@@ -54,4 +54,14 @@ public class CriteresDeSecurite{
 		this.lesCriteres.remove(nomCritere);
 	}	
 	
+	public Hashtable<String,Critere> getCriteresRetenus(){
+		Hashtable<String,Critere> resultat = new Hashtable<String,Critere>();
+		for(Critere c : this.getLesCriteres().values()){
+			if(c.isRetenu()){
+				resultat.put(c.getNom(), c);
+			}
+		}
+		return resultat;
+	}
+	
 }
