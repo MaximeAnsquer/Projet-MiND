@@ -1,10 +1,8 @@
-/**
- * Maxime A.
- * 
+/**  
  * En fait d'un point de vue du code cette classe est exactement la même que la classe
  * CriteresDeSecurite, mais d'un point de vue logique c'est pas la même chose donc je
  * préfère faire deux classes distinctes.
- * 
+ * @author Maxime Ansquer
  */
 
 package bdc;
@@ -12,6 +10,10 @@ import java.util.Hashtable;
 import autres.*;
 
 public class BDCCriteresDeSecurite{
+	
+	//--L'unique instance qui sera accessible de partout--
+	
+	public static BDCCriteresDeSecurite bdcCriteresDeSecurite;
 	
 	//---Variables d'instance
 	
@@ -47,7 +49,7 @@ public class BDCCriteresDeSecurite{
 	//---Services---
 	
 	public void ajouterCritere(Critere c){
-		this.lesCriteres.put(c.getNom(), c);
+		this.lesCriteres.put(c.getIntitule(), c);
 	}
 	
 	public void supprimerCritere(String nomCritere){

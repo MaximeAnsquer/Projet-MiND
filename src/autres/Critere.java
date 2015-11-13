@@ -1,26 +1,21 @@
-/**
- * Maxime A.
- */
-
-/**
- * Classe representant un critere, utile au module " Criteres de securite "
- */
-
 package autres;
+
+/**
+ * Classe representant un critère ; utile au module " Critères de securite ".
+ * @author Maxime Ansquer 
+ */
 
 public class Critere {
 	
 	//Variables d'instance
 	
-	private String nom;
 	private String id;
 	private String intitule;
 	private boolean retenu;
 	
 	//Constructeurs
 
-	public Critere(String nom, String id, String intitule, boolean retenu) {
-		this.nom = nom;
+	public Critere(String id, String intitule, boolean retenu) {
 		this.id = id;
 		this.intitule = intitule;
 		this.retenu = retenu;
@@ -28,14 +23,6 @@ public class Critere {
 	
 	//Getters et setters
 	
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -58,6 +45,11 @@ public class Critere {
 
 	public void setRetenu(boolean retenu) {
 		this.retenu = retenu;
+	}
+	
+	public String toString(){
+		return "{Critère : id = "+this.getId()+" ; intitule : "+this.getIntitule()
+				+" ; retenu : "+this.isRetenu()+"}";
 	}
 	
 }

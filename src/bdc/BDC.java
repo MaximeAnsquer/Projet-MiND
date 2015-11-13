@@ -1,3 +1,8 @@
+/**
+ * Classe qui vise à factoriser tout ce qui est communs aux différentes BDC.
+ * @author Maxime Ansquer
+ */
+
 package bdc;
 
 public class BDC implements IBDC {

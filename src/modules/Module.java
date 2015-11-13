@@ -1,6 +1,11 @@
 package modules;
 import java.util.ArrayList;
 
+/** 
+ * Classe visant à factoriser tout ce qui est commun aux différents modules.
+ * @author Maxime Ansquer 
+ */
+
 public class Module implements IModule{
 	
 	//---Variables d'instance---
