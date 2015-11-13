@@ -1,76 +1,57 @@
 package modules;
-import java.util.ArrayList;
-import bdc.*; 
+import java.util.Hashtable;
+import autres.*;
 
-public class CriteresDeSecurite extends Module {
+/**
+ * Maxime A.
+ * 
+ * En fait d'un point de vue du code cette classe est exactement la même que la classe
+ * BDCCriteresDeSecurite, mais d'un point de vue logique c'est pas la même chose donc je
+ * préfère faire deux classes distinctes.
+ * 
+ */
+
+public class CriteresDeSecurite{
 	
-	//---Variables d'instance---
+	//---Variables d'instance
 	
-	private ArrayList<String> colonneId = new ArrayList<>();
-	private ArrayList<String> colonneIntitule = new ArrayList<>();
-	private ArrayList<String> colonneDescription = new ArrayList<>();
-	private ArrayList<Boolean> colonneRetenu = new ArrayList<>();
-	private int nbLigne;
+	private Hashtable<String,Critere> lesCriteres;	
+	
+		//UneHashtable permet d'acceder a un critere en fournissant seulement
+		//son nom : top cool !
 	
 	//---Constructeurs---
-
-	public CriteresDeSecurite() {
-		super("Critères de sécurité");
-		this.disponible = true;
-		this.coherent = false;
-		this.cree = false;
-		//On importe les valeurs de la BDC :
-		BDCCriteresDeSecurite bdc = new BDCCriteresDeSecurite(); 		
-		this.colonneId = bdc.getColonneId();
-		this.colonneIntitule = bdc.getColonneIntitule();
-		this.colonneRetenu = bdc.getColonneRetenu();
+	
+	public CriteresDeSecurite(){
+		this.lesCriteres = new Hashtable<String,Critere>();
 	}
 	
+	public CriteresDeSecurite(Hashtable<String,Critere> lesCriteres) {
+		this.lesCriteres = lesCriteres;
+	}
+
 	//---Getters et setters---
-
-	public ArrayList<String> getColonneId() {
-		return colonneId;
+	
+	public Hashtable<String,Critere> getLesCriteres() {
+		return lesCriteres;
 	}
 
-	public void setColonneId(ArrayList<String> colonneId) {
-		this.colonneId = colonneId;
+	public void setLesCriteres(Hashtable<String,Critere> lesCriteres) {
+		this.lesCriteres = lesCriteres;
 	}
-
-	public ArrayList<String> getColonneIntitule() {
-		return colonneIntitule;
+	
+	public Critere getCritere(String nomCritere){
+		return this.lesCriteres.get(nomCritere);
 	}
-
-	public void setColonneIntitule(ArrayList<String> colonneIntitule) {
-		this.colonneIntitule = colonneIntitule;
+	
+	//---Services---
+	
+	public void ajouterCritere(Critere c){
+		this.lesCriteres.put(c.getNom(), c);
 	}
-
-	public ArrayList<String> getColonneDescription() {
-		return colonneDescription;
-	}
-
-	public void setColonneDescription(ArrayList<String> colonneDescription) {
-		this.colonneDescription = colonneDescription;
-	}
-
-	public ArrayList<Boolean> getColonneRetenu() {
-		return colonneRetenu;
-	}
-
-	public void setColonneRetenu(ArrayList<Boolean> colonneRetenu) {
-		this.colonneRetenu = colonneRetenu;
-	}
-
-	public int getNbLigne() {
-		if(this.colonneDescription.size() == this.colonneId.size() 
-				&& this.colonneId.size() == this.colonneIntitule.size()
-				&& this.colonneIntitule.size() == this.colonneRetenu.size())
-			{
-				return this.colonneDescription.size();
-			}
-			else{
-				System.out.println("Erreur, les colonnes de CriteresDeSecurite n'ont pas toutes la même taille.");
-				return 0;
-			}
+	
+	public void supprimerCritere(String nomCritere){
+		this.lesCriteres.remove(nomCritere);
 	}	
-
+	
 }
