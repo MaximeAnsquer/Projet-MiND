@@ -14,7 +14,7 @@ public class CriteresDeSecurite extends Module{
 	
 	//---L'objet unique qui sera accessible partout---
 	
-	public static CriteresDeSecurite criteresDeSecurite;
+	private static CriteresDeSecurite instance = new CriteresDeSecurite();
 	
 	//---Variables d'instance
 	
@@ -29,9 +29,9 @@ public class CriteresDeSecurite extends Module{
 	 * Initialise le module en copiant la BDC Critères de sécurité
 	 * @author Maxime Ansquer
 	 */
-	public CriteresDeSecurite() {
+	private CriteresDeSecurite() {
 		super("Critères de sécurité");
-		this.lesCriteres = BDCCriteresDeSecurite.bdcCriteresDeSecurite.getLesCriteres();
+		this.lesCriteres = BDCCriteresDeSecurite.getInstance().getLesCriteres();
 	}
 
 	//---Getters et setters---
@@ -88,6 +88,10 @@ public class CriteresDeSecurite extends Module{
 	 */
 	public void retenirCritere(Critere critere){
 		this.retenirCritere(critere.getIntitule());
+	}
+	
+	public static CriteresDeSecurite getInstance(){
+		return instance;
 	}
 	
 }
