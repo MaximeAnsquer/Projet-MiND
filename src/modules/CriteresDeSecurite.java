@@ -55,8 +55,8 @@ public class CriteresDeSecurite extends Module{
 	
 	//---Services---
 	
-	public void ajouterCritere(Critere c){
-		this.getLesCriteres().put(c.getIntitule(), c);
+	public void ajouterCritere(Critere critere){
+		this.getLesCriteres().put(critere.getIntitule(), critere);
 	}
 	
 	public void supprimerCritere(String nomCritere){
