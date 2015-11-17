@@ -9,7 +9,7 @@ public class EvenementsRedoutes extends Module {
 	
 	
 	private EvenementsRedoutes(){
-		
+		super("Evenements Redoutes");
 		this.predecesseurs.add(Metriques.getInstance());
 		this.predecesseurs.add(CriteresDeSecurite.getInstance());
 		
