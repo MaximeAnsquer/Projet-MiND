@@ -14,7 +14,7 @@ import autres.*;
 public class BDCBiensEssentiels {
 	// --L'unique instance qui sera accessible de partout--
 
-	public static BDCBiensEssentiels bdcBiensEssentiels;
+	private static BDCBiensEssentiels bdcBiensEssentiels = new BDCBiensEssentiels();
 
 	// ---Variables d'instance
 
@@ -22,11 +22,11 @@ public class BDCBiensEssentiels {
 
 	// ---Constructeurs---
 
-	public BDCBiensEssentiels() {
+	private BDCBiensEssentiels() {
 		this.lesBiens = new Hashtable<String, Biens>();
 	}
 
-	public BDCBiensEssentiels(Hashtable<String, Biens> lesBiens) {
+	private BDCBiensEssentiels(Hashtable<String, Biens> lesBiens) {
 		this.lesBiens = lesBiens;
 	}
 
@@ -41,7 +41,11 @@ public class BDCBiensEssentiels {
 	}
 
 	public Biens getBien(String nomBien) {
-		return this.lesBiens.get(nomBien);
+		return this.getLesBiens().get(nomBien);
+	}
+	
+	public static BDCBiensEssentiels getInstance(){
+		return bdcBiensEssentiels;
 	}
 
 	// ---Services---
@@ -53,4 +57,6 @@ public class BDCBiensEssentiels {
 	public void supprimerBien(String nomBien) {
 		this.getLesBiens().remove(nomBien);
 	}
+	
+	
 }

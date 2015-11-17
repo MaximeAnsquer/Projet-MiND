@@ -1,22 +1,23 @@
 package modules;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import autres.*;
-import bdc.BDCBiensSupports;
+import bdc.BDCBiensEssentiels;
+import bdc.BDCCriteresDeSecurite;
 
 /**
  * Cette classe correspond à la modélisation de la base de données préexistante
- * de biens supports augmentée de nouveaux biens supports que l'on peut rajouter
+ * de biens essentiels augmentée de nouveaux biens essentiels que l'on peut
+ * rajouter
  * 
  * @author Francois Adam
  */
 
-public class BiensSupports extends Module {
+public class BiensEssentiels extends Module{
 	// --L'unique instance qui sera accessible de partout--
 
-	private static BiensSupports instance = new BiensSupports();
+	private static BiensEssentiels instance = new BiensEssentiels();
 	
 	// ---Variables d'instance
 
@@ -24,16 +25,14 @@ public class BiensSupports extends Module {
 
 	// ---Constructeurs---
 
-	private BiensSupports() {
-		super("Biens supports");
-		this.predecesseurs.add(TypologieBiensSupports.getInstance());
+	private BiensEssentiels() {
+		super("Biens essentiels");
 		this.successeurs.add(MappingBiens.getInstance());
-		this.successeurs.add(ScenariosMenacesTypes.getInstance());
+		this.successeurs.add(EvenementsRedoutes.getInstance());
 		this.cree=false;
 		this.coherent=false;
 		this.disponible=false;
-		this.lesBiens = BDCBiensSupports.getInstance().getLesBiens();
-		
+		this.lesBiens = BDCBiensEssentiels.getInstance().getLesBiens();
 	}
 
 	// ---Getters et setters---
@@ -50,10 +49,9 @@ public class BiensSupports extends Module {
 		return this.getLesBiens().get(nomBien);
 	}
 	
-	public static BiensSupports getInstance(){
+	public static BiensEssentiels getInstance(){
 		return instance;
 	}
-
 
 	// ---Services---
 
@@ -74,6 +72,7 @@ public class BiensSupports extends Module {
 		}
 		return resultat;
 	}
+
 
 	public void retenirBien(String intituleBien) {
 		this.getBien(intituleBien).setRetenu(true);

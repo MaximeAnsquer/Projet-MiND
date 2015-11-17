@@ -14,7 +14,7 @@ import autres.*;
 public class BDCBiensSupports {
 	// --L'unique instance qui sera accessible de partout--
 
-	public static BDCBiensSupports bdcBiensSupports;
+	private static BDCBiensSupports bdcBiensSupports = new BDCBiensSupports();
 
 	// ---Variables d'instance
 
@@ -22,11 +22,11 @@ public class BDCBiensSupports {
 
 	// ---Constructeurs---
 
-	public BDCBiensSupports() {
+	private BDCBiensSupports() {
 		this.lesBiens = new Hashtable<String, Biens>();
 	}
 
-	public BDCBiensSupports(Hashtable<String, Biens> lesBiens) {
+	private BDCBiensSupports(Hashtable<String, Biens> lesBiens) {
 		this.lesBiens = lesBiens;
 	}
 
@@ -41,7 +41,11 @@ public class BDCBiensSupports {
 	}
 
 	public Biens getBien(String nomBien) {
-		return this.lesBiens.get(nomBien);
+		return this.getLesBiens().get(nomBien);
+	}
+	
+	public static BDCBiensSupports getInstance(){
+		return bdcBiensSupports;
 	}
 
 	// ---Services---
