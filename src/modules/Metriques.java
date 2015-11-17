@@ -11,9 +11,9 @@ import bdc.*;
  *   aux différents critères de sécurité retenus (par exemple : définition d’une 
  *   échelle à quatre niveaux pour le critère de disponibilité). "
  *   
- * Le module Metrique est ici représenté par un ensemble (Hashtable indexée par le nom 
- * du critère associé à la métrique) d'objets Metrique.
- * @author Maxime Ansquer
+ * Cette classe est un peu pipeau (elle a même pas de variable d'instance );
+ * le seul truc qu'elle fait c'est initialiser les
+ * métriques des critères retenus dans son constructeur.
  */
 
 public class Metriques extends Module {
@@ -24,15 +24,13 @@ public class Metriques extends Module {
 
 	//---Variables d'instance---
 
-	private Hashtable<String,Metrique> lesMetriques;
 
 	//---Constructeurs---
 	
 	/**
-	 * Initialise le module en copiant les métriques de la BDC métriques
-	 * pour les critères retenus et présent dans la BDC métriques, 
-	 * et en créant des métriques vides pour les critères retenus mais non
-	 * présents dans la BDC.
+	 * Initialise les métriques des critères retenus en copiant les métriques de la BDC métriques
+	 * pour les critères retenus et présent dans la BDC métriques, et en créant des métriques vides
+	 * pour les critères retenus mais non présents dans la BDC.
 	 */
 	private Metriques() {
 		super("Métriques");
@@ -41,46 +39,22 @@ public class Metriques extends Module {
 		this.successeurs.add(AnalyseDesRisques.getInstance());
 		this.successeurs.add(MatriceDesRisques.getInstance());
 		
-		this.lesMetriques = new Hashtable<String,Metrique>();
 		Hashtable<String,Critere> criteresRetenus = CriteresDeSecurite.getInstance().getCriteresRetenus();
 		BDCMetriques bdcMetriques = BDCMetriques.getInstance();
 		for(Critere critere : criteresRetenus.values()){	//pour chaque critère retenu 
-			if(bdcMetriques.contient(critere)){	//si son intitulé figure dans le template de l'onglet BDC métriques	
-				this.lesMetriques.put(critere.getIntitule(), bdcMetriques.getMetrique(critere));	//on ajoute la métrique correspondante
+			if(bdcMetriques.contient(critere)){	  //si son intitulé figure dans le template de l'onglet BDC métriques	
+				critere.setMetrique(bdcMetriques.getMetrique(critere));   //on associe la métrique correspondante de la BDC au critère
 			}
 			else{
-				this.lesMetriques.put(critere.getIntitule(), new Metrique(critere));	//sinon, on génère un tableau vide à 4 lignes	
+				critere.setMetrique(new Metrique());	//sinon, on lui associe une métrique vide à 4 lignes	
 			}
 		}
 	}
 
 	//---Getters et setters---
 
-	public Hashtable<String, Metrique> getLesMetriques() {
-		return lesMetriques;
-	}
-
-	public void setLesMetriques(Hashtable<String, Metrique> lesMetriques) {
-		this.lesMetriques = lesMetriques;
-	}
 	
 	//--Services--
-	
-	/** 
-	 * @param intituleCritere Le critère dont on souhaite avoir la métrique.
-	 * @return Renvoie la métrique associée au critère.
-	 */
-	public Metrique getMetrique(String intituleCritere){
-		return this.getLesMetriques().get(intituleCritere);
-	}
-	
-	/** 
-	 * @param critere Le critère dont on souhaite avoir la métrique.
-	 * @return Renvoie la métrique associée au critère.
-	 */
-	public Metrique getMetrique(Critere critere){
-		return this.getMetrique(critere.getIntitule());
-	}
 	
 	public static Metriques getInstance(){
 		return instance;

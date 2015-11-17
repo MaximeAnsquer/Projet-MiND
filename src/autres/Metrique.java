@@ -24,6 +24,10 @@ public class Metrique {
 		
 		//---Constructeurs---
 		
+		/**
+		 * Crée une ligne vide numérotée.
+		 * @param numero
+		 */
 		public Ligne(int numero){
 			this.numero = numero;
 			this.intitule = "";
@@ -74,7 +78,6 @@ public class Metrique {
 	
 	//---Variables d'instance---
 	
-	private Critere critere;
 	private Hashtable<Integer, Ligne> lesLignes;
 
 	//---Constructeurs---
@@ -82,10 +85,8 @@ public class Metrique {
 	/**	
 	 * Crée une " métrique " vide ; à utiliser dans le cas où l'utilisateur 
 	 * a retenu un critère qui n'était pas présent dans la BDC critères.
-	 * @param critere Le critère dont on cherche la métrique associée.
 	 */
-	public Metrique(Critere critere){
-		this.critere = critere;
+	public Metrique(){
 		this.lesLignes = new Hashtable<Integer, Ligne>();
 		for(int i=1;i<=4;i++){
 			this.lesLignes.put(i, new Ligne(i));
@@ -93,27 +94,16 @@ public class Metrique {
 	}
 	
 	/**
-	 * Crée une métrique liée à un critère en fournissant la liste
-	 * des lignes du tableau.
+	 * Crée une métrique en fournissant la liste des lignes du tableau.
 	 * @author Maxime Ansquer
-	 * @param critere Le critère liée à la métrique que l'on crée.
 	 * @param lesLignes Les lignes du tableau définissant la métrique.
 	 */
-	public Metrique(Critere critere, Hashtable<Integer, Ligne> lesLignes) {
-		this.critere = critere;
+	public Metrique(Hashtable<Integer, Ligne> lesLignes) {
 		this.lesLignes = lesLignes;
 	}
 	
 	//---Getters et setters---
 	
-	public Critere getCritere(){
-		return this.critere;
-	}
-	
-	public void setCritere(Critere critere){
-		this.critere = critere;
-	}
-
 	public Hashtable<Integer, Ligne> getLesLignes() {
 		return lesLignes;
 	}
@@ -121,8 +111,12 @@ public class Metrique {
 	public void setLesLignes(Hashtable<Integer, Ligne> lesLignes) {
 		this.lesLignes = lesLignes;
 	}	
-	
-	//---Services---
+		
+	//---Services---	
+
+	public Ligne getLigne(int numeroLigne){
+		return this.getLesLignes().get(numeroLigne);
+	}
 	
 	public void ajouterLigne(int numero, String intitule, String description){
 		this.getLesLignes().put(numero, new Ligne(numero, intitule, description));
@@ -130,6 +124,10 @@ public class Metrique {
 	
 	public void supprimerLigne(int numero){
 		this.getLesLignes().remove(numero);
+	}	
+	
+	public int nbLignes(){
+		return this.getLesLignes().size();
 	}	
 	
 	/** 
@@ -154,7 +152,6 @@ public class Metrique {
 	 */
 	public void modifierDescriptionLigne(int numeroDeLaLigneAModifier, String nouvelleDescription){
 		this.getLesLignes().get(numeroDeLaLigneAModifier).setDescription(nouvelleDescription);
-	}
-	
+	}	
 
 }

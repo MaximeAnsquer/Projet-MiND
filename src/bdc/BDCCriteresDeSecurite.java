@@ -42,11 +42,11 @@ public class BDCCriteresDeSecurite{
 		this.lesCriteres = lesCriteres;
 	}
 	
+	//---Services---	
+
 	public Critere getCritere(String nomCritere){
-		return this.lesCriteres.get(nomCritere);
+		return this.getLesCriteres().get(nomCritere);
 	}
-	
-	//---Services---
 	
 	public void ajouterCritere(Critere c){
 		this.getLesCriteres().put(c.getIntitule(), c);
