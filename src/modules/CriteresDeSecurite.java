@@ -1,4 +1,5 @@
 package modules;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import autres.*;
 import bdc.BDCCriteresDeSecurite;
@@ -32,6 +33,10 @@ public class CriteresDeSecurite extends Module{
 	private CriteresDeSecurite() {
 		super("Critères de sécurité");
 		this.lesCriteres = BDCCriteresDeSecurite.getInstance().getLesCriteres();
+		this.successeurs.add(Metriques.getInstance());
+		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
+		this.successeurs.add(AnalyseDesRisques.getInstance());
+		this.successeurs.add(MatriceDesRisques.getInstance());
 	}
 
 	//---Getters et setters---

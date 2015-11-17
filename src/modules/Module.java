@@ -10,9 +10,9 @@ public class Module implements IModule{
 	
 	//---Variables d'instance---
 	
-	private ArrayList<Module> predecesseurs; 
-	private ArrayList<Module> successeurs; 
-	private String nom;
+	protected ArrayList<Module> predecesseurs; 
+	protected ArrayList<Module> successeurs; 
+	protected String nom;
 	protected boolean cree;
 	protected boolean coherent;
 	protected boolean disponible;
@@ -46,5 +46,13 @@ public class Module implements IModule{
 	public String getNom() {
 		return this.nom;
 	} 
+	
+	public ArrayList getPredecesseurs(){
+		return this.predecesseurs;
+	}
+	
+	public ArrayList getSuccesseurs(){
+		return this.successeurs;
+	}
 
 }

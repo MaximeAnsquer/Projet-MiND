@@ -36,6 +36,11 @@ public class Metriques extends Module {
 	 */
 	private Metriques() {
 		super("Métriques");
+		this.predecesseurs.add(CriteresDeSecurite.getInstance());
+		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
+		this.successeurs.add(AnalyseDesRisques.getInstance());
+		this.successeurs.add(MatriceDesRisques.getInstance());
+		
 		this.lesMetriques = new Hashtable<String,Metrique>();
 		Hashtable<String,Critere> criteresRetenus = CriteresDeSecurite.getInstance().getCriteresRetenus();
 		BDCMetriques bdcMetriques = BDCMetriques.getInstance();
