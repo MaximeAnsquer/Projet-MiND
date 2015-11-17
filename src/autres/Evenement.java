@@ -1,38 +1,25 @@
 package autres;
 
+import java.util.ArrayList;
+
 import modules.BienEssentiels;
 
 public class Evenement {
 	
-	private Biens bienessentiels;
-	private Critere criteres;
-	private int metrique;
-	private int gravite;
+	private ArrayList<Biens> bienessentiels;
+	private ArrayList<Critere> criteres;
+	private ArrayList<Metrique> exigence;
+	private ArrayList<Metrique> gravite;
 	
-	private Evenement(Biens bienessentiels, Critere criteres,int metrique,int gravite){
+	
+	private Evenement(ArrayList<Biens> bienessentiels, ArrayList<Critere> criteres,ArrayList<Metrique> exigence,ArrayList<Metrique> gravite){
 		this.bienessentiels=bienessentiels;
 		this.criteres=criteres;
+		this.exigence=exigence;
 		this.gravite=gravite;
-		this.metrique=metrique;
 	}
 	
-	public Biens getBiens(){
-		return this.bienessentiels;
-	}
 	
-	public Critere getCriteres(){
-		return this.criteres;
-		
-		
-	}
 	
-	public int getMetrique(){
-		return this.metrique;
-		
-		
-	}
-	public int getGravite(){
-		return this.gravite;
-	}
-
+	
 }
