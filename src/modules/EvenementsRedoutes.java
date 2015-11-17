@@ -15,7 +15,9 @@ public class EvenementsRedoutes extends Module {
 		
 	}
 	
-	
+	public static EvenementsRedoutes getEvenements(){
+		return evenementsredoutes;
+	}
 	
 
 }
