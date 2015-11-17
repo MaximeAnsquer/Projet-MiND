@@ -47,10 +47,10 @@ public class BDCBiensSupports {
 	// ---Services---
 
 	public void ajouterBien(Biens bien) {
-		this.lesBiens.put(bien.getIntitule(), bien);
+		this.getLesBiens().put(bien.getIntitule(), bien);
 	}
 
 	public void supprimerBien(String nomBien) {
-		this.lesBiens.remove(nomBien);
+		this.getLesBiens().remove(nomBien);
 	}
 }

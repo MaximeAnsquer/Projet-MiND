@@ -51,11 +51,11 @@ public class CriteresDeSecurite extends Module{
 	//---Services---
 	
 	public void ajouterCritere(Critere c){
-		this.lesCriteres.put(c.getIntitule(), c);
+		this.getLesCriteres().put(c.getIntitule(), c);
 	}
 	
 	public void supprimerCritere(String nomCritere){
-		this.lesCriteres.remove(nomCritere);
+		this.getLesCriteres().remove(nomCritere);
 	}	
 	
 	/**
