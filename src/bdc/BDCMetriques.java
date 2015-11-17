@@ -2,6 +2,7 @@ package bdc;
 import java.util.Hashtable;
 
 import autres.*;
+import modules.Module;
 
 /** 
  * @author Maxime Ansquer
@@ -10,7 +11,7 @@ public class BDCMetriques {
 	
 	//---L'objet unique qui sera accessible de partout---
 	
-	public static BDCMetriques bdcMetriques;	
+	private static BDCMetriques instance = new BDCMetriques();	
 	
 	//---Variables d'instance---
 
@@ -18,7 +19,7 @@ public class BDCMetriques {
 	
 	//---Constructeurs---
 	
-	public BDCMetriques(){
+	private BDCMetriques(){
 		this.lesMetriques = new Hashtable<String,Metrique>();
 		//TODO : importer les métriques d'une base de donnée persistante
 	}
@@ -51,6 +52,10 @@ public class BDCMetriques {
 		return this.getLesMetriques().get(critere.getIntitule());
 	}
 	
+	
+	public static BDCMetriques getInstance(){
+		return instance;
+	}
 
 
 

@@ -20,7 +20,7 @@ public class Metriques extends Module {
 	
 	//--L'objet unique qui sera accessible de partout--
 	
-	public static Metriques metriques;
+	private static Metriques instance = new Metriques();
 
 	//---Variables d'instance---
 
@@ -34,11 +34,16 @@ public class Metriques extends Module {
 	 * et en créant des métriques vides pour les critères retenus mais non
 	 * présents dans la BDC.
 	 */
-	public Metriques() {
+	private Metriques() {
 		super("Métriques");
+		this.predecesseurs.add(CriteresDeSecurite.getInstance());
+		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
+		this.successeurs.add(AnalyseDesRisques.getInstance());
+		this.successeurs.add(MatriceDesRisques.getInstance());
+		
 		this.lesMetriques = new Hashtable<String,Metrique>();
-		Hashtable<String,Critere> criteresRetenus = CriteresDeSecurite.criteresDeSecurite.getCriteresRetenus();
-		BDCMetriques bdcMetriques = BDCMetriques.bdcMetriques;
+		Hashtable<String,Critere> criteresRetenus = CriteresDeSecurite.getInstance().getCriteresRetenus();
+		BDCMetriques bdcMetriques = BDCMetriques.getInstance();
 		for(Critere critere : criteresRetenus.values()){	//pour chaque critère retenu 
 			if(bdcMetriques.contient(critere)){	//si son intitulé figure dans le template de l'onglet BDC métriques	
 				this.lesMetriques.put(critere.getIntitule(), bdcMetriques.getMetrique(critere));	//on ajoute la métrique correspondante
@@ -75,6 +80,10 @@ public class Metriques extends Module {
 	 */
 	public Metrique getMetrique(Critere critere){
 		return this.getMetrique(critere.getIntitule());
+	}
+	
+	public static Metriques getInstance(){
+		return instance;
 	}
 
 }

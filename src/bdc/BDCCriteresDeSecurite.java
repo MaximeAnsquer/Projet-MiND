@@ -13,7 +13,7 @@ public class BDCCriteresDeSecurite{
 	
 	//--L'unique instance qui sera accessible de partout--
 	
-	public static BDCCriteresDeSecurite bdcCriteresDeSecurite;
+	private static BDCCriteresDeSecurite instance = new BDCCriteresDeSecurite();  //à voir, peut-être qu'il sera plus pratique d'utiliser l'autre constructeur
 	
 	//---Variables d'instance
 	
@@ -24,11 +24,11 @@ public class BDCCriteresDeSecurite{
 	
 	//---Constructeurs---
 	
-	public BDCCriteresDeSecurite(){
+	private BDCCriteresDeSecurite(){
 		this.lesCriteres = new Hashtable<String,Critere>();
 	}
 	
-	public BDCCriteresDeSecurite(Hashtable<String,Critere> lesCriteres) {
+	private BDCCriteresDeSecurite(Hashtable<String,Critere> lesCriteres) {
 		this.lesCriteres = lesCriteres;
 	}
 
@@ -49,11 +49,15 @@ public class BDCCriteresDeSecurite{
 	//---Services---
 	
 	public void ajouterCritere(Critere c){
-		this.lesCriteres.put(c.getIntitule(), c);
+		this.getLesCriteres().put(c.getIntitule(), c);
 	}
 	
 	public void supprimerCritere(String nomCritere){
-		this.lesCriteres.remove(nomCritere);
+		this.getLesCriteres().remove(nomCritere);
 	}	
+	
+	public static BDCCriteresDeSecurite getInstance(){
+		return instance;
+	}
 	
 }

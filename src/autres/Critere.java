@@ -11,13 +11,15 @@ public class Critere {
 	
 	private String id;
 	private String intitule;
+	private String description;
 	private boolean retenu;
 	
 	//Constructeurs
 
-	public Critere(String id, String intitule, boolean retenu) {
+	public Critere(String id, String intitule, String description, boolean retenu) {
 		this.id = id;
 		this.intitule = intitule;
+		this.description = description;
 		this.retenu = retenu;
 	}
 	
@@ -37,6 +39,14 @@ public class Critere {
 
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
+	}
+	
+	public String getDescription(){
+		return this.description;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
 	}
 
 	public boolean isRetenu() {
