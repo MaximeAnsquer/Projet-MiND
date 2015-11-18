@@ -1,8 +1,9 @@
-package modules;
+package abstraction.modules;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import autres.*;
-import bdc.BDCCriteresDeSecurite;
+
+import abstraction.autres.*;
+import abstraction.bdc.BDCCriteresDeSecurite;
 
 /**
  * En fait d'un point de vue du code cette classe est exactement la même que la classe

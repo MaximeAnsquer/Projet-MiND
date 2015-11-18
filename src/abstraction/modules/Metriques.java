@@ -1,8 +1,8 @@
-package modules;
+package abstraction.modules;
 import java.util.Hashtable;
 
-import autres.*;
-import bdc.*;
+import abstraction.autres.*;
+import abstraction.bdc.*;
 
 /** 
  * Cahier des charges, page 5 :
@@ -19,6 +19,7 @@ import bdc.*;
 public class Metriques extends Module {
 	
 	//--L'objet unique qui sera accessible de partout--
+	
 	
 	private static Metriques instance = new Metriques();
 

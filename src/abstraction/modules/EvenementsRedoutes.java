@@ -1,6 +1,6 @@
-package modules;
+package abstraction.modules;
 
-import bdc.BDCMetriques;
+import abstraction.bdc.BDCMetriques;
 
 public class EvenementsRedoutes extends Module {
 

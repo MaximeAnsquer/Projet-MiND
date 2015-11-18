@@ -1,4 +1,4 @@
-package bdc;
+package abstraction.bdc;
 
 /**  
  * Interface représentant une BDC.

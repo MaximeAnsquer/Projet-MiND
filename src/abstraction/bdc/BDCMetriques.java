@@ -1,8 +1,8 @@
-package bdc;
+package abstraction.bdc;
 import java.util.Hashtable;
 
-import autres.*;
-import modules.Module;
+import abstraction.autres.*;
+import abstraction.modules.Module;
 
 /** 
  * @author Maxime Ansquer

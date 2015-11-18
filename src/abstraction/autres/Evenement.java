@@ -1,8 +1,8 @@
-package autres;
+package abstraction.autres;
 
 import java.util.ArrayList;
 
-import modules.BienEssentiels;
+import abstraction.modules.BienEssentiels;
 
 public class Evenement {
 	

@@ -5,9 +5,10 @@
  * @author Maxime Ansquer
  */
 
-package bdc;
+package abstraction.bdc;
 import java.util.Hashtable;
-import autres.*;
+
+import abstraction.autres.*;
 
 public class BDCCriteresDeSecurite{
 	

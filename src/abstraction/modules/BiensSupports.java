@@ -1,23 +1,22 @@
-package modules;
+package abstraction.modules;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
-import autres.*;
-import bdc.BDCBiensEssentiels;
-import bdc.BDCCriteresDeSecurite;
+import abstraction.autres.*;
+import abstraction.bdc.BDCBiensSupports;
 
 /**
  * Cette classe correspond à la modélisation de la base de données préexistante
- * de biens essentiels augmentée de nouveaux biens essentiels que l'on peut
- * rajouter
+ * de biens supports augmentée de nouveaux biens supports que l'on peut rajouter
  * 
  * @author Francois Adam
  */
 
-public class BiensEssentiels extends Module{
+public class BiensSupports extends Module {
 	// --L'unique instance qui sera accessible de partout--
 
-	private static BiensEssentiels instance = new BiensEssentiels();
+	private static BiensSupports instance = new BiensSupports();
 	
 	// ---Variables d'instance
 
@@ -25,14 +24,16 @@ public class BiensEssentiels extends Module{
 
 	// ---Constructeurs---
 
-	private BiensEssentiels() {
-		super("Biens essentiels");
+	private BiensSupports() {
+		super("Biens supports");
+		this.predecesseurs.add(TypologieBiensSupports.getInstance());
 		this.successeurs.add(MappingBiens.getInstance());
-		this.successeurs.add(EvenementsRedoutes.getInstance());
+		this.successeurs.add(ScenariosMenacesTypes.getInstance());
 		this.cree=false;
 		this.coherent=false;
 		this.disponible=false;
-		this.lesBiens = BDCBiensEssentiels.getInstance().getLesBiens();
+		this.lesBiens = BDCBiensSupports.getInstance().getLesBiens();
+		
 	}
 
 	// ---Getters et setters---
@@ -49,9 +50,10 @@ public class BiensEssentiels extends Module{
 		return this.getLesBiens().get(nomBien);
 	}
 	
-	public static BiensEssentiels getInstance(){
+	public static BiensSupports getInstance(){
 		return instance;
 	}
+
 
 	// ---Services---
 
@@ -72,7 +74,6 @@ public class BiensEssentiels extends Module{
 		}
 		return resultat;
 	}
-
 
 	public void retenirBien(String intituleBien) {
 		this.getBien(intituleBien).setRetenu(true);

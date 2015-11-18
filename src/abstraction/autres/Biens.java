@@ -1,4 +1,4 @@
-package autres;
+package abstraction.autres;
 
 import java.util.ArrayList;
 

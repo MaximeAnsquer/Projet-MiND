@@ -3,7 +3,7 @@
  * @author Maxime Ansquer
  */
 
-package bdc;
+package abstraction.bdc;
 
 public class BDC implements IBDC {
 	

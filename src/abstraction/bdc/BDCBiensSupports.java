@@ -1,8 +1,8 @@
-package bdc;
+package abstraction.bdc;
 
 import java.util.Hashtable;
 
-import autres.*;
+import abstraction.autres.*;
 
 /**
  * Cette classe correspond à la modélisation de la base de données préexistante

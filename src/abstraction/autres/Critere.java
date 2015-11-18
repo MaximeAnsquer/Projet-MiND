@@ -1,4 +1,4 @@
-package autres;
+package abstraction.autres;
 
 /**
  * Classe representant un critère ; utile au module " Critères de securite ".

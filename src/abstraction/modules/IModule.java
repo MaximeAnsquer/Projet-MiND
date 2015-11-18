@@ -1,4 +1,4 @@
-package modules;
+package abstraction.modules;
 
 /** 
  * Interface représentant un module.

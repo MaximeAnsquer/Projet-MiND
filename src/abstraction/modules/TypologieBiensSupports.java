@@ -1,4 +1,4 @@
-package modules;
+package abstraction.modules;
 
 public class TypologieBiensSupports extends Module {
 
