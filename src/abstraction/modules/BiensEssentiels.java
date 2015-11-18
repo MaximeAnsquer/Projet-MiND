@@ -27,7 +27,7 @@ public class BiensEssentiels extends Module{
 
 	private BiensEssentiels() {
 		super("Biens essentiels");
-		this.successeurs.add(MappingBiens.getInstance());
+		this.successeurs.add(MappingDesBiens.getInstance());
 		this.successeurs.add(EvenementsRedoutes.getInstance());
 		this.cree=false;
 		this.coherent=false;

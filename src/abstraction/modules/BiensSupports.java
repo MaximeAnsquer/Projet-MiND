@@ -27,8 +27,8 @@ public class BiensSupports extends Module {
 	private BiensSupports() {
 		super("Biens supports");
 		this.predecesseurs.add(TypologieBiensSupports.getInstance());
-		this.successeurs.add(MappingBiens.getInstance());
-		this.successeurs.add(ScenariosMenacesTypes.getInstance());
+		this.successeurs.add(MappingDesBiens.getInstance());
+		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
 		this.cree=false;
 		this.coherent=false;
 		this.disponible=false;
