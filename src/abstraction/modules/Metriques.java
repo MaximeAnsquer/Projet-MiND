@@ -13,7 +13,7 @@ import abstraction.bdc.*;
  *   
  * Cette classe est un peu pipeau (elle a même pas de variable d'instance );
  * le seul truc qu'elle fait c'est initialiser les
- * métriques des critères retenus dans son constructeur.
+ * métriques des critères grâce à la méthode initialiser()
  */
 
 public class Metriques extends Module {
@@ -28,18 +28,30 @@ public class Metriques extends Module {
 
 	//---Constructeurs---
 	
-	/**
-	 * Initialise les métriques des critères retenus en copiant les métriques de la BDC métriques
-	 * pour les critères retenus et présent dans la BDC métriques, et en créant des métriques vides
-	 * pour les critères retenus mais non présents dans la BDC.
-	 */
+	
 	private Metriques() {
 		super("Métriques");
 		this.predecesseurs.add(CriteresDeSecurite.getInstance());
 		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
 		this.successeurs.add(AnalyseDesRisques.getInstance());
-		this.successeurs.add(MatriceDesRisques.getInstance());
-		
+		this.successeurs.add(MatriceDesRisques.getInstance());		
+	}
+
+	//---Getters et setters---
+
+	
+	//--Services--
+	
+	public static Metriques getInstance(){
+		return instance;
+	}
+	
+	/**
+	 * Initialise les métriques des critères retenus en copiant les métriques de la BDC métriques
+	 * pour les critères retenus et présent dans la BDC métriques, et en créant des métriques vides
+	 * pour les critères retenus mais non présents dans la BDC.
+	 */
+	public void initialiser(){
 		Hashtable<String,Critere> criteresRetenus = CriteresDeSecurite.getInstance().getCriteresRetenus();
 		BDCMetriques bdcMetriques = BDCMetriques.getInstance();
 		for(Critere critere : criteresRetenus.values()){	//pour chaque critère retenu 
@@ -50,15 +62,6 @@ public class Metriques extends Module {
 				critere.setMetrique(new Metrique());	//sinon, on lui associe une métrique vide à 4 lignes	
 			}
 		}
-	}
-
-	//---Getters et setters---
-
-	
-	//--Services--
-	
-	public static Metriques getInstance(){
-		return instance;
 	}
 
 }
