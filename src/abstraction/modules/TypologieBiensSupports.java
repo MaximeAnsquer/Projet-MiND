@@ -2,7 +2,7 @@ package abstraction.modules;
 
 import java.util.ArrayList;
 
-import autres.TypeBiens;
+import abstraction.autres.TypeBiens;
 
 /**
  * Cette classe représente le tableau crée lorqu'on clique 
