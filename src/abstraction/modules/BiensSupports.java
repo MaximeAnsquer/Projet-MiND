@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.autres.*;
-import abstraction.bdc.BDCBiensSupports;
 
 /**
  * Cette classe correspond à la modélisation de la base de données préexistante
@@ -15,7 +14,8 @@ import abstraction.bdc.BDCBiensSupports;
 
 public class BiensSupports extends Module {
 	// --L'unique instance qui sera accessible de partout--
-
+	private static BiensSupports bdcBiensSupports = new BiensSupports();
+	
 	private static BiensSupports instance = new BiensSupports();
 	
 	// ---Variables d'instance
@@ -35,6 +35,14 @@ public class BiensSupports extends Module {
 		this.lesBiens = BDCBiensSupports.getInstance().getLesBiens();
 		
 	}
+	
+	private BDCBiensSupports() {
+		this.lesBiens = new Hashtable<String, Biens>();
+	}
+
+	private BDCBiensSupports(Hashtable<String, Biens> lesBiens) {
+		this.lesBiens = lesBiens;
+	}
 
 	// ---Getters et setters---
 
@@ -52,6 +60,10 @@ public class BiensSupports extends Module {
 	
 	public static BiensSupports getInstance(){
 		return instance;
+	}
+	
+	public static BDCBiensSupports getInstance(){
+		return bdcBiensSupports;
 	}
 
 
