@@ -13,12 +13,11 @@ public class Critere {
 	private String intitule;
 	private String description;
 	private boolean retenu;
-	private Metrique metrique;
 	
 	//Constructeurs
 
 	/**
-	 * Crée un critère qui n'est initialement pas retenu.
+	 * Cree un critere qui n'est initialement pas retenu.
 	 * @param id
 	 * @param intitule
 	 * @param description
@@ -63,15 +62,7 @@ public class Critere {
 	public void setRetenu(boolean retenu) {
 		this.retenu = retenu;
 	}
-	
-	public Metrique getMetrique(){
-		return this.metrique;
-	}
-	
-	public void setMetrique(Metrique metrique){
-		this.metrique = metrique;
-	}
-	
+		
 	public String toString(){
 		return "{Critère : id = "+this.getId()+" ; intitule : "+this.getIntitule()
 				+" ; retenu : "+this.isRetenu()+"}";
