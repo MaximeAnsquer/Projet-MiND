@@ -8,9 +8,9 @@ import java.util.ArrayList;
  * @author Francois Adam 
  */
 
-public class Biens {
+public class Biens{
 	//Variables d'instance
-	
+
 	private ArrayList<String> nomColonneSup; //ArrayList represantant les titres des colonnes supplementaires que l'utilisateur peut rajouter
 	private ArrayList<String> contenuColonneSup; //ArrayList represantant le contenu des colonnes supplementaires que l'utilisateur peut rajouter
 	private String Description;
@@ -18,7 +18,6 @@ public class Biens {
 	private boolean retenu;
 		
 	//Constructeurs
-
 	public Biens(String description, String intitule, boolean retenu, ArrayList<String> nomColonneSup, ArrayList<String> contenuColonneSup) {
 		this.Description = description;
 		this.intitule = intitule;

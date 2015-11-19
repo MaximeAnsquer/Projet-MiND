@@ -14,8 +14,8 @@ import abstraction.autres.*;
 
 public class BiensEssentiels extends Module{
 	// --L'unique instance qui sera accessible de partout--
-	private static BiensEssentiels bdcBiensEssentiels = new BiensEssentiels();
-	private static BiensEssentiels instance = new BiensEssentiels();
+	
+	private static BiensEssentiels bdcBiensEssentiels = new BiensEssentiels(true);
 	
 	// ---Variables d'instance
 
@@ -23,22 +23,19 @@ public class BiensEssentiels extends Module{
 
 	// ---Constructeurs---
 
-	private BiensEssentiels() {
+	public BiensEssentiels(boolean creationBdc) {
 		super("Biens essentiels");
-		this.successeurs.add(MappingDesBiens.getInstance());
-		this.successeurs.add(EvenementsRedoutes.getInstance());
-		this.cree=false;
-		this.coherent=false;
-		this.disponible=false;
-		this.lesBiens = BDCBiensEssentiels.getInstance().getLesBiens();
-	}
-	
-	private BDCBiensEssentiels() {
-		this.lesBiens = new Hashtable<String, Biens>();
-	}
-
-	private BDCBiensEssentiels(Hashtable<String, Biens> lesBiens) {
-		this.lesBiens = lesBiens;
+		if (creationBdc){
+			this.lesBiens = new Hashtable<String, Biens>();
+		}
+		else {
+			this.successeurs.add(MappingDesBiens.getInstance());
+			this.successeurs.add(EvenementsRedoutes.getInstance());
+			this.cree=false;
+			this.coherent=false;
+			this.disponible=false;
+			this.lesBiens = this.getBDC().getLesBiens();
+		}	
 	}
 
 	// ---Getters et setters---
@@ -55,11 +52,7 @@ public class BiensEssentiels extends Module{
 		return this.getLesBiens().get(nomBien);
 	}
 	
-	public static BiensEssentiels getInstance(){
-		return instance;
-	}
-	
-	public static BDCBiensEssentiels getInstance(){
+	public BiensEssentiels getBDC(){
 		return bdcBiensEssentiels;
 	}
 
