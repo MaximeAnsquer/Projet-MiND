@@ -19,6 +19,7 @@ public class EvenementsRedoutes extends Module {
 		super("Evenements Redoutes");
 		this.predecesseurs.add(Metriques.getInstance());
 		this.predecesseurs.add(CriteresDeSecurite.getInstance());
+		this.successeurs.add(AnalyseDesRisques.getInstance());
 		this.lesCriteres=CriteresDeSecurite.getInstance().getCriteresRetenus();
 		this.lesBiens=BiensEssentiels.getInstance().getBiensRetenus();
 	}

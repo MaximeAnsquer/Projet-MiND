@@ -36,6 +36,18 @@ public class Module implements IModule{
 	public boolean estCree() {
 		return this.cree;
 	}
+	
+	public void setDisponible(){
+		this.disponible=true;
+	}
+	
+	public void setCree(){
+		this.cree=true;
+	}
+	
+	public void setCoherent(){
+		this.coherent=true;
+	}
 
 	@Override
 	public boolean estDisponible() {
