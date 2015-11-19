@@ -3,8 +3,6 @@ package abstraction.modules;
 import java.util.Hashtable;
 
 import abstraction.autres.*;
-import abstraction.bdc.BDCBiensEssentiels;
-import abstraction.bdc.BDCCriteresDeSecurite;
 
 /**
  * Cette classe correspond à la modélisation de la base de données préexistante
@@ -16,7 +14,7 @@ import abstraction.bdc.BDCCriteresDeSecurite;
 
 public class BiensEssentiels extends Module{
 	// --L'unique instance qui sera accessible de partout--
-
+	private static BiensEssentiels bdcBiensEssentiels = new BiensEssentiels();
 	private static BiensEssentiels instance = new BiensEssentiels();
 	
 	// ---Variables d'instance
@@ -33,6 +31,14 @@ public class BiensEssentiels extends Module{
 		this.coherent=false;
 		this.disponible=false;
 		this.lesBiens = BDCBiensEssentiels.getInstance().getLesBiens();
+	}
+	
+	private BDCBiensEssentiels() {
+		this.lesBiens = new Hashtable<String, Biens>();
+	}
+
+	private BDCBiensEssentiels(Hashtable<String, Biens> lesBiens) {
+		this.lesBiens = lesBiens;
 	}
 
 	// ---Getters et setters---
@@ -52,6 +58,11 @@ public class BiensEssentiels extends Module{
 	public static BiensEssentiels getInstance(){
 		return instance;
 	}
+	
+	public static BDCBiensEssentiels getInstance(){
+		return bdcBiensEssentiels;
+	}
+
 
 	// ---Services---
 

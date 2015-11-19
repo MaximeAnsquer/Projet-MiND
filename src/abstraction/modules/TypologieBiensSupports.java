@@ -2,7 +2,7 @@ package abstraction.modules;
 
 import java.util.ArrayList;
 
-import autres.TypeBiens;
+import abstraction.autres.TypeBiens;
 
 /**
  * Cette classe représente le tableau crée lorqu'on clique 
@@ -15,8 +15,6 @@ public class TypologieBiensSupports extends Module {
 	// Variable d'instance
 	ArrayList<TypeBiens> tableau ;
 	
-	// 
-	private static TypologieBiensSupports instance = new TypologieBiensSupports();
 
 	public TypologieBiensSupports() {
 		super("Typologie des biens supports");
@@ -34,11 +32,6 @@ public class TypologieBiensSupports extends Module {
 	// Suppression d'une ligne du tableau
 	public void deleteTypeBienSupport(TypeBiens type){
 		this.tableau.remove(type);
-	}
-	
-	// On récupère notre module
-	public static TypologieBiensSupports getInstance(){
-		return instance;
 	}
 
 }
