@@ -3,155 +3,84 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
- * Cette classe représente une métrique, c'est-à-dire une échelle ordinale associée à
- * un critère retenu. En gros c'est un tableau associé à un critère (cf page 10 du cahier des charges).
- * Je représente ce tableau par l'ensemble (Hashtable indexé par le numéro des lignes)
- * de ses lignes, d'où la classe locale Ligne.
+ * Cette classe represente une metrique, c'est-à-dire une echelle ordinale associee à
+ * un critere retenu (cf page 10 du cahier des charges).
+ * Ce tableau est represente par l'ensemble (Hashtable indexee par le numero des niveaux)
+ * de ses niveaux (un niveau correspond a une ligne du tableau) (cf la classe NiveauDeMetrique).
  * @author Maxime Ansquer 
  */
 
-public class Metrique {
-	
-	//Classe locale representant une ligne du tableau
-	
-	private class Ligne{
-		
-		//---Variables d'instance---
-		
-		private int numero;
-		private String intitule;
-		private String description;
-		
-		//---Constructeurs---
-		
-		/**
-		 * Crée une ligne vide numérotée.
-		 * @param numero
-		 */
-		public Ligne(int numero){
-			this.numero = numero;
-			this.intitule = "";
-			this.description = "";
-		}
-		
-		public Ligne(int numero, String intitule, String description){
-			this.numero = numero;
-			this.intitule = intitule;
-			this.description = description;
-		}
-		
-		//---Getters et setters---
-
-		public int getNumero() {
-			return numero;
-		}
-
-		public void setNumero(int numero) {
-			this.numero = numero;
-		}
-
-		public String getIntitule() {
-			return intitule;
-		}
-
-		public void setIntitule(String intitule) {
-			this.intitule = intitule;
-		}
-
-		public String getDescription() {
-			return description;
-		}
-
-		public void setDescription(String description) {
-			this.description = description;
-		}	
-		
-		public String toString(){
-			return "{[Ligne de Metrique] : numero = "+this.getNumero()
-				   +" ; intitule = "+this.intitule+" ; description = "
-				   +this.description+"}";			
-		}
-		
-	}
-	
-	//Fin de la classe locale
+public class Metrique {	
 	
 	//---Variables d'instance---
 	
-	private Hashtable<Integer, Ligne> lesLignes;
+	private Critere critere;
+	private Hashtable<Integer, NiveauDeMetrique> lesNiveaux;
 
 	//---Constructeurs---
 	
 	/**	
-	 * Crée une " métrique " vide ; à utiliser dans le cas où l'utilisateur 
-	 * a retenu un critère qui n'était pas présent dans la BDC critères.
+	 * Cree une metrique vide a 4 niveaux ; a utiliser dans le cas ou l'utilisateur 
+	 * a retenu un critere qui n'etait pas present dans la BDC criteres.
+	 * @param critere Le critere associe a la metrique.
 	 */
-	public Metrique(){
-		this.lesLignes = new Hashtable<Integer, Ligne>();
+	public Metrique(Critere critere){
+		this.critere = critere;
+		this.lesNiveaux = new Hashtable<Integer, NiveauDeMetrique>();
 		for(int i=1;i<=4;i++){
-			this.lesLignes.put(i, new Ligne(i));
+			this.lesNiveaux.put(i, new NiveauDeMetrique(i));
 		}
 	}
 	
 	/**
-	 * Crée une métrique en fournissant la liste des lignes du tableau.
+	 * Cree une metrique en fournissant le critere associe et la liste des niveaux.
 	 * @author Maxime Ansquer
-	 * @param lesLignes Les lignes du tableau définissant la métrique.
+	 * @param critere Le critere associe a la metrique.
+	 * @param lesNiveaux Les niveaux du tableau definissant la metrique.
 	 */
-	public Metrique(Hashtable<Integer, Ligne> lesLignes) {
-		this.lesLignes = lesLignes;
+	public Metrique(Critere critere, Hashtable<Integer, NiveauDeMetrique> lesNiveaux) {
+		this.critere = critere;
+		this.lesNiveaux = lesNiveaux;
 	}
 	
 	//---Getters et setters---
 	
-	public Hashtable<Integer, Ligne> getLesLignes() {
-		return lesLignes;
+	public Critere getCritere(){
+		return this.critere;
+	}
+	
+	public void setCritere(Critere critere){
+		this.critere = critere;
+	}
+	
+	public Hashtable<Integer, NiveauDeMetrique> getLesNiveaux() {
+		return lesNiveaux;
 	}
 
-	public void setLesLignes(Hashtable<Integer, Ligne> lesLignes) {
-		this.lesLignes = lesLignes;
+	public void setLesNiveaux(Hashtable<Integer, NiveauDeMetrique> lesNiveaux) {
+		this.lesNiveaux = lesNiveaux;
 	}	
 		
 	//---Services---	
 
-	public Ligne getLigne(int numeroLigne){
-		return this.getLesLignes().get(numeroLigne);
+	public NiveauDeMetrique getNiveau(int numeroNiveau){
+		return this.getLesNiveaux().get(numeroNiveau);
 	}
 	
-	public void ajouterLigne(int numero, String intitule, String description){
-		this.getLesLignes().put(numero, new Ligne(numero, intitule, description));
+	public void ajouterNiveau(int numero, String intitule, String description){
+		this.getLesNiveaux().put(numero, new NiveauDeMetrique(numero, intitule, description));
 	}
 	
-	public void supprimerLigne(int numero){
-		this.getLesLignes().remove(numero);
+	public void ajouterNiveau(NiveauDeMetrique niveau){
+		this.getLesNiveaux().put(niveau.getNumero(), niveau);
+	}
+	
+	public void supprimerNiveau(int numero){
+		this.getLesNiveaux().remove(numero);
 	}	
 	
-	public int nbLignes(){
-		return this.getLesLignes().size();
+	public int nombreDeNiveaux(){
+		return this.getLesNiveaux().size();
 	}	
 	
-	/** 
-	 * @param numeroDeLaLigneAModifier Le numéro de la ligne dont on souhaite changer le numéro.
-	 * @param nouveauNumero Le nouveau numéro que l'on veut lui attribuer.
-	 */
-	public void modifierNumeroLigne(int numeroDeLaLigneAModifier, int nouveauNumero){
-		this.getLesLignes().get(numeroDeLaLigneAModifier).setNumero(nouveauNumero);
-	}
-	
-	/** 
-	 * @param numeroDeLaLigneAModifier Le numéro de la ligne dont on souhaite changer l'intitulé.
-	 * @param nouvelIntitule  Le nouvel intitulé que l'on veut lui attribuer.
-	 */
-	public void modifierIntituleLigne(int numeroDeLaLigneAModifier, String nouvelIntitule){
-		this.getLesLignes().get(numeroDeLaLigneAModifier).setIntitule(nouvelIntitule);
-	}
-	
-	/** 
-	 * @param numeroDeLaLigneAModifier Le numéro de la ligne dont on souhaite changer la description.
-	 * @param nouvelleDescription La nouvelle description que l'on veut lui attribuer.
-	 */
-	public void modifierDescriptionLigne(int numeroDeLaLigneAModifier, String nouvelleDescription){
-		this.getLesLignes().get(numeroDeLaLigneAModifier).setDescription(nouvelleDescription);
-	}	
-
 }

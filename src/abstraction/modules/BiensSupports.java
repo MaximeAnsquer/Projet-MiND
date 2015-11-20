@@ -12,11 +12,9 @@ import abstraction.autres.*;
  * @author Francois Adam
  */
 
-public class BiensSupports extends Module {
+public class BiensSupports extends Module{
 	// --L'unique instance qui sera accessible de partout--
-	private static BiensSupports bdcBiensSupports = new BiensSupports();
-	
-	private static BiensSupports instance = new BiensSupports();
+	private static BiensSupports bdcBiensSupports = new BiensSupports(true);
 	
 	// ---Variables d'instance
 
@@ -24,24 +22,20 @@ public class BiensSupports extends Module {
 
 	// ---Constructeurs---
 
-	private BiensSupports() {
+	private BiensSupports(boolean creationBdc) {
 		super("Biens supports");
-		this.predecesseurs.add(TypologieBiensSupports.getInstance());
-		this.successeurs.add(MappingDesBiens.getInstance());
-		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
-		this.cree=false;
-		this.coherent=false;
-		this.disponible=false;
-		this.lesBiens = BDCBiensSupports.getInstance().getLesBiens();
-		
-	}
-	
-	private BDCBiensSupports() {
-		this.lesBiens = new Hashtable<String, Biens>();
-	}
-
-	private BDCBiensSupports(Hashtable<String, Biens> lesBiens) {
-		this.lesBiens = lesBiens;
+		if (creationBdc){
+			this.lesBiens = new Hashtable<String, Biens>();
+		}
+		else {
+			this.predecesseurs.add(TypologieBiensSupports.getInstance());
+			this.successeurs.add(MappingDesBiens.getInstance());
+			this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
+			this.cree=false;
+			this.coherent=false;
+			this.disponible=false;
+			this.lesBiens = this.getBDC().getLesBiens();
+		}	
 	}
 
 	// ---Getters et setters---
@@ -58,11 +52,7 @@ public class BiensSupports extends Module {
 		return this.getLesBiens().get(nomBien);
 	}
 	
-	public static BiensSupports getInstance(){
-		return instance;
-	}
-	
-	public static BDCBiensSupports getInstance(){
+	public BiensSupports getBDC(){
 		return bdcBiensSupports;
 	}
 

@@ -1,6 +1,8 @@
 package abstraction.modules;
 import java.util.ArrayList;
 
+import asbtraction.Analyse;
+
 /** 
  * Classe visant à factoriser tout ce qui est commun aux différents modules.
  * @author Maxime Ansquer 
@@ -16,13 +18,15 @@ public class Module implements IModule{
 	protected boolean cree;
 	protected boolean coherent;
 	protected boolean disponible;
+	protected Analyse analyse;
 	
 	//---Constructeurs---
 	
 	public Module(String nom) {
-		this.predecesseurs=new ArrayList<>();
-		this.successeurs=new ArrayList<>();
-		this.nom=nom ;
+		this.predecesseurs=new ArrayList<Module>();
+		this.successeurs=new ArrayList<Module>();
+		this.nom=nom;
+		this.cree = false;
 	}
 	
 	//---Getters et setters---
@@ -51,7 +55,11 @@ public class Module implements IModule{
 
 	@Override
 	public boolean estDisponible() {
-		return this.disponible;
+		boolean resultat = true;
+		for(Module module : this.getPredecesseurs()){
+			resultat = resultat & module.estCree();
+		}
+		return resultat;
 	}
 
 	@Override
@@ -59,12 +67,20 @@ public class Module implements IModule{
 		return this.nom;
 	} 
 	
-	public ArrayList getPredecesseurs(){
+	public ArrayList<Module> getPredecesseurs(){
 		return this.predecesseurs;
 	}
 	
-	public ArrayList getSuccesseurs(){
+	public ArrayList<Module> getSuccesseurs(){
 		return this.successeurs;
+	}
+	
+	public Analyse getAnalyse(){
+		return this.analyse;
+	}
+	
+	public void setAnalyse(Analyse analyse){
+		this.analyse = analyse;
 	}
 
 }
