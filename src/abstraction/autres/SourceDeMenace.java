@@ -29,6 +29,7 @@ public class SourceDeMenace {
 		this.id = id;
 		this.intitule = intitule;
 		this.exemple = exemple;
+		this.retenu = false;
 	}
 	
 	//---Getters et setters---

@@ -1,8 +1,5 @@
 package abstraction.modules;
-
-import java.util.ArrayList;
 import java.util.Hashtable;
-
 import abstraction.autres.*;
 
 /**
@@ -13,53 +10,50 @@ import abstraction.autres.*;
  */
 
 public class BiensSupports extends Module{
-	// --L'unique instance qui sera accessible de partout--
-	private static BiensSupports bdcBiensSupports = new BiensSupports(true);
+	
+	private static Hashtable<String,Bien> bdcBiensSupports ;
 	
 	// ---Variables d'instance
 
-	private Hashtable<String, Biens> lesBiens;
+	private Hashtable<String, Bien> lesBiens;
 
 	// ---Constructeurs---
 
-	private BiensSupports(boolean creationBdc) {
-		super("Biens supports");
-		if (creationBdc){
-			this.lesBiens = new Hashtable<String, Biens>();
-		}
-		else {
-			this.predecesseurs.add(TypologieBiensSupports.getInstance());
-			this.successeurs.add(MappingDesBiens.getInstance());
-			this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
-			this.cree=false;
-			this.coherent=false;
-			this.disponible=false;
-			this.lesBiens = this.getBDC().getLesBiens();
-		}	
+	public BiensSupports() {
+		super("Biens essentiels");
+		this.importerBDC();
+		this.lesBiens = new Hashtable<String, Bien>(); // useless ?
+		this.successeurs.add(MappingDesBiens.getInstance());
+		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
+		this.predecesseurs.add(TypologieBiensSupports.getInstance());
+		this.cree = false;
+		this.coherent = false;
+		this.disponible = false;
+		this.lesBiens = BiensSupports.getBDC();
 	}
 
 	// ---Getters et setters---
 
-	public Hashtable<String, Biens> getLesBiens() {
+	public Hashtable<String, Bien> getLesBiens() {
 		return lesBiens;
 	}
 
-	public void setLesBiens(Hashtable<String, Biens> lesBiens) {
+	public void setLesBiens(Hashtable<String, Bien> lesBiens) {
 		this.lesBiens = lesBiens;
 	}
 
-	public Biens getBien(String nomBien) {
+	public Bien getBien(String nomBien) {
 		return this.getLesBiens().get(nomBien);
 	}
 	
-	public BiensSupports getBDC(){
+	public static Hashtable<String,Bien> getBDC(){
 		return bdcBiensSupports;
 	}
 
 
 	// ---Services---
 
-	public void ajouterBien(Biens bien) {
+	public void ajouterBien(Bien bien) {
 		this.getLesBiens().put(bien.getIntitule(), bien);
 	}
 
@@ -67,9 +61,9 @@ public class BiensSupports extends Module{
 		this.getLesBiens().remove(nomBien);
 	}
 
-	public Hashtable<String, Biens> getBiensRetenus() {
-		Hashtable<String, Biens> resultat = new Hashtable<String, Biens>();
-		for (Biens bien : this.getLesBiens().values()) {
+	public Hashtable<String, Bien> getBiensRetenus() {
+		Hashtable<String, Bien> resultat = new Hashtable<String, Bien>();
+		for (Bien bien : this.getLesBiens().values()) {
 			if (bien.isRetenu()) {
 				resultat.put(bien.getIntitule(), bien);
 			}
@@ -81,7 +75,11 @@ public class BiensSupports extends Module{
 		this.getBien(intituleBien).setRetenu(true);
 	}
 
-	public void retenirBien(Biens bien) {
+	public void retenirBien(Bien bien) {
 		this.retenirBien(bien.getIntitule());
+	}
+	
+	public void importerBDC(){
+		//TODO importer la BDC via le fichier excel
 	}
 }

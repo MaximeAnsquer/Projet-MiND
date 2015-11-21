@@ -1,43 +1,44 @@
 package abstraction.modules;
 import java.util.ArrayList;
 import java.util.Hashtable;
-
 import abstraction.autres.*;
-import abstraction.bdc.BDCCriteresDeSecurite;
 
 /**
- * En fait d'un point de vue du code cette classe est exactement la même que la classe
- * BDCCriteresDeSecurite, mais d'un point de vue logique c'est pas la même chose donc je
- * préfère faire deux classes distinctes.
- * @author Maxime Ansquer 
+ * Classe representant l'onglet CriteresDeSecurite.
+ * Elle est constituee d'une Hashtable d'objets Critere indexee par l'intitule du critere.
+ * 
+	 * @author Maxime Ansquer
  */
 
 public class CriteresDeSecurite extends Module{
 	
-	//---L'objet unique qui sera accessible partout---
+	//---La BDC Criteres De Securite, accessible par la methode statique getBDC()---
 	
-	private static CriteresDeSecurite instance = new CriteresDeSecurite();
+	private static Hashtable<String,Critere> bdcCriteresDeSecurite;
 	
-	//---Variables d'instance
+	//---Variables d'instance---
 	
 	private Hashtable<String,Critere> lesCriteres;	
-	
-		//UneHashtable permet d'acceder a un critere en fournissant seulement
-		//son nom : top cool !
-	
+		
 	//---Constructeurs---	
 	
 	/** 
-	 * Initialise le module en copiant la BDC Critères de sécurité
-	 * @author Maxime Ansquer
+	 * Initialise le module en commençant par initialiser la BDC, puis en copiant les valeurs
+	 * de la BDC dans le module.
 	 */
 	private CriteresDeSecurite() {
 		super("Critères de sécurité");
-		this.lesCriteres = BDCCriteresDeSecurite.getInstance().getLesCriteres();
-		this.successeurs.add(Metriques.getInstance());
-		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
-		this.successeurs.add(AnalyseDesRisques.getInstance());
-		this.successeurs.add(MatriceDesRisques.getInstance());
+		this.successeurs.add(this.getAnalyse().getModule("Scénarios de menaces typés"));
+		this.successeurs.add(this.getAnalyse().getModule("Analyse des risques"));
+		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
+		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
+		this.cree = false;
+		this.coherent = false;
+		this.disponible = true;
+		
+		this.importerBDC();  //on remplit la BDC
+		this.lesCriteres = bdcCriteresDeSecurite;  //on initialise l'onglet avec les valeurs de la BDC
+		
 	}
 
 	//---Getters et setters---
@@ -54,7 +55,16 @@ public class CriteresDeSecurite extends Module{
 		return this.lesCriteres.get(intituleCritere);
 	}
 	
-	//---Services---
+	public static Hashtable<String,Critere> getBDC(){
+		return bdcCriteresDeSecurite;
+	}
+	
+	//---Services---	
+
+	private void importerBDC() {
+		// TODO remplit la hashtable bdcCriteresDeSecurite avec les valeurs fournies par le client (fichier excel)
+	}
+
 	
 	public void ajouterCritere(Critere critere){
 		this.getLesCriteres().put(critere.getIntitule(), critere);
@@ -76,28 +86,6 @@ public class CriteresDeSecurite extends Module{
 			}
 		}
 		return resultat;
-	}
-	
-	/** 
-	 * Indiquer que l'utilisateur a retenu (coché) le critère.
-	 * @author Maxime Ansquer
-	 * @param intituleCritere L'intitule du critère que l'on souhaite déclaré retenu.
-	 */
-	public void retenirCritere(String intituleCritere){
-		this.getCritere(intituleCritere).setRetenu(true);
-	}
-	
-	/** 
-	 * Indiquer que l'utilisateur a retenu (coché) le critère.
-	 * @author Maxime Ansquer
-	 * @param critere L'intitule du critère que l'on souhaite déclaré retenu.
-	 */
-	public void retenirCritere(Critere critere){
-		this.retenirCritere(critere.getIntitule());
-	}
-	
-	public static CriteresDeSecurite getInstance(){
-		return instance;
 	}
 	
 }

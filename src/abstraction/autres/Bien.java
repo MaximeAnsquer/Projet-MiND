@@ -8,19 +8,21 @@ import java.util.ArrayList;
  * @author Francois Adam 
  */
 
-public class Biens{
+public class Bien{
 	//Variables d'instance
 
-	private ArrayList<String> nomColonneSup; //ArrayList represantant les titres des colonnes supplementaires que l'utilisateur peut rajouter
-	private ArrayList<String> contenuColonneSup; //ArrayList represantant le contenu des colonnes supplementaires que l'utilisateur peut rajouter
-	private String Description;
+	private ArrayList<String> nomColonneSup; //ArrayList representant les titres des colonnes supplementaires que l'utilisateur peut rajouter
+	private ArrayList<String> contenuColonneSup; //ArrayList representant le contenu des colonnes supplementaires que l'utilisateur peut rajouter
+	private String description;
 	private String intitule;
+	private String type;
 	private boolean retenu;
 		
 	//Constructeurs
-	public Biens(String description, String intitule, boolean retenu, ArrayList<String> nomColonneSup, ArrayList<String> contenuColonneSup) {
-		this.Description = description;
+	public Bien(String description, String intitule, String type, boolean retenu, ArrayList<String> nomColonneSup, ArrayList<String> contenuColonneSup) {
+		this.description = description;
 		this.intitule = intitule;
+		this.type=type;
 		this.retenu = retenu;
 		this.nomColonneSup=nomColonneSup;
 		this.contenuColonneSup=contenuColonneSup;
@@ -29,11 +31,11 @@ public class Biens{
 	//Getters et setters
 		
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		this.Description = description;
+		this.description = description;
 	}
 
 	public String getIntitule() {
@@ -42,6 +44,14 @@ public class Biens{
 
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	public void setType (String type){
+		this.type=type;
 	}
 
 	public boolean isRetenu() {
@@ -67,9 +77,14 @@ public class Biens{
 	public void setContenuColonneSup(ArrayList<String> contenuColonneSup){
 		this.contenuColonneSup=contenuColonneSup;
 	}
+	
+	public void ajouterColonne(String nomColonne, String contenuColonne){
+		this.getNomColonneSup().add(nomColonne);
+		this.getContenuColonneSup().add(contenuColonne);
+	}
 		
 	public String toString(){
-		return "{Critère : id = "+this.getDescription()+" ; intitule : "+this.getIntitule()
+		return "{Bien : id = "+this.getDescription()+" ; intitule : "+this.getIntitule()
 				+" ; retenu : "+this.isRetenu()+"}";
 	}
 		

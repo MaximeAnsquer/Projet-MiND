@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
- * Cette classe represente une metrique, c'est-à-dire une echelle ordinale associee à
+ * Cette classe represente une metrique, c'est-a-dire une echelle ordinale (un tableau) associee a
  * un critere retenu (cf page 10 du cahier des charges).
- * Ce tableau est represente par l'ensemble (Hashtable indexee par le numero des niveaux)
+ * Ce tableau est represente par l'ensemble (hashtable indexee par le numero des niveaux)
  * de ses niveaux (un niveau correspond a une ligne du tableau) (cf la classe NiveauDeMetrique).
  * @author Maxime Ansquer 
  */
