@@ -15,12 +15,14 @@ public class Bien{
 	private ArrayList<String> contenuColonneSup; //ArrayList representant le contenu des colonnes supplementaires que l'utilisateur peut rajouter
 	private String description;
 	private String intitule;
+	private String type;
 	private boolean retenu;
 		
 	//Constructeurs
-	public Bien(String description, String intitule, boolean retenu, ArrayList<String> nomColonneSup, ArrayList<String> contenuColonneSup) {
+	public Bien(String description, String intitule, String type, boolean retenu, ArrayList<String> nomColonneSup, ArrayList<String> contenuColonneSup) {
 		this.description = description;
 		this.intitule = intitule;
+		this.type=type;
 		this.retenu = retenu;
 		this.nomColonneSup=nomColonneSup;
 		this.contenuColonneSup=contenuColonneSup;
@@ -42,6 +44,14 @@ public class Bien{
 
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	public void setType (String type){
+		this.type=type;
 	}
 
 	public boolean isRetenu() {

@@ -11,7 +11,6 @@ import abstraction.autres.*;
  */
 
 public class BiensEssentiels extends Module {
-	// --L'unique instance qui sera accessible de partout--
 
 	private static Hashtable<String, Bien> bdcBiensEssentiels;
 
@@ -24,13 +23,13 @@ public class BiensEssentiels extends Module {
 	public BiensEssentiels() {
 		super("Biens essentiels");
 		this.importerBDC();
-		this.lesBiens = new Hashtable<String, Bien>();
+		this.lesBiens = new Hashtable<String, Bien>(); // useless ?
 		this.successeurs.add(MappingDesBiens.getInstance());
 		this.successeurs.add(EvenementsRedoutes.getInstance());
 		this.cree = false;
 		this.coherent = false;
-		this.disponible = false;
-		this.lesBiens = this.getBDC();
+		this.disponible = true;
+		this.lesBiens = BiensEssentiels.getBDC();
 	}
 
 	// ---Getters et setters---
@@ -47,7 +46,7 @@ public class BiensEssentiels extends Module {
 		return this.getLesBiens().get(nomBien);
 	}
 
-	public Hashtable<String, Bien> getBDC() {
+	public static Hashtable<String, Bien> getBDC() {
 		return bdcBiensEssentiels;
 	}
 
