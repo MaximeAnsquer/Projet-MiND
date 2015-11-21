@@ -14,21 +14,34 @@ public class NiveauDeMetrique {
 	private int numero;
 	private String intitule;
 	private String description;
+	private String couleur; //TODO la couleur de la case " numero " ; on pourrait utiliser une variable de type Color, mais pas sur que ça existe en Java 6 donc mefiance
 
 	//---Constructeurs---
 
 	/**
-	 * Cree un niveau vide numerote.
+	 * Cree un niveau de metrique vide mais numerote, et assigne une couleur par defaut a la case " numero " en fonction du numero.
 	 * @param numero
 	 */
 	public NiveauDeMetrique(int numero){
 		this.numero = numero;
 		this.intitule = "";
 		this.description = "";
+		if(numero == 1){
+			this.couleur = "vert";
+		}
+		else if(numero == 2){
+			this.couleur = "jaune-orange";
+		}
+		else if(numero == 3){
+			this.couleur = "orange";
+		}
+		else{
+			this.couleur = "rouge";
+		}
 	}
 
 	public NiveauDeMetrique(int numero, String intitule, String description){
-		this.numero = numero;
+		this(numero);
 		this.intitule = intitule;
 		this.description = description;
 	}
@@ -58,6 +71,16 @@ public class NiveauDeMetrique {
 	public void setDescription(String description) {
 		this.description = description;
 	}	
+	
+	public String getCouleur(){
+		return this.couleur;
+	}
+	
+	public void setCouleur(String couleur){
+		this.couleur = couleur;
+	}
+	
+	//---Services---
 
 	public String toString(){
 		return "{[Ligne de Metrique] : numero = "+this.getNumero()

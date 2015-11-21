@@ -62,6 +62,8 @@ public class Critere {
 	public void setRetenu(boolean retenu) {
 		this.retenu = retenu;
 	}
+	
+	//---Services---
 		
 	public String toString(){
 		return "{Critère : id = "+this.getId()+" ; intitule : "+this.getIntitule()

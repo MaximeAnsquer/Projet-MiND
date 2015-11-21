@@ -1,7 +1,7 @@
 package abstraction.modules;
 import java.util.ArrayList;
 
-import asbtraction.Analyse;
+import abstraction.Analyse;
 
 /** 
  * Classe visant à factoriser tout ce qui est commun aux différents modules.

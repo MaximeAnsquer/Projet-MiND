@@ -1,9 +1,8 @@
 package abstraction.modules;
 import java.util.Hashtable;
 
+import abstraction.Analyse;
 import abstraction.autres.*;
-import abstraction.bdc.*;
-import asbtraction.Analyse;
 
 /** 
  * Cahier des charges, page 5 :
@@ -14,14 +13,14 @@ import asbtraction.Analyse;
  *   
  * Cette classe modelise le module " Metriques ". Elle est constituee d'une hastable d'objets Metrique
  * indexee par le nom du critere associe (on rappelle qu'un objet Metrique est constitue d'un critere
- * et d'un tableau des differents niveaux de l'echelle).
+ * et d'un tableau dans lequel chaque ligne est un niveau de metrique).
  */
 
 public class Metriques extends Module {
 		
-	//--L'instance representant la BDC---
+	//---La BDC Metriques, accessible par la methode statique getBDC()---
 	
-	private static Metriques bdc = new Metriques(true);
+	private static Hashtable<String, Metrique> bdcMetriques;
 
 	//---Variables d'instance---
 	
@@ -29,31 +28,32 @@ public class Metriques extends Module {
 
 	//---Constructeurs---	
 	
-	/**
-	 * Constructeur qui sert a creer soit la BDC Metriques, soit le module Metriques lui-meme.
-	 * @param bdc Indique si on construit une BDC ou non (si non, on construit le module).
+	/** 
+	 * Initialise le module en commençant par initialiser la BDC, puis en copiant les valeurs
+	 * de la BDC dans le module.
 	 */
-	public Metriques(boolean creationBdc) {
+	public Metriques() {
 		super("Métriques");
-		if(bdc){  //si on construit une bdc			
-			this.lesMetriques = new Hashtable<String, Metrique>();
-			//TODO Quand on aura le fichier excel, c'est la qu'on ajoutera les Metriques par defaut de la BDC Metrique
+		this.predecesseurs.add(this.getAnalyse().getModule("Critères de sécurité"));
+		this.successeurs.add(this.getAnalyse().getModule("Scénarios de menaces typés"));
+		this.successeurs.add(this.getAnalyse().getModule("Analyse des risques"));
+		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
+		this.cree = false;
+		this.coherent = false;
+		this.disponible = false;
+		
+		this.importerBDC();  //on remplit la BDC
+		this.lesMetriques = new Hashtable<String, Metrique>();  
+		CriteresDeSecurite cds = (CriteresDeSecurite) this.getAnalyse().getModule("Critères de sécurité");
+		for(Critere critere : cds.getCriteresRetenus().values()){   //pour chaque critere retenu a l'onglet "Critères de sécurité"
+			if(bdcMetriques.containsKey(critere.getIntitule())){   //s'il existe une metrique associee dans la BDC Metriques
+				this.lesMetriques.put(critere.getIntitule(), bdcMetriques.get(critere.getIntitule()));   //on ajoute cette metrique dans l'onglet Metriques
+			}
+			else{
+				this.lesMetriques.put(critere.getIntitule(), new Metrique(critere));   //sinon, on ajoute une metrique vide associee a ce critere dans l'onglet Metriques
+			}
 		}
-		else{	//si on ne construit pas une bdc, mais bien le module lui meme
-			
-			this.predecesseurs.add(CriteresDeSecurite.getInstance());
-			this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
-			this.successeurs.add(AnalyseDesRisques.getInstance());
-			this.successeurs.add(MatriceDesRisques.getInstance());		
-			
-			this.lesMetriques = getBDC().getLesMetriques();  //on importe toutes les metriques de la bdc
-			for(Metrique metrique : this.lesMetriques.values()){
-				if(!metrique.getCritere().isRetenu()){	//on enleve toutes celles qui correspondent a des criteres non retenus.
-					this.lesMetriques.remove(metrique.getCritere().getIntitule());    
-				}
-			}			
-		}		
-	}
+	}	
 
 	//---Getters et setters---
 	
@@ -67,16 +67,24 @@ public class Metriques extends Module {
 	
 	//--Services--		
 	
-	private boolean contient(Critere critere) {
-		return this.getLesMetriques().contains(critere.getIntitule()); //TODO
-	}
-	
-	public static Metriques getBDC(){
-		return bdc;
+	public void supprimerMetrique(String intituleCritere){
+		this.getLesMetriques().remove(intituleCritere);
 	}
 	
 	public void ajouterMetrique(Metrique metrique){
 		this.getLesMetriques().put(metrique.getCritere().getIntitule(), metrique);
 	}
-
+	
+	public void ajouterMetrique(Critere critere){
+		this.getLesMetriques().put(critere.getIntitule(), new Metrique(critere));
+	}
+	
+	private void importerBDC() {
+		// TODO Auto-generated method stub		
+	}
+		
+	public static Hashtable<String, Metrique> getBDC(){
+		return bdcMetriques;
+	}
+	
 }
