@@ -11,18 +11,18 @@ import abstraction.autres.*;
 
 public class BiensSupports extends Module{
 	// --L'unique instance qui sera accessible de partout--
-	private static Hashtable<String,Biens> bdcBiensSupports ;
+	private static Hashtable<String,Bien> bdcBiensSupports ;
 	
 	// ---Variables d'instance
 
-	private Hashtable<String, Biens> lesBiens;
+	private Hashtable<String, Bien> lesBiens;
 
 	// ---Constructeurs---
 
 	private BiensSupports(boolean creationBdc) {
 		super("Biens essentiels");
 		this.importerBDC();
-		this.lesBiens = new Hashtable<String, Biens>();
+		this.lesBiens = new Hashtable<String, Bien>();
 		this.successeurs.add(MappingDesBiens.getInstance());
 		this.successeurs.add(EvenementsRedoutes.getInstance());
 		this.cree = false;
@@ -33,26 +33,26 @@ public class BiensSupports extends Module{
 
 	// ---Getters et setters---
 
-	public Hashtable<String, Biens> getLesBiens() {
+	public Hashtable<String, Bien> getLesBiens() {
 		return lesBiens;
 	}
 
-	public void setLesBiens(Hashtable<String, Biens> lesBiens) {
+	public void setLesBiens(Hashtable<String, Bien> lesBiens) {
 		this.lesBiens = lesBiens;
 	}
 
-	public Biens getBien(String nomBien) {
+	public Bien getBien(String nomBien) {
 		return this.getLesBiens().get(nomBien);
 	}
 	
-	public Hashtable<String,Biens> getBDC(){
+	public Hashtable<String,Bien> getBDC(){
 		return bdcBiensSupports;
 	}
 
 
 	// ---Services---
 
-	public void ajouterBien(Biens bien) {
+	public void ajouterBien(Bien bien) {
 		this.getLesBiens().put(bien.getIntitule(), bien);
 	}
 
@@ -60,9 +60,9 @@ public class BiensSupports extends Module{
 		this.getLesBiens().remove(nomBien);
 	}
 
-	public Hashtable<String, Biens> getBiensRetenus() {
-		Hashtable<String, Biens> resultat = new Hashtable<String, Biens>();
-		for (Biens bien : this.getLesBiens().values()) {
+	public Hashtable<String, Bien> getBiensRetenus() {
+		Hashtable<String, Bien> resultat = new Hashtable<String, Bien>();
+		for (Bien bien : this.getLesBiens().values()) {
 			if (bien.isRetenu()) {
 				resultat.put(bien.getIntitule(), bien);
 			}
@@ -74,7 +74,7 @@ public class BiensSupports extends Module{
 		this.getBien(intituleBien).setRetenu(true);
 	}
 
-	public void retenirBien(Biens bien) {
+	public void retenirBien(Bien bien) {
 		this.retenirBien(bien.getIntitule());
 	}
 	
