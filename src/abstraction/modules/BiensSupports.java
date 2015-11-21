@@ -19,7 +19,7 @@ public class BiensSupports extends Module{
 
 	// ---Constructeurs---
 
-	private BiensSupports(boolean creationBdc) {
+	public BiensSupports() {
 		super("Biens essentiels");
 		this.importerBDC();
 		this.lesBiens = new Hashtable<String, Bien>();
