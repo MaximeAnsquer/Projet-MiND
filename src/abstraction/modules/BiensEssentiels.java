@@ -1,7 +1,5 @@
 package abstraction.modules;
-
 import java.util.Hashtable;
-
 import abstraction.autres.*;
 
 /**
@@ -12,30 +10,27 @@ import abstraction.autres.*;
  * @author Francois Adam
  */
 
-public class BiensEssentiels extends Module{
+public class BiensEssentiels extends Module {
 	// --L'unique instance qui sera accessible de partout--
-	
-	private static BiensEssentiels bdcBiensEssentiels = new BiensEssentiels(true);
-	
+
+	private static Hashtable<String, Biens> bdcBiensEssentiels;
+
 	// ---Variables d'instance
 
 	private Hashtable<String, Biens> lesBiens;
 
 	// ---Constructeurs---
 
-	public BiensEssentiels(boolean creationBdc) {
+	public BiensEssentiels() {
 		super("Biens essentiels");
-		if (creationBdc){
-			this.lesBiens = new Hashtable<String, Biens>();
-		}
-		else {
-			this.successeurs.add(MappingDesBiens.getInstance());
-			this.successeurs.add(EvenementsRedoutes.getInstance());
-			this.cree=false;
-			this.coherent=false;
-			this.disponible=false;
-			this.lesBiens = this.getBDC().getLesBiens();
-		}	
+		this.importerBDC();
+		this.lesBiens = new Hashtable<String, Biens>();
+		this.successeurs.add(MappingDesBiens.getInstance());
+		this.successeurs.add(EvenementsRedoutes.getInstance());
+		this.cree = false;
+		this.coherent = false;
+		this.disponible = false;
+		this.lesBiens = this.getBDC();
 	}
 
 	// ---Getters et setters---
@@ -51,11 +46,10 @@ public class BiensEssentiels extends Module{
 	public Biens getBien(String nomBien) {
 		return this.getLesBiens().get(nomBien);
 	}
-	
-	public BiensEssentiels getBDC(){
+
+	public Hashtable<String, Biens> getBDC() {
 		return bdcBiensEssentiels;
 	}
-
 
 	// ---Services---
 
@@ -77,12 +71,15 @@ public class BiensEssentiels extends Module{
 		return resultat;
 	}
 
-
 	public void retenirBien(String intituleBien) {
 		this.getBien(intituleBien).setRetenu(true);
 	}
 
 	public void retenirBien(Biens bien) {
 		this.retenirBien(bien.getIntitule());
+	}
+	
+	public void importerBDC(){
+		//TODO importer la bdc avec le fichier excel
 	}
 }
