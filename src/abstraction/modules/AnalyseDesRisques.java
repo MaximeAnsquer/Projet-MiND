@@ -1,15 +1,17 @@
 package abstraction.modules;
 
+import abstraction.Analyse;
+
 public class AnalyseDesRisques extends Module{
 	
-	
-	private static AnalyseDesRisques Analyse=new AnalyseDesRisques();
+	/*Note: ce Module est aussi appelé dans le cdc Mapping des risques!
+	 * 
+	 */
+	private Analyse analyse;
 	
 	private EvenementsRedoutes evenements;
 	private ScenariosMenacesTypes scenarios;
 	private MappingDesBiens mapping;
-	
-	
 	
 	
 	
@@ -21,27 +23,27 @@ public class AnalyseDesRisques extends Module{
 		this.mapping=MappingDesBiens.getInstance();
 		this.scenarios=ScenariosMenacesTypes.getInstance();
 		this.evenements=EvenementsRedoutes.getInstance();
+		this.cree=false;
+		this.coherent=false;
+		this.disponible=false;
 		
 	}
 
-	public static AnalyseDesRisques getInstance(){
-		return Analyse;
+	public Analyse getAnalyse(){
+		return analyse;
 
-	
-	
 	}
 	
 	/*retourne les scénarios retenus pour la table*/
 
-    public Hashtable<String,Scenarios> getScenariosRetenus(){
-    	return evenements.getInstance().getBiens().getBiensCorrespondants().getScenarios();
+    public Hashtable<String,Scenarios> getScenariosConcrets(){
+    	return scenarios.getBiens().getBiensCorrespondants().getScenarios();
     }
     
     
-    public Hashtable<String, Biens> getBiensCorrespondants(){
-    	return mapping.getInstance().get
-    }
-
+    
+    
+   
 
 
 }
