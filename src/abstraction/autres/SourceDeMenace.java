@@ -1,7 +1,7 @@
 package abstraction.autres;
 
 /**
- * Cette classe représente une source de menace. Elle est utile au module SourcesDeMenaces.
+ * Cette classe represente une source de menace. Elle est utile au module SourcesDeMenaces.
  * cf cahier des charges page 19.
  * Notez bien que j'ai mis " Source " et " Menace " au singulier ! 8)
  * @author Maxime Ansquer

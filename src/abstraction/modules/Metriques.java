@@ -67,6 +67,10 @@ public class Metriques extends Module {
 	
 	//--Services--		
 	
+	public Metrique getMetrique(String intituleCritere){
+		return this.getLesMetriques().get(intituleCritere);
+	}
+	
 	public void supprimerMetrique(String intituleCritere){
 		this.getLesMetriques().remove(intituleCritere);
 	}
