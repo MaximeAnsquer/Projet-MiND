@@ -40,20 +40,22 @@ public class EvenementsRedoutes extends Module {
 		 */
 		
 	    ArrayList<Evenement> liste=new ArrayList<Evenement>();
-		int a=((BiensEssentiels)this.analyse.getModule("BiensEssentiels")).getBiensEssentiels().size();
-		int b=((CriteresDeSecurite)this.analyse.getModule("Critères")).getLesCriteres().size();
-		Module critere=this.analyse.getModule("Critere");
-		Module bienessentiel=this.analyse.getModule("BiensEssentiels");
+		int a=((BiensEssentiels)this.analyse.getModule("BiensEssentiels")).getLesBiens().size();
+		int b=((CriteresDeSecurite)this.analyse.getModule("CritèresDeSécurité")).getLesCriteres().size();
+		CriteresDeSecurite critere=(CriteresDeSecurite) this.analyse.getModule("CritèresDeSécurité");
+		BiensEssentiels bienessentiel=this.lesBiensEssentiels;
+		Metrique exigence=this.lesMetriques.getMetrique("Exigence");
+		Metrique gravite=this.lesMetriques.getMetrique("Gravité");
 		
 		
 		for (int i=0;i<a;i++){
 			for(int j=0;j<b;j++){
-				liste.set(i*b+j,new Evenement("",this.lesBiensEssentiels.get))
-				hashtable[i*b+j].setCritere(critere.getCriteres().get());j
+				liste.set(i*b+j,new Evenement("",bienessentiel.getLesBiens().get(i).getNomColonneSup(),bienessentiel.getLesBiens().get(i),critere.getLesCriteres().get(j),exigence,gravite));
+				
 			}
 		}
 		
-		this.evenementsredoutes=hashtable;
+		this.evenementsredoutes=liste;
 	}
 	
 	public Analyse getAnalyse(){
@@ -68,7 +70,7 @@ public class EvenementsRedoutes extends Module {
 		return this.lesMetriques;
 	}
 	
-	public Hashtable<String,Evenement> getEvenementsRedoutes(){
+	public ArrayList<Evenement> getEvenementsRedoutes(){
 		return this.evenementsredoutes;
 	}
 	
