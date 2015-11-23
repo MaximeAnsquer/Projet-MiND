@@ -33,10 +33,10 @@ public class SourcesDeMenaces extends Module {
 	 */
 	public SourcesDeMenaces(){
 		super("Sources de menaces");
-		this.successeurs.add(this.getAnalyse().getModule("Scénarios de menaces génériques"));
-		this.successeurs.add(this.getAnalyse().getModule("Scénarios de menaces typés"));
-		this.successeurs.add(this.getAnalyse().getModule("Analyse des risques"));
-		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
+		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces génériques"));
+		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces typés"));
+		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
+		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
