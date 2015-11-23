@@ -36,6 +36,14 @@ public class TypeBien {
 		this("","","",false);
 	}
 	
+	public String getId(){
+		return this.Id;
+	}
+	
+	public void setId(String id){
+		this.Id=id;
+	}
+	
 	public String getDescription() {
 		return Description;
 	}
