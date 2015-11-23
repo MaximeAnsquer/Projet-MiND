@@ -31,6 +31,12 @@ public class ScenarioGenerique {
 		this.criteres = criteres;
 		this.retenu = retenu;
 	}
+	
+	// Constructeur : Nouveau Type Bien défini précédemment
+	public ScenarioGenerique(TypeBien type){
+		this(type,"", "",new Hashtable<String, SourceDeMenace>(),
+				new Hashtable<String, Critere>(), true);
+	}
 
 	// Constructeur : Ligne vide
 	public ScenarioGenerique() {

@@ -29,6 +29,7 @@ public class TypologieDesBiensSupports extends Module {
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
+		this.importerBDC();
 		this.tableau = TypologieDesBiensSupports.getBDC();
 	}
 
@@ -51,6 +52,22 @@ public class TypologieDesBiensSupports extends Module {
 	}
 
 	// ---Services---
+	
+	// On verifie si un type de bien support est nouveau
+	// cad s'il n'est pas présent dans la bdc et qu'il a été ajouté au tableau
+	// ALGO A AMELIORER
+	public boolean estNouveauTypeBien(TypeBien type) {
+		boolean b = true;
+		for (TypeBien t : TypologieDesBiensSupports.getBDC().values()) {
+			b = b && (t.getIntitule() != type.getIntitule());
+		}
+		if (b) {
+			for (TypeBien t : this.tableau.values()) {
+				b = b && (t.getIntitule() != type.getIntitule());
+			}
+		}
+		return b;
+	}
 
 	// On ajoute une ligne au tableau seulement si tous les champs sont
 	// renseignés
