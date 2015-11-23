@@ -3,8 +3,8 @@ import java.util.Hashtable;
 import abstraction.autres.*;
 
 /**
- * Cette classe correspond à la modélisation de la base de données préexistante
- * de biens supports augmentée de nouveaux biens supports que l'on peut rajouter
+ * Cette classe correspond ï¿½ la modï¿½lisation de la base de donnï¿½es prï¿½existante
+ * de biens supports augmentï¿½e de nouveaux biens supports que l'on peut rajouter
  * 
  * @author Francois Adam
  */
@@ -25,7 +25,7 @@ public class BiensSupports extends Module{
 		this.lesBiens = new Hashtable<String, Bien>(); // useless ?
 		this.successeurs.add(MappingDesBiens.getInstance());
 		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
-		this.predecesseurs.add(TypologieBiensSupports.getInstance());
+		this.predecesseurs.add(TypologieDesBiensSupports.getInstance());
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
