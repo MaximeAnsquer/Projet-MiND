@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.Analyse;
+import abstraction.autres.Bien;
 import abstraction.autres.Biens;
 import abstraction.autres.Critere;
 import abstraction.autres.Evenement;
@@ -24,7 +25,7 @@ public class EvenementsRedoutes extends Module {
 	
 	
 	private EvenementsRedoutes(Analyse analyse){
-		super("Evenements Redoutes");
+		super("Evènements redoutés");
 		this.predecesseurs.add(this.analyse.getModule("BiensEssentiels"));
 		this.predecesseurs.add(this.analyse.getModule("Metriques"));
 		this.successeurs.add(this.analyse.getModule("AnalyseDesRisques"));
@@ -46,11 +47,12 @@ public class EvenementsRedoutes extends Module {
 		BiensEssentiels bienessentiel=this.lesBiensEssentiels;
 		Metrique exigence=this.lesMetriques.getMetrique("Exigence");
 		Metrique gravite=this.lesMetriques.getMetrique("Gravité");
+		Bien[] tableaubiens=this.lesBiensEssentiels.getLesBiens().values().toArray(new Bien[this.lesBiensEssentiels.getLesBiens().size()]);
 		
 		
 		for (int i=0;i<a;i++){
 			for(int j=0;j<b;j++){
-				liste.set(i*b+j,new Evenement("",bienessentiel.getLesBiens().get(i).getNomColonneSup(),bienessentiel.getLesBiens().get(i),critere.getLesCriteres().get(j),exigence,gravite));
+				liste.set(i*b+j,new Evenement("",tableaubiens[i].getNomColonneSup(),tableaubiens[i],critere.getLesCriteres().get(j),exigence,gravite));
 				
 			}
 		}
