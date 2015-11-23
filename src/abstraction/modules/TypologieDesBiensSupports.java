@@ -13,7 +13,7 @@ import abstraction.autres.TypeBien;
  * @author Belghiti Ali
  */
 
-public class TypologieBiensSupports extends Module {
+public class TypologieDesBiensSupports extends Module {
 
 	// Represente la bdc
 	private static Hashtable<String, TypeBien> bdcTypeBiensSupports;
@@ -21,7 +21,7 @@ public class TypologieBiensSupports extends Module {
 	// Variable d'instance
 	Hashtable<String, TypeBien> tableau;
 
-	public TypologieBiensSupports() {
+	public TypologieDesBiensSupports() {
 		super("Typologie des biens supports");
 		this.tableau = new Hashtable<String, TypeBien>();
 		this.successeurs.add(this.getEtude().getModule("Biens Supports"));
@@ -29,7 +29,7 @@ public class TypologieBiensSupports extends Module {
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
-		this.tableau = TypologieBiensSupports.getBDC();
+		this.tableau = TypologieDesBiensSupports.getBDC();
 	}
 
 	// ---Getters et setters---
