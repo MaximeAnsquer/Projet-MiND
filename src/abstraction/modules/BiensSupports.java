@@ -20,7 +20,7 @@ public class BiensSupports extends Module{
 	// ---Constructeurs---
 
 	public BiensSupports() {
-		super("Biens essentiels");
+		super("Biens supports");
 		this.importerBDC();
 		this.lesBiens = new Hashtable<String, Bien>(); // useless ?
 		this.successeurs.add(MappingDesBiens.getInstance());
