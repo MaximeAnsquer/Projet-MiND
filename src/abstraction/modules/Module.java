@@ -1,7 +1,7 @@
 package abstraction.modules;
 import java.util.ArrayList;
 
-import abstraction.Analyse;
+import abstraction.Etude;
 
 /** 
  * Classe visant à factoriser tout ce qui est commun aux différents modules.
@@ -18,7 +18,7 @@ public class Module implements IModule{
 	protected boolean cree;
 	protected boolean coherent;
 	protected boolean disponible;
-	protected Analyse analyse;
+	protected Etude etude;
 	
 	//---Constructeurs---
 	
@@ -75,12 +75,12 @@ public class Module implements IModule{
 		return this.successeurs;
 	}
 	
-	public Analyse getAnalyse(){
-		return this.analyse;
+	public Etude getEtude(){
+		return this.etude;
 	}
 	
-	public void setAnalyse(Analyse analyse){
-		this.analyse = analyse;
+	public void setEtude(Etude etude){
+		this.etude = etude;
 	}
 
 }

@@ -28,10 +28,10 @@ public class CriteresDeSecurite extends Module{
 	 */
 	public CriteresDeSecurite() {
 		super("Critères de sécurité");
-		this.successeurs.add(this.getAnalyse().getModule("Scénarios de menaces typés"));
-		this.successeurs.add(this.getAnalyse().getModule("Analyse des risques"));
-		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
-		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
+		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces typés"));
+		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
+		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
+		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;

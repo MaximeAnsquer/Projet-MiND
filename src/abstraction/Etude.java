@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import abstraction.modules.Module;
 
-public class Analyse {
+public class Etude {
 	
 	private Hashtable<String,Module> lesModules;	
 	

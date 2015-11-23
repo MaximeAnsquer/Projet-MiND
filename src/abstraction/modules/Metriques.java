@@ -1,7 +1,7 @@
 package abstraction.modules;
 import java.util.Hashtable;
 
-import abstraction.Analyse;
+import abstraction.Etude;
 import abstraction.autres.*;
 
 /** 
@@ -34,17 +34,17 @@ public class Metriques extends Module {
 	 */
 	public Metriques() {
 		super("Métriques");
-		this.predecesseurs.add(this.getAnalyse().getModule("Critères de sécurité"));
-		this.successeurs.add(this.getAnalyse().getModule("Scénarios de menaces typés"));
-		this.successeurs.add(this.getAnalyse().getModule("Analyse des risques"));
-		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
+		this.predecesseurs.add(this.getEtude().getModule("Critères de sécurité"));
+		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces typés"));
+		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
+		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
 		
 		this.importerBDC();  //on remplit la BDC
 		this.lesMetriques = new Hashtable<String, Metrique>();  
-		CriteresDeSecurite cds = (CriteresDeSecurite) this.getAnalyse().getModule("Critères de sécurité");
+		CriteresDeSecurite cds = (CriteresDeSecurite) this.getEtude().getModule("Critères de sécurité");
 		for(Critere critere : cds.getCriteresRetenus().values()){   //pour chaque critere retenu a l'onglet "Critères de sécurité"
 			if(bdcMetriques.containsKey(critere.getIntitule())){   //s'il existe une metrique associee dans la BDC Metriques
 				this.lesMetriques.put(critere.getIntitule(), bdcMetriques.get(critere.getIntitule()));   //on ajoute cette metrique dans l'onglet Metriques

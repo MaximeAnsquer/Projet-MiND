@@ -2,7 +2,7 @@ package abstraction.modules;
 
 import java.util.ArrayList;
 
-import abstraction.Analyse;
+import abstraction.Etude;
 
 public class MatriceDesRisques extends Module {
 	
@@ -17,7 +17,7 @@ public class MatriceDesRisques extends Module {
 	/*les variables d'instance qui représentent les antécédents du module Matrice des risques et dont le module a 
 	 * par conséquent besoin pour fonctionner
 	 */
-	private Analyse analyse;
+	private Etude analyse;
 	
 	private ArrayList<String>[][] matrice; 
 	private AnalyseDesRisques analysedesrisques;
