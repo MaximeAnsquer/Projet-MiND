@@ -24,8 +24,8 @@ public class TypologieBiensSupports extends Module {
 	public TypologieBiensSupports() {
 		super("Typologie des biens supports");
 		this.tableau = new Hashtable<String, TypeBien>();
-		//this.successeurs.add(BiensSupports.getInstance());
-		//this.successeurs.add(ScenariosDeMenacesGeneriques.getInstance());
+		this.successeurs.add(this.getEtude().getModule("Biens Supports"));
+		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
