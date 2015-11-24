@@ -3,16 +3,14 @@ import java.util.Hashtable;
 import abstraction.autres.*;
 
 /**
- * Cette classe correspond à la modélisation de la base de données préexistante
- * de biens supports augmentée de nouveaux biens supports que l'on peut rajouter
+ * Cette classe correspond ï¿½ la modï¿½lisation de la base de donnï¿½es prï¿½existante
+ * de biens supports augmentï¿½e de nouveaux biens supports que l'on peut rajouter
  * 
  * @author Francois Adam
  */
 
 public class BiensSupports extends Module{
-	
-	private static Hashtable<String,Bien> bdcBiensSupports ;
-	
+
 	// ---Variables d'instance
 
 	private Hashtable<String, Bien> lesBiens;
@@ -20,16 +18,14 @@ public class BiensSupports extends Module{
 	// ---Constructeurs---
 
 	public BiensSupports() {
-		super("Biens essentiels");
-		this.importerBDC();
+		super("Biens supports");
 		this.lesBiens = new Hashtable<String, Bien>(); // useless ?
 		this.successeurs.add(MappingDesBiens.getInstance());
 		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
-		this.predecesseurs.add(TypologieBiensSupports.getInstance());
+		this.predecesseurs.add(TypologieDesBiensSupports.getInstance());
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
-		this.lesBiens = BiensSupports.getBDC();
 	}
 
 	// ---Getters et setters---
@@ -45,11 +41,6 @@ public class BiensSupports extends Module{
 	public Bien getBien(String nomBien) {
 		return this.getLesBiens().get(nomBien);
 	}
-	
-	public static Hashtable<String,Bien> getBDC(){
-		return bdcBiensSupports;
-	}
-
 
 	// ---Services---
 
@@ -79,7 +70,4 @@ public class BiensSupports extends Module{
 		this.retenirBien(bien.getIntitule());
 	}
 	
-	public void importerBDC(){
-		//TODO importer la BDC via le fichier excel
-	}
 }

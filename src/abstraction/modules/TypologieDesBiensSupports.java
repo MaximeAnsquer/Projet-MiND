@@ -13,7 +13,7 @@ import abstraction.autres.TypeBien;
  * @author Belghiti Ali
  */
 
-public class TypologieBiensSupports extends Module {
+public class TypologieDesBiensSupports extends Module {
 
 	// Represente la bdc
 	private static Hashtable<String, TypeBien> bdcTypeBiensSupports;
@@ -21,7 +21,7 @@ public class TypologieBiensSupports extends Module {
 	// Variable d'instance
 	Hashtable<String, TypeBien> tableau;
 
-	public TypologieBiensSupports() {
+	public TypologieDesBiensSupports() {
 		super("Typologie des biens supports");
 		this.tableau = new Hashtable<String, TypeBien>();
 		this.successeurs.add(this.getEtude().getModule("Biens Supports"));
@@ -29,7 +29,8 @@ public class TypologieBiensSupports extends Module {
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
-		this.tableau = TypologieBiensSupports.getBDC();
+		this.importerBDC();
+		this.tableau = TypologieDesBiensSupports.getBDC();
 	}
 
 	// ---Getters et setters---
@@ -51,6 +52,22 @@ public class TypologieBiensSupports extends Module {
 	}
 
 	// ---Services---
+	
+	// On verifie si un type de bien support est nouveau
+	// cad s'il n'est pas présent dans la bdc et qu'il a été ajouté au tableau
+	// ALGO A AMELIORER
+	public boolean estNouveauTypeBien(TypeBien type) {
+		boolean b = true;
+		for (TypeBien t : TypologieDesBiensSupports.getBDC().values()) {
+			b = b && (t.getIntitule() != type.getIntitule());
+		}
+		if (b) {
+			for (TypeBien t : this.tableau.values()) {
+				b = b && (t.getIntitule() != type.getIntitule());
+			}
+		}
+		return b;
+	}
 
 	// On ajoute une ligne au tableau seulement si tous les champs sont
 	// renseignés
