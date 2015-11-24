@@ -3,7 +3,7 @@ package abstraction.modules;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import abstraction.Analyse;
+import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.autres.Biens;
 import abstraction.autres.Critere;
@@ -19,12 +19,12 @@ public class EvenementsRedoutes extends Module {
 	
 	/*Puis les antécédents du module car on en a besoin pour créer le présent module
 	 */
-	private Analyse analyse;
+	private Etude analyse;
 	private BiensEssentiels lesBiensEssentiels;
 	private Metriques lesMetriques;
 	
 	
-	private EvenementsRedoutes(Analyse analyse){
+	private EvenementsRedoutes(Etude analyse){
 		super("Evènements redoutés");
 		this.predecesseurs.add(this.analyse.getModule("BiensEssentiels"));
 		this.predecesseurs.add(this.analyse.getModule("Metriques"));
@@ -60,7 +60,7 @@ public class EvenementsRedoutes extends Module {
 		this.evenementsredoutes=liste;
 	}
 	
-	public Analyse getAnalyse(){
+	public Etude getAnalyse(){
 		return analyse;
 	}
 	

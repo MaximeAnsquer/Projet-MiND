@@ -1,17 +1,21 @@
 package abstraction.modules;
 import java.util.Hashtable;
 import abstraction.autres.SourceDeMenace;
-import abstraction.bdc.BDCSourcesDeMenaces;
 
 /**
+ * Classe representant l'onglet " Sources de menaces ".
  * @author Maxime Ansquer
  */
 
 public class SourcesDeMenaces extends Module {
 	
-	//---L'instance unique---
+	//---La BDC Sources de menaces, accessible par la methode statique getBDC()---
 	
-	private static SourcesDeMenaces bdcSourcesDeMenaces = new SourcesDeMenaces();
+	/**
+	 * Une hashtable d'objets " SourceDeMenace " indexes par leurs id.
+	 * Attention les id doivent etre distincts !
+	 */
+	private static Hashtable<String, SourceDeMenace> bdcSourcesDeMenaces;
 	
 	//---Variables d'instance---
 	
@@ -19,19 +23,29 @@ public class SourcesDeMenaces extends Module {
 	 * Une hashtable d'objets " SourceDeMenace " indexes par leurs id.
 	 * Attention les id doivent etre distincts !
 	 */
-	private Hashtable<String,SourceDeMenace>  lesSourcesDeMenaces;
+	private Hashtable<String, SourceDeMenace>  lesSourcesDeMenaces;
 	
 	//---Constructeurs---
 	
-	/**
-	 * Initialise les sources de menaces a partir de la bdc correspondante.
+	/** 
+	 * Initialise le module en commençant par initialiser la BDC, puis en copiant les valeurs
+	 * de la BDC dans le module.
 	 */
-	private SourcesDeMenaces(){
+	public SourcesDeMenaces(){
 		super("Sources de menaces");
-		this.lesSourcesDeMenaces = BDCSourcesDeMenaces.getInstance().getLesSourcesDeMenaces();
+		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces génériques"));
+		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces typés"));
+		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
+		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
+		this.cree = false;
+		this.coherent = false;
+		this.disponible = false;
+		
+		this.importerBDC();  //on remplit la BDC
+		this.lesSourcesDeMenaces = bdcSourcesDeMenaces;	 //on initialise l'onglet avec les valeurs de la BDC
 	}
 	
-	//---Getters et setters
+	//---Getters et setters	
 
 	public Hashtable<String, SourceDeMenace> getLesSourcesDeMenaces() {
 		return lesSourcesDeMenaces;
@@ -73,7 +87,15 @@ public class SourcesDeMenaces extends Module {
 		return resultat;
 	}
 	
-	public static SourcesDeMenaces getInstance(){
+	public static Hashtable<String, SourceDeMenace> getInstance(){
+		return bdcSourcesDeMenaces;
+	}
+	
+	private void importerBDC() {
+		// TODO Auto-generated method stub		
+	}
+	
+	public Hashtable<String, SourceDeMenace> getBDC(){
 		return bdcSourcesDeMenaces;
 	}
 	

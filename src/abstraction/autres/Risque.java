@@ -5,21 +5,39 @@ public class Risque {
 	
 	private String intitule;
 	private Evenement evenementredoute;
-	private Metrique gravite;
+	private int niveaugravite;
 	private Bien biensupport;
-	private Scenario scenarioconcret;
-	private Metrique vraisemblance;
+	private ScenarioDeMenaceType scenarioconcret;
+	private int niveauvraisemblance;
 	
 	
 	
-	public Risque(String intitule,Evenement evenementredoute,Metrique gravite,Bien biensupport,Scenario scenarioconcret,Metrique vraisemblance){
+	public Risque(String intitule,Evenement evenementredoute,int niveaugravite,Bien biensupport,ScenarioDeMenaceType scenarioconcret,int niveauvraisemblance){
 		this.intitule=intitule;
 		this.evenementredoute=evenementredoute;
-		this.gravite=gravite;
+		this.niveaugravite=niveaugravite;
 		this.biensupport=biensupport;
 		this.scenarioconcret=scenarioconcret;
-		this.vraisemblance=vraisemblance;
+		this.niveauvraisemblance=niveauvraisemblance;
 		
+	}
+	
+	
+	public String getIntitule(){
+		return this.intitule;
+	}
+	
+	public void setIntitule(String intitule){
+		this.intitule=intitule;
+	}
+	
+	public int getNiveauGravite(){
+		return this.niveaugravite;
+		
+		
+	}
+	public int getNiveauVraisemblance(){
+		return this.niveauvraisemblance;
 	}
 
 }

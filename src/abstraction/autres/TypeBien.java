@@ -9,7 +9,7 @@ package abstraction.autres;
  * @author Belghiti Ali
  */
 
-public class TypeBiens {
+public class TypeBien {
 	
 	// Variables d'instances
 	// Il faudra rajouter la couleur
@@ -24,7 +24,7 @@ public class TypeBiens {
 	//on a un X qui s'affiche dans cette case. Dans l'autre cas, le X disparait (case vide)
 	
 	// Constructeur
-	public TypeBiens(String id, String description, String intitule, boolean retenu){
+	public TypeBien(String id, String description, String intitule, boolean retenu){
 		this.Id=id;
 		this.Description = description;
 		this.intitule = intitule;
@@ -32,8 +32,16 @@ public class TypeBiens {
 	}
 	
 	// Constructeur : Ligne vide
-	public TypeBiens(){
+	public TypeBien(){
 		this("","","",false);
+	}
+	
+	public String getId(){
+		return this.Id;
+	}
+	
+	public void setId(String id){
+		this.Id=id;
 	}
 	
 	public String getDescription() {

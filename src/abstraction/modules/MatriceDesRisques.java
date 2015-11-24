@@ -2,7 +2,7 @@ package abstraction.modules;
 
 import java.util.ArrayList;
 
-import abstraction.Analyse;
+import abstraction.Etude;
 
 public class MatriceDesRisques extends Module {
 	
@@ -17,7 +17,7 @@ public class MatriceDesRisques extends Module {
 	/*les variables d'instance qui représentent les antécédents du module Matrice des risques et dont le module a 
 	 * par conséquent besoin pour fonctionner
 	 */
-	private Analyse analyse;
+	private Etude etude;
 	
 	private ArrayList<String>[][] matrice; 
 	private AnalyseDesRisques analysedesrisques;
@@ -26,23 +26,38 @@ public class MatriceDesRisques extends Module {
 	 * 
 	 */
 	
-	public MatriceDesRisques(){
-		super("Matrice des Risques");
+	public MatriceDesRisques(Etude etude){
+	    
+		super("Matrice des risques");
+		this.etude=etude;
+		this.analysedesrisques=(AnalyseDesRisques)this.etude.getModule("Analyse des risques");
 		this.successeurs=null;
-		this.predecesseurs.add(AnalyseDesRisques.getInstance());
+		this.predecesseurs.add(this.etude.getModule("Analyse des risques"));
 		this.coherent=false;
 		this.cree=false;
 		this.disponible=false;
-		this.matrice=new ArrayList[this.analyse.getLesModules().get("Métriques").getLesMetriques().get("Gravité").getSize()][this.analyse.getLesModules().get("Métriques").getLesMetriques().get("Exigence").getSize()];
-	}
+		int a=((Metriques)this.etude.getModule("Métriques")).get("Gravité").size();
+		int b=(Metriques)this.etude.getModule("Métriques")).get("Vraisemblance").size();
+		this.matrice=new ArrayList[a][b];
+		
+		for (int i=0;i<a;i++){
+			for (int j=0;j<b;j++){
+				for (int k=0;k<this.analysedesrisques.getAnalyseDesRisques().size();k++){
+					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j){
+		this.matrice[i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
+					}
+				}
+			}
+		}
+	
+			
+		}
 	
 	/*getters
 	 * 
 	 */
 	
-	public MatriceDesRisques getInstance(){
-		return instance;
-	}
+	
 	
 	public ArrayList<String>[][] getMatrice(){
 		return this.matrice;

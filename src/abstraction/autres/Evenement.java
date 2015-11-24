@@ -30,7 +30,7 @@ public class Evenement {
 	private int niveaugravite;
 	
 	
-	private Evenement(String nomevenement,ArrayList<String> nomgroupes,Bien bienessentiel,Critere critere,Metrique exigence,Metrique gravite){
+	public Evenement(String nomevenement,ArrayList<String> nomgroupes,Bien bienessentiel,Critere critere,Metrique exigence,Metrique gravite){
 		this.nomevenement=nomevenement;
 		this.nomgroupes=nomgroupes;
 		this.bienessentiel=bienessentiel;

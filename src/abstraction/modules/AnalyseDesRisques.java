@@ -3,6 +3,7 @@ package abstraction.modules;
 import java.util.ArrayList;
 
 import abstraction.Analyse;
+import abstraction.Etude;
 import abstraction.autres.Evenement;
 import abstraction.autres.Risque;
 
@@ -12,7 +13,7 @@ public class AnalyseDesRisques extends Module{
 	
 	private ArrayList<Risque> risques;
 	
-	private Analyse analyse;
+	private Etude etude;
 	private EvenementsRedoutes evenements;
 	private MappingDesBiens mapping;
 	private ScenariosDeMenacesTypes scenarios;
@@ -20,30 +21,30 @@ public class AnalyseDesRisques extends Module{
 	
 	
 	
-	public AnalyseDesRisques(){
+	public AnalyseDesRisques(Etude etude){
 		super("Analyse des risques");
-		this.evenements=(EvenementsRedoutes) this.analyse.getModule("Evènements redoutés");
-		this.mapping=(MappingDesBiens)this.analyse.getModule("Mapping des biens");
-		this.scenarios=(ScenariosDeMenacesTypes)this.analyse.getModule("Scenarios de menaces types");
+		this.etude=etude;
+		this.evenements=(EvenementsRedoutes) this.etude.getModule("Evènements redoutés");
+		this.mapping=(MappingDesBiens)this.etude.getModule("Mapping des biens");
+		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("Scenarios de menaces types");
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
-		
+		int a=this.scenarios.getScenariosMenacesTypes().size();
 		
 		for (int i=0;i<a;i++){
-			for(int j=0;j<b;j++){
-				liste.set(i*b+j,new Risque("",this.scenarios.getScenarios().get(i),this.analyse.getModule("Métriques").getMetrique("Gravité"),,exigence,gravite));
+			
+				liste.set(i,new Risque("",this.scenarios.getScenariosMenacesTypes().get(i).getEvenement().getNomEvenement(),this.scenarios.getScenariosMenacesTypes().get(i).getEvenement().getNiveauGravite(),this.scenarios.getScenariosMenacesTypes().get(i).getEvenement().getBienEssentiel().getBienSupportCorrespondant(),this.scenarios.getScenariosMenacesTypes().get(i),this.scenarios.getScenariosMenacesTypes().get(i).getNiveauVraisemblance()));
 				
 			}
-		}
-		
-		this.intitule=intitule;
-		this.evenementredoute=evenementredoute;
-		this.gravite=gravite;
-		this.biensupport=biensupport;
-		this.scenarioconcret=scenarioconcret;
-		this.vraisemblance=vraisemblance;
 		
 		
+		
+		
+		
+	}
+	
+	public ArrayList<Risque> getAnalyseDesRisques(){
+		return this.risques;
 	}
 
 }

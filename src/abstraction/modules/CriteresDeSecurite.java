@@ -26,12 +26,12 @@ public class CriteresDeSecurite extends Module{
 	 * Initialise le module en commençant par initialiser la BDC, puis en copiant les valeurs
 	 * de la BDC dans le module.
 	 */
-	private CriteresDeSecurite() {
+	public CriteresDeSecurite() {
 		super("Critères de sécurité");
-		this.successeurs.add(this.getAnalyse().getModule("Scénarios de menaces typés"));
-		this.successeurs.add(this.getAnalyse().getModule("Analyse des risques"));
-		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
-		this.successeurs.add(this.getAnalyse().getModule("Matrice des risques"));
+		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces typés"));
+		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
+		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
+		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
