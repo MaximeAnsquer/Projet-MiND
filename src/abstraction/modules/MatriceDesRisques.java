@@ -8,7 +8,7 @@ public class MatriceDesRisques extends Module {
 	
 	/*Ce module syntétise l'analyse effectuée en ce sens qu'elle ordonne différents "risques" tels qu'ils ont été définis 
 	 * dans le module AnalyseDesRisques.
-	 * Les intitulés de ces risques sont placés dans un tableau; en colonne sont précisés les niveaux d'exigence,
+	 * Les intitulés de ces risques sont placés dans un tableau; en colonne sont précisés les niveaux de vraisemblance,
 	 * en ligne les niveaux de gravité que ces risques induisent.
 	 */
 	

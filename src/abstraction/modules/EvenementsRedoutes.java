@@ -5,10 +5,10 @@ import java.util.Hashtable;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
-import abstraction.autres.Biens;
 import abstraction.autres.Critere;
 import abstraction.autres.Evenement;
-import abstraction.bdc.BDCMetriques;
+import abstraction.autres.Metrique;
+
 
 public class EvenementsRedoutes extends Module {
 	
@@ -19,31 +19,31 @@ public class EvenementsRedoutes extends Module {
 	
 	/*Puis les antécédents du module car on en a besoin pour créer le présent module
 	 */
-	private Etude analyse;
+	private Etude etude;
 	private BiensEssentiels lesBiensEssentiels;
 	private Metriques lesMetriques;
 	
 	
-	private EvenementsRedoutes(Etude analyse){
+	private EvenementsRedoutes(Etude etude){
 		super("Evènements redoutés");
-		this.predecesseurs.add(this.analyse.getModule("BiensEssentiels"));
-		this.predecesseurs.add(this.analyse.getModule("Metriques"));
-		this.successeurs.add(this.analyse.getModule("AnalyseDesRisques"));
-		this.lesMetriques=(Metriques) this.analyse.getModule("Metriques");
-		this.lesBiensEssentiels=(BiensEssentiels) this.analyse.getModule("BiensEssentiels");
+		this.predecesseurs.add(this.etude.getModule("BiensEssentiels"));
+		this.predecesseurs.add(this.etude.getModule("Metriques"));
+		this.successeurs.add(this.etude.getModule("AnalyseDesRisques"));
+		this.lesMetriques=(Metriques) this.etude.getModule("Metriques");
+		this.lesBiensEssentiels=(BiensEssentiels) this.etude.getModule("BiensEssentiels");
 		this.cree=false;
 		this.disponible=false;
 		this.coherent=false;
-		this.analyse=analyse;
+		this.etude=etude;
 		
 		/*A ce stade-ci du constructeur, on remplit la hashtable en constituant des combinaisons entre Biens Essentiels
 		 * et Critères définis dans les antécédents du  module.
 		 */
 		
 	    ArrayList<Evenement> liste=new ArrayList<Evenement>();
-		int a=((BiensEssentiels)this.analyse.getModule("BiensEssentiels")).getLesBiens().size();
-		int b=((CriteresDeSecurite)this.analyse.getModule("CritèresDeSécurité")).getLesCriteres().size();
-		CriteresDeSecurite critere=(CriteresDeSecurite) this.analyse.getModule("CritèresDeSécurité");
+		int a=((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getLesBiens().size();
+		int b=((CriteresDeSecurite)this.etude.getModule("CritèresDeSécurité")).getLesCriteres().size();
+		CriteresDeSecurite critere=(CriteresDeSecurite) this.etude.getModule("CritèresDeSécurité");
 		BiensEssentiels bienessentiel=this.lesBiensEssentiels;
 		Metrique exigence=this.lesMetriques.getMetrique("Exigence");
 		Metrique gravite=this.lesMetriques.getMetrique("Gravité");
@@ -60,8 +60,8 @@ public class EvenementsRedoutes extends Module {
 		this.evenementsredoutes=liste;
 	}
 	
-	public Etude getAnalyse(){
-		return analyse;
+	public Etude getEtude(){
+		return etude;
 	}
 	
 	public Module getLesBiensEssentiels(){

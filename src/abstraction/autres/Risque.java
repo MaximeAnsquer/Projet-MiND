@@ -1,6 +1,9 @@
 package abstraction.autres;
 
 public class Risque {
+	/*Cette classe donne une ligne du tableau AnalyseDesRisques en faisant correspondre divers éléments définis plus tôt
+	 * et en leur allouant un intitulé pour désigner chaque risque.
+	 */
 	
 	
 	private String intitule;
