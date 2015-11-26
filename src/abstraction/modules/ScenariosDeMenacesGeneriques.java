@@ -19,7 +19,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		this.predecesseurs.add(this.getEtude().getModule("Typologie des biens supports"));
 		this.predecesseurs.add(this.getEtude().getModule("Sources de menaces"));
 		this.successeurs.add(this.getEtude().getModule("Biens Supports"));
-		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
+		this.successeurs.add(this.getEtude().getModule("Scenario de Menaces Types"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;

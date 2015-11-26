@@ -15,7 +15,7 @@ import java.util.Hashtable;
 public class ScenarioGenerique {
 	private TypeBien type;
 	private String Id;
-	private String intitule;
+	private String intituleGenerique;
 	private Hashtable<String, SourceDeMenace> menaces;
 	private Hashtable<String, Critere> criteres;
 	private boolean retenu;
@@ -26,7 +26,7 @@ public class ScenarioGenerique {
 			Hashtable<String, Critere> criteres, boolean retenu) {
 		this.type = type;
 		this.Id = id;
-		this.intitule = intitule;
+		this.intituleGenerique = intitule;
 		this.menaces = menaces;
 		this.criteres = criteres;
 		this.retenu = retenu;
@@ -63,11 +63,11 @@ public class ScenarioGenerique {
 	}
 
 	public String getIntitule() {
-		return intitule;
+		return intituleGenerique;
 	}
 
 	public void setIntitule(String intitule) {
-		this.intitule = intitule;
+		this.intituleGenerique = intitule;
 	}
 
 	public Hashtable<String, SourceDeMenace> getMenaces() {
