@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import abstraction.Etude;
 
 /** 
- * Classe visant à factoriser tout ce qui est commun aux différents modules.
+ * Classe visant ï¿½ factoriser tout ce qui est commun aux diffï¿½rents modules.
  * @author Maxime Ansquer 
  */
 
@@ -81,6 +81,6 @@ public class Module implements IModule{
 	
 	public void setEtude(Etude etude){
 		this.etude = etude;
-	}
+	}	
 
 }

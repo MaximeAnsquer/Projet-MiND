@@ -23,15 +23,15 @@ public class CriteresDeSecurite extends Module{
 	//---Constructeurs---	
 	
 	/** 
-	 * Initialise le module en commençant par initialiser la BDC, puis en copiant les valeurs
+	 * Initialise le module en commenï¿½ant par initialiser la BDC, puis en copiant les valeurs
 	 * de la BDC dans le module.
 	 */
 	public CriteresDeSecurite() {
-		super("Critères de sécurité");
-		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces typés"));
-		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
-		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
-		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
+		super("Critï¿½res de sï¿½curitï¿½");
+		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenaceTypes"));
+		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
+		this.successeurs.add(this.getEtude().getModule("MatricDesRisques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
@@ -76,7 +76,7 @@ public class CriteresDeSecurite extends Module{
 	
 	/**
 	 * @author Maxime Ansquer
-	 * @return Renvoie une Hashtable des critères retenus par l'utilisateur
+	 * @return Renvoie une Hashtable des critï¿½res retenus par l'utilisateur
 	 */
 	public Hashtable<String,Critere> getCriteresRetenus(){
 		Hashtable<String,Critere> resultat = new Hashtable<String,Critere>();

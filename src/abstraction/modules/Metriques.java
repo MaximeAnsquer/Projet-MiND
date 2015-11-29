@@ -7,9 +7,9 @@ import abstraction.autres.*;
 /** 
  * Cahier des charges, page 5 :
  * 
- * " Metriques : cet onglet permet la définition des echelles ordinales associees
- *   aux differents criteres de securite retenus (par exemple : définition d’une 
- *   echelle à quatre niveaux pour le critère de disponibilite). "
+ * " Metriques : cet onglet permet la dï¿½finition des echelles ordinales associees
+ *   aux differents criteres de securite retenus (par exemple : dï¿½finition dï¿½une 
+ *   echelle ï¿½ quatre niveaux pour le critï¿½re de disponibilite). "
  *   
  * Cette classe modelise le module " Metriques ". Elle est constituee d'une hastable d'objets Metrique
  * indexee par le nom du critere associe (on rappelle qu'un objet Metrique est constitue d'un critere
@@ -29,23 +29,23 @@ public class Metriques extends Module {
 	//---Constructeurs---	
 	
 	/** 
-	 * Initialise le module en commençant par initialiser la BDC, puis en copiant les valeurs
+	 * Initialise le module en commenï¿½ant par initialiser la BDC, puis en copiant les valeurs
 	 * de la BDC dans le module.
 	 */
 	public Metriques() {
-		super("Métriques");
-		this.predecesseurs.add(this.getEtude().getModule("Critères de sécurité"));
-		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces typés"));
-		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
-		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
+		super("Metriques");
+		this.predecesseurs.add(this.getEtude().getModule("CriteresDeSecurite"));
+		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
+		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
 		
 		this.importerBDC();  //on remplit la BDC
 		this.lesMetriques = new Hashtable<String, Metrique>();  
-		CriteresDeSecurite cds = (CriteresDeSecurite) this.getEtude().getModule("Critères de sécurité");
-		for(Critere critere : cds.getCriteresRetenus().values()){   //pour chaque critere retenu a l'onglet "Critères de sécurité"
+		CriteresDeSecurite cds = (CriteresDeSecurite) this.getEtude().getModule("CriteresDeSecurite");
+		for(Critere critere : cds.getCriteresRetenus().values()){   //pour chaque critere retenu a l'onglet "CritereDeSecurite"
 			if(bdcMetriques.containsKey(critere.getIntitule())){   //s'il existe une metrique associee dans la BDC Metriques
 				this.lesMetriques.put(critere.getIntitule(), bdcMetriques.get(critere.getIntitule()));   //on ajoute cette metrique dans l'onglet Metriques
 			}

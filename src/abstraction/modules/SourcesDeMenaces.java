@@ -28,15 +28,15 @@ public class SourcesDeMenaces extends Module {
 	//---Constructeurs---
 	
 	/** 
-	 * Initialise le module en commençant par initialiser la BDC, puis en copiant les valeurs
+	 * Initialise le module en commencant par initialiser la BDC, puis en copiant les valeurs
 	 * de la BDC dans le module.
 	 */
 	public SourcesDeMenaces(){
 		super("Sources de menaces");
-		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces génériques"));
-		this.successeurs.add(this.getEtude().getModule("Scénarios de menaces typés"));
-		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
-		this.successeurs.add(this.getEtude().getModule("Matrice des risques"));
+		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
+		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
+		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
@@ -75,7 +75,7 @@ public class SourcesDeMenaces extends Module {
 	
 	/**
 	 * @return Renvoie la liste des sources de menaces retenues sous la forme d'une
-	 * hashtable de SourceDeMenace indexée par leurs id.
+	 * hashtable de SourceDeMenace indexee par leurs id.
 	 */
 	public Hashtable<String, SourceDeMenace> getSourcesDeMenacesRetenues(){
 		Hashtable<String, SourceDeMenace> resultat = new Hashtable<String, SourceDeMenace>();
