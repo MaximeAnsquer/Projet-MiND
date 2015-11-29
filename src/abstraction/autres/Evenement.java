@@ -19,6 +19,7 @@ public class Evenement {
 	
 	private String nomevenement;
 	private ArrayList<String> nomgroupes;
+	private ArrayList<String> contenugroupes;
 	private Bien bienessentiel;
 	private Critere critere;
 	private Metrique exigence;
@@ -30,9 +31,10 @@ public class Evenement {
 	private int niveaugravite;
 	
 	
-	public Evenement(String nomevenement,ArrayList<String> nomgroupes,Bien bienessentiel,Critere critere,Metrique exigence,Metrique gravite){
+	public Evenement(String nomevenement,ArrayList<String> nomgroupes,ArrayList<String> contenugroupes,Bien bienessentiel,Critere critere,Metrique exigence,Metrique gravite){
 		this.nomevenement=nomevenement;
 		this.nomgroupes=nomgroupes;
+		this.contenugroupes=contenugroupes;
 		this.bienessentiel=bienessentiel;
 		this.critere=critere;
 		this.exigence=exigence;

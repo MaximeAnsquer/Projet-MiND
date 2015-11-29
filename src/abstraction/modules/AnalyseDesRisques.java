@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import abstraction.Analyse;
 import abstraction.Etude;
+import abstraction.autres.Bien;
 import abstraction.autres.Evenement;
 import abstraction.autres.Risque;
+import abstraction.autres.ScenarioType;
 
 public class AnalyseDesRisques extends Module{
 	
@@ -25,14 +27,15 @@ public class AnalyseDesRisques extends Module{
 	
 	
 	public AnalyseDesRisques(Etude etude){
-		super("Analyse des risques");
+		super("AnalyseDesRisques");
 		this.etude=etude;
-		this.evenements=(EvenementsRedoutes) this.etude.getModule("Evènements redoutés");
-		this.mapping=(MappingDesBiens)this.etude.getModule("Mapping des biens");
-		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("Scenarios de menaces types");
+		this.evenements=(EvenementsRedoutes) this.etude.getModule("EvenementsRedoutes");
+		this.mapping=(MappingDesBiens)this.etude.getModule("MappingDesBiens");
+		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("ScenariosDeMenacesTypes");
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
-		int a=this.scenarios.getScenariosMenacesTypes().size();
+		int a=this.scenarios.getTableau().size();
+		int k=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
 		
 		/*là on construit chacuns des risques de l'arraylist, en allant piocher dans les modules antécédents pour
 		 * faire correspondre chaque scénario de menace(ScenariosDeMenacesTypes) avec l'évenement correspondant(EvenementsRedoutes)
@@ -40,13 +43,21 @@ public class AnalyseDesRisques extends Module{
 		 * y a moyen que je retouche ça plus tard pour plus de visibilité.
 		 * 
 		 */
+		ScenarioType[] scenarios=this.scenarios.getTableau().values().toArray(new ScenarioType[this.scenarios.getTableau().size()]);
+		
+		
 		
 		for (int i=0;i<a;i++){
-			
-				liste.set(i,new Risque("",this.scenarios.getScenariosMenacesTypes().get(i).getEvenement().getNomEvenement(),this.scenarios.getScenariosMenacesTypes().get(i).getEvenement().getNiveauGravite(),this.scenarios.getScenariosMenacesTypes().get(i).getEvenement().getBienEssentiel().getBienSupportCorrespondant(),this.scenarios.getScenariosMenacesTypes().get(i),this.scenarios.getScenariosMenacesTypes().get(i).getNiveauVraisemblance()));
+			for(int k=0;k<b;k++){
+			    if (scenarios.getValeurcritere(k)==true){
+			    	
+			    Bien biencourant=scenarios[i].getBienSupport().getBienEssentielCorrespondant();		
+			    Critere criterecourant=this.scenarios.getScenariosDeMenacesTypes().get(i).getNomCritere(k);
+			    
+				liste.add(new Risque("",this.evenements.getEvenementsRedoutes().getEvenementCorrespondant(criterecourant,biencourant),this.scenarios.getScenariosMenacesTypes().get(i).getEvenement().getNiveauGravite(),this.scenarios.getScenariosMenacesTypes().get(i).getBienSupport(),this.scenarios.getScenariosMenacesTypes().get(i),this.scenarios.getScenariosMenacesTypes().get(i).getNiveauVraisemblance()));
 				
 			}
-		
+			}
 		
 		
 	/*Getter utile pour la construction de la matrice qui vient après*/	

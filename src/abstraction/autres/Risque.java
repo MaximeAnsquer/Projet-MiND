@@ -1,5 +1,7 @@
 package abstraction.autres;
 
+import abstraction.modules.ScenariosDeMenacesTypes;
+
 public class Risque {
 	/*Cette classe donne une ligne du tableau AnalyseDesRisques en faisant correspondre divers éléments définis plus tôt
 	 * et en leur allouant un intitulé pour désigner chaque risque.
@@ -10,12 +12,12 @@ public class Risque {
 	private Evenement evenementredoute;
 	private int niveaugravite;
 	private Bien biensupport;
-	private ScenarioDeMenaceType scenarioconcret;
+	private ScenariosDeMenacesTypes scenarioconcret;
 	private int niveauvraisemblance;
 	
 	
 	
-	public Risque(String intitule,Evenement evenementredoute,int niveaugravite,Bien biensupport,ScenarioDeMenaceType scenarioconcret,int niveauvraisemblance){
+	public Risque(String intitule,Evenement evenementredoute,int niveaugravite,Bien biensupport,ScenariosDeMenacesTypes scenarioconcret,int niveauvraisemblance){
 		this.intitule=intitule;
 		this.evenementredoute=evenementredoute;
 		this.niveaugravite=niveaugravite;

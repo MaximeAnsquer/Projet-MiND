@@ -28,16 +28,16 @@ public class MatriceDesRisques extends Module {
 	
 	public MatriceDesRisques(Etude etude){
 	    
-		super("Matrice des risques");
+		super("MatriceDesRisques");
 		this.etude=etude;
-		this.analysedesrisques=(AnalyseDesRisques)this.etude.getModule("Analyse des risques");
+		this.analysedesrisques=(AnalyseDesRisques)this.etude.getModule("AnalyseDesRisques");
 		this.successeurs=null;
-		this.predecesseurs.add(this.etude.getModule("Analyse des risques"));
+		this.predecesseurs.add(this.etude.getModule("AnalyseDesRisques"));
 		this.coherent=false;
 		this.cree=false;
 		this.disponible=false;
-		int a=((Metriques)this.etude.getModule("Métriques")).get("Gravité").size();
-		int b=(Metriques)this.etude.getModule("Métriques")).get("Vraisemblance").size();
+		int a=((Metriques)this.etude.getModule("Metriques")).getMetrique("Gravite").size();
+		int b=(Metriques)this.etude.getModule("Métriques")).getMetrique("Vraisemblance").size();
 		this.matrice=new ArrayList[a][b];
 		
 		for (int i=0;i<a;i++){

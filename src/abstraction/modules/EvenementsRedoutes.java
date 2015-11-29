@@ -25,7 +25,7 @@ public class EvenementsRedoutes extends Module {
 	
 	
 	private EvenementsRedoutes(Etude etude){
-		super("Evènements redoutés");
+		super("EvenementsRedoutes");
 		this.predecesseurs.add(this.etude.getModule("BiensEssentiels"));
 		this.predecesseurs.add(this.etude.getModule("Metriques"));
 		this.successeurs.add(this.etude.getModule("AnalyseDesRisques"));
@@ -42,17 +42,17 @@ public class EvenementsRedoutes extends Module {
 		
 	    ArrayList<Evenement> liste=new ArrayList<Evenement>();
 		int a=((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getLesBiens().size();
-		int b=((CriteresDeSecurite)this.etude.getModule("CritèresDeSécurité")).getLesCriteres().size();
-		CriteresDeSecurite critere=(CriteresDeSecurite) this.etude.getModule("CritèresDeSécurité");
+		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
+		CriteresDeSecurite critere=(CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite");
 		BiensEssentiels bienessentiel=this.lesBiensEssentiels;
 		Metrique exigence=this.lesMetriques.getMetrique("Exigence");
-		Metrique gravite=this.lesMetriques.getMetrique("Gravité");
+		Metrique gravite=this.lesMetriques.getMetrique("Gravite");
 		Bien[] tableaubiens=this.lesBiensEssentiels.getLesBiens().values().toArray(new Bien[this.lesBiensEssentiels.getLesBiens().size()]);
 		
 		
 		for (int i=0;i<a;i++){
 			for(int j=0;j<b;j++){
-				liste.set(i*b+j,new Evenement("",tableaubiens[i].getNomColonneSup(),tableaubiens[i],critere.getLesCriteres().get(j),exigence,gravite));
+				liste.set(i*b+j,new Evenement("",tableaubiens[i].getNomColonneSup(),tableaubiens[i].getContenuColonneSup(),tableaubiens[i],critere.getLesCriteres().get(j),exigence,gravite));
 				
 			}
 		}
@@ -84,6 +84,19 @@ public class EvenementsRedoutes extends Module {
 	
 	public void setBiens(BiensEssentiels lesBiensEssentiels){
 		this.lesBiensEssentiels=lesBiensEssentiels;
+	}
+	
+	public Evenement getEvenementCorrespondant(Critere critere,Bien bien){
+		int a=this.evenementsredoutes.size();
+		for (int i=0;i<a;i++){
+			if (this.evenementsredoutes.get(i).GetBien()==bien){
+					if(this.evenementsredoutes.get(i).GetCritere()==critere){
+						return this.evenementsredoutes.get(i);
+					}
+				}
+			}
+		return null;
+		
 	}
 	
 	
