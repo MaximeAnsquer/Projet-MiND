@@ -33,11 +33,16 @@ public class CriteresDeSecurite extends Module{
 	 * de la BDC dans le module.
 	 */
 	public CriteresDeSecurite() {
-		super("Criteres de securite");
-		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenaceTypes"));
-		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
-		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
-		this.successeurs.add(this.getEtude().getModule("MatricDesRisques"));
+		super("CriteresDeSecurite");		
+		/**
+		 * TODO : commenté pour faire des tests, à décommenter après
+		 * 
+		 * this.successeurs.add(this.getEtude().getModule("ScenariosDeMenaceTypes"));
+		 * this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+		 * this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
+		 * this.successeurs.add(this.getEtude().getModule("MatricDesRisques"));
+		 */
+		
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
@@ -69,7 +74,7 @@ public class CriteresDeSecurite extends Module{
 
 	private void importerBDC() {
 		// TODO remplit la hashtable bdcCriteresDeSecurite avec les valeurs fournies par le client (fichier excel)
-		
+		bdcCriteresDeSecurite = new Hashtable<String,Critere>();
 		//valeurs fictives pour faire des tests :
 		bdcCriteresDeSecurite.put("Disponibilité", new Critere("D","Disponibilité","Durée maximale admissible pour la réalisation d’un processus métier."));
 		bdcCriteresDeSecurite.put("Intégrité", new Critere("I","Intégrité","Altération admissible et/ou mesures de récupération des données liées à mettre en oeuvre pour un processus métier."));
