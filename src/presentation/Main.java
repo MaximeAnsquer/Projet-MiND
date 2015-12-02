@@ -26,6 +26,7 @@ public class Main {
 		//---Création de la fenêtre CriteresDeSecurite
 		
 		FenetreCriteresDeSecurite f = new FenetreCriteresDeSecurite();
+		
 	}
 
 }

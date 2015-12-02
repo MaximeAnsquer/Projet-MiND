@@ -35,7 +35,7 @@ public class CriteresDeSecurite extends Module{
 	public CriteresDeSecurite() {
 		super("CriteresDeSecurite");		
 		/**
-		 * TODO : commenté pour faire des tests, à décommenter après
+		 * TODO : comment�e pour faire des tests, e� d�ecommenter apres
 		 * 
 		 * this.successeurs.add(this.getEtude().getModule("ScenariosDeMenaceTypes"));
 		 * this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
@@ -76,9 +76,9 @@ public class CriteresDeSecurite extends Module{
 		// TODO remplit la hashtable bdcCriteresDeSecurite avec les valeurs fournies par le client (fichier excel)
 		bdcCriteresDeSecurite = new Hashtable<String,Critere>();
 		//valeurs fictives pour faire des tests :
-		bdcCriteresDeSecurite.put("Disponibilité", new Critere("D","Disponibilité","Durée maximale admissible pour la réalisation d’un processus métier."));
-		bdcCriteresDeSecurite.put("Intégrité", new Critere("I","Intégrité","Altération admissible et/ou mesures de récupération des données liées à mettre en oeuvre pour un processus métier."));
-		bdcCriteresDeSecurite.put("Confidentialité", new Critere("C","Confidentialité","Diffusabilité des informations liées à un processus métier."));
+		bdcCriteresDeSecurite.put("Disponibilite", new Critere("D","Disponibilite","Duree maximale admissible pour la realisation d'��un processus metier."));
+		bdcCriteresDeSecurite.put("Integrite", new Critere("I","Integrite","Alteration admissible et/ou mesures de recuperation des donnes liees a� mettre en oeuvre pour un processus metier."));
+		bdcCriteresDeSecurite.put("Confidentialite", new Critere("C","Confidentialite","Diffusabilite des informations liees a� un processus metier."));
 
 	}
 
