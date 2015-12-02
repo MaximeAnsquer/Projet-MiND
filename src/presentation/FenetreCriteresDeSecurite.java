@@ -1,11 +1,12 @@
 package presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
