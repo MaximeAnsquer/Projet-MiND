@@ -2,14 +2,16 @@ package presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.AbstractTableModel;
 
 import abstraction.Etude;
@@ -45,10 +47,38 @@ public class FenetreCriteresDeSecurite extends JFrame {
 		
 		contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
 		contentPane.add(partieDuBas(), BorderLayout.SOUTH);
+		contentPane.add(test(), BorderLayout.EAST);
 		
 		this.pack();
 	}
 	
+	/**
+	 * Inspire d'un exemple de la Javadoc sur les JTextArea
+	 * @return
+	 */
+	private JScrollPane test() {
+		JTextArea textArea = new JTextArea(
+                "Cette zone servirait a afficher la description"
+                + " du critere selectionne. Qu'en dites-vous ?"
+                + " On enleverait alors la colonne \" description \" dans"
+                + " la JTabel de gauche."
+        );
+        textArea.setFont(new Font("Serif", Font.ITALIC, 16));
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        JScrollPane areaScrollPane = new JScrollPane(textArea);
+        areaScrollPane.setVerticalScrollBarPolicy(
+                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        areaScrollPane.setPreferredSize(new Dimension(400, 250));
+        areaScrollPane.setBorder(
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createCompoundBorder(
+                                BorderFactory.createTitledBorder("Description du critere"),
+                                BorderFactory.createEmptyBorder(5,5,5,5)),
+                areaScrollPane.getBorder()));
+        return areaScrollPane;
+	}
+
 	private JPanel partieDuBas() {
 		JPanel jp = new JPanel();
 		jp.add(boutonAjouter());
