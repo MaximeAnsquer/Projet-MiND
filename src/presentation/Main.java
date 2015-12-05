@@ -23,9 +23,9 @@ public class Main {
 		etude = new Etude();
 		etude.addModule(new CriteresDeSecurite());
 		
-		//---Création de la fenêtre CriteresDeSecurite
-		
-		FenetreCriteresDeSecurite f = new FenetreCriteresDeSecurite();
+		//---Création de la fenêtre CriteresDeSecurite		
+	
+		FenetreCriteresDeSecurite2 f2 = new FenetreCriteresDeSecurite2();
 		
 	}
 

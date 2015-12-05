@@ -61,7 +61,7 @@ public class FenetreCriteresDeSecurite extends JFrame {
                 "Cette zone servirait a afficher la description"
                 + " du critere selectionne. Qu'en dites-vous ?"
                 + " On enleverait alors la colonne \" description \" dans"
-                + " la JTabel de gauche."
+                + " la JTable de gauche."
         );
         textArea.setFont(new Font("Serif", Font.ITALIC, 16));
         textArea.setLineWrap(true);

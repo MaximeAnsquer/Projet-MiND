@@ -105,4 +105,17 @@ public class CriteresDeSecurite extends Module{
 		return resultat;
 	}
 	
+	public int nombreDeCriteres(){
+		return lesCriteres.size();
+	}
+	
+	/**
+	 * Permet d'acceder a un critere par sa position dans la hashtable
+	 * @param index
+	 * @return
+	 */
+	public Critere getCritere(int index){
+		return (Critere) lesCriteres.values().toArray()[index];
+	}
+	
 }
