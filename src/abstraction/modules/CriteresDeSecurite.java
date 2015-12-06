@@ -50,6 +50,14 @@ public class CriteresDeSecurite extends Module{
 		this.importerBDC();  //on remplit la BDC
 		this.lesCriteres = bdcCriteresDeSecurite;  //on initialise l'onglet avec les valeurs de la BDC
 		
+		/**
+		 * TODO : On declare certains criteres retenu ; utile pour tester l'onglet Metriques
+		 * A enlever par la suite
+		 */
+		this.getCritere("Disponibilite").setRetenu(true);
+		this.getCritere("Integrite").setRetenu(true);
+		this.getCritere("Confidentialite").setRetenu(true);
+		
 	}
 
 	//---Getters et setters---
@@ -79,6 +87,7 @@ public class CriteresDeSecurite extends Module{
 		bdcCriteresDeSecurite.put("Disponibilite", new Critere("D","Disponibilite","Duree maximale admissible pour la realisation d'€un processus metier."));
 		bdcCriteresDeSecurite.put("Integrite", new Critere("I","Integrite","Alteration admissible et/ou mesures de recuperation des donnes liees a  mettre en oeuvre pour un processus metier."));
 		bdcCriteresDeSecurite.put("Confidentialite", new Critere("C","Confidentialite","Diffusabilite des informations liees a  un processus metier."));
+		
 
 	}
 

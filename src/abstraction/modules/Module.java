@@ -31,12 +31,10 @@ public class Module implements IModule{
 	
 	//---Getters et setters---
 	
-	@Override
 	public boolean estCoherent() {
 		return this.coherent;
 	}
 
-	@Override
 	public boolean estCree() {
 		return this.cree;
 	}
@@ -53,7 +51,6 @@ public class Module implements IModule{
 		this.coherent=true;
 	}
 
-	@Override
 	public boolean estDisponible() {
 		boolean resultat = true;
 		for(Module module : this.getPredecesseurs()){
@@ -62,7 +59,6 @@ public class Module implements IModule{
 		return resultat;
 	}
 
-	@Override
 	public String getNom() {
 		return this.nom;
 	} 

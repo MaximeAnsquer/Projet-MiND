@@ -30,16 +30,12 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 	public FenetreCriteresDeSecurite2(){
 		super("Criteres de securite 2");
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
 
 		table = new JTable(new ModeleDynamiqueObjet());
 		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);	
 		getContentPane().add(partieDuBas(), BorderLayout.SOUTH);
 		pack();
-
 
 	}
 
@@ -54,7 +50,6 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 		JButton bouton = new JButton("Supprimer un critere");
 		bouton.addActionListener(new ActionListener(){
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
@@ -69,7 +64,6 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 		JButton bouton = new JButton("Ajouter un critere");
 		bouton.addActionListener(new ActionListener(){
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
