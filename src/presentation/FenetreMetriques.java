@@ -3,6 +3,8 @@ package presentation;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -10,10 +12,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+
+import presentation.FenetreCriteresDeSecurite2.ModeleDynamiqueObjet;
 
 import abstraction.Etude;
 import abstraction.autres.Metrique;
@@ -33,6 +38,8 @@ public class FenetreMetriques extends JFrame {
 	private Etude etude = MainMaximeAnsquer.etude;
 	private Metriques metriques = (Metriques) etude.getModule("Metriques");
 	private Metrique metriqueCourante;
+	private JPanel jpanel = new JPanel(new BorderLayout());
+	JTable table;
 	
 
 	public FenetreMetriques(){
@@ -51,19 +58,21 @@ public class FenetreMetriques extends JFrame {
 		/**
 		 * On affiche la metrique courante
 		 */
-		metriqueCourante = getMetriqueCourante();
-		ModeleDynamiqueObjet modele = new ModeleDynamiqueObjet(metriqueCourante);
-		JTable table = new JTable(modele);
-		contentPane.add(tableau(table, metriqueCourante));
+		contentPane.add(jpanel);
+		setTableau();
 		
 		pack();
 	}
 
-	private JPanel tableau(JTable table, Metrique metriqueCourante) {
-		JPanel jp = new JPanel(new BorderLayout());
-		jp.add(new JLabel(metriqueCourante.getIntitule()), BorderLayout.NORTH);
-		jp.add(new JScrollPane(table), BorderLayout.CENTER);
-		return jp;
+	private void setTableau() {
+		jpanel.removeAll();
+		metriqueCourante = getMetriqueCourante();
+		System.out.println(metriqueCourante.nombreDeNiveaux());
+		ModeleDynamiqueObjet modele = new ModeleDynamiqueObjet(metriqueCourante);
+		table = new JTable(modele);
+		jpanel.add(new JLabel(metriqueCourante.getIntitule()), BorderLayout.NORTH);		
+		jpanel.add(new JScrollPane(table), BorderLayout.CENTER);
+		jpanel.validate();
 	}
 
 	private Metrique getMetriqueCourante() {
@@ -74,12 +83,47 @@ public class FenetreMetriques extends JFrame {
 	private JPanel partieDuBas() {
 		JPanel jp = new JPanel();
 		jp.add(comboBox());
+		jp.add(boutonAjouter());
+		jp.add(boutonSupprimer());
 		return jp;
+	}
+
+	private JButton boutonSupprimer() {
+		JButton bouton = new JButton("Supprimer un niveau");
+		bouton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				int niveauSelectionne = table.getSelectedRow();
+				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+				modele.supprimerNiveau(niveauSelectionne);				
+			}
+		});
+		return bouton;
+	}
+
+	private JButton boutonAjouter() {
+		JButton bouton = new JButton("Ajouter un niveau");
+		bouton.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+				modele.ajouterNiveau();				
+			}
+			
+		});
+		return bouton;
 	}
 
 	private JComboBox comboBox() {
 		comboBox = new JComboBox(metriques.getLesMetriques().values().toArray());
 		comboBox.setSelectedIndex(0);
+		comboBox.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				setTableau();	
+			}
+			
+		});
 		return comboBox;
 	}
 
@@ -116,13 +160,13 @@ public class FenetreMetriques extends JFrame {
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			switch(columnIndex){
 			case 0:
-				return metrique.getNiveau(rowIndex+1).getNumero();
+				return metrique.getNiveau(rowIndex).getNumero();
 			case 1:
-				return metrique.getNiveau(rowIndex+1).getIntitule();
+				return metrique.getNiveau(rowIndex).getIntitule();
 			case 2:
-				return metrique.getNiveau(rowIndex+1).getDescription();
+				return metrique.getNiveau(rowIndex).getDescription();
 			default:
-				return null; //Ne devrait jamais arriver
+				return null; 
 			}
 		}
 
@@ -139,9 +183,25 @@ public class FenetreMetriques extends JFrame {
 			}
 		}
 		
+		public void ajouterNiveau() {
+			String numero = JOptionPane.showInputDialog("# ?");
+			String Intitule = JOptionPane.showInputDialog("Intitule ?");
+			String Description = JOptionPane.showInputDialog("Description ?");
+			NiveauDeMetrique niveau = new NiveauDeMetrique(Integer.parseInt(numero), Intitule, Description);
+			getMetriqueCourante().ajouterNiveau(niveau);
+
+			fireTableRowsInserted(getMetriqueCourante().nombreDeNiveaux() -1, getMetriqueCourante().nombreDeNiveaux() -1);
+		}
+
+		public void supprimerNiveau(int rowIndex) {
+			getMetriqueCourante().supprimerNiveau(rowIndex);
+
+			fireTableRowsDeleted(rowIndex, rowIndex);
+		}
+		
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		    if(aValue != null){
-		        NiveauDeMetrique niveau = metrique.getNiveau(rowIndex+1);
+		        NiveauDeMetrique niveau = metrique.getNiveau(rowIndex);
 		 
 		        switch(columnIndex){
 		            case 0:

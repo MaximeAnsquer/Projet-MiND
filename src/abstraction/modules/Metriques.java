@@ -1,4 +1,5 @@
 package abstraction.modules;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.Etude;
@@ -113,17 +114,20 @@ public class Metriques extends Module {
 		
 		bdcMetriques = new Hashtable<String, Metrique>();
 		
-		Metrique metriqueConfidentialite = new Metrique(cds.getCritere("Confidentialite"));
-		metriqueConfidentialite.ajouterNiveau(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
-		metriqueConfidentialite.ajouterNiveau(new NiveauDeMetrique(2, "Entreprise", "La connaissance s'organise sur un perimetre d'acces a la maille d'ERDF."));
-		metriqueConfidentialite.ajouterNiveau(new NiveauDeMetrique(3, "Restreint", "La connaissance est limite a des personnes, fonctions ou a un perimetre restreint lie a une activite."));
-		metriqueConfidentialite.ajouterNiveau(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
+		ArrayList<NiveauDeMetrique> niveauxConfidentialite = new ArrayList<NiveauDeMetrique>();
+		niveauxConfidentialite.add(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
+		niveauxConfidentialite.add(new NiveauDeMetrique(2, "Entreprise", "La connaissance s'organise sur un perimetre d'acces a la maille d'ERDF."));
+		niveauxConfidentialite.add(new NiveauDeMetrique(3, "Restreint", "La connaissance est limite a des personnes, fonctions ou a un perimetre restreint lie a une activite."));
+		niveauxConfidentialite.add(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
+		Metrique metriqueConfidentialite = new Metrique(cds.getCritere("Confidentialite"), niveauxConfidentialite);
 		
-		Metrique metriqueDisponibilite = new Metrique(cds.getCritere("Disponibilite"));
-		metriqueDisponibilite.ajouterNiveau(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
-		metriqueDisponibilite.ajouterNiveau(new NiveauDeMetrique(2, "Entreprise", "La connaissance s'organise sur un perimetre d'acces a la maille d'ERDF."));
-		metriqueDisponibilite.ajouterNiveau(new NiveauDeMetrique(3, "Restreint", "La connaissance est limite a des personnes, fonctions ou a un perimetre restreint lie a une activite."));
-		metriqueDisponibilite.ajouterNiveau(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
+		ArrayList<NiveauDeMetrique> niveauxDisponibilite = new ArrayList<NiveauDeMetrique>();
+		niveauxDisponibilite.add(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
+		niveauxDisponibilite.add(new NiveauDeMetrique(2, "Entreprise", "La connaissance s'organise sur un perimetre d'acces a la maille d'ERDF."));
+		niveauxDisponibilite.add(new NiveauDeMetrique(3, "Restreint", "La connaissance est limite a des personnes, fonctions ou a un perimetre restreint lie a une activite."));
+		niveauxDisponibilite.add(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
+		Metrique metriqueDisponibilite = new Metrique(cds.getCritere("Disponibilite"), niveauxDisponibilite);
+		
 				
 		bdcMetriques.put("Confidentialite", metriqueConfidentialite);
 		bdcMetriques.put("Disponibilite", metriqueDisponibilite);

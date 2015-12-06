@@ -137,7 +137,7 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 			case 3:
 				return Boolean.class;
 			default:
-				return String.class; //Ne devrait jamais arriver
+				return String.class; 
 			}
 		}
 		
