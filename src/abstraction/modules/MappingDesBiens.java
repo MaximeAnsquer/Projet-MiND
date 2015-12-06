@@ -19,7 +19,7 @@ public class MappingDesBiens extends Module{
 	
 	//Constructeur
 	public MappingDesBiens() {
-		super("Mapping des biens");
+		super("MappingDesBiens");
 		this.mappingDesBiens=new Hashtable<String, MappingBien>();
 		//TODO Decomenter quand les autres parties seront OK
 		/*

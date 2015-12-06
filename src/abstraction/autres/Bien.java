@@ -19,11 +19,10 @@ public class Bien{
 	private boolean retenu;
 		
 	//Constructeurs
-	public Bien(String description, String intitule, String type, boolean retenu, ArrayList<String> nomColonneSup, ArrayList<String> contenuColonneSup) {
+	public Bien(String description, String intitule, String type, ArrayList<String> nomColonneSup, ArrayList<String> contenuColonneSup) {
 		this.description = description;
 		this.intitule = intitule;
 		this.type=type;
-		this.retenu = retenu;
 		this.nomColonneSup=nomColonneSup;
 		this.contenuColonneSup=contenuColonneSup;
 	}

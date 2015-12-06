@@ -18,7 +18,7 @@ public class BiensSupports extends Module{
 	// ---Constructeurs---
 
 	public BiensSupports() {
-		super("Biens supports");
+		super("BiensSupports");
 		this.lesBiens = new Hashtable<String, Bien>();
 		//TODO Decomenter quand les autres parties seront OK
 		/*
