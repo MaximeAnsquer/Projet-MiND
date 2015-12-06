@@ -19,13 +19,16 @@ public class MappingDesBiens extends Module{
 	
 	//Constructeur
 	public MappingDesBiens() {
-		super("Mapping des biens");
+		super("MappingDesBiens");
 		this.mappingDesBiens=new Hashtable<String, MappingBien>();
+		//TODO Decomenter quand les autres parties seront OK
+		/*
 		this.successeurs.add(AnalyseDesRisques.getInstance());
 		this.predecesseurs.add(BiensEssentiels.getInstance());
 		this.predecesseurs.add(BiensSupports.getInstance());
 		this.biensSupports = BiensSupports.getInstance();
 		this.biensEssentiels = BiensEssentiels.getInstance();
+		*/
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;

@@ -1,39 +1,205 @@
 package presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+
+import abstraction.Etude;
+import abstraction.autres.Bien;
+import abstraction.autres.Critere;
+import abstraction.modules.BiensEssentiels;
+
+/**
+ * Presentation du module Biens Essentiels
+ * @author francois
+ *
+ */
 
 public class FenetreBiensEssentiels extends JFrame{
 
 	private static final long serialVersionUID = 1L;
+	private JTable table;
 
 	public FenetreBiensEssentiels(){
+		super("Criteres de securite 2");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		Container contentPane = this.getContentPane();
-		contentPane.setLayout(new BorderLayout());
-		JTable table = new JTable(2,3);
-		table.setValueAt("Intitulé", 0, 0);
-		table.setValueAt("Description", 0, 1);
-		table.setValueAt("Retenu", 0, 2);
-		table.setValueAt("", 1, 0);
-		table.setValueAt("", 1, 1);
-		table.setValueAt("X", 1, 2);
-		table.setDefaultRenderer(Object.class, new JTableRender());
-		table.setRowHeight(0, 75);
-		table.setRowHeight(1, 200);
-		table.getColumnModel().getColumn(0).setPreferredWidth(200);
-		table.getColumnModel().getColumn(1).setPreferredWidth(200);
-		table.getColumnModel().getColumn(2).setPreferredWidth(200);
-		 
-		contentPane.add(table, BorderLayout.CENTER);
 		this.setVisible(true);
-		this.pack();
+		this.setLocationRelativeTo(null);
+		table = new JTable(new ModeleDynamiqueObjet());
+		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);	
+		getContentPane().add(partieBoutons(), BorderLayout.SOUTH);
+		pack();
 	}
 	
-	public static void main(String[] args) {
-		FenetreBiensEssentiels fenetre = new FenetreBiensEssentiels();
+	private JPanel partieBoutons() {
+		JPanel jpanel = new JPanel();
+		jpanel.add(boutonAjouterLigne());
+		jpanel.add(boutonSupprimerLigne());
+		jpanel.add(boutonAjouterColonne());
+		jpanel.add(boutonSupprimerColonne());
+		return jpanel;
+	}
+
+	private JButton boutonSupprimerColonne() {
+		JButton bouton = new JButton("Supprimer une categorie");
+		bouton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				int ligneSelectionnee = table.getSelectedRow();
+				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+				modele.supprimerCategorie(ligneSelectionnee);
+			}
+		});
+		return bouton;
+	}
+
+	private JButton boutonSupprimerLigne() {
+		JButton bouton = new JButton("Supprimer un bien essentiel");
+		bouton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				int ligneSelectionnee = table.getSelectedRow();
+				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+				modele.supprimerBienEssentiel(ligneSelectionnee);
+			}
+		});
+		return bouton;
+	}
+
+	private JButton boutonAjouterColonne() {
+		JButton bouton = new JButton("Ajouter une catégorie");
+		bouton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+				modele.ajouterCategorie();
+			}
+		});
+		return bouton;
+	}
+
+	private JButton boutonAjouterLigne() {
+		JButton bouton = new JButton("Ajouter un bien essentiel");
+		bouton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+				modele.ajouterBienEssentiel();
+			}
+		});
+		return bouton;
+	}
+
+	class ModeleDynamiqueObjet extends AbstractTableModel {
+		private static final long serialVersionUID = 1L;
+		private Etude etude = Main.etude;
+		private BiensEssentiels biens = (BiensEssentiels) etude.getModule("BiensEssentiels");
+
+		private final String[] entetes = { "Intitulé", "Description", "Retenu"};
+
+		public ModeleDynamiqueObjet() {
+			super();
+		}
+		
+		public void supprimerCategorie(int ligneSelectionnee) {
+			Bien bien = biens.getBien(ligneSelectionnee);
+			biens.supprimerBien(bien.getIntitule());
+
+			fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+		}
+
+		public void supprimerBienEssentiel(int ligneSelectionnee) {
+			Bien bien = biens.getBien(ligneSelectionnee);
+			biens.supprimerBien(bien.getIntitule());
+
+			fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+		}
+
+		public void ajouterCategorie() {
+			ArrayList<String> nomColonneSup = new ArrayList<String>();
+			ArrayList<String> contenuColonneSup = new ArrayList<String>();
+			String Intitule = JOptionPane.showInputDialog("Intitule ?");
+			String type = "";
+			String Description = JOptionPane.showInputDialog("Description ?");
+			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
+			biens.ajouterBien(bien);
+
+			fireTableRowsInserted(biens.nombreDeBiens() -1, biens.nombreDeBiens() -1);
+		}
+
+		public void ajouterBienEssentiel() {
+			ArrayList<String> nomColonneSup = new ArrayList<String>();
+			ArrayList<String> contenuColonneSup = new ArrayList<String>();
+			String Intitule = JOptionPane.showInputDialog("Intitule ?");
+			String type = "";
+			String Description = JOptionPane.showInputDialog("Description ?");
+			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
+			biens.ajouterBien(bien);
+
+			fireTableRowsInserted(biens.nombreDeBiens() -1, biens.nombreDeBiens() -1);
+		}
+
+		public int getRowCount() {
+			return biens.nombreDeBiens();
+		}
+
+		public int getColumnCount() {
+			return entetes.length;
+		}
+
+		public String getColumnName(int columnIndex) {
+			return entetes[columnIndex];
+		}
+
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			switch(columnIndex){
+			case 0:
+				return biens.getBien(rowIndex).getIntitule();
+			case 1:
+				return biens.getBien(rowIndex).getDescription();
+			case 2:
+				return biens.getBien(rowIndex).isRetenu();
+			default:
+				return null; //Ne devrait jamais arriver
+			}
+		}
+
+		public boolean isCellEditable(int row, int col){
+			return true; 
+		}
+
+		public Class getColumnClass(int columnIndex){
+			switch(columnIndex){
+			case 2:
+				return Boolean.class;
+			default:
+				return String.class; //Ne devrait jamais arriver
+			}
+		}
+		
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		    if(aValue != null){
+		        Bien bien = biens.getBien(rowIndex);
+		 
+		        switch(columnIndex){
+		            case 0:
+		            	bien.setIntitule((String)aValue);
+		                break;
+		            case 1:
+		            	bien.setDescription((String)aValue);
+		                break;
+		            case 2:
+		            	bien.setRetenu((Boolean)aValue);
+		                break;
+		        }
+		    }
+		}
 	}
 }

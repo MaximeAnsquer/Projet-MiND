@@ -1,5 +1,7 @@
 package abstraction.modules;
+import java.util.ArrayList;
 import java.util.Hashtable;
+
 import abstraction.autres.*;
 
 /**
@@ -15,14 +17,21 @@ public class BiensEssentiels extends Module {
 	// ---Variables d'instance
 
 	private Hashtable<String, Bien> lesBiens;
-
+	private ArrayList<String> nomColonneSup;
 	// ---Constructeurs---
 
 	public BiensEssentiels() {
-		super("Biens essentiels");
-		this.lesBiens = new Hashtable<String, Bien>(); // useless ?
+		super("BiensEssentiels");
+		this.lesBiens = new Hashtable<String, Bien>();
+		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "bien 1", "", null, null));
+		this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "bien 2", "", null, null));
+		this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "bien 3", "", null, null));
+		this.nomColonneSup = new ArrayList<String>();
+		//TODO Decomenter quand les autres parties seront OK
+		/*
 		this.successeurs.add(MappingDesBiens.getInstance());
 		this.successeurs.add(EvenementsRedoutes.getInstance());
+		*/
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
@@ -42,14 +51,34 @@ public class BiensEssentiels extends Module {
 		return this.getLesBiens().get(nomBien);
 	}
 	
+	public Bien getBien(int index){
+		return (Bien) lesBiens.values().toArray()[index];
+	}
+	
+	public ArrayList<String> getNomColonneSup(){
+		return this.nomColonneSup;
+	}
+	
+	public void setNomColonneSup(ArrayList<String> nomColonneSup){
+		this.nomColonneSup=nomColonneSup;
+	}
+	
 	// ---Services---
 
+	public int nombreDeBiens(){
+		return lesBiens.size();
+	}
+	
 	public void ajouterBien(Bien bien) {
 		this.getLesBiens().put(bien.getIntitule(), bien);
 	}
 
 	public void supprimerBien(String nomBien) {
 		this.getLesBiens().remove(nomBien);
+	}
+	
+	public void ajouterColonne(String nomColonne){
+		this.getNomColonneSup().add(nomColonne);
 	}
 
 	public Hashtable<String, Bien> getBiensRetenus() {
