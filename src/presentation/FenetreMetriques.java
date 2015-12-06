@@ -30,8 +30,9 @@ public class FenetreMetriques extends JFrame {
 	private ArrayList<JPanel> lesTableaux = new ArrayList<JPanel>();
 	private JComboBox comboBox;
 	private JPanel metriqueEnCours;
-	private Etude etude = Main.etude;
+	private Etude etude = MainMaximeAnsquer.etude;
 	private Metriques metriques = (Metriques) etude.getModule("Metriques");
+	private Metrique metriqueCourante;
 	
 
 	public FenetreMetriques(){
@@ -41,27 +42,33 @@ public class FenetreMetriques extends JFrame {
 		int nombreDeMetriques = metriques.nombreDeMetriques();
 		Container contentPane = this.getContentPane();
 				
-		/**
-		 * On cree tous les tableaux, que l'on range dans la variable " les tableaux "
-		 */
-		for(Metrique m : metriques.getLesMetriques().values()){			
-			ModeleDynamiqueObjet modele = new ModeleDynamiqueObjet(m);
-			JTable table = new JTable(modele);
-			lesTableaux.add(tableau(table, m.getCritere().getIntitule()));	
-		}
-		
-		/**
-		 * S'il y a au moins une metrique, on affiche la premiere
-		 */
-		if(lesTableaux.size()!=0){
-			contentPane.add(lesTableaux.get(0), BorderLayout.CENTER);		}
-		
+				
 		/**
 		 * On ajoute la comboBox et les boutons
 		 */
 		contentPane.add(partieDuBas(), BorderLayout.SOUTH);		
 		
+		/**
+		 * On affiche la metrique courante
+		 */
+		metriqueCourante = getMetriqueCourante();
+		ModeleDynamiqueObjet modele = new ModeleDynamiqueObjet(metriqueCourante);
+		JTable table = new JTable(modele);
+		contentPane.add(tableau(table, metriqueCourante));
+		
 		pack();
+	}
+
+	private JPanel tableau(JTable table, Metrique metriqueCourante) {
+		JPanel jp = new JPanel(new BorderLayout());
+		jp.add(new JLabel(metriqueCourante.getIntitule()), BorderLayout.NORTH);
+		jp.add(new JScrollPane(table), BorderLayout.CENTER);
+		return jp;
+	}
+
+	private Metrique getMetriqueCourante() {
+		Metrique m = metriques.getMetrique(  ((Metrique) comboBox.getSelectedItem()).getCritere().getIntitule()   );
+		return m;
 	}
 
 	private JPanel partieDuBas() {
@@ -71,8 +78,8 @@ public class FenetreMetriques extends JFrame {
 	}
 
 	private JComboBox comboBox() {
-		comboBox = new JComboBox(lesTableaux.toArray());
-		comboBox.getS
+		comboBox = new JComboBox(metriques.getLesMetriques().values().toArray());
+		comboBox.setSelectedIndex(0);
 		return comboBox;
 	}
 

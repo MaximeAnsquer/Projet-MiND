@@ -85,7 +85,7 @@ public class CriteresDeSecurite extends Module{
 		bdcCriteresDeSecurite = new Hashtable<String,Critere>();
 		//valeurs fictives pour faire des tests :
 		bdcCriteresDeSecurite.put("Disponibilite", new Critere("D","Disponibilite","Duree maximale admissible pour la realisation d'€un processus metier."));
-		bdcCriteresDeSecurite.put("Integrite", new Critere("I","Integrite","Alteration admissible et/ou mesures de recuperation des donnes liees a  mettre en oeuvre pour un processus metier."));
+		bdcCriteresDeSecurite.put("Integrite", new Critere("I","Integrite","Alteration admissible et/ou mesures de recuperation des donnes \n liees a  mettre en oeuvre pour un processus metier."));
 		bdcCriteresDeSecurite.put("Confidentialite", new Critere("C","Confidentialite","Diffusabilite des informations liees a  un processus metier."));
 		
 

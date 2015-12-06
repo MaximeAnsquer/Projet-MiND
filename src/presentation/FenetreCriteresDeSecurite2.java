@@ -75,7 +75,7 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
-		private Etude etude = Main.etude;
+		private Etude etude = MainMaximeAnsquer.etude;
 		private CriteresDeSecurite cds = (CriteresDeSecurite) etude.getModule("CriteresDeSecurite");
 
 		private final String[] entetes = {"Id", "Intitulé", "Description", "Retenu"};

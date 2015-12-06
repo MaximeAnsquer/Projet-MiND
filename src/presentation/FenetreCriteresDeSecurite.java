@@ -26,7 +26,7 @@ import abstraction.modules.CriteresDeSecurite;
 public class FenetreCriteresDeSecurite extends JFrame {
 	
 	private JTable table;;	
-	private Etude etude = Main.etude;
+	private Etude etude = MainMaximeAnsquer.etude;
 	private CriteresDeSecurite cds = (CriteresDeSecurite) etude.getModule("CriteresDeSecurite"); 
 	private Object[][] data;
 	
