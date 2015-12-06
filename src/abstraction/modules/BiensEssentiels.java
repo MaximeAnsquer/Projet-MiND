@@ -20,9 +20,12 @@ public class BiensEssentiels extends Module {
 
 	public BiensEssentiels() {
 		super("Biens essentiels");
-		this.lesBiens = new Hashtable<String, Bien>(); // useless ?
+		this.lesBiens = new Hashtable<String, Bien>();
+		//TODO Decomenter quand les autres parties seront OK
+		/*
 		this.successeurs.add(MappingDesBiens.getInstance());
 		this.successeurs.add(EvenementsRedoutes.getInstance());
+		*/
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;

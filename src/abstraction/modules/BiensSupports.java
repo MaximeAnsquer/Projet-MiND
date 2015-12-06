@@ -19,10 +19,13 @@ public class BiensSupports extends Module{
 
 	public BiensSupports() {
 		super("Biens supports");
-		this.lesBiens = new Hashtable<String, Bien>(); // useless ?
+		this.lesBiens = new Hashtable<String, Bien>();
+		//TODO Decomenter quand les autres parties seront OK
+		/*
 		this.successeurs.add(MappingDesBiens.getInstance());
 		this.successeurs.add(ScenariosDeMenacesTypes.getInstance());
 		this.predecesseurs.add(TypologieDesBiensSupports.getInstance());
+		*/
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
