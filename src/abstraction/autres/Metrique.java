@@ -83,4 +83,12 @@ public class Metrique {
 		return this.getLesNiveaux().size();
 	}	
 	
+	public String toString(){
+		return getCritere().getIntitule();
+	}
+	
+	public String getIntitule(){
+		return getCritere().getIntitule();
+	}
+	
 }

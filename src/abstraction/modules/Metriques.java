@@ -2,7 +2,9 @@ package abstraction.modules;
 import java.util.Hashtable;
 
 import abstraction.Etude;
-import abstraction.autres.*;
+import abstraction.autres.Critere;
+import abstraction.autres.Metrique;
+import abstraction.autres.NiveauDeMetrique;
 
 /** 
  * Cahier des charges, page 5 :
@@ -25,6 +27,10 @@ public class Metriques extends Module {
 	//---Variables d'instance---
 	
 	private Hashtable<String, Metrique> lesMetriques;
+	
+	//---Le module CriteresDeSecurite de l'etude associee---
+	
+	CriteresDeSecurite cds; 
 
 	//---Constructeurs---	
 	
@@ -32,15 +38,27 @@ public class Metriques extends Module {
 	 * Initialise le module en commen�ant par initialiser la BDC, puis en copiant les valeurs
 	 * de la BDC dans le module.
 	 */
-	public Metriques() {
+	public Metriques(Etude etude) {
 		super("Metriques");
-		this.predecesseurs.add(this.getEtude().getModule("CriteresDeSecurite"));
-		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
-		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
-		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
+		
+		this.etude = etude;
+		
+		/**
+		 * TODO : Commente pour faire des tests, a decommenter par la suite
+		 */
+//		this.predecesseurs.add(this.getEtude().getModule("CriteresDeSecurite"));
+//		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
+//		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+//		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
+		
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
+		
+		/**
+		 * On initialise le module CriteresDeSecurite associe.
+		 */
+		cds = (CriteresDeSecurite) this.getEtude().getModule("CriteresDeSecurite");
 		
 		this.importerBDC();  //on remplit la BDC
 		this.lesMetriques = new Hashtable<String, Metrique>();  
@@ -53,6 +71,8 @@ public class Metriques extends Module {
 				this.lesMetriques.put(critere.getIntitule(), new Metrique(critere));   //sinon, on ajoute une metrique vide associee a ce critere dans l'onglet Metriques
 			}
 		}
+		
+		
 	}	
 
 	//---Getters et setters---
@@ -85,10 +105,45 @@ public class Metriques extends Module {
 	
 	private void importerBDC() {
 		// TODO Auto-generated method stub		
+		
+		/**
+		 * Des metriques fictives utiles pour les tests
+		 * TODO : a effacer par la suite
+		 */
+		
+		bdcMetriques = new Hashtable<String, Metrique>();
+		
+		Metrique metriqueConfidentialite = new Metrique(cds.getCritere("Confidentialite"));
+		metriqueConfidentialite.ajouterNiveau(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
+		metriqueConfidentialite.ajouterNiveau(new NiveauDeMetrique(2, "Entreprise", "La connaissance s'organise sur un perimetre d'acces a la maille d'ERDF."));
+		metriqueConfidentialite.ajouterNiveau(new NiveauDeMetrique(3, "Restreint", "La connaissance est limite a des personnes, fonctions ou a un perimetre restreint lie a une activite."));
+		metriqueConfidentialite.ajouterNiveau(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
+		
+		Metrique metriqueDisponibilite = new Metrique(cds.getCritere("Disponibilite"));
+		metriqueDisponibilite.ajouterNiveau(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
+		metriqueDisponibilite.ajouterNiveau(new NiveauDeMetrique(2, "Entreprise", "La connaissance s'organise sur un perimetre d'acces a la maille d'ERDF."));
+		metriqueDisponibilite.ajouterNiveau(new NiveauDeMetrique(3, "Restreint", "La connaissance est limite a des personnes, fonctions ou a un perimetre restreint lie a une activite."));
+		metriqueDisponibilite.ajouterNiveau(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
+				
+		bdcMetriques.put("Confidentialite", metriqueConfidentialite);
+		bdcMetriques.put("Disponibilite", metriqueDisponibilite);
 	}
 		
 	public static Hashtable<String, Metrique> getBDC(){
 		return bdcMetriques;
+	}
+
+	public int nombreDeMetriques() {
+		return getLesMetriques().size();
+	}
+
+	/**
+	 * Permet d'acceder a une metrique par sa position dans la hashtable
+	 * @param index
+	 * @return
+	 */
+	public Metrique getMetrique(int rowIndex) {
+		return (Metrique) getLesMetriques().values().toArray()[rowIndex];
 	}
 	
 }
