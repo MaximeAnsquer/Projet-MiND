@@ -67,7 +67,6 @@ public class FenetreMetriques extends JFrame {
 	private void setTableau() {
 		jpanel.removeAll();
 		metriqueCourante = getMetriqueCourante();
-		System.out.println(metriqueCourante.nombreDeNiveaux());
 		ModeleDynamiqueObjet modele = new ModeleDynamiqueObjet(metriqueCourante);
 		table = new JTable(modele);
 		jpanel.add(new JLabel(metriqueCourante.getIntitule()), BorderLayout.NORTH);		

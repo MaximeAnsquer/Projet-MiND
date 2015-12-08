@@ -1,5 +1,6 @@
 package abstraction.modules;
 import java.util.Hashtable;
+
 import abstraction.autres.SourceDeMenace;
 
 /**
@@ -15,7 +16,7 @@ public class SourcesDeMenaces extends Module {
 	 * Une hashtable d'objets " SourceDeMenace " indexes par leurs id.
 	 * Attention les id doivent etre distincts !
 	 */
-	private static Hashtable<String, SourceDeMenace> bdcSourcesDeMenaces;
+	private static Hashtable<String, SourceDeMenace> bdcSourcesDeMenaces = new Hashtable<String, SourceDeMenace>();
 	
 	//---Variables d'instance---
 	
@@ -32,11 +33,13 @@ public class SourcesDeMenaces extends Module {
 	 * de la BDC dans le module.
 	 */
 	public SourcesDeMenaces(){
-		super("Sources de menaces");
-		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
-		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
-		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
-		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
+		super("SourcesDeMenaces");
+		//TODO commente pour faire des test, a decommenter par la suite
+		
+//		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
+//		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
+//		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+//		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
@@ -92,11 +95,21 @@ public class SourcesDeMenaces extends Module {
 	}
 	
 	private void importerBDC() {
-		// TODO Auto-generated method stub		
+		// TODO Valeurs fictives pour faire des tests ; à changer
+		bdcSourcesDeMenaces.put("IMF", new SourceDeMenace("IMF", "Source humaine interne, malveillante, avec de faibles capacités", "Stagiaire"));
+		bdcSourcesDeMenaces.put("IMI", new SourceDeMenace("IMF", "Source humaine interne, malveillante, avec des capacités importantes", "Prestataire d'un service sensible"));		
 	}
 	
 	public Hashtable<String, SourceDeMenace> getBDC(){
 		return bdcSourcesDeMenaces;
+	}
+	
+	public int nombreDeSources(){
+		return this.getLesSourcesDeMenaces().size();
+	}
+	
+	public SourceDeMenace getSource(int index){
+		return (SourceDeMenace) getLesSourcesDeMenaces().values().toArray()[index];
 	}
 	
 }

@@ -28,6 +28,8 @@ public class Metriques extends Module {
 	//---Variables d'instance---
 	
 	private Hashtable<String, Metrique> lesMetriques;
+	private Metrique vraisemblance;
+	private Metrique gravite;
 	
 	//---Le module CriteresDeSecurite de l'etude associee---
 	
@@ -148,6 +150,22 @@ public class Metriques extends Module {
 	 */
 	public Metrique getMetrique(int rowIndex) {
 		return (Metrique) getLesMetriques().values().toArray()[rowIndex];
+	}
+	
+	public Metrique getVraisemblance(){
+		return this.vraisemblance;
+	}
+	
+	public Metrique getGravite(){
+		return this.gravite;
+	}
+	
+	public void setVraisemblance(Metrique vraisemblance){
+		this.vraisemblance = vraisemblance;
+	}
+	
+	public void setGravite(Metrique gravite){
+		this.gravite = gravite;
 	}
 	
 }
