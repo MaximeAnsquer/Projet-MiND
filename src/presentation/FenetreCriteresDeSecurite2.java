@@ -33,6 +33,12 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		table = new JTable(new ModeleDynamiqueObjet());
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(1);
+		table.getColumnModel().getColumn(1).setPreferredWidth(300);
+		table.getColumnModel().getColumn(2).setPreferredWidth(1000);
+		table.getColumnModel().getColumn(3).setPreferredWidth(1);
+		
 		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);	
 		getContentPane().add(partieDuBas(), BorderLayout.SOUTH);
 		pack();

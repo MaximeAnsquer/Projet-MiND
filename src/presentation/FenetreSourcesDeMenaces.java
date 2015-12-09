@@ -34,6 +34,12 @@ public class FenetreSourcesDeMenaces extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		table = new JTable(new ModeleDynamiqueObjet());
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(50);
+		table.getColumnModel().getColumn(1).setPreferredWidth(700);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
+		table.getColumnModel().getColumn(3).setPreferredWidth(1);
+		
 		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);	
 		getContentPane().add(partieDuBas(), BorderLayout.SOUTH);
 		pack();
