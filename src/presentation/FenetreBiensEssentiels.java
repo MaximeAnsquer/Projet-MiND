@@ -6,6 +6,8 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -99,20 +101,20 @@ public class FenetreBiensEssentiels extends JFrame{
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
-		private Etude etude = Main.etude;
+		private Etude etude = MainFrancois.etude;
 		private BiensEssentiels biens = (BiensEssentiels) etude.getModule("BiensEssentiels");
+		private final LinkedList<String> entetes = new LinkedList<String>();
 
-		private final String[] entetes = { "Intitulé", "Description", "Retenu"};
-
+		
 		public ModeleDynamiqueObjet() {
-			super();
+			super(); 
+			entetes.add("Intitulé");
+			entetes.add("Description");
+			entetes.add("Retenu");
 		}
 		
 		public void supprimerCategorie(int ligneSelectionnee) {
-			Bien bien = biens.getBien(ligneSelectionnee);
-			biens.supprimerBien(bien.getIntitule());
-
-			fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+			//TODO
 		}
 
 		public void supprimerBienEssentiel(int ligneSelectionnee) {
@@ -123,15 +125,11 @@ public class FenetreBiensEssentiels extends JFrame{
 		}
 
 		public void ajouterCategorie() {
-			ArrayList<String> nomColonneSup = new ArrayList<String>();
-			ArrayList<String> contenuColonneSup = new ArrayList<String>();
-			String Intitule = JOptionPane.showInputDialog("Intitule ?");
-			String type = "";
-			String Description = JOptionPane.showInputDialog("Description ?");
-			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
-			biens.ajouterBien(bien);
-
-			fireTableRowsInserted(biens.nombreDeBiens() -1, biens.nombreDeBiens() -1);
+			String categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
+			
+			entetes.addFirst(categorie);
+			fireTableStructureChanged();	
+			
 		}
 
 		public void ajouterBienEssentiel() {
@@ -151,23 +149,23 @@ public class FenetreBiensEssentiels extends JFrame{
 		}
 
 		public int getColumnCount() {
-			return entetes.length;
+			return entetes.size();
 		}
 
 		public String getColumnName(int columnIndex) {
-			return entetes[columnIndex];
+			return entetes.get(columnIndex);
 		}
 
 		public Object getValueAt(int rowIndex, int columnIndex) {
-			switch(columnIndex){
-			case 0:
+			switch(this.getColumnCount()-columnIndex-1){
+			case 2:
 				return biens.getBien(rowIndex).getIntitule();
 			case 1:
 				return biens.getBien(rowIndex).getDescription();
-			case 2:
+			case 0:
 				return biens.getBien(rowIndex).isRetenu();
 			default:
-				return null; //Ne devrait jamais arriver
+				return "";
 			}
 		}
 
@@ -176,11 +174,11 @@ public class FenetreBiensEssentiels extends JFrame{
 		}
 
 		public Class getColumnClass(int columnIndex){
-			switch(columnIndex){
-			case 2:
+			switch(this.getColumnCount()-columnIndex-1){
+			case 0:
 				return Boolean.class;
 			default:
-				return String.class; //Ne devrait jamais arriver
+				return String.class;
 			}
 		}
 		
@@ -188,14 +186,14 @@ public class FenetreBiensEssentiels extends JFrame{
 		    if(aValue != null){
 		        Bien bien = biens.getBien(rowIndex);
 		 
-		        switch(columnIndex){
-		            case 0:
+		        switch(this.getColumnCount()-columnIndex-1){
+		            case 2:
 		            	bien.setIntitule((String)aValue);
 		                break;
 		            case 1:
 		            	bien.setDescription((String)aValue);
 		                break;
-		            case 2:
+		            case 0:
 		            	bien.setRetenu((Boolean)aValue);
 		                break;
 		        }
