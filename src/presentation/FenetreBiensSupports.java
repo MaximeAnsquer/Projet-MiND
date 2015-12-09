@@ -21,6 +21,7 @@ import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.autres.Critere;
 import abstraction.modules.BiensEssentiels;
+import abstraction.modules.BiensSupports;
 
 /**
  * Presentation du module Biens Essentiels
@@ -28,13 +29,13 @@ import abstraction.modules.BiensEssentiels;
  *
  */
 
-public class FenetreBiensEssentiels extends JFrame{
+public class FenetreBiensSupports extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 
-	public FenetreBiensEssentiels(){
-		super("Biens Essentiels");
+	public FenetreBiensSupports(){
+		super("Biens Supports");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
@@ -66,7 +67,7 @@ public class FenetreBiensEssentiels extends JFrame{
 	}
 
 	private JButton boutonSupprimerLigne() {
-		JButton bouton = new JButton("Supprimer un bien essentiel");
+		JButton bouton = new JButton("Supprimer un bien support");
 		bouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
@@ -89,7 +90,7 @@ public class FenetreBiensEssentiels extends JFrame{
 	}
 
 	private JButton boutonAjouterLigne() {
-		JButton bouton = new JButton("Ajouter un bien essentiel");
+		JButton bouton = new JButton("Ajouter un bien support");
 		bouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
@@ -102,7 +103,7 @@ public class FenetreBiensEssentiels extends JFrame{
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		private Etude etude = MainFrancois.etude;
-		private BiensEssentiels biens = (BiensEssentiels) etude.getModule("BiensEssentiels");
+		private BiensSupports biens = (BiensSupports) etude.getModule("BiensSupports");
 		private final LinkedList<String> entetes = new LinkedList<String>();
 
 		
@@ -110,6 +111,7 @@ public class FenetreBiensEssentiels extends JFrame{
 			super(); 
 			entetes.add("Intitulé");
 			entetes.add("Description");
+			entetes.add("Type");
 			entetes.add("Retenu");
 		}
 		
@@ -136,7 +138,7 @@ public class FenetreBiensEssentiels extends JFrame{
 			ArrayList<String> nomColonneSup = new ArrayList<String>();
 			ArrayList<String> contenuColonneSup = new ArrayList<String>();
 			String Intitule = JOptionPane.showInputDialog("Intitule ?");
-			String type = "";
+			String type = JOptionPane.showInputDialog("Type ?");
 			String Description = JOptionPane.showInputDialog("Description ?");
 			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
 			biens.ajouterBien(bien);
@@ -158,10 +160,12 @@ public class FenetreBiensEssentiels extends JFrame{
 
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			switch(this.getColumnCount()-columnIndex-1){
-			case 2:
+			case 3:
 				return biens.getBien(rowIndex).getIntitule();
-			case 1:
+			case 2:
 				return biens.getBien(rowIndex).getDescription();
+			case 1:
+				return biens.getBien(rowIndex).getType();
 			case 0:
 				return biens.getBien(rowIndex).isRetenu();
 			default:
@@ -187,15 +191,21 @@ public class FenetreBiensEssentiels extends JFrame{
 		        Bien bien = biens.getBien(rowIndex);
 		 
 		        switch(this.getColumnCount()-columnIndex-1){
-		            case 2:
+		            case 3:
 		            	bien.setIntitule((String)aValue);
 		                break;
-		            case 1:
+		            case 2:
 		            	bien.setDescription((String)aValue);
+		                break;
+		            case 1:
+		            	bien.setType((String)aValue);
 		                break;
 		            case 0:
 		            	bien.setRetenu((Boolean)aValue);
 		                break;
+		            default:
+		            	break;
+		            	
 		        }
 		    }
 		}
