@@ -14,6 +14,7 @@ public class FenetreTypologieBiensSupports extends JFrame {
 	public FenetreTypologieBiensSupports() {
 		super("Typologie des Biens Supports");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setVisible(true);
 
 		this.getContentPane().setLayout(new BorderLayout());
 		
@@ -31,13 +32,8 @@ public class FenetreTypologieBiensSupports extends JFrame {
 		String[] titres = {"Id", "Intitulé", "Description", "Retenu"} ;
 		
 		JTable tableau = new JTable(donnees,titres);
-		//tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);
+		// tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);
 		this.getContentPane().add(tableau.getTableHeader(), BorderLayout.NORTH);
         this.getContentPane().add(tableau, BorderLayout.CENTER);
-	}
-	
-	public static void main(String[] args) {
-		FenetreTypologieBiensSupports fen = new FenetreTypologieBiensSupports();
-		fen.setVisible(true);
 	}
 }
