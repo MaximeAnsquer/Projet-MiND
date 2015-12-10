@@ -31,14 +31,9 @@ public class MainAli {
 				
 		String[] choix = {module1,module2,module3};
 		String reponse = (String) JOptionPane.showInputDialog(null,
-				"Quelle module voulez-vous ouvrir ?", "Choix fenetre",
+				"Quelle module voulez-vous ouvrir ?", "Test : Choix du module",
 				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
 		
-		if (reponse!= choix[0] && reponse!= choix[1] && reponse!= choix[2] ){
-			reponse = (String) JOptionPane.showInputDialog(null,
-					"Quelle module voulez-vous ouvrir ?", "Choix fenetre",
-					JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
-		}
 		if (reponse==choix[0]){
 			FenetreTypologieBiensSupports fen = new FenetreTypologieBiensSupports();
 		}
