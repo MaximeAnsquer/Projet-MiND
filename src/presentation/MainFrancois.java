@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 import abstraction.Etude;
 import abstraction.modules.BiensEssentiels;
+import abstraction.modules.BiensSupports;
 import abstraction.modules.CriteresDeSecurite;
 
 /**
@@ -13,7 +14,7 @@ import abstraction.modules.CriteresDeSecurite;
  *
  */
 
-public class Main {
+public class MainFrancois {
 	
 	/**
 	 * L'étude en cours
@@ -25,14 +26,14 @@ public class Main {
 		//---Création de l'étude---
 		
 		etude = new Etude();
-		etude.addModule(new CriteresDeSecurite());
 		etude.addModule(new BiensEssentiels());
+		etude.addModule(new BiensSupports());
 		
 		//---Création de la fenêtre CriteresDeSecurite
-		String[] choix = {"critere de securite","biens essentiels"};
+		String[] choix = {"biens supports","biens essentiels"};
 	    String reponse = (String)JOptionPane.showInputDialog(null, "Quelle fenetre voulez-vous ?", "Choix fenetre",JOptionPane.QUESTION_MESSAGE,  null, choix, choix[0]);
-		if (reponse == "critere de securite"){
-			FenetreCriteresDeSecurite2 f = new FenetreCriteresDeSecurite2();
+		if (reponse == "biens supports"){
+			FenetreBiensSupports f1 = new FenetreBiensSupports();
 		}
 		else{
 			FenetreBiensEssentiels f2 = new FenetreBiensEssentiels();

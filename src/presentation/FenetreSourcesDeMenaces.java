@@ -15,7 +15,8 @@ import javax.swing.table.AbstractTableModel;
 
 import abstraction.Etude;
 import abstraction.autres.Critere;
-import abstraction.modules.CriteresDeSecurite;
+import abstraction.autres.SourceDeMenace;
+import abstraction.modules.SourcesDeMenaces;
 
 /**
  * Fonctionnel, mais le code est relativement degueulasse.
@@ -23,20 +24,20 @@ import abstraction.modules.CriteresDeSecurite;
  * @author Maxime Ansquer
  *
  */
-public class FenetreCriteresDeSecurite2 extends JFrame {
+public class FenetreSourcesDeMenaces extends JFrame {
 
 	private JTable table;	
 
-	public FenetreCriteresDeSecurite2(){
-		super("Criteres de securite 2");
+	public FenetreSourcesDeMenaces(){
+		super("Sources de menaces");
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		table = new JTable(new ModeleDynamiqueObjet());
 		
-		table.getColumnModel().getColumn(0).setPreferredWidth(1);
-		table.getColumnModel().getColumn(1).setPreferredWidth(300);
-		table.getColumnModel().getColumn(2).setPreferredWidth(1000);
+		table.getColumnModel().getColumn(0).setPreferredWidth(50);
+		table.getColumnModel().getColumn(1).setPreferredWidth(700);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
 		table.getColumnModel().getColumn(3).setPreferredWidth(1);
 		
 		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);	
@@ -53,13 +54,13 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 	}
 
 	private Component boutonSupprimer() {
-		JButton bouton = new JButton("Supprimer un critere");
+		JButton bouton = new JButton("Supprimer une source de menace");
 		bouton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-				modele.supprimerCritere(ligneSelectionnee);
+				modele.supprimerSource(ligneSelectionnee);
 			}
 
 		});
@@ -67,13 +68,13 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 	}
 
 	private JButton boutonAjouter() {
-		JButton bouton = new JButton("Ajouter un critere");
+		JButton bouton = new JButton("Ajouter une source de menace");
 		bouton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-				modele.ajouterCritere();
+				modele.ajouterSource();
 			}
 
 		});
@@ -82,16 +83,15 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private Etude etude = MainMaximeAnsquer.etude;
-		private CriteresDeSecurite cds = (CriteresDeSecurite) etude.getModule("CriteresDeSecurite");
+		private SourcesDeMenaces sdm = (SourcesDeMenaces) etude.getModule("SourcesDeMenaces");
 
-		private final String[] entetes = {"Id", "Intitulé", "Description", "Retenu"};
+		private final String[] entetes = {"Id", "Intitulé", "Exemple", "Retenu"};
 
 		public ModeleDynamiqueObjet() {
-			super();
-		}
+			super();		}
 
 		public int getRowCount() {
-			return cds.nombreDeCriteres();
+			return sdm.nombreDeSources();
 		}
 
 		public int getColumnCount() {
@@ -105,31 +105,31 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			switch(columnIndex){
 			case 0:
-				return cds.getCritere(rowIndex).getId();
+				return sdm.getSource(rowIndex).getId();
 			case 1:
-				return cds.getCritere(rowIndex).getIntitule();
+				return sdm.getSource(rowIndex).getIntitule();
 			case 2:
-				return cds.getCritere(rowIndex).getDescription();
+				return sdm.getSource(rowIndex).getExemple();
 			case 3:
-				return cds.getCritere(rowIndex).isRetenu();
+				return sdm.getSource(rowIndex).isRetenu();
 			default:
 				return null; //Ne devrait jamais arriver
 			}
 		}
 
-		public void ajouterCritere() {
-			String Id = JOptionPane.showInputDialog("Id ?");
-			String Intitule = JOptionPane.showInputDialog("Intitule ?");
-			String Description = JOptionPane.showInputDialog("Description ?");
-			Critere critere = new Critere(Id, Intitule, Description);
-			cds.ajouterCritere(critere);
+		public void ajouterSource() {
+			String id = JOptionPane.showInputDialog("Id ?");
+			String intitule = JOptionPane.showInputDialog("Intitule ?");
+			String exemple = JOptionPane.showInputDialog("Exemple ?");
+			SourceDeMenace source = new SourceDeMenace(id, intitule, exemple);
+			sdm.ajouterSourceDeMenace(source);
 
-			fireTableRowsInserted(cds.nombreDeCriteres() -1, cds.nombreDeCriteres() -1);
+			fireTableRowsInserted(sdm.nombreDeSources() -1, sdm.nombreDeSources() -1);
 		}
 
-		public void supprimerCritere(int rowIndex) {
-			Critere c = cds.getCritere(rowIndex);
-			cds.supprimerCritere(c.getIntitule());
+		public void supprimerSource(int rowIndex) {
+			SourceDeMenace source = sdm.getSource(rowIndex);
+			sdm.supprimerSourceDeMenace(source);
 
 			fireTableRowsDeleted(rowIndex, rowIndex);
 		}
@@ -149,20 +149,20 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 		
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		    if(aValue != null){
-		        Critere critere = cds.getCritere(rowIndex);
+		        SourceDeMenace source = sdm.getSource(rowIndex);
 		 
 		        switch(columnIndex){
 		            case 0:
-		            	critere.setId((String)aValue);
+		            	source.setId((String)aValue);
 		                break;
 		            case 1:
-		            	critere.setIntitule((String)aValue);
+		            	source.setIntitule((String)aValue);
 		                break;
 		            case 2:
-		            	critere.setDescription((String)aValue);
+		            	source.setExemple((String)aValue);
 		                break;
 		            case 3:
-		            	critere.setRetenu((Boolean)aValue);
+		            	source.setRetenu((Boolean)aValue);
 		                break;
 		        }
 		    }

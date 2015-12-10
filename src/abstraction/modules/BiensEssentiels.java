@@ -23,9 +23,9 @@ public class BiensEssentiels extends Module {
 	public BiensEssentiels() {
 		super("BiensEssentiels");
 		this.lesBiens = new Hashtable<String, Bien>();
-		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "bien 1", "", null, null));
-		this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "bien 2", "", null, null));
-		this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "bien 3", "", null, null));
+		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "", null, null));
+		this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "", null, null));
+		this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "Confidentialite", "", null, null));
 		this.nomColonneSup = new ArrayList<String>();
 		//TODO Decomenter quand les autres parties seront OK
 		/*

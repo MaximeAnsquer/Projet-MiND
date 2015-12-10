@@ -1,5 +1,6 @@
 package abstraction.modules;
 import java.util.Hashtable;
+
 import abstraction.autres.*;
 
 /**
@@ -20,6 +21,9 @@ public class BiensSupports extends Module{
 	public BiensSupports() {
 		super("BiensSupports");
 		this.lesBiens = new Hashtable<String, Bien>();
+		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "type 1", null, null));
+		this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "type 2", null, null));
+		this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "Confidentialite", "type 3", null, null));
 		//TODO Decomenter quand les autres parties seront OK
 		/*
 		this.successeurs.add(MappingDesBiens.getInstance());
@@ -44,9 +48,17 @@ public class BiensSupports extends Module{
 	public Bien getBien(String nomBien) {
 		return this.getLesBiens().get(nomBien);
 	}
+	
+	public Bien getBien(int index){
+		return (Bien) lesBiens.values().toArray()[index];
+	}
 
 	// ---Services---
 
+	public int nombreDeBiens(){
+		return lesBiens.size();
+	}
+	
 	public void ajouterBien(Bien bien) {
 		this.getLesBiens().put(bien.getIntitule(), bien);
 	}

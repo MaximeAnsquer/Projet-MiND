@@ -15,7 +15,7 @@ public class Metrique {
 	//---Variables d'instance---
 	
 	private Critere critere;
-	private Hashtable<Integer, NiveauDeMetrique> lesNiveaux;
+	private ArrayList<NiveauDeMetrique> lesNiveaux;
 
 	//---Constructeurs---
 	
@@ -26,9 +26,9 @@ public class Metrique {
 	 */
 	public Metrique(Critere critere){
 		this.critere = critere;
-		this.lesNiveaux = new Hashtable<Integer, NiveauDeMetrique>();
+		this.lesNiveaux = new ArrayList<NiveauDeMetrique>();
 		for(int i=1;i<=4;i++){
-			this.lesNiveaux.put(i, new NiveauDeMetrique(i));
+			this.lesNiveaux.add(new NiveauDeMetrique(i));
 		}
 	}
 	
@@ -38,7 +38,7 @@ public class Metrique {
 	 * @param critere Le critere associe a la metrique.
 	 * @param lesNiveaux Les niveaux du tableau definissant la metrique.
 	 */
-	public Metrique(Critere critere, Hashtable<Integer, NiveauDeMetrique> lesNiveaux) {
+	public Metrique(Critere critere, ArrayList<NiveauDeMetrique> lesNiveaux) {
 		this.critere = critere;
 		this.lesNiveaux = lesNiveaux;
 	}
@@ -53,26 +53,26 @@ public class Metrique {
 		this.critere = critere;
 	}
 	
-	public Hashtable<Integer, NiveauDeMetrique> getLesNiveaux() {
+	public ArrayList<NiveauDeMetrique> getLesNiveaux() {
 		return lesNiveaux;
 	}
 
-	public void setLesNiveaux(Hashtable<Integer, NiveauDeMetrique> lesNiveaux) {
+	public void setLesNiveaux(ArrayList<NiveauDeMetrique> lesNiveaux) {
 		this.lesNiveaux = lesNiveaux;
 	}	
 		
 	//---Services---	
 
-	public NiveauDeMetrique getNiveau(int numeroNiveau){
-		return this.getLesNiveaux().get(numeroNiveau);
+	public NiveauDeMetrique getNiveau(int index){
+		return (NiveauDeMetrique) lesNiveaux.get(index);
 	}
 	
 	public void ajouterNiveau(int numero, String intitule, String description){
-		this.getLesNiveaux().put(numero, new NiveauDeMetrique(numero, intitule, description));
+		this.getLesNiveaux().add(new NiveauDeMetrique(numero, intitule, description));
 	}
 	
 	public void ajouterNiveau(NiveauDeMetrique niveau){
-		this.getLesNiveaux().put(niveau.getNumero(), niveau);
+		this.getLesNiveaux().add(niveau);
 	}
 	
 	public void supprimerNiveau(int numero){
