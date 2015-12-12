@@ -14,20 +14,20 @@ import abstraction.modules.SourcesDeMenaces;
 public class MainMaximeAnsquer {
 
 	/**
-	 * L'étude en cours
+	 * L'etude en cours
 	 */
 	public static Etude etude;
 
 	public static void main(String[] args) {
 
-		//---Création de l'étude---
+		//---Creation de l'etude---
 
 		etude = new Etude();
 		etude.addModule(new CriteresDeSecurite());
 		etude.addModule(new Metriques(etude));
 		etude.addModule(new SourcesDeMenaces());
 
-		//---Création de la fenêtre Criteres de securite
+		//---Creation de la fenetre Criteres de securite
 
 		FenetreCriteresDeSecurite2 f = new FenetreCriteresDeSecurite2();
 		

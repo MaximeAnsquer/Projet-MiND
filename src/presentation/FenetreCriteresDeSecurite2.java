@@ -1,16 +1,24 @@
 package presentation;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
 import abstraction.Etude;
@@ -26,6 +34,8 @@ import abstraction.modules.CriteresDeSecurite;
 public class FenetreCriteresDeSecurite2 extends JFrame {
 
 	private JTable table;	
+	private JTextArea zoneDescription;
+	private JButton boutonModifierDescription;
 
 	public FenetreCriteresDeSecurite2(){
 		super("Criteres de securite 2");
@@ -33,23 +43,90 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		table = new JTable(new ModeleDynamiqueObjet());
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		table.getColumnModel().getColumn(0).setPreferredWidth(1);
-		table.getColumnModel().getColumn(1).setPreferredWidth(300);
-		table.getColumnModel().getColumn(2).setPreferredWidth(1000);
-		table.getColumnModel().getColumn(3).setPreferredWidth(1);
-		
-		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);	
-		getContentPane().add(partieDuBas(), BorderLayout.SOUTH);
+		table.addMouseListener(new MouseListener(){
+
+			public void mouseClicked(MouseEvent e) {
+				zoneDescription.setText(getCritereSelectionne().getDescription());
+				boutonModifierDescription.setEnabled(false);
+			}
+			
+			public void mousePressed(MouseEvent e) {
+			}
+			public void mouseReleased(MouseEvent e) {
+			}
+			public void mouseEntered(MouseEvent e) {
+			}
+			public void mouseExited(MouseEvent e) {
+			}			
+		});
+				
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
+		getContentPane().add(new JScrollPane(table));	
+		getContentPane().add(zoneDescription());
+		getContentPane().add(partieDuBas());
 		pack();
 
+	}
+
+	private JScrollPane zoneDescription() {
+		
+		String valeurInitiale = ( (ModeleDynamiqueObjet)table.getModel() ).cds.getCritere(0).getDescription();		
+		zoneDescription = new JTextArea(valeurInitiale);
+		zoneDescription.setLineWrap(true);
+		zoneDescription.setWrapStyleWord(true);
+		
+		zoneDescription.addKeyListener(new KeyListener(){
+
+			public void keyTyped(KeyEvent e) {
+				boutonModifierDescription.setEnabled(true);
+			}
+
+			public void keyPressed(KeyEvent e) {
+			}
+
+			public void keyReleased(KeyEvent e) {
+			}
+			
+		});
+		
+		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
+		areaScrollPane.setVerticalScrollBarPolicy(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createCompoundBorder(
+								BorderFactory.createTitledBorder("Description du critere"),
+								BorderFactory.createEmptyBorder(5,5,5,5)),
+								areaScrollPane.getBorder()));
+		return areaScrollPane;
 	}
 
 	private JPanel partieDuBas() {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
+		jpanel.add(boutonModifierDescription());
 		return jpanel;
+	}
+
+	private JButton boutonModifierDescription() {
+		this.boutonModifierDescription = new JButton("Modifier la description");
+		boutonModifierDescription.setEnabled(false);
+		
+		boutonModifierDescription.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				String nouvelleDescription = zoneDescription.getText();
+				getCritereSelectionne().setDescription(nouvelleDescription);
+				boutonModifierDescription.setEnabled(false);
+			}
+			
+		});
+		return boutonModifierDescription;
 	}
 
 	private Component boutonSupprimer() {
@@ -79,12 +156,23 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 		});
 		return bouton;
 	}
+	
+	private Critere getCritereSelectionne(){
+		Critere c;
+		try{
+			c = ( (ModeleDynamiqueObjet)table.getModel() ).cds.getCritere(table.getSelectedRow());
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			c = ( (ModeleDynamiqueObjet)table.getModel() ).cds.getCritere(0);
+		}
+		return c;
+	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private Etude etude = MainMaximeAnsquer.etude;
 		private CriteresDeSecurite cds = (CriteresDeSecurite) etude.getModule("CriteresDeSecurite");
 
-		private final String[] entetes = {"Id", "Intitulé", "Description", "Retenu"};
+		private final String[] entetes = {"Id", "Intitule", "Description", "Retenu"};
 
 		public ModeleDynamiqueObjet() {
 			super();
@@ -146,26 +234,26 @@ public class FenetreCriteresDeSecurite2 extends JFrame {
 				return String.class; 
 			}
 		}
-		
+
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		    if(aValue != null){
-		        Critere critere = cds.getCritere(rowIndex);
-		 
-		        switch(columnIndex){
-		            case 0:
-		            	critere.setId((String)aValue);
-		                break;
-		            case 1:
-		            	critere.setIntitule((String)aValue);
-		                break;
-		            case 2:
-		            	critere.setDescription((String)aValue);
-		                break;
-		            case 3:
-		            	critere.setRetenu((Boolean)aValue);
-		                break;
-		        }
-		    }
+			if(aValue != null){
+				Critere critere = cds.getCritere(rowIndex);
+
+				switch(columnIndex){
+				case 0:
+					critere.setId((String)aValue);
+					break;
+				case 1:
+					critere.setIntitule((String)aValue);
+					break;
+				case 2:
+					critere.setDescription((String)aValue);
+					break;
+				case 3:
+					critere.setRetenu((Boolean)aValue);
+					break;
+				}
+			}
 		}
 	}
 
