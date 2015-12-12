@@ -1,19 +1,29 @@
 package presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
+import presentation.FenetreBiensEssentiels.ModeleDynamiqueObjet;
 import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.modules.BiensSupports;
@@ -28,6 +38,8 @@ public class FenetreBiensSupports extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
+	private JTextArea zoneDescription;
+	private JButton boutonModifierDescription;
 
 	public FenetreBiensSupports(){
 		super("Biens Supports");
@@ -35,9 +47,55 @@ public class FenetreBiensSupports extends JFrame{
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		table = new JTable(new ModeleDynamiqueObjet());
-		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);	
-		getContentPane().add(partieBoutons(), BorderLayout.SOUTH);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.addMouseListener(new MouseListener(){
+			public void mouseClicked(MouseEvent e) {
+				zoneDescription.setText(getBienSelectionne().getDescription());
+				boutonModifierDescription.setEnabled(false);
+			}
+			public void mousePressed(MouseEvent e) {
+			}
+			public void mouseReleased(MouseEvent e) {
+			}
+			public void mouseEntered(MouseEvent e) {
+			}
+			public void mouseExited(MouseEvent e) {
+			}			
+		});
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		getContentPane().add(new JScrollPane(table));	
+		getContentPane().add(zoneDescription());
+		getContentPane().add(partieBoutons());
 		pack();
+	}
+	
+	private JScrollPane zoneDescription() {
+		String valeurInitiale = "";		
+		zoneDescription = new JTextArea(valeurInitiale);
+		zoneDescription.setLineWrap(true);
+		zoneDescription.setWrapStyleWord(true);
+		
+		zoneDescription.addKeyListener(new KeyListener(){
+			public void keyTyped(KeyEvent e) {
+				boutonModifierDescription.setEnabled(true);
+			}
+			public void keyPressed(KeyEvent e) {
+			}
+			public void keyReleased(KeyEvent e) {
+			}
+		});
+		
+		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
+		areaScrollPane.setVerticalScrollBarPolicy(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createCompoundBorder(
+								BorderFactory.createTitledBorder("Description du Bien"),
+								BorderFactory.createEmptyBorder(5,5,5,5)),
+								areaScrollPane.getBorder()));
+		return areaScrollPane;
 	}
 	
 	private JPanel partieBoutons() {
@@ -46,7 +104,33 @@ public class FenetreBiensSupports extends JFrame{
 		jpanel.add(boutonSupprimerLigne());
 		jpanel.add(boutonAjouterColonne());
 		jpanel.add(boutonSupprimerColonne());
+		jpanel.add(boutonModifierDescription());
 		return jpanel;
+	}
+	
+	private JButton boutonModifierDescription() {
+		this.boutonModifierDescription = new JButton("Modifier la description");
+		boutonModifierDescription.setEnabled(false);
+		
+		boutonModifierDescription.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				String nouvelleDescription = zoneDescription.getText();
+				getBienSelectionne().setDescription(nouvelleDescription);
+				boutonModifierDescription.setEnabled(false);
+			}
+		});
+		return boutonModifierDescription;
+	}
+	
+	private Bien getBienSelectionne(){
+		Bien c;
+		try{
+			c = ( (ModeleDynamiqueObjet)table.getModel() ).biens.getBien(table.getSelectedRow());
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			c = ( (ModeleDynamiqueObjet)table.getModel() ).biens.getBien(0);
+		}
+		return c;
 	}
 
 	private JButton boutonSupprimerColonne() {
