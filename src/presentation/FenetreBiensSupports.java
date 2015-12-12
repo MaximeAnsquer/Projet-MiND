@@ -1,12 +1,9 @@
 package presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 
 import javax.swing.JButton;
@@ -19,8 +16,6 @@ import javax.swing.table.AbstractTableModel;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
-import abstraction.autres.Critere;
-import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
 
 /**
@@ -55,7 +50,7 @@ public class FenetreBiensSupports extends JFrame{
 	}
 
 	private JButton boutonSupprimerColonne() {
-		JButton bouton = new JButton("Supprimer une categorie");
+		JButton bouton = new JButton("Supprimer la premiere categorie");
 		bouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
@@ -79,7 +74,7 @@ public class FenetreBiensSupports extends JFrame{
 	}
 
 	private JButton boutonAjouterColonne() {
-		JButton bouton = new JButton("Ajouter une catégorie");
+		JButton bouton = new JButton("Ajouter une categorie");
 		bouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
@@ -105,33 +100,37 @@ public class FenetreBiensSupports extends JFrame{
 		private Etude etude = MainFrancois.etude;
 		private BiensSupports biens = (BiensSupports) etude.getModule("BiensSupports");
 		private final LinkedList<String> entetes = new LinkedList<String>();
+		private LinkedList<ArrayList<String>> colonnesSup = new LinkedList<ArrayList<String>>();
 
 		
 		public ModeleDynamiqueObjet() {
 			super(); 
-			entetes.add("Intitulé");
+			entetes.add("Intitule");
 			entetes.add("Description");
 			entetes.add("Type");
 			entetes.add("Retenu");
 		}
 		
 		public void supprimerCategorie(int ligneSelectionnee) {
-			//TODO
+			entetes.removeFirst();
+			colonnesSup.removeLast();
+			fireTableStructureChanged();
 		}
 
 		public void supprimerBienEssentiel(int ligneSelectionnee) {
 			Bien bien = biens.getBien(ligneSelectionnee);
 			biens.supprimerBien(bien.getIntitule());
-
 			fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
 		}
 
 		public void ajouterCategorie() {
 			String categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
-			
+			colonnesSup.addFirst(new ArrayList<String>(this.getRowCount()));
+			for (int i=0; i<this.getRowCount(); i++){
+				colonnesSup.getFirst().add(i, "");
+			}
 			entetes.addFirst(categorie);
 			fireTableStructureChanged();	
-			
 		}
 
 		public void ajouterBienEssentiel() {
@@ -142,7 +141,6 @@ public class FenetreBiensSupports extends JFrame{
 			String Description = JOptionPane.showInputDialog("Description ?");
 			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
 			biens.ajouterBien(bien);
-
 			fireTableRowsInserted(biens.nombreDeBiens() -1, biens.nombreDeBiens() -1);
 		}
 
@@ -169,7 +167,12 @@ public class FenetreBiensSupports extends JFrame{
 			case 0:
 				return biens.getBien(rowIndex).isRetenu();
 			default:
-				return "";
+				if(colonnesSup.get(columnIndex)!=null){
+					return colonnesSup.get(columnIndex).get(rowIndex);
+				}
+				else{
+					return "";
+				}
 			}
 		}
 
@@ -204,6 +207,7 @@ public class FenetreBiensSupports extends JFrame{
 		            	bien.setRetenu((Boolean)aValue);
 		                break;
 		            default:
+		            	colonnesSup.get(columnIndex).set(rowIndex, ((String)aValue));
 		            	break;
 		            	
 		        }
