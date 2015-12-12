@@ -6,14 +6,14 @@ import abstraction.autres.*;
 /**
  * Cette classe permet d'associer les biens supports et les biens
  * essentiels entre eux, sachant qu'un bien support peut avoir plusieurs biens 
- * essentiels associés et de même pour un bien essentiel
+ * essentiels associï¿½s et de mï¿½me pour un bien essentiel
  * 
  * @author Francois Adam
  */
 
 public class MappingDesBiens extends Module{
 	//Variables d'instance
-	private Hashtable<String, MappingBien> mappingDesBiens; // table qui relie chaque bien essentiel à son mapping
+	private Hashtable<String, MappingBien> mappingDesBiens; // table qui relie chaque bien essentiel ï¿½ son mapping
 	private BiensSupports biensSupports;
 	private BiensEssentiels biensEssentiels;
 	
@@ -21,6 +21,8 @@ public class MappingDesBiens extends Module{
 	public MappingDesBiens() {
 		super("MappingDesBiens");
 		this.mappingDesBiens=new Hashtable<String, MappingBien>();
+		this.biensSupports = new BiensSupports();
+		this.biensEssentiels = new BiensEssentiels();
 		//TODO Decomenter quand les autres parties seront OK
 		/*
 		this.successeurs.add(AnalyseDesRisques.getInstance());
