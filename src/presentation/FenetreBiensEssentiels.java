@@ -1,12 +1,9 @@
 package presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 
 import javax.swing.JButton;
@@ -19,7 +16,6 @@ import javax.swing.table.AbstractTableModel;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
-import abstraction.autres.Critere;
 import abstraction.modules.BiensEssentiels;
 
 /**
@@ -54,7 +50,7 @@ public class FenetreBiensEssentiels extends JFrame{
 	}
 
 	private JButton boutonSupprimerColonne() {
-		JButton bouton = new JButton("Supprimer une categorie");
+		JButton bouton = new JButton("Supprimer la premiere categorie");
 		bouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
@@ -78,7 +74,7 @@ public class FenetreBiensEssentiels extends JFrame{
 	}
 
 	private JButton boutonAjouterColonne() {
-		JButton bouton = new JButton("Ajouter une catégorie");
+		JButton bouton = new JButton("Ajouter une categorie");
 		bouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
@@ -104,17 +100,19 @@ public class FenetreBiensEssentiels extends JFrame{
 		private Etude etude = MainFrancois.etude;
 		private BiensEssentiels biens = (BiensEssentiels) etude.getModule("BiensEssentiels");
 		private final LinkedList<String> entetes = new LinkedList<String>();
-
+		private LinkedList<ArrayList<String>> colonnesSup = new LinkedList<ArrayList<String>>();
 		
 		public ModeleDynamiqueObjet() {
 			super(); 
-			entetes.add("Intitulé");
+			entetes.add("Intitule");
 			entetes.add("Description");
 			entetes.add("Retenu");
 		}
 		
 		public void supprimerCategorie(int ligneSelectionnee) {
-			//TODO
+			entetes.removeFirst();
+			colonnesSup.removeLast();
+			fireTableStructureChanged();
 		}
 
 		public void supprimerBienEssentiel(int ligneSelectionnee) {
@@ -126,7 +124,10 @@ public class FenetreBiensEssentiels extends JFrame{
 
 		public void ajouterCategorie() {
 			String categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
-			
+			colonnesSup.addFirst(new ArrayList<String>(this.getRowCount()));
+			for (int i=0; i<this.getRowCount(); i++){
+				colonnesSup.getFirst().add(i, "");
+			}
 			entetes.addFirst(categorie);
 			fireTableStructureChanged();	
 			
@@ -165,7 +166,12 @@ public class FenetreBiensEssentiels extends JFrame{
 			case 0:
 				return biens.getBien(rowIndex).isRetenu();
 			default:
-				return "";
+				if(colonnesSup.get(columnIndex)!=null){
+					return colonnesSup.get(columnIndex).get(rowIndex);
+				}
+				else{
+					return "";
+				}
 			}
 		}
 
@@ -196,6 +202,9 @@ public class FenetreBiensEssentiels extends JFrame{
 		            case 0:
 		            	bien.setRetenu((Boolean)aValue);
 		                break;
+		            default:
+		            	colonnesSup.get(columnIndex).set(rowIndex, ((String)aValue));
+		            	break;
 		        }
 		    }
 		}
