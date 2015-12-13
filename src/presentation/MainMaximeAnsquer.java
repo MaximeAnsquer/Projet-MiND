@@ -29,7 +29,7 @@ public class MainMaximeAnsquer {
 
 		//---Creation de la fenetre Criteres de securite
 
-		FenetreCriteresDeSecurite2 f = new FenetreCriteresDeSecurite2();
+		FenetreCriteresDeSecurite f = new FenetreCriteresDeSecurite();
 		
 		//---Creation de le fenetre Metrique---
 		

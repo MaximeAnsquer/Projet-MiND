@@ -7,7 +7,12 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,10 +22,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
+
+import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
 
 import abstraction.Etude;
+import abstraction.autres.Critere;
 import abstraction.autres.Metrique;
 import abstraction.autres.NiveauDeMetrique;
 import abstraction.modules.Metriques;
@@ -38,8 +49,9 @@ public class FenetreMetriques extends JFrame {
 	private Metriques metriques = (Metriques) etude.getModule("Metriques");
 	private Metrique metriqueCourante;
 	private JPanel jpanel = new JPanel(new BorderLayout());
-	JTable table;
-
+	private JTable table;
+	private JTextArea zoneDescription;
+	private JButton boutonModifierDescription;
 
 	public FenetreMetriques(){
 		super("Metriques");
@@ -47,40 +59,85 @@ public class FenetreMetriques extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		int nombreDeMetriques = metriques.nombreDeMetriques();
 		Container contentPane = this.getContentPane();
+		contentPane.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-
-		/**
-		 * On ajoute la comboBox et les boutons
-		 */
-		contentPane.add(partieDuBas(), BorderLayout.SOUTH);		
-
-		/**
-		 * On affiche la metrique courante
-		 */
+		//On ajoute la metrique courante
 		contentPane.add(jpanel);
 		setTableau();
 
+		//On ajoute la zone de description du niveau
+		contentPane.add(zoneDescription());
+
+		//On ajoute la comboBox et les boutons
+		contentPane.add(partieDuBas());		
+
+
+
 		pack();
-	}
+	}	
 
 	private void setTableau() {
 		jpanel.removeAll();
 		metriqueCourante = getMetriqueCourante();
 		ModeleDynamiqueObjet modele = new ModeleDynamiqueObjet(metriqueCourante);
 		table = new JTable(modele);
-		
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(1);
-		table.getColumnModel().getColumn(1).setPreferredWidth(150);
-		table.getColumnModel().getColumn(2).setPreferredWidth(1000);
+
+		//On n'autorise la selection que d'une seule ligne a la fois
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		//On ajoute un listener qui joue sur l'affichage de la description d'une part, et sur le bouton " modifier " d'autre part
+		table.addMouseListener(new MouseListener(){
+
+			public void mouseClicked(MouseEvent e) {
+			}
+
+			public void mousePressed(MouseEvent e) {
+				zoneDescription.setText(getNiveauSelectionne().getDescription());
+				boutonModifierDescription.setEnabled(false);
+			}
+			public void mouseReleased(MouseEvent e) {
+				zoneDescription.setText(getNiveauSelectionne().getDescription());
+				boutonModifierDescription.setEnabled(false);
+			}
+			public void mouseEntered(MouseEvent e) {
+			}
+			public void mouseExited(MouseEvent e) {
+			}			
+		});
+
+		//On redimensionne les colonnes 
+		TableColumnModel columnModel = table.getColumnModel();		
+		columnModel.getColumn(0).setMaxWidth(30);
+		columnModel.getColumn(1).setMaxWidth(150);
+		columnModel.getColumn(1).setMinWidth(150);
+
+		//On met colorie le tableau
 		table.setDefaultRenderer(Object.class, new Renderer());
+				
 		jpanel.add(new JLabel(metriqueCourante.getIntitule()), BorderLayout.NORTH);		
 		jpanel.add(new JScrollPane(table), BorderLayout.CENTER);
 		jpanel.validate();
+	}	
+
+	private NiveauDeMetrique getNiveauSelectionne() {
+		NiveauDeMetrique n;
+		try{
+			n = ( (ModeleDynamiqueObjet)table.getModel() ).metrique.getNiveau(table.getSelectedRow());
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			n = ( (ModeleDynamiqueObjet)table.getModel() ).metrique.getNiveau(table.getSelectedRow());
+		}
+		return n;
 	}
 
 	private Metrique getMetriqueCourante() {
-		Metrique m = metriques.getMetrique(  ((Metrique) comboBox.getSelectedItem()).getCritere().getIntitule()   );
+		Metrique m;
+		if(comboBox==null){
+			m = metriques.getMetrique(0);
+		}
+		else{
+			m = metriques.getMetrique(  ((Metrique) comboBox.getSelectedItem()).getCritere().getIntitule()   );
+		}
 		return m;
 	}
 
@@ -89,7 +146,24 @@ public class FenetreMetriques extends JFrame {
 		jp.add(comboBox());
 		jp.add(boutonAjouter());
 		jp.add(boutonSupprimer());
+		jp.add(boutonModifier());
 		return jp;
+	}
+
+	private JButton boutonModifier() {
+		this.boutonModifierDescription = new JButton("Modifier la description");
+		boutonModifierDescription.setEnabled(false);
+
+		boutonModifierDescription.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				String nouvelleDescription = zoneDescription.getText();
+				getNiveauSelectionne().setDescription(nouvelleDescription);
+				boutonModifierDescription.setEnabled(false);
+			}
+
+		});
+		return boutonModifierDescription;
 	}
 
 	private JButton boutonSupprimer() {
@@ -125,6 +199,8 @@ public class FenetreMetriques extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				setTableau();	
+				boutonModifierDescription.setEnabled(false);
+				zoneDescription.setText(null);
 			}
 
 		});
@@ -132,6 +208,7 @@ public class FenetreMetriques extends JFrame {
 	}
 
 	private JPanel tableau(JTable table, String intitule) {
+
 		JPanel j = new JPanel();
 		j.setLayout(new BoxLayout(j, BoxLayout.Y_AXIS));
 		j.add(new JLabel(intitule));
@@ -139,6 +216,40 @@ public class FenetreMetriques extends JFrame {
 		return j;
 	}
 
+	private JScrollPane zoneDescription() {
+			
+		zoneDescription = new JTextArea();
+		zoneDescription.setLineWrap(true);
+		zoneDescription.setWrapStyleWord(true);
+
+		zoneDescription.addKeyListener(new KeyListener(){
+
+			public void keyTyped(KeyEvent e) {
+				if(table.getSelectedRow()>-1){
+					boutonModifierDescription.setEnabled(true);
+				}
+			}
+
+			public void keyPressed(KeyEvent e) {
+			}
+
+			public void keyReleased(KeyEvent e) {
+			}
+
+		});
+
+		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
+		areaScrollPane.setVerticalScrollBarPolicy(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createCompoundBorder(
+								BorderFactory.createTitledBorder("Description du critere"),
+								BorderFactory.createEmptyBorder(5,5,5,5)),
+								areaScrollPane.getBorder()));
+		return areaScrollPane;
+	}
 	//---Modele---
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
@@ -194,9 +305,9 @@ public class FenetreMetriques extends JFrame {
 			String Intitule = JOptionPane.showInputDialog("Intitule ?");
 			String Description = JOptionPane.showInputDialog("Description ?");
 			try{ 
-			NiveauDeMetrique niveau = new NiveauDeMetrique(Integer.parseInt(numero), Intitule, Description);
+				NiveauDeMetrique niveau = new NiveauDeMetrique(Integer.parseInt(numero), Intitule, Description);
 
-			getMetriqueCourante().ajouterNiveau(niveau);
+				getMetriqueCourante().ajouterNiveau(niveau);
 			}
 			catch(NumberFormatException e){
 				JOptionPane.showMessageDialog(rootPane, "La première valeur doit être un entier.");
@@ -218,7 +329,7 @@ public class FenetreMetriques extends JFrame {
 				switch(columnIndex){
 				case 0:
 					try{
-					niveau.setNumero(Integer.parseInt((String) aValue));
+						niveau.setNumero(Integer.parseInt((String) aValue));
 					}
 					catch(NumberFormatException e){
 						JOptionPane.showMessageDialog(rootPane, "Veuillez saisir un entier supérieur à 0.");

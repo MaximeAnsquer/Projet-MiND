@@ -1,158 +1,274 @@
 package presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumnModel;
 
 import abstraction.Etude;
 import abstraction.autres.Critere;
 import abstraction.modules.CriteresDeSecurite;
 
 /**
- * 
+ * Fonctionnel, mais le code est relativement degueulasse.
+ * Source : http://baptiste-wicht.developpez.com/tutoriels/java/swing/jtable/
  * @author Maxime Ansquer
  *
  */
 public class FenetreCriteresDeSecurite extends JFrame {
-	
-	private JTable table;;	
-	private Etude etude = MainMaximeAnsquer.etude;
-	private CriteresDeSecurite cds = (CriteresDeSecurite) etude.getModule("CriteresDeSecurite"); 
-	private Object[][] data;
-	
+
+	private JTable table;	
+	private JTextArea zoneDescription;
+	private JButton boutonModifierDescription;
+
 	public FenetreCriteresDeSecurite(){
 		super("Criteres de securite");
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);		
-		
-		Container contentPane = this.getContentPane();
-		
-		this.updateData();
-		
-		String[] columnNames = {"Id", "Intitulé", "Description", "Retenu"};
-		
-		table = new JTable(new MonModel(data, columnNames));
-		table.setFillsViewportHeight(true);  //je sais pas ce que ca fait mais apparemment c'est cool
-		
-		contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
-		contentPane.add(partieDuBas(), BorderLayout.SOUTH);
-		contentPane.add(test(), BorderLayout.EAST);
-		
-		this.pack();
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		table = new JTable(new ModeleDynamiqueObjet());
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		//On redimensionne les colonnes 
+		TableColumnModel columnModel = table.getColumnModel();		
+		columnModel.getColumn(0).setMaxWidth(30);
+		columnModel.getColumn(1).setMaxWidth(200);
+		columnModel.getColumn(1).setMinWidth(200);
+		columnModel.getColumn(3).setMaxWidth(50);
+
+		table.addMouseListener(new MouseListener(){
+
+			public void mouseClicked(MouseEvent e) {
+			}
+
+			public void mousePressed(MouseEvent e) {
+				zoneDescription.setText(getCritereSelectionne().getDescription());
+				boutonModifierDescription.setEnabled(false);
+			}
+			public void mouseReleased(MouseEvent e) {
+				zoneDescription.setText(getCritereSelectionne().getDescription());
+				boutonModifierDescription.setEnabled(false);
+			}
+			public void mouseEntered(MouseEvent e) {
+			}
+			public void mouseExited(MouseEvent e) {
+			}			
+		});
+
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
+		getContentPane().add(new JScrollPane(table));	
+		getContentPane().add(zoneDescription());
+		getContentPane().add(partieDuBas());
+		pack();
+
 	}
-	
-	/**
-	 * Inspire d'un exemple de la Javadoc sur les JTextArea
-	 * @return
-	 */
-	private JScrollPane test() {
-		JTextArea textArea = new JTextArea(
-                "Cette zone servirait a afficher la description"
-                + " du critere selectionne. Qu'en dites-vous ?"
-                + " On enleverait alors la colonne \" description \" dans"
-                + " la JTable de gauche."
-        );
-        textArea.setFont(new Font("Serif", Font.ITALIC, 16));
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        JScrollPane areaScrollPane = new JScrollPane(textArea);
-        areaScrollPane.setVerticalScrollBarPolicy(
-                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        areaScrollPane.setPreferredSize(new Dimension(400, 250));
-        areaScrollPane.setBorder(
-            BorderFactory.createCompoundBorder(
-                BorderFactory.createCompoundBorder(
-                                BorderFactory.createTitledBorder("Description du critere"),
-                                BorderFactory.createEmptyBorder(5,5,5,5)),
-                areaScrollPane.getBorder()));
-        return areaScrollPane;
+
+	private JScrollPane zoneDescription() {
+
+		zoneDescription = new JTextArea();
+		zoneDescription.setLineWrap(true);
+		zoneDescription.setWrapStyleWord(true);
+
+		zoneDescription.addKeyListener(new KeyListener(){
+
+			public void keyTyped(KeyEvent e) {
+				if(table.getSelectedRow()>-1){
+					boutonModifierDescription.setEnabled(true);
+				}
+
+			}
+
+			public void keyPressed(KeyEvent e) {
+			}
+
+			public void keyReleased(KeyEvent e) {
+			}
+
+		});
+
+		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
+		areaScrollPane.setVerticalScrollBarPolicy(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createCompoundBorder(
+								BorderFactory.createTitledBorder("Description du critere"),
+								BorderFactory.createEmptyBorder(5,5,5,5)),
+								areaScrollPane.getBorder()));
+		return areaScrollPane;
 	}
 
 	private JPanel partieDuBas() {
-		JPanel jp = new JPanel();
-		jp.add(boutonAjouter());
-		jp.add(boutonSupprimer());
-		return jp;
+		JPanel jpanel = new JPanel();
+		jpanel.add(boutonAjouter());
+		jpanel.add(boutonSupprimer());
+		jpanel.add(boutonModifierDescription());
+		return jpanel;
 	}
 
-	private JButton boutonSupprimer() {
-		JButton b = new JButton("Supprimer le critere selectionne");
-		return b;
+	private JButton boutonModifierDescription() {
+		this.boutonModifierDescription = new JButton("Modifier la description");
+		boutonModifierDescription.setEnabled(false);
+
+		boutonModifierDescription.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				String nouvelleDescription = zoneDescription.getText();
+				getCritereSelectionne().setDescription(nouvelleDescription);
+				boutonModifierDescription.setEnabled(false);
+			}
+
+		});
+		return boutonModifierDescription;
+	}
+
+	private Component boutonSupprimer() {
+		JButton bouton = new JButton("Supprimer un critere");
+		bouton.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				int ligneSelectionnee = table.getSelectedRow();
+				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+				modele.supprimerCritere(ligneSelectionnee);
+			}
+
+		});
+		return bouton;
 	}
 
 	private JButton boutonAjouter() {
-		JButton b = new JButton("Ajouter un nouveau critere");
-		return b;
+		JButton bouton = new JButton("Ajouter un critere");
+		bouton.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+				modele.ajouterCritere();
+			}
+
+		});
+		return bouton;
 	}
 
-	/**
-	 * Actualise la variable data conformement aux donnes du package abstraction 
-	 */
-	private void updateData() {
-		this.data = new Object[cds.getLesCriteres().size()][4];
-		int numeroLigne=0;
-		for(Critere c : cds.getLesCriteres().values()){
-			data[numeroLigne][0] = c.getId();
-			data[numeroLigne][1] = c.getIntitule();
-			data[numeroLigne][2] = c.getDescription();
-			data[numeroLigne][3] = c.isRetenu();			
-			numeroLigne++;
+	private Critere getCritereSelectionne(){
+		Critere c;
+		try{
+			c = ( (ModeleDynamiqueObjet)table.getModel() ).cds.getCritere(table.getSelectedRow());
 		}
-		
+		catch(ArrayIndexOutOfBoundsException e){
+			c = ( (ModeleDynamiqueObjet)table.getModel() ).cds.getCritere(0);
+		}
+		return c;
 	}
 
-	//Classe modèle personnalisée
-	  class MonModel extends AbstractTableModel{
-	    private Object[][] data;
-	    private String[] title;
+	class ModeleDynamiqueObjet extends AbstractTableModel {
+		private Etude etude = MainMaximeAnsquer.etude;
+		private CriteresDeSecurite cds = (CriteresDeSecurite) etude.getModule("CriteresDeSecurite");
 
-	    //Constructeur
-	    public MonModel(Object[][] data, String[] title){
-	      this.data = data;
-	      this.title = title;
-	    }
+		private final String[] entetes = {"Id", "Intitule", "Description", "Retenu"};
 
-	    //Retourne le nombre de colonnes
-	    public int getColumnCount() {
-	      return this.title.length;
-	    }
+		public ModeleDynamiqueObjet() {
+			super();
+		}
 
-	    //Retourne le nombre de lignes
-	    public int getRowCount() {
-	      return this.data.length;
-	    }
+		public int getRowCount() {
+			return cds.nombreDeCriteres();
+		}
 
-	    //Retourne la valeur à l'emplacement spécifié
-	    public Object getValueAt(int row, int col) {
-	      return this.data[row][col];
-	    }  
-	    
-	    //Retourne le titre de la colonne à l'indice spécifié
-	    public String getColumnName(int col) {
-	      return this.title[col];
-	    }
-	    
-	    //Retourne la classe de la donnée de la colonne
-	    public Class getColumnClass(int col){
-	      return this.data[0][col].getClass();
-	    }	
-	    
-	    //Retourne vrai si la cellule est éditable : celle-ci sera donc éditable
-	    public boolean isCellEditable(int row, int col){
-	      return true; 
-	    }
-	    
-	  }
+		public int getColumnCount() {
+			return entetes.length;
+		}
+
+		public String getColumnName(int columnIndex) {
+			return entetes[columnIndex];
+		}
+
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			switch(columnIndex){
+			case 0:
+				return cds.getCritere(rowIndex).getId();
+			case 1:
+				return cds.getCritere(rowIndex).getIntitule();
+			case 2:
+				return cds.getCritere(rowIndex).getDescription();
+			case 3:
+				return cds.getCritere(rowIndex).isRetenu();
+			default:
+				return null; //Ne devrait jamais arriver
+			}
+		}
+
+		public void ajouterCritere() {
+			String Id = JOptionPane.showInputDialog("Id ?");
+			String Intitule = JOptionPane.showInputDialog("Intitule ?");
+			String Description = JOptionPane.showInputDialog("Description ?");
+			Critere critere = new Critere(Id, Intitule, Description);
+			cds.ajouterCritere(critere);
+
+			fireTableRowsInserted(cds.nombreDeCriteres() -1, cds.nombreDeCriteres() -1);
+		}
+
+		public void supprimerCritere(int rowIndex) {
+			Critere c = cds.getCritere(rowIndex);
+			cds.supprimerCritere(c.getIntitule());
+
+			fireTableRowsDeleted(rowIndex, rowIndex);
+		}
+
+		public boolean isCellEditable(int row, int col){
+			return true; 
+		}
+
+		public Class getColumnClass(int columnIndex){
+			switch(columnIndex){
+			case 3:
+				return Boolean.class;
+			default:
+				return String.class; 
+			}
+		}
+
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+			if(aValue != null){
+				Critere critere = cds.getCritere(rowIndex);
+
+				switch(columnIndex){
+				case 0:
+					critere.setId((String)aValue);
+					break;
+				case 1:
+					critere.setIntitule((String)aValue);
+					break;
+				case 2:
+					critere.setDescription((String)aValue);
+					break;
+				case 3:
+					critere.setRetenu((Boolean)aValue);
+					break;
+				}
+			}
+		}
+	}
+
+
 
 }

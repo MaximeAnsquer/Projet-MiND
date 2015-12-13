@@ -2,16 +2,28 @@ package presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumnModel;
+
+import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
 
 import abstraction.Etude;
 import abstraction.autres.Critere;
@@ -27,6 +39,8 @@ import abstraction.modules.SourcesDeMenaces;
 public class FenetreSourcesDeMenaces extends JFrame {
 
 	private JTable table;	
+	private JTextArea zoneIntitule;
+	private JButton boutonModifierIntitule;
 
 	public FenetreSourcesDeMenaces(){
 		super("Sources de menaces");
@@ -34,23 +48,112 @@ public class FenetreSourcesDeMenaces extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		table = new JTable(new ModeleDynamiqueObjet());
-		
-		table.getColumnModel().getColumn(0).setPreferredWidth(50);
-		table.getColumnModel().getColumn(1).setPreferredWidth(700);
-		table.getColumnModel().getColumn(2).setPreferredWidth(200);
-		table.getColumnModel().getColumn(3).setPreferredWidth(1);
-		
-		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);	
-		getContentPane().add(partieDuBas(), BorderLayout.SOUTH);
+
+		//On redimensionne les colonnes 
+		TableColumnModel columnModel = table.getColumnModel();		
+		columnModel.getColumn(0).setMaxWidth(30);
+		columnModel.getColumn(2).setMaxWidth(200);
+		columnModel.getColumn(2).setMinWidth(200);
+		columnModel.getColumn(3).setMaxWidth(50);
+
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		table.addMouseListener(new MouseListener(){
+
+			public void mouseClicked(MouseEvent e) {
+			}
+
+			public void mousePressed(MouseEvent e) {
+				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
+				boutonModifierIntitule.setEnabled(false);
+			}
+			public void mouseReleased(MouseEvent e) {
+				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
+				boutonModifierIntitule.setEnabled(false);
+			}
+			public void mouseEntered(MouseEvent e) {
+			}
+			public void mouseExited(MouseEvent e) {
+			}			
+		});
+
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		getContentPane().add(new JScrollPane(table));			
+		getContentPane().add(zoneIntitule());
+		getContentPane().add(partieDuBas());
 		pack();
 
+	}
+
+	private JScrollPane zoneIntitule() {
+	
+		zoneIntitule = new JTextArea();
+		zoneIntitule.setLineWrap(true);
+		zoneIntitule.setWrapStyleWord(true);
+
+		zoneIntitule.addKeyListener(new KeyListener(){
+
+			public void keyTyped(KeyEvent e) {
+				if(table.getSelectedRow()>-1){
+					boutonModifierIntitule.setEnabled(true);
+				}
+				
+			}
+
+			public void keyPressed(KeyEvent e) {
+			}
+
+			public void keyReleased(KeyEvent e) {
+			}
+
+		});
+
+		JScrollPane areaScrollPane = new JScrollPane(zoneIntitule);
+		areaScrollPane.setVerticalScrollBarPolicy(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createCompoundBorder(
+								BorderFactory.createTitledBorder("Intitulé de la source de menace"),
+								BorderFactory.createEmptyBorder(5,5,5,5)),
+								areaScrollPane.getBorder()));
+		return areaScrollPane;
+	}
+
+	protected SourceDeMenace getSourceSelectionnee() {
+		SourceDeMenace c;
+		try{
+			c = ( (ModeleDynamiqueObjet)table.getModel() ).sdm.getSource(table.getSelectedRow());
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			c = ( (ModeleDynamiqueObjet)table.getModel() ).sdm.getSource(table.getSelectedRow());
+		}
+		return c;
 	}
 
 	private JPanel partieDuBas() {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
+		jpanel.add(boutonModifierIntitule());
 		return jpanel;
+	}
+
+	private JButton boutonModifierIntitule() {
+		this.boutonModifierIntitule = new JButton("Modifier l'intitule");
+		boutonModifierIntitule.setEnabled(false);
+
+		boutonModifierIntitule.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				String nouvelIntitule = zoneIntitule.getText();
+				getSourceSelectionnee().setIntitule(nouvelIntitule);
+				boutonModifierIntitule.setEnabled(false);
+			}
+
+		});
+		return this.boutonModifierIntitule;
 	}
 
 	private Component boutonSupprimer() {
@@ -146,26 +249,26 @@ public class FenetreSourcesDeMenaces extends JFrame {
 				return String.class; 
 			}
 		}
-		
+
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		    if(aValue != null){
-		        SourceDeMenace source = sdm.getSource(rowIndex);
-		 
-		        switch(columnIndex){
-		            case 0:
-		            	source.setId((String)aValue);
-		                break;
-		            case 1:
-		            	source.setIntitule((String)aValue);
-		                break;
-		            case 2:
-		            	source.setExemple((String)aValue);
-		                break;
-		            case 3:
-		            	source.setRetenu((Boolean)aValue);
-		                break;
-		        }
-		    }
+			if(aValue != null){
+				SourceDeMenace source = sdm.getSource(rowIndex);
+
+				switch(columnIndex){
+				case 0:
+					source.setId((String)aValue);
+					break;
+				case 1:
+					source.setIntitule((String)aValue);
+					break;
+				case 2:
+					source.setExemple((String)aValue);
+					break;
+				case 3:
+					source.setRetenu((Boolean)aValue);
+					break;
+				}
+			}
 		}
 	}
 
