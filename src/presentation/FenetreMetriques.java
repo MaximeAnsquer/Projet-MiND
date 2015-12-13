@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -114,7 +115,12 @@ public class FenetreMetriques extends JFrame {
 		//On met colorie le tableau
 		table.setDefaultRenderer(Object.class, new Renderer());
 				
-		jpanel.add(new JLabel(metriqueCourante.getIntitule()), BorderLayout.NORTH);		
+		JLabel label = new JLabel(metriqueCourante.getIntitule());
+		label.setOpaque(true);
+		label.setBackground(Color.black);
+		label.setForeground(Color.white);
+		label.setFont(new Font("Arial", Font.BOLD, 13));
+		jpanel.add(label, BorderLayout.NORTH);		
 		jpanel.add(new JScrollPane(table), BorderLayout.CENTER);
 		jpanel.validate();
 	}	
