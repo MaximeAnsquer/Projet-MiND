@@ -37,6 +37,7 @@ public class FenetreCriteresDeSecurite extends JFrame {
 	private JTable table;	
 	private JTextArea zoneDescription;
 	private JButton boutonModifierDescription;
+	private JButton boutonSupprimer;
 
 	public FenetreCriteresDeSecurite(){
 		super("Criteres de securite");
@@ -61,6 +62,7 @@ public class FenetreCriteresDeSecurite extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				zoneDescription.setText(getCritereSelectionne().getDescription());
 				boutonModifierDescription.setEnabled(false);
+				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
 				zoneDescription.setText(getCritereSelectionne().getDescription());
@@ -141,9 +143,10 @@ public class FenetreCriteresDeSecurite extends JFrame {
 		return boutonModifierDescription;
 	}
 
-	private Component boutonSupprimer() {
-		JButton bouton = new JButton("Supprimer un critere");
-		bouton.addActionListener(new ActionListener(){
+	private JButton boutonSupprimer() {
+		boutonSupprimer = new JButton("Supprimer un critere");
+		boutonSupprimer.setEnabled(false);
+		boutonSupprimer.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
@@ -152,7 +155,7 @@ public class FenetreCriteresDeSecurite extends JFrame {
 			}
 
 		});
-		return bouton;
+		return boutonSupprimer;
 	}
 
 	private JButton boutonAjouter() {

@@ -41,6 +41,7 @@ public class FenetreSourcesDeMenaces extends JFrame {
 	private JTable table;	
 	private JTextArea zoneIntitule;
 	private JButton boutonModifierIntitule;
+	private JButton boutonSupprimer;
 
 	public FenetreSourcesDeMenaces(){
 		super("Sources de menaces");
@@ -66,6 +67,7 @@ public class FenetreSourcesDeMenaces extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
 				boutonModifierIntitule.setEnabled(false);
+				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
 				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
@@ -156,9 +158,10 @@ public class FenetreSourcesDeMenaces extends JFrame {
 		return this.boutonModifierIntitule;
 	}
 
-	private Component boutonSupprimer() {
-		JButton bouton = new JButton("Supprimer une source de menace");
-		bouton.addActionListener(new ActionListener(){
+	private JButton boutonSupprimer() {
+		boutonSupprimer = new JButton("Supprimer une source de menace");
+		boutonSupprimer.setEnabled(false);
+		boutonSupprimer.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
@@ -167,7 +170,7 @@ public class FenetreSourcesDeMenaces extends JFrame {
 			}
 
 		});
-		return bouton;
+		return boutonSupprimer;
 	}
 
 	private JButton boutonAjouter() {

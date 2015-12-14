@@ -53,6 +53,7 @@ public class FenetreMetriques extends JFrame {
 	private JTable table;
 	private JTextArea zoneDescription;
 	private JButton boutonModifierDescription;
+	private JButton boutonSupprimer;
 
 	public FenetreMetriques(){
 		super("Metriques");
@@ -95,6 +96,7 @@ public class FenetreMetriques extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				zoneDescription.setText(getNiveauSelectionne().getDescription());
 				boutonModifierDescription.setEnabled(false);
+				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
 				zoneDescription.setText(getNiveauSelectionne().getDescription());
@@ -173,8 +175,9 @@ public class FenetreMetriques extends JFrame {
 	}
 
 	private JButton boutonSupprimer() {
-		JButton bouton = new JButton("Supprimer un niveau");
-		bouton.addActionListener(new ActionListener() {
+		boutonSupprimer = new JButton("Supprimer un niveau");
+		boutonSupprimer.setEnabled(false);
+		boutonSupprimer.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				int niveauSelectionne = table.getSelectedRow();
@@ -182,7 +185,7 @@ public class FenetreMetriques extends JFrame {
 				modele.supprimerNiveau(niveauSelectionne);				
 			}
 		});
-		return bouton;
+		return boutonSupprimer;
 	}
 
 	private JButton boutonAjouter() {
@@ -207,6 +210,7 @@ public class FenetreMetriques extends JFrame {
 				setTableau();	
 				boutonModifierDescription.setEnabled(false);
 				zoneDescription.setText(null);
+				boutonSupprimer.setEnabled(false);
 			}
 
 		});
