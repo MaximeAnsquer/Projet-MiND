@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import abstraction.Analyse;
 import abstraction.Etude;
 import abstraction.autres.Bien;
+import abstraction.autres.Critere;
 import abstraction.autres.Evenement;
 import abstraction.autres.Risque;
 import abstraction.autres.ScenarioType;
@@ -35,7 +36,7 @@ public class AnalyseDesRisques extends Module{
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
 		int a=this.scenarios.getTableau().size();
-		int k=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
+		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
 		
 		/*là on construit chacuns des risques de l'arraylist, en allant piocher dans les modules antécédents pour
 		 * faire correspondre chaque scénario de menace(ScenariosDeMenacesTypes) avec l'évenement correspondant(EvenementsRedoutes)
@@ -52,12 +53,13 @@ public class AnalyseDesRisques extends Module{
 			    if (scenarios.getValeurcritere(k)==true){
 			    	
 			    Bien biencourant=scenarios[i].getBienSupport().getBienEssentielCorrespondant();		
-			    Critere criterecourant=this.scenarios.getScenariosDeMenacesTypes().get(i).getNomCritere(k);
+			    Critere criterecourant=scenarios[i].getCritere(k);
 			    
-				liste.add(new Risque("",this.evenements.getEvenementsRedoutes().getEvenementCorrespondant(criterecourant,biencourant),this.scenarios.getScenariosMenacesTypes().get(i).getEvenement().getNiveauGravite(),this.scenarios.getScenariosMenacesTypes().get(i).getBienSupport(),this.scenarios.getScenariosMenacesTypes().get(i),this.scenarios.getScenariosMenacesTypes().get(i).getNiveauVraisemblance()));
+				liste.add(new Risque("",this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biencourant.getIntitule()),scenarios[i].getEvenement().getNiveauGravite(),this.scenarios.getScenariosMenacesTypes().get(i).getBienSupport(),scenarios[i],scenarios[i].getNiveauVraisemblance()));
 				
 			}
 			}
+		}
 		
 		
 	/*Getter utile pour la construction de la matrice qui vient après*/	

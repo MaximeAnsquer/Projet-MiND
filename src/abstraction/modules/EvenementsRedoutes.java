@@ -52,7 +52,7 @@ public class EvenementsRedoutes extends Module {
 		
 		for (int i=0;i<a;i++){
 			for(int j=0;j<b;j++){
-				liste.set(i*b+j,new Evenement("",tableaubiens[i].getNomColonneSup(),tableaubiens[i].getContenuColonneSup(),tableaubiens[i],critere.getLesCriteres().get(j),exigence,gravite));
+				liste.set(i*b+j,new Evenement("",tableaubiens[i].getNomColonneSup(),tableaubiens[i].getContenuColonneSup(),tableaubiens[i].getIntitule(),critere.getLesCriteres().get(j).getIntitule()));
 				
 			}
 		}
@@ -86,12 +86,12 @@ public class EvenementsRedoutes extends Module {
 		this.lesBiensEssentiels=lesBiensEssentiels;
 	}
 	
-	public Evenement getEvenementCorrespondant(Critere critere,Bien bien){
+	public String getEvenementCorrespondant(String critere,String bien){
 		int a=this.evenementsredoutes.size();
 		for (int i=0;i<a;i++){
-			if (this.evenementsredoutes.get(i).GetBien()==bien){
+			if (this.evenementsredoutes.get(i).GetNomBien()==bien){
 					if(this.evenementsredoutes.get(i).GetCritere()==critere){
-						return this.evenementsredoutes.get(i);
+						return this.evenementsredoutes.get(i).GetNomEvenement();
 					}
 				}
 			}

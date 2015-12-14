@@ -2,6 +2,11 @@ package abstraction.autres;
 
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
+
+import abstraction.Etude;
+import abstraction.modules.Metriques;
+
 
 /*Un évènement redouté est matérialisé par un manquement aux exigences minimales fonctionnelles selon certains critères, 
  * qui peut toucher des biens essentiels.
@@ -16,62 +21,83 @@ public class Evenement {
 	 * De plus, cet evenement peut appartenir à des groupe définis dans le module Biens Essentiels.
 	 * On donne un nom à cet evenement.
 	 */
+	private Etude etude;
 	
 	private String nomevenement;
 	private ArrayList<String> nomgroupes;
 	private ArrayList<String> contenugroupes;
-	private Bien bienessentiel;
-	private Critere critere;
-	private Metrique exigence;
-	private Metrique gravite;
+	private String bienessentiel;
+	private String critere;
+	
+	
+	
 	
 	/*les niveaux sont des int qui permet de stocker les valeurs entrées dans le tableau par l'utilisateur
 	 */
-	private int niveauexigence;
-	private int niveaugravite;
+	private JComboBox exigence;
+	private JComboBox gravite;
 	
 	
-	public Evenement(String nomevenement,ArrayList<String> nomgroupes,ArrayList<String> contenugroupes,Bien bienessentiel,Critere critere,Metrique exigence,Metrique gravite){
+	public Evenement(String nomevenement,ArrayList<String> nomgroupes,ArrayList<String> contenugroupes,String bienessentiel,String critere){
 		this.nomevenement=nomevenement;
 		this.nomgroupes=nomgroupes;
 		this.contenugroupes=contenugroupes;
 		this.bienessentiel=bienessentiel;
 		this.critere=critere;
-		this.exigence=exigence;
-		this.gravite=gravite;
+		
 		
 		/*On met des valeurs par défaut pour les niveaux (peut être inutile mais on sait jamais)
 		 */
-		this.niveauexigence=1;
-		this.niveaugravite=1;
+		
+		
+		this.exigence=new JComboBox<Integer>();
+		this.gravite=new JComboBox<Integer>();
+		
+		int a=((Metriques) etude.getModule("Metriques")).getGravite().nombreDeNiveaux();
+		
+		Integer[] liste=new Integer[a];
+		for(int i=0;i<a;i++){
+			
+			liste[i]=new Integer(i+1);
+		}
+		this.gravite=new JComboBox<Integer>(liste);
+		
+		int b=((Metriques)this.etude.getModule("Metriques")).getMetrique("this.critere").nombreDeNiveaux();
+		
+		Integer[] listebis=new Integer[b];
+        for(int i=0;i<b;i++){
+			
+			listebis[i]=new Integer(i+1);
+		}
+        this.exigence=new JComboBox<Integer>(listebis);
 	}
 	
 	/*Getters
 	 */
 	
-	
-	public Metrique getExigence(){
-	return this.exigence;
+	public ArrayList<String> getNomGroupes(){
+		return this.nomgroupes;
+	}
+	public ArrayList<String> getContenuGroupes(){
+		return this.contenugroupes;
 	}
 	
-	public Metrique getGravite(){
-		return this.gravite;
-	}
 	
 	/*retourne  le nom du bien numero i
 	 * 
 	 */
 	
 	public String GetNomBien(){
-		return this.bienessentiel.toString();
+		return this.bienessentiel;
 	}
 	
-	public Critere GetCritere(){
+	public String GetCritere(){
 		return this.critere;
 	}
 	
-	public Bien GetBien(){
-		return this.bienessentiel;
+	
+	public String GetNomEvenement(){
+		return this.nomevenement;
 	}
 	
 	/*retourne le nom du critere numéro i
@@ -81,8 +107,16 @@ public class Evenement {
 	}
 	
 	
-	/*Setters*/
+	public JComboBox getComboGravite(){
+		return this.gravite;
+	}
 	
+	public JComboBox getComboExigence(){
+		return this.exigence;
+	}
+	
+	/*Setters*/
+	/*
 	public void setNiveauGravite(int i){
 		this.niveaugravite=i;
 	}
@@ -90,8 +124,8 @@ public class Evenement {
 	public void setNiveauExigence(int i){
 		this.niveauexigence=i;
 	}
-	
-	public void setBienEssentiel(Bien bienessentiel){
+	*/
+	public void setBienEssentiel(String bienessentiel){
 		this.bienessentiel=bienessentiel;
 	}
 	
