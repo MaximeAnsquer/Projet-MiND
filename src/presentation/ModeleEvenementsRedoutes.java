@@ -27,13 +27,11 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 			
 		
 
-	@Override
 	public int getColumnCount() {
 		return 5+this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();
 		
 	}
 
-	@Override
 	public int getRowCount() {
 		return this.evenements.getEvenementsRedoutes().size();
 	}
@@ -41,7 +39,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 
 
 
-	@Override
+	
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch(this.getColumnCount()-columnIndex-1){
 		case 4:
