@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 import abstraction.modules.TypologieDesBiensSupports;
 
@@ -61,5 +62,30 @@ public class FenetreTypologieBiensSupports extends JFrame {
 		panelBas.add(ajouterLigne);
 		panelBas.add(supprimerLigne);
 		this.getContentPane().add(panelBas,BorderLayout.SOUTH);
+	}
+	
+	class ModeleDynamiqueObjet extends AbstractTableModel{
+		
+		public ModeleDynamiqueObjet() {
+			super();
+		}
+		
+		public int getRowCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		
+		public int getColumnCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
 	}
 }
