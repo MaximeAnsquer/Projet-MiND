@@ -1,5 +1,7 @@
 package abstraction.autres;
 
+import javax.swing.JCheckBox;
+
 import abstraction.modules.ScenariosDeMenacesTypes;
 
 public class Risque {
@@ -12,18 +14,21 @@ public class Risque {
 	private Evenement evenementredoute;
 	private int niveaugravite;
 	private Bien biensupport;
-	private ScenariosDeMenacesTypes scenarioconcret;
+	private ScenarioType scenarioconcret;
 	private int niveauvraisemblance;
+	private JCheckBox checkbox;
 	
 	
 	
-	public Risque(String intitule,Evenement evenementredoute,int niveaugravite,Bien biensupport,ScenariosDeMenacesTypes scenarioconcret,int niveauvraisemblance){
+	public Risque(String intitule,Evenement evenementredoute,int niveaugravite,Bien biensupport,ScenarioType scenarioconcret,int niveauvraisemblance){
 		this.intitule=intitule;
 		this.evenementredoute=evenementredoute;
 		this.niveaugravite=niveaugravite;
 		this.biensupport=biensupport;
 		this.scenarioconcret=scenarioconcret;
 		this.niveauvraisemblance=niveauvraisemblance;
+		this.checkbox=new JCheckBox();
+		this.checkbox.setEnabled(true);
 		
 	}
 	
@@ -44,5 +49,21 @@ public class Risque {
 	public int getNiveauVraisemblance(){
 		return this.niveauvraisemblance;
 	}
+	
+	public JCheckBox getJCheckBox(){
+		return this.checkbox;
+		
+	}
+	
+	public ScenarioType getScenarioConcret(){
+		return this.scenarioconcret;
+	}
 
+	public Bien getBienSupport(){
+		return this.biensupport;
+	}
+	
+	public Evenement getEvenementRedoute(){
+		return this.evenementredoute;
+	}
 }
