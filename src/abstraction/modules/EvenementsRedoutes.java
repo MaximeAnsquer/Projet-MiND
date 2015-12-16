@@ -86,12 +86,12 @@ public class EvenementsRedoutes extends Module {
 		this.lesBiensEssentiels=lesBiensEssentiels;
 	}
 	
-	public String getEvenementCorrespondant(String critere,String bien){
+	public Evenement getEvenementCorrespondant(String critere,String bien){
 		int a=this.evenementsredoutes.size();
 		for (int i=0;i<a;i++){
 			if (this.evenementsredoutes.get(i).GetNomBien()==bien){
 					if(this.evenementsredoutes.get(i).GetCritere()==critere){
-						return this.evenementsredoutes.get(i).GetNomEvenement();
+						return this.evenementsredoutes.get(i);
 					}
 				}
 			}

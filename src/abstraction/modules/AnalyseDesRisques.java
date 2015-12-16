@@ -47,15 +47,19 @@ public class AnalyseDesRisques extends Module{
 		ScenarioType[] scenarios=this.scenarios.getTableau().values().toArray(new ScenarioType[this.scenarios.getTableau().size()]);
 		
 		
-		
+		/*Pour chaque scénario*/
 		for (int i=0;i<a;i++){
+			/*Pour chaque critere*/
 			for(int k=0;k<b;k++){
-			    if (scenarios.getValeurcritere(k)==true){
-			    	
+			    if (scenarios[i].getValeurcritere(k)==true){
+			    	/*On recupere le bien essentiel correspondant au bien support du scenario considéré*/
 			    Bien biencourant=scenarios[i].getBienSupport().getBienEssentielCorrespondant();		
+			    /*On récupère le critère correspondant*/
 			    Critere criterecourant=scenarios[i].getCritere(k);
 			    
-				liste.add(new Risque("",this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biencourant.getIntitule()),scenarios[i].getEvenement().getNiveauGravite(),this.scenarios.getScenariosMenacesTypes().get(i).getBienSupport(),scenarios[i],scenarios[i].getNiveauVraisemblance()));
+			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biencourant.getIntitule());
+			    
+				liste.add(new Risque("",evenement,evenement.getComboGravite().getSelectedItem(),scenarios[i].getBienSupport(),scenarios[i],scenarios[i].getNiveauVraisemblance()));
 				
 			}
 			}
