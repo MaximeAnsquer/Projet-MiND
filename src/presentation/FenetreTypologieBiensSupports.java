@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
@@ -33,18 +34,10 @@ public class FenetreTypologieBiensSupports extends JFrame {
 	}
 
 	public void creerTableau() {
-		
-		Object[][] donnees = {
-				{"MAT", "Matériels", "Ce type de biens supports est constitué de l’ensemble des éléments physiques d'un système informatique (hardware) et des supports de données électroniques) participant au stockage et au traitement de tout ou partie des biens essentiels.", "X"}, 
-				{"LOG", "Logiciels", "Ce type de biens supports est constitué de l'ensemble des programmes participant au traitement de tout ou partie des biens essentiels (software).", "X"}
-		};
-		
-		String[] titres = {"Id", "Intitulé", "Description", "Retenu"} ;
-		
-		JTable tableau = new JTable(donnees,titres);
-		// tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);
+		JTable tableau = new JTable(new ModeleTypologieBiensSupports());
+		//tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);
 		this.getContentPane().add(tableau.getTableHeader(), BorderLayout.NORTH);
-        this.getContentPane().add(tableau, BorderLayout.CENTER);
+        this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 	}
 	
 	public void creerDroite(){
@@ -56,36 +49,11 @@ public class FenetreTypologieBiensSupports extends JFrame {
 		JPanel panelBas = new JPanel() ;
 		panelBas.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
-		this.ajouterLigne = new JButton("Ajout d'un type de bien support");
-		this.supprimerLigne = new JButton("Suppression d'un type de bien support"); 
+		this.ajouterLigne = new JButton("Ajouter un type de bien support");
+		this.supprimerLigne = new JButton("Supprimer un type de bien support"); 
 		
 		panelBas.add(ajouterLigne);
 		panelBas.add(supprimerLigne);
 		this.getContentPane().add(panelBas,BorderLayout.SOUTH);
-	}
-	
-	class ModeleDynamiqueObjet extends AbstractTableModel{
-		
-		public ModeleDynamiqueObjet() {
-			super();
-		}
-		
-		public int getRowCount() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		
-		public int getColumnCount() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
 	}
 }

@@ -1,5 +1,6 @@
 package abstraction.modules;
 import java.util.ArrayList;
+import java.util.Observable;
 
 import abstraction.Etude;
 
@@ -8,7 +9,7 @@ import abstraction.Etude;
  * @author Maxime Ansquer 
  */
 
-public class Module implements IModule{
+public class Module extends Observable implements IModule  {
 	
 	//---Variables d'instance---
 	

@@ -2,6 +2,7 @@ package abstraction.modules;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Observable;
 
 import abstraction.autres.TypeBien;
 import abstraction.autres.TypeBien;
@@ -80,6 +81,8 @@ public class TypologieDesBiensSupports extends Module {
 	// Suppression d'une ligne du tableau
 	public void deleteTypeBienSupport(TypeBien type) {
 		this.tableau.remove(type);
+		this.setChanged();      // PAC
+		this.notifyObservers(); // PAC
 	}
 	
 	// On liste les Types de bien retenus
