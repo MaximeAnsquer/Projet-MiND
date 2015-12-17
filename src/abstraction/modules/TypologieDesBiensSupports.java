@@ -84,6 +84,8 @@ public class TypologieDesBiensSupports extends Module {
 	public void addTypeBienSupport(TypeBien type) {
 		if (!type.isIncomplete()) {
 			this.tableau.put(type.getIntitule(), type);
+			this.setChanged();      // PAC
+			this.notifyObservers(); // PAC
 		}
 	}
 

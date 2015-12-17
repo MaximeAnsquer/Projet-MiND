@@ -1,5 +1,6 @@
 package abstraction.autres;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
@@ -17,7 +18,8 @@ public class ScenarioGenerique {
 	private String Id;
 	private String intituleGenerique;
 	private Hashtable<String, SourceDeMenace> menaces;
-	private Hashtable<String, Critere> criteres;
+	private Hashtable<String, Critere> criteres; // représente les colonnes
+	private Hashtable<String, Boolean> CritereRetenu ;
 	private boolean retenu;
 
 	// Constructeur
@@ -84,6 +86,12 @@ public class ScenarioGenerique {
 
 	public void setCriteres(Hashtable<String, Critere> criteres) {
 		this.criteres = criteres;
+	}
+	
+	// i est l'indice du critère dans l'ArrayList/ou Hashtable
+	public boolean isRetenuCritere(int i){
+		ArrayList listeCriteres = new ArrayList<Boolean>(this.CritereRetenu.values()) ;
+		return (boolean) listeCriteres.get(i) ;
 	}
 
 	public boolean isRetenu() {
