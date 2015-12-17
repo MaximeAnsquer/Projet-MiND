@@ -25,13 +25,13 @@ public class TypologieDesBiensSupports extends Module {
 	public TypologieDesBiensSupports() {
 		super("Typologie des biens supports");
 		this.tableau = new Hashtable<String, TypeBien>();
-		this.successeurs.add(this.getEtude().getModule("Biens Supports"));
-		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
+		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
+		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
 		this.importerBDC();
-		this.tableau = TypologieDesBiensSupports.getBDC();
+		//this.tableau = TypologieDesBiensSupports.getBDC();
 	}
 
 	// ---Getters et setters---
@@ -39,13 +39,22 @@ public class TypologieDesBiensSupports extends Module {
 	public Hashtable<String, TypeBien> getTableau() {
 		return this.tableau;
 	}
+	
+	public int getSize(){
+		return this.tableau.size();
+	}
 
 	public void setTableau(Hashtable<String, TypeBien> tab) {
 		this.tableau = tab;
 	}
 
 	public TypeBien getTypeBien(String type) {
-		return this.getTableau().get(type);
+		return this.tableau.get(type);
+	}
+	
+	public TypeBien getTypeBien(int i){
+		ArrayList<TypeBien> typesBien = new ArrayList<>(tableau.values());
+		return typesBien.get(i);
 	}
 
 	public static Hashtable<String, TypeBien> getBDC() {
@@ -79,8 +88,8 @@ public class TypologieDesBiensSupports extends Module {
 	}
 
 	// Suppression d'une ligne du tableau
-	public void deleteTypeBienSupport(TypeBien type) {
-		this.tableau.remove(type);
+	public void removeTypeBienSupport(TypeBien type) {
+		this.tableau.remove(type.getIntitule());
 		this.setChanged();      // PAC
 		this.notifyObservers(); // PAC
 	}
