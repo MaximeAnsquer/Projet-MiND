@@ -22,6 +22,10 @@ public class Etude {
 		this.lesModules = new Hashtable<String, Module>();
 	}
 	
+	public Etude(){
+		this("Etude fictive");
+	}
+	
 	//---Getters et setters---
 	
 	public Hashtable<String,Module> getLesModules(){
