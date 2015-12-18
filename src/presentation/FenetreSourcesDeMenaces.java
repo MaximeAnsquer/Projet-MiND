@@ -31,7 +31,6 @@ import abstraction.autres.SourceDeMenace;
 import abstraction.modules.SourcesDeMenaces;
 
 /**
- * Fonctionnel, mais le code est relativement degueulasse.
  * Source : http://baptiste-wicht.developpez.com/tutoriels/java/swing/jtable/
  * @author Maxime Ansquer
  *
@@ -188,7 +187,7 @@ public class FenetreSourcesDeMenaces extends JFrame {
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
-		private Etude etude = MainMaximeAnsquer.etude;
+		private Etude etude = MainMaximeAnsquer.etudeEnCours;
 		private SourcesDeMenaces sdm = (SourcesDeMenaces) etude.getModule("SourcesDeMenaces");
 
 		private final String[] entetes = {"Id", "Intitulé", "Exemple", "Retenu"};

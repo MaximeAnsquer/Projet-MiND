@@ -12,10 +12,13 @@ public class Etude {
 	 * exemple : "CriteresDeSecurite "
 	 */
 	private Hashtable<String, Module> lesModules;
+	private String nomEtude;
 	
 	//---Constructeurs---
 	
-	public Etude(){
+	public Etude(String nomEtude){
+		
+		this.nomEtude = nomEtude;
 		this.lesModules = new Hashtable<String, Module>();
 	}
 	

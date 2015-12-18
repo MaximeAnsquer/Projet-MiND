@@ -33,6 +33,14 @@ public class Metrique {
 	}
 	
 	/**
+	 * Metrique encore plus vide qui ne contient absolument rien (et pourtant ce constructeur est utile !)
+	 */
+	public Metrique() {
+		this.critere = new Critere("", "", "");
+		this.lesNiveaux = new ArrayList<NiveauDeMetrique>();
+	}
+	
+	/**
 	 * Cree une metrique en fournissant le critere associe et la liste des niveaux.
 	 * @author Maxime Ansquer
 	 * @param critere Le critere associe a la metrique.
@@ -45,6 +53,8 @@ public class Metrique {
 	
 	//---Getters et setters---
 	
+	
+
 	public Critere getCritere(){
 		return this.critere;
 	}
