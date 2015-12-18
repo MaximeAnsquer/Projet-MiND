@@ -53,7 +53,7 @@ public class TypologieDesBiensSupports extends Module {
 	}
 	
 	public TypeBien getTypeBien(int i){
-		ArrayList<TypeBien> typesBien = new ArrayList<>(tableau.values());
+		ArrayList<TypeBien> typesBien = new ArrayList<TypeBien>(tableau.values());
 		return typesBien.get(i);
 	}
 
@@ -81,6 +81,7 @@ public class TypologieDesBiensSupports extends Module {
 
 	// On ajoute une ligne au tableau seulement si tous les champs sont
 	// renseignés
+	// ATTENTION : si 2 types ont le même intitulé, un seul sera présent dans la JTable
 	public void addTypeBienSupport(TypeBien type) {
 		if (!type.isIncomplete()) {
 			this.tableau.put(type.getIntitule(), type);
