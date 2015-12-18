@@ -17,7 +17,7 @@ public class ControlJButtonAjoutTypeBien implements ActionListener  {
 
 	public void actionPerformed(ActionEvent e) {
 		// La modification du modele va entrainer la modif de l'abstraction
-		modele.addTypeBien(new TypeBien("yo", "pour le style", "wesh", true));
+		modele.addTypeBien(new TypeBien("yo", "pour le style", (""+ Math.random()*10), true));
 	}
 
 }
