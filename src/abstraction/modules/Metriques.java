@@ -23,7 +23,7 @@ public class Metriques extends Module {
 		
 	//---La BDC Metriques, accessible par la methode statique getBDC()---
 	
-	private static Hashtable<String, Metrique> bdcMetriques;
+	private Hashtable<String, Metrique> bdcMetriques;
 
 	//---Variables d'instance---
 	
@@ -133,9 +133,10 @@ public class Metriques extends Module {
 				
 		bdcMetriques.put("Confidentialite", metriqueConfidentialite);
 		bdcMetriques.put("Disponibilite", metriqueDisponibilite);
+		
 	}
 		
-	public static Hashtable<String, Metrique> getBDC(){
+	public Hashtable<String, Metrique> getBDC(){
 		return bdcMetriques;
 	}
 
@@ -166,6 +167,21 @@ public class Metriques extends Module {
 	
 	public void setGravite(Metrique gravite){
 		this.gravite = gravite;
+	}
+	
+	public ArrayList<Metrique> getMetriquesDesCriteresRetenus(){
+		ArrayList<Metrique> resultat = new ArrayList<Metrique>();
+		for(Critere c : ((CriteresDeSecurite) this.getEtude().getModule("CriteresDeSecurite")).getLesCriteres().values() ){
+			if(c.isRetenu()){
+				if(this.bdcMetriques.get(c.getIntitule()) != null){
+					resultat.add(this.bdcMetriques.get(c.getIntitule()));
+				}
+				else{
+					resultat.add(new Metrique(c));
+				}
+			}			
+		}
+		return resultat;
 	}
 	
 }

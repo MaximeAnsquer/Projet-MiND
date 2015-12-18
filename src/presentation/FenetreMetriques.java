@@ -42,40 +42,35 @@ import abstraction.modules.Metriques;
  * @author Maxime Ansquer
  *
  */
-public class FenetreMetriques extends JFrame {
+public class FenetreMetriques extends JPanel {
 
 	private JComboBox comboBox;
 	private JPanel metriqueEnCours;
-	private Etude etude = MainMaximeAnsquer.etude;
-	private Metriques metriques = (Metriques) etude.getModule("Metriques");
 	private Metrique metriqueCourante;
+	private Metriques metriques;
 	private JPanel jpanel = new JPanel(new BorderLayout());
 	private JTable table;
 	private JTextArea zoneDescription;
 	private JButton boutonModifierDescription;
 	private JButton boutonSupprimer;
 
-	public FenetreMetriques(){
-		super("Metriques");
+	public FenetreMetriques(Metriques metriques){
+		this.metriques = metriques;
+		
 		this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		int nombreDeMetriques = metriques.nombreDeMetriques();
-		Container contentPane = this.getContentPane();
-		contentPane.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		//On ajoute la metrique courante
-		contentPane.add(jpanel);
+		this.add(jpanel);
 		setTableau();
 
 		//On ajoute la zone de description du niveau
-		contentPane.add(zoneDescription());
+		this.add(zoneDescription());
 
 		//On ajoute la comboBox et les boutons
-		contentPane.add(partieDuBas());		
+		this.add(partieDuBas());		
 
-
-
-		pack();
 	}	
 
 	private void setTableau() {
@@ -141,7 +136,12 @@ public class FenetreMetriques extends JFrame {
 	private Metrique getMetriqueCourante() {
 		Metrique m;
 		if(comboBox==null){
-			m = metriques.getMetrique(0);
+			if(metriques.getMetriquesDesCriteresRetenus().size() != 0){
+				m = metriques.getMetriquesDesCriteresRetenus().get(0);
+			}
+			else{
+				m = new Metrique();
+			}
 		}
 		else{
 			m = metriques.getMetrique(  ((Metrique) comboBox.getSelectedItem()).getCritere().getIntitule()   );
@@ -202,8 +202,7 @@ public class FenetreMetriques extends JFrame {
 	}
 
 	private JComboBox comboBox() {
-		comboBox = new JComboBox(metriques.getLesMetriques().values().toArray());
-		comboBox.setSelectedIndex(0);
+		comboBox = new JComboBox(metriques.getMetriquesDesCriteresRetenus().toArray());
 		comboBox.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
@@ -320,7 +319,7 @@ public class FenetreMetriques extends JFrame {
 				getMetriqueCourante().ajouterNiveau(niveau);
 			}
 			catch(NumberFormatException e){
-				JOptionPane.showMessageDialog(rootPane, "La première valeur doit être un entier.");
+				JOptionPane.showMessageDialog(null, "La première valeur doit être un entier.");
 			}
 
 			fireTableRowsInserted(getMetriqueCourante().nombreDeNiveaux() -1, getMetriqueCourante().nombreDeNiveaux() -1);
@@ -342,7 +341,7 @@ public class FenetreMetriques extends JFrame {
 						niveau.setNumero(Integer.parseInt((String) aValue));
 					}
 					catch(NumberFormatException e){
-						JOptionPane.showMessageDialog(rootPane, "Veuillez saisir un entier supérieur à 0.");
+						JOptionPane.showMessageDialog(null, "Veuillez saisir un entier supérieur à 0.");
 					}
 					break;
 				case 1:

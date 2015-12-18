@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +11,6 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -32,17 +30,19 @@ import abstraction.modules.CriteresDeSecurite;
  * @author Maxime Ansquer
  *
  */
-public class FenetreCriteresDeSecurite extends JFrame {
+public class FenetreCriteresDeSecurite extends JPanel {
 
 	private JTable table;	
 	private JTextArea zoneDescription;
 	private JButton boutonModifierDescription;
 	private JButton boutonSupprimer;
+	private CriteresDeSecurite cds;
 
-	public FenetreCriteresDeSecurite(){
-		super("Criteres de securite");
+	public FenetreCriteresDeSecurite(CriteresDeSecurite cds){
+		
+		this.cds = cds;
+		
 		this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -74,12 +74,11 @@ public class FenetreCriteresDeSecurite extends JFrame {
 			}			
 		});
 
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		getContentPane().add(new JScrollPane(table));	
-		getContentPane().add(zoneDescription());
-		getContentPane().add(partieDuBas());
-		pack();
+		this.add(new JScrollPane(table));	
+		this.add(zoneDescription());
+		this.add(partieDuBas());
 
 	}
 
@@ -175,17 +174,15 @@ public class FenetreCriteresDeSecurite extends JFrame {
 	private Critere getCritereSelectionne(){
 		Critere c;
 		try{
-			c = ( (ModeleDynamiqueObjet)table.getModel() ).cds.getCritere(table.getSelectedRow());
+			c = cds.getCritere(table.getSelectedRow());
 		}
 		catch(ArrayIndexOutOfBoundsException e){
-			c = ( (ModeleDynamiqueObjet)table.getModel() ).cds.getCritere(0);
+			c = cds.getCritere(0);
 		}
 		return c;
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
-		private Etude etude = MainMaximeAnsquer.etude;
-		private CriteresDeSecurite cds = (CriteresDeSecurite) etude.getModule("CriteresDeSecurite");
 
 		private final String[] entetes = {"Id", "Intitule", "Description", "Retenu"};
 
