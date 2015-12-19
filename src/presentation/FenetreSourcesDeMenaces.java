@@ -1,7 +1,5 @@
 package presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +11,6 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,10 +20,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumnModel;
 
-import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
-
-import abstraction.Etude;
-import abstraction.autres.Critere;
 import abstraction.autres.SourceDeMenace;
 import abstraction.modules.SourcesDeMenaces;
 
@@ -35,17 +28,17 @@ import abstraction.modules.SourcesDeMenaces;
  * @author Maxime Ansquer
  *
  */
-public class FenetreSourcesDeMenaces extends JFrame {
+public class FenetreSourcesDeMenaces extends JPanel {
 
 	private JTable table;	
 	private JTextArea zoneIntitule;
 	private JButton boutonModifierIntitule;
 	private JButton boutonSupprimer;
+	private SourcesDeMenaces sdm;
 
-	public FenetreSourcesDeMenaces(){
-		super("Sources de menaces");
+	public FenetreSourcesDeMenaces(SourcesDeMenaces sdm){
+		this.sdm = sdm;
 		this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		table = new JTable(new ModeleDynamiqueObjet());
 
@@ -59,9 +52,7 @@ public class FenetreSourcesDeMenaces extends JFrame {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		table.addMouseListener(new MouseListener(){
-
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 
 			public void mousePressed(MouseEvent e) {
 				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
@@ -72,18 +63,14 @@ public class FenetreSourcesDeMenaces extends JFrame {
 				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
 				boutonModifierIntitule.setEnabled(false);
 			}
-			public void mouseEntered(MouseEvent e) {
-			}
-			public void mouseExited(MouseEvent e) {
-			}			
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}			
 		});
 
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		getContentPane().add(new JScrollPane(table));			
-		getContentPane().add(zoneIntitule());
-		getContentPane().add(partieDuBas());
-		pack();
-
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(new JScrollPane(table));			
+		this.add(zoneIntitule());
+		this.add(partieDuBas());
 	}
 
 	private JScrollPane zoneIntitule() {
@@ -93,20 +80,13 @@ public class FenetreSourcesDeMenaces extends JFrame {
 		zoneIntitule.setWrapStyleWord(true);
 
 		zoneIntitule.addKeyListener(new KeyListener(){
-
 			public void keyTyped(KeyEvent e) {
 				if(table.getSelectedRow()>-1){
 					boutonModifierIntitule.setEnabled(true);
-				}
-				
+				}				
 			}
-
-			public void keyPressed(KeyEvent e) {
-			}
-
-			public void keyReleased(KeyEvent e) {
-			}
-
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {}
 		});
 
 		JScrollPane areaScrollPane = new JScrollPane(zoneIntitule);
@@ -125,10 +105,10 @@ public class FenetreSourcesDeMenaces extends JFrame {
 	protected SourceDeMenace getSourceSelectionnee() {
 		SourceDeMenace c;
 		try{
-			c = ( (ModeleDynamiqueObjet)table.getModel() ).sdm.getSource(table.getSelectedRow());
+			c = sdm.getSource(table.getSelectedRow());
 		}
 		catch(ArrayIndexOutOfBoundsException e){
-			c = ( (ModeleDynamiqueObjet)table.getModel() ).sdm.getSource(table.getSelectedRow());
+			c = sdm.getSource(table.getSelectedRow());
 		}
 		return c;
 	}
@@ -187,9 +167,6 @@ public class FenetreSourcesDeMenaces extends JFrame {
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
-		private Etude etude = MainMaximeAnsquer.etudeEnCours;
-		private SourcesDeMenaces sdm = (SourcesDeMenaces) etude.getModule("SourcesDeMenaces");
-
 		private final String[] entetes = {"Id", "Intitulé", "Exemple", "Retenu"};
 
 		public ModeleDynamiqueObjet() {
@@ -273,7 +250,5 @@ public class FenetreSourcesDeMenaces extends JFrame {
 			}
 		}
 	}
-
-
 
 }

@@ -70,6 +70,7 @@ public class FenetreMetriques extends JPanel {
 
 		//On ajoute la comboBox et les boutons
 		this.add(partieDuBas());		
+		
 
 	}	
 
@@ -167,6 +168,8 @@ public class FenetreMetriques extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String nouvelleDescription = zoneDescription.getText();
 				getNiveauSelectionne().setDescription(nouvelleDescription);
+				table.validate();
+				table.repaint();
 				boutonModifierDescription.setEnabled(false);
 			}
 
