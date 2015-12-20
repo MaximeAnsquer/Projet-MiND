@@ -18,10 +18,6 @@ public class MainAli {
 	
 	public static void main(String[] args) {
 		
-		// On crée l'étude correspondante
-		etude = new Etude();
-		// Problèmes de nullPointerException
-		
 		//etude.addModule(new TypologieDesBiensSupports());
 		//etude.addModule(new ScenariosDeMenacesGeneriques());
 		
