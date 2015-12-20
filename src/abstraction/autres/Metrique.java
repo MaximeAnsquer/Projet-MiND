@@ -73,7 +73,7 @@ public class Metrique {
 		
 	//---Services---	
 
-	public NiveauDeMetrique getNiveau(int index){
+	public NiveauDeMetrique getNiveau(int index){		
 		return (NiveauDeMetrique) lesNiveaux.get(index);
 	}
 	

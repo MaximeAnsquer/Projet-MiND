@@ -56,7 +56,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 			public void mousePressed(MouseEvent e) {
 				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
-				boutonModifierIntitule.setEnabled(false);
+				boutonModifierIntitule.setEnabled(false);				
 				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
@@ -68,9 +68,10 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		});
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(new JScrollPane(table));			
+		
 		this.add(zoneIntitule());
 		this.add(partieDuBas());
+		this.add(new JScrollPane(table));			
 	}
 
 	private JScrollPane zoneIntitule() {
@@ -130,6 +131,8 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String nouvelIntitule = zoneIntitule.getText();
 				getSourceSelectionnee().setIntitule(nouvelIntitule);
+				table.validate();
+				table.repaint();
 				boutonModifierIntitule.setEnabled(false);
 			}
 

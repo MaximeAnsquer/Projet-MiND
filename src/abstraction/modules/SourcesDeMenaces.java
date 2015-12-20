@@ -112,4 +112,8 @@ public class SourcesDeMenaces extends Module {
 		return (SourceDeMenace) getLesSourcesDeMenaces().values().toArray()[index];
 	}
 	
+	public String toString(){
+		return "Sources de menaces";
+	}
+	
 }

@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +11,13 @@ import java.util.Hashtable;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import abstraction.Etude;
 import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.Metriques;
+import abstraction.modules.Module;
 import abstraction.modules.SourcesDeMenaces;
 
 /**
@@ -25,18 +28,27 @@ import abstraction.modules.SourcesDeMenaces;
 
 public class MainMaximeAnsquer extends JFrame {
 	
-	public static Etude etudeEnCours;
+	public Etude etudeEnCours;
+	private JPanel partieDeGauche;
 	private JPanel contenuPrincipal;
 	private Hashtable<String, JPanel> lesJpanels;
 	private Workflow workflow;
+	private Module moduleEnCours;
+	private JLabel label;
+	private Container contentPane;
+	private int largeurEcran = Toolkit.getDefaultToolkit().getScreenSize().width;
+	private int hauteurEcran = Toolkit.getDefaultToolkit().getScreenSize().height;
 	
 	public MainMaximeAnsquer(){
 		
 		super("Outil d'analyse de risques");
+		this.setPreferredSize(new Dimension(largeurEcran, (int) (0.95*hauteurEcran)));
+		this.partieDeGauche = new JPanel();
 		this.etudeEnCours = this.ouvrirEtude();
+		this.moduleEnCours = new Module("Workflow");
 		this.contenuPrincipal = new JPanel();
 		this.contenuPrincipal.setLayout(new BorderLayout());
-		this.workflow = new Workflow(etudeEnCours);
+		this.workflow = new Workflow(etudeEnCours, this);
 		
 		this.lesJpanels = new Hashtable<String, JPanel>();
 		this.lesJpanels.put("CriteresDeSecurite", new FenetreCriteresDeSecurite((CriteresDeSecurite) etudeEnCours.getModule("CriteresDeSecurite")));
@@ -44,16 +56,12 @@ public class MainMaximeAnsquer extends JFrame {
 		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		Container contentPane = this.getContentPane();		
-
-		//Au lancement, on affiche le workflow (schema avec tous les modules)
-		contenuPrincipal.add(workflow);
+		contentPane = this.getContentPane();		
 		
 		contentPane.add(contenuPrincipal, BorderLayout.CENTER);
-		contentPane.add(partieDeGauche(), BorderLayout.WEST);
 		
 		//TODO a enlever (utile pour les tests intermediaires)		
-		this.setContenu("CriteresDeSecurite");		
+		this.setContenu("Workflow");		
 		
 		this.pack();
 	}
@@ -62,13 +70,21 @@ public class MainMaximeAnsquer extends JFrame {
 	 * 
 	 * @param nom le nom du module a afficher, ou bien " workflow " si on veut afficher le workflow
 	 */
-	private void setContenu(String nom) {		
+	public void setContenu(String nom) {		
 		
-		if(nom.equals("workflow")){
-			this.contenuPrincipal = this.workflow;
+		contentPane.remove(partieDeGauche);
+		
+		if(nom.equals("Workflow")){					
+			this.moduleEnCours = new Module("Workflow");
+			this.contenuPrincipal.removeAll();
+			this.contenuPrincipal.add(workflow, BorderLayout.CENTER);
 		}
 		else{
+			this.moduleEnCours = etudeEnCours.getModule(nom);
+			setPartieDeGauche();
+			contentPane.add(partieDeGauche, BorderLayout.WEST);
 			this.contenuPrincipal.removeAll();	
+			this.label = new JLabel(moduleEnCours.toString());
 			
 			if(nom.equals("CriteresDeSecurite")){
 				this.lesJpanels.put(nom, new FenetreCriteresDeSecurite((CriteresDeSecurite) etudeEnCours.getModule(nom)));
@@ -80,56 +96,62 @@ public class MainMaximeAnsquer extends JFrame {
 				this.lesJpanels.put(nom, new FenetreSourcesDeMenaces((SourcesDeMenaces) etudeEnCours.getModule(nom)));
 			}
 			
-			this.contenuPrincipal.add(lesJpanels.get(nom), BorderLayout.CENTER);
-			this.contenuPrincipal.validate();
-			this.contenuPrincipal.repaint();
-		}	
+			this.contenuPrincipal.add(label, BorderLayout.NORTH);
+			this.contenuPrincipal.add(lesJpanels.get(nom), BorderLayout.CENTER)		;
+		}		
 		
-		//Si la fenêtre est trop petite, on ne voit pas forcément tous les elements après avoir changé le JPanel " contenuPrincipal " et il faut donc appeler pack().
-		//On ne le fait pas si la fenetre est " grande ", car cela veut probablement dire que l'utilisateur l'a mise en plein ecran, et alors l'appel a la methode
-		//pack() quittera le mode plein ecran
-		int largeurEcran = Toolkit.getDefaultToolkit().getScreenSize().width;
-		if(this.size().width < 0.9*largeurEcran){
-			this.pack();
-		}
-		
+		this.contenuPrincipal.validate();
+		this.contenuPrincipal.repaint();	
+		contentPane.validate();
+		contentPane.repaint();
+				
 	}
 
-	private JPanel partieDeGauche() {
-		JPanel partieDeGauche = new JPanel();
+	private void setPartieDeGauche() {
+		
+		partieDeGauche = new JPanel();
 		partieDeGauche.setLayout(new BoxLayout(partieDeGauche, BoxLayout.Y_AXIS));
+		String nom = moduleEnCours.getNom();
 		
-		JButton boutonMetriques = new JButton("Metriques"); 
-		boutonMetriques.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				setContenu("Metriques");				
-			}
+		if(nom.equals("Workflow")){
+		}		
+		else{			
+			JButton boutonWorkflow = new JButton("Workflow"); 
+			boutonWorkflow.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					moduleEnCours = new Module("Workflow");
+					setContenu("Workflow");				
+				}				
+			});
+			partieDeGauche.add(boutonWorkflow);
 			
-		});
-		partieDeGauche.add(boutonMetriques);
-		
-		JButton boutonCriteres = new JButton("Criteres"); 
-		boutonCriteres.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				setContenu("CriteresDeSecurite");				
-			}
+			JButton boutonMetriques = new JButton("Metriques"); 
+			boutonMetriques.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					setContenu("Metriques");								}
+				
+			});
+			partieDeGauche.add(boutonMetriques);
 			
-		});
-		partieDeGauche.add(boutonCriteres);
-		
-		JButton boutonSourcesDeMenaces = new JButton("Sources de menaces"); 
-		boutonSourcesDeMenaces.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				setContenu("SourcesDeMenaces");		
-			}
+			JButton boutonCriteres = new JButton("Criteres"); 
+			boutonCriteres.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					setContenu("CriteresDeSecurite");			
+				}				
+			});
+			partieDeGauche.add(boutonCriteres);
 			
-		});
-		partieDeGauche.add(boutonSourcesDeMenaces);
-		
-		return partieDeGauche;
+			JButton boutonSourcesDeMenaces = new JButton("Sources de menaces"); 
+			boutonSourcesDeMenaces.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					setContenu("SourcesDeMenaces");		
+				}				
+			});
+			partieDeGauche.add(boutonSourcesDeMenaces);			
+			
+			partieDeGauche.validate();
+			partieDeGauche.repaint();
+		}		
 	}
 
 	public Etude ouvrirEtude(){
@@ -147,32 +169,17 @@ public class MainMaximeAnsquer extends JFrame {
 	public Etude getEtude(){
 		return etudeEnCours;
 	}
+	
+	public void setModuleEnCours(Module m){
+		this.moduleEnCours = m;
+	}
 
 	public static void main(String[] args) {
 		
 		//---La fenetre principale---
 		
 		MainMaximeAnsquer fenetrePrinciaple = new MainMaximeAnsquer(); 
-		
-		/**
-		 * Bidouille pour tester :
-		 */
-
-		//---Creation de l'etude---
-
-//		etudeEnCours = new Etude("Etude de test");
-//		etudeEnCours.addModule(new CriteresDeSecurite());
-//		etudeEnCours.addModule(new Metriques(etudeEnCours));
-//		etudeEnCours.addModule(new SourcesDeMenaces());	
-		
-		//---Creation de le fenetre Metrique---
-		
-//		FenetreMetriques fMetriques = new FenetreMetriques();
-		
-		//---Creation de le fenetre Sources de menaces---
-		
-//		FenetreSourcesDeMenaces source = new FenetreSourcesDeMenaces();		
-		
+				
 	}
 }
 

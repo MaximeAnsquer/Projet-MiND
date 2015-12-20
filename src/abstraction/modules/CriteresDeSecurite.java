@@ -94,6 +94,7 @@ public class CriteresDeSecurite extends Module{
 	
 	public void ajouterCritere(Critere critere){
 		this.getLesCriteres().put(critere.getIntitule(), critere);
+		( (Metriques) this.getEtude().getModule("Metriques")).ajouterMetrique(critere);
 	}
 	
 	public void supprimerCritere(String nomCritere){
@@ -125,6 +126,10 @@ public class CriteresDeSecurite extends Module{
 	 */
 	public Critere getCritere(int index){
 		return (Critere) lesCriteres.values().toArray()[index];
+	}
+	
+	public String toString(){
+		return "Critères de sécurité";
 	}
 	
 }
