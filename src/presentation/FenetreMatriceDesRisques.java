@@ -1,21 +1,21 @@
 package presentation;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
-public class FenetreMatriceDesRisques extends JFrame{
+public class FenetreMatriceDesRisques extends JPanel{
 	
 	private JTable tableau;
 	private ModeleMatriceDesRisques modele;
 	
 	public FenetreMatriceDesRisques(){
-		super("Matrice des Risques");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		
 		this.tableau=new JTable(modele);
 		
 		this.setVisible(true);
-		this.pack();
+		
 	}
 	
 	 public static void main(String[] args) {
