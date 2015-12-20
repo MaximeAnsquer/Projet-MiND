@@ -26,14 +26,12 @@ public class ControlJButtonModifierDescription implements Observer, ActionListen
 		this.modifierDescription = modifierDescription;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.modele.setValueAt(this.description.getText(),
 				this.tableau.getSelectedRow(),
 				ModeleTypologieBiensSupports.COLONNE_DESCRIPTION);
 	}
 
-	@Override
 	public void update(Observable o, Object arg) {
 		if (this.modele.getRowCount() == 0 || this.tableau.getSelectedRow()==-1) {
 			this.modifierDescription.setEnabled(false);

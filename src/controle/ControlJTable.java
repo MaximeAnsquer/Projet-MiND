@@ -16,32 +16,27 @@ public class ControlJTable implements MouseListener {
 		this.tableau=tableau;
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (this.tableau.getSelectedRow() != -1) {
 			this.modele.setTypeBienCourant(this.tableau.getSelectedRow());
 		}
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
