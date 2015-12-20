@@ -61,15 +61,17 @@ public class FenetreMetriques extends JPanel {
 		int nombreDeMetriques = metriques.nombreDeMetriques();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		//On ajoute la metrique courante
-		this.add(jpanel);
-		setTableau();
+		
 
 		//On ajoute la zone de description du niveau
 		this.add(zoneDescription());
 
 		//On ajoute la comboBox et les boutons
 		this.add(partieDuBas());		
+		
+		//On ajoute la metrique courante
+		this.add(jpanel);
+		setTableau();
 
 	}	
 
@@ -111,7 +113,7 @@ public class FenetreMetriques extends JPanel {
 
 		//On met colorie le tableau
 		table.setDefaultRenderer(Object.class, new Renderer());
-				
+
 		JLabel label = new JLabel(metriqueCourante.getIntitule());
 		label.setOpaque(true);
 		label.setBackground(Color.black);
@@ -167,6 +169,8 @@ public class FenetreMetriques extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String nouvelleDescription = zoneDescription.getText();
 				getNiveauSelectionne().setDescription(nouvelleDescription);
+				table.validate();
+				table.repaint();
 				boutonModifierDescription.setEnabled(false);
 			}
 
@@ -332,7 +336,7 @@ public class FenetreMetriques extends JPanel {
 		}
 
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-			if(aValue != null){
+			if(aValue != null && rowIndex >= 0){
 				NiveauDeMetrique niveau = metrique.getNiveau(rowIndex);
 
 				switch(columnIndex){
@@ -367,7 +371,7 @@ public class FenetreMetriques extends JPanel {
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-			if (value=="") {
+			if (value=="" || value == null) {
 				Color clr = Color.yellow;
 				component.setBackground(clr);
 			} 

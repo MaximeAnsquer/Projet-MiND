@@ -27,8 +27,7 @@ import abstraction.modules.CriteresDeSecurite;
 /**
  * Fonctionnel, mais le code est relativement degueulasse.
  * Source : http://baptiste-wicht.developpez.com/tutoriels/java/swing/jtable/
- * @author Maxime Ansquer
- *
+ * @author Maxime Ansquer *
  */
 public class FenetreCriteresDeSecurite extends JPanel {
 
@@ -39,9 +38,9 @@ public class FenetreCriteresDeSecurite extends JPanel {
 	private CriteresDeSecurite cds;
 
 	public FenetreCriteresDeSecurite(CriteresDeSecurite cds){
-		
+
 		this.cds = cds;
-		
+
 		this.setVisible(true);
 
 		table = new JTable(new ModeleDynamiqueObjet());
@@ -76,9 +75,9 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		this.add(new JScrollPane(table));	
 		this.add(zoneDescription());
 		this.add(partieDuBas());
+		this.add(new JScrollPane(table));	
 
 	}
 
@@ -135,6 +134,8 @@ public class FenetreCriteresDeSecurite extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String nouvelleDescription = zoneDescription.getText();
 				getCritereSelectionne().setDescription(nouvelleDescription);
+				table.validate();
+				table.repaint();
 				boutonModifierDescription.setEnabled(false);
 			}
 

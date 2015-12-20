@@ -184,4 +184,8 @@ public class Metriques extends Module {
 		return resultat;
 	}
 	
+	public String toString(){
+		return "Métriques";
+	}
+	
 }
