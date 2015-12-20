@@ -20,11 +20,35 @@ public class TypologieDesBiensSupports extends Module {
 	private static Hashtable<String, TypeBien> bdcTypeBiensSupports;
 
 	// Variable d'instance
-	Hashtable<String, TypeBien> tableau;
+	// La clé de la Hashtable représente l'intitulé du type de bien
+	private Hashtable<String, TypeBien> tableau;
+	private TypeBien typeBienCourant;
+
+	public TypeBien getTypeBienCourant() {
+		return typeBienCourant;
+	}
+
+	public void setTypeBienCourant(TypeBien typeBienCourant) {
+		this.typeBienCourant = typeBienCourant;
+		this.setChanged();        // PAC
+		this.notifyObservers();   // PAC
+	}
 
 	public TypologieDesBiensSupports() {
 		super("Typologie des biens supports");
 		this.tableau = new Hashtable<String, TypeBien>();
+		
+		this.addTypeBienSupport(new TypeBien(
+				"MAT",
+				"Ce type de biens supports est constitué de l’ensemble des éléments physiques d'un système informatique (hardware) et des supports de données électroniques) participant au stockage et au traitement de tout ou partie des biens essentiels.",
+				"Matériels", true));
+		
+		this.addTypeBienSupport(new TypeBien(
+				"LOG",
+				"Ce type de biens supports est constitué de l'ensemble des programmes participant au traitement de tout ou partie des biens essentiels (software).",
+				"Logiciels", true));
+		
+		this.typeBienCourant=this.getTypeBien(0);
 		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
 		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
 		this.cree = false;
@@ -50,6 +74,12 @@ public class TypologieDesBiensSupports extends Module {
 
 	public TypeBien getTypeBien(String type) {
 		return this.tableau.get(type);
+	}
+	
+	public void setTypeBien (int i, TypeBien type){
+		this.tableau.replace(this.getTypeBien(i).getIntitule(), type);
+		this.setChanged();               // PAC
+		this.notifyObservers();          // PAC
 	}
 	
 	public TypeBien getTypeBien(int i){
@@ -93,6 +123,13 @@ public class TypologieDesBiensSupports extends Module {
 	// Suppression d'une ligne du tableau
 	public void removeTypeBienSupport(TypeBien type) {
 		this.tableau.remove(type.getIntitule());
+		this.setChanged();      // PAC
+		this.notifyObservers(); // PAC
+	}
+	
+	// NEW !!!
+	public void setDescriptionTypeBienSupport (String description, TypeBien type){
+		this.tableau.get(type.getIntitule()).setDescription(description);
 		this.setChanged();      // PAC
 		this.notifyObservers(); // PAC
 	}

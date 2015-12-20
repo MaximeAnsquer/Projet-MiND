@@ -13,20 +13,13 @@ public class ModeleTypologieBiensSupports extends AbstractTableModel{
 	private TypologieDesBiensSupports moduleCourant = new TypologieDesBiensSupports();
 	private final String[] entetes = {"Id", "Intitulé", "Description", "Retenu"} ;
 	
+	public static final int COLONNE_ID = 0;
+	public static final int COLONNE_INTITULE = 1;
+	public static final int COLONNE_DESCRIPTION = 2;
+	public static final int COLONNE_RETENUE = 3;
+	
 	public ModeleTypologieBiensSupports() {
 		super();
-
-		this.moduleCourant
-				.addTypeBienSupport(new TypeBien(
-						"MAT",
-						"Ce type de biens supports est constitué de l’ensemble des éléments physiques d'un système informatique (hardware) et des supports de données électroniques) participant au stockage et au traitement de tout ou partie des biens essentiels.",
-						"Matériels", true));
-		this.moduleCourant
-				.addTypeBienSupport(new TypeBien(
-						"LOG",
-						"Logiciels",
-						"Ce type de biens supports est constitué de l'ensemble des programmes participant au traitement de tout ou partie des biens essentiels (software).",
-						true));
 	}
 	
 	public TypologieDesBiensSupports getModuleCourant(){
@@ -47,27 +40,68 @@ public class ModeleTypologieBiensSupports extends AbstractTableModel{
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
-		case 0:
+		case COLONNE_ID:
 			return this.moduleCourant.getTypeBien(rowIndex).getId();
-		case 1:
+		case COLONNE_INTITULE:
 			return this.moduleCourant.getTypeBien(rowIndex).getIntitule();
-		case 2:
+		case COLONNE_DESCRIPTION:
 			return this.moduleCourant.getTypeBien(rowIndex).getDescription();
-		case 3:
+		case COLONNE_RETENUE:
 			return this.moduleCourant.getTypeBien(rowIndex).isRetenu();
 		default:
 			return null; // Ne devrait jamais arriver
 		}
 	}
 	
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	    return true; //Toutes les cellules sont éditables
+	}
+	
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		if (aValue!=null){
+			switch(columnIndex){
+			case 0:
+				this.moduleCourant.getTypeBien(rowIndex).setId((String) aValue);
+				break;
+			case 1:
+				this.moduleCourant.getTypeBien(rowIndex).setIntitule((String) aValue);
+				break;
+			case 2:
+				this.moduleCourant.getTypeBien(rowIndex).setDescription((String) aValue);
+				break;
+			case 3:
+				this.moduleCourant.getTypeBien(rowIndex).setRetenu((boolean) aValue);
+				break;
+			}
+		}
+	}
+	
+	public Class getColumnClass(int columnIndex) {
+		switch (columnIndex) {
+		case 3:
+			return Boolean.class;
+		default:
+			return Object.class;
+		}
+	}
+	
+	// PAC 
 	public void addTypeBien(TypeBien type){
 		this.moduleCourant.addTypeBienSupport(type);
 		fireTableRowsInserted(this.moduleCourant.getSize() - 1,this.moduleCourant.getSize() - 1);
 	}
-	
+	// PAC 
 	public void removeTypeBien(int rowIndex){
 		this.moduleCourant.removeTypeBienSupport(this.moduleCourant.getTypeBien(rowIndex));
 		fireTableRowsDeleted(this.moduleCourant.getSize() - 1,this.moduleCourant.getSize() - 1);
+	}
+	
+	public TypeBien getTypeBienCourant(){
+		return this.moduleCourant.getTypeBienCourant();
+	}
+	// PAC 
+	public void setTypeBienCourant(int rowIndex){
+		this.moduleCourant.setTypeBienCourant(this.moduleCourant.getTypeBien(rowIndex));
 	}
 	
 }

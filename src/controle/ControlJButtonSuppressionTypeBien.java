@@ -33,7 +33,7 @@ public class ControlJButtonSuppressionTypeBien implements Observer,
 	}
 
 	public void update(Observable o, Object arg) {
-		if (this.modele.getRowCount()==0){
+		if (this.modele.getRowCount()==0 || this.tableau.getSelectedColumn()==-1){
 			supprimer.setEnabled(false);
 		}
 		else{
