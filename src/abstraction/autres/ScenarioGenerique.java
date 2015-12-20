@@ -90,7 +90,7 @@ public class ScenarioGenerique {
 	
 	// i est l'indice du critère dans l'ArrayList/ou Hashtable
 	public boolean isRetenuCritere(int i){
-		ArrayList listeCriteres = new ArrayList<Boolean>(this.CritereRetenu.values()) ;
+		ArrayList<Boolean> listeCriteres = new ArrayList<Boolean>(this.CritereRetenu.values()) ;
 		return (boolean) listeCriteres.get(i) ;
 	}
 
