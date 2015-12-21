@@ -62,8 +62,7 @@ public class Evenement {
 			liste[i]=new Integer(i+1);
 		}
 		this.gravite=new JComboBox(liste);
-		String s=((Metriques)this.etude.getModule("Metriques")).getMetrique(this.critere).getIntitule();
-		System.out.println(s);
+		
 		int b=((Metriques)this.etude.getModule("Metriques")).getMetrique(this.critere).nombreDeNiveaux();
 		
 		Integer[] listebis=new Integer[b];

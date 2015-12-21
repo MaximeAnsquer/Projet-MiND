@@ -21,6 +21,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.evenements=evenements;
 		
 		this.tableau=new JTable(modele);
+		this.add(this.tableau);
 		
 		this.setVisible(true);
 		

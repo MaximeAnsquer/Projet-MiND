@@ -35,7 +35,12 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		
 
 	public int getColumnCount() {
+		if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
 		return 5+this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();
+		}
+		else{
+			return 5;
+		}
 		
 	}
 
