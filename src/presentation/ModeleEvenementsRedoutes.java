@@ -6,10 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
+import abstraction.Etude;
 import abstraction.autres.Evenement;
 import abstraction.modules.EvenementsRedoutes;
 
 public class ModeleEvenementsRedoutes extends AbstractTableModel{
+	private Etude etude;
 	private EvenementsRedoutes evenements;
 	ArrayList<Object> data;
 	ArrayList<String> entetes;
@@ -17,6 +19,8 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	
 	
 	public ModeleEvenementsRedoutes(){
+		this.etude=MainMaximeEtienne.etude;
+		this.evenements=(EvenementsRedoutes)etude.getModule("EvenementsRedoutes");
 		int a=this.evenements.getEvenementsRedoutes().size();
 			
 				for(int j=0;j<a;j++){

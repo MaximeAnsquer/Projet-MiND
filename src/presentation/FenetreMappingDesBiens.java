@@ -4,33 +4,27 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
 import abstraction.Etude;
-import abstraction.autres.Bien;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
 
-public class FenetreMappingDesBiens extends JFrame{
+public class FenetreMappingDesBiens extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 
 
 	public FenetreMappingDesBiens(){
-		super("Mapping des Biens");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		getContentPane().add(new JScrollPane(table));	
-		pack();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(new JScrollPane(table));	
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {

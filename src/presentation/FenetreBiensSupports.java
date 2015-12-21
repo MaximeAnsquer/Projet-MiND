@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,7 +22,6 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import presentation.FenetreBiensEssentiels.ModeleDynamiqueObjet;
 import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.modules.BiensSupports;
@@ -34,7 +32,7 @@ import abstraction.modules.BiensSupports;
  *
  */
 
-public class FenetreBiensSupports extends JFrame{
+public class FenetreBiensSupports extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
@@ -42,10 +40,7 @@ public class FenetreBiensSupports extends JFrame{
 	private JButton boutonModifierDescription;
 
 	public FenetreBiensSupports(){
-		super("Biens Supports");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.addMouseListener(new MouseListener(){
@@ -62,11 +57,10 @@ public class FenetreBiensSupports extends JFrame{
 			public void mouseExited(MouseEvent e) {
 			}			
 		});
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		getContentPane().add(new JScrollPane(table));	
-		getContentPane().add(zoneDescription());
-		getContentPane().add(partieBoutons());
-		pack();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(new JScrollPane(table));	
+		this.add(zoneDescription());
+		this.add(partieBoutons());
 	}
 	
 	private JScrollPane zoneDescription() {
@@ -196,15 +190,19 @@ public class FenetreBiensSupports extends JFrame{
 		}
 		
 		public void supprimerCategorie(int ligneSelectionnee) {
-			entetes.removeFirst();
-			colonnesSup.removeLast();
-			fireTableStructureChanged();
+			if (colonnesSup.size()!=0){
+				entetes.removeFirst();
+				colonnesSup.removeLast();
+				fireTableStructureChanged();
+			}	
 		}
 
 		public void supprimerBienEssentiel(int ligneSelectionnee) {
-			Bien bien = biens.getBien(ligneSelectionnee);
-			biens.supprimerBien(bien.getIntitule());
-			fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+			if (biens.getLesBiens().size()!=0){
+				Bien bien = biens.getBien(ligneSelectionnee);
+				biens.supprimerBien(bien.getIntitule());
+				fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+			}		
 		}
 
 		public void ajouterCategorie() {
