@@ -1,5 +1,7 @@
 package abstraction.modules;
+import java.util.ArrayList;
 import java.util.Hashtable;
+
 import abstraction.autres.*;
 
 /**
@@ -11,15 +13,18 @@ import abstraction.autres.*;
 
 public class MappingBien {
 	//Variables d'instance
-	private Hashtable<String, String[]> mappingBien; // table qui relie un bien essentiels aux biens supports
+	private ArrayList<String> mappingBien; // table qui relie un bien essentiel aux biens supports
 	private BiensSupports biensSupports;
 	private Bien bienEssentiel;
 	
 	//Constructeur
-	public MappingBien(Hashtable<String, String[]> mappingBien, BiensSupports biensSupports, Bien bienEssentiel){
-		this.mappingBien = mappingBien;
+	public MappingBien(BiensSupports biensSupports, Bien bienEssentiel){
 		this.biensSupports = biensSupports;
 		this.bienEssentiel = bienEssentiel;
+		this.mappingBien = new ArrayList<String>(this.biensSupports.getLesBiens().size());
+		for (int i=0; i<this.biensSupports.nombreDeBiens(); i++){
+			this.mappingBien.add("");
+		}
 	}
 	
 	//Getters et Setters
@@ -39,15 +44,25 @@ public class MappingBien {
 		this.bienEssentiel=bienEssentiel;
 	}
 	
-	public Hashtable<String, String[]> getMappingBien(){
+	public ArrayList<String> getMappingBien(){
 		return this.mappingBien;
 	}
 	
-	public void setMappingBien(Hashtable<String, String[]> mappingBien){
+	public String getValueAt(int index){
+		return mappingBien.get(index);
+	}
+	
+	public void setValueAt(String value, int index){
+		if (value == "" || value == "x" || value == "o"){
+			mappingBien.set(index, value);
+		}
+	}
+	
+	public void setMappingBien(ArrayList<String> mappingBien){
 		this.mappingBien=mappingBien;
 	}
 	
 	public String toString(){
-		return "{Mapping Bien : intitulé = "+this.getBienEssentiel().getIntitule()+"}";
+		return "{Mapping Bien : intitulï¿½ = "+this.getBienEssentiel().getIntitule()+"}";
 	}
 }
