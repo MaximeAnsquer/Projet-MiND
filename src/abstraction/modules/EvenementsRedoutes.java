@@ -61,7 +61,7 @@ public class EvenementsRedoutes extends Module {
 			for(int j=0;j<b;j++){
 				System.out.println(tableaubiens.get(i).getIntitule());
 				System.out.println(tableaucriteres.get(j));
-				liste.set(i*b+j,new Evenement("",tableaubiens.get(i).getNomColonneSup(),tableaubiens.get(i).getContenuColonneSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
+				liste.add(i*b+j,new Evenement(this.etude,"",tableaubiens.get(i).getNomColonneSup(),tableaubiens.get(i).getContenuColonneSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
 				
 			}
 		}
@@ -106,6 +106,10 @@ public class EvenementsRedoutes extends Module {
 			}
 		return null;
 		
+	}
+	
+	public String toString(){
+		return "Evenements redoutés";
 	}
 	
 	

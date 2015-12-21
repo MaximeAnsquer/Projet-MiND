@@ -62,5 +62,9 @@ public class MatriceDesRisques extends Module {
 	public ArrayList<String>[][] getMatrice(){
 		return this.matrice;
 	}
+	
+	public String toString(){
+		return "Matrice des risques";
+	}
 
 }
