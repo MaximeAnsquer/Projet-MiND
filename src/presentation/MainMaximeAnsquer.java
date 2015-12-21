@@ -15,7 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import abstraction.Etude;
+import abstraction.modules.BiensEssentiels;
+import abstraction.modules.BiensSupports;
 import abstraction.modules.CriteresDeSecurite;
+import abstraction.modules.EvenementsRedoutes;
+import abstraction.modules.MappingDesBiens;
 import abstraction.modules.Metriques;
 import abstraction.modules.Module;
 import abstraction.modules.SourcesDeMenaces;
@@ -48,6 +52,8 @@ public class MainMaximeAnsquer extends JFrame {
 		this.moduleEnCours = new Module("Workflow");
 		this.contenuPrincipal = new JPanel();
 		this.contenuPrincipal.setLayout(new BorderLayout());
+		
+		this.setJMenuBar(new BarreMenu());
 
 		this.lesJpanels = new Hashtable<String, JPanel>();
 		this.lesJpanels.put("CriteresDeSecurite", new FenetreCriteresDeSecurite((CriteresDeSecurite) etudeEnCours.getModule("CriteresDeSecurite")));
@@ -95,6 +101,18 @@ public class MainMaximeAnsquer extends JFrame {
 			else if(nom.equals("SourcesDeMenaces")){
 				this.lesJpanels.put(nom, new FenetreSourcesDeMenaces((SourcesDeMenaces) etudeEnCours.getModule(nom)));
 			}
+			else if(nom.equals("BiensSupports")){
+				this.lesJpanels.put(nom, new FenetreBiensSupports());
+			}
+			else if(nom.equals("BiensEssentiels")){
+				this.lesJpanels.put(nom, new FenetreBiensEssentiels());
+			}
+			else if(nom.equals("MappingDesBiens")){
+				this.lesJpanels.put(nom, new FenetreMappingDesBiens());
+			}
+			else if(nom.equals("EvenementsRedoutes")){
+				this.lesJpanels.put(nom, new FenetreEvenementsRedoutes( (EvenementsRedoutes) etudeEnCours.getModule(nom)));
+			}
 
 			this.contenuPrincipal.add(label, BorderLayout.NORTH);
 			this.contenuPrincipal.add(lesJpanels.get(nom), BorderLayout.CENTER)		;
@@ -135,31 +153,6 @@ public class MainMaximeAnsquer extends JFrame {
 			});
 			partieDeGauche.add(boutonVerifier);
 			
-//			JButton boutonMetriques = new JButton("Metriques"); 
-//			boutonMetriques.addActionListener(new ActionListener(){
-//				public void actionPerformed(ActionEvent e) {
-//					setContenu("Metriques");								
-//				}
-//
-//			});
-//			partieDeGauche.add(boutonMetriques);
-//
-//			JButton boutonCriteres = new JButton("Criteres"); 
-//			boutonCriteres.addActionListener(new ActionListener(){
-//				public void actionPerformed(ActionEvent e) {
-//					setContenu("CriteresDeSecurite");			
-//				}				
-//			});
-//			partieDeGauche.add(boutonCriteres);
-//
-//			JButton boutonSourcesDeMenaces = new JButton("Sources de menaces"); 
-//			boutonSourcesDeMenaces.addActionListener(new ActionListener(){
-//				public void actionPerformed(ActionEvent e) {
-//					setContenu("SourcesDeMenaces");		
-//				}				
-//			});
-//			partieDeGauche.add(boutonSourcesDeMenaces);			
-//
 			for(JLabel label : moduleEnCours.getProblemes()){
 				partieDeGauche.add(label);
 			}
@@ -177,6 +170,10 @@ public class MainMaximeAnsquer extends JFrame {
 		etudeDeTest.addModule(new CriteresDeSecurite());		
 		etudeDeTest.addModule(new Metriques(etudeDeTest));
 		etudeDeTest.addModule(new SourcesDeMenaces());
+		etudeDeTest.addModule(new BiensSupports());
+		etudeDeTest.addModule(new BiensEssentiels());
+		etudeDeTest.addModule(new MappingDesBiens((BiensSupports)etudeDeTest.getModule("BiensSupports"), (BiensEssentiels)etudeDeTest.getModule("BiensEssentiels")));
+//		etudeDeTest.addModule(new EvenementsRedoutes(etudeDeTest));
 
 		return etudeDeTest;
 	}

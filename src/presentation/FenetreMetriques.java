@@ -30,9 +30,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
 import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
-
-import abstraction.Etude;
-import abstraction.autres.Critere;
 import abstraction.autres.Metrique;
 import abstraction.autres.NiveauDeMetrique;
 import abstraction.modules.Metriques;

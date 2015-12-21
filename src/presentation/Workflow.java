@@ -80,7 +80,7 @@ public class Workflow extends JPanel {
 		//2eme ligne
 		this.add(new JLabel());
 		this.add(new JLabel());
-		this.add(new JButton("Module manquant"));
+		this.add(lesBoutons.get("BiensEssentiels"));
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
@@ -91,7 +91,7 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
-		this.add(new JButton("Module manquant"));
+		this.add(lesBoutons.get("MappingDesBiens"));
 		this.add(new JLabel());
 		this.add(new JButton("Module manquant"));
 		this.add(new JLabel());
@@ -100,7 +100,7 @@ public class Workflow extends JPanel {
 		//4eme ligne
 		this.add(new JLabel());
 		this.add(new JLabel());
-		this.add(new JButton("Module manquant"));
+		this.add(lesBoutons.get("BiensSupports"));
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());

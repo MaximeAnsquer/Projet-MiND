@@ -167,11 +167,11 @@ public class Metriques extends Module {
 	}
 	
 	public Metrique getVraisemblance(){
-		return this.vraisemblance;
+		return getMetrique("Vraisemblance");
 	}
 	
 	public Metrique getGravite(){
-		return this.gravite;
+		return getMetrique("Gravité");
 	}
 	
 	public void setVraisemblance(Metrique vraisemblance){
