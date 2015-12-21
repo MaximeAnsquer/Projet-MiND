@@ -38,7 +38,8 @@ public class Evenement {
 	private JComboBox gravite;
 	
 	
-	public Evenement(String nomevenement,ArrayList<String> nomgroupes,ArrayList<String> contenugroupes,String bienessentiel,String critere){
+	public Evenement(Etude etude,String nomevenement,ArrayList<String> nomgroupes,ArrayList<String> contenugroupes,String bienessentiel,String critere){
+		this.etude=etude;
 		this.nomevenement=nomevenement;
 		this.nomgroupes=nomgroupes;
 		this.contenugroupes=contenugroupes;
@@ -50,26 +51,26 @@ public class Evenement {
 		 */
 		
 		
-		this.exigence=new JComboBox<Integer>();
-		this.gravite=new JComboBox<Integer>();
+		this.exigence=new JComboBox();
+		this.gravite=new JComboBox();
 		
-		int a=((Metriques) etude.getModule("Metriques")).getGravite().nombreDeNiveaux();
+		int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravité").nombreDeNiveaux();
 		
 		Integer[] liste=new Integer[a];
 		for(int i=0;i<a;i++){
 			
 			liste[i]=new Integer(i+1);
 		}
-		this.gravite=new JComboBox<Integer>(liste);
+		this.gravite=new JComboBox(liste);
 		
-		int b=((Metriques)this.etude.getModule("Metriques")).getMetrique("this.critere").nombreDeNiveaux();
+		int b=((Metriques)this.etude.getModule("Metriques")).getMetrique(this.critere).nombreDeNiveaux();
 		
 		Integer[] listebis=new Integer[b];
         for(int i=0;i<b;i++){
 			
 			listebis[i]=new Integer(i+1);
 		}
-        this.exigence=new JComboBox<Integer>(listebis);
+        this.exigence=new JComboBox(listebis);
 	}
 	
 	/*Getters

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import abstraction.Etude;
+import abstraction.autres.Critere;
 import abstraction.autres.Evenement;
 import abstraction.modules.EvenementsRedoutes;
 
@@ -22,8 +24,11 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		this.etude=MainMaximeEtienne.etude;
 		this.evenements=(EvenementsRedoutes)etude.getModule("EvenementsRedoutes");
 		int a=this.evenements.getEvenementsRedoutes().size();
+		System.out.println(a+"");
+		this.data=new ArrayList<Object>();
 			
 				for(int j=0;j<a;j++){
+					System.out.println(this.evenements.getEvenementsRedoutes().get(j).GetNomEvenement());
 					this.data.add(this.evenements.getEvenementsRedoutes().get(j));
 				}
 				
@@ -32,7 +37,12 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		
 
 	public int getColumnCount() {
+		if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
 		return 5+this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();
+		}
+		else{
+			return 5;
+		}
 		
 	}
 
@@ -64,6 +74,29 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 				return "";
 			}
 		}
+	}
+	
+	public boolean isCellEditable(int row, int col){
+		if(this.getColumnCount()-col-1==4){
+			return true;
+		}
+		else{
+		return false; 
+		}
+	}
+	 
+		
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+			if(aValue != null){
+				Evenement ev = evenements.getEvenementsRedoutes().get(rowIndex);
+				
+				switch(this.getColumnCount()-columnIndex-1){
+				case 4:
+					ev.setNomEvenement((String)aValue);
+					break;
+
+				}
+			}
 		
 		
 	}
