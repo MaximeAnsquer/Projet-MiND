@@ -1,6 +1,9 @@
 package abstraction.modules;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import javax.swing.JLabel;
 
 import abstraction.Etude;
 import abstraction.autres.Critere;
@@ -49,7 +52,7 @@ public class Metriques extends Module {
 		/**
 		 * TODO : Commente pour faire des tests, a decommenter par la suite
 		 */
-//		this.predecesseurs.add(this.getEtude().getModule("CriteresDeSecurite"));
+		this.predecesseurs.add(this.getEtude().getModule("CriteresDeSecurite"));
 //		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
 //		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
 //		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
@@ -186,6 +189,36 @@ public class Metriques extends Module {
 	
 	public String toString(){
 		return "Métriques";
+	}	
+	
+	public boolean estCoherent(){
+		boolean resultat = true;
+		
+		this.problemesDeCoherence = new ArrayList<JLabel>();
+		for(Metrique m : this.getLesMetriques().values()){
+			if(!m.estComplet()){
+				JLabel label = new JLabel("La métrique \" " + m.getIntitule() + " \" est incomplète.");
+				label.setForeground(Color.red);
+				this.problemesDeCoherence.add(label);
+				resultat = false;
+			}			
+		}
+		if(this.getMetrique("Gravité") == null){
+			JLabel label = new JLabel("Il faut une métrique \" Gravité \".");
+			label.setForeground(Color.red);
+			this.problemesDeCoherence.add(label);
+			resultat = false;
+		}
+		if(this.getMetrique("Vraisemblance") == null){
+			JLabel label = new JLabel("Il faut une métrique \" Vraisemblance \".");
+			label.setForeground(Color.red);
+			this.problemesDeCoherence.add(label);
+			resultat = false;
+		}		
+		if(resultat == true){
+			this.problemesDeCoherence.add(new JLabel("Aucun problème de cohérence."));
+		}
+		return resultat;
 	}
 	
 }

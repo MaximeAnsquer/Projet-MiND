@@ -1,7 +1,11 @@
 package abstraction.modules;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import abstraction.autres.*;
+
+import javax.swing.JLabel;
+
+import abstraction.autres.Critere;
 
 /**
  * Classe representant l'onglet CriteresDeSecurite.
@@ -130,6 +134,29 @@ public class CriteresDeSecurite extends Module{
 	
 	public String toString(){
 		return "Critères de sécurité";
+	}
+	
+	public boolean estCoherent(){
+		boolean resultat = true;
+		this.problemesDeCoherence = new ArrayList<JLabel>();
+		for(Critere c : getLesCriteres().values()){
+			if(!c.estComplet()){
+				JLabel label = new JLabel("Critère \" " + c.getIntitule() + " \" incomplet");
+				label.setForeground(Color.red);
+				this.problemesDeCoherence.add(label);
+				resultat = false;
+			}
+		}
+		if(this.getCriteresRetenus().size() <= 0){
+			JLabel label = new JLabel("Aucun critère retenu");
+			label.setForeground(Color.red);
+			this.problemesDeCoherence.add(label);
+			resultat = false;
+		}
+		if(resultat){
+			this.problemesDeCoherence.add(new JLabel("Aucun problème de cohérence."));
+		}		
+		return resultat;
 	}
 	
 }

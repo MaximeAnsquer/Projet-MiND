@@ -57,6 +57,10 @@ public class SourceDeMenace {
 	}
 	public void setRetenu(boolean retenu) {
 		this.retenu = retenu;
+	}
+
+	public boolean estComplet() {
+		return !this.getId().equals("") && !this.getIntitule().equals("") && !this.getExemple().equals("");   
 	}	
 	
 }

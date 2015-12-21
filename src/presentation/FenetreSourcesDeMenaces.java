@@ -68,14 +68,14 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		});
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		this.add(zoneIntitule());
 		this.add(partieDuBas());
 		this.add(new JScrollPane(table));			
 	}
 
 	private JScrollPane zoneIntitule() {
-	
+
 		zoneIntitule = new JTextArea();
 		zoneIntitule.setLineWrap(true);
 		zoneIntitule.setWrapStyleWord(true);
@@ -204,12 +204,17 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 		public void ajouterSource() {
 			String id = JOptionPane.showInputDialog("Id ?");
-			String intitule = JOptionPane.showInputDialog("Intitule ?");
-			String exemple = JOptionPane.showInputDialog("Exemple ?");
-			SourceDeMenace source = new SourceDeMenace(id, intitule, exemple);
-			sdm.ajouterSourceDeMenace(source);
+			if(sdm.getSourceDeMenace(id) != null){
+				JOptionPane.showMessageDialog(null, "Cet id est déjà utilisé.", "Erreur", JOptionPane.ERROR_MESSAGE);
+			}
+			else{
+				String intitule = JOptionPane.showInputDialog("Intitule ?");
+				String exemple = JOptionPane.showInputDialog("Exemple ?");
+				SourceDeMenace source = new SourceDeMenace(id, intitule, exemple);
+				sdm.ajouterSourceDeMenace(source);
 
-			fireTableRowsInserted(sdm.nombreDeSources() -1, sdm.nombreDeSources() -1);
+				fireTableRowsInserted(sdm.nombreDeSources() -1, sdm.nombreDeSources() -1);
+			}			
 		}
 
 		public void supprimerSource(int rowIndex) {

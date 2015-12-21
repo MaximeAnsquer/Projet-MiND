@@ -2,6 +2,7 @@ package presentation;
 
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -34,9 +35,23 @@ public class Workflow extends JPanel {
 		this.fenetre = fenetrePrincipale;
 		this.lesBoutons = new Hashtable<String, JButton>();
 
-		for(Module m : etude.getLesModules().values()){
+		for(final Module m : etude.getLesModules().values()){
 
 			JButton bouton = new JButton(m.toString());
+			if(!m.estDisponible()){
+				bouton.setEnabled(false);
+			}
+			else{
+				if(m.estCree()){
+					if(!m.estCoherent()){
+						bouton.setBackground(Color.RED);
+					}
+					else{
+						bouton.setBackground(Color.GREEN);
+					}
+				}				
+			}
+
 			lesBoutons.put(m.getNom(), bouton);			
 			final String nomModule = m.getNom();
 
@@ -44,6 +59,7 @@ public class Workflow extends JPanel {
 
 				public void actionPerformed(ActionEvent e) {
 					fenetre.setContenu(nomModule);
+					m.setCree(true);
 				}				
 
 			});

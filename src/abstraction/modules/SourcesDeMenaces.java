@@ -1,5 +1,9 @@
 package abstraction.modules;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Hashtable;
+
+import javax.swing.JLabel;
 
 import abstraction.autres.SourceDeMenace;
 
@@ -97,7 +101,7 @@ public class SourcesDeMenaces extends Module {
 	private void importerBDC() {
 		// TODO Valeurs fictives pour faire des tests ; à changer
 		bdcSourcesDeMenaces.put("IMF", new SourceDeMenace("IMF", "Source humaine interne, malveillante, avec de faibles capacités", "Stagiaire"));
-		bdcSourcesDeMenaces.put("IMI", new SourceDeMenace("IMF", "Source humaine interne, malveillante, avec des capacités importantes", "Prestataire d'un service sensible"));		
+		bdcSourcesDeMenaces.put("IMI", new SourceDeMenace("IMI", "Source humaine interne, malveillante, avec des capacités importantes", "Prestataire d'un service sensible"));		
 	}
 	
 	public Hashtable<String, SourceDeMenace> getBDC(){
@@ -114,6 +118,29 @@ public class SourcesDeMenaces extends Module {
 	
 	public String toString(){
 		return "Sources de menaces";
+	}
+	
+	public boolean estCoherent(){
+		boolean resultat = true;
+		this.problemesDeCoherence = new ArrayList<JLabel>();
+		for(SourceDeMenace s : this.getLesSourcesDeMenaces().values()){
+			if(!s.estComplet()){
+				JLabel label = new JLabel("La source de menace \" " + s.getId() + " \" est incomplète");
+				label.setForeground(Color.red);
+				problemesDeCoherence.add(label);
+				resultat = false;
+			}
+		}
+		if(this.getLesSourcesDeMenaces().size() <= 0){
+			JLabel label = new JLabel("Aucune source de menace.");
+			label.setForeground(Color.red);
+			problemesDeCoherence.add(label);
+			resultat = false;
+		}
+		if(resultat){
+			problemesDeCoherence.add(new JLabel("Aucun problème de cohérence."));
+		}
+		return resultat;
 	}
 	
 }

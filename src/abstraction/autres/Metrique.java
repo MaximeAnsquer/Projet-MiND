@@ -100,5 +100,13 @@ public class Metrique {
 	public String getIntitule(){
 		return getCritere().getIntitule();
 	}
+
+	public boolean estComplet() {
+		boolean resultat = true;
+		for(NiveauDeMetrique n : this.getLesNiveaux()){
+			resultat = resultat && n.estComplet();
+		}
+		return resultat;
+	}
 	
 }

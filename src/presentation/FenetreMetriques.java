@@ -146,7 +146,12 @@ public class FenetreMetriques extends JPanel {
 			}
 		}
 		else{
-			m = metriques.getMetrique(  ((Metrique) comboBox.getSelectedItem()).getCritere().getIntitule()   );
+			if(comboBox.getSelectedItem() == null){
+				m = new Metrique();
+			}
+			else{
+				m = metriques.getMetrique(  ((Metrique) comboBox.getSelectedItem()).getCritere().getIntitule()   );
+			}			
 		}
 		return m;
 	}
@@ -258,7 +263,7 @@ public class FenetreMetriques extends JPanel {
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Description du critere"),
+								BorderFactory.createTitledBorder("Description du niveau"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		return areaScrollPane;
@@ -314,11 +319,11 @@ public class FenetreMetriques extends JPanel {
 		}
 
 		public void ajouterNiveau() {
-			String numero = JOptionPane.showInputDialog("# ?");
-			String Intitule = JOptionPane.showInputDialog("Intitule ?");
-			String Description = JOptionPane.showInputDialog("Description ?");
+			int numero = getMetriqueCourante().nombreDeNiveaux() + 1;
+			String intitule = JOptionPane.showInputDialog("Intitule ?");
+			String description = JOptionPane.showInputDialog("Description ?");
 			try{ 
-				NiveauDeMetrique niveau = new NiveauDeMetrique(Integer.parseInt(numero), Intitule, Description);
+				NiveauDeMetrique niveau = new NiveauDeMetrique(numero, intitule, description);
 
 				getMetriqueCourante().ajouterNiveau(niveau);
 			}

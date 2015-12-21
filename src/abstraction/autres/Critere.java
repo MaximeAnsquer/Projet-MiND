@@ -17,7 +17,7 @@ public class Critere {
 	//Constructeurs
 
 	/**
-	 * Cree un critere qui n'est initialement pas retenu.
+	 * Cree un critere initialement retenu.
 	 * @param id
 	 * @param intitule
 	 * @param description
@@ -26,7 +26,7 @@ public class Critere {
 		this.id = id;
 		this.intitule = intitule;
 		this.description = description;
-		this.retenu = false;
+		this.retenu = true;
 	}
 	
 	//Getters et setters
@@ -68,6 +68,16 @@ public class Critere {
 	public String toString(){
 		return "{Critère : id = "+this.getId()+" ; intitule : "+this.getIntitule()
 				+" ; retenu : "+this.isRetenu()+"}";
+	}
+	
+	/**
+	 * vérifie si tous les attributs sont biens renseignés
+	 * @return
+	 */
+	public boolean estComplet(){
+		boolean resultat = true;
+		resultat = resultat && !getId().equals("") && !getIntitule().equals("") && !getDescription().equals("");
+		return resultat;
 	}
 	
 }
