@@ -77,6 +77,8 @@ public class Metriques extends Module {
 				this.lesMetriques.put(critere.getIntitule(), new Metrique(critere));   //sinon, on ajoute une metrique vide associee a ce critere dans l'onglet Metriques
 			}
 		}
+		//On ajoute également les métriques Gravité et Vraisemblance
+		this.lesMetriques.put("Gravité", bdcMetriques.get("Gravité"));
 		
 		
 	}	
@@ -133,9 +135,17 @@ public class Metriques extends Module {
 		niveauxDisponibilite.add(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
 		Metrique metriqueDisponibilite = new Metrique(cds.getCritere("Disponibilite"), niveauxDisponibilite);
 		
+		ArrayList<NiveauDeMetrique> niveauxGravite = new ArrayList<NiveauDeMetrique>();
+		niveauxGravite.add(new NiveauDeMetrique(1, "Pas grave", "YOLO"));
+		niveauxGravite.add(new NiveauDeMetrique(2, "Un peu grave", "Mince"));
+		niveauxGravite.add(new NiveauDeMetrique(3, "Ca commence à être la merde", "Saloperie"));
+		niveauxGravite.add(new NiveauDeMetrique(4, "On est foutus", "Suicide collectif"));
+		Metrique metriqueGravite = new Metrique(new Critere("Gr", "Gravité", "" ), niveauxGravite);
+		
 				
 		bdcMetriques.put("Confidentialite", metriqueConfidentialite);
 		bdcMetriques.put("Disponibilite", metriqueDisponibilite);
+		bdcMetriques.put("Gravité", metriqueGravite);
 		
 	}
 		
@@ -184,6 +194,7 @@ public class Metriques extends Module {
 				}
 			}			
 		}
+		resultat.add(this.bdcMetriques.get("Gravité"));
 		return resultat;
 	}
 	

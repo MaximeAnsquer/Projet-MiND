@@ -137,7 +137,7 @@ public class FenetreMetriques extends JPanel {
 
 	private Metrique getMetriqueCourante() {
 		Metrique m;
-		if(comboBox==null){
+		if(comboBox == null){
 			if(metriques.getMetriquesDesCriteresRetenus().size() != 0){
 				m = metriques.getMetriquesDesCriteresRetenus().get(0);
 			}
