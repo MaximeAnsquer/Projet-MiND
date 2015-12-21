@@ -11,7 +11,7 @@ import java.util.Observable;
  * @author Belghiti Ali
  */
 
-public class TypeBien extends Observable {
+public class TypeBien {
 	
 	// Variables d'instances
 	// Il faudra rajouter la couleur
@@ -52,8 +52,6 @@ public class TypeBien extends Observable {
 
 	public void setDescription(String description) {
 		this.Description = description;
-		this.setChanged();              // PAC
-		this.notifyObservers();         // PAC
 	}
 
 	public String getIntitule() {

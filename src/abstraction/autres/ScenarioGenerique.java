@@ -14,46 +14,43 @@ import java.util.Hashtable;
  */
 
 public class ScenarioGenerique {
-	private TypeBien type;
+	private TypeBien typeBienSupport;
 	private String Id;
 	private String intituleGenerique;
-	private Hashtable<String, SourceDeMenace> menaces;
 	private Hashtable<String, Critere> criteres; // représente les colonnes
 	private Hashtable<String, Boolean> CritereRetenu ;
 	private boolean retenu;
 
 	// Constructeur
 	public ScenarioGenerique(TypeBien type, String id, String intitule,
-			Hashtable<String, SourceDeMenace> menaces,
 			Hashtable<String, Critere> criteres, boolean retenu) {
-		this.type = type;
+		this.typeBienSupport = type;
 		this.Id = id;
 		this.intituleGenerique = intitule;
-		this.menaces = menaces;
 		this.criteres = criteres;
 		this.retenu = retenu;
 	}
 	
 	// Constructeur : Nouveau Type Bien défini précédemment
 	public ScenarioGenerique(TypeBien type){
-		this(type,"", "",new Hashtable<String, SourceDeMenace>(),
+		this(type,"", "",
 				new Hashtable<String, Critere>(), true);
 	}
 
 	// Constructeur : Ligne vide
 	public ScenarioGenerique() {
-		this(new TypeBien(), "", "", new Hashtable<String, SourceDeMenace>(),
+		this(new TypeBien(), "", "",
 				new Hashtable<String, Critere>(), false);
 	}
 	
 	// ---Getters et setters---
 	
 	public TypeBien getType() {
-		return type;
+		return typeBienSupport;
 	}
 
 	public void setType(TypeBien type) {
-		this.type = type;
+		this.typeBienSupport = type;
 	}
 
 	public String getId() {
@@ -72,14 +69,6 @@ public class ScenarioGenerique {
 		this.intituleGenerique = intitule;
 	}
 
-	public Hashtable<String, SourceDeMenace> getMenaces() {
-		return menaces;
-	}
-
-	public void setMenaces(Hashtable<String, SourceDeMenace> menaces) {
-		this.menaces = menaces;
-	}
-
 	public Hashtable<String, Critere> getCriteres() {
 		return criteres;
 	}
@@ -94,11 +83,11 @@ public class ScenarioGenerique {
 		return (boolean) listeCriteres.get(i) ;
 	}
 
-	public boolean isRetenu() {
+	public boolean isRetenuScenario() {
 		return retenu;
 	}
 
-	public void setRetenu(boolean retenu) {
+	public void setRetenuScenario(boolean retenu) {
 		this.retenu = retenu;
 	}
 }

@@ -9,7 +9,7 @@ import abstraction.autres.TypeBien;
 import abstraction.modules.TypologieDesBiensSupports;
 
 public class ModeleTypologieBiensSupports extends AbstractTableModel{
-	// private final List<TypeBien> typesBien = new ArrayList<TypeBien>();
+	
 	private TypologieDesBiensSupports moduleCourant = new TypologieDesBiensSupports();
 	private final String[] entetes = {"Id", "Intitulé", "Description", "Retenu"} ;
 	

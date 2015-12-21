@@ -28,6 +28,10 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	}
 	
 	// ---Getters et setters---
+	
+	public int getSize(){
+		return this.tableau.size();
+	}
 
 	public Hashtable<String, ScenarioGenerique> getTableau() {
 		return tableau;
@@ -64,9 +68,12 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	// L'ajout d'une ligne dans le tableau correspond ici
 	// à un nouveau type de bien support non référencé dans la bdc
 	public void addTypeBienSupport(TypeBien type) {
+		/*
 		if (estNouveauTypeBien(type)){
-			this.tableau.put(type.getIntitule(),new ScenarioGenerique(type));
+			
 		}
+		//*/
+		this.tableau.put(type.getIntitule(),new ScenarioGenerique(type));
 	}
 	
 	// L'ajout d'une ligne dans le tableau correspond ici

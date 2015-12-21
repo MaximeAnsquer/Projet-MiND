@@ -31,7 +31,10 @@ public class MainAli {
 				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
 		
 		if (reponse==choix[0]){
-			FenetreTypologieBiensSupports fen = new FenetreTypologieBiensSupports();
+			FenetreTypologieBiensSupports fen1 = new FenetreTypologieBiensSupports();
+		}
+		if (reponse==choix[1]){
+			FenetreScenarioDeMenacesGeneriques fen2 = new FenetreScenarioDeMenacesGeneriques();
 		}
 	}
 }
