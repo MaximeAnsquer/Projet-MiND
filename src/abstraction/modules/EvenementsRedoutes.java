@@ -50,16 +50,18 @@ public class EvenementsRedoutes extends Module {
 		
 		
 		CriteresDeSecurite critere=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
+		ArrayList<Critere> tableaucriteres=new ArrayList<Critere>(critere.getLesCriteres().values());
 		BiensEssentiels bienessentiel=this.lesBiensEssentiels;
 		Metrique exigence=this.lesMetriques.getMetrique("Exigence");
 		Metrique gravite=this.lesMetriques.getMetrique("Gravite");
-		Bien[] tableaubiens=this.lesBiensEssentiels.getLesBiens().values().toArray(new Bien[this.lesBiensEssentiels.getLesBiens().size()]);
+		ArrayList<Bien> tableaubiens=new ArrayList<Bien>(this.lesBiensEssentiels.getLesBiens().values());
 		
 		
 		for (int i=0;i<a;i++){
 			for(int j=0;j<b;j++){
-				
-				liste.set(i*b+j,new Evenement("",tableaubiens[i].getNomColonneSup(),tableaubiens[i].getContenuColonneSup(),tableaubiens[i].getIntitule(),critere.getLesCriteres().get(j).getIntitule()));
+				System.out.println(tableaubiens.get(i).getIntitule());
+				System.out.println(tableaucriteres.get(j));
+				liste.set(i*b+j,new Evenement("",tableaubiens.get(i).getNomColonneSup(),tableaubiens.get(i).getContenuColonneSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
 				
 			}
 		}
