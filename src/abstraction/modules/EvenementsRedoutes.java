@@ -12,12 +12,12 @@ import abstraction.autres.Metrique;
 
 public class EvenementsRedoutes extends Module {
 	
-	/*Je mets dans cette classe pour variable d'instance tout d'abord une hashtable d'évenements
+	/*Je mets dans cette classe pour variable d'instance tout d'abord une arraylist d'évenements
 	 */
 	private ArrayList<Evenement> evenementsredoutes;
 	
 	
-	/*Puis les antécédents du module car on en a besoin pour créer le présent module
+	/*Puis les antécédents du module ainsi que l'étude car on en a besoin pour créer le présent module
 	 */
 	private Etude etude;
 	private BiensEssentiels lesBiensEssentiels;
@@ -36,15 +36,19 @@ public class EvenementsRedoutes extends Module {
 		this.cree=true;
 		this.disponible=true;
 		this.coherent=true;
-		this.etude=etude;
 		
-		/*A ce stade-ci du constructeur, on remplit la hashtable en constituant des combinaisons entre Biens Essentiels
+		
+		/*A ce stade-ci du constructeur, on remplit l'arraylist en constituant des combinaisons entre Biens Essentiels
 		 * et Critères définis dans les antécédents du  module.
 		 */
+		/*On crée une arraylist qui contiendra les lignes du tableau*/
 		
 	    ArrayList<Evenement> liste=new ArrayList<Evenement>();
+	    
 		int a=((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getLesBiens().size();
 		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
+		
+		
 		CriteresDeSecurite critere=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
 		BiensEssentiels bienessentiel=this.lesBiensEssentiels;
 		Metrique exigence=this.lesMetriques.getMetrique("Exigence");
