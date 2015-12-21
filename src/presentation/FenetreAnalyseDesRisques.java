@@ -20,7 +20,5 @@ public class FenetreAnalyseDesRisques extends JPanel{
 		
 	}
 	
-	 public static void main(String[] args) {
-	        new FenetreEvenementsRedoutes();
-	    }
+	
 }

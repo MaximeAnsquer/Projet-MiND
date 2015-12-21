@@ -17,8 +17,8 @@ public class MainMaximeEtienne {
 	etude.addModule(new BiensEssentiels());
 	etude.addModule(new Metriques(etude));
 	etude.addModule(new SourcesDeMenaces());
-	etude.addModule(new EvenementsRedoutes(etude));
 	EvenementsRedoutes ev=new EvenementsRedoutes(etude);
+	etude.addModule(ev);
 	
 	FenetreEvenementsRedoutes f= new FenetreEvenementsRedoutes(ev);
 }
