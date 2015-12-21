@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
@@ -16,8 +15,8 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
+import controle.ControlJButtonAide;
 import controle.ControlJButtonAjoutTypeBien;
-import controle.ControlJButtonModifierDescription;
 import controle.ControlJButtonSuppressionTypeBien;
 import controle.ControlJTable;
 import controle.ControlJTextArea;
@@ -29,9 +28,9 @@ public class FenetreTypologieBiensSupports extends JFrame {
 	private ModeleTypologieBiensSupports modeleTableau ;
 	private JTable tableau ;
 	private JTextArea zoneDescription ;
-	private JButton modifierDescription ;
 	private JButton supprimerLigne ;
 	private JButton ajouterLigne ;
+	private JButton aide ;
 
 	public FenetreTypologieBiensSupports() {
 		super("Typologie des Biens Supports");
@@ -51,8 +50,8 @@ public class FenetreTypologieBiensSupports extends JFrame {
 		this.moduleCourant=this.modeleTableau.getModuleCourant();
 		this.tableau = new JTable(this.modeleTableau);
 		
-		ControlJTable control = new ControlJTable(modeleTableau, tableau);
-		this.tableau.addMouseListener(control);
+		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC
+		this.tableau.addMouseListener(control);                            // PAC
 		
 		//tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);
 		this.getContentPane().add(tableau.getTableHeader());
@@ -64,8 +63,9 @@ public class FenetreTypologieBiensSupports extends JFrame {
 		this.zoneDescription.setLineWrap(true); // On passe à la ligne 
 		this.zoneDescription.setWrapStyleWord(true);
 		
-		ControlJTextArea controlTextArea = new ControlJTextArea(modeleTableau, tableau, zoneDescription);
-		this.moduleCourant.addObserver(controlTextArea);
+		ControlJTextArea controlTextArea = new ControlJTextArea(modeleTableau, tableau, zoneDescription); // PAC
+		this.moduleCourant.addObserver(controlTextArea);                                                  // PAC
+		this.zoneDescription.addKeyListener(controlTextArea);
 		
 		JScrollPane areaScrollPane = new JScrollPane(this.zoneDescription);
 		areaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -96,16 +96,17 @@ public class FenetreTypologieBiensSupports extends JFrame {
 		this.moduleCourant.addObserver(controlSuppressionTypeBien);                                           // PAC
 		this.supprimerLigne.addActionListener(controlSuppressionTypeBien);                                    // PAC
 		
-		this.modifierDescription = new JButton("Modifier la description");
+		this.aide = new JButton("?");
 		
-		ControlJButtonModifierDescription controlModifierDescription = new ControlJButtonModifierDescription(
-				this.modeleTableau, tableau,this.zoneDescription, modifierDescription);
-		this.moduleCourant.addObserver(controlModifierDescription);
-		this.modifierDescription.addActionListener(controlModifierDescription);
+		///*
+		ControlJButtonAide controlAide = new ControlJButtonAide(
+				this.aide,this);
+		this.aide.addActionListener(controlAide);
+		//*/
 		
 		panelBas.add(ajouterLigne);
 		panelBas.add(supprimerLigne);
-		panelBas.add(modifierDescription);
+		panelBas.add(aide);
 		this.getContentPane().add(panelBas);
 	}
 }

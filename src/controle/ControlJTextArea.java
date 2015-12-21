@@ -23,30 +23,27 @@ public class ControlJTextArea implements Observer,KeyListener {
 		this.zoneDescription=zoneDescription;
 	}
 	
-	@Override
 	public void update(Observable o, Object arg) {
 		if (this.tableau.getSelectedRow() == -1 || this.modele.getRowCount() == 0 ) {
-			this.zoneDescription.setText("");
+			this.zoneDescription.setText(null);
 		} else {
 			this.zoneDescription.setText((String) this.modele.getTypeBienCourant().getDescription());
 		}
 	}
 
-	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (this.tableau.getSelectedRow() != -1) {
+			this.modele.setValueAt(this.zoneDescription.getText(),
+					this.tableau.getSelectedRow(),
+					ModeleTypologieBiensSupports.COLONNE_DESCRIPTION);
+		}
 	}
 }

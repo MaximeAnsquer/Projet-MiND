@@ -56,7 +56,7 @@ public class ModeleTypologieBiensSupports extends AbstractTableModel{
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 	    return true; //Toutes les cellules sont éditables
 	}
-	
+	// PAC
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		if (aValue!=null){
 			switch(columnIndex){

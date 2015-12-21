@@ -1,5 +1,7 @@
 package abstraction.autres;
 
+import java.util.Observable;
+
 /**
  * Classe representant les types de biens supports représentés en mémoire par : 
  * id, description, intitule et retenu
@@ -9,7 +11,7 @@ package abstraction.autres;
  * @author Belghiti Ali
  */
 
-public class TypeBien {
+public class TypeBien extends Observable {
 	
 	// Variables d'instances
 	// Il faudra rajouter la couleur
@@ -50,6 +52,8 @@ public class TypeBien {
 
 	public void setDescription(String description) {
 		this.Description = description;
+		this.setChanged();              // PAC
+		this.notifyObservers();         // PAC
 	}
 
 	public String getIntitule() {
