@@ -24,16 +24,18 @@ public class EvenementsRedoutes extends Module {
 	private Metriques lesMetriques;
 	
 	
-	private EvenementsRedoutes(Etude etude){
+	public EvenementsRedoutes(Etude etude){
+		
 		super("EvenementsRedoutes");
+		this.etude=etude;
 		this.predecesseurs.add(this.etude.getModule("BiensEssentiels"));
 		this.predecesseurs.add(this.etude.getModule("Metriques"));
 		this.successeurs.add(this.etude.getModule("AnalyseDesRisques"));
-		this.lesMetriques=(Metriques) this.etude.getModule("Metriques");
-		this.lesBiensEssentiels=(BiensEssentiels) this.etude.getModule("BiensEssentiels");
-		this.cree=false;
-		this.disponible=false;
-		this.coherent=false;
+		this.lesMetriques=(Metriques)this. etude.getModule("Metriques");
+		this.lesBiensEssentiels=(BiensEssentiels)this.etude.getModule("BiensEssentiels");
+		this.cree=true;
+		this.disponible=true;
+		this.coherent=true;
 		this.etude=etude;
 		
 		/*A ce stade-ci du constructeur, on remplit la hashtable en constituant des combinaisons entre Biens Essentiels
@@ -43,7 +45,7 @@ public class EvenementsRedoutes extends Module {
 	    ArrayList<Evenement> liste=new ArrayList<Evenement>();
 		int a=((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getLesBiens().size();
 		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
-		CriteresDeSecurite critere=(CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite");
+		CriteresDeSecurite critere=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
 		BiensEssentiels bienessentiel=this.lesBiensEssentiels;
 		Metrique exigence=this.lesMetriques.getMetrique("Exigence");
 		Metrique gravite=this.lesMetriques.getMetrique("Gravite");
@@ -52,6 +54,7 @@ public class EvenementsRedoutes extends Module {
 		
 		for (int i=0;i<a;i++){
 			for(int j=0;j<b;j++){
+				
 				liste.set(i*b+j,new Evenement("",tableaubiens[i].getNomColonneSup(),tableaubiens[i].getContenuColonneSup(),tableaubiens[i].getIntitule(),critere.getLesCriteres().get(j).getIntitule()));
 				
 			}

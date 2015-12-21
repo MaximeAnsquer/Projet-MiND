@@ -7,13 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import abstraction.modules.EvenementsRedoutes;
+
 public class FenetreEvenementsRedoutes extends JPanel{
+	
 	private ModeleEvenementsRedoutes modele=new ModeleEvenementsRedoutes();
+	private EvenementsRedoutes evenements;
 	private JTable tableau;
 
 	
-	FenetreEvenementsRedoutes(){
-		
+	FenetreEvenementsRedoutes(EvenementsRedoutes evenements){
+        
+		this.evenements=evenements;
 		
 		this.tableau=new JTable(modele);
 		
@@ -21,9 +26,6 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 	}
 	
-	 public static void main(String[] args) {
-	        new FenetreEvenementsRedoutes();
-	    }
 	 
 	    
 	        
