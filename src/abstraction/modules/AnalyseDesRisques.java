@@ -51,11 +51,12 @@ public class AnalyseDesRisques extends Module{
 		for (int i=0;i<a;i++){
 			/*Pour chaque critere*/
 			for(int k=0;k<b;k++){
-			    if (scenarios[i].getValeurcritere(k)==true){
+			    if (scenarios[i].isRetenuCritere(i)==true){
 			    	/*On recupere le bien essentiel correspondant au bien support du scenario considéré*/
 			    Bien biencourant=scenarios[i].getBienSupport().getBienEssentielCorrespondant();		
 			    /*On récupère le critère correspondant*/
-			    Critere criterecourant=scenarios[i].getCritere(k);
+			    Critere[] listecriteres =scenarios[0].getCriteres().values().toArray(new Critere[scenarios[0].getCriteres().size()]);
+			    Critere criterecourant=listecriteres[k];
 			    
 			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biencourant.getIntitule());
 			    
@@ -72,6 +73,10 @@ public class AnalyseDesRisques extends Module{
 	
 	public ArrayList<Risque> getAnalyseDesRisques(){
 		return this.risques;
+	}
+	
+	public String toString(){
+		return "Analyse des risques";
 	}
 
 }
