@@ -60,17 +60,17 @@ public class ModeleTypologieBiensSupports extends AbstractTableModel{
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		if (aValue!=null){
 			switch(columnIndex){
-			case 0:
+			case COLONNE_ID:
 				this.moduleCourant.getTypeBien(rowIndex).setId((String) aValue);
 				break;
-			case 1:
+			case COLONNE_INTITULE:
 				this.moduleCourant.getTypeBien(rowIndex).setIntitule((String) aValue);
 				break;
-			case 2:
+			case COLONNE_DESCRIPTION:
 				this.moduleCourant.getTypeBien(rowIndex).setDescription((String) aValue);
 				break;
-			case 3:
-				this.moduleCourant.getTypeBien(rowIndex).setRetenu((boolean) aValue);
+			case COLONNE_RETENUE:
+				this.moduleCourant.getTypeBien(rowIndex).setRetenu((Boolean) aValue);
 				break;
 			}
 		}
