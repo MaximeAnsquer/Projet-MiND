@@ -13,6 +13,7 @@ import javax.swing.table.AbstractTableModel;
 import abstraction.Etude;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
+import abstraction.modules.MappingDesBiens;
 
 public class FenetreMappingDesBiens extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -29,28 +30,32 @@ public class FenetreMappingDesBiens extends JPanel{
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
+		private final LinkedList<String> entetes = new LinkedList<String>();
 		private Etude etude = MainFrancois.etude;
 		private BiensEssentiels biensEssentiels = (BiensEssentiels) etude.getModule("BiensEssentiels");
 		private BiensSupports biensSupports = (BiensSupports) etude.getModule("BiensSupports");
-		private LinkedList<ArrayList<String>> mapping = new LinkedList<ArrayList<String>>();
+		private MappingDesBiens mapping = new MappingDesBiens(biensSupports,biensEssentiels);
 
 		
 		public ModeleDynamiqueObjet() {
-			super();
-			for (int j=0; j<biensEssentiels.nombreDeBiens();j++){
-				mapping.add(new ArrayList<String>(biensSupports.nombreDeBiens())) ;
-				for (int i=0; i<biensSupports.nombreDeBiens();i++){
-					mapping.get(j).add("");
-				}
+			super();			
+			
+			entetes.add("Biens Essentiels");
+			for (int i=0; i<biensSupports.getLesBiens().size(); i++){
+				entetes.add(biensSupports.getBien(i).getIntitule());
 			}
 		}
 
 		public int getRowCount() {
-			return biensSupports.nombreDeBiens()-1;
+			return biensSupports.nombreDeBiens();
 		}
 
 		public int getColumnCount() {
-			return biensEssentiels.nombreDeBiens()-1;
+			return biensEssentiels.nombreDeBiens()+1;
+		}
+		
+		public String getColumnName(int columnIndex) {
+			return entetes.get(columnIndex);
 		}
 		
 		public boolean isCellEditable(int row, int col){
@@ -60,19 +65,9 @@ public class FenetreMappingDesBiens extends JPanel{
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			switch(columnIndex){
 			case 0:
-				if (rowIndex==0){
-					return "";
-				}
-				else{
-					return biensEssentiels.getBien(rowIndex).getIntitule();	
-				}
+				return biensEssentiels.getBien(rowIndex).getIntitule();	
 			default:
-				if (rowIndex==0){
-					return biensSupports.getBien(columnIndex-1).getIntitule();
-				}
-				else{
-					return mapping.get(columnIndex-1).get(rowIndex-1);
-				}
+				return mapping.getMappingDesBiens().get(rowIndex).getValueAt(columnIndex-1);
 			}
 		}
 
@@ -83,12 +78,12 @@ public class FenetreMappingDesBiens extends JPanel{
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		    if(aValue != null){
 		    	switch(columnIndex){
-				case 0:
-					break;
+		    	case 0 :
+		    		break;
 				default:
-					if (rowIndex!=0 && ((String)aValue=="" || (String)aValue=="x" || (String)aValue=="o")){
-						mapping.get(columnIndex-1).set(rowIndex-1,(String)aValue);
-					}
+					//System.out.println(""+aValue);
+					mapping.getMappingDesBiens().get(rowIndex).setValueAt((String)aValue, columnIndex-1);
+					//System.out.println("value : "+mapping.getMappingDesBiens().get(rowIndex).getValueAt(columnIndex-1));
 					break;
 				}
 		    }

@@ -44,9 +44,12 @@ public class MainFrancois extends JFrame{
 	public static void main(String[] args) {
 		MainFrancois main = new MainFrancois();
 		etude = new Etude();
-		etude.addModule(new BiensEssentiels());
-		etude.addModule(new BiensSupports());
-		etude.addModule(new MappingDesBiens());
+		BiensEssentiels biensEssentiels = new BiensEssentiels();
+		BiensSupports biensSupports = new BiensSupports();
+		MappingDesBiens mapping = new MappingDesBiens(biensSupports,biensEssentiels);
+		etude.addModule(biensEssentiels);
+		etude.addModule(biensSupports);
+		etude.addModule(mapping);
 		
 		String[] choix = {"biens supports","biens essentiels","Mapping des biens"};
 	    String reponse = (String)JOptionPane.showInputDialog(null, "Quelle fenetre voulez-vous ?", "Choix fenetre",JOptionPane.QUESTION_MESSAGE,  null, choix, choix[0]);

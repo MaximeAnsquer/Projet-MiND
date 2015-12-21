@@ -1,4 +1,5 @@
 package abstraction.modules;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.autres.*;
@@ -13,16 +14,19 @@ import abstraction.autres.*;
 
 public class MappingDesBiens extends Module{
 	//Variables d'instance
-	private Hashtable<String, MappingBien> mappingDesBiens; // table qui relie chaque bien essentiel � son mapping
+	private ArrayList<MappingBien> mappingDesBiens; // table qui relie chaque bien essentiel a son mapping
 	private BiensSupports biensSupports;
 	private BiensEssentiels biensEssentiels;
 	
 	//Constructeur
-	public MappingDesBiens() {
+	public MappingDesBiens(BiensSupports biensSupports, BiensEssentiels biensEssentiels) {
 		super("MappingDesBiens");
-		this.mappingDesBiens=new Hashtable<String, MappingBien>();
 		this.biensSupports = new BiensSupports();
+		this.mappingDesBiens=new ArrayList<MappingBien>(this.biensSupports.nombreDeBiens());
 		this.biensEssentiels = new BiensEssentiels();
+		for (int i=0; i<this.biensSupports.nombreDeBiens(); i++){
+			mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
+		}
 		//TODO Decomenter quand les autres parties seront OK
 		/*
 		this.successeurs.add(AnalyseDesRisques.getInstance());
@@ -37,11 +41,11 @@ public class MappingDesBiens extends Module{
 	}
 	
 	//Getters et Setters
-	public Hashtable<String, MappingBien> getMappingDesBiens(){
+	public ArrayList<MappingBien> getMappingDesBiens(){
 		return this.mappingDesBiens;
 	}
 	
-	public  void setMappingDesBiens(Hashtable<String, MappingBien> mapping){
+	public  void setMappingDesBiens(ArrayList<MappingBien> mapping){
 		this.mappingDesBiens=mapping;
 	}
 	
@@ -59,12 +63,5 @@ public class MappingDesBiens extends Module{
 	
 	public void setBiensEssentiels(BiensEssentiels biensEssentiels){
 		this.biensEssentiels=biensEssentiels;
-	}
-	
-	
-	//Services
-	
-	public void mappingDesBiens(){
-		//TODO association des biens entre eux via l'IHM
 	}
 }
