@@ -50,8 +50,8 @@ public class Evenement {
 		 */
 		
 		
-		this.exigence=new JComboBox<Integer>();
-		this.gravite=new JComboBox<Integer>();
+		this.exigence=new JComboBox();
+		this.gravite=new JComboBox();
 		
 		int a=((Metriques) etude.getModule("Metriques")).getGravite().nombreDeNiveaux();
 		
@@ -60,7 +60,7 @@ public class Evenement {
 			
 			liste[i]=new Integer(i+1);
 		}
-		this.gravite=new JComboBox<Integer>(liste);
+		this.gravite=new JComboBox(liste);
 		
 		int b=((Metriques)this.etude.getModule("Metriques")).getMetrique("this.critere").nombreDeNiveaux();
 		
@@ -69,7 +69,7 @@ public class Evenement {
 			
 			listebis[i]=new Integer(i+1);
 		}
-        this.exigence=new JComboBox<Integer>(listebis);
+        this.exigence=new JComboBox(listebis);
 	}
 	
 	/*Getters
