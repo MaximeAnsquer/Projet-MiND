@@ -3,6 +3,7 @@ package presentation;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import abstraction.autres.ScenarioGenerique;
@@ -32,7 +33,9 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		entetes.add("Scénario générique");
 		entetes.add("Retenu");
 		
+		// On ajoute un scénario générique à partir des types définis dans Typologie des Biens Supports
 		for(TypeBien type : this.typologieDesBiensSupports.getTypeBiensRetenus()){
+			
 			// La clé est l'intitulé du TYPE !! (il ne faudra pas avoir plusieurs clés identiques)
 			this.moduleCourant.getTableau().put(type.getIntitule(), new ScenarioGenerique(type));
 		}
@@ -66,8 +69,9 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		case COLONNE_RETENU:
 			return this.moduleCourant.getScenarioGenerique(rowIndex).isRetenuScenario();
 		default:
-			if(colonnesSup.get(columnIndex)!=null){
-				return colonnesSup.get(columnIndex).get(rowIndex);
+			int indice = this.getColumnCount() - columnIndex - 1 ;
+			if(colonnesSup.get(indice)!=null){
+				return colonnesSup.get(indice).get(rowIndex);
 			}
 			else{
 				return false;
@@ -111,9 +115,28 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 				scenario.setRetenuScenario((Boolean) aValue);
 				break;
 			default:
-				colonnesSup.get(columnIndex).set(rowIndex, ((Boolean)aValue));
+				int indice = this.getColumnCount() - columnIndex - 1 ;
+				colonnesSup.get(indice).set(rowIndex, ((Boolean)aValue));
             	break;
 			}
+		}
+	}
+	
+	public void addCritere (String critere){
+		this.colonnesSup.addFirst(new ArrayList<Boolean>(this.getRowCount()));
+		for (int i=0; i<this.getRowCount(); i++){
+			colonnesSup.getFirst().add(i, false);
+		}
+		// On ajoute la colonne du critère à gauche de la colonne "Retenu"
+		this.entetes.add(this.getColumnCount()-1, critere);
+		fireTableStructureChanged();
+	}
+	
+	public void removeCritere (){
+		if (colonnesSup.size()!=0){
+			this.entetes.remove(this.getColumnCount()-2);
+			colonnesSup.removeLast();
+			fireTableStructureChanged();
 		}
 	}
 

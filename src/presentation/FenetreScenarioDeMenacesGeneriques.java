@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutColonne;
+import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionColonne;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 
 public class FenetreScenarioDeMenacesGeneriques extends JFrame {
@@ -18,6 +20,8 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 	private JTable tableau ;
 	private JButton supprimerLigne ;
 	private JButton ajouterLigne ;
+	private JButton ajouterCritere;
+	private JButton supprimerCritere;
 	private JButton aide ;
 	
 	public FenetreScenarioDeMenacesGeneriques() {
@@ -49,10 +53,24 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 		
 		this.supprimerLigne = new JButton("Supprimer un scénario de menace générique"); 
 		
+		this.ajouterCritere = new JButton("Ajouter un critère de sécurité");
+		
+		ControlJButtonAjoutColonne controlAjoutColonne = new ControlJButtonAjoutColonne(modeleTableau, ajouterCritere);
+		this.moduleCourant.addObserver(controlAjoutColonne);
+		this.ajouterCritere.addActionListener(controlAjoutColonne);
+		
+		this.supprimerCritere = new JButton("Supprimer un critère de sécurité");
+		
+		ControlJButtonSuppressionColonne controlSupression = new ControlJButtonSuppressionColonne(modeleTableau, supprimerCritere);
+		this.moduleCourant.addObserver(controlSupression);
+		this.supprimerCritere.addActionListener(controlSupression);
+		
 		this.aide = new JButton("?");
 		
 		panelBas.add(ajouterLigne);
 		panelBas.add(supprimerLigne);
+		panelBas.add(ajouterCritere);
+		panelBas.add(supprimerCritere);
 		panelBas.add(aide);
 		this.getContentPane().add(panelBas);
 	}
