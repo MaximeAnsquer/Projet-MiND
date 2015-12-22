@@ -51,24 +51,24 @@ public class Evenement {
 		 */
 		
 		
-		this.exigence=new JComboBox();
-		this.gravite=new JComboBox();
+		
 		
 		int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravité").nombreDeNiveaux();
 		
-		Integer[] liste=new Integer[a];
-		for(int i=0;i<a;i++){
+		String[] liste=new String[a];
+		for(int i=1;i<=a;i++){
 			
-			liste[i]=new Integer(i+1);
+			liste[i-1]=""+i;
 		}
 		this.gravite=new JComboBox(liste);
 		
 		int b=((Metriques)this.etude.getModule("Metriques")).getMetrique(this.critere).nombreDeNiveaux();
 		
-		Integer[] listebis=new Integer[b];
-        for(int i=0;i<b;i++){
+		String[] listebis=new String[b];
+        for(int i=1;i<=b;i++){
 			
-			listebis[i]=new Integer(i+1);
+			listebis[i-1]=""+i;
+			
 		}
         this.exigence=new JComboBox(listebis);
 	}
