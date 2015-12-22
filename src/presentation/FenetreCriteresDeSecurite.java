@@ -152,6 +152,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 				modele.supprimerCritere(ligneSelectionnee);
+				boutonSupprimer.setEnabled(false);
 			}
 
 		});

@@ -87,6 +87,12 @@ public class Metrique {
 	
 	public void supprimerNiveau(int numero){
 		this.getLesNiveaux().remove(numero);
+		for(NiveauDeMetrique n : this.getLesNiveaux()){
+			if(n.getNumero() > numero){
+				int ancienNumero = n.getNumero();
+				n.setNumero(ancienNumero-1);
+			}
+		}
 	}	
 	
 	public int nombreDeNiveaux(){

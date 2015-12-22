@@ -45,8 +45,6 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		//On redimensionne les colonnes 
 		TableColumnModel columnModel = table.getColumnModel();		
 		columnModel.getColumn(0).setMaxWidth(30);
-		columnModel.getColumn(2).setMaxWidth(200);
-		columnModel.getColumn(2).setMinWidth(200);
 		columnModel.getColumn(3).setMaxWidth(50);
 
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -149,6 +147,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 				modele.supprimerSource(ligneSelectionnee);
+				boutonSupprimer.setEnabled(false);
 			}
 
 		});

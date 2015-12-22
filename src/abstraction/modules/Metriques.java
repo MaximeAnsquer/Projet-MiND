@@ -1,9 +1,20 @@
 package abstraction.modules;
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import abstraction.Etude;
 import abstraction.autres.Critere;
@@ -112,14 +123,83 @@ public class Metriques extends Module {
 	}
 	
 	private void importerBDC() {
-		// TODO Auto-generated method stub		
-		
-		/**
-		 * Des metriques fictives utiles pour les tests
-		 * TODO : a effacer par la suite
-		 */
 		
 		bdcMetriques = new Hashtable<String, Metrique>();
+
+		/*
+		 * Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
+		 */
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		try {
+			/*
+			 * Etape 2 : création d'un parseur
+			 */
+			final DocumentBuilder builder = factory.newDocumentBuilder();
+
+			/*
+			 * Etape 3 : création d'un Document
+			 */
+			final Document document= builder.parse(new File("bdc.xml"));	    
+
+			/*
+			 * Etape 4 : récupération de l'Element racine
+			 */
+			final Element racine = document.getDocumentElement();
+
+			/*
+			 * Etape 5 : récupération du noeud " Metriques "
+			 */
+			final Element metriques = (Element) racine.getElementsByTagName("Metriques").item(0);
+			final NodeList listeMetriques = metriques.getChildNodes();
+			final int nbMetriques = listeMetriques.getLength();
+
+			for (int i = 0; i<nbMetriques; i++) {
+				if(listeMetriques.item(i).getNodeType() == Node.ELEMENT_NODE) {
+					final Element metrique = (Element) listeMetriques.item(i);
+					
+					/*
+					 * Construction d'une métrique
+					 */
+					
+					String intituleCritere = metrique.getElementsByTagName("Critere").item(0).getTextContent();
+					Critere critere = ((CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite")).getCritere(intituleCritere);
+					
+					ArrayList<NiveauDeMetrique> lesNiveaux = new ArrayList<NiveauDeMetrique>();
+					
+					final Element niveaux = (Element) metrique.getElementsByTagName("Niveaux").item(0);
+					final NodeList listeNiveaux = niveaux.getChildNodes();
+					final int nbNiveaux = listeNiveaux.getLength();					
+					
+					for (int j = 0; j < nbNiveaux; j++){
+						if(listeNiveaux.item(j).getNodeType() == Node.ELEMENT_NODE) {
+							final Element niveau = (Element) listeNiveaux.item(j);
+							int numero = Integer.parseInt(niveau.getElementsByTagName("Numero").item(0).getTextContent());
+							String intitule = niveau.getElementsByTagName("Intitule").item(0).getTextContent();
+							String description = niveau.getElementsByTagName("Description").item(0).getTextContent();
+							
+							lesNiveaux.add(new NiveauDeMetrique(numero, intitule, description));
+						}
+					}					
+					
+					Metrique m = new Metrique(critere, lesNiveaux);
+					
+					/*
+					 * Ajout de la métrique à la bdc
+					 */
+					
+					bdcMetriques.put(intituleCritere, m);				}				
+			}			
+		}
+		catch (final ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		catch (final SAXException e) {
+			e.printStackTrace();
+		}
+		catch (final IOException e) {
+			e.printStackTrace();
+		}	
 		
 		ArrayList<NiveauDeMetrique> niveauxConfidentialite = new ArrayList<NiveauDeMetrique>();
 		niveauxConfidentialite.add(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
@@ -206,7 +286,7 @@ public class Metriques extends Module {
 		boolean resultat = true;
 		
 		this.problemesDeCoherence = new ArrayList<JLabel>();
-		for(Metrique m : this.getLesMetriques().values()){
+		for(Metrique m : this.getMetriquesDesCriteresRetenus()){
 			if(!m.estComplet()){
 				JLabel label = new JLabel("La métrique \" " + m.getIntitule() + " \" est incomplète.");
 				label.setForeground(Color.red);

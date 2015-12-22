@@ -1,10 +1,22 @@
 package abstraction.modules;
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import abstraction.autres.Critere;
 import abstraction.autres.SourceDeMenace;
 
 /**
@@ -99,9 +111,67 @@ public class SourcesDeMenaces extends Module {
 	}
 	
 	private void importerBDC() {
-		// TODO Valeurs fictives pour faire des tests ; à changer
-		bdcSourcesDeMenaces.put("IMF", new SourceDeMenace("IMF", "Source humaine interne, malveillante, avec de faibles capacités", "Stagiaire"));
-		bdcSourcesDeMenaces.put("IMI", new SourceDeMenace("IMI", "Source humaine interne, malveillante, avec des capacités importantes", "Prestataire d'un service sensible"));		
+		
+		bdcSourcesDeMenaces = new Hashtable<String, SourceDeMenace>();
+
+		/*
+		 * Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
+		 */
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		try {
+			/*
+			 * Etape 2 : création d'un parseur
+			 */
+			final DocumentBuilder builder = factory.newDocumentBuilder();
+
+			/*
+			 * Etape 3 : création d'un Document
+			 */
+			final Document document= builder.parse(new File("bdc.xml"));	    
+
+			/*
+			 * Etape 4 : récupération de l'Element racine
+			 */
+			final Element racine = document.getDocumentElement();
+
+			/*
+			 * Etape 5 : récupération du noeud " SourcesDeMenaces "
+			 */
+			final Element sources = (Element) racine.getElementsByTagName("SourcesDeMenaces").item(0);
+			final NodeList listeSources = sources.getChildNodes();
+			final int nbSources = listeSources.getLength();
+
+			for (int i = 0; i<nbSources; i++) {
+				if(listeSources.item(i).getNodeType() == Node.ELEMENT_NODE) {
+					final Element source = (Element) listeSources.item(i);
+					
+					/*
+					 * Construction d'une source de menace
+					 */
+					
+					String id = source.getAttribute("id");
+					String intitule = source.getAttribute("intitule");
+					String exemple = source.getAttribute("exemple");
+					
+					SourceDeMenace s = new SourceDeMenace(id, intitule, exemple);
+					
+					/*
+					 * Ajout de la source à la bdc
+					 */
+					
+					bdcSourcesDeMenaces.put(id, s);				}				
+			}			
+		}
+		catch (final ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		catch (final SAXException e) {
+			e.printStackTrace();
+		}
+		catch (final IOException e) {
+			e.printStackTrace();
+		}			
 	}
 	
 	public Hashtable<String, SourceDeMenace> getBDC(){
@@ -131,8 +201,8 @@ public class SourcesDeMenaces extends Module {
 				resultat = false;
 			}
 		}
-		if(this.getLesSourcesDeMenaces().size() <= 0){
-			JLabel label = new JLabel("Aucune source de menace.");
+		if(this.getSourcesDeMenacesRetenues().size() <= 0){
+			JLabel label = new JLabel("Aucune source de menace retenue.");
 			label.setForeground(Color.red);
 			problemesDeCoherence.add(label);
 			resultat = false;

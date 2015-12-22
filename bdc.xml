@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<bdc>
+    <CriteresDeSecurite>
+        <Critere>
+            <Id>D</Id>
+            <Intitule>Disponibilité</Intitule>
+            <Description>Durée maximale admissible pour la réalisation d'un processus métier.</Description>
+        </Critere>
+        <Critere>
+            <Id>I</Id>
+            <Intitule>Intégrité</Intitule>
+            <Description>Altération admissible et/ou mesures de récupération des données à mettre en œuvre pour un processus métier.</Description>
+        </Critere>
+        <Critere>
+            <Id>C</Id>
+            <Intitule>Confidentialité</Intitule>
+            <Description>Sensibilité des informations liées à un processus métier.</Description>
+        </Critere>
+        <Critere>
+            <Id>T</Id>
+            <Intitule>Traçabilité</Intitule>
+            <Description>Suivi des actions liées à un processus métier.</Description>
+        </Critere>
+    </CriteresDeSecurite>
+    <Metriques>        
+        <Metrique>
+            <Critere>Disponibilité</Critere>
+            <Niveaux>
+                <Niveau>
+                    <Numero>1</Numero>
+                    <Intitule>Faible</Intitule>
+                    <Description>Une indisponibilité peut être tolérée sur un intervalle de temps de quelques jours, voire plus.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>2</Numero>
+                    <Intitule>Modérée</Intitule>
+                    <Description>L’indisponibilité ne peut excéder l’ordre de quelques heures.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>3</Numero>
+                    <Intitule>Forte</Intitule>
+                    <Description>L’indisponibilité ne peut excéder l’ordre de quelques minutes.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>4</Numero>
+                    <Intitule>Immédiate</Intitule>
+                    <Description>L’indisponibilité ne peut excéder l’ordre de quelques secondes.</Description>
+                </Niveau>
+            </Niveaux>
+        </Metrique>
+        <Metrique>
+            <Critere>Intégrité</Critere>
+            <Niveaux>
+                <Niveau>
+                    <Numero>1</Numero>
+                    <Intitule>Non contrôlée</Intitule>
+                    <Description>Aucune mesure particulière ne doit être mise en œuvre.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>2</Numero>
+                    <Intitule>Identifiée</Intitule>
+                    <Description>Le processus essentiel peut être altéré si cette alétration est identifiée.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>3</Numero>
+                    <Intitule>Corrigée</Intitule>
+                    <Description>Le processus essentiel peut être altéré si cette altération est identifiée et l’intégrité du processus essentiel peut être retrouvée.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>4</Numero>
+                    <Intitule>Non altérée</Intitule>
+                    <Description>Le processus essentiel ne doit pas être altéré.</Description>
+                </Niveau>
+            </Niveaux>
+        </Metrique>
+        <Metrique>
+            <Critere>Confidentialité</Critere>
+            <Niveaux>
+                <Niveau>
+                    <Numero>1</Numero>
+                    <Intitule>Libre</Intitule>
+                    <Description>Aucune mesure particulière ne doit être mise en œuvre.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>2</Numero>
+                    <Intitule>Entreprise</Intitule>
+                    <Description>La connaissance s'organise sur un périmètre d'accès à la maille d'ERDF.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>3</Numero>
+                    <Intitule>Restreint</Intitule>
+                    <Description>La connaissance est limitée à des personnes, fonctions ou à un périmètre restreint lié à une activité.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>4</Numero>
+                    <Intitule>Confidentiel</Intitule>
+                    <Description>Ne doit être connu que par des personnes nommément désignées et autorisées à cet effet.</Description>
+                </Niveau>
+            </Niveaux>
+        </Metrique>
+        <Metrique>
+            <Critere>Traçabilité</Critere>
+            <Niveaux>
+                <Niveau>
+                    <Numero>1</Numero>
+                    <Intitule>Inexistante</Intitule>
+                    <Description>La traçabiltié n'est pas nécessaire.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>2</Numero>
+                    <Intitule>Courte</Intitule>
+                    <Description>La traçabilité doit être assurée et conservée pour une durée de quelques mois.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>3</Numero>
+                    <Intitule>Moyenne</Intitule>
+                    <Description>La traçabilité doit être assurée et conservée pour une durée de quelques années.</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>4</Numero>
+                    <Intitule>Longue</Intitule>
+                    <Description>La traçabilité doit être assurée et conservée pendant de nombreuses années voir indéfiniment.</Description>
+                </Niveau>
+            </Niveaux>
+        </Metrique>
+    </Metriques>
+    <SourcesDeMenaces>
+    
+        <Source 
+         id = "IMF" 
+         intitule = "Source humaine interne, malveillante, avec de faibles capacités."
+         exemple = "Stagiaire, agent voulant nuire à quelqu'un ou à l'entreprise, personnel de ménage."/>
+         
+         <Source 
+          id = "IMM" 
+          intitule = "Source humaine interne, malveillante, avec des capacités importantes."
+          exemple = "Agent connaissant bien l'entreprise et le système voulant nuire à quelqu'un ou à l'entreprise."/>
+
+        <Source 
+          id = "IMI" 
+          intitule = "Source humaine interne, malveillante, avec des capacités illimitées."
+          exemple = "Agent connaissant bien l'entreprise et le système, ayant accès au système et voulant nuire à quelqu'un ou à l'entreprise."/>
+
+        <Source 
+          id = "EMF" 
+          intitule = "Source humaine externe malveillante, avec de faibles capacités."
+          exemple = "Vandales, hackers naïfs,  client mécontent."/>
+
+        <Source 
+          id = "EMM" 
+          intitule = "Source humaine externe, malveillante, avec des capacités importantes."
+          exemple = "Organisation de hackers, ancien agents, concurrent."/>
+
+        <Source 
+          id = "EMI" 
+          intitule = "Source humaine externe, malveillante, avec des capacités illimitées."
+          exemple = "Organisation criminelle, mercenaire, organisation gouvernementale."/>
+
+        <Source 
+          id = "IAF" 
+          intitule = "Source humaine interne, sans intention de nuire, avec de faibles capacités."
+          exemple = "Stagiaires, prestataires."/>
+
+        <Source 
+          id = "IAM" 
+          intitule = "Source humaine interne, sans intention de nuire, avec des capacités importantes."
+          exemple = "Agents."/>
+
+        <Source 
+          id = "IAI" 
+          intitule = "Source humaine interne, sans intention de nuire, avec des capacités illimitées."
+          exemple = "Administrateurs système."/>
+
+        <Source 
+          id = "EAF" 
+          intitule = "Source humaine externe sans intention de nuire, avec de faibles capacités."
+          exemple = "Entourage du personnel, travaux aux alentours des ouvrages et/ou équipements du système."/>
+
+        <Source 
+          id = "EAM" 
+          intitule = "Source humaine externe, sans intention de nuire, avec des capacités importantes."
+          exemple = "Tout ce qui est lié à l'activité humaine: CEM, pollution…"/>
+
+        <Source 
+          id = "EAI" 
+          intitule = "Source humaine externe, sans intention de nuire, avec des capacités illimitées."
+          exemple = "Opérateurs réseaux télécom."/>
+
+        <Source 
+          id = "VIR" 
+          intitule = "Code malveillant d'origine inconnue."
+          exemple = "Virus, code malveillant, virus sur étagère / virus spécifique."/>
+
+        <Source 
+          id = "NAT" 
+          intitule = "Phénomène naturel."
+          exemple = "Foudre, vents forts, neige, canicule, usure."/>
+
+        <Source 
+          id = "CAT" 
+          intitule = "Catastrophe naturelle ou sanitaire."
+          exemple = "Séisme, incendie, pandémie de grande ampleur."/>
+
+        <Source 
+          id = "ANI" 
+          intitule = "Activité animale."
+          exemple = "Dans ou à proximité des ouvrages."/>
+
+        <Source 
+          id = "EVE" 
+          intitule = "Evénement interne."
+          exemple = "Feu des locaux, travaux dans les locaux, fuite de canalisation."/>
+
+        <Source 
+          id = "DEF" 
+          intitule = "Panne ou défaillance intrinsèque du composant."
+          exemple = "Panne d'un ordinateur bureautique."/>    
+    
+    </SourcesDeMenaces>
+    
+</bdc>

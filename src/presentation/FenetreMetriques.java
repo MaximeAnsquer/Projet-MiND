@@ -188,7 +188,8 @@ public class FenetreMetriques extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int niveauSelectionne = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-				modele.supprimerNiveau(niveauSelectionne);				
+				modele.supprimerNiveau(niveauSelectionne);		
+				boutonSupprimer.setEnabled(false);
 			}
 		});
 		return boutonSupprimer;
