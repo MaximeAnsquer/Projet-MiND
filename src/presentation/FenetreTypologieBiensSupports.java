@@ -15,11 +15,11 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import controleTypologieBiensSupports.ControlJButtonAide;
-import controleTypologieBiensSupports.ControlJButtonAjoutTypeBien;
-import controleTypologieBiensSupports.ControlJButtonSuppressionTypeBien;
-import controleTypologieBiensSupports.ControlJTable;
-import controleTypologieBiensSupports.ControlJTextArea;
+import controle.TypologieBiensSupports.ControlJButtonAide;
+import controle.TypologieBiensSupports.ControlJButtonAjoutTypeBien;
+import controle.TypologieBiensSupports.ControlJButtonSuppressionTypeBien;
+import controle.TypologieBiensSupports.ControlJTable;
+import controle.TypologieBiensSupports.ControlJTextArea;
 import abstraction.modules.TypologieDesBiensSupports;
 
 public class FenetreTypologieBiensSupports extends JFrame {

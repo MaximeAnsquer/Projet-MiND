@@ -1,4 +1,4 @@
-package controleTypologieBiensSupports;
+package controle.TypologieBiensSupports;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
