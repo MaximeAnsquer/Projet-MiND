@@ -20,7 +20,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	private Etude etude;
 	private EvenementsRedoutes evenements;
 	ArrayList<Object> data;
-	ArrayList<String> entetes;
+	ArrayList<String> entetes=new ArrayList<String>();
 	
 	
 	
@@ -28,15 +28,35 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		this.etude=MainMaximeEtienne.etude;
 		this.evenements=(EvenementsRedoutes)etude.getModule("EvenementsRedoutes");
 		int a=this.evenements.getEvenementsRedoutes().size();
+		
 		System.out.println(a+"");
 		this.data=new ArrayList<Object>();
 			
 				for(int j=0;j<a;j++){
 					System.out.println(this.evenements.getEvenementsRedoutes().get(j).GetNomEvenement());
 					this.data.add(this.evenements.getEvenementsRedoutes().get(j));
+					
+				}
+				
+				this.entetes.add("Nom evênement");
+				this.entetes.add("Bien essentiel");
+				this.entetes.add("Critère");
+				this.entetes.add("Exigence");
+				this.entetes.add("Gravité");
+			
+				
+				if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
+					int b=this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();
+				for(int i=0;i<b;i++){
+				this.entetes.add(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().get(i));
+				
+				}
 				}
 				
 			}
+	public String getColumnName(int columnIndex) {
+		return entetes.get(columnIndex);
+	}
 			
 		
 
