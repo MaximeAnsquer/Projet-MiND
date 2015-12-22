@@ -50,7 +50,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	public void setUpComBo() {
 	TableColumn exColumn = this.tableau.getColumnModel().getColumn(modele.getColumnCount()-2);
 	
-	JComboBox comboBoxex=this.evenements.getEvenementsRedoutes().get(0).getComboExigence();
+	final JComboBox comboBoxex=this.evenements.getEvenementsRedoutes().get(0).getComboExigence();
 	exColumn.setCellEditor(new DefaultCellEditor(comboBoxex));
 	exColumn.setPreferredWidth(200);
 	
@@ -59,7 +59,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 	
 	TableColumn gravColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-1);
-	JComboBox comboBoxgrav=this.evenements.getEvenementsRedoutes().get(0).getComboGravite();
+	final JComboBox comboBoxgrav=this.evenements.getEvenementsRedoutes().get(0).getComboGravite();
 	
 	gravColumn.setCellEditor(new DefaultCellEditor(comboBoxgrav));
 	gravColumn.setPreferredWidth(200);
@@ -80,7 +80,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 			
 	comboBoxgrav.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					tableau.setValueAt(comboBoxex.getSelectedItem(), tableau.getSelectedRow(), tableau.getSelectedColumn());
+					tableau.setValueAt(comboBoxgrav.getSelectedItem(), tableau.getSelectedRow(), tableau.getSelectedColumn());
 					
 		}
 	});
