@@ -1,7 +1,7 @@
 package abstraction.autres;
 
 /**
- * Classe representant un critère ; utile au module " Critères de securite ".
+ * Classe representant un critere ; utile au module " Criteres de securite ".
  * @author Maxime Ansquer 
  */
 
@@ -66,12 +66,12 @@ public class Critere {
 	//---Services---
 		
 	public String toString(){
-		return "{Critère : id = "+this.getId()+" ; intitule : "+this.getIntitule()
+		return "{Critere : id = "+this.getId()+" ; intitule : "+this.getIntitule()
 				+" ; retenu : "+this.isRetenu()+"}";
 	}
 	
 	/**
-	 * vérifie si tous les attributs sont biens renseignés
+	 * verifie si tous les attributs sont biens renseignes
 	 * @return
 	 */
 	public boolean estComplet(){

@@ -143,7 +143,7 @@ public class MainMaximeAnsquer extends JFrame {
 			});
 			partieDeGauche.add(boutonWorkflow);
 			
-			JButton boutonVerifier = new JButton("Vérifier la cohérence");
+			JButton boutonVerifier = new JButton("Verifier la coherence");
 			boutonVerifier.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					String nom = moduleEnCours.getNom();
@@ -173,7 +173,7 @@ public class MainMaximeAnsquer extends JFrame {
 		etudeDeTest.addModule(new BiensSupports());
 		etudeDeTest.addModule(new BiensEssentiels());
 		etudeDeTest.addModule(new MappingDesBiens((BiensSupports)etudeDeTest.getModule("BiensSupports"), (BiensEssentiels)etudeDeTest.getModule("BiensEssentiels")));
-		etudeDeTest.addModule(new EvenementsRedoutes(etudeDeTest));
+		//etudeDeTest.addModule(new EvenementsRedoutes(etudeDeTest));
 
 		return etudeDeTest;
 	}

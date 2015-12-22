@@ -110,7 +110,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Intitulé de la source de menace"),
+								BorderFactory.createTitledBorder("Intitule de la source de menace"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		return areaScrollPane;
@@ -184,7 +184,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
-		private final String[] entetes = {"Id", "Intitulé", "Exemple", "Retenu"};
+		private final String[] entetes = {"Id", "Intitule", "Exemple", "Retenu"};
 
 		public ModeleDynamiqueObjet() {
 			super();		}
@@ -219,7 +219,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		public void ajouterSource() {
 			String id = JOptionPane.showInputDialog("Id ?");
 			if(sdm.getSourceDeMenace(id) != null){
-				JOptionPane.showMessageDialog(null, "Cet id est déjà utilisé.", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Cet id est deja utilise.", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 			else{
 				String intitule = JOptionPane.showInputDialog("Intitule ?");

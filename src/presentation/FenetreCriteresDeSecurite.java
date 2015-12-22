@@ -233,13 +233,13 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		}
 
 		public void ajouterCritere() {
-			String Id = JOptionPane.showInputDialog("Veuillez entrer l'id du critère.");
-			String Intitule = JOptionPane.showInputDialog("Veuillez entrer l'intitulé du critère.");
+			String Id = JOptionPane.showInputDialog("Veuillez entrer l'id du critere.");
+			String Intitule = JOptionPane.showInputDialog("Veuillez entrer l'intitule du critere.");
 			if(cds.getCritere(Intitule) != null){
-				JOptionPane.showMessageDialog(null, "Le critere existe déjà.", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Le critere existe deja.", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 			else{
-				String Description = JOptionPane.showInputDialog("Veuillez entrer la description du critère.");
+				String Description = JOptionPane.showInputDialog("Veuillez entrer la description du critere.");
 				Critere critere = new Critere(Id, Intitule, Description);
 				cds.ajouterCritere(critere);
 				fireTableRowsInserted(cds.nombreDeCriteres() -1, cds.nombreDeCriteres() -1);
