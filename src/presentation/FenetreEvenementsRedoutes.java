@@ -38,7 +38,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.setUpComBo();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		this.add(this.tableau);
+		
 		
 		
 		
@@ -84,6 +84,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 					
 		}
 	});
+	
 	
 	 }
 	
