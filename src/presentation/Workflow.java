@@ -72,7 +72,7 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
-		this.add(new JButton("Module manquant"));
+		this.add(lesBoutons.get("EvenementsRedoutes"));
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
