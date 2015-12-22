@@ -57,6 +57,7 @@ public class Metriques extends Module {
 	 */
 	public Metriques(Etude etude) {
 		super("Metriques");
+		System.out.println("Construction du module Metriques");
 		
 		this.etude = etude;
 		
@@ -90,6 +91,7 @@ public class Metriques extends Module {
 		}
 		//On ajoute également les métriques Gravité et Vraisemblance
 		this.lesMetriques.put("Gravité", bdcMetriques.get("Gravité"));
+		this.lesMetriques.put("Vraisemblance", bdcMetriques.get("Vraisemblance"));
 		
 		
 	}	
@@ -162,7 +164,7 @@ public class Metriques extends Module {
 					 * Construction d'une métrique
 					 */
 					
-					String intituleCritere = metrique.getElementsByTagName("Critere").item(0).getTextContent();
+					String intituleCritere = metrique.getElementsByTagName("Critere").item(0).getTextContent();					
 					Critere critere = ((CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite")).getCritere(intituleCritere);
 					
 					ArrayList<NiveauDeMetrique> lesNiveaux = new ArrayList<NiveauDeMetrique>();
@@ -199,34 +201,7 @@ public class Metriques extends Module {
 		}
 		catch (final IOException e) {
 			e.printStackTrace();
-		}	
-		
-		ArrayList<NiveauDeMetrique> niveauxConfidentialite = new ArrayList<NiveauDeMetrique>();
-		niveauxConfidentialite.add(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
-		niveauxConfidentialite.add(new NiveauDeMetrique(2, "Entreprise", "La connaissance s'organise sur un perimetre d'acces a la maille d'ERDF."));
-		niveauxConfidentialite.add(new NiveauDeMetrique(3, "Restreint", "La connaissance est limite a des personnes, fonctions ou a un perimetre restreint lie a une activite."));
-		niveauxConfidentialite.add(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
-		Metrique metriqueConfidentialite = new Metrique(cds.getCritere("Confidentialite"), niveauxConfidentialite);
-		
-		ArrayList<NiveauDeMetrique> niveauxDisponibilite = new ArrayList<NiveauDeMetrique>();
-		niveauxDisponibilite.add(new NiveauDeMetrique(1, "Libre", "Aucune mesure particuliere ne doit etre mise en oeuvre"));
-		niveauxDisponibilite.add(new NiveauDeMetrique(2, "Entreprise", "La connaissance s'organise sur un perimetre d'acces a la maille d'ERDF."));
-		niveauxDisponibilite.add(new NiveauDeMetrique(3, "Restreint", "La connaissance est limite a des personnes, fonctions ou a un perimetre restreint lie a une activite."));
-		niveauxDisponibilite.add(new NiveauDeMetrique(4, "Confidentiel", "Ne doit etre connu que par des personnes nommement designees et autorisees a cet effet."));
-		Metrique metriqueDisponibilite = new Metrique(cds.getCritere("Disponibilite"), niveauxDisponibilite);
-		
-		ArrayList<NiveauDeMetrique> niveauxGravite = new ArrayList<NiveauDeMetrique>();
-		niveauxGravite.add(new NiveauDeMetrique(1, "Pas grave", "YOLO"));
-		niveauxGravite.add(new NiveauDeMetrique(2, "Un peu grave", "Mince"));
-		niveauxGravite.add(new NiveauDeMetrique(3, "Ca commence à être la merde", "Saloperie"));
-		niveauxGravite.add(new NiveauDeMetrique(4, "On est foutus", "Suicide collectif"));
-		Metrique metriqueGravite = new Metrique(new Critere("Gr", "Gravité", "" ), niveauxGravite);
-		
-				
-		bdcMetriques.put("Confidentialite", metriqueConfidentialite);
-		bdcMetriques.put("Disponibilite", metriqueDisponibilite);
-		bdcMetriques.put("Gravité", metriqueGravite);
-		
+		}			
 	}
 		
 	public Hashtable<String, Metrique> getBDC(){
@@ -274,7 +249,8 @@ public class Metriques extends Module {
 				}
 			}			
 		}
-		resultat.add(this.bdcMetriques.get("Gravité"));
+		resultat.add(this.getGravite());
+		resultat.add(this.getVraisemblance());
 		return resultat;
 	}
 	

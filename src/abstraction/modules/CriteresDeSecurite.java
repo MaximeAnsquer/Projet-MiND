@@ -39,7 +39,10 @@ public class CriteresDeSecurite extends Module{
 	/**
 	 * Hashtable reference par l'intitule des criteres
 	 */
-	private Hashtable<String,Critere> lesCriteres;	
+	private Hashtable<String,Critere> lesCriteres;
+
+	private Critere gravite;	
+	private Critere vraisemblance;
 
 	//---Constructeurs---	
 
@@ -49,6 +52,7 @@ public class CriteresDeSecurite extends Module{
 	 */
 	public CriteresDeSecurite() {
 		super("CriteresDeSecurite");		
+		System.out.println("Construction du module CriteresDeSecurite");
 		/**
 		 * TODO : comment�e pour faire des tests, e� d�ecommenter apres
 		 * 
@@ -61,6 +65,9 @@ public class CriteresDeSecurite extends Module{
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
+
+		this.gravite = new Critere("Gravité", "Gravité", "Gravité");
+		this.vraisemblance = new Critere("Vraisemblance", "Vraisemblance", "Vraisemblance");
 
 		this.importerBDC();  //on remplit la BDC
 		this.lesCriteres = bdcCriteresDeSecurite;  //on initialise l'onglet avec les valeurs de la BDC
@@ -77,7 +84,23 @@ public class CriteresDeSecurite extends Module{
 	}
 
 	public Critere getCritere(String intituleCritere){
-		return this.lesCriteres.get(intituleCritere);
+		if(intituleCritere.equals("Gravité")){
+			return this.getGravite();
+		}
+		else if(intituleCritere.equals("Vraisemblance")){
+			return this.getVraisemblance();
+		}
+		else{
+			return this.lesCriteres.get(intituleCritere);			
+		}
+	}
+
+	private Critere getVraisemblance() {
+		return this.vraisemblance;
+	}
+
+	private Critere getGravite() {
+		return this.gravite;
 	}
 
 	public static Hashtable<String,Critere> getBDC(){
@@ -120,21 +143,21 @@ public class CriteresDeSecurite extends Module{
 			for (int i = 0; i<nbCriteres; i++) {
 				if(listeCriteres.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					final Element critere = (Element) listeCriteres.item(i);
-					
+
 					/*
 					 * Construction d'un critère
 					 */
-					
+
 					String id = critere.getElementsByTagName("Id").item(0).getTextContent();
 					String intitule = critere.getElementsByTagName("Intitule").item(0).getTextContent();
 					String description = critere.getElementsByTagName("Description").item(0).getTextContent();
-					
+
 					Critere c = new Critere(id, intitule, description);
-					
+
 					/*
 					 * Ajout du critère à la bdc
 					 */
-					
+
 					bdcCriteresDeSecurite.put(intitule, c);				}				
 			}			
 		}

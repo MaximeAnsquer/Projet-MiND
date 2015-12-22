@@ -123,6 +123,56 @@
                 </Niveau>
             </Niveaux>
         </Metrique>
+        <Metrique>
+            <Critere>Gravité</Critere>
+            <Niveaux>
+                <Niveau>
+                    <Numero>1</Numero>
+                    <Intitule>Négligeable</Intitule>
+                    <Description>Gravité négligeable</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>2</Numero>
+                    <Intitule>Limitée</Intitule>
+                    <Description>Gravité limitée</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>3</Numero>
+                    <Intitule>Importante</Intitule>
+                    <Description>Gravité importante</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>4</Numero>
+                    <Intitule>Critique</Intitule>
+                    <Description>Gravité critique</Description>
+                </Niveau>
+            </Niveaux>
+        </Metrique>
+        <Metrique>
+            <Critere>Vraisemblance</Critere>
+            <Niveaux>
+                <Niveau>
+                    <Numero>1</Numero>
+                    <Intitule>Minime</Intitule>
+                    <Description>Minime</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>2</Numero>
+                    <Intitule>Significative</Intitule>
+                    <Description>Significative</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>3</Numero>
+                    <Intitule>Forte</Intitule>
+                    <Description>Forte</Description>
+                </Niveau>
+                <Niveau>
+                    <Numero>4</Numero>
+                    <Intitule>Maximale</Intitule>
+                    <Description>Maximale</Description>
+                </Niveau>
+            </Niveaux>
+        </Metrique>
     </Metriques>
     <SourcesDeMenaces>
     
