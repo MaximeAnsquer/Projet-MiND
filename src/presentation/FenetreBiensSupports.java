@@ -38,9 +38,14 @@ public class FenetreBiensSupports extends JPanel{
 	private JTable table;
 	private JTextArea zoneDescription;
 	private JButton boutonModifierDescription;
+	private JButton boutonSupprimerColonne;
+	private JButton boutonSupprimerLigne;
+	private BiensSupports biensSupports;
 
-	public FenetreBiensSupports(){
+	public FenetreBiensSupports(BiensSupports biensSupports){
 		this.setVisible(true);
+		this.boutonSupprimerColonne.setEnabled(false);
+		this.biensSupports=biensSupports;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.addMouseListener(new MouseListener(){
@@ -117,38 +122,38 @@ public class FenetreBiensSupports extends JPanel{
 	}
 	
 	private Bien getBienSelectionne(){
-		Bien c;
+		Bien b;
 		try{
-			c = ( (ModeleDynamiqueObjet)table.getModel() ).biens.getBien(table.getSelectedRow());
+			b = biensSupports.getBien(table.getSelectedRow());
 		}
 		catch(ArrayIndexOutOfBoundsException e){
-			c = ( (ModeleDynamiqueObjet)table.getModel() ).biens.getBien(0);
+			b = biensSupports.getBien(0);
 		}
-		return c;
+		return b;
 	}
 
 	private JButton boutonSupprimerColonne() {
-		JButton bouton = new JButton("Supprimer la premiere categorie");
-		bouton.addActionListener(new ActionListener(){
+		this.boutonSupprimerColonne = new JButton("Supprimer la premiere categorie");
+		boutonSupprimerColonne.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 				modele.supprimerCategorie(ligneSelectionnee);
 			}
 		});
-		return bouton;
+		return boutonSupprimerColonne;
 	}
 
 	private JButton boutonSupprimerLigne() {
-		JButton bouton = new JButton("Supprimer un bien support");
-		bouton.addActionListener(new ActionListener(){
+		this.boutonSupprimerLigne = new JButton("Supprimer un bien support");
+		boutonSupprimerLigne.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 				modele.supprimerBienEssentiel(ligneSelectionnee);
 			}
 		});
-		return bouton;
+		return boutonSupprimerLigne;
 	}
 
 	private JButton boutonAjouterColonne() {
@@ -176,7 +181,6 @@ public class FenetreBiensSupports extends JPanel{
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		private Etude etude = MainFrancois.etude;
-		private BiensSupports biens = (BiensSupports) etude.getModule("BiensSupports");
 		private final LinkedList<String> entetes = new LinkedList<String>();
 		private LinkedList<ArrayList<String>> colonnesSup = new LinkedList<ArrayList<String>>();
 
@@ -191,18 +195,34 @@ public class FenetreBiensSupports extends JPanel{
 		
 		public void supprimerCategorie(int ligneSelectionnee) {
 			if (colonnesSup.size()!=0){
-				entetes.removeFirst();
-				colonnesSup.removeLast();
-				fireTableStructureChanged();
-			}	
+				if (colonnesSup.size()==1){
+					entetes.removeFirst();
+					colonnesSup.removeLast();
+					boutonSupprimerColonne.setEnabled(false);
+					fireTableStructureChanged();
+				}
+				else{
+					entetes.removeFirst();
+					colonnesSup.removeLast();
+					fireTableStructureChanged();
+				}
+			}
 		}
 
 		public void supprimerBienEssentiel(int ligneSelectionnee) {
-			if (biens.getLesBiens().size()!=0){
-				Bien bien = biens.getBien(ligneSelectionnee);
-				biens.supprimerBien(bien.getIntitule());
-				fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
-			}		
+			if (biensSupports.getLesBiens().size()!=0){
+				if (biensSupports.getLesBiens().size()==1){
+					Bien bien = biensSupports.getBien(ligneSelectionnee);
+					biensSupports.supprimerBien(bien.getIntitule());
+					boutonSupprimerLigne.setEnabled(false);
+					fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+				}
+				else{
+					Bien bien = biensSupports.getBien(ligneSelectionnee);
+					biensSupports.supprimerBien(bien.getIntitule());
+					fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+				}
+			}
 		}
 
 		public void ajouterCategorie() {
@@ -212,6 +232,7 @@ public class FenetreBiensSupports extends JPanel{
 				colonnesSup.getFirst().add(i, "");
 			}
 			entetes.addFirst(categorie);
+			boutonSupprimerColonne.setEnabled(true);
 			fireTableStructureChanged();	
 		}
 
@@ -222,12 +243,13 @@ public class FenetreBiensSupports extends JPanel{
 			String type = JOptionPane.showInputDialog("Type ?");
 			String Description = JOptionPane.showInputDialog("Description ?");
 			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
-			biens.ajouterBien(bien);
-			fireTableRowsInserted(biens.nombreDeBiens() -1, biens.nombreDeBiens() -1);
+			biensSupports.ajouterBien(bien);
+			boutonSupprimerLigne.setEnabled(true);
+			fireTableRowsInserted(biensSupports.nombreDeBiens() -1, biensSupports.nombreDeBiens() -1);
 		}
 
 		public int getRowCount() {
-			return biens.nombreDeBiens();
+			return biensSupports.nombreDeBiens();
 		}
 
 		public int getColumnCount() {
@@ -241,13 +263,13 @@ public class FenetreBiensSupports extends JPanel{
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			switch(this.getColumnCount()-columnIndex-1){
 			case 3:
-				return biens.getBien(rowIndex).getIntitule();
+				return biensSupports.getBien(rowIndex).getIntitule();
 			case 2:
-				return biens.getBien(rowIndex).getDescription();
+				return biensSupports.getBien(rowIndex).getDescription();
 			case 1:
-				return biens.getBien(rowIndex).getType();
+				return biensSupports.getBien(rowIndex).getType();
 			case 0:
-				return biens.getBien(rowIndex).isRetenu();
+				return biensSupports.getBien(rowIndex).isRetenu();
 			default:
 				if(colonnesSup.get(columnIndex)!=null){
 					return colonnesSup.get(columnIndex).get(rowIndex);
@@ -273,7 +295,7 @@ public class FenetreBiensSupports extends JPanel{
 		
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		    if(aValue != null){
-		        Bien bien = biens.getBien(rowIndex);
+		        Bien bien = biensSupports.getBien(rowIndex);
 		 
 		        switch(this.getColumnCount()-columnIndex-1){
 		            case 3:

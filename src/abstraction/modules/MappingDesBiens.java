@@ -64,4 +64,8 @@ public class MappingDesBiens extends Module{
 	public void setBiensEssentiels(BiensEssentiels biensEssentiels){
 		this.biensEssentiels=biensEssentiels;
 	}
+	
+	public String toString(){
+		return "Mapping Des Biens";
+	}
 }

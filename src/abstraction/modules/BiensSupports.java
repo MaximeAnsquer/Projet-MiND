@@ -85,4 +85,7 @@ public class BiensSupports extends Module{
 		this.retenirBien(bien.getIntitule());
 	}
 	
+	public String toString(){
+		return "Biens Supports";
+	}
 }

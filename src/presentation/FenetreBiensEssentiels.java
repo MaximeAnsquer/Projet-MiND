@@ -23,6 +23,7 @@ import javax.swing.table.AbstractTableModel;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
+import abstraction.autres.Critere;
 import abstraction.modules.BiensEssentiels;
 
 /**
@@ -37,8 +38,13 @@ public class FenetreBiensEssentiels extends JPanel{
 	private JTable table;
 	private JTextArea zoneDescription;
 	private JButton boutonModifierDescription;
+	private JButton boutonSupprimerColonne;
+	private JButton boutonSupprimerLigne;
+	private BiensEssentiels biensEssentiels;
 
-	public FenetreBiensEssentiels(){
+	public FenetreBiensEssentiels(BiensEssentiels biensEssentiels){
+		this.biensEssentiels = biensEssentiels;
+		this.boutonSupprimerColonne.setEnabled(false);
 		this.setVisible(true);
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -116,38 +122,38 @@ public class FenetreBiensEssentiels extends JPanel{
 	}
 	
 	private Bien getBienSelectionne(){
-		Bien c;
+		Bien b;
 		try{
-			c = ( (ModeleDynamiqueObjet)table.getModel() ).biens.getBien(table.getSelectedRow());
+			b = biensEssentiels.getBien(table.getSelectedRow());
 		}
 		catch(ArrayIndexOutOfBoundsException e){
-			c = ( (ModeleDynamiqueObjet)table.getModel() ).biens.getBien(0);
+			b= biensEssentiels.getBien(0);
 		}
-		return c;
+		return b;
 	}
 	
 	private JButton boutonSupprimerColonne() {
-		JButton bouton = new JButton("Supprimer la premiere categorie");
-		bouton.addActionListener(new ActionListener(){
+		this.boutonSupprimerColonne = new JButton("Supprimer la premiere categorie");
+		boutonSupprimerColonne.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 				modele.supprimerCategorie(ligneSelectionnee);
 			}
 		});
-		return bouton;
+		return boutonSupprimerColonne;
 	}
 
 	private JButton boutonSupprimerLigne() {
-		JButton bouton = new JButton("Supprimer un bien essentiel");
-		bouton.addActionListener(new ActionListener(){
+		this.boutonSupprimerLigne = new JButton("Supprimer un bien essentiel");
+		boutonSupprimerLigne.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 				modele.supprimerBienEssentiel(ligneSelectionnee);
 			}
 		});
-		return bouton;
+		return boutonSupprimerLigne;
 	}
 
 	private JButton boutonAjouterColonne() {
@@ -175,7 +181,6 @@ public class FenetreBiensEssentiels extends JPanel{
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		private Etude etude = MainFrancois.etude;
-		private BiensEssentiels biens = (BiensEssentiels) etude.getModule("BiensEssentiels");
 		private final LinkedList<String> entetes = new LinkedList<String>();
 		private LinkedList<ArrayList<String>> colonnesSup = new LinkedList<ArrayList<String>>();
 		
@@ -188,17 +193,34 @@ public class FenetreBiensEssentiels extends JPanel{
 		
 		public void supprimerCategorie(int ligneSelectionnee) {
 			if (colonnesSup.size()!=0){
-				entetes.removeFirst();
-				colonnesSup.removeLast();
-				fireTableStructureChanged();
+				if (colonnesSup.size()!=0){
+					entetes.removeFirst();
+					colonnesSup.removeLast();
+					boutonSupprimerColonne.setEnabled(false);
+					fireTableStructureChanged();
+				}
+				else{
+					entetes.removeFirst();
+					colonnesSup.removeLast();
+					fireTableStructureChanged();
+				}
+				
 			}
 		}
 
 		public void supprimerBienEssentiel(int ligneSelectionnee) {
-			if (biens.getLesBiens().size()!=0){
-				Bien bien = biens.getBien(ligneSelectionnee);
-				biens.supprimerBien(bien.getIntitule());
-				fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+			if (biensEssentiels.getLesBiens().size()!=0){
+				if (biensEssentiels.getLesBiens().size()==1){
+					Bien bien = biensEssentiels.getBien(ligneSelectionnee);
+					biensEssentiels.supprimerBien(bien.getIntitule());
+					boutonSupprimerLigne.setEnabled(false);
+					fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+				}
+				else{
+					Bien bien = biensEssentiels.getBien(ligneSelectionnee);
+					biensEssentiels.supprimerBien(bien.getIntitule());
+					fireTableRowsDeleted(ligneSelectionnee, ligneSelectionnee);
+				}
 			}	
 		}
 
@@ -209,6 +231,7 @@ public class FenetreBiensEssentiels extends JPanel{
 				colonnesSup.getFirst().add(i, "");
 			}
 			entetes.addFirst(categorie);
+			boutonSupprimerColonne.setEnabled(true);
 			fireTableStructureChanged();	
 			
 		}
@@ -220,13 +243,13 @@ public class FenetreBiensEssentiels extends JPanel{
 			String type = "";
 			String Description = JOptionPane.showInputDialog("Description ?");
 			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
-			biens.ajouterBien(bien);
-
-			fireTableRowsInserted(biens.nombreDeBiens() -1, biens.nombreDeBiens() -1);
+			biensEssentiels.ajouterBien(bien);
+			boutonSupprimerLigne.setEnabled(true);
+			fireTableRowsInserted(biensEssentiels.nombreDeBiens() -1, biensEssentiels.nombreDeBiens() -1);
 		}
 
 		public int getRowCount() {
-			return biens.nombreDeBiens();
+			return biensEssentiels.nombreDeBiens();
 		}
 
 		public int getColumnCount() {
@@ -240,11 +263,11 @@ public class FenetreBiensEssentiels extends JPanel{
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			switch(this.getColumnCount()-columnIndex-1){
 			case 2:
-				return biens.getBien(rowIndex).getIntitule();
+				return biensEssentiels.getBien(rowIndex).getIntitule();
 			case 1:
-				return biens.getBien(rowIndex).getDescription();
+				return biensEssentiels.getBien(rowIndex).getDescription();
 			case 0:
-				return biens.getBien(rowIndex).isRetenu();
+				return biensEssentiels.getBien(rowIndex).isRetenu();
 			default:
 				if(colonnesSup.get(columnIndex)!=null){
 					return colonnesSup.get(columnIndex).get(rowIndex);
@@ -270,7 +293,7 @@ public class FenetreBiensEssentiels extends JPanel{
 		
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		    if(aValue != null){
-		        Bien bien = biens.getBien(rowIndex);
+		        Bien bien = biensEssentiels.getBien(rowIndex);
 		 
 		        switch(this.getColumnCount()-columnIndex-1){
 		            case 2:

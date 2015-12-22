@@ -18,10 +18,12 @@ import abstraction.modules.MappingDesBiens;
 public class FenetreMappingDesBiens extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTable table;
+	private MappingDesBiens mappingDesBiens;
 
 
-	public FenetreMappingDesBiens(){
+	public FenetreMappingDesBiens(MappingDesBiens mappingDesBiens){
 		this.setVisible(true);
+		this.mappingDesBiens=mappingDesBiens;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -32,9 +34,8 @@ public class FenetreMappingDesBiens extends JPanel{
 		private static final long serialVersionUID = 1L;
 		private final LinkedList<String> entetes = new LinkedList<String>();
 		private Etude etude = MainFrancois.etude;
-		private BiensEssentiels biensEssentiels = (BiensEssentiels) etude.getModule("BiensEssentiels");
-		private BiensSupports biensSupports = (BiensSupports) etude.getModule("BiensSupports");
-		private MappingDesBiens mapping = new MappingDesBiens(biensSupports,biensEssentiels);
+		private BiensEssentiels biensEssentiels = mappingDesBiens.getBiensEssentiels();
+		private BiensSupports biensSupports = mappingDesBiens.getBiensSupports();
 
 		
 		public ModeleDynamiqueObjet() {
@@ -67,7 +68,7 @@ public class FenetreMappingDesBiens extends JPanel{
 			case 0:
 				return biensEssentiels.getBien(rowIndex).getIntitule();	
 			default:
-				return mapping.getMappingDesBiens().get(rowIndex).getValueAt(columnIndex-1);
+				return mappingDesBiens.getMappingDesBiens().get(rowIndex).getValueAt(columnIndex-1);
 			}
 		}
 
@@ -82,7 +83,7 @@ public class FenetreMappingDesBiens extends JPanel{
 		    		break;
 				default:
 					//System.out.println(""+aValue);
-					mapping.getMappingDesBiens().get(rowIndex).setValueAt((String)aValue, columnIndex-1);
+					mappingDesBiens.getMappingDesBiens().get(rowIndex).setValueAt((String)aValue, columnIndex-1);
 					//System.out.println("value : "+mapping.getMappingDesBiens().get(rowIndex).getValueAt(columnIndex-1));
 					break;
 				}

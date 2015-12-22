@@ -5,8 +5,8 @@ import java.util.Hashtable;
 import abstraction.autres.*;
 
 /**
- * Cette classe correspond à la modélisation de la base de données préexistante
- * de biens essentiels augmentée de nouveaux biens essentiels que l'on peut
+ * Cette classe correspond ï¿½ la modï¿½lisation de la base de donnï¿½es prï¿½existante
+ * de biens essentiels augmentï¿½e de nouveaux biens essentiels que l'on peut
  * rajouter
  * 
  * @author Francois Adam
@@ -97,5 +97,9 @@ public class BiensEssentiels extends Module {
 
 	public void retenirBien(Bien bien) {
 		this.retenirBien(bien.getIntitule());
+	}
+	
+	public String toString(){
+		return "Biens Essentiels";
 	}
 }
