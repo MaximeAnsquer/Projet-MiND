@@ -87,6 +87,8 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		// TODO Auto-generated method stub		
 	}
 	
-	
+	public String toString(){
+		return "Scenarios de menaces génériques";
+	}
 	
 }

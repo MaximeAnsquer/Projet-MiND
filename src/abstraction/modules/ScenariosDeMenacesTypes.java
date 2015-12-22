@@ -42,5 +42,8 @@ public class ScenariosDeMenacesTypes extends Module {
 	private void importerBDC() {
 		// TODO Auto-generated method stub
 	}
-
+	
+	public String toString(){
+		return "Scénarios de menaces typés";
+	}
 }
