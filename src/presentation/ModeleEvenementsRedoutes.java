@@ -92,12 +92,21 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 			if(aValue != null){
+				
 				Evenement ev = evenements.getEvenementsRedoutes().get(rowIndex);
 				
 				switch(this.getColumnCount()-columnIndex-1){
 				case 4:
 					ev.setNomEvenement((String)aValue);
 					break;
+				case 1:
+					ev.getComboExigence().getSelectedItem();
+					ev.getComboExigence().setSelectedIndex(ev.getComboExigence().getSelectedIndex());
+					
+					break;
+				case 0:
+					ev.getComboGravite().getSelectedItem();
+					ev.getComboGravite().setSelectedIndex(ev.getComboGravite().getSelectedIndex());
 
 				}
 			}
