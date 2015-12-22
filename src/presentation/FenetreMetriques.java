@@ -3,7 +3,6 @@ package presentation;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -17,7 +16,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,7 +27,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
 import abstraction.autres.Metrique;
 import abstraction.autres.NiveauDeMetrique;
 import abstraction.modules.Metriques;
@@ -80,6 +77,10 @@ public class FenetreMetriques extends JPanel {
 
 		//On n'autorise la selection que d'une seule ligne a la fois
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		//On change la police et la hauteur des lignes
+		table.setFont(new Font("Arial", Font.PLAIN, 15));
+		table.setRowHeight(50);
 
 		//On ajoute un listener qui joue sur l'affichage de la description d'une part, et sur le bouton " modifier " d'autre part
 		table.addMouseListener(new MouseListener(){
@@ -101,6 +102,16 @@ public class FenetreMetriques extends JPanel {
 			public void mouseExited(MouseEvent e) {
 			}			
 		});
+		
+		table.addKeyListener(new KeyListener(){
+
+			public void keyTyped(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
+				zoneDescription.setText(getNiveauSelectionne().getDescription());
+			}
+			
+		});
 
 		//On redimensionne les colonnes 
 		TableColumnModel columnModel = table.getColumnModel();		
@@ -115,7 +126,7 @@ public class FenetreMetriques extends JPanel {
 		label.setOpaque(true);
 		label.setBackground(Color.black);
 		label.setForeground(Color.white);
-		label.setFont(new Font("Arial", Font.BOLD, 13));
+		label.setFont(new Font("Arial", Font.BOLD, 15));
 		jpanel.add(label, BorderLayout.NORTH);		
 		jpanel.add(new JScrollPane(table), BorderLayout.CENTER);
 		jpanel.validate();
@@ -359,7 +370,7 @@ public class FenetreMetriques extends JPanel {
 					break;
 				}
 			}
-			setTableau();
+			zoneDescription.setText(getNiveauSelectionne().getDescription());
 		}
 	}
 

@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -44,10 +45,15 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 		//On redimensionne les colonnes 
 		TableColumnModel columnModel = table.getColumnModel();		
-		columnModel.getColumn(0).setMaxWidth(30);
+		columnModel.getColumn(0).setMaxWidth(40);
 		columnModel.getColumn(3).setMaxWidth(50);
 
+		//On change le mode de selection
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		//On change la police et la hauteur des lignes
+		table.setFont(new Font("Arial", Font.PLAIN, 15));
+		table.setRowHeight(50);
 
 		table.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent e) {}
@@ -63,6 +69,15 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
+		});
+		
+		table.addKeyListener(new KeyListener(){
+
+			public void keyTyped(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
+				zoneIntitule.setText(getSourceSelectionnee().getIntitule());			
+			}			
 		});
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -255,6 +270,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 					break;
 				}
 			}
+			zoneIntitule.setText(getSourceSelectionnee().getIntitule());
 		}
 	}
 
