@@ -1,9 +1,13 @@
 package presentation;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -63,9 +67,9 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		case 2:
 			return evenements.getEvenementsRedoutes().get(rowIndex).getNomCritere();
 		case 1:
-			return evenements.getEvenementsRedoutes().get(rowIndex).getComboExigence();
+			return evenements.getEvenementsRedoutes().get(rowIndex).getComboExigence().getSelectedItem();
 		case 0:
-			return evenements.getEvenementsRedoutes().get(rowIndex).getComboGravite();
+			return evenements.getEvenementsRedoutes().get(rowIndex).getComboGravite().getSelectedItem();
 		default:
 			if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size()!=0){
 				return this.evenements.getEvenementsRedoutes().get(rowIndex).getContenuGroupes().get(columnIndex);
@@ -77,7 +81,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	}
 	
 	public boolean isCellEditable(int row, int col){
-		if(this.getColumnCount()-col-1==4){
+		if(this.getColumnCount()-col-1==4||this.getColumnCount()-col-1==0||this.getColumnCount()-col-1==1){
 			return true;
 		}
 		else{
@@ -100,5 +104,8 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		
 		
 	}
+		
+		
 
 }
+ 
