@@ -135,11 +135,11 @@ public class TypologieDesBiensSupports extends Module {
 	}
 	
 	// On liste les Types de bien retenus
-	public Hashtable<String, TypeBien> getTypeBiensRetenus() {
-		Hashtable<String, TypeBien> resultat = new Hashtable<String, TypeBien>();
+	public ArrayList<TypeBien> getTypeBiensRetenus() {
+		ArrayList<TypeBien> resultat = new ArrayList<TypeBien>();
 		for (TypeBien type : this.getTableau().values()) {
 			if (type.isRetenu()) {
-				resultat.put(type.getIntitule(), type);
+				resultat.add(type);
 			}
 		}
 		return resultat;

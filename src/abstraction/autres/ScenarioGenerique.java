@@ -37,7 +37,7 @@ public class ScenarioGenerique {
 				new Hashtable<String, Critere>(), true);
 	}
 
-	// Constructeur : Ligne vide
+	// Constructeur : Scénario non retenu
 	public ScenarioGenerique() {
 		this(new TypeBien(), "", "",
 				new Hashtable<String, Critere>(), false);

@@ -8,12 +8,14 @@ import javax.swing.table.AbstractTableModel;
 import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.TypeBien;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
+import abstraction.modules.TypologieDesBiensSupports;
 
 public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	
+	private TypologieDesBiensSupports typologieDesBiensSupports = new TypologieDesBiensSupports();
 	private ScenariosDeMenacesGeneriques moduleCourant = new ScenariosDeMenacesGeneriques();
 	private LinkedList<String> entetes = new LinkedList<String>();
-	private LinkedList<ArrayList<String>> colonnesSup = new LinkedList<ArrayList<String>>();
+	private LinkedList<ArrayList<Boolean>> colonnesSup = new LinkedList<ArrayList<Boolean>>();
 	
 	public static final int COLONNE_TYPEBIENSUPPORT = 0;
 	public static final int COLONNE_ID = 1;
@@ -29,6 +31,11 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		entetes.add("Id");
 		entetes.add("Scénario générique");
 		entetes.add("Retenu");
+		
+		for(TypeBien type : this.typologieDesBiensSupports.getTypeBiensRetenus()){
+			// La clé est l'intitulé du TYPE !! (il ne faudra pas avoir plusieurs clés identiques)
+			this.moduleCourant.getTableau().put(type.getIntitule(), new ScenarioGenerique(type));
+		}
 	}
 	
 	public ScenariosDeMenacesGeneriques getModuleCourant(){
@@ -59,7 +66,54 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		case COLONNE_RETENU:
 			return this.moduleCourant.getScenarioGenerique(rowIndex).isRetenuScenario();
 		default:
-			return null; // Ne devrait jamais arriver
+			if(colonnesSup.get(columnIndex)!=null){
+				return colonnesSup.get(columnIndex).get(rowIndex);
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	
+	public boolean isCellEditable(int row, int col){
+		return true; 
+	}
+
+	public Class getColumnClass(int columnIndex){
+		switch(columnIndex){
+		case COLONNE_TYPEBIENSUPPORT:
+			return TypeBien.class;
+		case COLONNE_ID:
+			return String.class ;
+		case COLONNE_INTITULE:
+			return String.class ;
+		default:
+			return Boolean.class;
+		}
+	}
+	
+	public void setValueAt (Object aValue,int  rowIndex, int columnIndex){
+		if (aValue!= null){
+			ScenarioGenerique scenario = this.moduleCourant.getScenarioGenerique(rowIndex);
+			
+			switch (columnIndex) {
+	
+			case COLONNE_TYPEBIENSUPPORT:
+				scenario.setType((TypeBien) aValue);
+				break;
+			case COLONNE_ID:
+				scenario.setId((String) aValue);
+				break;
+			case COLONNE_INTITULE:
+				scenario.setIntitule((String) aValue);
+				break;
+			case COLONNE_RETENU:
+				scenario.setRetenuScenario((Boolean) aValue);
+				break;
+			default:
+				colonnesSup.get(columnIndex).set(rowIndex, ((Boolean)aValue));
+            	break;
+			}
 		}
 	}
 
