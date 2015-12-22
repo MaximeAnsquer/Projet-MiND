@@ -68,6 +68,7 @@ public class ModeleTypologieBiensSupports extends AbstractTableModel{
 				break;
 			case COLONNE_DESCRIPTION:
 				this.moduleCourant.getTypeBien(rowIndex).setDescription((String) aValue);
+				// ou this.moduleCourant.getTypeBienCourant().setDescription((String) aValue);
 				break;
 			case COLONNE_RETENUE:
 				this.moduleCourant.getTypeBien(rowIndex).setRetenu((Boolean) aValue);

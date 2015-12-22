@@ -24,16 +24,6 @@ public class TypologieDesBiensSupports extends Module {
 	private Hashtable<String, TypeBien> tableau;
 	private TypeBien typeBienCourant;
 
-	public TypeBien getTypeBienCourant() {
-		return typeBienCourant;
-	}
-
-	public void setTypeBienCourant(TypeBien typeBienCourant) {
-		this.typeBienCourant = typeBienCourant;
-		this.setChanged();        // PAC
-		this.notifyObservers();   // PAC
-	}
-
 	public TypologieDesBiensSupports() {
 		super("Typologie des biens supports");
 		this.tableau = new Hashtable<String, TypeBien>();
@@ -70,6 +60,16 @@ public class TypologieDesBiensSupports extends Module {
 
 	public void setTableau(Hashtable<String, TypeBien> tab) {
 		this.tableau = tab;
+	}
+	
+	public TypeBien getTypeBienCourant() {
+		return typeBienCourant;
+	}
+
+	public void setTypeBienCourant(TypeBien typeBienCourant) {
+		this.typeBienCourant = typeBienCourant;
+		this.setChanged();        // PAC
+		this.notifyObservers();   // PAC
 	}
 
 	public TypeBien getTypeBien(String type) {

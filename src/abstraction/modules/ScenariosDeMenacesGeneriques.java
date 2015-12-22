@@ -1,5 +1,6 @@
 package abstraction.modules;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.autres.ScenarioGenerique;
@@ -11,26 +12,35 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	private static Hashtable<String, ScenarioGenerique> bdcScenariosMenacesGeneriques;
 
 	// Variable d'instance
-	Hashtable<String, ScenarioGenerique> tableau;
+	private Hashtable<String, ScenarioGenerique> tableau;
+	private ScenarioGenerique scenarioCourant ;
 	
 	public ScenariosDeMenacesGeneriques(){
 		super("Scenario de Menaces Generiques");
 		this.tableau = new Hashtable<String, ScenarioGenerique>();
-		this.predecesseurs.add(this.getEtude().getModule("Typologie des biens supports"));
-		this.predecesseurs.add(this.getEtude().getModule("Sources de menaces"));
-		this.successeurs.add(this.getEtude().getModule("Biens Supports"));
-		this.successeurs.add(this.getEtude().getModule("Scenario de Menaces Types"));
+		//this.predecesseurs.add(this.getEtude().getModule("Typologie des biens supports"));
+		//this.predecesseurs.add(this.getEtude().getModule("Sources de menaces"));
+		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
+		//this.successeurs.add(this.getEtude().getModule("Scenario de Menaces Types"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
 		this.importerBDC();
-		this.tableau = ScenariosDeMenacesGeneriques.getBDC();
+		//this.tableau = ScenariosDeMenacesGeneriques.getBDC();
 	}
 	
 	// ---Getters et setters---
 	
 	public int getSize(){
 		return this.tableau.size();
+	}
+	
+	public ScenarioGenerique getScenarioCourant(){
+		return this.scenarioCourant;
+	}
+	
+	public void setScenarioCourant(ScenarioGenerique scenarioCourant){
+		this.scenarioCourant=scenarioCourant;
 	}
 
 	public Hashtable<String, ScenarioGenerique> getTableau() {
@@ -39,6 +49,12 @@ public class ScenariosDeMenacesGeneriques extends Module {
 
 	public void setTableau(Hashtable<String, ScenarioGenerique> tableau) {
 		this.tableau = tableau;
+	}
+	
+	public ScenarioGenerique getScenarioGenerique(int i) {
+		ArrayList<ScenarioGenerique> scenariosMenacesGeneriques = new ArrayList<ScenarioGenerique>(
+				tableau.values());
+		return scenariosMenacesGeneriques.get(i);
 	}
 	
 	public static Hashtable<String, ScenarioGenerique> getBDC(){
