@@ -17,41 +17,34 @@ public class ScenarioGenerique {
 	private String typeBienSupport;
 	private String Id;
 	private String intituleGenerique;
-	private Hashtable<String, Critere> criteres; // représente les colonnes
-	private Hashtable<String, Boolean> CritereRetenu ;
+	private ArrayList<String> nomCritereSup; // représente les critères que l'utilisateur peut rajouter
+	private ArrayList<Boolean> contenuCriteresSup ;
 	private boolean retenu;
 
 	// Constructeur
 	public ScenarioGenerique(String type, String id, String intitule,
-			Hashtable<String, Critere> criteres, boolean retenu) {
+			ArrayList<String> criteres, ArrayList<Boolean> criteresRetenus, boolean retenu) {
 		this.typeBienSupport = type;
 		this.Id = id;
 		this.intituleGenerique = intitule;
-		this.criteres = criteres;
+		this.nomCritereSup= criteres;
+		this.contenuCriteresSup=criteresRetenus;
 		this.retenu = retenu;
 	}
 	
-	// Constructeur : Nouveau Type Bien défini précédemment
-	public ScenarioGenerique(String type){
-		this(type,"", "",
-				new Hashtable<String, Critere>(), true);
+	// Constructeur : Nouveau Type de bien support défini précédemment
+	public ScenarioGenerique(String type) {
+		this(type, "", "", new ArrayList<String>(), new ArrayList<Boolean>(),
+				true);
 	}
 
 	// Constructeur : Scénario non retenu
 	public ScenarioGenerique() {
-		this(new String(), "", "",
-				new Hashtable<String, Critere>(), false);
+		this("", "", "",
+				new ArrayList<String>(), new ArrayList<Boolean>(), false);
 	}
 	
 	// ---Getters et setters---
-	
-	public String getIntituleType() {
-		return typeBienSupport;
-	}
-
-	public void setIntituleType(String type) {
-		this.typeBienSupport = type;
-	}
 
 	public String getId() {
 		return Id;
@@ -68,19 +61,42 @@ public class ScenarioGenerique {
 	public void setIntitule(String intitule) {
 		this.intituleGenerique = intitule;
 	}
-
-	public Hashtable<String, Critere> getCriteres() {
-		return criteres;
-	}
-
-	public void setCriteres(Hashtable<String, Critere> criteres) {
-		this.criteres = criteres;
-	}
 	
-	// i est l'indice du critère dans l'ArrayList/ou Hashtable
+	public String getTypeBienSupport() {
+		return typeBienSupport;
+	}
+
+	public void setTypeBienSupport(String typeBienSupport) {
+		this.typeBienSupport = typeBienSupport;
+	}
+
+	public ArrayList<String> getNomCriteresSup() {
+		return nomCritereSup;
+	}
+
+	public void setNomCriteresSup(ArrayList<String> nomCriteresSup) {
+		this.nomCritereSup = nomCriteresSup;
+	}
+
+	public ArrayList<Boolean> getContenuCriteresSup() {
+		return contenuCriteresSup;
+	}
+
+	public void setContenuCriteresSup(ArrayList<Boolean> contenuCriteresSup) {
+		this.contenuCriteresSup = contenuCriteresSup;
+	}
+
+	public boolean isRetenu() {
+		return retenu;
+	}
+
+	public void setRetenu(boolean retenu) {
+		this.retenu = retenu;
+	}
+
+	// i est l'indice du critère dans l'ArrayList
 	public boolean isRetenuCritere(int i){
-		ArrayList<Boolean> listeCriteres = new ArrayList<Boolean>(this.CritereRetenu.values()) ;
-		return (boolean) listeCriteres.get(i) ;
+		return this.contenuCriteresSup.get(i);
 	}
 
 	public boolean isRetenuScenario() {

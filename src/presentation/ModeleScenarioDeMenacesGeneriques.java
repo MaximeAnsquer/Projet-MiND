@@ -6,14 +6,17 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
+import abstraction.autres.Critere;
 import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.TypeBien;
+import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.TypologieDesBiensSupports;
 
 public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	
 	private TypologieDesBiensSupports typologieDesBiensSupports = new TypologieDesBiensSupports();
+	private CriteresDeSecurite criteresDeSecurite = new CriteresDeSecurite();
 	private ScenariosDeMenacesGeneriques moduleCourant = new ScenariosDeMenacesGeneriques();
 	private LinkedList<String> entetes = new LinkedList<String>();
 	private LinkedList<ArrayList<Boolean>> colonnesSup = new LinkedList<ArrayList<Boolean>>();
@@ -39,6 +42,13 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 			// La clé est l'intitulé du TYPE !! (il ne faudra pas avoir plusieurs clés identiques)
 			this.moduleCourant.getTableau().put(type.getIntitule(), new ScenarioGenerique(type.getIntitule()));
 		}
+		
+		// On ajoute les colonnes supplémentaires représentant les critères de sécurités retenus
+		/*
+		for (Critere c : this.criteresDeSecurite.getCriteresRetenus().values()){
+			this.moduleCourant.getTableau().setTa
+		}
+		//*/
 	}
 	
 	public ScenariosDeMenacesGeneriques getModuleCourant(){
@@ -47,6 +57,10 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	
 	public TypologieDesBiensSupports getTypologieBiensSupports(){
 		return this.typologieDesBiensSupports;
+	}
+	
+	public CriteresDeSecurite getCriteresDeSecurite(){
+		return this.criteresDeSecurite;
 	}
 
 	public int getRowCount() {
@@ -64,8 +78,8 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
 		case COLONNE_TYPEBIENSUPPORT:
-			String intituleTypeScenario = this.moduleCourant.getScenarioGenerique(rowIndex).getIntituleType();
-			return intituleTypeScenario;
+			String intituleTypeBien = this.moduleCourant.getScenarioGenerique(rowIndex).getTypeBienSupport();
+			return intituleTypeBien;
 		case COLONNE_ID:
 			return this.moduleCourant.getScenarioGenerique(rowIndex).getId();
 		case COLONNE_INTITULE:
@@ -108,7 +122,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	
 			case COLONNE_TYPEBIENSUPPORT:
 				if (this.typologieDesBiensSupports.isTypeBienRetenu((String) aValue)) {
-					scenario.setIntituleType((String) aValue);
+					scenario.setTypeBienSupport((String) aValue);
 				}
 				break;
 			case COLONNE_ID:

@@ -20,7 +20,10 @@ public class ControlJButtonAjoutColonne implements Observer,ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		String critere = JOptionPane.showInputDialog("Intitule du critere ?");
+		Object[] criteresRetenus = this.modele.getCriteresDeSecurite().getCriteresRetenus().keySet().toArray();
+		String critere = (String) JOptionPane.showInputDialog(null,
+				"Quelle critère voulez-vous rajoutez ?", "Choix du critère",
+				JOptionPane.QUESTION_MESSAGE, null, criteresRetenus, criteresRetenus[0]);
 		if (critere!=null){
 			this.modele.addCritere(critere);
 		}
