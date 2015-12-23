@@ -155,14 +155,12 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 				 * colonnesSup.get(indice).set(rowIndex, ((Boolean)aValue)); //
 				 */
 				int indice = columnIndex - 4;
-				if (this.moduleCourant.getNomColonneSup() != null) {
 					String critereAssocie = this.moduleCourant
 							.getNomColonneSup().get(indice);
 					this.moduleCourant.getScenarioGenerique(rowIndex)
 							.getCriteresSup()
 							.replace(critereAssocie, (Boolean) aValue);
 					break;
-				}
 			}
 		}
 	}
