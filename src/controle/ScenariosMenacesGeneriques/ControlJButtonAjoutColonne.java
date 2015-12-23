@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import presentation.ModeleScenarioDeMenacesGeneriques;
 
-public class ControlJButtonAjoutColonne implements Observer, ActionListener {
+public class ControlJButtonAjoutColonne implements Observer,ActionListener {
 	private ModeleScenarioDeMenacesGeneriques modele;
 	private JButton ajouterCritere ;
 	
@@ -19,7 +19,6 @@ public class ControlJButtonAjoutColonne implements Observer, ActionListener {
 		this.ajouterCritere=ajouterCritere;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		String critere = JOptionPane.showInputDialog("Intitule du critere ?");
 		if (critere!=null){
@@ -27,7 +26,6 @@ public class ControlJButtonAjoutColonne implements Observer, ActionListener {
 		}
 	}
 
-	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		

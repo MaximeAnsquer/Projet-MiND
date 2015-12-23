@@ -19,14 +19,12 @@ public class ControlJButtonSuppressionColonne implements Observer, ActionListene
 		this.supprimerCritere=supprimerCritere;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Faire plutôt une JComboBox avec des choix 
 		// UTILISER UN CRITERE COURANT ????
 		this.modele.removeCritere();
 	}
 
-	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 	}
