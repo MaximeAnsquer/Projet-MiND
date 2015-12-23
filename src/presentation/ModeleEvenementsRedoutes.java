@@ -73,6 +73,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	public int getRowCount() {
 		return this.evenements.getEvenementsRedoutes().size();
 	}
+	
 
 
 
@@ -87,9 +88,9 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		case 2:
 			return evenements.getEvenementsRedoutes().get(rowIndex).getNomCritere();
 		case 1:
-			return evenements.getEvenementsRedoutes().get(rowIndex).getComboExigence().getSelectedItem();
+			return evenements.getEvenementsRedoutes().get(rowIndex).getNiveauExigence();
 		case 0:
-			return evenements.getEvenementsRedoutes().get(rowIndex).getComboGravite().getSelectedItem();
+			return evenements.getEvenementsRedoutes().get(rowIndex).getNiveauGravite();
 		default:
 			if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size()!=0){
 				return this.evenements.getEvenementsRedoutes().get(rowIndex).getContenuGroupes().get(columnIndex);
@@ -98,7 +99,12 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 				return "";
 			}
 		}
+		
 	}
+	
+	public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
 	
 	public boolean isCellEditable(int row, int col){
 		if(this.getColumnCount()-col-1==4||this.getColumnCount()-col-1==0||this.getColumnCount()-col-1==1){
@@ -120,13 +126,16 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 					ev.setNomEvenement((String)aValue);
 					break;
 				case 1:
-					ev.getComboExigence().getSelectedItem();
-					ev.getComboExigence().setSelectedIndex(ev.getComboExigence().getSelectedIndex());
+					/*ev.getComboExigence().getSelectedItem();
+					ev.getComboExigence().setSelectedIndex(ev.getComboExigence().getSelectedIndex());*/
 					
+				ev.setNiveauExigence(Integer.parseInt((String)aValue));
+				fireTableCellUpdated(rowIndex, columnIndex);
 					break;
 				case 0:
-					ev.getComboGravite().getSelectedItem();
-					ev.getComboGravite().setSelectedIndex(ev.getComboGravite().getSelectedIndex());
+					ev.setNiveauGravite(Integer.parseInt((String)aValue));;
+					fireTableCellUpdated(rowIndex,columnIndex);
+					break;
 
 				}
 			}

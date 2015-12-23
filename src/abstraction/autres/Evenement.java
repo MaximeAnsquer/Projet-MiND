@@ -29,6 +29,9 @@ public class Evenement {
 	private String bienessentiel;
 	private String critere;
 	
+	private int niveaugravite;
+	private int niveauexigence;
+	
 	
 	
 	
@@ -45,6 +48,8 @@ public class Evenement {
 		this.contenugroupes=contenugroupes;
 		this.bienessentiel=bienessentiel;
 		this.critere=critere;
+		this.niveauexigence=1;
+		this.niveaugravite=1;
 		
 		
 		/*On met des valeurs par défaut pour les niveaux (peut être inutile mais on sait jamais)
@@ -83,6 +88,14 @@ public class Evenement {
 		return this.contenugroupes;
 	}
 	
+	public int getNiveauExigence(){
+		return this.niveauexigence;
+	}
+	
+	public int getNiveauGravite(){
+		return this.niveaugravite;
+	}
+	
 	
 	/*retourne  le nom du bien numero i
 	 * 
@@ -117,7 +130,7 @@ public class Evenement {
 	}
 	
 	/*Setters*/
-	/*
+	
 	public void setNiveauGravite(int i){
 		this.niveaugravite=i;
 	}
@@ -125,7 +138,7 @@ public class Evenement {
 	public void setNiveauExigence(int i){
 		this.niveauexigence=i;
 	}
-	*/
+	
 	public void setBienEssentiel(String bienessentiel){
 		this.bienessentiel=bienessentiel;
 	}
