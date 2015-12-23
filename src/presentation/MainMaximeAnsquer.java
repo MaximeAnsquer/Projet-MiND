@@ -184,7 +184,7 @@ public class MainMaximeAnsquer extends JFrame {
 		etudeDeTest.addModule(new BiensSupports());
 		etudeDeTest.addModule(new BiensEssentiels());
 		etudeDeTest.addModule(new MappingDesBiens((BiensSupports)etudeDeTest.getModule("BiensSupports"), (BiensEssentiels)etudeDeTest.getModule("BiensEssentiels")));
-		//etudeDeTest.addModule(new EvenementsRedoutes(etudeDeTest));
+		etudeDeTest.addModule(new EvenementsRedoutes(etudeDeTest));
 		
 		//---Sauvegarde d'une etude---
 //
