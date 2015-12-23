@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -384,6 +385,10 @@ public class FenetreMetriques extends JPanel {
 
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			
+			if(component instanceof JComponent){
+				((JComponent)component).setToolTipText(value.toString());
+			}
 
 			if (value=="" || value == null) {
 				Color clr = Color.yellow;

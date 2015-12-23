@@ -1,5 +1,7 @@
 package presentation;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,7 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,7 +22,10 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
+
+import presentation.FenetreMetriques.Renderer;
 
 import abstraction.Etude;
 import abstraction.autres.Critere;
@@ -54,6 +60,9 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		columnModel.getColumn(1).setMinWidth(200);
 		columnModel.getColumn(3).setMaxWidth(50);
 
+		//On definit le Renderer (pour les tooltips)
+		table.setDefaultRenderer(Object.class, new Renderer());
+
 		table.addMouseListener(new MouseListener(){
 
 			public void mouseClicked(MouseEvent e) {
@@ -81,7 +90,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 				zoneDescription.setText(getCritereSelectionne().getDescription());
 			}			
 		});
-		
+
 		table.setFont(new Font("Arial", Font.PLAIN, 16));
 		table.setRowHeight(50);
 
@@ -197,6 +206,8 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		return c;
 	}
 
+	//---Modele---
+
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 
 		private final String[] entetes = {"Id", "Intitule", "Description", "Retenu"};
@@ -288,6 +299,24 @@ public class FenetreCriteresDeSecurite extends JPanel {
 			zoneDescription.setText(getCritereSelectionne().getDescription());
 		}
 	}
+
+	//---Renderer---
+
+	class Renderer extends DefaultTableCellRenderer {
+
+		private static final long serialVersionUID = 1L;
+
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+			if(component instanceof JComponent){
+				((JComponent)component).setToolTipText(value.toString());
+			}
+			return component;
+		}
+	}
+
+	//---Fin du Renderer---
 
 
 
