@@ -1,29 +1,12 @@
 package presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Hashtable;
-
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import abstraction.Etude;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
-import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.MappingDesBiens;
-import abstraction.modules.Metriques;
-import abstraction.modules.Module;
-import abstraction.modules.SourcesDeMenaces;
 
 /**
  * Classe pour lancer les modules BiensEssentiels, BiensSupports et MappingDesBiens
@@ -32,6 +15,8 @@ import abstraction.modules.SourcesDeMenaces;
  */
 
 public class MainFrancois extends JFrame{
+
+	private static final long serialVersionUID = 1L;
 	public static Etude etude;
 	
 	public MainFrancois(){
