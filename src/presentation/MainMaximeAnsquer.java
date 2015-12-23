@@ -72,6 +72,7 @@ public class MainMaximeAnsquer extends JFrame {
 		this.contentPane = this.getContentPane();
 		this.contenuPrincipal = new JPanel();
 		this.contenuPrincipal.setLayout(new BorderLayout());
+		this.partieDeGauche = new JPanel();
 		this.pack();
 
 		this.demanderEtude();	
@@ -96,6 +97,7 @@ public class MainMaximeAnsquer extends JFrame {
 
 		contentPane.add(contenuPrincipal, BorderLayout.CENTER);
 
+		System.out.println("partie de gauche : " + partieDeGauche);
 		contentPane.remove(partieDeGauche);
 
 		if(nom.equals("Workflow")){					
@@ -190,8 +192,7 @@ public class MainMaximeAnsquer extends JFrame {
 		if(etudeEnCours != null){
 			setContenu("Workflow");
 		}
-
-		this.partieDeGauche = new JPanel();
+		
 		this.lesJpanels = new Hashtable<String, JPanel>();
 
 		String nomEtude = "";
@@ -224,7 +225,6 @@ public class MainMaximeAnsquer extends JFrame {
 			try {
 				// Sérialisation de l'objet article dans c:/temp/article.xml
 				xstream.toXML(etudeEnCours, fos);
-				JOptionPane.showMessageDialog(null, "Etude enregistree avec succes");
 			} finally {
 				// On s'assure de fermer le flux quoi qu'il arrive
 				fos.close();
@@ -275,8 +275,6 @@ public class MainMaximeAnsquer extends JFrame {
 
 		Etude etudeOuverte = new Etude();
 
-		JOptionPane.showMessageDialog(null, urlEtude);
-
 		try {
 			// Instanciation de la classe XStream
 			XStream xstream = new XStream(new DomDriver());
@@ -289,13 +287,9 @@ public class MainMaximeAnsquer extends JFrame {
 				etudeOuverte = (Etude) xstream.fromXML(fis);
 
 			} finally {
-				JOptionPane.showMessageDialog(null, "On s'assure de fermer le flux quoi qu'il arrive");
 				// On s'assure de fermer le flux quoi qu'il arrive
 				fis.close();
-				JOptionPane.showMessageDialog(null, "fis.close();");
 			}
-
-			JOptionPane.showMessageDialog(null, "fin du try");
 
 		} catch (FileNotFoundException e) {	
 			JOptionPane.showMessageDialog(null, "catch (FileNotFoundException e)");
