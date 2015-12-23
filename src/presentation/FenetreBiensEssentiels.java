@@ -238,12 +238,21 @@ public class FenetreBiensEssentiels extends JPanel{
 
 		public void ajouterBienEssentiel() {
 			ArrayList<String> nomColonneSup = new ArrayList<String>();
+			for (int i=0; i<entetes.size()-3;i++){
+				nomColonneSup.add(entetes.get(i));
+			}
 			ArrayList<String> contenuColonneSup = new ArrayList<String>();
+			for (int i=0; i<entetes.size()-3;i++){
+				contenuColonneSup.add("");
+			}
 			String Intitule = JOptionPane.showInputDialog("Intitule ?");
 			String type = "";
 			String Description = JOptionPane.showInputDialog("Description ?");
 			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
 			biensEssentiels.ajouterBien(bien);
+			for (int i=0; i<entetes.size()-3;i++){
+				colonnesSup.get(i).add("");
+			}
 			boutonSupprimerLigne.setEnabled(true);
 			fireTableRowsInserted(biensEssentiels.nombreDeBiens() -1, biensEssentiels.nombreDeBiens() -1);
 		}
