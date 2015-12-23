@@ -73,6 +73,7 @@ public class MainMaximeAnsquer extends JFrame {
 		this.contenuPrincipal = new JPanel();
 		this.contenuPrincipal.setLayout(new BorderLayout());
 		this.partieDeGauche = new JPanel();
+		this.lesJpanels = new Hashtable<String, JPanel>();
 		this.pack();
 
 		this.demanderEtude();	
@@ -97,7 +98,6 @@ public class MainMaximeAnsquer extends JFrame {
 
 		contentPane.add(contenuPrincipal, BorderLayout.CENTER);
 
-		System.out.println("partie de gauche : " + partieDeGauche);
 		contentPane.remove(partieDeGauche);
 
 		if(nom.equals("Workflow")){					
@@ -121,6 +121,8 @@ public class MainMaximeAnsquer extends JFrame {
 				this.lesJpanels.put(nom, new FenetreMetriques((Metriques) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("SourcesDeMenaces")){
+				System.out.println("lesJpanels : "+lesJpanels);
+				System.out.println("etudeEnCours.getModule(nom) : "+etudeEnCours.getModule(nom));
 				this.lesJpanels.put(nom, new FenetreSourcesDeMenaces((SourcesDeMenaces) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("BiensSupports")){
@@ -193,7 +195,7 @@ public class MainMaximeAnsquer extends JFrame {
 			setContenu("Workflow");
 		}
 		
-		this.lesJpanels = new Hashtable<String, JPanel>();
+		
 
 		String nomEtude = "";
 		while(nomEtude.equals("")){
@@ -225,6 +227,7 @@ public class MainMaximeAnsquer extends JFrame {
 			try {
 				// Sérialisation de l'objet article dans c:/temp/article.xml
 				xstream.toXML(etudeEnCours, fos);
+				JOptionPane.showMessageDialog(null, "Etude enregistree avec succes");
 			} finally {
 				// On s'assure de fermer le flux quoi qu'il arrive
 				fos.close();
@@ -246,7 +249,6 @@ public class MainMaximeAnsquer extends JFrame {
 
 
 		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
-		System.out.println(urlEtudes);
 
 		File dossierEtude = new File(urlEtudes);
 		File[] listOfFiles = dossierEtude.listFiles();
@@ -260,7 +262,6 @@ public class MainMaximeAnsquer extends JFrame {
 		listeFichiers = new JList(data.toArray());
 		listeFichiers.addListSelectionListener(new ListSelectionListener(){
 
-			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				boutonOk.setEnabled(true);				
 			}
@@ -319,7 +320,6 @@ public class MainMaximeAnsquer extends JFrame {
 		boutonOk.setEnabled(false);
 		boutonOk.addActionListener(new ActionListener(){
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" + File.separator + listeFichiers.getSelectedValue();
 				ouvrirEtude(urlEtude);

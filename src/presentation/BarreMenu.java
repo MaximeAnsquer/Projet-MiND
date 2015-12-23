@@ -22,7 +22,6 @@ public class BarreMenu extends JMenuBar {
 		nouvelleEtude.setMnemonic('n');
 		nouvelleEtude.addActionListener(new ActionListener(){
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				fenetre.nouvelleEtude();				
 			}
@@ -33,7 +32,6 @@ public class BarreMenu extends JMenuBar {
 		JMenuItem enregistrer = new JMenuItem("Enregistrer l'etude");
 		enregistrer.addActionListener(new ActionListener(){
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				fenetre.enregistrerEtude();
 			}
@@ -44,7 +42,6 @@ public class BarreMenu extends JMenuBar {
 		JMenuItem ouvrir = new JMenuItem("Ouvrir une etude existante");
 		ouvrir.addActionListener(new ActionListener(){
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				fenetre.choisirEtude();
 			}
@@ -73,7 +70,6 @@ public class BarreMenu extends JMenuBar {
 		JMenuItem modifierNom = new JMenuItem("Modifier le nom de l'étude");
 		modifierNom.addActionListener(new ActionListener(){
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				fenetre.modifierNomEtude();		
 			}
