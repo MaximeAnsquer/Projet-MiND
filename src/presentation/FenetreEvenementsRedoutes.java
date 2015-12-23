@@ -2,6 +2,8 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,16 +31,18 @@ public class FenetreEvenementsRedoutes extends JPanel{
 
 	
 	FenetreEvenementsRedoutes(EvenementsRedoutes evenements){
-        
+		 super(new GridLayout(1,0));
 		this.evenements=evenements;
 		
 		this.tableau=new JTable(modele);
-		System.out.println(modele.getColumnCount());
+		tableau.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        tableau.setFillsViewportHeight(true);
+		
+        JScrollPane scrollPane = new JScrollPane(tableau);
 		this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setUpComBo();
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		
+		add(scrollPane);
 		
 		
 		
@@ -52,6 +56,11 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 	final JComboBox comboBoxex=this.evenements.getEvenementsRedoutes().get(0).getComboExigence();
 	exColumn.setCellEditor(new DefaultCellEditor(comboBoxex));
+	DefaultTableCellRenderer renderer =
+            new DefaultTableCellRenderer();
+    renderer.setToolTipText("Click for combo box");
+    exColumn.setCellRenderer(renderer);
+	
 	exColumn.setPreferredWidth(200);
 	
 	this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(150);
@@ -62,6 +71,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	final JComboBox comboBoxgrav=this.evenements.getEvenementsRedoutes().get(0).getComboGravite();
 	
 	gravColumn.setCellEditor(new DefaultCellEditor(comboBoxgrav));
+	gravColumn.setCellRenderer(renderer);
+	
 	gravColumn.setPreferredWidth(200);
 	gravColumn.setMaxWidth(250);
 	
@@ -69,24 +80,9 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	exColumn.setCellRenderer(new DefaultTableCellRenderer());*/
 	
 	
-	JScrollPane scroll=new JScrollPane(this.tableau);
-	this.add(scroll);
-	
-	comboBoxex.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent e){
-			tableau.setValueAt(comboBoxex.getSelectedItem(), tableau.getSelectedRow(), tableau.getSelectedColumn());
-			
-		}});
-			
-	comboBoxgrav.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					tableau.setValueAt(comboBoxgrav.getSelectedItem(), tableau.getSelectedRow(), tableau.getSelectedColumn());
-					
-		}
-	});
 	
 	
-	 }
+	}
 	
 	private Evenement getEvenementSelectionne(){
 		Evenement e;
