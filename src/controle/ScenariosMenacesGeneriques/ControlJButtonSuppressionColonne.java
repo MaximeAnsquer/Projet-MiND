@@ -22,7 +22,8 @@ public class ControlJButtonSuppressionColonne implements Observer, ActionListene
 	public void actionPerformed(ActionEvent e) {
 		// Faire plutôt une JComboBox avec des choix 
 		// UTILISER UN CRITERE COURANT ????
-		this.modele.removeCritere();
+		
+		//this.modele.removeCritere();
 	}
 
 	public void update(Observable o, Object arg) {

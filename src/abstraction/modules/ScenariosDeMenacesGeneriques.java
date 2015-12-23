@@ -106,14 +106,20 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	// Ajout d'une colonne
 	public void addCritere (String nomCritere){
-		this.getNomColonneSup().add(nomCritere);
-		this.setChanged();                           // PAC
-		this.notifyObservers();                      // PAC
+		this.nomColonneSup.add(nomCritere);
+		for (int i=0 ; i<this.tableau.size() ; i++){
+			this.getScenarioGenerique(i).getCriteresSup().put(nomCritere, false);
+		}
+		//this.setChanged();                           // PAC
+		//this.notifyObservers();                      // PAC
 	}
 	
 	//Suppression d'une colonne
 	public void removeCritere (String nomCritere){
-		this.getNomColonneSup().remove(nomCritere);
+		this.nomColonneSup.remove(nomCritere);
+		for (int i=0 ; i<this.tableau.size() ; i++){
+			this.getScenarioGenerique(i).getCriteresSup().remove(nomCritere);
+		}
 		this.setChanged();                           // PAC
 		this.notifyObservers();                      // PAC
 	}

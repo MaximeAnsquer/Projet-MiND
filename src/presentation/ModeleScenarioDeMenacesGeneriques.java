@@ -19,7 +19,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	private CriteresDeSecurite criteresDeSecurite = new CriteresDeSecurite();
 	private ScenariosDeMenacesGeneriques moduleCourant = new ScenariosDeMenacesGeneriques();
 	private LinkedList<String> entetes = new LinkedList<String>();
-	private LinkedList<ArrayList<Boolean>> colonnesSup = new LinkedList<ArrayList<Boolean>>();
+	// private LinkedList<ArrayList<Boolean>> colonnesSup = new LinkedList<ArrayList<Boolean>>();
 	
 	public static final int COLONNE_TYPEBIENSUPPORT = 0;
 	public static final int COLONNE_ID = 1;
@@ -37,10 +37,13 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		entetes.add("Retenu");
 		
 		// On ajoute un scénario générique à partir des types définis dans Typologie des Biens Supports
+		int i = 1 ;
 		for(TypeBien type : this.typologieDesBiensSupports.getTypeBiensRetenus()){
 			
 			// La clé est l'intitulé du TYPE !! (il ne faudra pas avoir plusieurs clés identiques)
-			this.moduleCourant.getTableau().put(type.getIntitule(), new ScenarioGenerique(type.getIntitule()));
+			ScenarioGenerique scenario = new ScenarioGenerique(type.getIntitule(),"toto " + i,"Intitule " + i);
+			this.moduleCourant.getTableau().put(scenario.getIntitule(),scenario );
+			i++ ;
 		}
 		
 		// On ajoute les colonnes supplémentaires représentant les critères de sécurités retenus
@@ -87,12 +90,22 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		case COLONNE_RETENU:
 			return this.moduleCourant.getScenarioGenerique(rowIndex).isRetenuScenario();
 		default:
+			/*
 			int indice = this.getColumnCount() - columnIndex - 1 ;
 			if(colonnesSup.get(indice)!=null){
 				return colonnesSup.get(indice).get(rowIndex);
 			}
 			else{
 				return false;
+			}
+			*/
+			int indice = columnIndex - 4 ;
+			if (this.moduleCourant.getNomColonneSup()!=null){
+				String critereAssocie = this.moduleCourant.getNomColonneSup().get(indice);
+				return this.moduleCourant.getScenarioGenerique(rowIndex).getCriteresSup().get(critereAssocie);
+			}
+			else{
+				return false ;
 			}
 		}
 	}
@@ -114,14 +127,16 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		}
 	}
 	
-	public void setValueAt (Object aValue,int  rowIndex, int columnIndex){
-		if (aValue!= null){
-			ScenarioGenerique scenario = this.moduleCourant.getScenarioGenerique(rowIndex);
-			
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		if (aValue != null) {
+			ScenarioGenerique scenario = this.moduleCourant
+					.getScenarioGenerique(rowIndex);
+
 			switch (columnIndex) {
-	
+
 			case COLONNE_TYPEBIENSUPPORT:
-				if (this.typologieDesBiensSupports.isTypeBienRetenu((String) aValue)) {
+				if (this.typologieDesBiensSupports
+						.isTypeBienRetenu((String) aValue)) {
 					scenario.setTypeBienSupport((String) aValue);
 				}
 				break;
@@ -135,29 +150,46 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 				scenario.setRetenuScenario((Boolean) aValue);
 				break;
 			default:
-				int indice = this.getColumnCount() - columnIndex - 1 ;
-				colonnesSup.get(indice).set(rowIndex, ((Boolean)aValue));
-            	break;
+				/*
+				 * int indice = this.getColumnCount() - columnIndex - 1 ;
+				 * colonnesSup.get(indice).set(rowIndex, ((Boolean)aValue)); //
+				 */
+				int indice = columnIndex - 4;
+				if (this.moduleCourant.getNomColonneSup() != null) {
+					String critereAssocie = this.moduleCourant
+							.getNomColonneSup().get(indice);
+					this.moduleCourant.getScenarioGenerique(rowIndex)
+							.getCriteresSup()
+							.replace(critereAssocie, (Boolean) aValue);
+					break;
+				}
 			}
 		}
 	}
 	
 	public void addCritere (String critere){
+		/*
 		this.colonnesSup.addFirst(new ArrayList<Boolean>(this.getRowCount()));
 		for (int i=0; i<this.getRowCount(); i++){
 			colonnesSup.getFirst().add(i, false);
 		}
+		//*/
+		this.moduleCourant.addCritere(critere);
 		// On ajoute la colonne du critère à gauche de la colonne "Retenu"
 		this.entetes.add(this.getColumnCount()-1, critere);
 		fireTableStructureChanged();
 	}
 	
-	public void removeCritere (){
+	public void removeCritere (String critere){
+		/*
 		if (colonnesSup.size()!=0){
 			this.entetes.remove(this.getColumnCount()-2);
 			colonnesSup.removeLast();
 			fireTableStructureChanged();
 		}
+		//*/
+		this.entetes.remove(this.getColumnCount()-2);
+		fireTableStructureChanged();
 	}
 	
 	// Ajout d'un scénario

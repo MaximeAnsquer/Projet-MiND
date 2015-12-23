@@ -17,31 +17,30 @@ public class ScenarioGenerique {
 	private String typeBienSupport;
 	private String Id;
 	private String intituleGenerique;
-	private ArrayList<String> nomCritereSup; // représente les critères que l'utilisateur peut rajouter
-	private ArrayList<Boolean> contenuCriteresSup ;
+	private Hashtable<String,Boolean> CriteresSup; // représente les critères que l'utilisateur peut rajouter
+	// private ArrayList<Boolean> contenuCriteresSup ;
 	private boolean retenu;
 
 	// Constructeur
 	public ScenarioGenerique(String type, String id, String intitule,
-			ArrayList<String> criteres, ArrayList<Boolean> criteresRetenus, boolean retenu) {
+			Hashtable<String,Boolean> criteres, boolean retenu) {
 		this.typeBienSupport = type;
 		this.Id = id;
 		this.intituleGenerique = intitule;
-		this.nomCritereSup= criteres;
-		this.contenuCriteresSup=criteresRetenus;
+		this.CriteresSup= criteres;
 		this.retenu = retenu;
 	}
 	
 	// Constructeur : Nouveau Type de bien support défini précédemment
-	public ScenarioGenerique(String type) {
-		this(type, "", "", new ArrayList<String>(), new ArrayList<Boolean>(),
+	public ScenarioGenerique(String type, String id, String intitule) {
+		this(type, id, intitule, new Hashtable<String,Boolean>(),
 				true);
 	}
 
 	// Constructeur : Scénario non retenu
 	public ScenarioGenerique() {
 		this("", "", "",
-				new ArrayList<String>(), new ArrayList<Boolean>(), false);
+				new Hashtable<String,Boolean>(), false);
 	}
 	
 	// ---Getters et setters---
@@ -70,20 +69,12 @@ public class ScenarioGenerique {
 		this.typeBienSupport = typeBienSupport;
 	}
 
-	public ArrayList<String> getNomCriteresSup() {
-		return nomCritereSup;
+	public Hashtable<String,Boolean> getCriteresSup() {
+		return CriteresSup;
 	}
 
-	public void setNomCriteresSup(ArrayList<String> nomCriteresSup) {
-		this.nomCritereSup = nomCriteresSup;
-	}
-
-	public ArrayList<Boolean> getContenuCriteresSup() {
-		return contenuCriteresSup;
-	}
-
-	public void setContenuCriteresSup(ArrayList<Boolean> contenuCriteresSup) {
-		this.contenuCriteresSup = contenuCriteresSup;
+	public void setCriteresSup(Hashtable<String,Boolean> nomCriteresSup) {
+		this.CriteresSup = nomCriteresSup;
 	}
 
 	public boolean isRetenu() {
@@ -96,7 +87,8 @@ public class ScenarioGenerique {
 
 	// i est l'indice du critère dans l'ArrayList
 	public boolean isRetenuCritere(int i){
-		return this.contenuCriteresSup.get(i);
+		ArrayList<Boolean> criteresRetenus = new ArrayList<Boolean>(this.CriteresSup.values());
+		return criteresRetenus.get(i);
 	}
 
 	public boolean isRetenuScenario() {
