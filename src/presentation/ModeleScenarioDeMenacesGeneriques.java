@@ -37,12 +37,16 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		for(TypeBien type : this.typologieDesBiensSupports.getTypeBiensRetenus()){
 			
 			// La clé est l'intitulé du TYPE !! (il ne faudra pas avoir plusieurs clés identiques)
-			this.moduleCourant.getTableau().put(type.getIntitule(), new ScenarioGenerique(type));
+			this.moduleCourant.getTableau().put(type.getIntitule(), new ScenarioGenerique(type.getIntitule()));
 		}
 	}
 	
 	public ScenariosDeMenacesGeneriques getModuleCourant(){
 		return this.moduleCourant;
+	}
+	
+	public TypologieDesBiensSupports getTypologieBiensSupports(){
+		return this.typologieDesBiensSupports;
 	}
 
 	public int getRowCount() {
@@ -60,8 +64,8 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
 		case COLONNE_TYPEBIENSUPPORT:
-			TypeBien typeScenario = this.moduleCourant.getScenarioGenerique(rowIndex).getType();
-			return typeScenario.getIntitule() + " (" + typeScenario.getId() + ")";
+			String intituleTypeScenario = this.moduleCourant.getScenarioGenerique(rowIndex).getIntituleType();
+			return intituleTypeScenario;
 		case COLONNE_ID:
 			return this.moduleCourant.getScenarioGenerique(rowIndex).getId();
 		case COLONNE_INTITULE:
@@ -86,7 +90,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	public Class getColumnClass(int columnIndex){
 		switch(columnIndex){
 		case COLONNE_TYPEBIENSUPPORT:
-			return TypeBien.class;
+			return String.class;
 		case COLONNE_ID:
 			return String.class ;
 		case COLONNE_INTITULE:
@@ -103,7 +107,9 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 			switch (columnIndex) {
 	
 			case COLONNE_TYPEBIENSUPPORT:
-				scenario.setType((TypeBien) aValue);
+				if (this.typologieDesBiensSupports.isTypeBienRetenu((String) aValue)) {
+					scenario.setIntituleType((String) aValue);
+				}
 				break;
 			case COLONNE_ID:
 				scenario.setId((String) aValue);
@@ -138,6 +144,17 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 			colonnesSup.removeLast();
 			fireTableStructureChanged();
 		}
+	}
+	
+	// Ajout d'un scénario
+	public void addScenarioGenerique (ScenarioGenerique scenario, int indiceInsertion){
+		this.moduleCourant.addScenarioGenerique(scenario);
+		fireTableRowsInserted(indiceInsertion, indiceInsertion);
+	}
+	
+	public void removeScenarioGenerique (int indiceSuppression){
+		this.moduleCourant.removeScenarioGenerique(this.moduleCourant.getScenarioGenerique(indiceSuppression));
+		fireTableRowsDeleted(indiceSuppression, indiceSuppression);
 	}
 
 }

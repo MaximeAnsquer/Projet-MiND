@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutColonne;
+import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutScenario;
 import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionColonne;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 
@@ -50,6 +51,10 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 		panelBas.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		this.ajouterLigne = new JButton("Ajouter un scénario de menace générique");
+		
+		ControlJButtonAjoutScenario controlAjoutLigne = new ControlJButtonAjoutScenario(modeleTableau, tableau, ajouterLigne);
+		this.moduleCourant.addObserver(controlAjoutLigne);
+		this.ajouterLigne.addActionListener(controlAjoutLigne);
 		
 		this.supprimerLigne = new JButton("Supprimer un scénario de menace générique"); 
 		

@@ -14,7 +14,7 @@ import java.util.Hashtable;
  */
 
 public class ScenarioGenerique {
-	private TypeBien typeBienSupport;
+	private String typeBienSupport;
 	private String Id;
 	private String intituleGenerique;
 	private Hashtable<String, Critere> criteres; // représente les colonnes
@@ -22,7 +22,7 @@ public class ScenarioGenerique {
 	private boolean retenu;
 
 	// Constructeur
-	public ScenarioGenerique(TypeBien type, String id, String intitule,
+	public ScenarioGenerique(String type, String id, String intitule,
 			Hashtable<String, Critere> criteres, boolean retenu) {
 		this.typeBienSupport = type;
 		this.Id = id;
@@ -32,24 +32,24 @@ public class ScenarioGenerique {
 	}
 	
 	// Constructeur : Nouveau Type Bien défini précédemment
-	public ScenarioGenerique(TypeBien type){
+	public ScenarioGenerique(String type){
 		this(type,"", "",
 				new Hashtable<String, Critere>(), true);
 	}
 
 	// Constructeur : Scénario non retenu
 	public ScenarioGenerique() {
-		this(new TypeBien(), "", "",
+		this(new String(), "", "",
 				new Hashtable<String, Critere>(), false);
 	}
 	
 	// ---Getters et setters---
 	
-	public TypeBien getType() {
+	public String getIntituleType() {
 		return typeBienSupport;
 	}
 
-	public void setType(TypeBien type) {
+	public void setIntituleType(String type) {
 		this.typeBienSupport = type;
 	}
 

@@ -145,6 +145,26 @@ public class TypologieDesBiensSupports extends Module {
 		return resultat;
 	}
 	
+	public boolean isTypeBienRetenu(String value) {
+		ArrayList<String> resultat = new ArrayList<String>();
+		for (TypeBien type : this.getTableau().values()) {
+			if (type.isRetenu()) {
+				resultat.add(type.getIntitule());
+			}
+		}
+		return resultat.contains(value);
+	}
+	
+	public Object[] getIntituleTypeBiensRetenus() {
+		ArrayList<String> resultat = new ArrayList<String>();
+		for (TypeBien type : this.getTableau().values()) {
+			if (type.isRetenu()) {
+				resultat.add(type.getIntitule());
+			}
+		}
+		return resultat.toArray();
+	}
+	
 	// On retient un Type de Bien)
 	// Cela correspond à une croix cochée dans la colonne des types de biens retenus
 	public void retenirTypeBien(String intitule) {
