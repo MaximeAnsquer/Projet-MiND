@@ -50,8 +50,8 @@ public class BarreMenu extends JMenuBar {
 		fichier.add(ouvrir);
 		
 		fichier.addSeparator();
-		JMenu preferences = new JMenu("Préférences");
-		preferences.add(new JMenuItem("Config. éditeur"));
+		JMenu preferences = new JMenu("Preferences");
+		preferences.add(new JMenuItem("Config. editeur"));
 		preferences.add(new JCheckBoxMenuItem("Son"));
 		JRadioButtonMenuItem b219 = new JRadioButtonMenuItem("21:9");
 		preferences.add(b219);
@@ -67,7 +67,7 @@ public class BarreMenu extends JMenuBar {
 		this.add(fichier);
 		
 		JMenu options = new JMenu("Options");
-		JMenuItem modifierNom = new JMenuItem("Modifier le nom de l'étude");
+		JMenuItem modifierNom = new JMenuItem("Modifier le nom de l'etude");
 		modifierNom.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {

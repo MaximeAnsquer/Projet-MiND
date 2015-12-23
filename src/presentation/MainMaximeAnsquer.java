@@ -219,7 +219,7 @@ public class MainMaximeAnsquer extends JFrame {
 
 		try {
 			// Instanciation de la classe XStream
-			XStream xstream = new XStream(new DomDriver());		    
+			XStream xstream = new XStream(new DomDriver("UTF-8"));		    
 			// Instanciation d'un fichier c:/temp/article.xml
 			File fichier = new File(System.getProperty("user.dir") + File.separator + "etudes" + File.separator + etudeEnCours.getNom()+".xml");
 			// Instanciation d'un flux de sortie fichier
@@ -283,20 +283,14 @@ public class MainMaximeAnsquer extends JFrame {
 			// Redirection du fichier vers un flux d'entrée fichier
 			FileInputStream fis = new FileInputStream(new File(urlEtude));
 
-			try {
+			
 				// Désérialisation du fichier vers un nouvel objet article
 				etudeOuverte = (Etude) xstream.fromXML(fis);
-
-			} finally {
-				// On s'assure de fermer le flux quoi qu'il arrive
-				fis.close();
-			}
+			
 
 		} catch (FileNotFoundException e) {	
-			JOptionPane.showMessageDialog(null, "catch (FileNotFoundException e)");
 			e.printStackTrace();
 		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, "catch (IOException ioe)");
 			ioe.printStackTrace();
 		}
 
