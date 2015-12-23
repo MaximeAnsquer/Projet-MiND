@@ -124,27 +124,27 @@
             </Niveaux>
         </Metrique>
         <Metrique>
-            <Critere>Gravité</Critere>
+            <Critere>Gravite</Critere>
             <Niveaux>
                 <Niveau>
                     <Numero>1</Numero>
                     <Intitule>Négligeable</Intitule>
-                    <Description>Gravité négligeable</Description>
+                    <Description>Gravite négligeable</Description>
                 </Niveau>
                 <Niveau>
                     <Numero>2</Numero>
                     <Intitule>Limitée</Intitule>
-                    <Description>Gravité limitée</Description>
+                    <Description>Gravite limitée</Description>
                 </Niveau>
                 <Niveau>
                     <Numero>3</Numero>
                     <Intitule>Importante</Intitule>
-                    <Description>Gravité importante</Description>
+                    <Description>Gravite importante</Description>
                 </Niveau>
                 <Niveau>
                     <Numero>4</Numero>
                     <Intitule>Critique</Intitule>
-                    <Description>Gravité critique</Description>
+                    <Description>Gravite critique</Description>
                 </Niveau>
             </Niveaux>
         </Metrique>

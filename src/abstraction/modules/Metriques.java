@@ -24,9 +24,9 @@ import abstraction.autres.NiveauDeMetrique;
 /** 
  * Cahier des charges, page 5 :
  * 
- * " Metriques : cet onglet permet la dï¿½finition des echelles ordinales associees
- *   aux differents criteres de securite retenus (par exemple : dï¿½finition dï¿½une 
- *   echelle ï¿½ quatre niveaux pour le critï¿½re de disponibilite). "
+ * " Metriques : cet onglet permet la definition des echelles ordinales associees
+ *   aux differents criteres de securite retenus (par exemple : definition deune 
+ *   echelle e quatre niveaux pour le critere de disponibilite). "
  *   
  * Cette classe modelise le module " Metriques ". Elle est constituee d'une hastable d'objets Metrique
  * indexee par le nom du critere associe (on rappelle qu'un objet Metrique est constitue d'un critere
@@ -52,7 +52,7 @@ public class Metriques extends Module {
 	//---Constructeurs---	
 	
 	/** 
-	 * Initialise le module en commenï¿½ant par initialiser la BDC, puis en copiant les valeurs
+	 * Initialise le module en commeneant par initialiser la BDC, puis en copiant les valeurs
 	 * de la BDC dans le module.
 	 */
 	public Metriques(Etude etude) {
@@ -89,8 +89,8 @@ public class Metriques extends Module {
 				this.lesMetriques.put(critere.getIntitule(), new Metrique(critere));   //sinon, on ajoute une metrique vide associee a ce critere dans l'onglet Metriques
 			}
 		}
-		//On ajoute également les métriques Gravité et Vraisemblance
-		this.lesMetriques.put("Gravité", bdcMetriques.get("Gravité"));
+		//On ajoute egalement les metriques Gravite et Vraisemblance
+		this.lesMetriques.put("Gravite", bdcMetriques.get("Gravite"));
 		this.lesMetriques.put("Vraisemblance", bdcMetriques.get("Vraisemblance"));
 		
 		
@@ -129,28 +129,28 @@ public class Metriques extends Module {
 		bdcMetriques = new Hashtable<String, Metrique>();
 
 		/*
-		 * Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
+		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
 		 */
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 		try {
 			/*
-			 * Etape 2 : création d'un parseur
+			 * Etape 2 : creation d'un parseur
 			 */
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 
 			/*
-			 * Etape 3 : création d'un Document
+			 * Etape 3 : creation d'un Document
 			 */
 			final Document document= builder.parse(new File("bdc.xml"));	    
 
 			/*
-			 * Etape 4 : récupération de l'Element racine
+			 * Etape 4 : recuperation de l'Element racine
 			 */
 			final Element racine = document.getDocumentElement();
 
 			/*
-			 * Etape 5 : récupération du noeud " Metriques "
+			 * Etape 5 : recuperation du noeud " Metriques "
 			 */
 			final Element metriques = (Element) racine.getElementsByTagName("Metriques").item(0);
 			final NodeList listeMetriques = metriques.getChildNodes();
@@ -161,7 +161,7 @@ public class Metriques extends Module {
 					final Element metrique = (Element) listeMetriques.item(i);
 					
 					/*
-					 * Construction d'une métrique
+					 * Construction d'une metrique
 					 */
 					
 					String intituleCritere = metrique.getElementsByTagName("Critere").item(0).getTextContent();					
@@ -187,7 +187,7 @@ public class Metriques extends Module {
 					Metrique m = new Metrique(critere, lesNiveaux);
 					
 					/*
-					 * Ajout de la métrique à la bdc
+					 * Ajout de la metrique e la bdc
 					 */
 					
 					bdcMetriques.put(intituleCritere, m);				}				
@@ -226,7 +226,7 @@ public class Metriques extends Module {
 	}
 	
 	public Metrique getGravite(){
-		return getMetrique("Gravité");
+		return getMetrique("Gravite");
 	}
 	
 	public void setVraisemblance(Metrique vraisemblance){
@@ -255,7 +255,7 @@ public class Metriques extends Module {
 	}
 	
 	public String toString(){
-		return "Métriques";
+		return "Metriques";
 	}	
 	
 	public boolean estCoherent(){
@@ -264,26 +264,26 @@ public class Metriques extends Module {
 		this.problemesDeCoherence = new ArrayList<JLabel>();
 		for(Metrique m : this.getMetriquesDesCriteresRetenus()){
 			if(!m.estComplet()){
-				JLabel label = new JLabel("La métrique \" " + m.getIntitule() + " \" est incomplète.");
+				JLabel label = new JLabel("La metrique \" " + m.getIntitule() + " \" est incomplete.");
 				label.setForeground(Color.red);
 				this.problemesDeCoherence.add(label);
 				resultat = false;
 			}			
 		}
-		if(this.getMetrique("Gravité") == null){
-			JLabel label = new JLabel("Il faut une métrique \" Gravité \".");
+		if(this.getMetrique("Gravite") == null){
+			JLabel label = new JLabel("Il faut une metrique \" Gravite \".");
 			label.setForeground(Color.red);
 			this.problemesDeCoherence.add(label);
 			resultat = false;
 		}
 		if(this.getMetrique("Vraisemblance") == null){
-			JLabel label = new JLabel("Il faut une métrique \" Vraisemblance \".");
+			JLabel label = new JLabel("Il faut une metrique \" Vraisemblance \".");
 			label.setForeground(Color.red);
 			this.problemesDeCoherence.add(label);
 			resultat = false;
 		}		
 		if(resultat == true){
-			this.problemesDeCoherence.add(new JLabel("Aucun problème de cohérence."));
+			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence."));
 		}
 		return resultat;
 	}

@@ -14,7 +14,7 @@ public class NiveauDeMetrique {
 	private int numero;
 	private String intitule;
 	private String description;
-	private String couleur; //TODO la couleur de la case " numero " ; on pourrait utiliser une variable de type Color, mais pas sur que ça existe en Java 6 donc mefiance
+	private String couleur; //TODO la couleur de la case " numero " ; on pourrait utiliser une variable de type Color, mais pas sur que ca existe en Java 6 donc mefiance
 
 	//---Constructeurs---
 

@@ -66,7 +66,7 @@ public class CriteresDeSecurite extends Module{
 		this.coherent = false;
 		this.disponible = true;
 
-		this.gravite = new Critere("Gravité", "Gravité", "Gravité");
+		this.gravite = new Critere("Gravite", "Gravite", "Gravite");
 		this.vraisemblance = new Critere("Vraisemblance", "Vraisemblance", "Vraisemblance");
 
 		this.importerBDC();  //on remplit la BDC
@@ -84,7 +84,7 @@ public class CriteresDeSecurite extends Module{
 	}
 
 	public Critere getCritere(String intituleCritere){
-		if(intituleCritere.equals("Gravité")){
+		if(intituleCritere.equals("Gravite")){
 			return this.getGravite();
 		}
 		else if(intituleCritere.equals("Vraisemblance")){
@@ -113,28 +113,28 @@ public class CriteresDeSecurite extends Module{
 		bdcCriteresDeSecurite = new Hashtable<String,Critere>();
 
 		/*
-		 * Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
+		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
 		 */
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 		try {
 			/*
-			 * Etape 2 : création d'un parseur
+			 * Etape 2 : creation d'un parseur
 			 */
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 
 			/*
-			 * Etape 3 : création d'un Document
+			 * Etape 3 : creation d'un Document
 			 */
 			final Document document= builder.parse(new File("bdc.xml"));	    
 
 			/*
-			 * Etape 4 : récupération de l'Element racine
+			 * Etape 4 : recuperation de l'Element racine
 			 */
 			final Element racine = document.getDocumentElement();
 
 			/*
-			 * Etape 5 : récupération du noeud " CriteresDeSecurite "
+			 * Etape 5 : recuperation du noeud " CriteresDeSecurite "
 			 */
 			final Element criteres = (Element) racine.getElementsByTagName("CriteresDeSecurite").item(0);
 			final NodeList listeCriteres = criteres.getChildNodes();
@@ -145,7 +145,7 @@ public class CriteresDeSecurite extends Module{
 					final Element critere = (Element) listeCriteres.item(i);
 
 					/*
-					 * Construction d'un critère
+					 * Construction d'un critere
 					 */
 
 					String id = critere.getElementsByTagName("Id").item(0).getTextContent();
@@ -155,7 +155,7 @@ public class CriteresDeSecurite extends Module{
 					Critere c = new Critere(id, intitule, description);
 
 					/*
-					 * Ajout du critère à la bdc
+					 * Ajout du critere a la bdc
 					 */
 
 					bdcCriteresDeSecurite.put(intitule, c);				}				
@@ -210,7 +210,7 @@ public class CriteresDeSecurite extends Module{
 	}
 
 	public String toString(){
-		return "Critères de sécurité";
+		return "Criteres de securite";
 	}
 
 	public boolean estCoherent(){
@@ -218,20 +218,20 @@ public class CriteresDeSecurite extends Module{
 		this.problemesDeCoherence = new ArrayList<JLabel>();
 		for(Critere c : getLesCriteres().values()){
 			if(!c.estComplet()){
-				JLabel label = new JLabel("Critère \" " + c.getIntitule() + " \" incomplet");
+				JLabel label = new JLabel("Critere \" " + c.getIntitule() + " \" incomplet");
 				label.setForeground(Color.red);
 				this.problemesDeCoherence.add(label);
 				resultat = false;
 			}
 		}
 		if(this.getCriteresRetenus().size() <= 0){
-			JLabel label = new JLabel("Aucun critère retenu");
+			JLabel label = new JLabel("Aucun critere retenu");
 			label.setForeground(Color.red);
 			this.problemesDeCoherence.add(label);
 			resultat = false;
 		}
 		if(resultat){
-			this.problemesDeCoherence.add(new JLabel("Aucun problème de cohérence."));
+			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence."));
 		}		
 		return resultat;
 	}

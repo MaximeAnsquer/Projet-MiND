@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,7 +21,10 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
+
+import presentation.FenetreMetriques.Renderer;
 
 import abstraction.autres.SourceDeMenace;
 import abstraction.modules.SourcesDeMenaces;
@@ -50,10 +55,13 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 		//On change le mode de selection
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		//On change la police et la hauteur des lignes
 		table.setFont(new Font("Arial", Font.PLAIN, 15));
 		table.setRowHeight(50);
+
+		//On definit le renderer (pour les tooltips)
+		table.setDefaultRenderer(Object.class, new Renderer());
 
 		table.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent e) {}
@@ -70,7 +78,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
 		});
-		
+
 		table.addKeyListener(new KeyListener(){
 
 			public void keyTyped(KeyEvent e) {}
@@ -110,7 +118,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Intitulé de la source de menace"),
+								BorderFactory.createTitledBorder("Intitule de la source de menace"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		return areaScrollPane;
@@ -184,7 +192,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
-		private final String[] entetes = {"Id", "Intitulé", "Exemple", "Retenu"};
+		private final String[] entetes = {"Id", "Intitule", "Exemple", "Retenu"};
 
 		public ModeleDynamiqueObjet() {
 			super();		}
@@ -219,7 +227,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		public void ajouterSource() {
 			String id = JOptionPane.showInputDialog("Id ?");
 			if(sdm.getSourceDeMenace(id) != null){
-				JOptionPane.showMessageDialog(null, "Cet id est déjà utilisé.", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Cet id est deja utilise.", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 			else{
 				String intitule = JOptionPane.showInputDialog("Intitule ?");
@@ -273,5 +281,23 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			zoneIntitule.setText(getSourceSelectionnee().getIntitule());
 		}
 	}
+
+	//---Renderer---
+
+	class Renderer extends DefaultTableCellRenderer {
+
+		private static final long serialVersionUID = 1L;
+
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+			if(component instanceof JComponent){
+				((JComponent)component).setToolTipText(value.toString());
+			}
+			return component;
+		}
+	}
+
+	//---Fin du Renderer---
 
 }

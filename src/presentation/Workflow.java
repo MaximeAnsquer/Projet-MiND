@@ -39,7 +39,8 @@ public class Workflow extends JPanel {
 
 			JButton bouton = new JButton(m.toString());
 			if(!m.estDisponible()){
-				bouton.setEnabled(false);
+				//TODO a decommenter a la fin
+//				bouton.setEnabled(false);
 			}
 			else{
 				if(m.estCree()){

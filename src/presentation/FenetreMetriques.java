@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -281,7 +282,7 @@ public class FenetreMetriques extends JPanel {
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 
-		private final String[] entetes = {"#", "Intitulé", "Description"};
+		private final String[] entetes = {"#", "Intitule", "Description"};
 		private Metrique metrique;
 
 		public ModeleDynamiqueObjet(Metrique metrique) {
@@ -337,7 +338,7 @@ public class FenetreMetriques extends JPanel {
 				getMetriqueCourante().ajouterNiveau(niveau);
 			}
 			catch(NumberFormatException e){
-				JOptionPane.showMessageDialog(null, "La première valeur doit être un entier.");
+				JOptionPane.showMessageDialog(null, "La premiere valeur doit etre un entier.");
 			}
 
 			fireTableRowsInserted(getMetriqueCourante().nombreDeNiveaux() -1, getMetriqueCourante().nombreDeNiveaux() -1);
@@ -359,7 +360,7 @@ public class FenetreMetriques extends JPanel {
 						niveau.setNumero(Integer.parseInt((String) aValue));
 					}
 					catch(NumberFormatException e){
-						JOptionPane.showMessageDialog(null, "Veuillez saisir un entier supérieur à 0.");
+						JOptionPane.showMessageDialog(null, "Veuillez saisir un entier superieur a 0.");
 					}
 					break;
 				case 1:
@@ -384,6 +385,10 @@ public class FenetreMetriques extends JPanel {
 
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			
+			if(component instanceof JComponent){
+				((JComponent)component).setToolTipText(value.toString());
+			}
 
 			if (value=="" || value == null) {
 				Color clr = Color.yellow;

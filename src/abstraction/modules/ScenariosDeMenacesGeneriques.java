@@ -74,7 +74,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			for (ScenarioGenerique scenario : bdcScenariosMenacesGeneriques
 					.values()) {
 				b = b
-						&& (scenario.getType().getIntitule() != type
+						&& (scenario.getIntituleType() != type
 								.getIntitule());
 			}
 		}
@@ -83,20 +83,25 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	// L'ajout d'une ligne dans le tableau correspond ici
 	// à un nouveau type de bien support non référencé dans la bdc
-	public void addTypeBienSupport(TypeBien type) {
+	public void addTypeBienSupport(String type) {
 		/*
 		if (estNouveauTypeBien(type)){
 			
 		}
 		//*/
-		this.tableau.put(type.getIntitule(),new ScenarioGenerique(type));
+		this.tableau.put(type,new ScenarioGenerique(type));
 	}
 	
 	// L'ajout d'une ligne dans le tableau correspond ici
 	// à un type de bien support référencé
 	
-	public void addScenarioGenerique(TypeBien type) {
-		// TODO
+	public void addScenarioGenerique(ScenarioGenerique scenario) {
+		this.tableau.put(scenario.getIntitule(), scenario);
+	}
+	
+	public void removeScenarioGenerique(ScenarioGenerique scenario){
+		this.tableau.remove(scenario.getIntitule(), scenario);
+		this.tableau.remove(scenario.getIntituleType(), scenario);
 	}
 	
 	private void importerBDC() {
@@ -104,7 +109,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	}
 	
 	public String toString(){
-		return "Scenarios de menaces génériques";
+		return "Scenarios de menaces generiques";
 	}
 	
 }

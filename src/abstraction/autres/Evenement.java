@@ -58,7 +58,7 @@ public class Evenement {
 		
 		
 		
-		int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravité").nombreDeNiveaux();
+		int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
 		
 		String[] liste=new String[a];
 		for(int i=1;i<=a;i++){

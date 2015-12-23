@@ -115,28 +115,28 @@ public class SourcesDeMenaces extends Module {
 		bdcSourcesDeMenaces = new Hashtable<String, SourceDeMenace>();
 
 		/*
-		 * Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
+		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
 		 */
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 		try {
 			/*
-			 * Etape 2 : création d'un parseur
+			 * Etape 2 : creation d'un parseur
 			 */
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 
 			/*
-			 * Etape 3 : création d'un Document
+			 * Etape 3 : creation d'un Document
 			 */
 			final Document document= builder.parse(new File("bdc.xml"));	    
 
 			/*
-			 * Etape 4 : récupération de l'Element racine
+			 * Etape 4 : recuperation de l'Element racine
 			 */
 			final Element racine = document.getDocumentElement();
 
 			/*
-			 * Etape 5 : récupération du noeud " SourcesDeMenaces "
+			 * Etape 5 : recuperation du noeud " SourcesDeMenaces "
 			 */
 			final Element sources = (Element) racine.getElementsByTagName("SourcesDeMenaces").item(0);
 			final NodeList listeSources = sources.getChildNodes();
@@ -157,7 +157,7 @@ public class SourcesDeMenaces extends Module {
 					SourceDeMenace s = new SourceDeMenace(id, intitule, exemple);
 					
 					/*
-					 * Ajout de la source à la bdc
+					 * Ajout de la source a la bdc
 					 */
 					
 					bdcSourcesDeMenaces.put(id, s);				}				
@@ -195,7 +195,7 @@ public class SourcesDeMenaces extends Module {
 		this.problemesDeCoherence = new ArrayList<JLabel>();
 		for(SourceDeMenace s : this.getLesSourcesDeMenaces().values()){
 			if(!s.estComplet()){
-				JLabel label = new JLabel("La source de menace \" " + s.getId() + " \" est incomplète");
+				JLabel label = new JLabel("La source de menace \" " + s.getId() + " \" est incomplete");
 				label.setForeground(Color.red);
 				problemesDeCoherence.add(label);
 				resultat = false;
@@ -208,7 +208,7 @@ public class SourcesDeMenaces extends Module {
 			resultat = false;
 		}
 		if(resultat){
-			problemesDeCoherence.add(new JLabel("Aucun problème de cohérence."));
+			problemesDeCoherence.add(new JLabel("Aucun probleme de coherence."));
 		}
 		return resultat;
 	}
