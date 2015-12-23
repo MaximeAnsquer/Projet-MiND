@@ -96,6 +96,11 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	// à un type de bien support référencé
 	
 	public void addScenarioGenerique(ScenarioGenerique scenario) {
+		if (this.nomColonneSup!=null){
+			for(String nomCritere : this.nomColonneSup){
+				scenario.getCriteresSup().put(nomCritere,false);
+			}
+		}
 		this.tableau.put(scenario.getIntitule(), scenario);
 	}
 	
