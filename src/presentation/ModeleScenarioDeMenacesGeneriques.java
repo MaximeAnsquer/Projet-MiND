@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
 import abstraction.autres.Critere;
@@ -174,7 +175,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		//*/
 		this.moduleCourant.addCritere(critere);
 		// On ajoute la colonne du critère à gauche de la colonne "Retenu"
-		this.entetes.add(this.getColumnCount()-1, critere);
+		this.entetes.add(0, critere);
 		fireTableStructureChanged();
 	}
 	

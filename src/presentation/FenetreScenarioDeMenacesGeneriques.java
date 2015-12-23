@@ -26,7 +26,7 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 	private JButton aide ;
 	
 	public FenetreScenarioDeMenacesGeneriques() {
-		super("Typologie des Biens Supports");
+		super("Scénarios de menaces génériques");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
