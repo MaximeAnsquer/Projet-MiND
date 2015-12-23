@@ -44,7 +44,6 @@ public class FenetreBiensSupports extends JPanel{
 
 	public FenetreBiensSupports(BiensSupports biensSupports){
 		this.setVisible(true);
-		this.boutonSupprimerColonne.setEnabled(false);
 		this.biensSupports=biensSupports;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -66,6 +65,7 @@ public class FenetreBiensSupports extends JPanel{
 		this.add(new JScrollPane(table));	
 		this.add(zoneDescription());
 		this.add(partieBoutons());
+		this.boutonSupprimerColonne.setEnabled(false);
 	}
 	
 	private JScrollPane zoneDescription() {

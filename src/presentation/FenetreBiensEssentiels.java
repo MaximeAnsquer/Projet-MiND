@@ -44,7 +44,6 @@ public class FenetreBiensEssentiels extends JPanel{
 
 	public FenetreBiensEssentiels(BiensEssentiels biensEssentiels){
 		this.biensEssentiels = biensEssentiels;
-		this.boutonSupprimerColonne.setEnabled(false);
 		this.setVisible(true);
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -66,6 +65,7 @@ public class FenetreBiensEssentiels extends JPanel{
 		this.add(new JScrollPane(table));	
 		this.add(zoneDescription());
 		this.add(partieBoutons());
+		this.boutonSupprimerColonne.setEnabled(false);
 	}
 	
 	private JScrollPane zoneDescription() {
