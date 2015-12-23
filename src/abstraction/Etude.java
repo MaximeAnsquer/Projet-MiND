@@ -1,7 +1,15 @@
 package abstraction;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import abstraction.modules.BiensEssentiels;
+import abstraction.modules.BiensSupports;
+import abstraction.modules.CriteresDeSecurite;
+import abstraction.modules.EvenementsRedoutes;
+import abstraction.modules.MappingDesBiens;
+import abstraction.modules.Metriques;
 import abstraction.modules.Module;
+import abstraction.modules.SourcesDeMenaces;
 
 public class Etude {
 	
@@ -16,10 +24,22 @@ public class Etude {
 	
 	//---Constructeurs---
 	
+	/**
+	 * Une nouvelle etude remplie de nouveaux modules
+	 * @param nomEtude
+	 */
 	public Etude(String nomEtude){
 		
 		this.nomEtude = nomEtude;
 		this.lesModules = new Hashtable<String, Module>();
+		
+		this.addModule(new CriteresDeSecurite());		
+		this.addModule(new Metriques(this));
+		this.addModule(new SourcesDeMenaces());
+		this.addModule(new BiensSupports());
+		this.addModule(new BiensEssentiels());
+		this.addModule(new MappingDesBiens((BiensSupports)this.getModule("BiensSupports"), (BiensEssentiels)this.getModule("BiensEssentiels")));
+		this.addModule(new EvenementsRedoutes(this));
 	}
 	
 	public Etude(){
@@ -34,6 +54,14 @@ public class Etude {
 	
 	public void setLesModules(Hashtable<String,Module> lesModules) {
 		this.lesModules = lesModules;
+	}
+	
+	public String getNom(){
+		return this.nomEtude;
+	}
+	
+	public void setNom(String nomEtude){
+		this.nomEtude = nomEtude;
 	}
 	
 	//---Services---

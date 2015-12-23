@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.autres.ScenarioGenerique;
+import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.TypeBien;
 
 public class ScenariosDeMenacesGeneriques extends Module {
@@ -14,6 +15,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	// Variable d'instance
 	private Hashtable<String, ScenarioGenerique> tableau;
 	private ScenarioGenerique scenarioCourant ;
+	private ArrayList<String> nomColonneSup;
 	
 	public ScenariosDeMenacesGeneriques(){
 		super("Scenario de Menaces Generiques");
@@ -22,6 +24,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		//this.predecesseurs.add(this.getEtude().getModule("Sources de menaces"));
 		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
 		//this.successeurs.add(this.getEtude().getModule("Scenario de Menaces Types"));
+		this.nomColonneSup = new ArrayList<String>();
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
@@ -41,6 +44,14 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	public void setScenarioCourant(ScenarioGenerique scenarioCourant){
 		this.scenarioCourant=scenarioCourant;
+	}
+	
+	public ArrayList<String> getNomColonneSup() {
+		return nomColonneSup;
+	}
+
+	public void setNomColonneSup(ArrayList<String> nomColonneSup) {
+		this.nomColonneSup = nomColonneSup;
 	}
 
 	public Hashtable<String, ScenarioGenerique> getTableau() {
@@ -74,22 +85,11 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			for (ScenarioGenerique scenario : bdcScenariosMenacesGeneriques
 					.values()) {
 				b = b
-						&& (scenario.getIntituleType() != type
+						&& (scenario.getTypeBienSupport() != type
 								.getIntitule());
 			}
 		}
 		return b;
-	}
-	
-	// L'ajout d'une ligne dans le tableau correspond ici
-	// à un nouveau type de bien support non référencé dans la bdc
-	public void addTypeBienSupport(String type) {
-		/*
-		if (estNouveauTypeBien(type)){
-			
-		}
-		//*/
-		this.tableau.put(type,new ScenarioGenerique(type));
 	}
 	
 	// L'ajout d'une ligne dans le tableau correspond ici
@@ -101,7 +101,31 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	public void removeScenarioGenerique(ScenarioGenerique scenario){
 		this.tableau.remove(scenario.getIntitule(), scenario);
-		this.tableau.remove(scenario.getIntituleType(), scenario);
+		// this.tableau.remove(scenario.getTypeBienSupport(), scenario);
+	}
+	
+	// Ajout d'une colonne
+	public void addCritere (String nomCritere){
+		this.getNomColonneSup().add(nomCritere);
+		this.setChanged();                           // PAC
+		this.notifyObservers();                      // PAC
+	}
+	
+	//Suppression d'une colonne
+	public void removeCritere (String nomCritere){
+		this.getNomColonneSup().remove(nomCritere);
+		this.setChanged();                           // PAC
+		this.notifyObservers();                      // PAC
+	}
+	
+	public Hashtable<String, ScenarioGenerique> getScenariosGeneriquesRetenus() {
+		Hashtable<String, ScenarioGenerique> resultat = new Hashtable<String, ScenarioGenerique>();
+		for (ScenarioGenerique scenario : this.getTableau().values()) {
+			if (scenario.isRetenu()) {
+				resultat.put(scenario.getIntitule(), scenario);
+			}
+		}
+		return resultat;
 	}
 	
 	private void importerBDC() {
