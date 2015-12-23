@@ -3,9 +3,15 @@ package presentation;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.swing.BoxLayout;
@@ -13,6 +19,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import abstraction.Etude;
 import abstraction.modules.BiensEssentiels;
@@ -52,7 +62,7 @@ public class MainMaximeAnsquer extends JFrame {
 		this.moduleEnCours = new Module("Workflow");
 		this.contenuPrincipal = new JPanel();
 		this.contenuPrincipal.setLayout(new BorderLayout());
-		
+
 		this.setJMenuBar(new BarreMenu());
 
 		this.lesJpanels = new Hashtable<String, JPanel>();
@@ -90,7 +100,8 @@ public class MainMaximeAnsquer extends JFrame {
 			setPartieDeGauche();
 			contentPane.add(partieDeGauche, BorderLayout.WEST);
 			this.contenuPrincipal.removeAll();	
-			this.label = new JLabel(moduleEnCours.toString());
+			this.label = new JLabel(moduleEnCours.toString(), SwingConstants.CENTER);
+			this.label.setFont(new Font("Arial", Font.PLAIN, 25));
 
 			if(nom.equals("CriteresDeSecurite")){
 				this.lesJpanels.put(nom, new FenetreCriteresDeSecurite((CriteresDeSecurite) etudeEnCours.getModule(nom)));
@@ -142,7 +153,7 @@ public class MainMaximeAnsquer extends JFrame {
 				}				
 			});
 			partieDeGauche.add(boutonWorkflow);
-			
+
 			JButton boutonVerifier = new JButton("Verifier la coherence");
 			boutonVerifier.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
@@ -152,7 +163,7 @@ public class MainMaximeAnsquer extends JFrame {
 				}				
 			});
 			partieDeGauche.add(boutonVerifier);
-			
+
 			for(JLabel label : moduleEnCours.getProblemes()){
 				partieDeGauche.add(label);
 			}
@@ -174,6 +185,60 @@ public class MainMaximeAnsquer extends JFrame {
 		etudeDeTest.addModule(new BiensEssentiels());
 		etudeDeTest.addModule(new MappingDesBiens((BiensSupports)etudeDeTest.getModule("BiensSupports"), (BiensEssentiels)etudeDeTest.getModule("BiensEssentiels")));
 		//etudeDeTest.addModule(new EvenementsRedoutes(etudeDeTest));
+		
+		//---Sauvegarde d'une etude---
+//
+//		try {
+//		    // Instanciation de la classe XStream
+//		    XStream xstream = new XStream(new DomDriver());		    
+//		    // Instanciation d'un fichier c:/temp/article.xml
+//		    File fichier = new File("C:/Users/Maxime/git/Projet-MiND/etudes/etudeDeTest.xml");
+//		    // Instanciation d'un flux de sortie fichier
+//		    FileOutputStream fos = new FileOutputStream(fichier);
+//		    try {
+//			// Sérialisation de l'objet article dans c:/temp/article.xml
+//			xstream.toXML(etudeDeTest, fos);
+//		    } finally {
+//			// On s'assure de fermer le flux quoi qu'il arrive
+//			fos.close();
+//		    }	 
+//		} catch (FileNotFoundException e) {
+//		    e.printStackTrace();
+//		} catch (IOException ioe) {
+//		    ioe.printStackTrace();
+//		}
+		
+		//---Sauvegarde d'une etude---
+		
+		//---Ouverture d'une etude sauvegardee--
+		
+//		Etude etudeOuverte = new Etude();
+//		
+//		try {
+//            // Instanciation de la classe XStream
+//            XStream xstream = new XStream(new DomDriver());
+// 
+//            // Redirection du fichier c:/temp/article.xml vers un flux
+//            // d'entrée fichier
+//            FileInputStream fis = new FileInputStream(new File("C:/Users/Maxime/git/Projet-MiND/etudes/etudeDeTest.xml"));
+// 
+//            try {
+//                // Désérialisation du fichier c:/temp/article.xml vers un nouvel
+//                // objet article
+//                etudeOuverte = (Etude) xstream.fromXML(fis);
+// 
+//            } finally {
+//                // On s'assure de fermer le flux quoi qu'il arrive
+//                fis.close();
+//            }
+// 
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace();
+//        }
+		
+		//---Fin ouverture d'uen etude sauvegardee
 
 		return etudeDeTest;
 	}

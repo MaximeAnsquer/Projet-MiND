@@ -1,0 +1,701 @@
+<abstraction.Etude>
+  <lesModules>
+    <entry>
+      <string>MappingDesBiens</string>
+      <abstraction.modules.MappingDesBiens>
+        <changed>false</changed>
+        <obs/>
+        <predecesseurs/>
+        <successeurs/>
+        <nom>MappingDesBiens</nom>
+        <cree>false</cree>
+        <coherent>false</coherent>
+        <disponible>false</disponible>
+        <etude reference="../../../.."/>
+        <problemesDeCoherence/>
+        <mappingDesBiens>
+          <abstraction.modules.MappingBien>
+            <mappingBien>
+              <string></string>
+              <string></string>
+              <string></string>
+            </mappingBien>
+            <biensSupports>
+              <changed>false</changed>
+              <obs/>
+              <predecesseurs/>
+              <successeurs/>
+              <nom>BiensSupports</nom>
+              <cree>false</cree>
+              <coherent>false</coherent>
+              <disponible>false</disponible>
+              <etude reference="../../../../../../.."/>
+              <problemesDeCoherence/>
+              <lesBiens>
+                <entry>
+                  <string>Disponibilite</string>
+                  <abstraction.autres.Bien>
+                    <description>il s&apos;agit du bien numero 1</description>
+                    <intitule>Disponibilite</intitule>
+                    <type>type 1</type>
+                    <retenu>false</retenu>
+                  </abstraction.autres.Bien>
+                </entry>
+                <entry>
+                  <string>Integrite</string>
+                  <abstraction.autres.Bien>
+                    <description>il s&apos;agit du bien numero 2</description>
+                    <intitule>Integrite</intitule>
+                    <type>type 2</type>
+                    <retenu>false</retenu>
+                  </abstraction.autres.Bien>
+                </entry>
+                <entry>
+                  <string>Confidentialite</string>
+                  <abstraction.autres.Bien>
+                    <description>il s&apos;agit du bien numero 3</description>
+                    <intitule>Confidentialite</intitule>
+                    <type>type 3</type>
+                    <retenu>false</retenu>
+                  </abstraction.autres.Bien>
+                </entry>
+              </lesBiens>
+            </biensSupports>
+            <bienEssentiel>
+              <description>il s&apos;agit du bien numero 1</description>
+              <intitule>Disponibilite</intitule>
+              <type></type>
+              <retenu>false</retenu>
+            </bienEssentiel>
+          </abstraction.modules.MappingBien>
+          <abstraction.modules.MappingBien>
+            <mappingBien>
+              <string></string>
+              <string></string>
+              <string></string>
+            </mappingBien>
+            <biensSupports reference="../../abstraction.modules.MappingBien/biensSupports"/>
+            <bienEssentiel>
+              <description>il s&apos;agit du bien numero 2</description>
+              <intitule>Integrite</intitule>
+              <type></type>
+              <retenu>false</retenu>
+            </bienEssentiel>
+          </abstraction.modules.MappingBien>
+          <abstraction.modules.MappingBien>
+            <mappingBien>
+              <string></string>
+              <string></string>
+              <string></string>
+            </mappingBien>
+            <biensSupports reference="../../abstraction.modules.MappingBien/biensSupports"/>
+            <bienEssentiel>
+              <description>il s&apos;agit du bien numero 3</description>
+              <intitule>Confidentialite</intitule>
+              <type></type>
+              <retenu>false</retenu>
+            </bienEssentiel>
+          </abstraction.modules.MappingBien>
+        </mappingDesBiens>
+        <biensSupports>
+          <changed>false</changed>
+          <obs/>
+          <predecesseurs/>
+          <successeurs/>
+          <nom>BiensSupports</nom>
+          <cree>false</cree>
+          <coherent>false</coherent>
+          <disponible>false</disponible>
+          <problemesDeCoherence/>
+          <lesBiens>
+            <entry>
+              <string>Disponibilite</string>
+              <abstraction.autres.Bien>
+                <description>il s&apos;agit du bien numero 1</description>
+                <intitule>Disponibilite</intitule>
+                <type>type 1</type>
+                <retenu>false</retenu>
+              </abstraction.autres.Bien>
+            </entry>
+            <entry>
+              <string>Integrite</string>
+              <abstraction.autres.Bien>
+                <description>il s&apos;agit du bien numero 2</description>
+                <intitule>Integrite</intitule>
+                <type>type 2</type>
+                <retenu>false</retenu>
+              </abstraction.autres.Bien>
+            </entry>
+            <entry>
+              <string>Confidentialite</string>
+              <abstraction.autres.Bien>
+                <description>il s&apos;agit du bien numero 3</description>
+                <intitule>Confidentialite</intitule>
+                <type>type 3</type>
+                <retenu>false</retenu>
+              </abstraction.autres.Bien>
+            </entry>
+          </lesBiens>
+        </biensSupports>
+        <biensEssentiels>
+          <changed>false</changed>
+          <obs/>
+          <predecesseurs/>
+          <successeurs/>
+          <nom>BiensEssentiels</nom>
+          <cree>false</cree>
+          <coherent>false</coherent>
+          <disponible>true</disponible>
+          <problemesDeCoherence/>
+          <lesBiens>
+            <entry>
+              <string>Disponibilite</string>
+              <abstraction.autres.Bien>
+                <description>il s&apos;agit du bien numero 1</description>
+                <intitule>Disponibilite</intitule>
+                <type></type>
+                <retenu>false</retenu>
+              </abstraction.autres.Bien>
+            </entry>
+            <entry>
+              <string>Integrite</string>
+              <abstraction.autres.Bien>
+                <description>il s&apos;agit du bien numero 2</description>
+                <intitule>Integrite</intitule>
+                <type></type>
+                <retenu>false</retenu>
+              </abstraction.autres.Bien>
+            </entry>
+            <entry>
+              <string>Confidentialite</string>
+              <abstraction.autres.Bien>
+                <description>il s&apos;agit du bien numero 3</description>
+                <intitule>Confidentialite</intitule>
+                <type></type>
+                <retenu>false</retenu>
+              </abstraction.autres.Bien>
+            </entry>
+          </lesBiens>
+          <nomColonneSup/>
+        </biensEssentiels>
+      </abstraction.modules.MappingDesBiens>
+    </entry>
+    <entry>
+      <string>Metriques</string>
+      <abstraction.modules.Metriques>
+        <changed>false</changed>
+        <obs/>
+        <predecesseurs>
+          <abstraction.modules.CriteresDeSecurite>
+            <changed>false</changed>
+            <obs/>
+            <predecesseurs/>
+            <successeurs/>
+            <nom>CriteresDeSecurite</nom>
+            <cree>false</cree>
+            <coherent>false</coherent>
+            <disponible>true</disponible>
+            <etude reference="../../../../../.."/>
+            <problemesDeCoherence/>
+            <lesCriteres>
+              <entry>
+                <string>Disponibilité</string>
+                <abstraction.autres.Critere>
+                  <id>D</id>
+                  <intitule>Disponibilité</intitule>
+                  <description>Durée maximale admissible pour la réalisation d&apos;un processus métier.</description>
+                  <retenu>true</retenu>
+                </abstraction.autres.Critere>
+              </entry>
+              <entry>
+                <string>Confidentialité</string>
+                <abstraction.autres.Critere>
+                  <id>C</id>
+                  <intitule>Confidentialité</intitule>
+                  <description>Sensibilité des informations liées à un processus métier.</description>
+                  <retenu>true</retenu>
+                </abstraction.autres.Critere>
+              </entry>
+              <entry>
+                <string>Intégrité</string>
+                <abstraction.autres.Critere>
+                  <id>I</id>
+                  <intitule>Intégrité</intitule>
+                  <description>Altération admissible et/ou mesures de récupération des données à mettre en œuvre pour un processus métier.</description>
+                  <retenu>true</retenu>
+                </abstraction.autres.Critere>
+              </entry>
+              <entry>
+                <string>Traçabilité</string>
+                <abstraction.autres.Critere>
+                  <id>T</id>
+                  <intitule>Traçabilité</intitule>
+                  <description>Suivi des actions liées à un processus métier.</description>
+                  <retenu>true</retenu>
+                </abstraction.autres.Critere>
+              </entry>
+            </lesCriteres>
+            <gravite>
+              <id>Gravite</id>
+              <intitule>Gravite</intitule>
+              <description>Gravite</description>
+              <retenu>true</retenu>
+            </gravite>
+            <vraisemblance>
+              <id>Vraisemblance</id>
+              <intitule>Vraisemblance</intitule>
+              <description>Vraisemblance</description>
+              <retenu>true</retenu>
+            </vraisemblance>
+          </abstraction.modules.CriteresDeSecurite>
+        </predecesseurs>
+        <successeurs/>
+        <nom>Metriques</nom>
+        <cree>false</cree>
+        <coherent>false</coherent>
+        <disponible>false</disponible>
+        <etude reference="../../../.."/>
+        <problemesDeCoherence/>
+        <bdcMetriques>
+          <entry>
+            <string>Disponibilité</string>
+            <abstraction.autres.Metrique>
+              <critere reference="../../../../predecesseurs/abstraction.modules.CriteresDeSecurite/lesCriteres/entry/abstraction.autres.Critere"/>
+              <lesNiveaux>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>1</numero>
+                  <intitule>Faible</intitule>
+                  <description>Une indisponibilité peut être tolérée sur un intervalle de temps de quelques jours, voire plus.</description>
+                  <couleur>vert</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>2</numero>
+                  <intitule>Modérée</intitule>
+                  <description>L’indisponibilité ne peut excéder l’ordre de quelques heures.</description>
+                  <couleur>jaune-orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>3</numero>
+                  <intitule>Forte</intitule>
+                  <description>L’indisponibilité ne peut excéder l’ordre de quelques minutes.</description>
+                  <couleur>orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>4</numero>
+                  <intitule>Immédiate</intitule>
+                  <description>L’indisponibilité ne peut excéder l’ordre de quelques secondes.</description>
+                  <couleur>rouge</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+              </lesNiveaux>
+            </abstraction.autres.Metrique>
+          </entry>
+          <entry>
+            <string>Vraisemblance</string>
+            <abstraction.autres.Metrique>
+              <critere reference="../../../../predecesseurs/abstraction.modules.CriteresDeSecurite/vraisemblance"/>
+              <lesNiveaux>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>1</numero>
+                  <intitule>Minime</intitule>
+                  <description>Minime</description>
+                  <couleur>vert</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>2</numero>
+                  <intitule>Significative</intitule>
+                  <description>Significative</description>
+                  <couleur>jaune-orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>3</numero>
+                  <intitule>Forte</intitule>
+                  <description>Forte</description>
+                  <couleur>orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>4</numero>
+                  <intitule>Maximale</intitule>
+                  <description>Maximale</description>
+                  <couleur>rouge</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+              </lesNiveaux>
+            </abstraction.autres.Metrique>
+          </entry>
+          <entry>
+            <string>Gravite</string>
+            <abstraction.autres.Metrique>
+              <critere reference="../../../../predecesseurs/abstraction.modules.CriteresDeSecurite/gravite"/>
+              <lesNiveaux>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>1</numero>
+                  <intitule>Négligeable</intitule>
+                  <description>Gravite négligeable</description>
+                  <couleur>vert</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>2</numero>
+                  <intitule>Limitée</intitule>
+                  <description>Gravite limitée</description>
+                  <couleur>jaune-orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>3</numero>
+                  <intitule>Importante</intitule>
+                  <description>Gravite importante</description>
+                  <couleur>orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>4</numero>
+                  <intitule>Critique</intitule>
+                  <description>Gravite critique</description>
+                  <couleur>rouge</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+              </lesNiveaux>
+            </abstraction.autres.Metrique>
+          </entry>
+          <entry>
+            <string>Confidentialité</string>
+            <abstraction.autres.Metrique>
+              <critere reference="../../../../predecesseurs/abstraction.modules.CriteresDeSecurite/lesCriteres/entry[2]/abstraction.autres.Critere"/>
+              <lesNiveaux>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>1</numero>
+                  <intitule>Libre</intitule>
+                  <description>Aucune mesure particulière ne doit être mise en œuvre.</description>
+                  <couleur>vert</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>2</numero>
+                  <intitule>Entreprise</intitule>
+                  <description>La connaissance s&apos;organise sur un périmètre d&apos;accès à la maille d&apos;ERDF.</description>
+                  <couleur>jaune-orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>3</numero>
+                  <intitule>Restreint</intitule>
+                  <description>La connaissance est limitée à des personnes, fonctions ou à un périmètre restreint lié à une activité.</description>
+                  <couleur>orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>4</numero>
+                  <intitule>Confidentiel</intitule>
+                  <description>Ne doit être connu que par des personnes nommément désignées et autorisées à cet effet.</description>
+                  <couleur>rouge</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+              </lesNiveaux>
+            </abstraction.autres.Metrique>
+          </entry>
+          <entry>
+            <string>Intégrité</string>
+            <abstraction.autres.Metrique>
+              <critere reference="../../../../predecesseurs/abstraction.modules.CriteresDeSecurite/lesCriteres/entry[3]/abstraction.autres.Critere"/>
+              <lesNiveaux>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>1</numero>
+                  <intitule>Non contrôlée</intitule>
+                  <description>Aucune mesure particulière ne doit être mise en œuvre.</description>
+                  <couleur>vert</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>2</numero>
+                  <intitule>Identifiée</intitule>
+                  <description>Le processus essentiel peut être altéré si cette alétration est identifiée.</description>
+                  <couleur>jaune-orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>3</numero>
+                  <intitule>Corrigée</intitule>
+                  <description>Le processus essentiel peut être altéré si cette altération est identifiée et l’intégrité du processus essentiel peut être retrouvée.</description>
+                  <couleur>orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>4</numero>
+                  <intitule>Non altérée</intitule>
+                  <description>Le processus essentiel ne doit pas être altéré.</description>
+                  <couleur>rouge</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+              </lesNiveaux>
+            </abstraction.autres.Metrique>
+          </entry>
+          <entry>
+            <string>Traçabilité</string>
+            <abstraction.autres.Metrique>
+              <critere reference="../../../../predecesseurs/abstraction.modules.CriteresDeSecurite/lesCriteres/entry[4]/abstraction.autres.Critere"/>
+              <lesNiveaux>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>1</numero>
+                  <intitule>Inexistante</intitule>
+                  <description>La traçabiltié n&apos;est pas nécessaire.</description>
+                  <couleur>vert</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>2</numero>
+                  <intitule>Courte</intitule>
+                  <description>La traçabilité doit être assurée et conservée pour une durée de quelques mois.</description>
+                  <couleur>jaune-orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>3</numero>
+                  <intitule>Moyenne</intitule>
+                  <description>La traçabilité doit être assurée et conservée pour une durée de quelques années.</description>
+                  <couleur>orange</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+                <abstraction.autres.NiveauDeMetrique>
+                  <numero>4</numero>
+                  <intitule>Longue</intitule>
+                  <description>La traçabilité doit être assurée et conservée pendant de nombreuses années voir indéfiniment.</description>
+                  <couleur>rouge</couleur>
+                </abstraction.autres.NiveauDeMetrique>
+              </lesNiveaux>
+            </abstraction.autres.Metrique>
+          </entry>
+        </bdcMetriques>
+        <lesMetriques>
+          <entry>
+            <string>Disponibilité</string>
+            <abstraction.autres.Metrique reference="../../../bdcMetriques/entry/abstraction.autres.Metrique"/>
+          </entry>
+          <entry>
+            <string>Vraisemblance</string>
+            <abstraction.autres.Metrique reference="../../../bdcMetriques/entry[2]/abstraction.autres.Metrique"/>
+          </entry>
+          <entry>
+            <string>Gravite</string>
+            <abstraction.autres.Metrique reference="../../../bdcMetriques/entry[3]/abstraction.autres.Metrique"/>
+          </entry>
+          <entry>
+            <string>Confidentialité</string>
+            <abstraction.autres.Metrique reference="../../../bdcMetriques/entry[4]/abstraction.autres.Metrique"/>
+          </entry>
+          <entry>
+            <string>Intégrité</string>
+            <abstraction.autres.Metrique reference="../../../bdcMetriques/entry[5]/abstraction.autres.Metrique"/>
+          </entry>
+          <entry>
+            <string>Traçabilité</string>
+            <abstraction.autres.Metrique reference="../../../bdcMetriques/entry[6]/abstraction.autres.Metrique"/>
+          </entry>
+        </lesMetriques>
+        <cds reference="../predecesseurs/abstraction.modules.CriteresDeSecurite"/>
+      </abstraction.modules.Metriques>
+    </entry>
+    <entry>
+      <string>BiensSupports</string>
+      <abstraction.modules.BiensSupports reference="../../entry/abstraction.modules.MappingDesBiens/mappingDesBiens/abstraction.modules.MappingBien/biensSupports"/>
+    </entry>
+    <entry>
+      <string>BiensEssentiels</string>
+      <abstraction.modules.BiensEssentiels>
+        <changed>false</changed>
+        <obs/>
+        <predecesseurs/>
+        <successeurs/>
+        <nom>BiensEssentiels</nom>
+        <cree>false</cree>
+        <coherent>false</coherent>
+        <disponible>true</disponible>
+        <etude reference="../../../.."/>
+        <problemesDeCoherence/>
+        <lesBiens>
+          <entry>
+            <string>Disponibilite</string>
+            <abstraction.autres.Bien reference="../../../../../entry/abstraction.modules.MappingDesBiens/mappingDesBiens/abstraction.modules.MappingBien/bienEssentiel"/>
+          </entry>
+          <entry>
+            <string>Integrite</string>
+            <abstraction.autres.Bien reference="../../../../../entry/abstraction.modules.MappingDesBiens/mappingDesBiens/abstraction.modules.MappingBien[2]/bienEssentiel"/>
+          </entry>
+          <entry>
+            <string>Confidentialite</string>
+            <abstraction.autres.Bien reference="../../../../../entry/abstraction.modules.MappingDesBiens/mappingDesBiens/abstraction.modules.MappingBien[3]/bienEssentiel"/>
+          </entry>
+        </lesBiens>
+        <nomColonneSup/>
+      </abstraction.modules.BiensEssentiels>
+    </entry>
+    <entry>
+      <string>SourcesDeMenaces</string>
+      <abstraction.modules.SourcesDeMenaces>
+        <changed>false</changed>
+        <obs/>
+        <predecesseurs/>
+        <successeurs/>
+        <nom>SourcesDeMenaces</nom>
+        <cree>false</cree>
+        <coherent>false</coherent>
+        <disponible>false</disponible>
+        <etude reference="../../../.."/>
+        <problemesDeCoherence/>
+        <lesSourcesDeMenaces>
+          <entry>
+            <string>LOL</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>LOL</id>
+              <intitule>Source humaine interne, sans intention de nuire, avec de faibles capacités.</intitule>
+              <exemple>Stagiaires, prestataires.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>IMI</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>IMI</id>
+              <intitule>Source humaine interne, malveillante, avec des capacités illimitées.</intitule>
+              <exemple>Agent connaissant bien l&apos;entreprise et le système, ayant accès au système et voulant nuire à quelqu&apos;un ou à l&apos;entreprise.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>IMF</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>IMF</id>
+              <intitule>Source humaine interne, malveillante, avec de faibles capacités.</intitule>
+              <exemple>Stagiaire, agent voulant nuire à quelqu&apos;un ou à l&apos;entreprise, personnel de ménage.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>CAT</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>CAT</id>
+              <intitule>Catastrophe naturelle ou sanitaire.</intitule>
+              <exemple>Séisme, incendie, pandémie de grande ampleur.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>NAT</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>NAT</id>
+              <intitule>Phénomène naturel.</intitule>
+              <exemple>Foudre, vents forts, neige, canicule, usure.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>DEF</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>DEF</id>
+              <intitule>Panne ou défaillance intrinsèque du composant.</intitule>
+              <exemple>Panne d&apos;un ordinateur bureautique.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>EAM</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>EAM</id>
+              <intitule>Source humaine externe, sans intention de nuire, avec des capacités importantes.</intitule>
+              <exemple>Tout ce qui est lié à l&apos;activité humaine: CEM, pollution…</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>VIR</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>VIR</id>
+              <intitule>Code malveillant d&apos;origine inconnue.</intitule>
+              <exemple>Virus, code malveillant, virus sur étagère / virus spécifique.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>EMM</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>EMM</id>
+              <intitule>Source humaine externe, malveillante, avec des capacités importantes.</intitule>
+              <exemple>Organisation de hackers, ancien agents, concurrent.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>EAI</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>EAI</id>
+              <intitule>Source humaine externe, sans intention de nuire, avec des capacités illimitées.</intitule>
+              <exemple>Opérateurs réseaux télécom.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>EAF</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>EAF</id>
+              <intitule>Source humaine externe sans intention de nuire, avec de faibles capacités.</intitule>
+              <exemple>Entourage du personnel, travaux aux alentours des ouvrages et/ou équipements du système.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>EMI</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>EMI</id>
+              <intitule>Source humaine externe, malveillante, avec des capacités illimitées.</intitule>
+              <exemple>Organisation criminelle, mercenaire, organisation gouvernementale.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>IAM</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>IAM</id>
+              <intitule>Source humaine interne, sans intention de nuire, avec des capacités importantes.</intitule>
+              <exemple>Agents.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>EMF</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>EMF</id>
+              <intitule>Source humaine externe malveillante, avec de faibles capacités.</intitule>
+              <exemple>Vandales, hackers naïfs,  client mécontent.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>ANI</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>ANI</id>
+              <intitule>Activité animale.</intitule>
+              <exemple>Dans ou à proximité des ouvrages.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>IMM</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>IMM</id>
+              <intitule>Source humaine interne, malveillante, avec des capacités importantes.</intitule>
+              <exemple>Agent connaissant bien l&apos;entreprise et le système voulant nuire à quelqu&apos;un ou à l&apos;entreprise.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>IAI</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>IAI</id>
+              <intitule>Source humaine interne, sans intention de nuire, avec des capacités illimitées.</intitule>
+              <exemple>Administrateurs système.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+          <entry>
+            <string>EVE</string>
+            <abstraction.autres.SourceDeMenace>
+              <id>EVE</id>
+              <intitule>Evénement interne.</intitule>
+              <exemple>Feu des locaux, travaux dans les locaux, fuite de canalisation.</exemple>
+              <retenu>false</retenu>
+            </abstraction.autres.SourceDeMenace>
+          </entry>
+        </lesSourcesDeMenaces>
+      </abstraction.modules.SourcesDeMenaces>
+    </entry>
+    <entry>
+      <string>CriteresDeSecurite</string>
+      <abstraction.modules.CriteresDeSecurite reference="../../entry[2]/abstraction.modules.Metriques/predecesseurs/abstraction.modules.CriteresDeSecurite"/>
+    </entry>
+  </lesModules>
+  <nomEtude>Etude test</nomEtude>
+</abstraction.Etude>
