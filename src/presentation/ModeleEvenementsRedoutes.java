@@ -1,9 +1,13 @@
 package presentation;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -16,7 +20,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	private Etude etude;
 	private EvenementsRedoutes evenements;
 	ArrayList<Object> data;
-	ArrayList<String> entetes;
+	ArrayList<String> entetes=new ArrayList<String>();
 	
 	
 	
@@ -24,15 +28,35 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		this.etude=MainMaximeEtienne.etude;
 		this.evenements=(EvenementsRedoutes)etude.getModule("EvenementsRedoutes");
 		int a=this.evenements.getEvenementsRedoutes().size();
+		
 		System.out.println(a+"");
 		this.data=new ArrayList<Object>();
 			
 				for(int j=0;j<a;j++){
 					System.out.println(this.evenements.getEvenementsRedoutes().get(j).GetNomEvenement());
 					this.data.add(this.evenements.getEvenementsRedoutes().get(j));
+					
+				}
+				
+				this.entetes.add("Nom evênement");
+				this.entetes.add("Bien essentiel");
+				this.entetes.add("Critère");
+				this.entetes.add("Exigence");
+				this.entetes.add("Gravité");
+			
+				
+				if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
+					int b=this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();
+				for(int i=0;i<b;i++){
+				this.entetes.add(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().get(i));
+				
+				}
 				}
 				
 			}
+	public String getColumnName(int columnIndex) {
+		return entetes.get(columnIndex);
+	}
 			
 		
 
@@ -49,6 +73,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	public int getRowCount() {
 		return this.evenements.getEvenementsRedoutes().size();
 	}
+	
 
 
 
@@ -63,9 +88,9 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		case 2:
 			return evenements.getEvenementsRedoutes().get(rowIndex).getNomCritere();
 		case 1:
-			return evenements.getEvenementsRedoutes().get(rowIndex).getComboExigence();
+			return evenements.getEvenementsRedoutes().get(rowIndex).getNiveauExigence();
 		case 0:
-			return evenements.getEvenementsRedoutes().get(rowIndex).getComboGravite();
+			return evenements.getEvenementsRedoutes().get(rowIndex).getNiveauGravite();
 		default:
 			if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size()!=0){
 				return this.evenements.getEvenementsRedoutes().get(rowIndex).getContenuGroupes().get(columnIndex);
@@ -74,10 +99,15 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 				return "";
 			}
 		}
+		
 	}
 	
+	public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
+	
 	public boolean isCellEditable(int row, int col){
-		if(this.getColumnCount()-col-1==4){
+		if(this.getColumnCount()-col-1==4||this.getColumnCount()-col-1==0||this.getColumnCount()-col-1==1){
 			return true;
 		}
 		else{
@@ -88,11 +118,23 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 			if(aValue != null){
+				
 				Evenement ev = evenements.getEvenementsRedoutes().get(rowIndex);
 				
 				switch(this.getColumnCount()-columnIndex-1){
 				case 4:
 					ev.setNomEvenement((String)aValue);
+					break;
+				case 1:
+					/*ev.getComboExigence().getSelectedItem();
+					ev.getComboExigence().setSelectedIndex(ev.getComboExigence().getSelectedIndex());*/
+					
+				ev.setNiveauExigence(Integer.parseInt((String)aValue));
+				fireTableCellUpdated(rowIndex, columnIndex);
+					break;
+				case 0:
+					ev.setNiveauGravite(Integer.parseInt((String)aValue));;
+					fireTableCellUpdated(rowIndex,columnIndex);
 					break;
 
 				}
@@ -100,5 +142,8 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		
 		
 	}
+		
+		
 
 }
+ 

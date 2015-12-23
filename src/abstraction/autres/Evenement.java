@@ -29,6 +29,9 @@ public class Evenement {
 	private String bienessentiel;
 	private String critere;
 	
+	private int niveaugravite;
+	private int niveauexigence;
+	
 	
 	
 	
@@ -45,30 +48,32 @@ public class Evenement {
 		this.contenugroupes=contenugroupes;
 		this.bienessentiel=bienessentiel;
 		this.critere=critere;
+		this.niveauexigence=1;
+		this.niveaugravite=1;
 		
 		
 		/*On met des valeurs par défaut pour les niveaux (peut être inutile mais on sait jamais)
 		 */
 		
 		
-		this.exigence=new JComboBox();
-		this.gravite=new JComboBox();
+		
 		
 		int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravité").nombreDeNiveaux();
 		
-		Integer[] liste=new Integer[a];
-		for(int i=0;i<a;i++){
+		String[] liste=new String[a];
+		for(int i=1;i<=a;i++){
 			
-			liste[i]=new Integer(i+1);
+			liste[i-1]=""+i;
 		}
 		this.gravite=new JComboBox(liste);
 		
 		int b=((Metriques)this.etude.getModule("Metriques")).getMetrique(this.critere).nombreDeNiveaux();
 		
-		Integer[] listebis=new Integer[b];
-        for(int i=0;i<b;i++){
+		String[] listebis=new String[b];
+        for(int i=1;i<=b;i++){
 			
-			listebis[i]=new Integer(i+1);
+			listebis[i-1]=""+i;
+			
 		}
         this.exigence=new JComboBox(listebis);
 	}
@@ -81,6 +86,14 @@ public class Evenement {
 	}
 	public ArrayList<String> getContenuGroupes(){
 		return this.contenugroupes;
+	}
+	
+	public int getNiveauExigence(){
+		return this.niveauexigence;
+	}
+	
+	public int getNiveauGravite(){
+		return this.niveaugravite;
 	}
 	
 	
@@ -117,7 +130,7 @@ public class Evenement {
 	}
 	
 	/*Setters*/
-	/*
+	
 	public void setNiveauGravite(int i){
 		this.niveaugravite=i;
 	}
@@ -125,7 +138,7 @@ public class Evenement {
 	public void setNiveauExigence(int i){
 		this.niveauexigence=i;
 	}
-	*/
+	
 	public void setBienEssentiel(String bienessentiel){
 		this.bienessentiel=bienessentiel;
 	}

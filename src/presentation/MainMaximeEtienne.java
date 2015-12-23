@@ -1,6 +1,8 @@
 package presentation;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import abstraction.Etude;
 import abstraction.modules.BiensEssentiels;
@@ -25,8 +27,12 @@ public class MainMaximeEtienne extends JFrame {
 		EvenementsRedoutes ev=new EvenementsRedoutes(etude);
 		etude.addModule(ev);
 		
+		
+		
+		
 		FenetreEvenementsRedoutes f= new FenetreEvenementsRedoutes(ev);
 		this.add(f);
+		
 		this.setVisible(true);
 		this.pack();
 		

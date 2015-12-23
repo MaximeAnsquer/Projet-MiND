@@ -47,8 +47,7 @@ public class EvenementsRedoutes extends Module {
 	    
 		int a=((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getLesBiens().size();
 		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
-		System.out.println(a);
-		System.out.println(b);
+		
 		
 		
 		CriteresDeSecurite critere=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
@@ -61,7 +60,6 @@ public class EvenementsRedoutes extends Module {
 		
 		for (int i=0;i<a;i++){
 			for(int j=0;j<b;j++){
-				System.out.println(tableaubiens.get(i).getIntitule());
 				
 				liste.add(i*b+j,new Evenement(this.etude,"",tableaubiens.get(i).getNomColonneSup(),tableaubiens.get(i).getContenuColonneSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
 				

@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -73,6 +74,17 @@ public class FenetreCriteresDeSecurite extends JPanel {
 			}			
 		});
 
+		table.addKeyListener(new KeyListener(){
+			public void keyTyped(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
+				zoneDescription.setText(getCritereSelectionne().getDescription());
+			}			
+		});
+		
+		table.setFont(new Font("Arial", Font.PLAIN, 16));
+		table.setRowHeight(50);
+
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		this.add(zoneDescription());
@@ -86,6 +98,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		zoneDescription = new JTextArea();
 		zoneDescription.setLineWrap(true);
 		zoneDescription.setWrapStyleWord(true);
+		zoneDescription.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		zoneDescription.addKeyListener(new KeyListener(){
 
@@ -272,6 +285,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 					break;
 				}
 			}
+			zoneDescription.setText(getCritereSelectionne().getDescription());
 		}
 	}
 
