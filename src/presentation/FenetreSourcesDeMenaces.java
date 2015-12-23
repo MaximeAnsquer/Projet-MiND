@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -67,13 +68,13 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			public void mouseClicked(MouseEvent e) {}
 
 			public void mousePressed(MouseEvent e) {
-				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
-				boutonModifierIntitule.setEnabled(false);				
+//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
+//				boutonModifierIntitule.setEnabled(false);				
 				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
-				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
-				boutonModifierIntitule.setEnabled(false);
+//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
+//				boutonModifierIntitule.setEnabled(false);
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
@@ -84,15 +85,15 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				zoneIntitule.setText(getSourceSelectionnee().getIntitule());			
+//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());			
 			}			
 		});
 
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new BorderLayout());
 
-		this.add(zoneIntitule());
-		this.add(partieDuBas());
-		this.add(new JScrollPane(table));			
+//		this.add(zoneIntitule());
+		this.add(partieDuHaut(), BorderLayout.NORTH);
+		this.add(new JScrollPane(table), BorderLayout.CENTER);			
 	}
 
 	private JScrollPane zoneIntitule() {
@@ -104,7 +105,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		zoneIntitule.addKeyListener(new KeyListener(){
 			public void keyTyped(KeyEvent e) {
 				if(table.getSelectedRow()>-1){
-					boutonModifierIntitule.setEnabled(true);
+//					boutonModifierIntitule.setEnabled(true);
 				}				
 			}
 			public void keyPressed(KeyEvent e) {}
@@ -135,11 +136,11 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		return c;
 	}
 
-	private JPanel partieDuBas() {
+	private JPanel partieDuHaut() {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
-		jpanel.add(boutonModifierIntitule());
+//		jpanel.add(boutonModifierIntitule());
 		return jpanel;
 	}
 
@@ -278,7 +279,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 					break;
 				}
 			}
-			zoneIntitule.setText(getSourceSelectionnee().getIntitule());
+//			zoneIntitule.setText(getSourceSelectionnee().getIntitule());
 		}
 	}
 

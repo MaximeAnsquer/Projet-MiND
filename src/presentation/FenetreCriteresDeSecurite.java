@@ -95,7 +95,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		this.setLayout(new BorderLayout());
 
 //		this.add(zoneDescription());
-		this.add(partieDuBas(), BorderLayout.NORTH);
+		this.add(partieDuHaut(), BorderLayout.NORTH);
 		this.add(new JScrollPane(table), BorderLayout.CENTER);	
 
 	}
@@ -137,7 +137,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		return areaScrollPane;
 	}
 
-	private JPanel partieDuBas() {
+	private JPanel partieDuHaut() {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());

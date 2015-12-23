@@ -53,19 +53,13 @@ public class FenetreMetriques extends JPanel {
 		this.metriques = metriques;
 		
 		this.setVisible(true);
-		int nombreDeMetriques = metriques.nombreDeMetriques();
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new BorderLayout());		
 
 		
-
-		//On ajoute la zone de description du niveau
-		this.add(zoneDescription());
-
-		//On ajoute la comboBox et les boutons
-		this.add(partieDuBas());		
+//		this.add(zoneDescription());		
+		this.add(partieDuBas(), BorderLayout.NORTH);			
+		this.add(jpanel, BorderLayout.CENTER);
 		
-		//On ajoute la metrique courante
-		this.add(jpanel);
 		setTableau();
 
 	}	
@@ -90,13 +84,13 @@ public class FenetreMetriques extends JPanel {
 			}
 
 			public void mousePressed(MouseEvent e) {
-				zoneDescription.setText(getNiveauSelectionne().getDescription());
-				boutonModifierDescription.setEnabled(false);
+//				zoneDescription.setText(getNiveauSelectionne().getDescription());
+//				boutonModifierDescription.setEnabled(false);
 				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
-				zoneDescription.setText(getNiveauSelectionne().getDescription());
-				boutonModifierDescription.setEnabled(false);
+//				zoneDescription.setText(getNiveauSelectionne().getDescription());
+//				boutonModifierDescription.setEnabled(false);
 			}
 			public void mouseEntered(MouseEvent e) {
 			}
@@ -109,7 +103,7 @@ public class FenetreMetriques extends JPanel {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				zoneDescription.setText(getNiveauSelectionne().getDescription());
+//				zoneDescription.setText(getNiveauSelectionne().getDescription());
 			}
 			
 		});
@@ -170,7 +164,7 @@ public class FenetreMetriques extends JPanel {
 		jp.add(comboBox());
 		jp.add(boutonAjouter());
 		jp.add(boutonSupprimer());
-		jp.add(boutonModifier());
+//		jp.add(boutonModifier());
 		return jp;
 	}
 
@@ -181,8 +175,8 @@ public class FenetreMetriques extends JPanel {
 		boutonModifierDescription.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				String nouvelleDescription = zoneDescription.getText();
-				getNiveauSelectionne().setDescription(nouvelleDescription);
+//				String nouvelleDescription = zoneDescription.getText();
+//				getNiveauSelectionne().setDescription(nouvelleDescription);
 				table.validate();
 				table.repaint();
 				boutonModifierDescription.setEnabled(false);
@@ -226,8 +220,8 @@ public class FenetreMetriques extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				setTableau();	
-				boutonModifierDescription.setEnabled(false);
-				zoneDescription.setText(null);
+//				boutonModifierDescription.setEnabled(false);
+//				zoneDescription.setText(null);
 				boutonSupprimer.setEnabled(false);
 			}
 
@@ -254,7 +248,7 @@ public class FenetreMetriques extends JPanel {
 
 			public void keyTyped(KeyEvent e) {
 				if(table.getSelectedRow()>-1){
-					boutonModifierDescription.setEnabled(true);
+//					boutonModifierDescription.setEnabled(true);
 				}
 			}
 
@@ -371,7 +365,7 @@ public class FenetreMetriques extends JPanel {
 					break;
 				}
 			}
-			zoneDescription.setText(getNiveauSelectionne().getDescription());
+//			zoneDescription.setText(getNiveauSelectionne().getDescription());
 		}
 	}
 
