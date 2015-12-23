@@ -21,8 +21,10 @@ public class ControlJButtonAjoutColonne implements Observer, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String critere = JOptionPane.showInputDialog("Intitulé du critère ?");
-		this.modele.addCritere(critere);
+		String critere = JOptionPane.showInputDialog("Intitule du critere ?");
+		if (critere!=null){
+			this.modele.addCritere(critere);
+		}
 	}
 
 	@Override

@@ -104,7 +104,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	}
 	
 	public String toString(){
-		return "Scenarios de menaces génériques";
+		return "Scenarios de menaces generiques";
 	}
 	
 }
