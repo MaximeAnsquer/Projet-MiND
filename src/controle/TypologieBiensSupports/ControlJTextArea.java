@@ -44,6 +44,8 @@ public class ControlJTextArea implements Observer,KeyListener {
 			this.modele.setValueAt(this.zoneDescription.getText(),
 					this.tableau.getSelectedRow(),
 					ModeleTypologieBiensSupports.COLONNE_DESCRIPTION);
+			this.tableau.validate();
+			this.tableau.repaint();
 		}
 	}
 }
