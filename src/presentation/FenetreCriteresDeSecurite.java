@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -65,40 +66,37 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 		table.addMouseListener(new MouseListener(){
 
-			public void mouseClicked(MouseEvent e) {
-			}
-
+			public void mouseClicked(MouseEvent e) {}
+			
 			public void mousePressed(MouseEvent e) {
-				zoneDescription.setText(getCritereSelectionne().getDescription());
-				boutonModifierDescription.setEnabled(false);
+//				zoneDescription.setText(getCritereSelectionne().getDescription());
+//				boutonModifierDescription.setEnabled(false);
 				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
-				zoneDescription.setText(getCritereSelectionne().getDescription());
-				boutonModifierDescription.setEnabled(false);
+//				zoneDescription.setText(getCritereSelectionne().getDescription());
+//				boutonModifierDescription.setEnabled(false);
 			}
-			public void mouseEntered(MouseEvent e) {
-			}
-			public void mouseExited(MouseEvent e) {
-			}			
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}			
 		});
 
 		table.addKeyListener(new KeyListener(){
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				zoneDescription.setText(getCritereSelectionne().getDescription());
+//				zoneDescription.setText(getCritereSelectionne().getDescription());
 			}			
 		});
 
 		table.setFont(new Font("Arial", Font.PLAIN, 16));
 		table.setRowHeight(50);
 
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new BorderLayout());
 
-		this.add(zoneDescription());
-		this.add(partieDuBas());
-		this.add(new JScrollPane(table));	
+//		this.add(zoneDescription());
+		this.add(partieDuBas(), BorderLayout.NORTH);
+		this.add(new JScrollPane(table), BorderLayout.CENTER);	
 
 	}
 
@@ -113,7 +111,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 			public void keyTyped(KeyEvent e) {
 				if(table.getSelectedRow()>-1){
-					boutonModifierDescription.setEnabled(true);
+//					boutonModifierDescription.setEnabled(true);
 				}
 
 			}
@@ -143,7 +141,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
-		jpanel.add(boutonModifierDescription());
+//		jpanel.add(boutonModifierDescription());
 		return jpanel;
 	}
 
@@ -154,8 +152,8 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		boutonModifierDescription.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				String nouvelleDescription = zoneDescription.getText();
-				getCritereSelectionne().setDescription(nouvelleDescription);
+//				String nouvelleDescription = zoneDescription.getText();
+//				getCritereSelectionne().setDescription(nouvelleDescription);
 				table.validate();
 				table.repaint();
 				boutonModifierDescription.setEnabled(false);
@@ -296,7 +294,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 					break;
 				}
 			}
-			zoneDescription.setText(getCritereSelectionne().getDescription());
+//			zoneDescription.setText(getCritereSelectionne().getDescription());
 		}
 	}
 

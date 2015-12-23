@@ -65,7 +65,6 @@ public class MainMaximeAnsquer extends JFrame {
 		super("Outil d'analyse de risques");
 		this.setPreferredSize(new Dimension(largeurEcran, (int) (0.95*hauteurEcran)));
 
-
 		this.setJMenuBar(new BarreMenu(this));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);	
@@ -89,7 +88,6 @@ public class MainMaximeAnsquer extends JFrame {
 			this.choisirEtude();
 		}		
 	}
-
 	/**
 	 * 
 	 * @param nom le nom du module a afficher, ou bien " workflow " si on veut afficher le workflow
@@ -189,14 +187,10 @@ public class MainMaximeAnsquer extends JFrame {
 	 * @return la nouvelle etude cree
 	 */
 	public Etude nouvelleEtude(){	
-
 		//permet d'eviter un bug graphique
 		if(etudeEnCours != null){
 			setContenu("Workflow");
 		}
-		
-		
-
 		String nomEtude = "";
 		while(nomEtude.equals("")){
 			nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle etude.");			
@@ -214,9 +208,7 @@ public class MainMaximeAnsquer extends JFrame {
 
 		return nouvelleEtude;
 	}
-
 	public void enregistrerEtude(){
-
 		try {
 			// Instanciation de la classe XStream
 			XStream xstream = new XStream(new DomDriver("UTF-8"));		    
@@ -238,74 +230,49 @@ public class MainMaximeAnsquer extends JFrame {
 			ioe.printStackTrace();
 		}
 	}
-
 	/**
 	 * Permet a l'utilisateur de choisir parmi une liste d'etudes sauvegardees, et definit l'etude choisie comme etude courante
 	 * @return l'etude choisie
 	 */
 	public void choisirEtude(){
-
 		ArrayList<Object> data = new ArrayList<Object>();
-
-
 		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
-
 		File dossierEtude = new File(urlEtudes);
 		File[] listOfFiles = dossierEtude.listFiles();
-
 		for (int i = 0; i < listOfFiles.length; i++) {
 			if (listOfFiles[i].isFile()) {
 				data.add(listOfFiles[i].getName());
 			}
 		}
-
 		listeFichiers = new JList(data.toArray());
 		listeFichiers.addListSelectionListener(new ListSelectionListener(){
-
 			public void valueChanged(ListSelectionEvent e) {
 				boutonOk.setEnabled(true);				
 			}
-
 		});
-
-		JFrame fenetreChoixFichier = fenetreChoixFichier(listeFichiers);			
-
+		JFrame fenetreChoixFichier = fenetreChoixFichier(listeFichiers);		
 	}
-
 	public Etude ouvrirEtude(String urlEtude){
-
 		Etude etudeOuverte = new Etude();
-
 		try {
 			// Instanciation de la classe XStream
 			XStream xstream = new XStream(new DomDriver());
-
 			// Redirection du fichier vers un flux d'entrée fichier
-			FileInputStream fis = new FileInputStream(new File(urlEtude));
-
-			
-				// Désérialisation du fichier vers un nouvel objet article
-				etudeOuverte = (Etude) xstream.fromXML(fis);
-			
-
+			FileInputStream fis = new FileInputStream(new File(urlEtude));			
+			// Désérialisation du fichier vers un nouvel objet article
+			etudeOuverte = (Etude) xstream.fromXML(fis);
 		} catch (FileNotFoundException e) {	
 			e.printStackTrace();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-
 		this.etudeEnCours = etudeOuverte;
 		this.setTitle("Outil d'analyse de risques - Etude en cours : " + etudeOuverte.getNom());
-
 		this.moduleEnCours = new Module("Workflow");
-
 		this.setContenu("Workflow");	
-
 		return etudeOuverte;
 	}
-
 	private JFrame fenetreChoixFichier(JList jlist) {
-
 		final JFrame fenetre = new JFrame();
 		fenetre.setVisible(true);
 		fenetre.getContentPane().add(new JLabel("Veuillez choisir l'etude a ouvrir"), BorderLayout.NORTH);
@@ -313,28 +280,22 @@ public class MainMaximeAnsquer extends JFrame {
 		boutonOk = new JButton("OK");
 		boutonOk.setEnabled(false);
 		boutonOk.addActionListener(new ActionListener(){
-
 			public void actionPerformed(ActionEvent e) {
 				String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" + File.separator + listeFichiers.getSelectedValue();
 				ouvrirEtude(urlEtude);
 				fenetre.dispose();				
 			}
-
 		});
 		fenetre.getContentPane().add(boutonOk, BorderLayout.SOUTH);
 		fenetre.pack();
-
 		return fenetre;
 	}
-
 	public Etude getEtude(){
 		return etudeEnCours;
 	}
-
 	public void setModuleEnCours(Module m){
 		this.moduleEnCours = m;
 	}
-
 	public void modifierNomEtude() {
 		String nouveauNom = "";
 		while(nouveauNom != null && nouveauNom.equals("")){
@@ -345,15 +306,9 @@ public class MainMaximeAnsquer extends JFrame {
 			}
 		}		
 	}
-
 	public static void main(String[] args) {
-
 		//---La fenetre principale---
-
 		MainMaximeAnsquer fenetrePrincipale = new MainMaximeAnsquer(); 
-
 	}
-
-
 }
 
