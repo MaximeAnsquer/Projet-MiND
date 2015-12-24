@@ -11,14 +11,14 @@ import java.util.Hashtable;
  */
 
 public class Metrique {	
-	
+
 	//---Variables d'instance---
-	
+
 	private Critere critere;
 	private ArrayList<NiveauDeMetrique> lesNiveaux;
 
 	//---Constructeurs---
-	
+
 	/**	
 	 * Cree une metrique vide a 4 niveaux ; a utiliser dans le cas ou l'utilisateur 
 	 * a retenu un critere qui n'etait pas present dans la BDC criteres.
@@ -26,12 +26,13 @@ public class Metrique {
 	 */
 	public Metrique(Critere critere){
 		this.critere = critere;
-		this.lesNiveaux = new ArrayList<NiveauDeMetrique>();
+		ArrayList<NiveauDeMetrique> lesNiveaux = new ArrayList<NiveauDeMetrique>();; 
 		for(int i=1;i<=4;i++){
-			this.lesNiveaux.add(new NiveauDeMetrique(i));
+			lesNiveaux.add(new NiveauDeMetrique(i));
 		}
+		this.lesNiveaux = lesNiveaux;
 	}
-	
+
 	/**
 	 * Metrique encore plus vide qui ne contient absolument rien (et pourtant ce constructeur est utile !)
 	 */
@@ -39,7 +40,7 @@ public class Metrique {
 		this.critere = new Critere("", "", "");
 		this.lesNiveaux = new ArrayList<NiveauDeMetrique>();
 	}
-	
+
 	/**
 	 * Cree une metrique en fournissant le critere associe et la liste des niveaux.
 	 * @author Maxime Ansquer
@@ -50,19 +51,19 @@ public class Metrique {
 		this.critere = critere;
 		this.lesNiveaux = lesNiveaux;
 	}
-	
+
 	//---Getters et setters---
-	
-	
+
+
 
 	public Critere getCritere(){
 		return this.critere;
 	}
-	
+
 	public void setCritere(Critere critere){
 		this.critere = critere;
 	}
-	
+
 	public ArrayList<NiveauDeMetrique> getLesNiveaux() {
 		return lesNiveaux;
 	}
@@ -70,21 +71,21 @@ public class Metrique {
 	public void setLesNiveaux(ArrayList<NiveauDeMetrique> lesNiveaux) {
 		this.lesNiveaux = lesNiveaux;
 	}	
-		
+
 	//---Services---	
 
 	public NiveauDeMetrique getNiveau(int index){		
 		return (NiveauDeMetrique) lesNiveaux.get(index);
 	}
-	
+
 	public void ajouterNiveau(int numero, String intitule, String description){
 		this.getLesNiveaux().add(new NiveauDeMetrique(numero, intitule, description));
 	}
-	
+
 	public void ajouterNiveau(NiveauDeMetrique niveau){
 		this.getLesNiveaux().add(niveau);
 	}
-	
+
 	public void supprimerNiveau(int numero){
 		this.getLesNiveaux().remove(numero);
 		for(NiveauDeMetrique n : this.getLesNiveaux()){
@@ -94,25 +95,30 @@ public class Metrique {
 			}
 		}
 	}	
-	
+
 	public int nombreDeNiveaux(){
 		return this.getLesNiveaux().size();
 	}	
-	
+
 	public String toString(){
 		return getCritere().getIntitule();
 	}
-	
+
 	public String getIntitule(){
 		return getCritere().getIntitule();
 	}
 
 	public boolean estComplet() {
 		boolean resultat = true;
-		for(NiveauDeMetrique n : this.getLesNiveaux()){
-			resultat = resultat && n.estComplet();
+		if(this.nombreDeNiveaux() == 0){
+			resultat = false;
+		}
+		else{
+			for(NiveauDeMetrique n : this.getLesNiveaux()){
+				resultat = resultat && n.estComplet();
+			}
 		}
 		return resultat;
 	}
-	
+
 }

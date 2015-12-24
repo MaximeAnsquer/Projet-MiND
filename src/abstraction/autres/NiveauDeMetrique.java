@@ -89,7 +89,8 @@ public class NiveauDeMetrique {
 	}
 
 	public boolean estComplet() {
-		return !this.getDescription().equals("") && !this.getIntitule().equals("") && !((Integer) this.getNumero() == null);
+		boolean resultat = !this.getDescription().equals("") && !this.getIntitule().equals("") && !((Integer) this.getNumero() == null);
+		return resultat;
 	}
 
 }

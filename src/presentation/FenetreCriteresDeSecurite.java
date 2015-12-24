@@ -1,7 +1,6 @@
 package presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -26,11 +24,9 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-import presentation.FenetreMetriques.Renderer;
-
-import abstraction.Etude;
 import abstraction.autres.Critere;
 import abstraction.modules.CriteresDeSecurite;
+import abstraction.modules.Metriques;
 
 /**
  * Fonctionnel, mais le code est relativement degueulasse.
@@ -86,6 +82,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
 //				zoneDescription.setText(getCritereSelectionne().getDescription());
+				boutonSupprimer.setEnabled(true);
 			}			
 		});
 
@@ -284,7 +281,10 @@ public class FenetreCriteresDeSecurite extends JPanel {
 					critere.setId((String)aValue);
 					break;
 				case 1:
+					String ancienIntitule = critere.getIntitule();
 					critere.setIntitule((String)aValue);
+					((Metriques) cds.getEtude().getModule("Metriques")).supprimerMetrique(ancienIntitule);
+					((Metriques) cds.getEtude().getModule("Metriques")).ajouterMetrique(critere);
 					break;
 				case 2:
 					critere.setDescription((String)aValue);

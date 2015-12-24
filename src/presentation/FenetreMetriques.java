@@ -51,15 +51,15 @@ public class FenetreMetriques extends JPanel {
 
 	public FenetreMetriques(Metriques metriques){
 		this.metriques = metriques;
-		
+
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());		
 
-		
-//		this.add(zoneDescription());		
+
+		//		this.add(zoneDescription());		
 		this.add(partieDuBas(), BorderLayout.NORTH);			
 		this.add(jpanel, BorderLayout.CENTER);
-		
+
 		setTableau();
 
 	}	
@@ -72,7 +72,7 @@ public class FenetreMetriques extends JPanel {
 
 		//On n'autorise la selection que d'une seule ligne a la fois
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		//On change la police et la hauteur des lignes
 		table.setFont(new Font("Arial", Font.PLAIN, 15));
 		table.setRowHeight(50);
@@ -84,28 +84,29 @@ public class FenetreMetriques extends JPanel {
 			}
 
 			public void mousePressed(MouseEvent e) {
-//				zoneDescription.setText(getNiveauSelectionne().getDescription());
-//				boutonModifierDescription.setEnabled(false);
+				//				zoneDescription.setText(getNiveauSelectionne().getDescription());
+				//				boutonModifierDescription.setEnabled(false);
 				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
-//				zoneDescription.setText(getNiveauSelectionne().getDescription());
-//				boutonModifierDescription.setEnabled(false);
+				//				zoneDescription.setText(getNiveauSelectionne().getDescription());
+				//				boutonModifierDescription.setEnabled(false);
 			}
 			public void mouseEntered(MouseEvent e) {
 			}
 			public void mouseExited(MouseEvent e) {
 			}			
 		});
-		
+
 		table.addKeyListener(new KeyListener(){
 
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-//				zoneDescription.setText(getNiveauSelectionne().getDescription());
+				//				zoneDescription.setText(getNiveauSelectionne().getDescription());
+				boutonSupprimer.setEnabled(true);
 			}
-			
+
 		});
 
 		//On redimensionne les colonnes 
@@ -164,7 +165,7 @@ public class FenetreMetriques extends JPanel {
 		jp.add(comboBox());
 		jp.add(boutonAjouter());
 		jp.add(boutonSupprimer());
-//		jp.add(boutonModifier());
+		//		jp.add(boutonModifier());
 		return jp;
 	}
 
@@ -175,8 +176,8 @@ public class FenetreMetriques extends JPanel {
 		boutonModifierDescription.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-//				String nouvelleDescription = zoneDescription.getText();
-//				getNiveauSelectionne().setDescription(nouvelleDescription);
+				//				String nouvelleDescription = zoneDescription.getText();
+				//				getNiveauSelectionne().setDescription(nouvelleDescription);
 				table.validate();
 				table.repaint();
 				boutonModifierDescription.setEnabled(false);
@@ -220,8 +221,8 @@ public class FenetreMetriques extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				setTableau();	
-//				boutonModifierDescription.setEnabled(false);
-//				zoneDescription.setText(null);
+				//				boutonModifierDescription.setEnabled(false);
+				//				zoneDescription.setText(null);
 				boutonSupprimer.setEnabled(false);
 			}
 
@@ -239,7 +240,7 @@ public class FenetreMetriques extends JPanel {
 	}
 
 	private JScrollPane zoneDescription() {
-			
+
 		zoneDescription = new JTextArea();
 		zoneDescription.setLineWrap(true);
 		zoneDescription.setWrapStyleWord(true);
@@ -248,7 +249,7 @@ public class FenetreMetriques extends JPanel {
 
 			public void keyTyped(KeyEvent e) {
 				if(table.getSelectedRow()>-1){
-//					boutonModifierDescription.setEnabled(true);
+					//					boutonModifierDescription.setEnabled(true);
 				}
 			}
 
@@ -310,7 +311,12 @@ public class FenetreMetriques extends JPanel {
 		}
 
 		public boolean isCellEditable(int row, int col){
-			return true; 
+			if(col == 0){
+				return false;
+			}
+			else{
+				return true;
+			}
 		}
 
 		public Class getColumnClass(int columnIndex){
@@ -365,7 +371,7 @@ public class FenetreMetriques extends JPanel {
 					break;
 				}
 			}
-//			zoneDescription.setText(getNiveauSelectionne().getDescription());
+			//			zoneDescription.setText(getNiveauSelectionne().getDescription());
 		}
 	}
 
@@ -379,12 +385,11 @@ public class FenetreMetriques extends JPanel {
 
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-			
+
 			if(component instanceof JComponent){
 				((JComponent)component).setToolTipText(value.toString());
-			}
-
-			if (value=="" || value == null) {
+			}	
+			if (value.equals("") || value == null) {
 				Color clr = Color.yellow;
 				component.setBackground(clr);
 			} 

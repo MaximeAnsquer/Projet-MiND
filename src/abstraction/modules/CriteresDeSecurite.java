@@ -52,9 +52,8 @@ public class CriteresDeSecurite extends Module{
 	 */
 	public CriteresDeSecurite() {
 		super("CriteresDeSecurite");		
-		System.out.println("Construction du module CriteresDeSecurite");
 		/**
-		 * TODO : comment�e pour faire des tests, e� d�ecommenter apres
+		 * TODO : comment�e pour faire des tests, a decommenter apres
 		 * 
 		 * this.successeurs.add(this.getEtude().getModule("ScenariosDeMenaceTypes"));
 		 * this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));

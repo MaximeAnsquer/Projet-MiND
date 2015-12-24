@@ -119,8 +119,6 @@ public class MainMaximeAnsquer extends JFrame {
 				this.lesJpanels.put(nom, new FenetreMetriques((Metriques) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("SourcesDeMenaces")){
-				System.out.println("lesJpanels : "+lesJpanels);
-				System.out.println("etudeEnCours.getModule(nom) : "+etudeEnCours.getModule(nom));
 				this.lesJpanels.put(nom, new FenetreSourcesDeMenaces((SourcesDeMenaces) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("BiensSupports")){

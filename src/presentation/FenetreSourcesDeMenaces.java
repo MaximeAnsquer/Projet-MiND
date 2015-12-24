@@ -85,7 +85,8 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());			
+//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());		
+				boutonSupprimer.setEnabled(true);
 			}			
 		});
 

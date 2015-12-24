@@ -57,7 +57,6 @@ public class Metriques extends Module {
 	 */
 	public Metriques(Etude etude) {
 		super("Metriques");
-		System.out.println("Construction du module Metriques");
 		
 		this.etude = etude;
 		
@@ -241,10 +240,11 @@ public class Metriques extends Module {
 		ArrayList<Metrique> resultat = new ArrayList<Metrique>();
 		for(Critere c : ((CriteresDeSecurite) this.getEtude().getModule("CriteresDeSecurite")).getLesCriteres().values() ){
 			if(c.isRetenu()){
-				if(this.bdcMetriques.get(c.getIntitule()) != null){
-					resultat.add(this.bdcMetriques.get(c.getIntitule()));
+				if(this.getLesMetriques().get(c.getIntitule()) != null){
+					resultat.add(this.getLesMetriques().get(c.getIntitule()));
 				}
-				else{
+				else{		
+					this.ajouterMetrique(c);
 					resultat.add(new Metrique(c));
 				}
 			}			
