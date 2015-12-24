@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -146,7 +148,7 @@ public class MainMaximeAnsquer extends JFrame {
 	private void setPartieDeGauche() {
 
 		partieDeGauche = new JPanel();
-		partieDeGauche.setLayout(new BoxLayout(partieDeGauche, BoxLayout.Y_AXIS));
+		partieDeGauche.setLayout(new GridLayout(3,1));
 		String nom = moduleEnCours.getNom();
 
 		if(nom.equals("Workflow")){
@@ -171,8 +173,12 @@ public class MainMaximeAnsquer extends JFrame {
 			});
 			partieDeGauche.add(boutonVerifier);
 
+			JPanel lesProblemes = new JPanel();
+			lesProblemes.setLayout(new BoxLayout(lesProblemes, BoxLayout.Y_AXIS));
+			partieDeGauche.add(new JScrollPane(lesProblemes));
+			
 			for(JLabel label : moduleEnCours.getProblemes()){
-				partieDeGauche.add(label);
+				lesProblemes.add(label);
 			}
 
 			partieDeGauche.validate();
