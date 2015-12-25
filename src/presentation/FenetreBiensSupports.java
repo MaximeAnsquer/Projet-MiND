@@ -226,7 +226,7 @@ public class FenetreBiensSupports extends JPanel{
 			String categorie = "";
 			do{
 				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
-			} while (categorie.equals(""));			
+			} while (categorie.equals("") || categorie.equals("Intitule") || categorie.equals("Description") || categorie.equals("Type") || categorie.equals("Retenu"));			
 			colonnesSup.addFirst(new ArrayList<String>(this.getRowCount()));
 			for (int i=0; i<this.getRowCount(); i++){
 				colonnesSup.getFirst().add(i, "");
