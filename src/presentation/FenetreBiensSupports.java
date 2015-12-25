@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.modules.BiensSupports;
 
@@ -180,7 +178,6 @@ public class FenetreBiensSupports extends JPanel{
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
-		private Etude etude = MainFrancois.etude;
 		private final LinkedList<String> entetes = new LinkedList<String>();
 		private LinkedList<ArrayList<String>> colonnesSup = new LinkedList<ArrayList<String>>();
 
@@ -226,7 +223,10 @@ public class FenetreBiensSupports extends JPanel{
 		}
 
 		public void ajouterCategorie() {
-			String categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
+			String categorie = "";
+			do{
+				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
+			} while (categorie.equals(""));			
 			colonnesSup.addFirst(new ArrayList<String>(this.getRowCount()));
 			for (int i=0; i<this.getRowCount(); i++){
 				colonnesSup.getFirst().add(i, "");
@@ -245,13 +245,24 @@ public class FenetreBiensSupports extends JPanel{
 			for (int i=0; i<entetes.size()-3;i++){
 				contenuColonneSup.add("");
 			}
-			String Intitule = JOptionPane.showInputDialog("Intitule ?");
-			String type = JOptionPane.showInputDialog("Type ?");
-			String Description = JOptionPane.showInputDialog("Description ?");
-			Bien bien = new Bien(Description, Intitule, type, nomColonneSup, contenuColonneSup);
+			String intitule = "";
+			do{
+				intitule = JOptionPane.showInputDialog("Intitule ?");
+			} while (intitule.equals(""));
+			String type = "";
+			do{
+				type = JOptionPane.showInputDialog("Type ?");
+			} while (type.equals(""));
+			String description = "";
+			do{
+				description = JOptionPane.showInputDialog("Description ?");
+			} while (description.equals(""));
+			Bien bien = new Bien(description, intitule, type, nomColonneSup, contenuColonneSup);
 			biensSupports.ajouterBien(bien);
-			for (int i=0; i<entetes.size()-3;i++){
-				colonnesSup.get(i).add("");
+			if (colonnesSup.size()>0){
+				for (int i=0; i<entetes.size()-3;i++){
+					colonnesSup.get(i).add("");
+				}
 			}
 			boutonSupprimerLigne.setEnabled(true);
 			fireTableRowsInserted(biensSupports.nombreDeBiens() -1, biensSupports.nombreDeBiens() -1);
@@ -308,19 +319,27 @@ public class FenetreBiensSupports extends JPanel{
 		 
 		        switch(this.getColumnCount()-columnIndex-1){
 		            case 3:
-		            	bien.setIntitule((String)aValue);
+		            	if (!aValue.equals("")){
+		            		bien.setIntitule((String)aValue);
+		            	}
 		                break;
 		            case 2:
-		            	bien.setDescription((String)aValue);
+		            	if (!aValue.equals("")){
+		            		bien.setDescription((String)aValue);
+		            	}
 		                break;
 		            case 1:
-		            	bien.setType((String)aValue);
+		            	if (!aValue.equals("")){
+		            		bien.setType((String)aValue);
+		            	}
 		                break;
 		            case 0:
 		            	bien.setRetenu((Boolean)aValue);
 		                break;
 		            default:
-		            	colonnesSup.get(columnIndex).set(rowIndex, ((String)aValue));
+		            	if (!aValue.equals("")){
+		            		colonnesSup.get(columnIndex).set(rowIndex, ((String)aValue));
+		            	}
 		            	break;
 		            	
 		        }

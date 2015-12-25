@@ -1,6 +1,5 @@
 package presentation;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
@@ -10,8 +9,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import presentation.MainFrancois;
-import abstraction.Etude;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
 import abstraction.modules.MappingDesBiens;
@@ -34,7 +31,6 @@ public class FenetreMappingDesBiens extends JPanel{
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		private final LinkedList<String> entetes = new LinkedList<String>();
-		private Etude etude = MainFrancois.etude;
 		private BiensEssentiels biensEssentiels = mappingDesBiens.getBiensEssentiels();
 		private BiensSupports biensSupports = mappingDesBiens.getBiensSupports();
 
