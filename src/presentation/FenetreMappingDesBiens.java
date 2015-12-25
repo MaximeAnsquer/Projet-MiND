@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
+import presentation.MainFrancois;
 import abstraction.Etude;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
