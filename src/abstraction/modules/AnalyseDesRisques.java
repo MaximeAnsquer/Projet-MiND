@@ -60,7 +60,7 @@ public class AnalyseDesRisques extends Module{
 			    
 			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biencourant.getIntitule());
 			    
-				liste.add(new Risque("",evenement,evenement.getComboGravite().getSelectedItem(),scenarios[i].getBienSupport(),scenarios[i],scenarios[i].getNiveauVraisemblance()));
+				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),scenarios[i].getBienSupport(),scenarios[i],scenarios[i].getVraisemblanceReelle()));
 				
 			}
 			}

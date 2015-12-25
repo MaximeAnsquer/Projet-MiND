@@ -58,7 +58,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	exColumn.setCellEditor(new DefaultCellEditor(comboBoxex));
 	DefaultTableCellRenderer renderer =
             new DefaultTableCellRenderer();
-    renderer.setToolTipText("Click for combo box");
+    renderer.setToolTipText("Cliquez pour sélectionner un niveau");
     exColumn.setCellRenderer(renderer);
 	
 	exColumn.setPreferredWidth(200);
