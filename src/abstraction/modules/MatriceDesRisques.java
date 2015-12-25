@@ -36,19 +36,31 @@ public class MatriceDesRisques extends Module {
 		this.coherent=true;
 		this.cree=true;
 		this.disponible=true;
-		int a=((Metriques)this.etude.getModule("Metriques")).getGravite().nombreDeNiveaux();
-		int b=((Metriques)this.etude.getModule("Métriques")).getVraisemblance().nombreDeNiveaux();
+		int a=((Metriques)this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
+		int b=((Metriques)this.etude.getModule("Metriques")).getVraisemblance().nombreDeNiveaux();
 		this.matrice=new ArrayList[a][b];
 		
-		for (int i=0;i<a;i++){
-			for (int j=0;j<b;j++){
+		for (int i=1;i<a;i++){
+			for (int j=1;j<b;j++){
 				for (int k=0;k<this.analysedesrisques.getAnalyseDesRisques().size();k++){
 					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j){
 		this.matrice[i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
 					}
 				}
 			}
+			
+			
 		}
+	for (int i=1;i<a;i++){
+		this.matrice[i][0].add((i+1)+"");
+	}
+	for (int i=1;i<b;i++){
+		this.matrice[0][i].add((i+1)+"");
+	}
+	
+	
+	this.matrice[0][0].add("Gravité");
+	this.matrice[0][0].add("Vraisemblance");
 	
 			
 		}

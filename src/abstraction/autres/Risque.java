@@ -16,7 +16,7 @@ public class Risque {
 	private Bien biensupport;
 	private ScenarioType scenarioconcret;
 	private int niveauvraisemblance;
-	private JCheckBox checkbox;
+	private boolean estretenu;
 	
 	
 	
@@ -27,8 +27,7 @@ public class Risque {
 		this.biensupport=biensupport;
 		this.scenarioconcret=scenarioconcret;
 		this.niveauvraisemblance=niveauvraisemblance;
-		this.checkbox=new JCheckBox();
-		this.checkbox.setEnabled(true);
+		this.estretenu=true;
 		
 	}
 	
@@ -50,8 +49,8 @@ public class Risque {
 		return this.niveauvraisemblance;
 	}
 	
-	public JCheckBox getJCheckBox(){
-		return this.checkbox;
+	public boolean getRetenu(){
+		return this.estretenu;
 		
 	}
 	

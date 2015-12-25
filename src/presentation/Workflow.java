@@ -26,6 +26,7 @@ import abstraction.modules.Module;
  */
 public class Workflow extends JPanel {
 
+	
 	private Etude etude;
 	private Hashtable<String, JButton> lesBoutons;
 	private MainMaximeAnsquer fenetre;
