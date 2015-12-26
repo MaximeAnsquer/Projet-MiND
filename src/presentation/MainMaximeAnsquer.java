@@ -8,6 +8,9 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -61,11 +65,32 @@ public class MainMaximeAnsquer extends JFrame {
 	private int hauteurEcran = Toolkit.getDefaultToolkit().getScreenSize().height;
 	private JList listeFichiers;
 	private JButton boutonOk;
+	private JFrame fenetreChoisirEtude; 
 
 	public MainMaximeAnsquer(){
+		
 
 		super("Outil d'analyse de risques");
 		this.setPreferredSize(new Dimension(largeurEcran, (int) (0.95*hauteurEcran)));
+		
+		this.addWindowListener(new WindowAdapter() {
+			
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	int decision = JOptionPane.showConfirmDialog(null, 
+			            "Enregistrer l'etude en cours avant de fermer le programme ?", "Fermeture du programme", 
+			            JOptionPane.YES_NO_OPTION,
+			            JOptionPane.QUESTION_MESSAGE);
+		    	switch(decision){
+		    	case JOptionPane.YES_OPTION:
+		    		enregistrerEtude();		 
+		    		System.exit(0);
+		    		break;
+		    	case JOptionPane.NO_OPTION:
+		    		System.exit(0);
+		    		break;
+		    	}		    	
+		    }
+		});
 
 		this.setJMenuBar(new BarreMenu(this));
 		this.setVisible(true);
@@ -77,18 +102,32 @@ public class MainMaximeAnsquer extends JFrame {
 		this.lesJpanels = new Hashtable<String, JPanel>();
 		this.pack();
 
-		this.demanderEtude();	
+		if(this.existeAuMoinsUneEtude()){
+			this.demanderEtude();			
+		}
+		else{
+			this.nouvelleEtude();
+		}
+	}
+
+	private boolean existeAuMoinsUneEtude() {
+		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
+		File dossierEtude = new File(urlEtudes);
+		File[] listOfFiles = dossierEtude.listFiles();
+		return listOfFiles.length > 0;
 	}
 
 	private void demanderEtude() {
-		String[] choix = {"Creer une nouvelle etude", "Ouvrir une etude existante"};
-		String reponse = (String) JOptionPane.showInputDialog(null,	null, null,	JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);		
-		if (reponse==choix[0]){
+		Object[] choix = {"Creer une nouvelle etude", "Ouvrir une etude existante"};
+		Object reponse =  JOptionPane.showOptionDialog(this,  "Que souhaitez-vous faire ?", null, JOptionPane.DEFAULT_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
+		//		String reponse = (String) JOptionPane.showInputDialog(null,	null, null,	JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);		
+		if (reponse.equals(0)){
 			this.nouvelleEtude();
 		}
-		if (reponse==choix[1]){
+		else{
 			this.choisirEtude();
-		}		
+		}	
 	}
 	/**
 	 * 
@@ -176,7 +215,7 @@ public class MainMaximeAnsquer extends JFrame {
 			JPanel lesProblemes = new JPanel();
 			lesProblemes.setLayout(new BoxLayout(lesProblemes, BoxLayout.Y_AXIS));
 			partieDeGauche.add(new JScrollPane(lesProblemes));
-			
+
 			for(JLabel label : moduleEnCours.getProblemes()){
 				lesProblemes.add(label);
 			}
@@ -239,23 +278,48 @@ public class MainMaximeAnsquer extends JFrame {
 	 * @return l'etude choisie
 	 */
 	public void choisirEtude(){
-		ArrayList<Object> data = new ArrayList<Object>();
-		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
-		File dossierEtude = new File(urlEtudes);
-		File[] listOfFiles = dossierEtude.listFiles();
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if (listOfFiles[i].isFile()) {
-				data.add(listOfFiles[i].getName());
+		if(this.existeAuMoinsUneEtude()){
+			ArrayList<Object> data = new ArrayList<Object>();
+			String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
+			File dossierEtude = new File(urlEtudes);
+			File[] listOfFiles = dossierEtude.listFiles();
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile()) {
+					String nomFichier = listOfFiles[i].getName();
+					int longueurFichier = nomFichier.length();
+					String nomFichierSansExtension = nomFichier.substring(0, longueurFichier - 4);				
+					data.add(nomFichierSansExtension);
+				}
 			}
+			listeFichiers = new JList(data.toArray());
+			listeFichiers.setFont(new Font("Arial", Font.PLAIN, 20));
+			((DefaultListCellRenderer) listeFichiers.getCellRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+
+			listeFichiers.addKeyListener(new KeyListener(){
+				public void keyTyped(KeyEvent e) {}			
+				public void keyPressed(KeyEvent e) {
+					int keyCode = e.getKeyCode();
+					if(keyCode == KeyEvent.VK_ENTER){
+						String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" + File.separator + listeFichiers.getSelectedValue() + ".xml";
+						ouvrirEtude(urlEtude);
+						fenetreChoisirEtude.dispose();
+					}
+				}			
+				public void keyReleased(KeyEvent e) {}			
+			});
+
+			listeFichiers.addListSelectionListener(new ListSelectionListener(){
+				public void valueChanged(ListSelectionEvent e) {
+					boutonOk.setEnabled(true);				
+				}
+			});
+			JFrame fenetreChoixFichier = fenetreChoixFichier(listeFichiers);			
 		}
-		listeFichiers = new JList(data.toArray());
-		listeFichiers.addListSelectionListener(new ListSelectionListener(){
-			public void valueChanged(ListSelectionEvent e) {
-				boutonOk.setEnabled(true);				
-			}
-		});
-		JFrame fenetreChoixFichier = fenetreChoixFichier(listeFichiers);		
+		else{
+			JOptionPane.showMessageDialog(null, "Desole, il n'existe aucune etude enregistree.");
+		}
 	}
+
 	public Etude ouvrirEtude(String urlEtude){
 		Etude etudeOuverte = new Etude();
 		try {
@@ -277,22 +341,22 @@ public class MainMaximeAnsquer extends JFrame {
 		return etudeOuverte;
 	}
 	private JFrame fenetreChoixFichier(JList jlist) {
-		final JFrame fenetre = new JFrame();
-		fenetre.setVisible(true);
-		fenetre.getContentPane().add(new JLabel("Veuillez choisir l'etude a ouvrir"), BorderLayout.NORTH);
-		fenetre.getContentPane().add(jlist, BorderLayout.CENTER);
-		boutonOk = new JButton("OK");
+		fenetreChoisirEtude = new JFrame();
+		fenetreChoisirEtude.setVisible(true);
+		fenetreChoisirEtude.getContentPane().add(jlist, BorderLayout.CENTER);
+		boutonOk = new JButton("Ouvrir l'etude");
 		boutonOk.setEnabled(false);
 		boutonOk.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" + File.separator + listeFichiers.getSelectedValue();
+				String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" + File.separator + listeFichiers.getSelectedValue() + ".xml";
 				ouvrirEtude(urlEtude);
-				fenetre.dispose();				
+				fenetreChoisirEtude.dispose();				
 			}
 		});
-		fenetre.getContentPane().add(boutonOk, BorderLayout.SOUTH);
-		fenetre.pack();
-		return fenetre;
+		fenetreChoisirEtude.setLocationRelativeTo(null);
+		fenetreChoisirEtude.getContentPane().add(boutonOk, BorderLayout.SOUTH);
+		fenetreChoisirEtude.pack();
+		return fenetreChoisirEtude;
 	}
 	public Etude getEtude(){
 		return etudeEnCours;
@@ -300,7 +364,22 @@ public class MainMaximeAnsquer extends JFrame {
 	public void setModuleEnCours(Module m){
 		this.moduleEnCours = m;
 	}
-	public void modifierNomEtude() {
+	public void modifierNomEtude() {		
+		//On supprimer le fichier de sauvegarde de l'etude en cours s'il existe		
+		boolean existaitSauvegarde = false;
+		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
+		File dossierEtude = new File(urlEtudes);
+		File[] listOfFiles = dossierEtude.listFiles();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				String nomFichier = listOfFiles[i].getName();
+				if(nomFichier.equals(etudeEnCours.getNom()+".xml")){
+					existaitSauvegarde = true;
+					listOfFiles[i].delete();
+				}
+			}
+		}
+		//On change le nom de l'etude		
 		String nouveauNom = "";
 		while(nouveauNom != null && nouveauNom.equals("")){
 			nouveauNom = JOptionPane.showInputDialog("Veuillez saisir le nouveau nom de l'etude");
@@ -309,10 +388,37 @@ public class MainMaximeAnsquer extends JFrame {
 				this.setTitle("Outil d'analyse de risques - Etude en cours : " + nouveauNom);
 			}
 		}		
+		//On enregistre l'etude (si elle etait deja enregistree)
+		if(existaitSauvegarde){
+			this.enregistrerEtude();
+		}
 	}
+
 	public static void main(String[] args) {
 		//---La fenetre principale---
 		MainMaximeAnsquer fenetrePrincipale = new MainMaximeAnsquer(); 
+	}
+
+	public void supprimerEtude() {
+		System.out.println("supprimerEtude");
+		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
+		File dossierEtude = new File(urlEtudes);
+		File[] listOfFiles = dossierEtude.listFiles();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				String nomFichier = listOfFiles[i].getName();
+				if(nomFichier.equals(etudeEnCours.getNom()+".xml")){
+					listOfFiles[i].delete();
+					JOptionPane.showMessageDialog(this, "Etude supprimee avec succes");
+					if(this.existeAuMoinsUneEtude()){
+						this.demanderEtude();			
+					}
+					else{
+						this.nouvelleEtude();
+					}
+				}
+			}
+		}		
 	}
 }
 
