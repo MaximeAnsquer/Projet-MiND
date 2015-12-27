@@ -24,9 +24,9 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	
 	
 	
-	public ModeleEvenementsRedoutes(){
-		this.etude=MainMaximeEtienne.etude;
-		this.evenements=(EvenementsRedoutes)etude.getModule("EvenementsRedoutes");
+	public ModeleEvenementsRedoutes(EvenementsRedoutes evenements){
+		this.etude=evenements.getEtude();
+		this.evenements=evenements;
 		int a=this.evenements.getEvenementsRedoutes().size();
 		
 		System.out.println(a+"");
@@ -124,6 +124,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 				switch(this.getColumnCount()-columnIndex-1){
 				case 4:
 					ev.setNomEvenement((String)aValue);
+					fireTableCellUpdated(rowIndex, columnIndex);
 					break;
 				case 1:
 					/*ev.getComboExigence().getSelectedItem();

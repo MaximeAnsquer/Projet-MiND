@@ -78,5 +78,10 @@ public class AnalyseDesRisques extends Module{
 	public String toString(){
 		return "Analyse des risques";
 	}
+	
+	
+	public boolean estCoherent(){
+		return true;
+	}
 
 }

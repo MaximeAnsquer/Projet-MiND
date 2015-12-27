@@ -13,6 +13,7 @@ import abstraction.modules.EvenementsRedoutes;
 import abstraction.modules.MappingDesBiens;
 import abstraction.modules.MatriceDesRisques;
 import abstraction.modules.Metriques;
+import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.ScenariosDeMenacesTypes;
 import abstraction.modules.SourcesDeMenaces;
 
@@ -31,22 +32,23 @@ public class MainMaximeEtienne extends JFrame {
 		etude.addModule(be);
 		etude.addModule(new Metriques(etude));
 		etude.addModule(new SourcesDeMenaces());
+		/*etude.addModule(new ScenariosDeMenacesGeneriques());*/
 		EvenementsRedoutes ev=new EvenementsRedoutes(etude);
 		etude.addModule(ev);
-		etude.addModule(new ScenariosDeMenacesTypes());
+		/*etude.addModule(new ScenariosDeMenacesTypes());
 		etude.addModule(new MappingDesBiens(bs,be));
 		AnalyseDesRisques an=new AnalyseDesRisques(etude);
 		etude.addModule(an);
-		MatriceDesRisques ma=new MatriceDesRisques(etude);
+		MatriceDesRisques ma=new MatriceDesRisques(etude);*/
 		
 		
 		
 		
 		
 		
-		/*FenetreEvenementsRedoutes f= new FenetreEvenementsRedoutes(ev);*/
+		FenetreEvenementsRedoutes f= new FenetreEvenementsRedoutes(ev);
 		/*FenetreAnalyseDesRisques f=new FenetreAnalyseDesRisques(an);*/
-		FenetreMatriceDesRisques f=new FenetreMatriceDesRisques(ma);
+		/*FenetreMatriceDesRisques f=new FenetreMatriceDesRisques(ma);*/
 		
 		this.add(f);
 		

@@ -79,4 +79,7 @@ public class MatriceDesRisques extends Module {
 		return "Matrice des risques";
 	}
 
+	public boolean  estCoherent(){
+		return true;
+	}
 }

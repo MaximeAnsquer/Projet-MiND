@@ -25,13 +25,14 @@ import abstraction.modules.EvenementsRedoutes;
 
 public class FenetreEvenementsRedoutes extends JPanel{
 	
-	private ModeleEvenementsRedoutes modele=new ModeleEvenementsRedoutes();
+	private ModeleEvenementsRedoutes modele;
 	private EvenementsRedoutes evenements;
 	private JTable tableau;
 
 	
 	FenetreEvenementsRedoutes(EvenementsRedoutes evenements){
 		 super(new GridLayout(1,0));
+		this.modele=new ModeleEvenementsRedoutes(evenements);
 		this.evenements=evenements;
 		
 		this.tableau=new JTable(modele);

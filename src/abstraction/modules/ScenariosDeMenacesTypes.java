@@ -16,10 +16,10 @@ public class ScenariosDeMenacesTypes extends Module {
 		super("Scenario de Menaces Types");
 		this.tableau = new Hashtable<String, ScenarioType>();
 		this.predecesseurs.add(this.getEtude().getModule(
-				"Scenario de Menaces Generiques"));
-		this.predecesseurs.add(this.getEtude().getModule("Biens Supports"));
+				"ScenariosDeMenacesGeneriques"));
+		this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
 		this.predecesseurs.add(this.getEtude().getModule("Metriques"));
-		this.successeurs.add(this.getEtude().getModule("Analyse des risques"));
+		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
