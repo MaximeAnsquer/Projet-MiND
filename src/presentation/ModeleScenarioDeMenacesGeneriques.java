@@ -178,7 +178,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		//*/
 		this.moduleCourant.addCritere(critere);
 		// On ajoute la colonne du critère à gauche de la colonne "Retenu"
-		this.entetes.add(this.getColumnCount(), critere);
+		this.entetes.add(this.getColumnCount(), "" + critere.charAt(0));
 		fireTableStructureChanged();
 	}
 	
