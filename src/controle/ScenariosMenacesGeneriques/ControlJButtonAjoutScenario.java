@@ -22,6 +22,7 @@ public class ControlJButtonAjoutScenario implements Observer, ActionListener {
 			ModeleScenarioDeMenacesGeneriques modele, JTable tableau,
 			JButton ajouterLigne) {
 		this.modele = modele;
+		this.tableau=tableau;
 		this.ajouterLigne = ajouterLigne;
 	}
 
@@ -39,7 +40,7 @@ public class ControlJButtonAjoutScenario implements Observer, ActionListener {
 				String intituleScenario = JOptionPane.showInputDialog("Intitulé du scénario ?");
 				
 				if (intituleScenario != null && !intituleScenario.equals("")){
-					this.modele.addScenarioGenerique(new ScenarioGenerique(typeBienSupport, Id, intituleScenario), 0);
+					this.modele.addScenarioGenerique(new ScenarioGenerique(typeBienSupport, Id, intituleScenario), this.tableau.getSelectedRow());
 				}
 			}
 		}
