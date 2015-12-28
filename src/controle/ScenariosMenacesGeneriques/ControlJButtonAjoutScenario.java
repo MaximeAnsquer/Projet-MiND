@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import abstraction.autres.ScenarioGenerique;
 import presentation.ModeleScenarioDeMenacesGeneriques;
 
-public class ControlJButtonAjoutScenario implements Observer, ActionListener {
+public class ControlJButtonAjoutScenario implements ActionListener {
 	private ModeleScenarioDeMenacesGeneriques modele;
 	private JTable tableau;
 	private JButton ajouterLigne;
@@ -40,18 +40,10 @@ public class ControlJButtonAjoutScenario implements Observer, ActionListener {
 				String intituleScenario = JOptionPane.showInputDialog("Intitulé du scénario ?");
 				
 				if (intituleScenario != null && !intituleScenario.equals("")){
-					this.modele.addScenarioGenerique(new ScenarioGenerique(typeBienSupport, Id, intituleScenario), this.tableau.getSelectedRow());
+					this.modele.addScenarioGenerique(new ScenarioGenerique(typeBienSupport, Id, intituleScenario), this.modele.getRowCount());
 				}
 			}
 		}
 		
-	}
-
-	public void update(Observable o, Object arg) {
-		if (this.tableau.getSelectedRow() != -1) {
-			this.ajouterLigne.setEnabled(true);
-		} else {
-			this.ajouterLigne.setEnabled(false);
-		}
 	}
 }

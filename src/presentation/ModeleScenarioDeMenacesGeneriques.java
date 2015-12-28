@@ -166,6 +166,10 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		}
 	}
 	
+	public void setScenarioCourant(int rowIndex){
+		this.moduleCourant.setScenarioCourant(this.moduleCourant.getScenarioGenerique(rowIndex));
+	}
+	
 	public void addCritere (String critere){
 		/*
 		this.colonnesSup.addFirst(new ArrayList<Boolean>(this.getRowCount()));
@@ -187,7 +191,8 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 			fireTableStructureChanged();
 		}
 		//*/
-		this.entetes.remove(this.getColumnCount()-2);
+		this.moduleCourant.removeCritere(critere);
+		this.entetes.remove(critere);
 		fireTableStructureChanged();
 	}
 	

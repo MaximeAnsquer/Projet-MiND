@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutColonne;
 import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutScenario;
 import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionColonne;
+import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionScenario;
+import controle.ScenariosMenacesGeneriques.ControlJtable;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 
 public class FenetreScenarioDeMenacesGeneriques extends JFrame {
@@ -42,6 +44,9 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 		this.moduleCourant=this.modeleTableau.getModuleCourant();
 		this.tableau = new JTable(this.modeleTableau);
 		
+		ControlJtable controlTableau = new ControlJtable(modeleTableau, tableau);
+		this.tableau.addMouseListener(controlTableau);
+		
 		this.getContentPane().add(tableau.getTableHeader());
         this.getContentPane().add(new JScrollPane(tableau));
 	}
@@ -53,10 +58,15 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 		this.ajouterLigne = new JButton("Ajouter un scénario de menace générique");
 		
 		ControlJButtonAjoutScenario controlAjoutLigne = new ControlJButtonAjoutScenario(modeleTableau, tableau, ajouterLigne);
-		this.moduleCourant.addObserver(controlAjoutLigne);
+		// this.moduleCourant.addObserver(controlAjoutLigne);
 		this.ajouterLigne.addActionListener(controlAjoutLigne);
 		
-		this.supprimerLigne = new JButton("Supprimer un scénario de menace générique"); 
+		this.supprimerLigne = new JButton("Supprimer un scénario de menace générique");
+		this.supprimerLigne.setEnabled(false);
+		
+		ControlJButtonSuppressionScenario controlSuppressionScenario = new ControlJButtonSuppressionScenario(modeleTableau, tableau, supprimerLigne);
+		this.moduleCourant.addObserver(controlSuppressionScenario);
+		this.supprimerLigne.addActionListener(controlSuppressionScenario);;
 		
 		this.ajouterCritere = new JButton("Ajouter un critère de sécurité");
 		
@@ -65,6 +75,7 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 		this.ajouterCritere.addActionListener(controlAjoutColonne);
 		
 		this.supprimerCritere = new JButton("Supprimer un critère de sécurité");
+		this.supprimerCritere.setEnabled(false);
 		
 		ControlJButtonSuppressionColonne controlSupression = new ControlJButtonSuppressionColonne(modeleTableau, supprimerCritere);
 		this.moduleCourant.addObserver(controlSupression);

@@ -24,6 +24,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		//this.predecesseurs.add(this.getEtude().getModule("Sources de menaces"));
 		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
 		//this.successeurs.add(this.getEtude().getModule("Scenario de Menaces Types"));
+		this.scenarioCourant= new ScenarioGenerique();
 		this.nomColonneSup = new ArrayList<String>();
 		this.cree = false;
 		this.coherent = false;
@@ -44,6 +45,8 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	public void setScenarioCourant(ScenarioGenerique scenarioCourant){
 		this.scenarioCourant=scenarioCourant;
+		this.setChanged();         // PAC
+		this.notifyObservers();    // PAC
 	}
 	
 	public ArrayList<String> getNomColonneSup() {
@@ -105,8 +108,12 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	}
 	
 	public void removeScenarioGenerique(ScenarioGenerique scenario){
+		if (this.nomColonneSup!=null){
+			for(String nomCritere : this.nomColonneSup){
+				scenario.getCriteresSup().remove(nomCritere);
+			}
+		}
 		this.tableau.remove(scenario.getIntitule(), scenario);
-		// this.tableau.remove(scenario.getTypeBienSupport(), scenario);
 	}
 	
 	// Ajout d'une colonne
@@ -115,8 +122,8 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		for (int i=0 ; i<this.tableau.size() ; i++){
 			this.getScenarioGenerique(i).getCriteresSup().put(nomCritere, false);
 		}
-		//this.setChanged();                           // PAC
-		//this.notifyObservers();                      // PAC
+		this.setChanged();                           // PAC
+		this.notifyObservers();                      // PAC
 	}
 	
 	//Suppression d'une colonne
