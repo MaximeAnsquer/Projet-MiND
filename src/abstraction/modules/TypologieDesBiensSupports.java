@@ -1,9 +1,22 @@
 package abstraction.modules;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import abstraction.autres.Critere;
 import abstraction.autres.TypeBien;
 import abstraction.autres.TypeBien;
 
@@ -45,7 +58,7 @@ public class TypologieDesBiensSupports extends Module {
 		this.coherent = false;
 		this.disponible = true;
 		this.importerBDC();
-		//this.tableau = TypologieDesBiensSupports.getBDC();
+		this.tableau = TypologieDesBiensSupports.getBDC();
 	}
 
 	// ---Getters et setters---
@@ -172,7 +185,69 @@ public class TypologieDesBiensSupports extends Module {
 	}
 
 	public void importerBDC() {
-		// TODO importer la bdc avec le fichier excel
+		
+		bdcTypeBiensSupports= new Hashtable<String, TypeBien>();
+		
+		/*
+		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
+		 */
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		
+		try {
+			/*
+			 * Etape 2 : creation d'un parseur
+			 */
+			final DocumentBuilder builder = factory.newDocumentBuilder();
+			
+			/*
+			 * Etape 3 : creation d'un Document
+			 */
+			final Document document= builder.parse(new File("bdc.xml"));
+			
+			/*
+			 * Etape 4 : recuperation de l'Element racine
+			 */
+			final Element racine = document.getDocumentElement();
+			
+			/*
+			 * Etape 5 : recuperation du noeud " TypologieBiensSupports "
+			 */
+			final Element TypesBiens = (Element) racine.getElementsByTagName("TypologieBiensSupports").item(0);
+			final NodeList listeTypesBiens = TypesBiens.getChildNodes();
+			final int nbTypesBiens = listeTypesBiens.getLength();
+			
+			for (int i = 0; i<nbTypesBiens; i++) {
+				if(listeTypesBiens.item(i).getNodeType() == Node.ELEMENT_NODE) {
+					final Element typeBien = (Element) listeTypesBiens.item(i);
+
+					/*
+					 * Construction d'un type de bien
+					 */
+
+					String id = typeBien.getElementsByTagName("Id").item(0).getTextContent();
+					String intitule = typeBien.getElementsByTagName("Intitule").item(0).getTextContent();
+					String description = typeBien.getElementsByTagName("Description").item(0).getTextContent();
+
+					TypeBien type = new TypeBien(id, description, intitule, true);
+
+					/*
+					 * Ajout du type de bien à la bdc
+					 */
+
+					bdcTypeBiensSupports.put(intitule, type);
+				}				
+			}
+			
+		} catch (final ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		catch (final SAXException e) {
+			e.printStackTrace();
+		}
+		catch (final IOException e) {
+			e.printStackTrace();
+		}	
+		
 	}
 
 }

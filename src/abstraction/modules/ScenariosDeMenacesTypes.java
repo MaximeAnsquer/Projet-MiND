@@ -1,5 +1,6 @@
 package abstraction.modules;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.autres.ScenarioType;
@@ -11,24 +12,41 @@ public class ScenariosDeMenacesTypes extends Module {
 
 	// Variable d'instance
 	Hashtable<String, ScenarioType> tableau;
+	private ScenarioType scenarioTypeCourant ;
+	private ArrayList<String> nomColonneSup ;
 
 	public ScenariosDeMenacesTypes() {
 		super("Scenario de Menaces Types");
 		this.tableau = new Hashtable<String, ScenarioType>();
-		this.predecesseurs.add(this.getEtude().getModule(
-				"ScenariosDeMenacesGeneriques"));
-		this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
-		this.predecesseurs.add(this.getEtude().getModule("Metriques"));
-		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+		// this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
+		// this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
+		// this.predecesseurs.add(this.getEtude().getModule("Metriques"));
+		// this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
 		this.importerBDC();
-		this.tableau = ScenariosDeMenacesTypes.getBDC();
+		// this.tableau = ScenariosDeMenacesTypes.getBDC();
 	}
 	
 	public int getSize(){
 		return this.tableau.size();
+	}
+	
+	public ScenarioType getScenarioTypeCourant() {
+		return scenarioTypeCourant;
+	}
+
+	public void setScenarioTypeCourant(ScenarioType scenarioTypeCourant) {
+		this.scenarioTypeCourant = scenarioTypeCourant;
+	}
+
+	public ArrayList<String> getNomColonneSup() {
+		return nomColonneSup;
+	}
+
+	public void setNomColonneSup(ArrayList<String> nomColonneSup) {
+		this.nomColonneSup = nomColonneSup;
 	}
 
 	public Hashtable<String, ScenarioType> getTableau() {
