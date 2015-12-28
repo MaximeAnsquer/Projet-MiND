@@ -26,6 +26,10 @@ public class ScenariosDeMenacesTypes extends Module {
 		this.importerBDC();
 		this.tableau = ScenariosDeMenacesTypes.getBDC();
 	}
+	
+	public int getSize(){
+		return this.tableau.size();
+	}
 
 	public Hashtable<String, ScenarioType> getTableau() {
 		return tableau;

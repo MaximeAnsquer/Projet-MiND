@@ -36,5 +36,8 @@ public class MainAli {
 		if (reponse==choix[1]){
 			FenetreScenarioDeMenacesGeneriques fen2 = new FenetreScenarioDeMenacesGeneriques();
 		}
+		if (reponse==choix[2]){
+			FenetreScenarioDeMenacesTypes fen3 = new FenetreScenarioDeMenacesTypes();
+		}
 	}
 }

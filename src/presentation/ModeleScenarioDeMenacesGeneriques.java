@@ -20,7 +20,6 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	private CriteresDeSecurite criteresDeSecurite = new CriteresDeSecurite();
 	private ScenariosDeMenacesGeneriques moduleCourant = new ScenariosDeMenacesGeneriques();
 	private LinkedList<String> entetes = new LinkedList<String>();
-	// private LinkedList<ArrayList<Boolean>> colonnesSup = new LinkedList<ArrayList<Boolean>>();
 	
 	public static final int COLONNE_TYPEBIENSUPPORT = 0;
 	public static final int COLONNE_ID = 1;

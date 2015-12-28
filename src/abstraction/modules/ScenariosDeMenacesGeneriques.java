@@ -105,6 +105,8 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			}
 		}
 		this.tableau.put(scenario.getIntitule(), scenario);
+		this.setChanged();                           // PAC
+		this.notifyObservers();                      // PAC
 	}
 	
 	public void removeScenarioGenerique(ScenarioGenerique scenario){
@@ -114,6 +116,8 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			}
 		}
 		this.tableau.remove(scenario.getIntitule(), scenario);
+		this.setChanged();                           // PAC
+		this.notifyObservers();                      // PAC
 	}
 	
 	// Ajout d'une colonne
