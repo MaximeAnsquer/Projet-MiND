@@ -1,6 +1,6 @@
 package abstraction.autres;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Classe representant un bien ; utile aux modules " Biens essentiels " et " Biens supports "
@@ -10,21 +10,18 @@ import java.util.ArrayList;
 
 public class Bien{
 	//Variables d'instance
-
-	private ArrayList<String> nomColonneSup; //ArrayList representant les titres des colonnes supplementaires que l'utilisateur peut rajouter
-	private ArrayList<String> contenuColonneSup; //ArrayList representant le contenu des colonnes supplementaires que l'utilisateur peut rajouter
+	private LinkedList<String> contenuColonnesSup;
 	private String description;
 	private String intitule;
 	private String type;
 	private boolean retenu;
 		
 	//Constructeurs
-	public Bien(String description, String intitule, String type, ArrayList<String> nomColonneSup, ArrayList<String> contenuColonneSup) {
+	public Bien(String description, String intitule, String type, LinkedList<String> contenuColonnesSup) {
 		this.description = description;
 		this.intitule = intitule;
 		this.type=type;
-		this.nomColonneSup=nomColonneSup;
-		this.contenuColonneSup=contenuColonneSup;
+		this.contenuColonnesSup=contenuColonnesSup;
 	}
 		
 	//Getters et setters
@@ -61,25 +58,20 @@ public class Bien{
 		this.retenu = retenu;
 	}
 	
-	public ArrayList<String> getNomColonneSup(){
-		return nomColonneSup;
+	public LinkedList<String> getContenuColonnesSup(){
+		return contenuColonnesSup;
 	}
 	
-	public void setNomColonneSup(ArrayList<String> nomColonneSup){
-		this.nomColonneSup=nomColonneSup;
+	public void ajouterColonne(String contenu){
+		this.getContenuColonnesSup().addFirst(contenu);
 	}
 	
-	public ArrayList<String> getContenuColonneSup(){
-		return contenuColonneSup;
+	public void enleverPremiereColonne(){
+		this.getContenuColonnesSup().removeFirst();
 	}
 	
-	public void setContenuColonneSup(ArrayList<String> contenuColonneSup){
-		this.contenuColonneSup=contenuColonneSup;
-	}
-	
-	public void ajouterColonne(String nomColonne, String contenuColonne){
-		this.getNomColonneSup().add(nomColonne);
-		this.getContenuColonneSup().add(contenuColonne);
+	public void setContenuColonnesSup(LinkedList<String> contenuColonnesSup){
+		this.contenuColonnesSup=contenuColonnesSup;
 	}
 		
 	public String toString(){

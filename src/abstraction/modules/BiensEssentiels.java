@@ -1,6 +1,7 @@
 package abstraction.modules;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedList;
 
 import abstraction.autres.*;
 
@@ -17,16 +18,16 @@ public class BiensEssentiels extends Module {
 	// ---Variables d'instance
 
 	private Hashtable<String, Bien> lesBiens;
-	private ArrayList<String> nomColonneSup;
+	private LinkedList<String> nomColonnesSup;
 	// ---Constructeurs---
 
 	public BiensEssentiels() {
 		super("BiensEssentiels");
 		this.lesBiens = new Hashtable<String, Bien>();
-		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "", null, null));
-		this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "", null, null));
-		this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "Confidentialite", "", null, null));
-		this.nomColonneSup = new ArrayList<String>();
+		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "", new LinkedList<String>()));
+		this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "", new LinkedList<String>()));
+		this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "Confidentialite", "", new LinkedList<String>()));
+		this.nomColonnesSup = new LinkedList<String>();
 		//TODO Decomenter quand les autres parties seront OK
 		/*
 		this.successeurs.add(MappingDesBiens.getInstance());
@@ -55,12 +56,12 @@ public class BiensEssentiels extends Module {
 		return (Bien) lesBiens.values().toArray()[index];
 	}
 	
-	public ArrayList<String> getNomColonneSup(){
-		return this.nomColonneSup;
+	public LinkedList<String> getNomColonnesSup(){
+		return this.nomColonnesSup;
 	}
 	
-	public void setNomColonneSup(ArrayList<String> nomColonneSup){
-		this.nomColonneSup=nomColonneSup;
+	public void setNomColonnesSup(LinkedList<String> nomColonnesSup){
+		this.nomColonnesSup=nomColonnesSup;
 	}
 	
 	// ---Services---
@@ -78,7 +79,11 @@ public class BiensEssentiels extends Module {
 	}
 	
 	public void ajouterColonne(String nomColonne){
-		this.getNomColonneSup().add(nomColonne);
+		this.getNomColonnesSup().addFirst(nomColonne);
+	}
+	
+	public void enleverPremiereColonne(){
+		this.getNomColonnesSup().removeFirst();
 	}
 
 	public Hashtable<String, Bien> getBiensRetenus() {

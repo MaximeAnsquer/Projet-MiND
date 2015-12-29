@@ -179,7 +179,6 @@ public class FenetreBiensSupports extends JPanel{
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		private final LinkedList<String> entetes = new LinkedList<String>();
-		private LinkedList<ArrayList<String>> colonnesSup = new LinkedList<ArrayList<String>>();
 
 		
 		public ModeleDynamiqueObjet() {
@@ -191,18 +190,16 @@ public class FenetreBiensSupports extends JPanel{
 		}
 		
 		public void supprimerCategorie(int ligneSelectionnee) {
-			if (colonnesSup.size()!=0){
-				if (colonnesSup.size()==1){
-					entetes.removeFirst();
-					colonnesSup.removeLast();
+			if (biensSupports.getNomColonnesSup().size()!=0){
+				entetes.removeFirst();
+				for (int i=0; i<biensSupports.nombreDeBiens();i++){
+					biensSupports.getBien(i).enleverPremiereColonne();
+				}
+				biensSupports.getNomColonnesSup().removeFirst();
+				if (biensSupports.getNomColonnesSup().size()==1){
 					boutonSupprimerColonne.setEnabled(false);
-					fireTableStructureChanged();
 				}
-				else{
-					entetes.removeFirst();
-					colonnesSup.removeLast();
-					fireTableStructureChanged();
-				}
+				fireTableStructureChanged();
 			}
 		}
 
@@ -227,9 +224,9 @@ public class FenetreBiensSupports extends JPanel{
 			do{
 				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
 			} while (categorie.equals("") || categorie.equals("Intitule") || categorie.equals("Description") || categorie.equals("Type") || categorie.equals("Retenu"));			
-			colonnesSup.addFirst(new ArrayList<String>(this.getRowCount()));
-			for (int i=0; i<this.getRowCount(); i++){
-				colonnesSup.getFirst().add(i, "");
+			biensSupports.getNomColonnesSup().addFirst("categorie");
+			for (int i=0; i<biensSupports.nombreDeBiens();i++){
+				biensSupports.getBien(i).ajouterColonne("");
 			}
 			entetes.addFirst(categorie);
 			boutonSupprimerColonne.setEnabled(true);
@@ -237,11 +234,7 @@ public class FenetreBiensSupports extends JPanel{
 		}
 
 		public void ajouterBienEssentiel() {
-			ArrayList<String> nomColonneSup = new ArrayList<String>();
-			for (int i=0; i<entetes.size()-3;i++){
-				nomColonneSup.add(entetes.get(i));
-			}
-			ArrayList<String> contenuColonneSup = new ArrayList<String>();
+			LinkedList<String> contenuColonneSup = new LinkedList<String>();
 			for (int i=0; i<entetes.size()-3;i++){
 				contenuColonneSup.add("");
 			}
@@ -257,13 +250,8 @@ public class FenetreBiensSupports extends JPanel{
 			do{
 				description = JOptionPane.showInputDialog("Description ?");
 			} while (description.equals(""));
-			Bien bien = new Bien(description, intitule, type, nomColonneSup, contenuColonneSup);
+			Bien bien = new Bien(description, intitule, type, contenuColonneSup);
 			biensSupports.ajouterBien(bien);
-			if (colonnesSup.size()>0){
-				for (int i=0; i<entetes.size()-3;i++){
-					colonnesSup.get(i).add("");
-				}
-			}
 			boutonSupprimerLigne.setEnabled(true);
 			fireTableRowsInserted(biensSupports.nombreDeBiens() -1, biensSupports.nombreDeBiens() -1);
 		}
@@ -291,8 +279,8 @@ public class FenetreBiensSupports extends JPanel{
 			case 0:
 				return biensSupports.getBien(rowIndex).isRetenu();
 			default:
-				if(colonnesSup.get(columnIndex)!=null){
-					return colonnesSup.get(columnIndex).get(rowIndex);
+				if(biensSupports.getNomColonnesSup().get(columnIndex)!=null){
+					return biensSupports.getBien(rowIndex).getContenuColonnesSup().get(columnIndex);
 				}
 				else{
 					return "";
@@ -338,7 +326,7 @@ public class FenetreBiensSupports extends JPanel{
 		                break;
 		            default:
 		            	if (!aValue.equals("")){
-		            		colonnesSup.get(columnIndex).set(rowIndex, ((String)aValue));
+		            		biensSupports.getBien(rowIndex).getContenuColonnesSup().set(columnIndex, (String)aValue);
 		            	}
 		            	break;
 		            	
