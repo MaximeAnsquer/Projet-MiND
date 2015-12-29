@@ -1,15 +1,10 @@
 package presentation;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
-import abstraction.autres.Critere;
 import abstraction.autres.ScenarioGenerique;
-import abstraction.autres.TypeBien;
 import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.TypologieDesBiensSupports;
