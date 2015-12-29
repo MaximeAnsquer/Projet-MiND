@@ -18,7 +18,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	
 	private TypologieDesBiensSupports typologieDesBiensSupports = new TypologieDesBiensSupports();
 	private CriteresDeSecurite criteresDeSecurite = new CriteresDeSecurite();
-	private ScenariosDeMenacesGeneriques moduleCourant = new ScenariosDeMenacesGeneriques();
+	private ScenariosDeMenacesGeneriques moduleCourant ;
 	private LinkedList<String> entetes = new LinkedList<String>();
 	
 	public static final int COLONNE_TYPEBIENSUPPORT = 0;
@@ -29,8 +29,10 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	public static int COLONNE_CRITERE_I= 5;
 	public static int COLONNE_CRITERE_C = 6;
 	
-	public ModeleScenarioDeMenacesGeneriques(){
+	public ModeleScenarioDeMenacesGeneriques(ScenariosDeMenacesGeneriques moduleCourant){
 		super();
+		this.moduleCourant=moduleCourant;
+		
 		entetes.add("Type de bien support");
 		entetes.add("Id");
 		entetes.add("Scénario générique");

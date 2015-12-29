@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -31,7 +32,6 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	public FenetreTypologieBiensSupports(TypologieDesBiensSupports module) {
 		
 		this.moduleCourant=module;
-		this.setVisible(true);
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -53,6 +53,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	}
 	
 	public void creerZoneDescription(){
+		JLabel label = new JLabel("");
 		this.zoneDescription= new JTextArea("Cliquer sur la description que vous souhaitez afficher");
 		this.zoneDescription.setLineWrap(true); // On passe à la ligne 
 		this.zoneDescription.setWrapStyleWord(true);
@@ -71,6 +72,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		
+		this.add(label);
 		this.add(areaScrollPane);
 	}
 	

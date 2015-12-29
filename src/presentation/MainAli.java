@@ -19,7 +19,7 @@ public class MainAli extends JFrame {
 		super("tests");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.pack();
+		//this.pack();
 	}
 	
 	public static Etude etude ;
@@ -49,7 +49,9 @@ public class MainAli extends JFrame {
 			mainTest.pack();
 		}
 		if (reponse==choix[1]){
-			FenetreScenarioDeMenacesGeneriques fen2 = new FenetreScenarioDeMenacesGeneriques();
+			FenetreScenarioDeMenacesGeneriques fen2 = new FenetreScenarioDeMenacesGeneriques(secondModule);
+			mainTest.add(fen2);
+			mainTest.pack();
 		}
 		if (reponse==choix[2]){
 			FenetreScenarioDeMenacesTypes fen3 = new FenetreScenarioDeMenacesTypes();

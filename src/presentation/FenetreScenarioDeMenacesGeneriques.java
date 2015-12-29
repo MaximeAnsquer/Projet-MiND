@@ -16,7 +16,7 @@ import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionScenario;
 import controle.ScenariosMenacesGeneriques.ControlJtable;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 
-public class FenetreScenarioDeMenacesGeneriques extends JFrame {
+public class FenetreScenarioDeMenacesGeneriques extends JPanel {
 	
 	private ScenariosDeMenacesGeneriques moduleCourant;
 	private ModeleScenarioDeMenacesGeneriques modeleTableau;
@@ -27,28 +27,25 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 	private JButton supprimerCritere;
 	private JButton aide ;
 	
-	public FenetreScenarioDeMenacesGeneriques() {
-		super("Scénarios de menaces génériques");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(true);
+	public FenetreScenarioDeMenacesGeneriques(ScenariosDeMenacesGeneriques module) {
 		
-		this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+		this.moduleCourant=module;
+		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.creerTableau();
 		this.creerBoutonsBas();
-		this.pack();
 	}
 	
 	public void creerTableau() {
-		this.modeleTableau= new ModeleScenarioDeMenacesGeneriques();
-		this.moduleCourant=this.modeleTableau.getModuleCourant();
+		this.modeleTableau= new ModeleScenarioDeMenacesGeneriques(this.moduleCourant);
 		this.tableau = new JTable(this.modeleTableau);
 		
 		ControlJtable controlTableau = new ControlJtable(modeleTableau, tableau);
 		this.tableau.addMouseListener(controlTableau);
 		
-		this.getContentPane().add(tableau.getTableHeader());
-        this.getContentPane().add(new JScrollPane(tableau));
+		this.add(tableau.getTableHeader());
+        this.add(new JScrollPane(tableau));
 	}
 	
 	public void creerBoutonsBas() {
@@ -88,7 +85,7 @@ public class FenetreScenarioDeMenacesGeneriques extends JFrame {
 		panelBas.add(ajouterCritere);
 		panelBas.add(supprimerCritere);
 		panelBas.add(aide);
-		this.getContentPane().add(panelBas);
+		this.add(panelBas);
 	}
 		
 }
