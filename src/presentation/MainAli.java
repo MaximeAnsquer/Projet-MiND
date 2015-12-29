@@ -36,7 +36,7 @@ public class MainAli extends JFrame {
 		CriteresDeSecurite moduleIntermed = new CriteresDeSecurite();
 		etude.addModule(moduleIntermed);
 		
-		ScenariosDeMenacesGeneriques secondModule = new ScenariosDeMenacesGeneriques();
+		ScenariosDeMenacesGeneriques secondModule = new ScenariosDeMenacesGeneriques(etude);
 		etude.addModule(secondModule);
 		
 		String module1 = "Typologie des biens supports";

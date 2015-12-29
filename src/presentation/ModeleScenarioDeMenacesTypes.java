@@ -15,7 +15,7 @@ import abstraction.modules.SourcesDeMenaces;
 public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	private SourcesDeMenaces sourcesDeMenaces = new SourcesDeMenaces();
 	private BiensSupports biensSupports = new BiensSupports(new Etude());
-	private ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques = new ScenariosDeMenacesGeneriques();
+	private ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques = new ScenariosDeMenacesGeneriques(new Etude());
 	private ScenariosDeMenacesTypes moduleCourant = new ScenariosDeMenacesTypes() ;
 	private LinkedList<String> entetes = new LinkedList<String>();
 	

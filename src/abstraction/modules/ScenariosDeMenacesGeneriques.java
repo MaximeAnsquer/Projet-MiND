@@ -15,6 +15,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import abstraction.Etude;
 import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.TypeBien;
 
@@ -28,11 +29,13 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	private ScenarioGenerique scenarioCourant ;
 	private ArrayList<String> nomColonneSup;
 	
-	public ScenariosDeMenacesGeneriques(){
+	public ScenariosDeMenacesGeneriques(Etude etude){
 		super("ScenariosDeMenacesGeneriques");
 		this.tableau = new Hashtable<String, ScenarioGenerique>();
-		//this.predecesseurs.add(this.getEtude().getModule("Typologie des biens supports"));
-		//this.predecesseurs.add(this.getEtude().getModule("Sources de menaces"));
+		
+		this.etude=etude;
+		this.predecesseurs.add(this.getEtude().getModule("TypologieDesBiensSupports"));
+		this.predecesseurs.add(this.getEtude().getModule("CriteresDeSecurite"));
 		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
 		//this.successeurs.add(this.getEtude().getModule("Scenario de Menaces Types"));
 		this.scenarioCourant= new ScenarioGenerique();
