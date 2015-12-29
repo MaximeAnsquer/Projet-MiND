@@ -22,7 +22,7 @@ import controle.TypologieBiensSupports.ControlJTable;
 import controle.TypologieBiensSupports.ControlJTextArea;
 import abstraction.modules.TypologieDesBiensSupports;
 
-public class FenetreTypologieBiensSupports extends JFrame {
+public class FenetreTypologieBiensSupports extends JPanel {
 
 	private TypologieDesBiensSupports moduleCourant;
 	private ModeleTypologieBiensSupports modeleTableau ;
@@ -33,30 +33,29 @@ public class FenetreTypologieBiensSupports extends JFrame {
 	private JButton aide ;
 
 	public FenetreTypologieBiensSupports(TypologieDesBiensSupports module) {
-		super("Typologie des Biens Supports");
+		// super("Typologie des Biens Supports");
 		this.moduleCourant=module;
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		// this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 
-		this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		this.creerTableau();
+		this.creerTableau(module);
 		this.creerZoneDescription();
 		this.creerBoutonsBas();
-		this.pack();
+		// this.pack();
 	}
 
-	public void creerTableau() {
-		this.modeleTableau=new ModeleTypologieBiensSupports();
-		this.moduleCourant=this.modeleTableau.getModuleCourant();
+	public void creerTableau(TypologieDesBiensSupports module) {
+		this.modeleTableau=new ModeleTypologieBiensSupports(module);
 		this.tableau = new JTable(this.modeleTableau);
 		
 		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC
 		this.tableau.addMouseListener(control);                            // PAC
 		
 		//tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);
-		this.getContentPane().add(tableau.getTableHeader());
-        this.getContentPane().add(new JScrollPane(tableau));
+		this.add(tableau.getTableHeader());
+        this.add(new JScrollPane(tableau));
 	}
 	
 	public void creerZoneDescription(){
@@ -78,7 +77,7 @@ public class FenetreTypologieBiensSupports extends JFrame {
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		
-		this.getContentPane().add(areaScrollPane,BoxLayout.Y_AXIS);
+		this.add(areaScrollPane,BoxLayout.Y_AXIS);
 	}
 	
 	public void creerBoutonsBas() {
@@ -87,7 +86,7 @@ public class FenetreTypologieBiensSupports extends JFrame {
 		
 		this.ajouterLigne = new JButton("Ajouter un type de bien support");
 		
-		ControlJButtonAjoutTypeBien ControlAjoutTypeBien = new ControlJButtonAjoutTypeBien(this.modeleTableau,this);
+		ControlJButtonAjoutTypeBien ControlAjoutTypeBien = new ControlJButtonAjoutTypeBien(this.modeleTableau,null);
 		this.ajouterLigne.addActionListener(ControlAjoutTypeBien );
 		
 		this.supprimerLigne = new JButton("Supprimer un type de bien support"); 
@@ -101,13 +100,13 @@ public class FenetreTypologieBiensSupports extends JFrame {
 		
 		///*
 		ControlJButtonAide controlAide = new ControlJButtonAide(
-				this.aide,this);
+				this.aide,null);
 		this.aide.addActionListener(controlAide);
 		//*/
 		
 		panelBas.add(ajouterLigne);
 		panelBas.add(supprimerLigne);
 		panelBas.add(aide);
-		this.getContentPane().add(panelBas);
+		this.add(panelBas);
 	}
 }

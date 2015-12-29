@@ -10,7 +10,7 @@ import abstraction.modules.TypologieDesBiensSupports;
 
 public class ModeleTypologieBiensSupports extends AbstractTableModel{
 	
-	private TypologieDesBiensSupports moduleCourant = new TypologieDesBiensSupports();
+	private TypologieDesBiensSupports moduleCourant ; 
 	private final String[] entetes = {"Id", "Intitulé", "Description", "Retenu"} ;
 	
 	public static final int COLONNE_ID = 0;
@@ -18,8 +18,9 @@ public class ModeleTypologieBiensSupports extends AbstractTableModel{
 	public static final int COLONNE_DESCRIPTION = 2;
 	public static final int COLONNE_RETENUE = 3;
 	
-	public ModeleTypologieBiensSupports() {
+	public ModeleTypologieBiensSupports(TypologieDesBiensSupports module) {
 		super();
+		this.moduleCourant=module;
 	}
 	
 	public TypologieDesBiensSupports getModuleCourant(){
