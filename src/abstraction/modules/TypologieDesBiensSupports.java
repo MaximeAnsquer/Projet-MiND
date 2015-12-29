@@ -38,7 +38,7 @@ public class TypologieDesBiensSupports extends Module {
 	private TypeBien typeBienCourant;
 
 	public TypologieDesBiensSupports() {
-		super("Typologie des biens supports");
+		super("TypologieDesBiensSupports");
 		this.tableau = new Hashtable<String, TypeBien>();
 		
 		this.addTypeBienSupport(new TypeBien(

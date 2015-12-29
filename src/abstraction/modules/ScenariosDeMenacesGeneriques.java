@@ -29,7 +29,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	private ArrayList<String> nomColonneSup;
 	
 	public ScenariosDeMenacesGeneriques(){
-		super("Scenario de Menaces Generiques");
+		super("ScenarioDeMenacesGeneriques");
 		this.tableau = new Hashtable<String, ScenarioGenerique>();
 		//this.predecesseurs.add(this.getEtude().getModule("Typologie des biens supports"));
 		//this.predecesseurs.add(this.getEtude().getModule("Sources de menaces"));
