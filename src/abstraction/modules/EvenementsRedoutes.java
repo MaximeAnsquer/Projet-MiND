@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -181,7 +182,7 @@ public class EvenementsRedoutes extends Module {
 					String bien = evenement.getElementsByTagName("BienEssentiel").item(0).getTextContent();
 					String critere = evenement.getElementsByTagName("Critere").item(0).getTextContent();
 					
-					ArrayList<String> l=new ArrayList<String>();
+					LinkedList<String> l=new LinkedList<String>();
 
 					Evenement e = new Evenement(this.etude,nom,l,l, bien, critere);
 
@@ -201,9 +202,6 @@ public class EvenementsRedoutes extends Module {
 		catch (final IOException e) {
 			e.printStackTrace();
 		}	
-	
-
-
 	}
 	
 	

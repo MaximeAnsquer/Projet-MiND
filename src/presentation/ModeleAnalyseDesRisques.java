@@ -13,7 +13,7 @@ import abstraction.modules.EvenementsRedoutes;
 public class ModeleAnalyseDesRisques extends AbstractTableModel{
 	private Etude etude;
 	private AnalyseDesRisques analyse;
-	private ArrayList<Object> data;
+	private ArrayList<Object> data=new ArrayList<Object>();
 	private ArrayList<String> entetes=new ArrayList<String>();
 	
 	
@@ -22,6 +22,7 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 		this.etude=MainMaximeEtienne.etude;
 		this.analyse=(AnalyseDesRisques)etude.getModule("AnalyseDesRisques");
 		int a=this.analyse.getAnalyseDesRisques().size();
+		System.out.println(a+"");
 		
 		for (int i=0;i<a;i++){
 			this.data.add(this.analyse.getAnalyseDesRisques().get(i));
@@ -65,7 +66,7 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch(columnIndex){
 		case 0:
-			analyse.getAnalyseDesRisques().get(rowIndex).getEvenementRedoute();
+			analyse.getAnalyseDesRisques().get(rowIndex).getEvenementRedoute().GetNomEvenement();
 		case 1:
 			return analyse.getAnalyseDesRisques().get(rowIndex).getNiveauGravite();
 		
