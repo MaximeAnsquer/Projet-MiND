@@ -65,6 +65,31 @@ public class MappingDesBiens extends Module{
 		this.biensEssentiels=biensEssentiels;
 	}
 	
+	public int getIndexBienSupport(Bien bienSupport) throws Exception{
+		int index=0;
+		while (index<this.mappingDesBiens.get(0).getBiensSupports().nombreDeBiens() 
+				&& this.getMappingDesBiens().get(0).getBiensSupports().getBien(index)==bienSupport){
+			index++;
+		}
+		if (index!=this.mappingDesBiens.get(0).getBiensSupports().nombreDeBiens()){
+			return index;
+		}
+		else {
+			throw new Exception("bien support pas present");
+		}
+	}
+	
+	public ArrayList<Bien> getBiensEssentielsCorrespondant(Bien bienSupport) throws Exception{
+		ArrayList<Bien> biens = new ArrayList<Bien>();
+		int indexBien = this.getIndexBienSupport(bienSupport);
+		for (int i=0; i<this.mappingDesBiens.size(); i++){
+			if (this.getMappingDesBiens().get(i).getMappingBien().get(indexBien).equals("x")){
+				biens.add(this.getMappingDesBiens().get(i).getBienEssentiel());
+			}
+		}
+		return biens;
+	}
+	
 	public String toString(){
 		return "Mapping Des Biens";
 	}

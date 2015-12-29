@@ -105,6 +105,8 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			}
 		}
 		this.tableau.put(scenario.getIntitule(), scenario);
+		this.setChanged();                           // PAC
+		this.notifyObservers();                      // PAC
 	}
 	
 	public void removeScenarioGenerique(ScenarioGenerique scenario){
@@ -114,13 +116,17 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			}
 		}
 		this.tableau.remove(scenario.getIntitule(), scenario);
+		this.setChanged();                           // PAC
+		this.notifyObservers();                      // PAC
 	}
 	
 	// Ajout d'une colonne
 	public void addCritere (String nomCritere){
 		this.nomColonneSup.add(nomCritere);
 		for (int i=0 ; i<this.tableau.size() ; i++){
-			this.getScenarioGenerique(i).getCriteresSup().put(nomCritere, false);
+			if (!this.getScenarioGenerique(i).getCriteresSup().containsKey(nomCritere)){
+				this.getScenarioGenerique(i).getCriteresSup().put(nomCritere, false);
+			}
 		}
 		this.setChanged();                           // PAC
 		this.notifyObservers();                      // PAC
@@ -129,9 +135,11 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	//Suppression d'une colonne
 	public void removeCritere (String nomCritere){
 		this.nomColonneSup.remove(nomCritere);
+		/*
 		for (int i=0 ; i<this.tableau.size() ; i++){
 			this.getScenarioGenerique(i).getCriteresSup().remove(nomCritere);
 		}
+		//*/
 		this.setChanged();                           // PAC
 		this.notifyObservers();                      // PAC
 	}

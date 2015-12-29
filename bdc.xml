@@ -268,4 +268,62 @@
     
     </SourcesDeMenaces>
     
+    
+    
+    
+    <TypologieBiensSupports>
+    	<TypeBien>
+    		<Id>MAT</Id>
+            <Intitule>Matériels</Intitule>
+            <Description>Ce type de biens supports est constitué de l’ensemble des éléments physiques d'un système informatique (hardware) et des supports de données électroniques) participant au stockage et au traitement de tout ou partie des biens essentiels.</Description>
+		</TypeBien>
+    
+    	<TypeBien>
+    		<Id>LOG</Id>
+            <Intitule>Logiciels</Intitule>
+            <Description>Ce type de biens supports est constitué de l'ensemble des programmes participant au traitement de tout ou partie des biens essentiels (software).</Description>
+		</TypeBien>
+		
+		<TypeBien>
+    		<Id>RSX</Id>
+            <Intitule>Canaux informatiques et de téléphonie</Intitule>
+            <Description>Ce type de biens supports est constitué de l'ensemble des vecteurs physiques de communication et de télécommunication qui transportent tout ou partie des biens essentiels. </Description>
+		</TypeBien>
+		
+		<TypeBien>
+    		<Id>LOC</Id>
+            <Intitule>Locaux</Intitule>
+            <Description>Ce type de biens supports est constitué des infrastructures immobilières hébergeant, et nécessaires au bon fonctionnement, des systèmes informatiques (SYS) et des organisations (ORG), dans lesquels sont utilisés tout ou partie des biens essentiels. </Description>
+		</TypeBien>
+		
+		<TypeBien>
+    		<Id>PER</Id>
+            <Intitule>Personnes</Intitule>
+            <Description>Ce type de biens supports est constitué de l’ensemble des individus, catégories d'individus ou groupes sociaux homogènes, qui ont accès à tout ou partie des biens essentiels. </Description>
+		</TypeBien>
+		
+		<TypeBien>
+    		<Id>ORG</Id>
+            <Intitule>Organisations</Intitule>
+            <Description>Ce type de biens supports est constitué de la combinaison de personnes (PER), de supports papier (PAP) et des canaux interpersonnels (CAN) en interaction, organisées pour satisfaire les objectifs d'un organisme (en réalisant des activités métiers spécifiques) et manipulant tout ou partie des biens essentiels. </Description>
+		</TypeBien>
+		
+		<TypeBien>
+    		<Id>PAP</Id>
+            <Intitule>Supports papiers</Intitule>
+            <Description>Ce type de biens supports est constitué de l’ensemble des supports statiques non électroniques contenant des données.</Description>
+		</TypeBien>
+    
+    </TypologieBiensSupports>
+    
+    
+    <ScenariosMenacesGeneriques>
+    
+    
+    
+    
+    
+    </ScenariosMenacesGeneriques>
+    
+    
 </bdc>

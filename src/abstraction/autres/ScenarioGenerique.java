@@ -18,7 +18,6 @@ public class ScenarioGenerique {
 	private String Id;
 	private String intituleGenerique;
 	private Hashtable<String,Boolean> CriteresSup; // représente les critères que l'utilisateur peut rajouter
-	// private ArrayList<Boolean> contenuCriteresSup ;
 	private boolean retenu;
 
 	// Constructeur

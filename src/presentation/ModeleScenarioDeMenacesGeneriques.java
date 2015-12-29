@@ -20,7 +20,6 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	private CriteresDeSecurite criteresDeSecurite = new CriteresDeSecurite();
 	private ScenariosDeMenacesGeneriques moduleCourant = new ScenariosDeMenacesGeneriques();
 	private LinkedList<String> entetes = new LinkedList<String>();
-	// private LinkedList<ArrayList<Boolean>> colonnesSup = new LinkedList<ArrayList<Boolean>>();
 	
 	public static final int COLONNE_TYPEBIENSUPPORT = 0;
 	public static final int COLONNE_ID = 1;
@@ -159,8 +158,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 					String critereAssocie = this.moduleCourant
 							.getNomColonneSup().get(indice);
 					this.moduleCourant.getScenarioGenerique(rowIndex)
-							.getCriteresSup()
-							.replace(critereAssocie, (Boolean) aValue);
+							.getCriteresSup().put(critereAssocie, (Boolean) aValue);
 					break;
 			}
 		}
@@ -179,7 +177,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		//*/
 		this.moduleCourant.addCritere(critere);
 		// On ajoute la colonne du critère à gauche de la colonne "Retenu"
-		this.entetes.add(this.getColumnCount(), critere);
+		this.entetes.add(this.getColumnCount(), "" + critere.charAt(0));
 		fireTableStructureChanged();
 	}
 	
@@ -192,7 +190,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		}
 		//*/
 		this.moduleCourant.removeCritere(critere);
-		this.entetes.remove(critere);
+		this.entetes.remove("" + critere.charAt(0));
 		fireTableStructureChanged();
 	}
 	

@@ -17,6 +17,21 @@ public class ScenarioType extends ScenarioGenerique {
 	private String intituleConcret;
 	private int vraisemblanceIntrinseque;
 	private int vraisemblanceReelle;
+	private boolean retenu;
+	
+	public ScenarioType(String type, String id, String intitule,
+			Hashtable<String, Boolean> criteres,
+			Hashtable<String, SourceDeMenace> menaces, Bien bienSupport,
+			String intituleConcret, int intrinseque, int reelle, boolean retenu) {
+		
+		super(type,id,intitule,criteres,true);
+		this.menaces=menaces;
+		this.bienSupport=bienSupport;
+		this.intituleConcret=intituleConcret;
+		this.vraisemblanceIntrinseque=intrinseque;
+		this.vraisemblanceReelle=reelle;
+		this.retenu=retenu;
+	}
 	
 	public Hashtable<String, SourceDeMenace> getMenaces() {
 		return menaces;
