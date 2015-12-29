@@ -1,9 +1,20 @@
 package abstraction.modules;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import abstraction.autres.ScenarioGenerique;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.TypeBien;
 
@@ -30,7 +41,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		this.coherent = false;
 		this.disponible = false;
 		this.importerBDC();
-		//this.tableau = ScenariosDeMenacesGeneriques.getBDC();
+		this.tableau = ScenariosDeMenacesGeneriques.getBDC();
 	}
 	
 	// ---Getters et setters---
@@ -155,7 +166,84 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	}
 	
 	private void importerBDC() {
-		// TODO Auto-generated method stub		
+		
+		bdcScenariosMenacesGeneriques = new Hashtable<String, ScenarioGenerique>();
+		
+		/*
+		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
+		 */
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		
+		try {
+			/*
+			 * Etape 2 : creation d'un parseur
+			 */
+			final DocumentBuilder builder = factory.newDocumentBuilder();
+			
+			/*
+			 * Etape 3 : creation d'un Document
+			 */
+			final Document document= builder.parse(new File("bdc.xml"));
+			
+			/*
+			 * Etape 4 : recuperation de l'Element racine
+			 */
+			final Element racine = document.getDocumentElement();
+			
+			/*
+			 * Etape 5 : recuperation du noeud " ScenariosMenacesGeneriques "
+			 */
+			final Element scenariosDeMenacesGeneriques = (Element) racine.getElementsByTagName("ScenariosMenacesGeneriques").item(0);
+			final NodeList listeScenarios = scenariosDeMenacesGeneriques.getChildNodes();
+			final int nbScenarios = listeScenarios.getLength();
+			
+			for (int i = 0; i<nbScenarios; i++) {
+				if(listeScenarios.item(i).getNodeType() == Node.ELEMENT_NODE) {
+					final Element scenarioGenerique = (Element) listeScenarios.item(i);
+					
+					/*
+					 * Construction d'un scenario
+					 */
+					
+					String intituleTypeBien = scenarioGenerique.getElementsByTagName("TypeBien").item(0).getTextContent();
+					String id = scenarioGenerique.getElementsByTagName("Id").item(0).getTextContent();
+					String intituleScenario = scenarioGenerique.getElementsByTagName("Intitule").item(0).getTextContent(); 
+					
+					Hashtable<String, Boolean> CriteresSup = new Hashtable<String, Boolean>();
+					
+					final Element criteres = (Element) scenarioGenerique.getElementsByTagName("CriteresRetenus").item(0);
+					final NodeList listeCriteres = criteres.getChildNodes();
+					final int nbCriteres = listeCriteres.getLength();					
+					
+					for (int j = 0; j < nbCriteres; j++){
+						if(listeCriteres.item(j).getNodeType() == Node.ELEMENT_NODE) {
+							final Element critere = (Element) listeCriteres.item(j);
+							String intituleCritere = critere.getElementsByTagName("IntituleCritere").item(0).getTextContent();
+							Boolean retenu = Boolean.parseBoolean(critere.getElementsByTagName("Retenu").item(0).getTextContent());
+							
+							CriteresSup.put(intituleCritere,retenu);
+						}
+					}					
+					
+					ScenarioGenerique scenario = new ScenarioGenerique(intituleTypeBien, id, intituleScenario, CriteresSup, true);
+					
+					/*
+					 * Ajout du scenario à la bdc
+					 */
+					
+					bdcScenariosMenacesGeneriques.put(intituleScenario, scenario);				
+					}				
+			}
+			
+		} catch (final ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		catch (final SAXException e) {
+			e.printStackTrace();
+		}
+		catch (final IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String toString(){

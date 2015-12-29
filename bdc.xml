@@ -319,10 +319,206 @@
     
     <ScenariosMenacesGeneriques>
     
-    
-    
-    
-    
+    	<ScenarioGenerique>
+    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<Id>M1</Id>
+    		<Intitule>Détournement de l'usage prévu d'un matériel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<Id>M2</Id>
+    		<Intitule>Espionnage d'un matériel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<Id>M3</Id>
+    		<Intitule>Dépassement des limites de fonctionnement d'un matériel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<Id>M4</Id>
+    		<Intitule>Déterioration d'un matériel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<Id>M5</Id>
+    		<Intitule>Modification d'un matériel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<Id>M6</Id>
+    		<Intitule>Perte d'un matériel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Logiciel (LOG)</TypeBien>
+    		<Id>L1</Id>
+    		<Intitule>Détournement de l'usage prévu d'un logiciel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	
+    	
     </ScenariosMenacesGeneriques>
     
     
