@@ -100,7 +100,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		}
 	
-		
+		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(150);
+		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(200);
         
         // tell the RowEditorModel to use ed for row 1
 		
@@ -113,11 +114,6 @@ public class FenetreEvenementsRedoutes extends JPanel{
 			liste[i-1]=""+i;
 		}
         
-		
-	
-	this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(150);
-	this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(200);
-	
 	
 	TableColumn gravColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-1);
 	final JComboBox comboBoxgrav=new JComboBox(liste);

@@ -31,7 +31,7 @@ public class MainMaximeEtienne extends JFrame {
 	public MainMaximeEtienne(){
 		super("Main Maxime Etienne");
 		
-		
+		etude = new Etude("nouvelleetude");
 		Hashtable<String,Boolean> criteres=new Hashtable<String,Boolean>();
 		criteres.put("Confidentialite", true);
 		criteres.put("Integrite",true);
@@ -42,9 +42,11 @@ public class MainMaximeEtienne extends JFrame {
  		menaces.put("Moi",menace);
 		
  		
- 		BiensSupports bs=new BiensSupports();
+ 		BiensSupports bs=new BiensSupports(etude);
 		
-		Bien bien1=bs.getBien("Confidentialite");
+		Bien bien1=bs.getBien("Disponibilite");
+		System.out.println(bien1.getIntitule());
+		
 		
 		ScenarioType sc1=new ScenarioType("couco", "1", "J'ai parlé du projet à un ami", criteres,menaces, bien1,
 				 "J'ai parlé du projet et tout à foiré", 1, 2,true) ;
@@ -52,9 +54,9 @@ public class MainMaximeEtienne extends JFrame {
 		ScenariosDeMenacesTypes sc=new ScenariosDeMenacesTypes();
 		sc.getTableau().put("ligne1", sc1);
 		
-		etude = new Etude();
+		
 		etude.addModule(new CriteresDeSecurite());
-		BiensEssentiels be=new BiensEssentiels();
+		BiensEssentiels be=new BiensEssentiels(etude);
 		
 		etude.addModule(be);
 		etude.addModule(new Metriques(etude));
@@ -63,10 +65,10 @@ public class MainMaximeEtienne extends JFrame {
 		EvenementsRedoutes ev=new EvenementsRedoutes(etude);
 		etude.addModule(ev);
 		etude.addModule(sc);
-		MappingDesBiens mapping=new MappingDesBiens(bs,be);
+		MappingDesBiens mapping=new MappingDesBiens(etude);
 		mapping.getMappingDesBiens().get(0).setValueAt("x",0);
 		mapping.getMappingDesBiens().get(1).setValueAt("x",1);
-		mapping.getMappingDesBiens().get(2).setValueAt("x",2);
+		/*mapping.getMappingDesBiens().get(2).setValueAt("x",2);*/
 		
 		
 		etude.addModule(mapping);

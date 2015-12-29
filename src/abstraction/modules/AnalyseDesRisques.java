@@ -36,7 +36,7 @@ public class AnalyseDesRisques extends Module{
 		this.criteres=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
 		this.evenements=(EvenementsRedoutes) this.etude.getModule("EvenementsRedoutes");
 		this.mapping=(MappingDesBiens)this.etude.getModule("MappingDesBiens");
-		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("Scenario de Menaces Types");
+		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("ScenarioDeMenacesTypes");
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
 		int a=this.scenarios.getTableau().size();
@@ -78,7 +78,7 @@ public class AnalyseDesRisques extends Module{
 			    
 			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biensessentiels.get(j).getIntitule());
 			    
-				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),scenarios[i].getBienSupport(),scenarios[i],scenarios[i].getVraisemblanceReelle()));
+				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),biensupport,scenarios[i],scenarios[i].getVraisemblanceReelle()));
 				
 			}}
 			}}
