@@ -31,9 +31,9 @@ public class BiensEssentiels extends Module {
 		this.etude=etude;
 		this.lesBiens = new Hashtable<String, Bien>();
 		//TODO supprimer quand tous les tests seront ok
-		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "", new LinkedList<String>()));
-		this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "", new LinkedList<String>()));
-		this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "Confidentialite", "", new LinkedList<String>()));
+		//this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "", new LinkedList<String>()));
+		//this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "", new LinkedList<String>()));
+		//this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "Confidentialite", "", new LinkedList<String>()));
 		//
 		this.nomColonnesSup = new LinkedList<String>();
 
