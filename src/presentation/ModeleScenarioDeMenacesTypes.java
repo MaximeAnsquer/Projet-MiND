@@ -74,7 +74,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		ScenarioType scenarioType = this.moduleCourant.getScenarioType(rowIndex);
 		switch(this.getColumnCount()-columnIndex-1){
 		case 12 :
-			return scenarioType.getBienSupport();
+			return scenarioType.getBienSupport().getIntitule();
 		case 11 :
 			return scenarioType.getTypeBienSupport();
 		case 10 :
@@ -141,7 +141,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			switch (this.getColumnCount() - columnIndex - 1) {
 			case 12:
 				if (!aValue.equals("")) {
-					scenarioType.setBienSupport((String) aValue);
+					scenarioType.getBienSupport().setIntitule(((String) aValue));
 				}
 				break;
 			case 11:

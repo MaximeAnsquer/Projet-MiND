@@ -2,6 +2,8 @@ package abstraction.autres;
 
 import java.util.Hashtable;
 
+import abstraction.modules.BiensSupports;
+
 /**
  * Classe representant les scénarios de menaces typés. Cette classe étend la
  * classe ScenarioGenerique : un scénario typé n'est qu'un cas particulier de
@@ -13,7 +15,7 @@ import java.util.Hashtable;
 
 public class ScenarioType extends ScenarioGenerique {
 	private Hashtable<String, SourceDeMenace> menaces;
-	private String bienSupport; // Il s'agit d'un bien support ici
+	private Bien bienSupport; // Il s'agit d'un bien support ici
 	private String intituleConcret;
 	private int vraisemblanceIntrinseque;
 	private int vraisemblanceReelle;
@@ -21,7 +23,7 @@ public class ScenarioType extends ScenarioGenerique {
 	
 	public ScenarioType(String type, String id, String intitule,
 			Hashtable<String, Boolean> criteres,
-			Hashtable<String, SourceDeMenace> menaces, String bienSupport,
+			Hashtable<String, SourceDeMenace> menaces, Bien bienSupport,
 			String intituleConcret, int intrinseque, int reelle, boolean retenu) {
 		
 		super(type,id,intitule,criteres,true);
@@ -41,11 +43,11 @@ public class ScenarioType extends ScenarioGenerique {
 		this.menaces = menaces;
 	}
 
-	public String getBienSupport() {
+	public Bien getBienSupport() {
 		return bienSupport;
 	}
 
-	public void setBienSupport(String bienSupport) {
+	public void setBienSupport(Bien bienSupport) {
 		this.bienSupport = bienSupport;
 	}
 
