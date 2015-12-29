@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -46,6 +47,10 @@ public class FenetreBiensSupports extends JPanel{
 		this.biensSupports=biensSupports;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		comboBox.addItem("type 1");
+		comboBox.addItem("type 2");
+		comboBox.addItem("type 3");
+		table.getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));;
 		table.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent e) {
 				zoneDescription.setText(getBienSelectionne().getDescription());
