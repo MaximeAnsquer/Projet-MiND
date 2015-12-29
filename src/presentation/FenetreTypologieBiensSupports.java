@@ -32,8 +32,9 @@ public class FenetreTypologieBiensSupports extends JFrame {
 	private JButton ajouterLigne ;
 	private JButton aide ;
 
-	public FenetreTypologieBiensSupports() {
+	public FenetreTypologieBiensSupports(TypologieDesBiensSupports module) {
 		super("Typologie des Biens Supports");
+		this.moduleCourant=module;
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import javax.swing.table.AbstractTableModel;
 
+import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.autres.ScenarioType;
 import abstraction.modules.BiensSupports;
@@ -13,7 +14,7 @@ import abstraction.modules.SourcesDeMenaces;
 
 public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	private SourcesDeMenaces sourcesDeMenaces = new SourcesDeMenaces();
-	private BiensSupports biensSupports = new BiensSupports();
+	private BiensSupports biensSupports = new BiensSupports(new Etude());
 	private ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques = new ScenariosDeMenacesGeneriques();
 	private ScenariosDeMenacesTypes moduleCourant = new ScenariosDeMenacesTypes() ;
 	private LinkedList<String> entetes = new LinkedList<String>();
