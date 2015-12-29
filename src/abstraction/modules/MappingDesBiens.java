@@ -1,6 +1,9 @@
 package abstraction.modules;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import javax.swing.JLabel;
 
 import abstraction.autres.*;
 
@@ -92,5 +95,22 @@ public class MappingDesBiens extends Module{
 	
 	public String toString(){
 		return "Mapping Des Biens";
+	}
+	
+	public boolean estCoherent(){
+		boolean resultat = true;
+		this.problemesDeCoherence = new ArrayList<JLabel>();
+		for(MappingBien m : this.getMappingDesBiens()){
+			if(!m.estComplet()){
+				JLabel label = new JLabel("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
+				label.setForeground(Color.red);
+				this.problemesDeCoherence.add(label);
+				resultat = false;
+			}
+		}
+		if(resultat){
+			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence au niveau du mapping des biens."));
+		}		
+		return resultat;
 	}
 }

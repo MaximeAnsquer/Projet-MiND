@@ -62,6 +62,18 @@ public class MappingBien {
 		this.mappingBien=mappingBien;
 	}
 	
+	public boolean estComplet(){
+		int nombreCasesVides = 0;
+		int index = 0;
+		while (nombreCasesVides<this.getMappingBien().size() && index<this.getMappingBien().size()){
+			if (this.getMappingBien().get(index).equals("")){
+				nombreCasesVides++;
+			}
+			index++;
+		}
+		return nombreCasesVides<this.getMappingBien().size();
+	}
+	
 	public String toString(){
 		return "{Mapping Bien : intitul� = "+this.getBienEssentiel().getIntitule()+"}";
 	}

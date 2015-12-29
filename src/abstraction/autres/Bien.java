@@ -73,6 +73,21 @@ public class Bien{
 	public void setContenuColonnesSup(LinkedList<String> contenuColonnesSup){
 		this.contenuColonnesSup=contenuColonnesSup;
 	}
+	
+	public boolean estComplet(){
+		boolean complet = true;
+		int index = 0;
+		if (this.description.equals("") || this.intitule.equals("")){
+			complet=false;
+		}
+		while (complet && index<this.getContenuColonnesSup().size()){
+			if (this.getContenuColonnesSup().get(index).equals("")){
+				complet=false;
+			}
+			index++;
+		}
+		return complet;
+	}
 		
 	public String toString(){
 		return "{Bien : id = "+this.getDescription()+" ; intitule : "+this.getIntitule()

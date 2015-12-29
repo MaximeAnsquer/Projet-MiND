@@ -1,7 +1,10 @@
 package abstraction.modules;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
+
+import javax.swing.JLabel;
 
 import abstraction.autres.*;
 
@@ -107,5 +110,28 @@ public class BiensSupports extends Module{
 	
 	public String toString(){
 		return "Biens Supports";
+	}
+	
+	public boolean estCoherent(){
+		boolean resultat = true;
+		this.problemesDeCoherence = new ArrayList<JLabel>();
+		for(Bien b : this.getLesBiens().values()){
+			if(!b.estComplet()){
+				JLabel label = new JLabel("bien support \" " + b.getIntitule() + " \" incomplet");
+				label.setForeground(Color.red);
+				this.problemesDeCoherence.add(label);
+				resultat = false;
+			}
+		}
+		if(this.getBiensRetenus().size() <= 0){
+			JLabel label = new JLabel("Aucun bien support retenu");
+			label.setForeground(Color.red);
+			this.problemesDeCoherence.add(label);
+			resultat = false;
+		}
+		if(resultat){
+			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence au niveau des biens supports."));
+		}		
+		return resultat;
 	}
 }
