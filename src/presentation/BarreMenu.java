@@ -48,7 +48,7 @@ public class BarreMenu extends JMenuBar {
 				fenetre.enregistrerEtude();
 			}			
 		});		
-//		fichier.add(enregistrer);
+		fichier.add(enregistrer);
 		
 		fichier.addSeparator();
 		JMenu preferences = new JMenu("Preferences");

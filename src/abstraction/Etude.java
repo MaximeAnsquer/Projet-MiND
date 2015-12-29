@@ -10,6 +10,7 @@ import abstraction.modules.MappingDesBiens;
 import abstraction.modules.Metriques;
 import abstraction.modules.Module;
 import abstraction.modules.SourcesDeMenaces;
+import abstraction.modules.TypologieDesBiensSupports;
 
 public class Etude {
 	
@@ -34,8 +35,9 @@ public class Etude {
 		this.lesModules = new Hashtable<String, Module>();
 		
 		this.addModule(new CriteresDeSecurite());		
-		this.addModule(new Metriques(this));
 		this.addModule(new SourcesDeMenaces());
+		this.addModule(new TypologieDesBiensSupports());
+		this.addModule(new Metriques(this));
 		this.addModule(new BiensSupports(this));
 		this.addModule(new BiensEssentiels(this));
 		this.addModule(new MappingDesBiens(this));

@@ -41,6 +41,7 @@ import abstraction.modules.MappingDesBiens;
 import abstraction.modules.Metriques;
 import abstraction.modules.Module;
 import abstraction.modules.SourcesDeMenaces;
+import abstraction.modules.TypologieDesBiensSupports;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -173,7 +174,10 @@ public class MainMaximeAnsquer extends JFrame {
 				this.lesJpanels.put(nom, new FenetreMappingDesBiens((MappingDesBiens) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("EvenementsRedoutes")){
-				this.lesJpanels.put(nom, new FenetreEvenementsRedoutes( (EvenementsRedoutes) etudeEnCours.getModule(nom)));
+				this.lesJpanels.put(nom, new FenetreEvenementsRedoutes( (EvenementsRedoutes) etudeEnCours.getModule(nom)) );
+			}
+			else if(nom.equals("TypologieDesBiensSupports")){
+				this.lesJpanels.put(nom, new FenetreTypologieBiensSupports( (TypologieDesBiensSupports) etudeEnCours.getModule(nom)) ) ;
 			}
 
 			this.contenuPrincipal.add(label, BorderLayout.NORTH);

@@ -118,7 +118,7 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 
 		//5eme ligne
-		this.add(moduleManquant());
+		this.add(lesBoutons.get("TypologieDesBiensSupports"));
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
