@@ -27,7 +27,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -40,6 +39,7 @@ import abstraction.modules.EvenementsRedoutes;
 import abstraction.modules.MappingDesBiens;
 import abstraction.modules.Metriques;
 import abstraction.modules.Module;
+import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.SourcesDeMenaces;
 import abstraction.modules.TypologieDesBiensSupports;
 
@@ -190,6 +190,9 @@ public class MainMaximeAnsquer extends JFrame {
 			else if(nom.equals("TypologieDesBiensSupports")){
 				this.lesJpanels.put(nom, new FenetreTypologieBiensSupports( (TypologieDesBiensSupports) etudeEnCours.getModule(nom)) ) ;
 			}
+			else if(nom.equals("ScenariosDeMenacesGeneriques")){
+				this.lesJpanels.put(nom, new FenetreScenariosDeMenacesGeneriques( (ScenariosDeMenacesGeneriques) etudeEnCours.getModule(nom)) ) ;
+			}
 
 			this.contenuPrincipal.add(label, BorderLayout.NORTH);
 			this.contenuPrincipal.add(lesJpanels.get(nom), BorderLayout.CENTER);
@@ -205,7 +208,7 @@ public class MainMaximeAnsquer extends JFrame {
 		partieDuBas.removeAll();
 		
 		for(JLabel label : moduleEnCours.getProblemes()){
-			label.setFont(new Font("Arial", Font.PLAIN, 18));
+			label.setFont(new Font("Arial", Font.PLAIN, 22));
 			partieDuBas.add(label);
 		}
 		
