@@ -47,9 +47,9 @@ public class FenetreBiensSupports extends JPanel{
 		this.biensSupports=biensSupports;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		comboBox.addItem("type 1");
-		comboBox.addItem("type 2");
-		comboBox.addItem("type 3");
+		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
+			comboBox.addItem((String)biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i]);
+		}
 		table.getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));;
 		table.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent e) {

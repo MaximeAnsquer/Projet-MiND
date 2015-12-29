@@ -23,6 +23,7 @@ public class BiensEssentiels extends Module {
 
 	private Hashtable<String, Bien> lesBiens;
 	private LinkedList<String> nomColonnesSup;
+
 	// ---Constructeurs---
 
 	public BiensEssentiels(Etude etude) {

@@ -21,6 +21,7 @@ public class BiensSupports extends Module{
 	// ---Variables d'instance
 
 	private Hashtable<String, Bien> lesBiens;
+	private TypologieDesBiensSupports typologie;
 	private LinkedList<String> nomColonnesSup;
 
 	// ---Constructeurs---
@@ -28,6 +29,7 @@ public class BiensSupports extends Module{
 	public BiensSupports(Etude etude) {
 		super("BiensSupports");
 		this.etude=etude;
+		
 		this.lesBiens = new Hashtable<String, Bien>();
 		//TODO supprimer quand tous les tests seront ok
 		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "type 1", new LinkedList<String>()));
@@ -36,10 +38,11 @@ public class BiensSupports extends Module{
 		//
 		this.nomColonnesSup = new LinkedList<String>();
 
-		System.out.println(""+this.etude);
 		//this.successeurs.add(this.getEtude().getModule("MappingDesBiens"));
 		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
-		//this.predecesseurs.add(this.getEtude().getModule("TypologieDesBiensSupports"));
+		this.predecesseurs.add(this.getEtude().getModule("TypologieDesBiensSupports"));
+		
+		typologie = (TypologieDesBiensSupports) this.getEtude().getModule("TypologieDesBiensSupports");
 		
 		this.cree = false;
 		this.coherent = false;
@@ -62,6 +65,10 @@ public class BiensSupports extends Module{
 	
 	public Bien getBien(int index){
 		return (Bien) lesBiens.values().toArray()[index];
+	}
+	
+	public TypologieDesBiensSupports getTypologie(){
+		return typologie;
 	}
 	
 	public LinkedList<String> getNomColonnesSup(){
