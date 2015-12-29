@@ -1,11 +1,13 @@
 package abstraction.modules;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 
+import javax.swing.JLabel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -252,5 +254,31 @@ public class TypologieDesBiensSupports extends Module {
 	
 	public String toString(){
 		return "Typologies des biens supports" ;
+	}
+	
+	public boolean estCoherent() {
+		boolean resultat = true;
+		this.problemesDeCoherence = new ArrayList<JLabel>();
+		for (TypeBien type : this.tableau.values()) {
+			if (type.isIncomplete()) {
+				JLabel label = new JLabel("Type de bien support \" "
+						+ type.getIntitule() + " \" incomplet");
+				label.setForeground(Color.red);
+				this.problemesDeCoherence.add(label);
+				resultat = false;
+			}
+		}
+
+		if (this.getTypeBiensRetenus().size() < 1) {
+			JLabel label = new JLabel("Aucun type de bien support retenu");
+			label.setForeground(Color.red);
+			this.problemesDeCoherence.add(label);
+			resultat = false;
+		}
+		if (resultat) {
+			this.problemesDeCoherence.add(new JLabel(
+					"Aucun probleme de coherence."));
+		}
+		return resultat;
 	}
 }

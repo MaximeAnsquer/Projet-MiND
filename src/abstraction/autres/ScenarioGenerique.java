@@ -97,4 +97,11 @@ public class ScenarioGenerique {
 	public void setRetenuScenario(boolean retenu) {
 		this.retenu = retenu;
 	}
+	
+	// On vérifie si le type a bien toutes les informations renseignées
+	// Tous les champs doivent être renseignés
+	public boolean isIncomplete() {
+		return (this.typeBienSupport.equals("") || this.Id.equals("") || this.intituleGenerique
+				.equals(""));
+	}
 }
