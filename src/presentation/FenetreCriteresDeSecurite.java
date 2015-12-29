@@ -63,15 +63,15 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		table.addMouseListener(new MouseListener(){
 
 			public void mouseClicked(MouseEvent e) {}
-			
+
 			public void mousePressed(MouseEvent e) {
-//				zoneDescription.setText(getCritereSelectionne().getDescription());
-//				boutonModifierDescription.setEnabled(false);
+				//				zoneDescription.setText(getCritereSelectionne().getDescription());
+				//				boutonModifierDescription.setEnabled(false);
 				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
-//				zoneDescription.setText(getCritereSelectionne().getDescription());
-//				boutonModifierDescription.setEnabled(false);
+				//				zoneDescription.setText(getCritereSelectionne().getDescription());
+				//				boutonModifierDescription.setEnabled(false);
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
@@ -81,7 +81,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-//				zoneDescription.setText(getCritereSelectionne().getDescription());
+				//				zoneDescription.setText(getCritereSelectionne().getDescription());
 				boutonSupprimer.setEnabled(true);
 			}			
 		});
@@ -91,7 +91,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 		this.setLayout(new BorderLayout());
 
-//		this.add(zoneDescription());
+		//		this.add(zoneDescription());
 		this.add(partieDuHaut(), BorderLayout.NORTH);
 		this.add(new JScrollPane(table), BorderLayout.CENTER);	
 
@@ -108,7 +108,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 			public void keyTyped(KeyEvent e) {
 				if(table.getSelectedRow()>-1){
-//					boutonModifierDescription.setEnabled(true);
+					//					boutonModifierDescription.setEnabled(true);
 				}
 
 			}
@@ -138,7 +138,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
-//		jpanel.add(boutonModifierDescription());
+		//		jpanel.add(boutonModifierDescription());
 		return jpanel;
 	}
 
@@ -149,8 +149,8 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		boutonModifierDescription.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-//				String nouvelleDescription = zoneDescription.getText();
-//				getCritereSelectionne().setDescription(nouvelleDescription);
+				//				String nouvelleDescription = zoneDescription.getText();
+				//				getCritereSelectionne().setDescription(nouvelleDescription);
 				table.validate();
 				table.repaint();
 				boutonModifierDescription.setEnabled(false);
@@ -167,6 +167,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
+				System.out.println("ligneSelectionnee : " + ligneSelectionnee);
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 				modele.supprimerCritere(ligneSelectionnee);
 				boutonSupprimer.setEnabled(false);
@@ -254,6 +255,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 		public void supprimerCritere(int rowIndex) {
 			Critere c = cds.getCritere(rowIndex);
+			System.out.println("Suppression du critere : " + c + "a l'index : " + rowIndex);
 			cds.supprimerCritere(c.getIntitule());
 
 			fireTableRowsDeleted(rowIndex, rowIndex);
@@ -294,7 +296,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 					break;
 				}
 			}
-//			zoneDescription.setText(getCritereSelectionne().getDescription());
+			//			zoneDescription.setText(getCritereSelectionne().getDescription());
 		}
 	}
 

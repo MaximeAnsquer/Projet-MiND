@@ -16,8 +16,9 @@ public class ScenariosDeMenacesTypes extends Module {
 	private ArrayList<String> nomColonneSup ;
 
 	public ScenariosDeMenacesTypes() {
-		super("Scenario de Menaces Types");
+		super("ScenarioDeMenacesTypes");
 		this.tableau = new Hashtable<String, ScenarioType>();
+		this.nomColonneSup=new ArrayList<String>();
 		// this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
 		// this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
 		// this.predecesseurs.add(this.getEtude().getModule("Metriques"));
@@ -39,6 +40,8 @@ public class ScenariosDeMenacesTypes extends Module {
 
 	public void setScenarioTypeCourant(ScenarioType scenarioTypeCourant) {
 		this.scenarioTypeCourant = scenarioTypeCourant;
+		// this.setChanged();         // PAC
+		// this.notifyObservers();    // PAC
 	}
 
 	public ArrayList<String> getNomColonneSup() {
@@ -55,6 +58,11 @@ public class ScenariosDeMenacesTypes extends Module {
 
 	public void setTableau(Hashtable<String, ScenarioType> tableau) {
 		this.tableau = tableau;
+	}
+	
+	public ScenarioType getScenarioType (int i){
+		ArrayList<ScenarioType> scenariosMenacesTypes = new ArrayList<ScenarioType>(tableau.values());
+		return scenariosMenacesTypes.get(i);
 	}
 
 	public static Hashtable<String, ScenarioType> getBDC() {

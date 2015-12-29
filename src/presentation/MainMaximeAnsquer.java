@@ -41,6 +41,7 @@ import abstraction.modules.MappingDesBiens;
 import abstraction.modules.Metriques;
 import abstraction.modules.Module;
 import abstraction.modules.SourcesDeMenaces;
+import abstraction.modules.TypologieDesBiensSupports;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -68,28 +69,30 @@ public class MainMaximeAnsquer extends JFrame {
 	private JFrame fenetreChoisirEtude; 
 
 	public MainMaximeAnsquer(){
-		
+
 
 		super("Outil d'analyse de risques");
 		this.setPreferredSize(new Dimension(largeurEcran, (int) (0.95*hauteurEcran)));
-		
+
 		this.addWindowListener(new WindowAdapter() {
-			
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		    	int decision = JOptionPane.showConfirmDialog(null, 
-			            "Enregistrer l'etude en cours avant de fermer le programme ?", "Fermeture du programme", 
-			            JOptionPane.YES_NO_OPTION,
-			            JOptionPane.QUESTION_MESSAGE);
-		    	switch(decision){
-		    	case JOptionPane.YES_OPTION:
-		    		enregistrerEtude();		 
-		    		System.exit(0);
-		    		break;
-		    	case JOptionPane.NO_OPTION:
-		    		System.exit(0);
-		    		break;
-		    	}		    	
-		    }
+
+			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+				if(etudeEnCours != null){
+					int decision = JOptionPane.showConfirmDialog(null, 
+							"Enregistrer l'etude en cours avant de fermer le programme ?", "Fermeture du programme", 
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE);
+					switch(decision){
+					case JOptionPane.YES_OPTION:
+						enregistrerEtude();		 
+						System.exit(0);
+						break;
+					case JOptionPane.NO_OPTION:
+						System.exit(0);
+						break;
+					}	    	
+				}
+			}
 		});
 
 		this.setJMenuBar(new BarreMenu(this));
@@ -120,8 +123,7 @@ public class MainMaximeAnsquer extends JFrame {
 	private void demanderEtude() {
 		Object[] choix = {"Creer une nouvelle etude", "Ouvrir une etude existante"};
 		Object reponse =  JOptionPane.showOptionDialog(this,  "Que souhaitez-vous faire ?", null, JOptionPane.DEFAULT_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
-		//		String reponse = (String) JOptionPane.showInputDialog(null,	null, null,	JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);		
+				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);	
 		if (reponse.equals(0)){
 			this.nouvelleEtude();
 		}
@@ -131,7 +133,7 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 	/**
 	 * 
-	 * @param nom le nom du module a afficher, ou bien " workflow " si on veut afficher le workflow
+	 * @param nom le nom du module a afficher, ou bien " Workflow " si on veut afficher le workflow
 	 */
 	public void setContenu(String nom) {					
 
@@ -172,7 +174,10 @@ public class MainMaximeAnsquer extends JFrame {
 				this.lesJpanels.put(nom, new FenetreMappingDesBiens((MappingDesBiens) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("EvenementsRedoutes")){
-				this.lesJpanels.put(nom, new FenetreEvenementsRedoutes( (EvenementsRedoutes) etudeEnCours.getModule(nom)));
+				this.lesJpanels.put(nom, new FenetreEvenementsRedoutes( (EvenementsRedoutes) etudeEnCours.getModule(nom)) );
+			}
+			else if(nom.equals("TypologieDesBiensSupports")){
+				this.lesJpanels.put(nom, new FenetreTypologieBiensSupports( (TypologieDesBiensSupports) etudeEnCours.getModule(nom)) ) ;
 			}
 
 			this.contenuPrincipal.add(label, BorderLayout.NORTH);
@@ -235,11 +240,8 @@ public class MainMaximeAnsquer extends JFrame {
 			setContenu("Workflow");
 		}
 		String nomEtude = "";
-		while(nomEtude.equals("")){
+		while(nomEtude == null || nomEtude.equals("") ){
 			nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle etude.");			
-			if(nomEtude == null){
-				System.exit(0);
-			}
 		}
 		Etude nouvelleEtude = new Etude(nomEtude);
 		this.etudeEnCours = nouvelleEtude;

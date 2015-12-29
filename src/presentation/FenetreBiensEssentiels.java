@@ -7,12 +7,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.modules.BiensEssentiels;
 
@@ -64,7 +63,18 @@ public class FenetreBiensEssentiels extends JPanel{
 		this.add(new JScrollPane(table));	
 		this.add(zoneDescription());
 		this.add(partieBoutons());
-		this.boutonSupprimerColonne.setEnabled(false);
+		if (biensEssentiels.getNomColonnesSup().size()>0){
+			boutonSupprimerColonne.setEnabled(true);
+		}
+		else{
+			boutonSupprimerColonne.setEnabled(false);
+		}
+		if (biensEssentiels.nombreDeBiens()==0){
+			boutonSupprimerLigne.setEnabled(false);
+		}
+		else{
+			boutonSupprimerLigne.setEnabled(true);
+		}
 	}
 	
 	private JScrollPane zoneDescription() {
@@ -182,7 +192,10 @@ public class FenetreBiensEssentiels extends JPanel{
 		private final LinkedList<String> entetes = new LinkedList<String>();
 		
 		public ModeleDynamiqueObjet() {
-			super(); 
+			super();
+			for (int i=0; i<biensEssentiels.getNomColonnesSup().size();i++){
+				entetes.add(biensEssentiels.getNomColonnesSup().get(i));
+			}
 			entetes.add("Intitule");
 			entetes.add("Description");
 			entetes.add("Retenu");
@@ -223,7 +236,7 @@ public class FenetreBiensEssentiels extends JPanel{
 			do{
 				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
 			} while (categorie.equals("") || categorie.equals("Intitule") || categorie.equals("Description") || categorie.equals("Type") || categorie.equals("Retenu"));
-			biensEssentiels.getNomColonnesSup().addFirst("categorie");
+			biensEssentiels.getNomColonnesSup().addFirst(categorie);
 			for (int i=0; i<biensEssentiels.nombreDeBiens();i++){
 				biensEssentiels.getBien(i).ajouterColonne("");;
 			}

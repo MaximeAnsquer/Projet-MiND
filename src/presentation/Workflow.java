@@ -3,6 +3,7 @@ package presentation;
 
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -34,17 +35,23 @@ public class Workflow extends JPanel {
 	public Workflow(Etude etude, MainMaximeAnsquer fenetrePrincipale) {
 		this.etude = etude;
 		this.fenetre = fenetrePrincipale;
-		this.lesBoutons = new Hashtable<String, JButton>();
+		this.lesBoutons = new Hashtable<String, JButton>();		
+
+		System.out.println("\n ---RECHARGEMENT DU WORKLOW--- \n");
 
 		for(final Module m : etude.getLesModules().values()){
 
 			JButton bouton = new JButton(m.toString());
 			if(!m.estDisponible()){
+				System.out.println("Le module " + m + " n'est pas disponible");
 				//TODO a decommenter a la fin
 //				bouton.setEnabled(false);
+				bouton.setBackground(Color.blue);
 			}
 			else{
+				System.out.println("Le module " + m + " est disponible");
 				if(m.estCree()){
+					System.out.println("Le module " + m + " est cree");
 					if(!m.estCoherent()){
 						bouton.setBackground(Color.RED);
 					}
@@ -62,6 +69,7 @@ public class Workflow extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					fenetre.setContenu(nomModule);
 					m.setCree(true);
+					System.out.println("Le module " + m + " est maintenant cree");
 				}				
 
 			});
@@ -95,9 +103,9 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 		this.add(lesBoutons.get("MappingDesBiens"));
 		this.add(new JLabel());
-		this.add(new JButton("Module manquant"));
+		this.add(moduleManquant());
 		this.add(new JLabel());
-		this.add(new JButton("Module manquant"));
+		this.add(moduleManquant());
 
 		//4eme ligne
 		this.add(new JLabel());
@@ -110,7 +118,7 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 
 		//5eme ligne
-		this.add(new JButton("Module manquant"));
+		this.add(lesBoutons.get("TypologieDesBiensSupports"));
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
@@ -122,7 +130,7 @@ public class Workflow extends JPanel {
 		//6eme ligne
 		this.add(new JLabel());
 		this.add(new JLabel());
-		this.add(new JButton("Module manquant"));
+		this.add(moduleManquant());
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
@@ -133,7 +141,7 @@ public class Workflow extends JPanel {
 		this.add(lesBoutons.get("SourcesDeMenaces"));
 		this.add(new JLabel());
 		this.add(new JLabel());
-		this.add(new JButton("Module manquant"));
+		this.add(moduleManquant());
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
@@ -148,6 +156,12 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
+	}
+
+	private JButton moduleManquant() {
+		JButton moduleManquant = new JButton("Module manquant"); //TODO: a enlever pour le rendu final
+		moduleManquant.setEnabled(false); //TODO: a enlever pour le rendu final
+		return moduleManquant;
 	}
 
 	public void paintComponent(Graphics g){

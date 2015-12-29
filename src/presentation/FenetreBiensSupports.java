@@ -7,12 +7,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -39,12 +40,17 @@ public class FenetreBiensSupports extends JPanel{
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensSupports biensSupports;
+	JComboBox comboBox = new JComboBox();
 
 	public FenetreBiensSupports(BiensSupports biensSupports){
 		this.setVisible(true);
 		this.biensSupports=biensSupports;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		comboBox.addItem("type 1");
+		comboBox.addItem("type 2");
+		comboBox.addItem("type 3");
+		table.getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));;
 		table.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent e) {
 				zoneDescription.setText(getBienSelectionne().getDescription());
@@ -63,7 +69,18 @@ public class FenetreBiensSupports extends JPanel{
 		this.add(new JScrollPane(table));	
 		this.add(zoneDescription());
 		this.add(partieBoutons());
-		this.boutonSupprimerColonne.setEnabled(false);
+		if (biensSupports.getNomColonnesSup().size()>0){
+			boutonSupprimerColonne.setEnabled(true);
+		}
+		else{
+			boutonSupprimerColonne.setEnabled(false);
+		}
+		if (biensSupports.nombreDeBiens()==0){
+			boutonSupprimerLigne.setEnabled(false);
+		}
+		else{
+			boutonSupprimerLigne.setEnabled(true);
+		}
 	}
 	
 	private JScrollPane zoneDescription() {
@@ -182,7 +199,10 @@ public class FenetreBiensSupports extends JPanel{
 
 		
 		public ModeleDynamiqueObjet() {
-			super(); 
+			super();
+			for (int i=0; i<biensSupports.getNomColonnesSup().size();i++){
+				entetes.add(biensSupports.getNomColonnesSup().get(i));
+			}
 			entetes.add("Intitule");
 			entetes.add("Description");
 			entetes.add("Type");
@@ -224,7 +244,7 @@ public class FenetreBiensSupports extends JPanel{
 			do{
 				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
 			} while (categorie.equals("") || categorie.equals("Intitule") || categorie.equals("Description") || categorie.equals("Type") || categorie.equals("Retenu"));			
-			biensSupports.getNomColonnesSup().addFirst("categorie");
+			biensSupports.getNomColonnesSup().addFirst(categorie);
 			for (int i=0; i<biensSupports.nombreDeBiens();i++){
 				biensSupports.getBien(i).ajouterColonne("");
 			}
@@ -235,7 +255,7 @@ public class FenetreBiensSupports extends JPanel{
 
 		public void ajouterBienEssentiel() {
 			LinkedList<String> contenuColonneSup = new LinkedList<String>();
-			for (int i=0; i<entetes.size()-3;i++){
+			for (int i=0; i<entetes.size()-4;i++){
 				contenuColonneSup.add("");
 			}
 			String intitule = "";

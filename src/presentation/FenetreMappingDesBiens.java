@@ -3,6 +3,8 @@ package presentation;
 import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,13 +19,19 @@ public class FenetreMappingDesBiens extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private MappingDesBiens mappingDesBiens;
-
+	JComboBox comboBox = new JComboBox();
 
 	public FenetreMappingDesBiens(MappingDesBiens mappingDesBiens){
 		this.setVisible(true);
 		this.mappingDesBiens=mappingDesBiens;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		comboBox.addItem("");
+		comboBox.addItem("x");
+		comboBox.addItem("o");
+		for (int i=1; i<table.getColumnCount();i++){
+			table.getColumn(""+table.getColumnName(i)).setCellEditor(new DefaultCellEditor(comboBox));;
+		}
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(new JScrollPane(table));	
 	}
@@ -37,7 +45,6 @@ public class FenetreMappingDesBiens extends JPanel{
 		
 		public ModeleDynamiqueObjet() {
 			super();			
-			
 			entetes.add("Biens Essentiels");
 			for (int i=0; i<biensSupports.getLesBiens().size(); i++){
 				entetes.add(biensSupports.getBien(i).getIntitule());
@@ -45,11 +52,11 @@ public class FenetreMappingDesBiens extends JPanel{
 		}
 
 		public int getRowCount() {
-			return biensSupports.nombreDeBiens();
+			return biensEssentiels.nombreDeBiens();
 		}
 
 		public int getColumnCount() {
-			return biensEssentiels.nombreDeBiens()+1;
+			return biensSupports.nombreDeBiens()+1;
 		}
 		
 		public String getColumnName(int columnIndex) {

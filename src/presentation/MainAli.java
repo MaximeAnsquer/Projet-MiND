@@ -1,12 +1,13 @@
 package presentation;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import abstraction.Etude;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.TypologieDesBiensSupports;
 
-public class MainAli {
+public class MainAli extends JFrame {
 	
 	/**
 	 * Classe destinée à tester les modules
@@ -14,12 +15,24 @@ public class MainAli {
 	 *
 	 */
 	
+	public MainAli() {
+		super("tests");
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setVisible(true);
+		this.pack();
+	}
+	
 	public static Etude etude ;
 	
 	public static void main(String[] args) {
 		
-		//etude.addModule(new TypologieDesBiensSupports());
-		//etude.addModule(new ScenariosDeMenacesGeneriques());
+		MainAli mainTest= new MainAli();
+		etude = new Etude();
+		
+		TypologieDesBiensSupports firstModule = new TypologieDesBiensSupports();
+		ScenariosDeMenacesGeneriques secondModule = new ScenariosDeMenacesGeneriques();
+		etude.addModule(firstModule);
+		etude.addModule(secondModule);
 		
 		String module1 = "Typologie des biens supports";
 		String module2 = "Scénario de menaces génériques";
@@ -31,7 +44,9 @@ public class MainAli {
 				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
 		
 		if (reponse==choix[0]){
-			FenetreTypologieBiensSupports fen1 = new FenetreTypologieBiensSupports();
+			FenetreTypologieBiensSupports fen1 = new FenetreTypologieBiensSupports(firstModule);
+			mainTest.add(fen1);
+			mainTest.pack();
 		}
 		if (reponse==choix[1]){
 			FenetreScenarioDeMenacesGeneriques fen2 = new FenetreScenarioDeMenacesGeneriques();

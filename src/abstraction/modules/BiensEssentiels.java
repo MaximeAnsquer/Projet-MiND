@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import javax.swing.JLabel;
 
+import abstraction.Etude;
 import abstraction.autres.*;
 
 /**
@@ -24,18 +25,20 @@ public class BiensEssentiels extends Module {
 	private LinkedList<String> nomColonnesSup;
 	// ---Constructeurs---
 
-	public BiensEssentiels() {
+	public BiensEssentiels(Etude etude) {
 		super("BiensEssentiels");
+		this.etude=etude;
 		this.lesBiens = new Hashtable<String, Bien>();
+		//TODO supprimer quand tous les tests seront ok
 		this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "", new LinkedList<String>()));
 		this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "", new LinkedList<String>()));
 		this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "Confidentialite", "", new LinkedList<String>()));
+		//
 		this.nomColonnesSup = new LinkedList<String>();
-		//TODO Decomenter quand les autres parties seront OK
-		/*
-		this.successeurs.add(MappingDesBiens.getInstance());
-		this.successeurs.add(EvenementsRedoutes.getInstance());
-		*/
+
+		//this.successeurs.add(this.getEtude().getModule("MappingDesBiens"));
+		//this.successeurs.add(this.getEtude().getModule("EvenementsRedoutes"));
+
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = true;
