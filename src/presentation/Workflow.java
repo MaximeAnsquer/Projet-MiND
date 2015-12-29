@@ -37,21 +37,17 @@ public class Workflow extends JPanel {
 		this.fenetre = fenetrePrincipale;
 		this.lesBoutons = new Hashtable<String, JButton>();		
 
-		System.out.println("\n ---RECHARGEMENT DU WORKLOW--- \n");
 
 		for(final Module m : etude.getLesModules().values()){
 
 			JButton bouton = new JButton(m.toString());
 			if(!m.estDisponible()){
-				System.out.println("Le module " + m + " n'est pas disponible");
 				//TODO a decommenter a la fin
 //				bouton.setEnabled(false);
-				bouton.setBackground(Color.blue);
+				bouton.setBackground(Color.blue); //TODO: ligne a supprimer a la fin
 			}
 			else{
-				System.out.println("Le module " + m + " est disponible");
 				if(m.estCree()){
-					System.out.println("Le module " + m + " est cree");
 					if(!m.estCoherent()){
 						bouton.setBackground(Color.RED);
 					}
@@ -69,7 +65,6 @@ public class Workflow extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					fenetre.setContenu(nomModule);
 					m.setCree(true);
-					System.out.println("Le module " + m + " est maintenant cree");
 				}				
 
 			});

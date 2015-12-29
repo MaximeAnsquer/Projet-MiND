@@ -56,6 +56,7 @@ public class MainMaximeAnsquer extends JFrame {
 
 	public Etude etudeEnCours;
 	private JPanel partieDeGauche;
+	private JPanel partieDuBas;
 	private JPanel contenuPrincipal;
 	private Hashtable<String, JPanel> lesJpanels;
 	private Workflow workflow;
@@ -74,6 +75,7 @@ public class MainMaximeAnsquer extends JFrame {
 		super("Outil d'analyse de risques");
 		this.setPreferredSize(new Dimension(largeurEcran, (int) (0.95*hauteurEcran)));
 
+		//Permet de reagir a la fermeture de la fenetre
 		this.addWindowListener(new WindowAdapter() {
 
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -102,6 +104,7 @@ public class MainMaximeAnsquer extends JFrame {
 		this.contenuPrincipal = new JPanel();
 		this.contenuPrincipal.setLayout(new BorderLayout());
 		this.partieDeGauche = new JPanel();
+		creerPartieDuBas();		
 		this.lesJpanels = new Hashtable<String, JPanel>();
 		this.pack();
 
@@ -111,6 +114,11 @@ public class MainMaximeAnsquer extends JFrame {
 		else{
 			this.nouvelleEtude();
 		}
+	}
+
+	private void creerPartieDuBas() {
+		partieDuBas = new JPanel();
+		partieDuBas.setLayout(new BoxLayout(partieDuBas, BoxLayout.Y_AXIS));		
 	}
 
 	private boolean existeAuMoinsUneEtude() {
@@ -146,14 +154,17 @@ public class MainMaximeAnsquer extends JFrame {
 			this.contenuPrincipal.removeAll();
 			this.workflow = new Workflow(etudeEnCours, this);
 			this.contenuPrincipal.add(workflow, BorderLayout.CENTER);
+			partieDuBas.removeAll();
 		}
 		else{
 			this.moduleEnCours = etudeEnCours.getModule(nom);
 			setPartieDeGauche();
-			contentPane.add(partieDeGauche, BorderLayout.WEST);
 			this.contenuPrincipal.removeAll();	
+			contentPane.add(partieDeGauche, BorderLayout.WEST);
 			this.label = new JLabel(moduleEnCours.toString(), SwingConstants.CENTER);
 			this.label.setFont(new Font("Arial", Font.PLAIN, 25));
+			contenuPrincipal.add(partieDuBas, BorderLayout.SOUTH);
+			setPartieDuBas();
 
 			if(nom.equals("CriteresDeSecurite")){
 				this.lesJpanels.put(nom, new FenetreCriteresDeSecurite((CriteresDeSecurite) etudeEnCours.getModule(nom)));
@@ -189,10 +200,24 @@ public class MainMaximeAnsquer extends JFrame {
 
 	}
 
+	private void setPartieDuBas() {
+		
+		partieDuBas.removeAll();
+		
+		for(JLabel label : moduleEnCours.getProblemes()){
+			label.setFont(new Font("Arial", Font.PLAIN, 18));
+			partieDuBas.add(label);
+		}
+		
+		partieDuBas.validate();
+		partieDuBas.repaint();
+				
+	}
+
 	private void setPartieDeGauche() {
 
 		partieDeGauche = new JPanel();
-		partieDeGauche.setLayout(new GridLayout(3,1));
+		partieDeGauche.setLayout(new GridLayout(2,1));
 		String nom = moduleEnCours.getNom();
 
 		if(nom.equals("Workflow")){
@@ -216,14 +241,6 @@ public class MainMaximeAnsquer extends JFrame {
 				}				
 			});
 			partieDeGauche.add(boutonVerifier);
-
-			JPanel lesProblemes = new JPanel();
-			lesProblemes.setLayout(new BoxLayout(lesProblemes, BoxLayout.Y_AXIS));
-			partieDeGauche.add(new JScrollPane(lesProblemes));
-
-			for(JLabel label : moduleEnCours.getProblemes()){
-				lesProblemes.add(label);
-			}
 
 			partieDeGauche.validate();
 			partieDeGauche.repaint();
