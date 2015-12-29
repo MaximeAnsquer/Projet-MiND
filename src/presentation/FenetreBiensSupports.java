@@ -69,7 +69,18 @@ public class FenetreBiensSupports extends JPanel{
 		this.add(new JScrollPane(table));	
 		this.add(zoneDescription());
 		this.add(partieBoutons());
-		this.boutonSupprimerColonne.setEnabled(false);
+		if (biensSupports.getNomColonnesSup().size()>0){
+			boutonSupprimerColonne.setEnabled(true);
+		}
+		else{
+			boutonSupprimerColonne.setEnabled(false);
+		}
+		if (biensSupports.nombreDeBiens()==0){
+			boutonSupprimerLigne.setEnabled(false);
+		}
+		else{
+			boutonSupprimerLigne.setEnabled(true);
+		}
 	}
 	
 	private JScrollPane zoneDescription() {
@@ -189,12 +200,6 @@ public class FenetreBiensSupports extends JPanel{
 		
 		public ModeleDynamiqueObjet() {
 			super();
-			if (biensSupports.getNomColonnesSup().size()>0){
-				boutonSupprimerColonne.setEnabled(true);
-			}
-			if (biensSupports.nombreDeBiens()==0){
-				boutonSupprimerLigne.setEnabled(false);
-			}
 			for (int i=0; i<biensSupports.getNomColonnesSup().size();i++){
 				entetes.add(biensSupports.getNomColonnesSup().get(i));
 			}
