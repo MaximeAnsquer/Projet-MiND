@@ -44,7 +44,7 @@ public class Etude {
 		this.addModule(new BiensEssentiels(this));
 		this.addModule(new MappingDesBiens(this));
 		this.addModule(new EvenementsRedoutes(this));
-		this.addModule(new ScenariosDeMenacesGeneriques());
+		this.addModule(new ScenariosDeMenacesGeneriques(this));
 	}
 	
 	public Etude(){
