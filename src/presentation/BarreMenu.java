@@ -10,6 +10,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
+/**
+ * 
+ * @author Maxime Ansquer
+ *
+ */
+
 public class BarreMenu extends JMenuBar {
 	
 	private MainMaximeAnsquer fenetre;
@@ -27,13 +33,6 @@ public class BarreMenu extends JMenuBar {
 		});
 		fichier.add(nouvelleEtude);		
 		
-		JMenuItem enregistrer = new JMenuItem("Enregistrer l'etude");
-		enregistrer.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				fenetre.enregistrerEtude();
-			}			
-		});		
-		fichier.add(enregistrer);
 		
 		JMenuItem ouvrir = new JMenuItem("Ouvrir une etude existante");
 		ouvrir.addActionListener(new ActionListener(){
@@ -42,6 +41,14 @@ public class BarreMenu extends JMenuBar {
 			}			
 		});		
 		fichier.add(ouvrir);
+		
+		JMenuItem enregistrer = new JMenuItem("Enregistrer l'etude");
+		enregistrer.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				fenetre.enregistrerEtude();
+			}			
+		});		
+//		fichier.add(enregistrer);
 		
 		fichier.addSeparator();
 		JMenu preferences = new JMenu("Preferences");

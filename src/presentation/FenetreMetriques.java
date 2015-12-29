@@ -208,7 +208,7 @@ public class FenetreMetriques extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-				modele.ajouterNiveau();				
+				modele.ajouterNiveau();			
 			}
 
 		});

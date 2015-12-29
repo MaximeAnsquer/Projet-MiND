@@ -68,13 +68,13 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			public void mouseClicked(MouseEvent e) {}
 
 			public void mousePressed(MouseEvent e) {
-//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
-//				boutonModifierIntitule.setEnabled(false);				
+				//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
+				//				boutonModifierIntitule.setEnabled(false);				
 				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
-//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
-//				boutonModifierIntitule.setEnabled(false);
+				//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
+				//				boutonModifierIntitule.setEnabled(false);
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
@@ -85,14 +85,14 @@ public class FenetreSourcesDeMenaces extends JPanel {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());		
+				//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());		
 				boutonSupprimer.setEnabled(true);
 			}			
 		});
 
 		this.setLayout(new BorderLayout());
 
-//		this.add(zoneIntitule());
+		//		this.add(zoneIntitule());
 		this.add(partieDuHaut(), BorderLayout.NORTH);
 		this.add(new JScrollPane(table), BorderLayout.CENTER);			
 	}
@@ -106,7 +106,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		zoneIntitule.addKeyListener(new KeyListener(){
 			public void keyTyped(KeyEvent e) {
 				if(table.getSelectedRow()>-1){
-//					boutonModifierIntitule.setEnabled(true);
+					//					boutonModifierIntitule.setEnabled(true);
 				}				
 			}
 			public void keyPressed(KeyEvent e) {}
@@ -141,7 +141,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
-//		jpanel.add(boutonModifierIntitule());
+		//		jpanel.add(boutonModifierIntitule());
 		return jpanel;
 	}
 
@@ -235,6 +235,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 				String intitule = JOptionPane.showInputDialog("Intitule ?");
 				String exemple = JOptionPane.showInputDialog("Exemple ?");
 				SourceDeMenace source = new SourceDeMenace(id, intitule, exemple);
+				source.setRetenu(true);
 				sdm.ajouterSourceDeMenace(source);
 
 				fireTableRowsInserted(sdm.nombreDeSources() -1, sdm.nombreDeSources() -1);
@@ -280,7 +281,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 					break;
 				}
 			}
-//			zoneIntitule.setText(getSourceSelectionnee().getIntitule());
+			//			zoneIntitule.setText(getSourceSelectionnee().getIntitule());
 		}
 	}
 
