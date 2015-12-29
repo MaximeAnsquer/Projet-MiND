@@ -35,24 +35,6 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		entetes.add("Id");
 		entetes.add("Scénario générique");
 		entetes.add("Retenu");
-		
-		// On ajoute un scénario générique à partir des types définis dans Typologie des Biens Supports
-		/*
-		int i = 1 ;
-		for(TypeBien type : this.typologieDesBiensSupports.getTypeBiensRetenus()){
-			
-			// La clé est l'intitulé du TYPE !! (il ne faudra pas avoir plusieurs clés identiques)
-			ScenarioGenerique scenario = new ScenarioGenerique(type.getIntitule(),"toto " + i,"Intitule " + i);
-			this.moduleCourant.getTableau().put(scenario.getIntitule(),scenario );
-			i++ ;
-		}
-		
-		// On ajoute les colonnes supplémentaires représentant les critères de sécurités retenus
-		/*
-		for (Critere c : this.criteresDeSecurite.getCriteresRetenus().values()){
-			this.moduleCourant.getTableau().setTa
-		}
-		//*/
 	}
 	
 	public ScenariosDeMenacesGeneriques getModuleCourant(){
