@@ -182,6 +182,12 @@ public class FenetreBiensEssentiels extends JPanel{
 		
 		public ModeleDynamiqueObjet() {
 			super();
+			if (biensEssentiels.getNomColonnesSup().size()>0){
+				boutonSupprimerColonne.setEnabled(true);
+			}
+			if (biensEssentiels.nombreDeBiens()==0){
+				boutonSupprimerLigne.setEnabled(false);
+			}
 			for (int i=0; i<biensEssentiels.getNomColonnesSup().size();i++){
 				entetes.add(biensEssentiels.getNomColonnesSup().get(i));
 			}
