@@ -270,7 +270,7 @@ public class TypologieDesBiensSupports extends Module {
 		}
 
 		if (this.getTypeBiensRetenus().size() < 1) {
-			JLabel label = new JLabel("Aucun critere retenu");
+			JLabel label = new JLabel("Aucun type de bien support retenu");
 			label.setForeground(Color.red);
 			this.problemesDeCoherence.add(label);
 			resultat = false;

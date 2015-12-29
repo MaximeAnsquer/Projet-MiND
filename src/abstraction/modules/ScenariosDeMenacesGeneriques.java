@@ -1,10 +1,12 @@
 package abstraction.modules;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javax.swing.JLabel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -253,4 +255,27 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		return "Scenarios de menaces generiques";
 	}
 	
+	public boolean estCoherent() {
+		boolean resultat = true ;
+		this.problemesDeCoherence = new ArrayList<JLabel>();
+		for (ScenarioGenerique scenario : this.tableau.values()){
+			if (scenario.isIncomplete()){
+				JLabel label = new JLabel("Scenario generique \" " + scenario.getIntitule() + " \" incomplet");
+				label.setForeground(Color.red);
+				this.problemesDeCoherence.add(label);
+				resultat = false;
+			}
+		}
+		if (this.getScenariosGeneriquesRetenus().size()<1){
+			JLabel label = new JLabel("Aucun scenario generique retenu");
+			label.setForeground(Color.red);
+			this.problemesDeCoherence.add(label);
+			resultat = false;
+		}
+		if (resultat) {
+			this.problemesDeCoherence.add(new JLabel(
+					"Aucun probleme de coherence."));
+		}
+		return resultat ;
+	}
 }
