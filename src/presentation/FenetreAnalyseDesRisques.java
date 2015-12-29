@@ -25,7 +25,7 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			this.analyse=analyse;
 			
 			this.tableau=new JTable(modele);
-			tableau.setPreferredScrollableViewportSize(new Dimension(500, 70));
+			tableau.setPreferredScrollableViewportSize(new Dimension(900, 400));
 	        tableau.setFillsViewportHeight(true);
 			
 	        JScrollPane scrollPane = new JScrollPane(tableau);
@@ -33,15 +33,19 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			
 			add(scrollPane);
 			
-			
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(400);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(400);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-2).setPreferredWidth(250);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-1).setPreferredWidth(300);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5).setPreferredWidth(600);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-6).setPreferredWidth(700);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-7).setPreferredWidth(800);
 			
 			this.setVisible(true);
 		
 		
 		
-		this.tableau=new JTable(modele);
 		
-		this.setVisible(true);
 		
 	}
 	

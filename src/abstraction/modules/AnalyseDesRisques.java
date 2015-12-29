@@ -36,7 +36,7 @@ public class AnalyseDesRisques extends Module{
 		this.criteres=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
 		this.evenements=(EvenementsRedoutes) this.etude.getModule("EvenementsRedoutes");
 		this.mapping=(MappingDesBiens)this.etude.getModule("MappingDesBiens");
-		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("ScenariosDeMenacesTypes");
+		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("Scenario de Menaces Types");
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
 		int a=this.scenarios.getTableau().size();
@@ -55,9 +55,11 @@ public class AnalyseDesRisques extends Module{
 		for (int i=0;i<a;i++){
 			/*Pour chaque critere*/
 			for(int k=0;k<b;k++){
-			    if (scenarios[i].isRetenuCritere(i)==true){
+			    if (/*scenarios[i].isRetenuCritere(k)*/true==true){
 			    	/*On recupere le bien essentiel correspondant au bien support du scenario considéré*/
-			    Bien biensupport=scenarios[i].getBienSupport();		
+			    Bien biensupport=scenarios[i].getBienSupport();	
+			    System.out.println(scenarios[i].getIntituleConcret());
+			    
 			    ArrayList<Bien> biensessentiels;
 				try {
 					biensessentiels = this.mapping.getBiensEssentielsCorrespondant(biensupport);
@@ -67,23 +69,25 @@ public class AnalyseDesRisques extends Module{
 					e.printStackTrace();
 				}
 			    /*On récupère le critère correspondant*/
-			    Critere[] listecriteres =this.criteres.getCriteresRetenus().values().toArray(new Critere[this.criteres.getLesCriteres().size()]);
+			    Critere[] listecriteres =this.criteres.getLesCriteres().values().toArray(new Critere[this.criteres.getLesCriteres().size()]);
 			    Critere criterecourant=listecriteres[k];
+			    System.out.println(criterecourant.getIntitule());
 			  
 			    if(biensessentiels!=null){
 			    for(int j=0;j<biensessentiels.size();j++){
 			    
-			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biensessentiels.get(k).getIntitule());
+			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biensessentiels.get(j).getIntitule());
 			    
 				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),scenarios[i].getBienSupport(),scenarios[i],scenarios[i].getVraisemblanceReelle()));
 				
 			}}
 			}}
+			
 		}
 		
-		
+		this.risques=liste;
 	/*Getter utile pour la construction de la matrice qui vient après*/	
-		
+	
 	}
 	
 	public ArrayList<Risque> getAnalyseDesRisques(){
