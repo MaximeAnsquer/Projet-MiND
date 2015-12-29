@@ -52,11 +52,11 @@ public class FenetreMappingDesBiens extends JPanel{
 		}
 
 		public int getRowCount() {
-			return biensSupports.nombreDeBiens();
+			return biensEssentiels.nombreDeBiens();
 		}
 
 		public int getColumnCount() {
-			return biensEssentiels.nombreDeBiens()+1;
+			return biensSupports.nombreDeBiens()+1;
 		}
 		
 		public String getColumnName(int columnIndex) {

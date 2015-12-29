@@ -39,7 +39,7 @@ public class BiensSupports extends Module{
 		System.out.println(""+this.etude);
 		//this.successeurs.add(this.getEtude().getModule("MappingDesBiens"));
 		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
-		this.predecesseurs.add(this.getEtude().getModule("TypologieDesBiensSupports"));
+		//this.predecesseurs.add(this.getEtude().getModule("TypologieDesBiensSupports"));
 		
 		this.cree = false;
 		this.coherent = false;

@@ -26,8 +26,8 @@ public class MappingDesBiens extends Module{
 		super("MappingDesBiens");
 		this.etude=etude;
 		this.biensSupports = (BiensSupports)this.getEtude().getModule("BiensSupports");
-		this.mappingDesBiens=new ArrayList<MappingBien>(this.biensSupports.nombreDeBiens());
 		this.biensEssentiels = (BiensEssentiels)this.getEtude().getModule("BiensEssentiels");
+		this.mappingDesBiens=new ArrayList<MappingBien>(this.biensSupports.nombreDeBiens());
 		for (int i=0; i<this.biensSupports.nombreDeBiens(); i++){
 			mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
 		}
