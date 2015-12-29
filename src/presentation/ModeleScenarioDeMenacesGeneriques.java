@@ -158,8 +158,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 					String critereAssocie = this.moduleCourant
 							.getNomColonneSup().get(indice);
 					this.moduleCourant.getScenarioGenerique(rowIndex)
-							.getCriteresSup()
-							.replace(critereAssocie, (Boolean) aValue);
+							.getCriteresSup().put(critereAssocie, (Boolean) aValue);
 					break;
 			}
 		}
@@ -191,7 +190,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		}
 		//*/
 		this.moduleCourant.removeCritere(critere);
-		this.entetes.remove(critere);
+		this.entetes.remove("" + critere.charAt(0));
 		fireTableStructureChanged();
 	}
 	
