@@ -188,7 +188,10 @@ public class FenetreBiensSupports extends JPanel{
 
 		
 		public ModeleDynamiqueObjet() {
-			super(); 
+			super();
+			for (int i=0; i<biensSupports.getNomColonnesSup().size();i++){
+				entetes.add(biensSupports.getNomColonnesSup().get(i));
+			}
 			entetes.add("Intitule");
 			entetes.add("Description");
 			entetes.add("Type");
@@ -230,7 +233,7 @@ public class FenetreBiensSupports extends JPanel{
 			do{
 				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
 			} while (categorie.equals("") || categorie.equals("Intitule") || categorie.equals("Description") || categorie.equals("Type") || categorie.equals("Retenu"));			
-			biensSupports.getNomColonnesSup().addFirst("categorie");
+			biensSupports.getNomColonnesSup().addFirst(categorie);
 			for (int i=0; i<biensSupports.nombreDeBiens();i++){
 				biensSupports.getBien(i).ajouterColonne("");
 			}
@@ -241,7 +244,7 @@ public class FenetreBiensSupports extends JPanel{
 
 		public void ajouterBienEssentiel() {
 			LinkedList<String> contenuColonneSup = new LinkedList<String>();
-			for (int i=0; i<entetes.size()-3;i++){
+			for (int i=0; i<entetes.size()-4;i++){
 				contenuColonneSup.add("");
 			}
 			String intitule = "";
