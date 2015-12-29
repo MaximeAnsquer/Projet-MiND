@@ -77,7 +77,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		
-		this.add(areaScrollPane,BoxLayout.Y_AXIS);
+		this.add(areaScrollPane);
 	}
 	
 	public void creerBoutonsBas() {
