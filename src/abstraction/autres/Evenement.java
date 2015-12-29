@@ -1,6 +1,7 @@
 package abstraction.autres;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.JComboBox;
 
@@ -24,8 +25,8 @@ public class Evenement {
 	private Etude etude;
 	
 	private String nomevenement;
-	private ArrayList<String> nomgroupes;
-	private ArrayList<String> contenugroupes;
+	private LinkedList<String> nomgroupes;
+	private LinkedList<String> contenugroupes;
 	private String bienessentiel;
 	private String critere;
 	
@@ -40,7 +41,7 @@ public class Evenement {
 	
 	
 	
-	public Evenement(Etude etude,String nomevenement,ArrayList<String> nomgroupes,ArrayList<String> contenugroupes,String bienessentiel,String critere){
+	public Evenement(Etude etude,String nomevenement,LinkedList<String> nomgroupes,LinkedList<String> contenugroupes,String bienessentiel,String critere){
 		this.etude=etude;
 		this.nomevenement=nomevenement;
 		this.nomgroupes=nomgroupes;
@@ -63,10 +64,10 @@ public class Evenement {
 	/*Getters
 	 */
 	
-	public ArrayList<String> getNomGroupes(){
+	public LinkedList<String> getNomGroupes(){
 		return this.nomgroupes;
 	}
-	public ArrayList<String> getContenuGroupes(){
+	public LinkedList<String> getContenuGroupes(){
 		return this.contenugroupes;
 	}
 	

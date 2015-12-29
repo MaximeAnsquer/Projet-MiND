@@ -39,7 +39,7 @@ public class MainMaximeEtienne extends JFrame {
 		etude.addModule(new MappingDesBiens(bs,be));
 		AnalyseDesRisques an=new AnalyseDesRisques(etude);
 		etude.addModule(an);
-		MatriceDesRisques ma=new MatriceDesRisques(etude);*/
+		/*MatriceDesRisques ma=new MatriceDesRisques(etude);*/
 		
 		
 		
