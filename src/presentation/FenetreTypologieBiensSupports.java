@@ -94,11 +94,9 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		
 		this.aide = new JButton("?");
 		
-		///*
 		ControlJButtonAide controlAide = new ControlJButtonAide(
-				this.aide,null);
+				this.aide);
 		this.aide.addActionListener(controlAide);
-		//*/
 		
 		panelBas.add(ajouterLigne);
 		panelBas.add(supprimerLigne);
