@@ -39,7 +39,7 @@ public class FenetreBiensSupports extends JPanel{
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensSupports biensSupports;
-	JComboBox<String> comboBox = new JComboBox<String>();
+	JComboBox comboBox = new JComboBox();
 
 	public FenetreBiensSupports(BiensSupports biensSupports){
 		this.setVisible(true);

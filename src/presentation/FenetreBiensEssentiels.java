@@ -39,7 +39,6 @@ public class FenetreBiensEssentiels extends JPanel{
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensEssentiels biensEssentiels;
-	JComboBox<String> comboBox = new JComboBox<String>();
 
 	public FenetreBiensEssentiels(BiensEssentiels biensEssentiels){
 		this.biensEssentiels = biensEssentiels;
