@@ -86,14 +86,22 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		case 6 :
 			return scenarioType.getCriteresSup().get("Disponibilité");	
 		case 5 :
-			return scenarioType.getCriteresSup().get("Disponibilité");
+			return scenarioType.getCriteresSup().get("Intégrité");
+		case 4 :
+			return scenarioType.getCriteresSup().get("Confidentialité");
+		case 3 :
+			return scenarioType.getCriteresSup().get("Traçabilité");
 		case 2 :
 			return scenarioType.getVraisemblanceIntrinseque();
 		case 1 :
 			return scenarioType.getVraisemblanceReelle();
+		case 0 :
+			return scenarioType.isRetenuScenarioType();
+		default :
+			return null;
 		}
-		
-		return null;
 	}
+	
+	
 
 }

@@ -72,5 +72,13 @@ public class ScenarioType extends ScenarioGenerique {
 	public void setVraisemblanceReelle(int vraisemblanceReelle) {
 		this.vraisemblanceReelle = vraisemblanceReelle;
 	}
+	
+	public Boolean isRetenuScenarioType(){
+		return this.retenu;
+	}
+	
+	public void setRetenuScenarioType(){
+		this.retenu=retenu;
+	}
 
 }
