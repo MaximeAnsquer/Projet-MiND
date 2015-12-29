@@ -249,5 +249,8 @@ public class TypologieDesBiensSupports extends Module {
 		}	
 		
 	}
-
+	
+	public String toString(){
+		return "Typologies des biens supports" ;
+	}
 }

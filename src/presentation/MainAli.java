@@ -30,7 +30,9 @@ public class MainAli extends JFrame {
 		etude = new Etude();
 		
 		TypologieDesBiensSupports firstModule = new TypologieDesBiensSupports();
+		ScenariosDeMenacesGeneriques secondModule = new ScenariosDeMenacesGeneriques();
 		etude.addModule(firstModule);
+		etude.addModule(secondModule);
 		
 		String module1 = "Typologie des biens supports";
 		String module2 = "Scénario de menaces génériques";
