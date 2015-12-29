@@ -17,7 +17,7 @@ import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionScenario;
 import controle.ScenariosMenacesGeneriques.ControlJtable;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 
-public class FenetreScenarioDeMenacesGeneriques extends JPanel {
+public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 	
 	private ScenariosDeMenacesGeneriques moduleCourant;
 	private ModeleScenarioDeMenacesGeneriques modeleTableau;
@@ -28,7 +28,7 @@ public class FenetreScenarioDeMenacesGeneriques extends JPanel {
 	private JButton supprimerCritere;
 	private JButton aide ;
 	
-	public FenetreScenarioDeMenacesGeneriques(ScenariosDeMenacesGeneriques module) {
+	public FenetreScenariosDeMenacesGeneriques(ScenariosDeMenacesGeneriques module) {
 		
 		this.moduleCourant=module;
 		

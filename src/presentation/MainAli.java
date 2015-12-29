@@ -54,7 +54,7 @@ public class MainAli extends JFrame {
 			mainTest.pack();
 		}
 		if (reponse==choix[1]){
-			FenetreScenarioDeMenacesGeneriques fen2 = new FenetreScenarioDeMenacesGeneriques(secondModule);
+			FenetreScenariosDeMenacesGeneriques fen2 = new FenetreScenariosDeMenacesGeneriques(secondModule);
 			mainTest.add(fen2);
 			mainTest.pack();
 		}
