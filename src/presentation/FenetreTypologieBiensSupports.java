@@ -6,14 +6,10 @@ import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.AbstractTableModel;
 
 import controle.TypologieBiensSupports.ControlJButtonAide;
 import controle.TypologieBiensSupports.ControlJButtonAjoutTypeBien;
@@ -33,21 +29,19 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	private JButton aide ;
 
 	public FenetreTypologieBiensSupports(TypologieDesBiensSupports module) {
-		// super("Typologie des Biens Supports");
+		
 		this.moduleCourant=module;
-		// this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		this.creerTableau(module);
+		this.creerTableau();
 		this.creerZoneDescription();
 		this.creerBoutonsBas();
-		// this.pack();
 	}
 
-	public void creerTableau(TypologieDesBiensSupports module) {
-		this.modeleTableau=new ModeleTypologieBiensSupports(module);
+	public void creerTableau() {
+		this.modeleTableau=new ModeleTypologieBiensSupports(this.moduleCourant);
 		this.tableau = new JTable(this.modeleTableau);
 		
 		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC
