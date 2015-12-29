@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 import abstraction.Etude;
@@ -143,6 +144,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		
 		
 	}
+		
 		
 		
 

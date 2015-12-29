@@ -37,8 +37,7 @@ public class Evenement {
 	
 	/*les niveaux sont des int qui permet de stocker les valeurs entrées dans le tableau par l'utilisateur
 	 */
-	private JComboBox exigence;
-	private JComboBox gravite;
+	
 	
 	
 	public Evenement(Etude etude,String nomevenement,ArrayList<String> nomgroupes,ArrayList<String> contenugroupes,String bienessentiel,String critere){
@@ -58,24 +57,7 @@ public class Evenement {
 		
 		
 		
-		int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
 		
-		String[] liste=new String[a];
-		for(int i=1;i<=a;i++){
-			
-			liste[i-1]=""+i;
-		}
-		this.gravite=new JComboBox(liste);
-		
-		int b=((Metriques)this.etude.getModule("Metriques")).getMetrique(this.critere).nombreDeNiveaux();
-		
-		String[] listebis=new String[b];
-        for(int i=1;i<=b;i++){
-			
-			listebis[i-1]=""+i;
-			
-		}
-        this.exigence=new JComboBox(listebis);
 	}
 	
 	/*Getters
@@ -121,13 +103,6 @@ public class Evenement {
 	}
 	
 	
-	public JComboBox getComboGravite(){
-		return this.gravite;
-	}
-	
-	public JComboBox getComboExigence(){
-		return this.exigence;
-	}
 	
 	/*Setters*/
 	
@@ -145,6 +120,12 @@ public class Evenement {
 	
 	public void setNomEvenement(String nomevenement){
 		this.nomevenement=nomevenement;
+	}
+	
+	public boolean estComplet(){
+		boolean resultat = true;
+		resultat = resultat && !this.GetNomEvenement().equals("");
+		return resultat;
 	}
 	
 	/*A noter que setCritere est absent pour éviter des problèmes de cohérence; l'utilisateur doit à tout prix utiliser

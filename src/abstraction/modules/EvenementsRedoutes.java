@@ -42,14 +42,14 @@ public class EvenementsRedoutes extends Module {
 		
 		super("EvenementsRedoutes");
 		this.etude=etude;
-		/*this.predecesseurs.add(this.etude.getModule("BiensEssentiels"));
+		this.predecesseurs.add(this.etude.getModule("BiensEssentiels"));
 		this.predecesseurs.add(this.etude.getModule("Metriques"));
-		this.successeurs.add(this.etude.getModule("AnalyseDesRisques"));*/
+		this.successeurs.add(this.etude.getModule("AnalyseDesRisques"));
 		this.lesMetriques=(Metriques)this. etude.getModule("Metriques");
 		this.lesBiensEssentiels=(BiensEssentiels)this.etude.getModule("BiensEssentiels");
-		this.cree=true;
-		this.disponible=true;
-		this.coherent=true;
+		this.cree=false;
+		this.checkDisponible();
+		this.coherent=false;
 		
 		
 		/*A ce stade-ci du constructeur, on remplit l'arraylist en constituant des combinaisons entre Biens Essentiels
@@ -77,7 +77,9 @@ public class EvenementsRedoutes extends Module {
 		
 		
 		for (int i=0;i<a;i++){
+			
 			for(int j=0;j<b;j++){
+				
 				
 				liste.add(i*b+j,new Evenement(this.etude,"",tableaubiens.get(i).getNomColonneSup(),tableaubiens.get(i).getContenuColonneSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
 				
@@ -206,7 +208,22 @@ public class EvenementsRedoutes extends Module {
 	
 	
 	public boolean estCoherent(){
-		return true;
+		boolean resultat=true;
+		for (int i=0;i<this.getEvenementsRedoutes().size();i++){
+			if(this.getEvenementsRedoutes().get(i).estComplet()!=true){
+				resultat=false;
+			}
+		}
+		return resultat;
+	}
+	
+	public void checkDisponible(){
+		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.etude.getModule("BiensEssentiels").estCoherent()==true&&this.lesMetriques.estCoherent()==true){
+			this.disponible=true;
+		}
+		else{
+			this.disponible=false;
+		}
 	}
 	
 	
