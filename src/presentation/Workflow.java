@@ -44,7 +44,7 @@ public class Workflow extends JPanel {
 			if(!m.estDisponible()){
 				//TODO a decommenter a la fin
 //				bouton.setEnabled(false);
-				bouton.setBackground(Color.blue); //TODO: ligne a supprimer a la fin
+				bouton.setBackground(Color.CYAN); //TODO: ligne a supprimer a la fin
 			}
 			else{
 				if(m.estCree()){
