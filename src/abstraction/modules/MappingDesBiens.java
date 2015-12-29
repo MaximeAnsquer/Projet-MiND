@@ -1,10 +1,10 @@
 package abstraction.modules;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 import javax.swing.JLabel;
 
+import abstraction.Etude;
 import abstraction.autres.*;
 
 /**
@@ -22,22 +22,20 @@ public class MappingDesBiens extends Module{
 	private BiensEssentiels biensEssentiels;
 	
 	//Constructeur
-	public MappingDesBiens(BiensSupports biensSupports, BiensEssentiels biensEssentiels) {
+	public MappingDesBiens(Etude etude) {
 		super("MappingDesBiens");
-		this.biensSupports = new BiensSupports();
+		this.etude=etude;
+		this.biensSupports = (BiensSupports)this.getEtude().getModule("BiensSupports");
 		this.mappingDesBiens=new ArrayList<MappingBien>(this.biensSupports.nombreDeBiens());
-		this.biensEssentiels = new BiensEssentiels();
+		this.biensEssentiels = (BiensEssentiels)this.getEtude().getModule("BiensEssentiels");
 		for (int i=0; i<this.biensSupports.nombreDeBiens(); i++){
 			mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
 		}
-		//TODO Decomenter quand les autres parties seront OK
-		/*
-		this.successeurs.add(AnalyseDesRisques.getInstance());
-		this.predecesseurs.add(BiensEssentiels.getInstance());
-		this.predecesseurs.add(BiensSupports.getInstance());
-		this.biensSupports = BiensSupports.getInstance();
-		this.biensEssentiels = BiensEssentiels.getInstance();
-		*/
+
+		//this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+		this.predecesseurs.add(this.getEtude().getModule("BiensEssentiels"));
+		this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
+		
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;

@@ -7,12 +7,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -39,6 +39,7 @@ public class FenetreBiensSupports extends JPanel{
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensSupports biensSupports;
+	JComboBox<String> comboBox = new JComboBox<String>();
 
 	public FenetreBiensSupports(BiensSupports biensSupports){
 		this.setVisible(true);

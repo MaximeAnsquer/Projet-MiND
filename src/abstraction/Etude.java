@@ -36,9 +36,9 @@ public class Etude {
 		this.addModule(new CriteresDeSecurite());		
 		this.addModule(new Metriques(this));
 		this.addModule(new SourcesDeMenaces());
-		this.addModule(new BiensSupports());
-		this.addModule(new BiensEssentiels());
-		this.addModule(new MappingDesBiens((BiensSupports)this.getModule("BiensSupports"), (BiensEssentiels)this.getModule("BiensEssentiels")));
+		this.addModule(new BiensSupports(this));
+		this.addModule(new BiensEssentiels(this));
+		this.addModule(new MappingDesBiens(this));
 		this.addModule(new EvenementsRedoutes(this));
 	}
 	

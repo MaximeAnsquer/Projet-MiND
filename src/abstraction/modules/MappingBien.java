@@ -1,6 +1,5 @@
 package abstraction.modules;
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 import abstraction.autres.*;
 

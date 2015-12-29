@@ -7,12 +7,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.modules.BiensEssentiels;
 
@@ -40,6 +39,7 @@ public class FenetreBiensEssentiels extends JPanel{
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensEssentiels biensEssentiels;
+	JComboBox<String> comboBox = new JComboBox<String>();
 
 	public FenetreBiensEssentiels(BiensEssentiels biensEssentiels){
 		this.biensEssentiels = biensEssentiels;
