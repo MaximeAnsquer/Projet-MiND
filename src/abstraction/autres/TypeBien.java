@@ -73,7 +73,7 @@ public class TypeBien {
 	// On vérifie si le type a bien toutes les informations renseignées
 	// Tous les champs doivent être renseignés
 	public boolean isIncomplete() {
-		return (this.Id == null && this.Description == null
-				&& this.intitule == null);
+		return (this.Id.equals("") || this.Description.equals("") ||
+				this.intitule.equals(""));
 	}
 }
