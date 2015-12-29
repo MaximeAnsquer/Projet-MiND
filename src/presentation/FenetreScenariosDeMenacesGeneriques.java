@@ -15,6 +15,7 @@ import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutScenario;
 import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionColonne;
 import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionScenario;
 import controle.ScenariosMenacesGeneriques.ControlJtable;
+import controle.TypologieBiensSupports.ControlJButtonAide;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 
 public class FenetreScenariosDeMenacesGeneriques extends JPanel {
@@ -81,6 +82,10 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 		this.supprimerCritere.addActionListener(controlSupression);
 		
 		this.aide = new JButton("?");
+		
+		ControlJButtonAide controlAide = new ControlJButtonAide(
+				this.aide);
+		this.aide.addActionListener(controlAide);
 		
 		panelBas.add(ajouterLigne);
 		panelBas.add(supprimerLigne);
