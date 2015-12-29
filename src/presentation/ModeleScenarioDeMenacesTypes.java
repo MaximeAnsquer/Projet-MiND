@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import javax.swing.table.AbstractTableModel;
 
+import abstraction.autres.Bien;
 import abstraction.autres.ScenarioType;
 import abstraction.modules.BiensSupports;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
@@ -74,7 +75,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		case 12 :
 			return scenarioType.getBienSupport();
 		case 11 :
-			return scenarioType.getVraisemblanceReelle();
+			return scenarioType.getTypeBienSupport();
 		case 10 :
 			return scenarioType.getId();
 		case 9 :
@@ -82,7 +83,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		case 8 :
 			return scenarioType.getIntituleConcret();
 		case 7 :
-			return null;
+			return scenarioType.listeSourcesMenaces();
 		case 6 :
 			return scenarioType.getCriteresSup().get("Disponibilité");	
 		case 5 :
@@ -98,7 +99,71 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		case 0 :
 			return scenarioType.isRetenuScenarioType();
 		default :
-			return null;
+			if(biensSupports.getNomColonnesSup().get(columnIndex)!=null){
+				return biensSupports.getBien(rowIndex).getContenuColonnesSup().get(columnIndex);
+			}
+			else{
+				return "";
+			}
+		}
+	}
+	
+	public boolean isCellEditable(int row, int col){
+		return true; 
+	}
+	
+	public Class getColumnClass(int columnIndex){
+		switch(this.getColumnCount()-columnIndex-1){
+		case 6 :
+			return Boolean.class;
+		case 5 :
+			return Boolean.class;
+		case 4 :
+			return Boolean.class;
+		case 3 :
+			return Boolean.class;
+		case 2 :
+			return Integer.class;
+		case 1 :
+			return Integer.class;
+		case 0 :
+			return Boolean.class;
+		default:
+			return String.class;
+		}
+	}
+	
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		if (aValue != null) {
+			ScenarioType scenarioType = this.moduleCourant.getScenarioType(rowIndex);
+
+			switch (this.getColumnCount() - columnIndex - 1) {
+			case 12:
+				if (!aValue.equals("")) {
+					scenarioType.setBienSupport((String) aValue);
+				}
+				break;
+			case 11:
+				if (!aValue.equals("")) {
+					scenarioType.setTypeBienSupport((String) aValue);
+				}
+				break;
+			case 10:
+				if (!aValue.equals("")) {
+					scenarioType.setId((String) aValue);
+				}
+				break;
+			case 9:
+				scenarioType.setRetenu((Boolean) aValue);
+				break;
+			default:
+				if (!aValue.equals("")) {
+					biensSupports.getBien(rowIndex).getContenuColonnesSup()
+							.set(columnIndex, (String) aValue);
+				}
+				break;
+
+			}
 		}
 	}
 	
