@@ -16,8 +16,8 @@ import abstraction.modules.TypologieDesBiensSupports;
 
 public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	
-	private TypologieDesBiensSupports typologieDesBiensSupports = new TypologieDesBiensSupports();
-	private CriteresDeSecurite criteresDeSecurite = new CriteresDeSecurite();
+	private TypologieDesBiensSupports typologieDesBiensSupports ;
+	private CriteresDeSecurite criteresDeSecurite ;
 	private ScenariosDeMenacesGeneriques moduleCourant ;
 	private LinkedList<String> entetes = new LinkedList<String>();
 	
@@ -32,6 +32,8 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	public ModeleScenarioDeMenacesGeneriques(ScenariosDeMenacesGeneriques moduleCourant){
 		super();
 		this.moduleCourant=moduleCourant;
+		this.typologieDesBiensSupports= (TypologieDesBiensSupports) this.moduleCourant.getEtude().getModule("TypologieDesBiensSupports");
+		this.criteresDeSecurite=(CriteresDeSecurite) this.moduleCourant.getEtude().getModule("CriteresDeSecurite");
 		
 		entetes.add("Type de bien support");
 		entetes.add("Id");

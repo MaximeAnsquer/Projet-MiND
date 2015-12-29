@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -49,6 +50,7 @@ public class FenetreScenarioDeMenacesGeneriques extends JPanel {
 	}
 	
 	public void creerBoutonsBas() {
+		JLabel label = new JLabel("");
 		JPanel panelBas = new JPanel() ;
 		panelBas.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
@@ -85,6 +87,7 @@ public class FenetreScenarioDeMenacesGeneriques extends JPanel {
 		panelBas.add(ajouterCritere);
 		panelBas.add(supprimerCritere);
 		panelBas.add(aide);
+		this.add(label);
 		this.add(panelBas);
 	}
 		

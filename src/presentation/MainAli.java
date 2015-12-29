@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import abstraction.Etude;
+import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.TypologieDesBiensSupports;
 
@@ -30,8 +31,12 @@ public class MainAli extends JFrame {
 		etude = new Etude();
 		
 		TypologieDesBiensSupports firstModule = new TypologieDesBiensSupports();
-		ScenariosDeMenacesGeneriques secondModule = new ScenariosDeMenacesGeneriques();
 		etude.addModule(firstModule);
+		
+		CriteresDeSecurite moduleIntermed = new CriteresDeSecurite();
+		etude.addModule(moduleIntermed);
+		
+		ScenariosDeMenacesGeneriques secondModule = new ScenariosDeMenacesGeneriques();
 		etude.addModule(secondModule);
 		
 		String module1 = "Typologie des biens supports";
