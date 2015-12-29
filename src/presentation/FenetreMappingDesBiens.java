@@ -19,7 +19,7 @@ public class FenetreMappingDesBiens extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private MappingDesBiens mappingDesBiens;
-	JComboBox<String> comboBox = new JComboBox<String>();
+	JComboBox comboBox = new JComboBox();
 
 	public FenetreMappingDesBiens(MappingDesBiens mappingDesBiens){
 		this.setVisible(true);
