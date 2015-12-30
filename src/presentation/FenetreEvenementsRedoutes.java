@@ -43,12 +43,20 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 	FenetreEvenementsRedoutes(EvenementsRedoutes evenements){
 		 super(new GridLayout(1,0));
+		 /* On recrée un module pour être sur que les données sont à jour*/
+		 
+		EvenementsRedoutes ev=new EvenementsRedoutes(evenements.getEtude()); 
+		evenements=ev;
+		
 		this.modele=new ModeleEvenementsRedoutes(evenements);
+		
 		this.etude=evenements.getEtude();
+	
+		
 		this.criteres=(CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite");
 		
 		this.evenements=evenements;
-		this.etude=this.evenements.getEtude();
+		
 		
 		this.setUpComBo();
 		
