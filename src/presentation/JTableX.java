@@ -76,10 +76,13 @@ public class JTableX extends JTable{
 	      public TableCellEditor getCellEditor(int row, int col)
 	      {
 	          TableCellEditor tmpEditor = null;
-	          if (rm!=null&&this.getModel().getColumnCount()-col-1==1)
+	          if (rm!=null&&this.getModel().getColumnCount()-col-1==1){
+	        	  
 	              tmpEditor = rm.getEditor(row);
-	          if (tmpEditor!=null)
+	          
 	              return tmpEditor;
-	          return super.getCellEditor(row,col);
+	          }
+	          else{return super.getCellEditor(row,col);
+	      }
 	      }
 }
