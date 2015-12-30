@@ -45,9 +45,7 @@ public class Workflow extends JPanel {
 			JButton bouton = new JButton(m.toString());
 			if(!m.estDisponible()){
 				System.out.println(m + " n'est pas disponible");
-				//TODO a decommenter a la fin
-//				bouton.setEnabled(false);
-				bouton.setBackground(Color.CYAN); //TODO: ligne a supprimer a la fin
+				bouton.setEnabled(false);
 			}
 			else{
 				System.out.println(m + " est disponible");
