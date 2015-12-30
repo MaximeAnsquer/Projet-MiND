@@ -214,24 +214,19 @@ public class CriteresDeSecurite extends Module{
 
 	public boolean estCoherent(){
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<JLabel>();
+		this.problemesDeCoherence = new ArrayList<String>();
 		for(Critere c : getLesCriteres().values()){
 			if(!c.estComplet()){
-				JLabel label = new JLabel("Critere \" " + c.getIntitule() + " \" incomplet");
-				label.setForeground(Color.red);
-				this.problemesDeCoherence.add(label);
+				String probleme = "Critere \" " + c.getIntitule() + " \" incomplet";
+				this.problemesDeCoherence.add(probleme);
 				resultat = false;
 			}
 		}
 		if(this.getCriteresRetenus().size() <= 0){
-			JLabel label = new JLabel("Aucun critere retenu");
-			label.setForeground(Color.red);
-			this.problemesDeCoherence.add(label);
+			String probleme = "Aucun critere retenu";
+			this.problemesDeCoherence.add(probleme);
 			resultat = false;
 		}
-		if(resultat){
-			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence."));
-		}		
 		return resultat;
 	}
 

@@ -22,7 +22,7 @@ public class Module extends Observable implements IModule  {
 	protected boolean coherent;
 	protected boolean disponible;
 	protected Etude etude;
-	protected ArrayList<JLabel> problemesDeCoherence;
+	protected ArrayList<String> problemesDeCoherence;
 
 	//---Constructeurs---
 
@@ -31,7 +31,7 @@ public class Module extends Observable implements IModule  {
 		this.successeurs=new ArrayList<Module>();
 		this.nom=nom;
 		this.cree = false;
-		this.problemesDeCoherence = new ArrayList<JLabel>();
+		this.problemesDeCoherence = new ArrayList<String>();
 	}
 
 	//---Getters et setters---
@@ -85,7 +85,7 @@ public class Module extends Observable implements IModule  {
 		this.etude = etude;
 	}
 
-	public ArrayList<JLabel> getProblemes() {
+	public ArrayList<String> getProblemes() {
 		return this.problemesDeCoherence;
 	}	
 

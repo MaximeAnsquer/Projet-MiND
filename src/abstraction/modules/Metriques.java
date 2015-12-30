@@ -261,30 +261,24 @@ public class Metriques extends Module {
 	public boolean estCoherent(){
 		boolean resultat = true;
 		
-		this.problemesDeCoherence = new ArrayList<JLabel>();
+		this.problemesDeCoherence = new ArrayList<String>();
 		for(Metrique m : this.getMetriquesDesCriteresRetenus()){
 			if(!m.estComplet()){
-				JLabel label = new JLabel("La metrique \" " + m.getIntitule() + " \" est incomplete.");
-				label.setForeground(Color.red);
-				this.problemesDeCoherence.add(label);
+				String probleme = "La metrique \" " + m.getIntitule() + " \" est incomplete.";
+				this.problemesDeCoherence.add(probleme);
 				resultat = false;
 			}			
 		}
 		if(this.getMetrique("Gravite") == null){
-			JLabel label = new JLabel("Il faut une metrique \" Gravite \".");
-			label.setForeground(Color.red);
-			this.problemesDeCoherence.add(label);
+			String probleme = "Il faut une metrique \" Gravite \".";
+			this.problemesDeCoherence.add(probleme);
 			resultat = false;
 		}
 		if(this.getMetrique("Vraisemblance") == null){
-			JLabel label = new JLabel("Il faut une metrique \" Vraisemblance \".");
-			label.setForeground(Color.red);
-			this.problemesDeCoherence.add(label);
+			String probleme = "Il faut une metrique \" Vraisemblance \".";
+			this.problemesDeCoherence.add(probleme);
 			resultat = false;
 		}		
-		if(resultat == true){
-			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence."));
-		}
 		return resultat;
 	}
 	
