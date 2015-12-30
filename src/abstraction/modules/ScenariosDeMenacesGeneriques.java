@@ -93,9 +93,9 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	// ---Services---
 	
-	// L'idée n'est pas encore finalisée : 
+	// L'idï¿½e n'est pas encore finalisï¿½e : 
 	
-	// Un TypeBien est nouveau dans le cas où il n'est pas contenu dans la bdc de cette classe
+	// Un TypeBien est nouveau dans le cas oï¿½ il n'est pas contenu dans la bdc de cette classe
 	// et qu'il n'est pas dans la bdc de la classe TypeBien
 	public boolean estNouveauTypeBien(TypeBien type) {
 		boolean b = ((TypologieDesBiensSupports) this.getEtude().getModule(
@@ -112,7 +112,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	}
 	
 	// L'ajout d'une ligne dans le tableau correspond ici
-	// à un type de bien support référencé
+	// ï¿½ un type de bien support rï¿½fï¿½rencï¿½
 	
 	public void addScenarioGenerique(ScenarioGenerique scenario) {
 		if (this.nomColonneSup!=null){
@@ -233,7 +233,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 					ScenarioGenerique scenario = new ScenarioGenerique(intituleTypeBien, id, intituleScenario, CriteresSup, true);
 					
 					/*
-					 * Ajout du scenario à la bdc
+					 * Ajout du scenario ï¿½ la bdc
 					 */
 					
 					bdcScenariosMenacesGeneriques.put(intituleScenario, scenario);				
@@ -274,7 +274,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		}
 		for (ScenarioGenerique scenario : this.tableau.values()){
 			if (!scenario.getCriteresSup().values().contains(true)){
-				JLabel label = new JLabel("Aucun scenario generique retenu");
+				JLabel label = new JLabel("Aucun criteres de securite retenu");
 				label.setForeground(Color.red);
 				this.problemesDeCoherence.add(label);
 				resultat = false;
