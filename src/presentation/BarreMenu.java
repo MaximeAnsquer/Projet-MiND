@@ -50,21 +50,6 @@ public class BarreMenu extends JMenuBar {
 		});		
 		fichier.add(enregistrer);
 		
-		fichier.addSeparator();
-		JMenu preferences = new JMenu("Preferences");
-		preferences.add(new JMenuItem("Config. editeur"));
-		preferences.add(new JCheckBoxMenuItem("Son"));
-		JRadioButtonMenuItem b219 = new JRadioButtonMenuItem("21:9");
-		preferences.add(b219);
-		JRadioButtonMenuItem b169 = new JRadioButtonMenuItem("16:9");
-		preferences.add(b169);
-		JRadioButtonMenuItem b43 = new JRadioButtonMenuItem("4:3");
-		preferences.add(b43);
-		ButtonGroup groupeFormat = new ButtonGroup();
-		groupeFormat.add(b219);
-		groupeFormat.add(b169);
-		groupeFormat.add(b43);
-		fichier.add(preferences);
 		this.add(fichier);
 		
 		JMenu options = new JMenu("Options");
