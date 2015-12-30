@@ -8,6 +8,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 
 /**
@@ -26,11 +27,26 @@ public class BarreMenu extends JMenuBar {
 		JMenu fichier = new JMenu("Fichier");
 		JMenuItem nouvelleEtude = new JMenuItem("Nouvelle etude");
 		nouvelleEtude.setMnemonic('n');
+		
 		nouvelleEtude.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				if(fenetre.etudeEnCours != null){
+					int decision = JOptionPane.showConfirmDialog(null, 
+							"Enregistrer l'etude en cours avant de creer une nouvelle etude ?", "Enregistrer l'etude en cours ?", 
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE);
+					switch(decision){
+					case JOptionPane.YES_OPTION:
+						fenetre.enregistrerEtude();		
+						break;
+					case JOptionPane.NO_OPTION:
+						break;
+					}	
+				}
 				fenetre.nouvelleEtude();				
 			}			
 		});
+		
 		fichier.add(nouvelleEtude);		
 		
 		

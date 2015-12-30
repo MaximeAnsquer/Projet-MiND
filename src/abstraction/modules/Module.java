@@ -58,9 +58,7 @@ public class Module extends Observable implements IModule  {
 
 	public boolean estDisponible(){
 		boolean resultat = true;
-		System.out.println("Verification de la disponibilite de " + this + "...");
 		for(Module m : this.getPredecesseurs()){
-			System.out.println("Predecesseur " + m + " : [estCree(), estCoherent()] = " + m.estCree() + ", " + m.estCoherent() );
 			resultat = resultat && m.estCree() && m.estCoherent();
 		}
 		this.disponible = resultat;
