@@ -192,23 +192,18 @@ public class SourcesDeMenaces extends Module {
 	
 	public boolean estCoherent(){
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<JLabel>();
+		this.problemesDeCoherence = new ArrayList<String>();
 		for(SourceDeMenace s : this.getLesSourcesDeMenaces().values()){
 			if(!s.estComplet()){
-				JLabel label = new JLabel("La source de menace \" " + s.getId() + " \" est incomplete");
-				label.setForeground(Color.red);
-				problemesDeCoherence.add(label);
+				String probleme = "La source de menace \" " + s.getId() + " \" est incomplete";
+				problemesDeCoherence.add(probleme);
 				resultat = false;
 			}
 		}
 		if(this.getSourcesDeMenacesRetenues().size() <= 0){
-			JLabel label = new JLabel("Aucune source de menace retenue.");
-			label.setForeground(Color.red);
-			problemesDeCoherence.add(label);
+			String probleme = "Aucune source de menace retenue.";
+			problemesDeCoherence.add(probleme);
 			resultat = false;
-		}
-		if(resultat){
-			problemesDeCoherence.add(new JLabel("Aucun probleme de coherence."));
 		}
 		return resultat;
 	}

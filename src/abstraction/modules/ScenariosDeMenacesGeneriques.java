@@ -170,6 +170,16 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		return resultat;
 	}
 	
+	public boolean isImpacteCritere(String nomCritere){
+		ArrayList<Boolean> critere = new ArrayList<Boolean>();
+		for (ScenarioGenerique scenario : this.tableau.values()){
+			if (!scenario.getCriteresSup().get(nomCritere)){
+				critere.add(scenario.getCriteresSup().get(nomCritere));
+			}
+		}
+		return !(critere.size()==this.tableau.size()) ;
+	}
+	
 	private void importerBDC() {
 		
 		bdcScenariosMenacesGeneriques = new Hashtable<String, ScenarioGenerique>();
@@ -272,9 +282,9 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			this.problemesDeCoherence.add(label);
 			resultat = false;
 		}
-		for (ScenarioGenerique scenario : this.tableau.values()){
-			if (!scenario.getCriteresSup().values().contains(true)){
-				JLabel label = new JLabel("Aucun criteres de securite retenu");
+		for (String nomCritere : this.nomColonneSup){
+			if (!this.isImpacteCritere(nomCritere)){
+				JLabel label = new JLabel("Le critere de securite \" " + nomCritere + " \" n'est retenu dans aucun scenario");
 				label.setForeground(Color.red);
 				this.problemesDeCoherence.add(label);
 				resultat = false;

@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -214,9 +215,16 @@ public class MainMaximeAnsquer extends JFrame {
 		
 		partieDuBas.removeAll();
 		
-		for(JLabel label : moduleEnCours.getProblemes()){
+		for(String probleme : moduleEnCours.getProblemes()){
+			JLabel label = new JLabel(probleme);
+			label.setForeground(Color.red);
 			label.setFont(new Font("Arial", Font.PLAIN, 22));
 			partieDuBas.add(label);
+		}
+		
+		if(moduleEnCours.getProblemes().size() == 0){
+			JLabel label = new JLabel("Aucun probleme de coherence");
+			label.setFont(new Font("Arial", Font.PLAIN, 22));
 		}
 		
 		partieDuBas.validate();
