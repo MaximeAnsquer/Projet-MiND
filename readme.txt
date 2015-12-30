@@ -10,7 +10,7 @@ des charges pour que l'on puisse se passer d'un mode d'emploi (celui-ci pourra b
 fait sentir).
 
 Une erreur survient lors de l'ouverture d'une etude sauvegardée, mais nous connaissons l'origine du problème et savons
-comment le résoudre.
+comment le résoudre (nous y travaillons activement).
 
 Quatre modules ne sont pas encore opérationnels (" Module manquant ").
 

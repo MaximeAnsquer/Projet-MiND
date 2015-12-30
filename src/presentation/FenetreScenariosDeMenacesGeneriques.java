@@ -10,12 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controle.ScenariosMenacesGeneriques.ControlJButtonAide;
 import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutColonne;
 import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutScenario;
 import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionColonne;
 import controle.ScenariosMenacesGeneriques.ControlJButtonSuppressionScenario;
 import controle.ScenariosMenacesGeneriques.ControlJtable;
-import controle.TypologieBiensSupports.ControlJButtonAide;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 
 public class FenetreScenariosDeMenacesGeneriques extends JPanel {
@@ -83,8 +83,7 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 		
 		this.aide = new JButton("?");
 		
-		ControlJButtonAide controlAide = new ControlJButtonAide(
-				this.aide);
+		ControlJButtonAide controlAide = new ControlJButtonAide(this.aide);
 		this.aide.addActionListener(controlAide);
 		
 		panelBas.add(ajouterLigne);
