@@ -82,7 +82,7 @@ public class EvenementsRedoutes extends Module {
 			for(int j=0;j<b;j++){
 				
 				
-				liste.add(i*b+j,new Evenement(this.etude,"",this.lesBiensEssentiels.getNomColonnesSup(),tableaubiens.get(i).getContenuColonnesSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
+				liste.add(i*b+j,new Evenement(this.etude,"lol",this.lesBiensEssentiels.getNomColonnesSup(),tableaubiens.get(i).getContenuColonnesSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
 				
 			}
 		}

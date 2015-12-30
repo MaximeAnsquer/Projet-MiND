@@ -32,7 +32,7 @@ public class MainMaximeEtienne extends JFrame {
 		super("Main Maxime Etienne");
 		
 		etude = new Etude("nouvelleetude");
-		Hashtable<String,Boolean> criteres=new Hashtable<String,Boolean>();
+		/*Hashtable<String,Boolean> criteres=new Hashtable<String,Boolean>();
 		criteres.put("Confidentialite", true);
 		criteres.put("Integrite",true);
 		
@@ -52,9 +52,9 @@ public class MainMaximeEtienne extends JFrame {
 				 "J'ai parlé du projet et tout à foiré", 1, 2,true) ;
 		
 		ScenariosDeMenacesTypes sc=new ScenariosDeMenacesTypes();
-		sc.getTableau().put("ligne1", sc1);
+		sc.getTableau().put("ligne1", sc1);*/
 		
-		
+		ScenariosDeMenacesTypes sc=new ScenariosDeMenacesTypes();
 		etude.addModule(new CriteresDeSecurite());
 		BiensEssentiels be=new BiensEssentiels(etude);
 		
@@ -74,11 +74,11 @@ public class MainMaximeEtienne extends JFrame {
 		etude.addModule(mapping);
 		AnalyseDesRisques an=new AnalyseDesRisques(etude);
 		etude.addModule(an);
-		/*etude.addModule(new ScenariosDeMenacesTypes());
-		etude.addModule(new MappingDesBiens(bs,be));
+		etude.addModule(new ScenariosDeMenacesTypes());
+		/*etude.addModule(new MappingDesBiens(bs,be));
 		AnalyseDesRisques an=new AnalyseDesRisques(etude);
 		etude.addModule(an);
-		/*MatriceDesRisques ma=new MatriceDesRisques(etude);
+		/*MatriceDesRisques ma=new MatriceDesRisques(etude);*/
 		
 		
 		
@@ -88,7 +88,7 @@ public class MainMaximeEtienne extends JFrame {
 		FenetreEvenementsRedoutes f= new FenetreEvenementsRedoutes(ev);
 		/*FenetreAnalyseDesRisques f=new FenetreAnalyseDesRisques(an);*/
 		/*FenetreMatriceDesRisques f=new FenetreMatriceDesRisques(ma);*/
-		FenetreAnalyseDesRisques f=new FenetreAnalyseDesRisques(an);
+		/*FenetreAnalyseDesRisques f=new FenetreAnalyseDesRisques(an);*/
 		
 		this.add(f);
 		

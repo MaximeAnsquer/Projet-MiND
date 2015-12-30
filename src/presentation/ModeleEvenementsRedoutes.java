@@ -45,6 +45,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 				this.entetes.add("Exigence");
 				this.entetes.add("Gravité");
 			
+				System.out.println(this.evenements.getEvenementsRedoutes().get(0).GetNomEvenement());
 				
 				if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
 					int b=this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();

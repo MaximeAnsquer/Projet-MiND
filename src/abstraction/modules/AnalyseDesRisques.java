@@ -37,6 +37,11 @@ public class AnalyseDesRisques extends Module{
 		this.evenements=(EvenementsRedoutes) this.etude.getModule("EvenementsRedoutes");
 		this.mapping=(MappingDesBiens)this.etude.getModule("MappingDesBiens");
 		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("ScenarioDeMenacesTypes");
+		
+		this.cree=false;
+		this.checkDisponible();
+		
+		
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
 		int a=this.scenarios.getTableau().size();
@@ -100,7 +105,21 @@ public class AnalyseDesRisques extends Module{
 	
 	
 	public boolean estCoherent(){
-		return true;
+		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.etude.getModule("MappingDesBiens").estCoherent()==true&&this.scenarios.estCoherent()==true){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public void checkDisponible(){
+		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.mapping.estCoherent()==true&&this.scenarios.estCoherent()==true){
+			this.disponible=true;
+		}
+		else{
+			this.disponible=false;
+		}
 	}
 
 }
