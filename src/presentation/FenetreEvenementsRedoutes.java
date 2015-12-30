@@ -45,7 +45,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.criteres=(CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite");
 		
 		this.evenements=evenements;
-		
+		this.etude=this.evenements.getEtude();
 		
 		this.setUpComBo();
 		
@@ -123,6 +123,9 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 	gravColumn.setPreferredWidth(200);
 	gravColumn.setMaxWidth(250);
+	
+	/*gravColumn.setCellRenderer(new DefaultTableCellRenderer());
+	exColumn.setCellRenderer(new DefaultTableCellRenderer());*/
 	
 	
 	

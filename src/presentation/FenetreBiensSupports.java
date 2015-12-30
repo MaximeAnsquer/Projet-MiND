@@ -262,10 +262,11 @@ public class FenetreBiensSupports extends JPanel{
 			do{
 				intitule = JOptionPane.showInputDialog("Intitule ?");
 			} while (intitule.equals(""));
-			String type = "";
-			do{
-				type = JOptionPane.showInputDialog("Type ?");
-			} while (type.equals(""));
+			Object[] possibilities = biensSupports.getTypologie().getIntituleTypeBiensRetenus();
+			String type = (String)possibilities[0];
+			/*do{
+				type = JOptionPane.showInputDialog(null, "type",JOptionPane.PLAIN_MESSAGE, null, null, possibilities,possibilities[0]);
+			} while (type.equals(""));*/
 			String description = "";
 			do{
 				description = JOptionPane.showInputDialog("Description ?");
