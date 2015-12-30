@@ -57,7 +57,7 @@ public class MainMaximeAnsquer extends JFrame {
 	public Etude etudeEnCours;
 	private JPanel partieDeGauche;
 	private JPanel partieDuBas;
-	private JPanel contenuPrincipal;
+	private JPanel partieDuCentre;
 	private Hashtable<String, JPanel> lesJpanels;
 	private Workflow workflow;
 	private Module moduleEnCours;
@@ -96,13 +96,15 @@ public class MainMaximeAnsquer extends JFrame {
 				}
 			}
 		});
-
+		
+		//La barre de menu en haut
 		this.setJMenuBar(new BarreMenu(this));
+		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);	
 		this.contentPane = this.getContentPane();
-		this.contenuPrincipal = new JPanel();
-		this.contenuPrincipal.setLayout(new BorderLayout());
+		this.partieDuCentre = new JPanel();
+		this.partieDuCentre.setLayout(new BorderLayout());
 		this.partieDeGauche = new JPanel();
 		creerPartieDuBas();		
 		this.lesJpanels = new Hashtable<String, JPanel>();
@@ -112,6 +114,7 @@ public class MainMaximeAnsquer extends JFrame {
 			this.demanderEtude();			
 		}
 		else{
+			JOptionPane.showMessageDialog(this, "Aucune etude enregistreee !");
 			this.nouvelleEtude();
 		}
 	}
@@ -145,25 +148,25 @@ public class MainMaximeAnsquer extends JFrame {
 	 */
 	public void setContenu(String nom) {					
 
-		contentPane.add(contenuPrincipal, BorderLayout.CENTER);
+		contentPane.add(partieDuCentre, BorderLayout.CENTER);
 
 		contentPane.remove(partieDeGauche);
 
 		if(nom.equals("Workflow")){					
 			this.moduleEnCours = new Module("Workflow");
-			this.contenuPrincipal.removeAll();
+			this.partieDuCentre.removeAll();
 			this.workflow = new Workflow(etudeEnCours, this);
-			this.contenuPrincipal.add(workflow, BorderLayout.CENTER);
+			this.partieDuCentre.add(workflow, BorderLayout.CENTER);
 			partieDuBas.removeAll();
 		}
 		else{
 			this.moduleEnCours = etudeEnCours.getModule(nom);
 			setPartieDeGauche();
-			this.contenuPrincipal.removeAll();	
+			this.partieDuCentre.removeAll();	
 			contentPane.add(partieDeGauche, BorderLayout.WEST);
 			this.label = new JLabel(moduleEnCours.toString(), SwingConstants.CENTER);
 			this.label.setFont(new Font("Arial", Font.PLAIN, 25));
-			contenuPrincipal.add(partieDuBas, BorderLayout.SOUTH);
+			partieDuCentre.add(partieDuBas, BorderLayout.SOUTH);
 			setPartieDuBas();
 
 			if(nom.equals("CriteresDeSecurite")){
@@ -194,8 +197,8 @@ public class MainMaximeAnsquer extends JFrame {
 				this.lesJpanels.put(nom, new FenetreScenariosDeMenacesGeneriques( (ScenariosDeMenacesGeneriques) etudeEnCours.getModule(nom)) ) ;
 			}
 
-			this.contenuPrincipal.add(label, BorderLayout.NORTH);
-			this.contenuPrincipal.add(lesJpanels.get(nom), BorderLayout.CENTER);
+			this.partieDuCentre.add(label, BorderLayout.NORTH);
+			this.partieDuCentre.add(lesJpanels.get(nom), BorderLayout.CENTER);
 		}				
 
 		this.validate();
@@ -260,8 +263,17 @@ public class MainMaximeAnsquer extends JFrame {
 			setContenu("Workflow");
 		}
 		String nomEtude = "";
-		while(nomEtude == null || nomEtude.equals("") ){
-			nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle etude.");			
+		while(nomEtude.equals("") ){
+			nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle etude.");	
+			if(nomEtude == null){
+				if(this.existeAuMoinsUneEtude()){
+					this.demanderEtude();			
+				}
+				else{
+					JOptionPane.showMessageDialog(this, "Aucune etude enregistreee !");
+					this.nouvelleEtude();
+				}
+			}
 		}
 		Etude nouvelleEtude = new Etude(nomEtude);
 		this.etudeEnCours = nouvelleEtude;
