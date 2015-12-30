@@ -89,6 +89,8 @@ public class ScenarioGenerique {
 		ArrayList<Boolean> criteresRetenus = new ArrayList<Boolean>(this.CriteresSup.values());
 		return criteresRetenus.get(i);
 	}
+	
+	
 
 	public boolean isRetenuScenario() {
 		return retenu;
