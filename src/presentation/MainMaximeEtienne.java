@@ -49,12 +49,12 @@ public class MainMaximeEtienne extends JFrame {
 		
 		
 		ScenarioType sc1=new ScenarioType("couco", "1", "J'ai parlé du projet à un ami", criteres,menaces, bien1,
-				 "J'ai parlé du projet et tout à foiré", 1, 2,true) ;
+				 "J'ai parlé du projet et cela a menacé la Confidentialité du projet", 1, 2,true) ;
 		
 		ScenariosDeMenacesTypes sc=new ScenariosDeMenacesTypes();
 		sc.getTableau().put("ligne1", sc1);*/
 		
-		ScenariosDeMenacesTypes sc=new ScenariosDeMenacesTypes();
+		/*ScenariosDeMenacesTypes sc=new ScenariosDeMenacesTypes();*/
 		etude.addModule(new CriteresDeSecurite());
 		BiensEssentiels be=new BiensEssentiels(etude);
 		
@@ -64,14 +64,14 @@ public class MainMaximeEtienne extends JFrame {
 		/*etude.addModule(new ScenariosDeMenacesGeneriques());*/
 		EvenementsRedoutes ev=new EvenementsRedoutes(etude);
 		etude.addModule(ev);
-		etude.addModule(sc);
-		MappingDesBiens mapping=new MappingDesBiens(etude);
+		/*etude.addModule(sc);
+		/*MappingDesBiens mapping=new MappingDesBiens(etude);
 		mapping.getMappingDesBiens().get(0).setValueAt("x",0);
 		mapping.getMappingDesBiens().get(1).setValueAt("x",1);
 		/*mapping.getMappingDesBiens().get(2).setValueAt("x",2);*/
 		
 		
-		etude.addModule(mapping);
+		/*etude.addModule(mapping);
 		AnalyseDesRisques an=new AnalyseDesRisques(etude);
 		etude.addModule(an);
 		etude.addModule(new ScenariosDeMenacesTypes());

@@ -18,8 +18,14 @@ import abstraction.autres.Evenement;
 import abstraction.modules.EvenementsRedoutes;
 
 public class ModeleEvenementsRedoutes extends AbstractTableModel{
+	
+	/* les varialbes d'instance sont l'étude considérée, les evenements redoutes qui permettent d'établir le tableau*/
 	private Etude etude;
 	private EvenementsRedoutes evenements;
+	
+	/*mais également les éléments du tableau lui même, c'est à dire une liste d'Objects qui seront en fait des evenements
+	 * et les entêtes du tableau Evenements Redoutés
+	 */
 	ArrayList<Object> data;
 	ArrayList<String> entetes=new ArrayList<String>();
 	
@@ -30,11 +36,10 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 		this.evenements=evenements;
 		int a=this.evenements.getEvenementsRedoutes().size();
 		
-		System.out.println(a+"");
 		this.data=new ArrayList<Object>();
 			
 				for(int j=0;j<a;j++){
-					System.out.println(this.evenements.getEvenementsRedoutes().get(j).GetNomEvenement());
+					
 					this.data.add(this.evenements.getEvenementsRedoutes().get(j));
 					
 				}
@@ -45,7 +50,6 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 				this.entetes.add("Exigence");
 				this.entetes.add("Gravité");
 			
-				System.out.println(this.evenements.getEvenementsRedoutes().get(0).GetNomEvenement());
 				
 				if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
 					int b=this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();
@@ -129,8 +133,6 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 					fireTableCellUpdated(rowIndex, columnIndex);
 					break;
 				case 1:
-					/*ev.getComboExigence().getSelectedItem();
-					ev.getComboExigence().setSelectedIndex(ev.getComboExigence().getSelectedIndex());*/
 					
 				ev.setNiveauExigence(Integer.parseInt((String)aValue));
 				fireTableCellUpdated(rowIndex, columnIndex);

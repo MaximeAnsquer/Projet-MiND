@@ -25,7 +25,8 @@ import abstraction.autres.Metrique;
 
 public class EvenementsRedoutes extends Module {
 	
-	/*Je mets dans cette classe pour variable d'instance tout d'abord une arraylist d'évenements
+	/*Je mets dans cette classe pour variable d'instance tout d'abord une arraylist d'évenements, et une autre qui correspond
+	 * aux évenements éventuellement stockés dans une bdc(xml)
 	 */
 	private ArrayList<Evenement> evenementsredoutes;
 	
@@ -82,7 +83,7 @@ public class EvenementsRedoutes extends Module {
 			for(int j=0;j<b;j++){
 				
 				
-				liste.add(i*b+j,new Evenement(this.etude,"lol",this.lesBiensEssentiels.getNomColonnesSup(),tableaubiens.get(i).getContenuColonnesSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
+				liste.add(i*b+j,new Evenement(this.etude,"",this.lesBiensEssentiels.getNomColonnesSup(),tableaubiens.get(i).getContenuColonnesSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
 				
 			}
 		}
@@ -138,6 +139,8 @@ public class EvenementsRedoutes extends Module {
 		return "Evenements redoutés";
 	}
 	
+	/*Méthode qui permet de lire le fichier xml pour importer les évenements qu'il contient*/
+	
 	public void importerBDC(){
 		bdcevenementsredoutes = new ArrayList<Evenement>();
 
@@ -163,7 +166,7 @@ public class EvenementsRedoutes extends Module {
 			final Element racine = document.getDocumentElement();
 
 			/*
-			 * Etape 5 : recuperation du noeud " CriteresDeSecurite "
+			 * Etape 5 : recuperation du noeud " EvenementsRedoutes "
 			 */
 			final Element evenements = (Element) racine.getElementsByTagName("EvenementsRedoutes").item(0);
 			final NodeList listeEvenements = evenements.getChildNodes();
@@ -174,7 +177,7 @@ public class EvenementsRedoutes extends Module {
 					final Element evenement = (Element) listeEvenements.item(i);
 
 					/*
-					 * Construction d'un critere
+					 * Construction d'un evenement
 					 */
 					
 
@@ -187,7 +190,7 @@ public class EvenementsRedoutes extends Module {
 					Evenement e = new Evenement(this.etude,nom,l,l, bien, critere);
 
 					/*
-					 * Ajout du critere a la bdc
+					 * Ajout de l'évenement a la bdc
 					 */
 
 					bdcevenementsredoutes.add(e);				}				
@@ -215,6 +218,9 @@ public class EvenementsRedoutes extends Module {
 		return resultat;
 	}
 	
+	/*Détermine si le bouton doit être disponible(non grisé) ou indisponible(grisé) dans le workflow
+	 * 	
+	 */
 	public void checkDisponible(){
 		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.etude.getModule("BiensEssentiels").estCoherent()==true&&this.lesMetriques.estCoherent()==true){
 			this.disponible=true;

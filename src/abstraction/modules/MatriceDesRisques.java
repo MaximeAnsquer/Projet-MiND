@@ -35,7 +35,7 @@ public class MatriceDesRisques extends Module {
 		this.predecesseurs.add(this.etude.getModule("AnalyseDesRisques"));
 		this.coherent=true;
 		this.cree=true;
-		this.disponible=true;
+		this.disponible=false;
 		int a=((Metriques)this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
 		int b=((Metriques)this.etude.getModule("Metriques")).getVraisemblance().nombreDeNiveaux();
 		this.matrice=new ArrayList[a][b];

@@ -9,6 +9,12 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 public class JTableX extends JTable{
+	
+	/*Cette classe étend JTable et nous permet de définir un TableCellEditor spécifique à chaque ligne (grâce
+	 * à la classe RowEditorModel) et donc d'avoir des JCombobox différentes à chaque ligne, ce qui est impossible avec 
+	 * l'Editor par défaut d'un JTable classique.
+	 * 
+	 */
 
 	
 	 protected RowEditorModel rm;

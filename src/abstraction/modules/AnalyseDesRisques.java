@@ -76,7 +76,7 @@ public class AnalyseDesRisques extends Module{
 			    /*On récupère le critère correspondant*/
 			    Critere[] listecriteres =this.criteres.getLesCriteres().values().toArray(new Critere[this.criteres.getLesCriteres().size()]);
 			    Critere criterecourant=listecriteres[k];
-			    System.out.println(criterecourant.getIntitule());
+			   
 			  
 			    if(biensessentiels!=null){
 			    for(int j=0;j<biensessentiels.size();j++){
@@ -112,6 +112,8 @@ public class AnalyseDesRisques extends Module{
 			return false;
 		}
 	}
+	
+	/*Méthode qui permet de vérifier si le bouton associé au module doit être grisé ou non (cf workflow)*/
 	
 	public void checkDisponible(){
 		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.mapping.estCoherent()==true&&this.scenarios.estCoherent()==true){

@@ -6,7 +6,7 @@ import javax.swing.table.TableCellEditor;
 
 public class RowEditorModel {
 	
-	
+	/*Classe qui permet de définir des TableCellEditor qui correspondent à ce que le tableau devra afficher à chaque ligne*/
 	
 	    private Hashtable data;
        public RowEditorModel()

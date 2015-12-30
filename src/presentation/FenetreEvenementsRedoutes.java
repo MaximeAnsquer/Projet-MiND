@@ -29,6 +29,9 @@ import abstraction.modules.EvenementsRedoutes;
 import abstraction.modules.Metriques;
 
 public class FenetreEvenementsRedoutes extends JPanel{
+	/*Cette classe fait appel aux variables d'instance suivantes pour afficher le tableau des Evenements Redoutés
+	 * 
+	 */
 	
 	private ModeleEvenementsRedoutes modele;
 	private EvenementsRedoutes evenements;
@@ -65,6 +68,9 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 	}
 	
+	
+	/*Methode qui permet de construire le tableau ainsi que les Jcombobox associées à la Gravité et à l'Exigence*/
+	
 	public void setUpComBo() {
  
 		
@@ -76,7 +82,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		tableau.setRowEditorModel(rm);
 	
-	
+	/*On construit la JCombobox associée à l'exigence de chaque critère du tableau*/
 		
 		int u=this.criteres.nombreDeCriteres();
 		
@@ -102,8 +108,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(150);
 		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(200);
-        
-        // tell the RowEditorModel to use ed for row 1
+       
+		/*Puis on construit la JCombobox associée à la Gravité*/
 		
        int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
 		
@@ -123,11 +129,6 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 	gravColumn.setPreferredWidth(200);
 	gravColumn.setMaxWidth(250);
-	
-	/*gravColumn.setCellRenderer(new DefaultTableCellRenderer());
-	exColumn.setCellRenderer(new DefaultTableCellRenderer());*/
-	
-	
 	
 	
 	}

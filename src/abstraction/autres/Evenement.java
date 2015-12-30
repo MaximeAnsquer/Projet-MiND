@@ -80,7 +80,7 @@ public class Evenement {
 	}
 	
 	
-	/*retourne  le nom du bien numero i
+	/*retourne  le nom du bien associé à l'évenement
 	 * 
 	 */
 	
@@ -97,7 +97,7 @@ public class Evenement {
 		return this.nomevenement;
 	}
 	
-	/*retourne le nom du critere numéro i
+	/*retourne le nom du critere associé à l'évenement considéré
 	 */
 	public String getNomCritere(){
 		return this.critere.toString();
