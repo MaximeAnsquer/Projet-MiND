@@ -46,8 +46,12 @@ import abstraction.modules.TypologieDesBiensSupports;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+//Copyright (c) 2003-2006, Joe Walnes
+//Copyright (c) 2006-2009, 2011 XStream Committers
+//All rights reserved.
+
 /**
- * Classe brouillon pour faire des tests
+ * 
  * @author Maxime Ansquer
  *
  */
