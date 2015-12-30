@@ -272,6 +272,14 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			this.problemesDeCoherence.add(label);
 			resultat = false;
 		}
+		for (ScenarioGenerique scenario : this.tableau.values()){
+			if (!scenario.getCriteresSup().values().contains(true)){
+				JLabel label = new JLabel("Aucun scenario generique retenu");
+				label.setForeground(Color.red);
+				this.problemesDeCoherence.add(label);
+				resultat = false;
+			}
+		}
 		if (resultat) {
 			this.problemesDeCoherence.add(new JLabel(
 					"Aucun probleme de coherence."));
