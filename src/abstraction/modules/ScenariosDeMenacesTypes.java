@@ -13,6 +13,7 @@ public class ScenariosDeMenacesTypes extends Module {
 	// Variable d'instance
 	Hashtable<String, ScenarioType> tableau;
 	private ScenarioType scenarioTypeCourant ;
+	// On liste les critères de sécurité retenus dans le module Scénarios de menaces génériques
 	private ArrayList<String> nomColonneSup ;
 
 	public ScenariosDeMenacesTypes() {
