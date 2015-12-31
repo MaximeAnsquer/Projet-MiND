@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 import javax.swing.table.AbstractTableModel;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.autres.ScenarioType;
@@ -26,12 +28,6 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	public static int COLONNE_SCENARIO_CONCRET= 4;
 	public static int COLONNE_SOURCES_MENACES = 5;
 	
-	/*
-	public static final int COLONNE_CRITERE_D = 6;
-	public static final int COLONNE_CRITERE_I = 7;
-	public static final int COLONNE_CRITERE_C = 8;
-	public static final int COLONNE_CRITERE_T = 9;
-	*/
 	public static int COLONNE_VRAISEMBLANCE_I=6 ;
 	public static int COLONNE_VRAISEMBLANCE_R=7 ;
 	public static int COLONNE_RETENU=8 ;
@@ -112,7 +108,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				&& columnIndex < this.biensSupports.getNomColonnesSup().size()) {
 			
 			// Bien du module BiensSupports ou du module ScenarioType ??
-			resultat = this.biensSupports.getBien(rowIndex).getContenuColonnesSup().get(columnIndex);
+			resultat = scenarioType.getBienSupport().getContenuColonnesSup().get(columnIndex);
 		}
 		if (columnIndex==COLONNE_BIEN_SUPPORT){
 			resultat=scenarioType.getBienSupport().getIntitule();
@@ -124,7 +120,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			resultat=scenarioType.getId();
 		}
 		if(columnIndex==COLONNE_SCENARIO_GENERIQUE){
-			resultat=scenarioType.getId();
+			resultat=scenarioType.getIntitule();
 		}
 		if (columnIndex==COLONNE_SCENARIO_CONCRET){
 			resultat=scenarioType.getIntituleConcret();
@@ -150,100 +146,47 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			resultat=scenarioType.isRetenu();
 		}
 		return resultat;
-		/*
-		switch(this.getColumnCount()-columnIndex-1){
-		case 12 :
-			return scenarioType.getBienSupport().getIntitule();
-		case 11 :
-			return scenarioType.getTypeBienSupport();
-		case 10 :
-			return scenarioType.getId();
-		case 9 :
-			return scenarioType.getIntitule();
-		case 8 :
-			return scenarioType.getIntituleConcret();
-		case 7 :
-			return scenarioType.listeSourcesMenaces();
-		case 6 :
-			return scenarioType.getCriteresSup().get("Disponibilité");	
-		case 5 :
-			return scenarioType.getCriteresSup().get("Intégrité");
-		case 4 :
-			return scenarioType.getCriteresSup().get("Confidentialité");
-		case 3 :
-			return scenarioType.getCriteresSup().get("Traçabilité");
-		case 2 :
-			return scenarioType.getVraisemblanceIntrinseque();
-		case 1 :
-			return scenarioType.getVraisemblanceReelle();
-		case 0 :
-			return scenarioType.isRetenuScenarioType();
-		default :
-			if(biensSupports.getNomColonnesSup().get(columnIndex)!=null){
-				return biensSupports.getBien(rowIndex).getContenuColonnesSup().get(columnIndex);
-			}
-			else{
-				return "";
-			}
-		}
-		*/
 	}
 	
 	public boolean isCellEditable(int row, int col){
 		return true; 
 	}
 	
-	public Class getColumnClass(int columnIndex){
-		switch(this.getColumnCount()-columnIndex-1){
-		case 6 :
-			return Boolean.class;
-		case 5 :
-			return Boolean.class;
-		case 4 :
-			return Boolean.class;
-		case 3 :
-			return Boolean.class;
-		case 2 :
+	public Class getColumnClass(int columnIndex) {
+		if (columnIndex == COLONNE_VRAISEMBLANCE_I
+				|| columnIndex == COLONNE_VRAISEMBLANCE_R) {
 			return Integer.class;
-		case 1 :
-			return Integer.class;
-		case 0 :
-			return Boolean.class;
-		default:
-			return String.class;
+		} else {
+			if (columnIndex == COLONNE_RETENU
+					|| (columnIndex > COLONNE_SOURCES_MENACES && columnIndex < COLONNE_VRAISEMBLANCE_I)) {
+				return Boolean.class;
+			} else {
+				return String.class;
+			}
 		}
 	}
 	
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		if (aValue != null) {
 			ScenarioType scenarioType = this.moduleCourant.getScenarioType(rowIndex);
-
-			switch (this.getColumnCount() - columnIndex - 1) {
-			case 12:
-				if (!aValue.equals("")) {
-					scenarioType.getBienSupport().setIntitule(((String) aValue));
-				}
-				break;
-			case 11:
-				if (!aValue.equals("")) {
-					scenarioType.setTypeBienSupport((String) aValue);
-				}
-				break;
-			case 10:
-				if (!aValue.equals("")) {
-					scenarioType.setId((String) aValue);
-				}
-				break;
-			case 9:
-				scenarioType.setRetenu((Boolean) aValue);
-				break;
-			default:
-				if (!aValue.equals("")) {
-					biensSupports.getBien(rowIndex).getContenuColonnesSup()
-							.set(columnIndex, (String) aValue);
-				}
-				break;
-
+			
+			if (columnIndex==COLONNE_BIEN_SUPPORT){
+				scenarioType.getBienSupport().setIntitule((String) aValue);
+			}
+			if(columnIndex==COLONNE_TYPE){
+				scenarioType.setTypeBienSupport((String) aValue);
+			}
+			if(columnIndex==COLONNE_ID){
+				scenarioType.setId((String) aValue);
+			}
+			if(columnIndex==COLONNE_SCENARIO_GENERIQUE){
+				scenarioType.setIntitule((String) aValue);
+			}
+			if (columnIndex==COLONNE_SCENARIO_CONCRET){
+				scenarioType.setIntituleConcret((String) aValue);
+			}
+			if (columnIndex==COLONNE_SOURCES_MENACES){
+				//scenarioType.getMenaces().put(key, value)
 			}
 		}
 	}
