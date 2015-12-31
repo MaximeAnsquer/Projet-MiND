@@ -266,34 +266,32 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	}
 	
 	public boolean estCoherent() {
-		boolean resultat = true ;
-		this.problemesDeCoherence = new ArrayList<JLabel>();
-		for (ScenarioGenerique scenario : this.tableau.values()){
-			if (scenario.isIncomplete()){
-				JLabel label = new JLabel("Scenario generique \" " + scenario.getIntitule() + " \" incomplet");
-				label.setForeground(Color.red);
-				this.problemesDeCoherence.add(label);
+		boolean resultat = true;
+		this.problemesDeCoherence = new ArrayList<String>();
+		for (ScenarioGenerique scenario : this.tableau.values()) {
+			if (scenario.isIncomplete()) {
+				String s = "Scenario generique \" " + scenario.getIntitule()
+						+ " \" incomplet";
+				this.problemesDeCoherence.add(s);
 				resultat = false;
 			}
 		}
-		if (this.getScenariosGeneriquesRetenus().size()<1){
-			JLabel label = new JLabel("Aucun scenario generique retenu");
-			label.setForeground(Color.red);
-			this.problemesDeCoherence.add(label);
+		if (this.getScenariosGeneriquesRetenus().size() < 1) {
+			String s = "Aucun scenario generique retenu";
+			this.problemesDeCoherence.add(s);
 			resultat = false;
 		}
-		for (String nomCritere : this.nomColonneSup){
-			if (!this.isImpacteCritere(nomCritere)){
-				JLabel label = new JLabel("Le critere de securite \" " + nomCritere + " \" n'est retenu dans aucun scenario");
-				label.setForeground(Color.red);
-				this.problemesDeCoherence.add(label);
+		for (String nomCritere : this.nomColonneSup) {
+			if (!this.isImpacteCritere(nomCritere)) {
+				String s = "Le critere de securite \" " + nomCritere
+						+ " \" n'est retenu dans aucun scenario";
+				this.problemesDeCoherence.add(s);
 				resultat = false;
 			}
 		}
 		if (resultat) {
-			this.problemesDeCoherence.add(new JLabel(
-					"Aucun probleme de coherence."));
+			this.problemesDeCoherence.add("Aucun probleme de coherence.");
 		}
-		return resultat ;
+		return resultat;
 	}
 }

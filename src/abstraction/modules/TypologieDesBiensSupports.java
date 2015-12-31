@@ -258,26 +258,23 @@ public class TypologieDesBiensSupports extends Module {
 	
 	public boolean estCoherent() {
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<JLabel>();
+		this.problemesDeCoherence = new ArrayList<String>();
 		for (TypeBien type : this.tableau.values()) {
 			if (type.isIncomplete()) {
-				JLabel label = new JLabel("Type de bien support \" "
-						+ type.getIntitule() + " \" incomplet");
-				label.setForeground(Color.red);
-				this.problemesDeCoherence.add(label);
+				String s = "Type de bien support \" " + type.getIntitule()
+						+ " \" incomplet";
+				this.problemesDeCoherence.add(s);
 				resultat = false;
 			}
 		}
 
 		if (this.getTypeBiensRetenus().size() < 1) {
-			JLabel label = new JLabel("Aucun type de bien support retenu");
-			label.setForeground(Color.red);
-			this.problemesDeCoherence.add(label);
+			String s = "Aucun type de bien support retenu";
+			this.problemesDeCoherence.add(s);
 			resultat = false;
 		}
 		if (resultat) {
-			this.problemesDeCoherence.add(new JLabel(
-					"Aucun probleme de coherence."));
+			this.problemesDeCoherence.add("Aucun probleme de coherence");
 		}
 		return resultat;
 	}
