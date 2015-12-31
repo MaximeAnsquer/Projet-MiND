@@ -97,17 +97,15 @@ public class MappingDesBiens extends Module{
 	
 	public boolean estCoherent(){
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<JLabel>();
+		this.problemesDeCoherence = new ArrayList<String>();
 		for(MappingBien m : this.getMappingDesBiens()){
 			if(!m.estComplet()){
-				JLabel label = new JLabel("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
-				label.setForeground(Color.red);
-				this.problemesDeCoherence.add(label);
+				this.problemesDeCoherence.add("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
 				resultat = false;
 			}
 		}
 		if(resultat){
-			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence au niveau du mapping des biens."));
+			this.problemesDeCoherence.add("Aucun probleme de coherence au niveau du mapping des biens.");
 		}		
 		return resultat;
 	}

@@ -117,24 +117,17 @@ public class BiensEssentiels extends Module {
 	
 	public boolean estCoherent(){
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<JLabel>();
+		this.problemesDeCoherence = new ArrayList<String>();
 		for(Bien b : this.getLesBiens().values()){
 			if(!b.estComplet()){
-				JLabel label = new JLabel("bien essentiel \" " + b.getIntitule() + " \" incomplet");
-				label.setForeground(Color.red);
-				this.problemesDeCoherence.add(label);
+				this.problemesDeCoherence.add("bien essentiel \" " + b.getIntitule() + " \" incomplet");
 				resultat = false;
 			}
 		}
 		if(this.getBiensRetenus().size() <= 0){
-			JLabel label = new JLabel("Aucun bien essentiel retenu");
-			label.setForeground(Color.red);
-			this.problemesDeCoherence.add(label);
+			this.problemesDeCoherence.add("Aucun bien essentiel retenu");
 			resultat = false;
 		}
-		if(resultat){
-			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence au niveau des biens essentiels."));
-		}		
 		return resultat;
 	}
 }

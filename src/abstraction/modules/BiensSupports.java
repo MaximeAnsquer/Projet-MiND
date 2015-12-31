@@ -125,24 +125,17 @@ public class BiensSupports extends Module{
 	
 	public boolean estCoherent(){
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<JLabel>();
+		this.problemesDeCoherence = new ArrayList<String>();
 		for(Bien b : this.getLesBiens().values()){
 			if(!b.estComplet()){
-				JLabel label = new JLabel("bien support \" " + b.getIntitule() + " \" incomplet");
-				label.setForeground(Color.red);
-				this.problemesDeCoherence.add(label);
+				this.problemesDeCoherence.add("bien support \" " + b.getIntitule() + " \" incomplet");
 				resultat = false;
 			}
 		}
 		if(this.getBiensRetenus().size() <= 0){
-			JLabel label = new JLabel("Aucun bien support retenu");
-			label.setForeground(Color.red);
-			this.problemesDeCoherence.add(label);
+			this.problemesDeCoherence.add("Aucun bien support retenu");
 			resultat = false;
-		}
-		if(resultat){
-			this.problemesDeCoherence.add(new JLabel("Aucun probleme de coherence au niveau des biens supports."));
-		}		
+		}	
 		return resultat;
 	}
 }
