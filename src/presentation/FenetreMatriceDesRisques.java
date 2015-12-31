@@ -21,7 +21,10 @@ public class FenetreMatriceDesRisques extends JPanel{
 		
 		
 		super(new GridLayout(1,0));
-				
+		
+		MatriceDesRisques mat=new MatriceDesRisques(matrice.getEtude());
+		matrice=mat;		
+		
 		this.matrice=matrice;
 		this.tableau=new JTable(modele);
 		tableau.setPreferredScrollableViewportSize(new Dimension(500, 70));

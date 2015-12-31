@@ -35,7 +35,7 @@ public class MatriceDesRisques extends Module {
 		this.predecesseurs.add(this.etude.getModule("AnalyseDesRisques"));
 		this.coherent=true;
 		this.cree=true;
-		this.disponible=false;
+		this.checkDisponible();
 		int a=((Metriques)this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
 		int b=((Metriques)this.etude.getModule("Metriques")).getVraisemblance().nombreDeNiveaux();
 		this.matrice=new ArrayList[a][b];
@@ -82,4 +82,14 @@ public class MatriceDesRisques extends Module {
 	public boolean  estCoherent(){
 		return true;
 	}
+	
+	public void checkDisponible(){
+		if(this.analysedesrisques.estCoherent()==true){
+			this.disponible=true;
+		}
+		else{
+			this.disponible=false;
+		}
+	}
+	
 }

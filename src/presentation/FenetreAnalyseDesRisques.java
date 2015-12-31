@@ -22,6 +22,9 @@ public class FenetreAnalyseDesRisques extends JPanel{
 		
 		
 		 super(new GridLayout(1,0));
+		 
+		 AnalyseDesRisques an=new AnalyseDesRisques(analyse.getEtude());
+		 analyse=an;
 			this.analyse=analyse;
 			
 			this.tableau=new JTable(modele);

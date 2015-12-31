@@ -65,4 +65,10 @@ public class Risque {
 	public Evenement getEvenementRedoute(){
 		return this.evenementredoute;
 	}
+	
+	public boolean estComplet(){
+		boolean resultat = true;
+		resultat = resultat && !getIntitule().equals("");
+		return resultat;
+	}
 }

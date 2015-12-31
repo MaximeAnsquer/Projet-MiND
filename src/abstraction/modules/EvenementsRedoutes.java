@@ -210,8 +210,12 @@ public class EvenementsRedoutes extends Module {
 	
 	public boolean estCoherent(){
 		boolean resultat=true;
+		this.problemesDeCoherence=new ArrayList<String>();
 		for (int i=0;i<this.getEvenementsRedoutes().size();i++){
 			if(this.getEvenementsRedoutes().get(i).estComplet()!=true){
+				String probleme = "Un evenement est incomplet";
+				this.problemesDeCoherence.add(probleme);
+				
 				resultat=false;
 			}
 		}

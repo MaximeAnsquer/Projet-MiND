@@ -123,5 +123,20 @@ public class AnalyseDesRisques extends Module{
 			this.disponible=false;
 		}
 	}
+	
+	
+	public boolean estCoherent(){
+		boolean resultat=true;
+		this.problemesDeCoherence=new ArrayList<String>();
+		for (int i=0;i<this.getAnalyseDesRisques().size();i++){
+			if(this.getAnalyseDesRisques().get(i).estComplet()!=true){
+				String probleme = "Un risque est incomplet";
+				this.problemesDeCoherence.add(probleme);
+				
+				resultat=false;
+			}
+		}
+		return resultat;
+	}
 
 }
