@@ -94,11 +94,17 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		int u=this.criteres.nombreDeCriteres();
 		
+		
 		for(int i=0;i<u;i++){
-			String critere=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCritere(i).getIntitule();	
-			int b=((Metriques)this.etude.getModule("Metriques")).getMetrique(critere).nombreDeNiveaux();
+			
+			ArrayList<Critere> tableaucriteres=new ArrayList<Critere>(this.criteres.getCriteresRetenus().values());
+			String nomcritere=tableaucriteres.get(i).getIntitule();	
+			
+			
+			int b=((Metriques)this.etude.getModule("Metriques")).getMetrique(nomcritere).nombreDeNiveaux();
 			String[] listebis=new String[b];
-	    for(int j=1;j<=b;j++){
+	    
+			for(int j=1;j<=b;j++){
 	    	
 	    	
 			listebis[j-1]=""+j;
@@ -106,7 +112,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	    JComboBox comboBoxex=new JComboBox(listebis);
 	    DefaultCellEditor ed = new DefaultCellEditor(comboBoxex);
 	    for (int k=0;k<modele.getRowCount();k++){
-	    	if(evenements.getEvenementsRedoutes().get(k).getNomCritere()==critere){
+	    	if(evenements.getEvenementsRedoutes().get(k).getNomCritere()==nomcritere){
 	    		rm.addEditorForRow(k,ed);
 	    	}
 	    }

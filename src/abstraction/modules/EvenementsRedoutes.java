@@ -44,11 +44,16 @@ public class EvenementsRedoutes extends Module {
 		
 		super("EvenementsRedoutes");
 		this.etude=etude;
+		
+		
 		this.predecesseurs.add(this.etude.getModule("BiensEssentiels"));
 		this.predecesseurs.add(this.etude.getModule("Metriques"));
+		
 		this.successeurs.add(this.etude.getModule("AnalyseDesRisques"));
+		
 		this.lesMetriques=(Metriques)this. etude.getModule("Metriques");
 		this.lesBiensEssentiels=(BiensEssentiels)this.etude.getModule("BiensEssentiels");
+		
 		this.cree=false;
 		this.checkDisponible();
 		this.coherent=false;
@@ -65,17 +70,18 @@ public class EvenementsRedoutes extends Module {
 	    
 	    /*if(importerbdc==false){*/
 	
-		int a=((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getLesBiens().size();
-		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
+		int a=((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getBiensRetenus().size();
+		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size();
 		
+		if(((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size()!=0 &&((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getBiensRetenus().size()!=0 ){
+	
 		
 		
 		CriteresDeSecurite critere=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
-		ArrayList<Critere> tableaucriteres=new ArrayList<Critere>(critere.getLesCriteres().values());
-		BiensEssentiels bienessentiel=this.lesBiensEssentiels;
-		Metrique exigence=this.lesMetriques.getMetrique("Exigence");
-		Metrique gravite=this.lesMetriques.getMetrique("Gravite");
-		ArrayList<Bien> tableaubiens=new ArrayList<Bien>(this.lesBiensEssentiels.getLesBiens().values());
+		ArrayList<Critere> tableaucriteres=new ArrayList<Critere>(critere.getCriteresRetenus().values());
+		
+		
+		ArrayList<Bien> tableaubiens=new ArrayList<Bien>(this.lesBiensEssentiels.getBiensRetenus().values());
 		
 		
 		for (int i=0;i<a;i++){
@@ -86,6 +92,11 @@ public class EvenementsRedoutes extends Module {
 				liste.add(i*b+j,new Evenement(this.etude,"",this.lesBiensEssentiels.getNomColonnesSup(),tableaubiens.get(i).getContenuColonnesSup(),tableaubiens.get(i).getIntitule(),tableaucriteres.get(j).getIntitule()));
 				
 			}
+		}
+		}
+		else{
+			LinkedList<String> vide=new LinkedList<String>();
+			liste.add(0,new Evenement(this.etude,"",vide,vide,"",""));
 		}
 		
 		this.evenementsredoutes=liste;

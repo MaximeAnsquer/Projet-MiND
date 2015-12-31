@@ -3,7 +3,7 @@ package abstraction.modules;
 
 
 import java.util.ArrayList;
-
+import java.util.LinkedList;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
@@ -33,16 +33,26 @@ public class AnalyseDesRisques extends Module{
 	public AnalyseDesRisques(Etude etude){
 		super("AnalyseDesRisques");
 		this.etude=etude;
+		
 		this.criteres=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
 		this.evenements=(EvenementsRedoutes) this.etude.getModule("EvenementsRedoutes");
 		this.mapping=(MappingDesBiens)this.etude.getModule("MappingDesBiens");
 		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("ScenarioDeMenacesTypes");
+		
+		this.predecesseurs.add(this.etude.getModule("ScenariosDeMenacesTypes"));
+		this.predecesseurs.add(this.evenements);
+		this.predecesseurs.add(this.mapping);
+		
+		this.successeurs.add(this.etude.getModule("MatriceDesRisques"));
+		
 		
 		this.cree=false;
 		this.checkDisponible();
 		
 		
 		ArrayList<Risque> liste=new ArrayList<Risque>();
+		
+		if(this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true){
 		
 		int a=this.scenarios.getTableau().size();
 		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
@@ -74,7 +84,7 @@ public class AnalyseDesRisques extends Module{
 					e.printStackTrace();
 				}
 			    /*On récupère le critère correspondant*/
-			    Critere[] listecriteres =this.criteres.getLesCriteres().values().toArray(new Critere[this.criteres.getLesCriteres().size()]);
+			    Critere[] listecriteres =this.criteres.getCriteresRetenus().values().toArray(new Critere[this.criteres.getCriteresRetenus().size()]);
 			    Critere criterecourant=listecriteres[k];
 			   
 			  
@@ -91,6 +101,15 @@ public class AnalyseDesRisques extends Module{
 		}
 		
 		this.risques=liste;
+		}
+		else{
+			
+			/*LinkedList<String> vide=new LinkedList<String>();
+			Evenement ev=new Evenement(this.etude,"",vide,vide,"","");*/
+			
+			
+			this.risques=new ArrayList<Risque>();
+		}
 	/*Getter utile pour la construction de la matrice qui vient après*/	
 	
 	}
@@ -104,14 +123,8 @@ public class AnalyseDesRisques extends Module{
 	}
 	
 	
-	public boolean estCoherent(){
-		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.etude.getModule("MappingDesBiens").estCoherent()==true&&this.scenarios.estCoherent()==true){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
+	
+	
 	
 	/*Méthode qui permet de vérifier si le bouton associé au module doit être grisé ou non (cf workflow)*/
 	
