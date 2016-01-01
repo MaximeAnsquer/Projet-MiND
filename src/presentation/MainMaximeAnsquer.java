@@ -213,7 +213,10 @@ public class MainMaximeAnsquer extends JFrame {
 
 	private void setPartieDuBas() {
 		
-		partieDuBas.removeAll();
+		//On genere les eventuels problemes de coherence
+		moduleEnCours.estCoherent();
+		
+		partieDuBas.removeAll();		
 		
 		for(String probleme : moduleEnCours.getProblemes()){
 			JLabel label = new JLabel(probleme);
@@ -225,6 +228,7 @@ public class MainMaximeAnsquer extends JFrame {
 		if(moduleEnCours.getProblemes().size() == 0){
 			JLabel label = new JLabel("Aucun probleme de coherence");
 			label.setFont(new Font("Arial", Font.PLAIN, 22));
+			partieDuBas.add(label);
 		}
 		
 		partieDuBas.validate();
@@ -298,15 +302,24 @@ public class MainMaximeAnsquer extends JFrame {
 		return nouvelleEtude;
 	}
 	public void enregistrerEtude(){
+		
+		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme tant que la fenetre)
+		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
+		((ScenariosDeMenacesGeneriques) etudeEnCours.getModule("ScenariosDeMenacesGeneriques") ).deleteObservers();
+		
+		//Necessaire etant donne que l'on supprime les observeurs (il faut recreer les fenetres pour que les boutons etc refonctionnent)
+		setContenu("Workflow");
+		
+		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
 		try {
 			// Instanciation de la classe XStream
 			XStream xstream = new XStream(new DomDriver("UTF-8"));		    
-			// Instanciation d'un fichier c:/temp/article.xml
+			// Instanciation d'un fichier
 			File fichier = new File(System.getProperty("user.dir") + File.separator + "etudes" + File.separator + etudeEnCours.getNom()+".xml");
 			// Instanciation d'un flux de sortie fichier
 			FileOutputStream fos = new FileOutputStream(fichier);
 			try {
-				// Sérialisation de l'objet article dans c:/temp/article.xml
+				// Sérialisation de l'objet 
 				xstream.toXML(etudeEnCours, fos);
 				JOptionPane.showMessageDialog(null, "Etude enregistree avec succes");
 			} finally {
@@ -439,12 +452,7 @@ public class MainMaximeAnsquer extends JFrame {
 			this.enregistrerEtude();
 		}
 	}
-
-	public static void main(String[] args) {
-		//---La fenetre principale---
-		MainMaximeAnsquer fenetrePrincipale = new MainMaximeAnsquer(); 
-	}
-
+	
 	public void supprimerEtude() {
 		System.out.println("supprimerEtude");
 		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
@@ -466,5 +474,11 @@ public class MainMaximeAnsquer extends JFrame {
 			}
 		}		
 	}
+
+	public static void main(String[] args) {
+		//---La fenetre principale---
+		MainMaximeAnsquer fenetrePrincipale = new MainMaximeAnsquer(); 
+	}
+
 }
 
