@@ -31,11 +31,16 @@ public class MatriceDesRisques extends Module {
 		super("MatriceDesRisques");
 		this.etude=etude;
 		this.analysedesrisques=(AnalyseDesRisques)this.etude.getModule("AnalyseDesRisques");
+		
 		this.successeurs=null;
 		this.predecesseurs.add(this.etude.getModule("AnalyseDesRisques"));
-		this.coherent=true;
-		this.cree=true;
+		
+		this.coherent=false;
+		this.cree=false;
 		this.checkDisponible();
+		
+		if(this.analysedesrisques.estCoherent()==true){
+		
 		int a=((Metriques)this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
 		int b=((Metriques)this.etude.getModule("Metriques")).getVraisemblance().nombreDeNiveaux();
 		this.matrice=new ArrayList[a][b];
@@ -48,9 +53,15 @@ public class MatriceDesRisques extends Module {
 					}
 				}
 			}
-			
+		
+		
+		
+		
 			
 		}
+			
+			
+		
 	for (int i=1;i<a;i++){
 		this.matrice[i][0].add((i+1)+"");
 	}
@@ -61,8 +72,13 @@ public class MatriceDesRisques extends Module {
 	
 	this.matrice[0][0].add("Gravité");
 	this.matrice[0][0].add("Vraisemblance");
-	
+}
 			
+	else{this.matrice=new ArrayList[1][1];
+	this.matrice[0][0].add("");
+	
+		
+	}
 		}
 	
 	/*getters
@@ -80,7 +96,12 @@ public class MatriceDesRisques extends Module {
 	}
 
 	public boolean  estCoherent(){
-		return true;
+		if (this.matrice.length!=1){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	public void checkDisponible(){

@@ -73,7 +73,7 @@ public class EvenementsRedoutes extends Module {
 		int a=((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getBiensRetenus().size();
 		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size();
 		
-		if(((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size()!=0 &&((BiensEssentiels)this.etude.getModule("BiensEssentiels")).getBiensRetenus().size()!=0 ){
+		if(this.lesMetriques.estCoherent()==true && this.lesBiensEssentiels.estCoherent()==true ){
 	
 		
 		
@@ -96,6 +96,7 @@ public class EvenementsRedoutes extends Module {
 		}
 		else{
 			LinkedList<String> vide=new LinkedList<String>();
+			vide.add("");
 			liste.add(0,new Evenement(this.etude,"",vide,vide,"",""));
 		}
 		

@@ -3,6 +3,7 @@ package abstraction.modules;
 
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.LinkedList;
 
 import abstraction.Etude;
@@ -11,6 +12,7 @@ import abstraction.autres.Critere;
 import abstraction.autres.Evenement;
 import abstraction.autres.Risque;
 import abstraction.autres.ScenarioType;
+import abstraction.autres.SourceDeMenace;
 
 public class AnalyseDesRisques extends Module{
 	
@@ -104,11 +106,27 @@ public class AnalyseDesRisques extends Module{
 		}
 		else{
 			
-			/*LinkedList<String> vide=new LinkedList<String>();
-			Evenement ev=new Evenement(this.etude,"",vide,vide,"","");*/
+			LinkedList<String> vide=new LinkedList<String>();
+			vide.add("");
+			Evenement ev=new Evenement(this.etude,"",vide,vide,"","");
+			Bien biensupport= new Bien("","","",vide);
+			ScenarioType[] scenarios=new ScenarioType[1];
+			
+			Hashtable<String,Boolean> hash1=new Hashtable<String,Boolean>();
+			hash1.put("", true);
+			
+			SourceDeMenace src=new SourceDeMenace("","","");
+			src.setRetenu(true);
+			
+			Hashtable<String,SourceDeMenace> hash2=new Hashtable<String,SourceDeMenace>();
+			hash2.put("",src);
 			
 			
-			this.risques=new ArrayList<Risque>();
+			ScenarioType sc=new ScenarioType("","", "",hash1,hash2, biensupport,"", 1, 1, true) ;
+				
+			liste.add(new Risque("",ev,1,biensupport,sc,1));
+			
+			this.risques=liste;
 		}
 	/*Getter utile pour la construction de la matrice qui vient après*/	
 	
