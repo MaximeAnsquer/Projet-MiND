@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -288,6 +289,11 @@ public class FenetreSourcesDeMenaces extends JPanel {
 	//---Renderer---
 
 	class Renderer extends DefaultTableCellRenderer {
+		
+		public Renderer(){
+			super();
+			this.setHorizontalAlignment( SwingConstants.CENTER );
+		}
 
 		private static final long serialVersionUID = 1L;
 

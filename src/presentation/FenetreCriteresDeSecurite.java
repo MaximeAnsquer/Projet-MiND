@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -304,7 +305,12 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 	class Renderer extends DefaultTableCellRenderer {
 
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1L;		
+
+		public Renderer(){
+			super();
+			this.setHorizontalAlignment( SwingConstants.CENTER );
+		}
 
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

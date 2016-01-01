@@ -303,11 +303,11 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 	public void enregistrerEtude(){
 		
-		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme tant que la fenetre)
+		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme temps que la fenetre)
 		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
 		((ScenariosDeMenacesGeneriques) etudeEnCours.getModule("ScenariosDeMenacesGeneriques") ).deleteObservers();
 		
-		//Necessaire etant donne que l'on supprime les observeurs (il faut recreer les fenetres pour que les boutons etc refonctionnent)
+		//Necessaire etant donne que l'on supprime les observeurs (il faut recreer les fenetres pour que leurs boutons etc refonctionnent)
 		setContenu("Workflow");
 		
 		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
