@@ -77,8 +77,8 @@ public class TypologieDesBiensSupports extends Module {
 
 	public void setTypeBienCourant(TypeBien typeBienCourant) {
 		this.typeBienCourant = typeBienCourant;
-		this.setChanged();        // PAC
-		this.notifyObservers();   // PAC
+		// this.setChanged();        // PAC
+		// this.notifyObservers();   // PAC
 	}
 
 	public TypeBien getTypeBien(String type) {
@@ -87,8 +87,8 @@ public class TypologieDesBiensSupports extends Module {
 	
 	public void setTypeBien (int i, TypeBien type){
 		this.tableau.replace(this.getTypeBien(i).getIntitule(), type);
-		this.setChanged();               // PAC
-		this.notifyObservers();          // PAC
+		// this.setChanged();               // PAC
+		// this.notifyObservers();          // PAC
 	}
 	
 	public TypeBien getTypeBien(int i){
@@ -124,23 +124,23 @@ public class TypologieDesBiensSupports extends Module {
 	public void addTypeBienSupport(TypeBien type) {
 		if (!type.isIncomplete()) {
 			this.tableau.put(type.getIntitule(), type);
-			this.setChanged();      // PAC
-			this.notifyObservers(); // PAC
+			// this.setChanged();      // PAC
+			// this.notifyObservers(); // PAC
 		}
 	}
 
 	// Suppression d'une ligne du tableau
 	public void removeTypeBienSupport(TypeBien type) {
 		this.tableau.remove(type.getIntitule());
-		this.setChanged();      // PAC
-		this.notifyObservers(); // PAC
+		// this.setChanged();      // PAC
+		// this.notifyObservers(); // PAC
 	}
 	
 	// NEW !!!
 	public void setDescriptionTypeBienSupport (String description, TypeBien type){
 		this.tableau.get(type.getIntitule()).setDescription(description);
-		this.setChanged();      // PAC
-		this.notifyObservers(); // PAC
+		//this.setChanged();      // PAC
+		//this.notifyObservers(); // PAC
 	}
 	
 	// On liste les Types de bien retenus
