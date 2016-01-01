@@ -287,9 +287,6 @@ public class ScenariosDeMenacesGeneriques extends Module {
 				resultat = false;
 			}
 		}
-		if (resultat) {
-			this.problemesDeCoherence.add("Aucun probleme de coherence.");
-		}
 		return resultat;
 	}
 }

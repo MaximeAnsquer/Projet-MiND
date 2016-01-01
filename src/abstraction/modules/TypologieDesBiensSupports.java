@@ -267,9 +267,6 @@ public class TypologieDesBiensSupports extends Module {
 			this.problemesDeCoherence.add(s);
 			resultat = false;
 		}
-		if (resultat) {
-			this.problemesDeCoherence.add("Aucun probleme de coherence");
-		}
 		return resultat;
 	}
 }

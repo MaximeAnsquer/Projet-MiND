@@ -9,6 +9,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.autres.ScenarioType;
+import abstraction.autres.SourceDeMenace;
 import abstraction.modules.BiensSupports;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.ScenariosDeMenacesTypes;
@@ -186,8 +187,12 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				scenarioType.setIntituleConcret((String) aValue);
 			}
 			if (columnIndex==COLONNE_SOURCES_MENACES){
-				//scenarioType.getMenaces().put(key, value)
+				SourceDeMenace source = this.sourcesDeMenaces.getSourceDeMenace((String) aValue);
+				if (source!=null){
+					scenarioType.getMenaces().put((String) aValue, source);
+				}
 			}
+			//if(co)
 		}
 	}
 	
