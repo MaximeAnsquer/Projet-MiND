@@ -45,8 +45,29 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		 super(new GridLayout(1,0));
 		 /* On recrée un module pour être sur que les données sont à jour*/
 		 
-		EvenementsRedoutes ev=new EvenementsRedoutes(evenements.getEtude()); 
-		evenements=ev;
+		EvenementsRedoutes nouveauev=new EvenementsRedoutes(evenements.getEtude());
+		
+		
+		/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
+		 * dans le nouveau
+		 */
+		
+		int a=nouveauev.getEvenementsRedoutes().size();
+		int b=evenements.getEvenementsRedoutes().size();
+		
+		for (int i=0;i<a;i++){
+			for(int j=0;j<b;j++){
+				String biennouveau=nouveauev.getEvenementsRedoutes().get(i).GetNomBien();
+				String bienancien=evenements.getEvenementsRedoutes().get(j).GetNomBien();
+				if(nouveauev.getEvenementsRedoutes().get(i).GetCritere()==evenements.getEvenementsRedoutes().get(j).GetCritere()&&biennouveau==bienancien){
+					nouveauev.getEvenementsRedoutes().get(i).setNomEvenement(evenements.getEvenementsRedoutes().get(j).GetNomEvenement());
+					nouveauev.getEvenementsRedoutes().get(i).setNiveauExigence(evenements.getEvenementsRedoutes().get(j).getNiveauExigence());
+					nouveauev.getEvenementsRedoutes().get(i).setNiveauGravite(evenements.getEvenementsRedoutes().get(j).getNiveauGravite());
+				}
+			}
+		}
+		
+		evenements=nouveauev;
 		
 		this.modele=new ModeleEvenementsRedoutes(evenements);
 		
