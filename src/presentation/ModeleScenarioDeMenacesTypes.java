@@ -8,6 +8,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
+import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.ScenarioType;
 import abstraction.autres.SourceDeMenace;
 import abstraction.modules.BiensSupports;
@@ -63,6 +64,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		entetes.add("Retenu");
 		
 		this.updateIndice();
+		this.importerDonnees();
 	}
 	
 	public ScenariosDeMenacesTypes getModuleCourant(){
@@ -99,6 +101,27 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			COLONNE_VRAISEMBLANCE_I+=nbCriteresSup;
 			COLONNE_VRAISEMBLANCE_R+=nbCriteresSup;
 			COLONNE_RETENU+=nbCriteresSup;
+		}
+	}
+	
+	public void importerDonnees(){
+		// On ajoute des biens supports pour tester
+		Bien bien1 = new Bien("description bien 1", "BS 1", "Matériel", new LinkedList<String>() );
+		bien1.setRetenu(true);
+		this.biensSupports.ajouterBien(bien1);
+		
+		Bien bien2 = new Bien("description bien 2", "BS 2", "Logiciel", new LinkedList<String>() );
+		bien2.setRetenu(true);
+		this.biensSupports.ajouterBien(bien2);
+		
+		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getTableau().values()){
+			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
+			for (Bien b : this.biensSupports.getBiensRetenus().values()){
+				if (sGene.getTypeBienSupport().contains(b.getType())){
+					scenario.setBienSupport(b);
+				}
+			}
+			this.moduleCourant.getTableau().put(sGene.getIntitule(), scenario);
 		}
 	}
 
@@ -192,7 +215,25 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 					scenarioType.getMenaces().put((String) aValue, source);
 				}
 			}
-			//if(co)
+			if(this.scenarioDeMenacesGeneriques.getNomColonneSup()!=null){
+				
+				if (columnIndex>COLONNE_SOURCES_MENACES && columnIndex<COLONNE_VRAISEMBLANCE_I){
+					
+					// indice du critère dans l'ArrayList
+					int indice = columnIndex-COLONNE_SOURCES_MENACES; 
+					String critere = this.moduleCourant.getNomColonneSup().get(indice);
+					this.moduleCourant.getScenarioType(rowIndex).getCriteresSup().put(critere, (Boolean) aValue);
+				}
+			}
+			if(columnIndex==COLONNE_VRAISEMBLANCE_I){
+				scenarioType.setVraisemblanceIntrinseque((Integer) aValue);
+			}
+			if(columnIndex==COLONNE_VRAISEMBLANCE_R){
+				scenarioType.setVraisemblanceReelle((Integer) aValue);
+			}
+			if(columnIndex==COLONNE_RETENU){
+				scenarioType.setRetenuScenarioType((Boolean) aValue);
+			}
 		}
 	}
 	

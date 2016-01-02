@@ -35,6 +35,19 @@ public class ScenarioType extends ScenarioGenerique {
 		this.retenu=retenu;
 	}
 	
+	public ScenarioType(String type, String id, String intitule,
+			Hashtable<String, Boolean> criteres,
+			Hashtable<String, SourceDeMenace> menaces, Bien bienSupport, boolean retenu) {
+		
+		super(type,id,intitule,criteres,true);
+		this.menaces=menaces;
+		this.bienSupport=bienSupport;
+		this.intituleConcret="";
+		this.vraisemblanceIntrinseque=0;
+		this.vraisemblanceReelle=0;
+		this.retenu=retenu;
+	}
+	
 	public Hashtable<String, SourceDeMenace> getMenaces() {
 		return menaces;
 	}
@@ -79,7 +92,7 @@ public class ScenarioType extends ScenarioGenerique {
 		return this.retenu;
 	}
 	
-	public void setRetenuScenarioType(){
+	public void setRetenuScenarioType(Boolean retenu){
 		this.retenu=retenu;
 	}
 	
