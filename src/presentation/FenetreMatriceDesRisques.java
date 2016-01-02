@@ -35,15 +35,14 @@ public class FenetreMatriceDesRisques extends JPanel{
 		
 		add(scrollPane);
 		
-		
+		tableau.setDefaultRenderer(Object.class, new MonTableCellRenderer());
 		
 		this.setVisible(true);
 	
 	
+
 	
-	this.tableau=new JTable(modele);
 	
-	this.setVisible(true);
 		
 	}
 	

@@ -48,18 +48,13 @@ public class MatriceDesRisques extends Module {
 		for (int i=1;i<a;i++){
 			for (int j=1;j<b;j++){
 				for (int k=0;k<this.analysedesrisques.getAnalyseDesRisques().size();k++){
-					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j){
+					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getRetenu()==true&&this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j){
 		this.matrice[i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
 					}
 				}
 			}
-		
-		
-		
-		
 			
 		}
-			
 			
 		
 	for (int i=1;i<a;i++){
@@ -84,8 +79,7 @@ public class MatriceDesRisques extends Module {
 	/*getters
 	 * 
 	 */
-	
-	
+
 	
 	public ArrayList<String>[][] getMatrice(){
 		return this.matrice;

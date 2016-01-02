@@ -225,7 +225,7 @@ public class EvenementsRedoutes extends Module {
 		this.problemesDeCoherence=new ArrayList<String>();
 		for (int i=0;i<this.getEvenementsRedoutes().size();i++){
 			if(this.getEvenementsRedoutes().get(i).estComplet()!=true){
-				String probleme = "Un evenement est incomplet";
+				String probleme = "Un ou plusieurs evenements sont incomplets";
 				this.problemesDeCoherence.add(probleme);
 				
 				resultat=false;

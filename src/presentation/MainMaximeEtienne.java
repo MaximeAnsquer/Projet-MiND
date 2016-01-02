@@ -64,6 +64,7 @@ public class MainMaximeEtienne extends JFrame {
 		/*etude.addModule(new ScenariosDeMenacesGeneriques());*/
 		EvenementsRedoutes ev=new EvenementsRedoutes(etude);
 		etude.addModule(ev);
+		
 		/*etude.addModule(sc);
 		/*MappingDesBiens mapping=new MappingDesBiens(etude);
 		mapping.getMappingDesBiens().get(0).setValueAt("x",0);
