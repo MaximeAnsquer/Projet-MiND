@@ -56,8 +56,8 @@ public class AnalyseDesRisques extends Module{
 		
 		if(this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true){
 		
-		int a=this.scenarios.getTableau().size();
-		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getLesCriteres().size();
+		int a=this.scenarios.getTableau().size();/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
+		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size();
 		
 		/*là on construit chacuns des risques de l'arraylist, en allant piocher dans les modules antécédents pour
 		 * faire correspondre chaque scénario de menace(ScenariosDeMenacesTypes) avec l'évenement correspondant(EvenementsRedoutes)
@@ -65,17 +65,33 @@ public class AnalyseDesRisques extends Module{
 		 * y a moyen que je retouche ça plus tard pour plus de visibilité.
 		 * 
 		 */
+		
+		/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
+		
 		ScenarioType[] scenarios=this.scenarios.getTableau().values().toArray(new ScenarioType[this.scenarios.getTableau().size()]);
 		
 		
 		/*Pour chaque scénario*/
 		for (int i=0;i<a;i++){
+			
+			/*si le scenario est retenu*/
+			
+			if(scenarios[i].isRetenuScenario()){
+				
+			
 			/*Pour chaque critere*/
 			for(int k=0;k<b;k++){
-			    if (/*scenarios[i].isRetenuCritere(k)*/true==true){
+				
+				/*si le critere est retenu*/
+			
+				
+				String critere = this.scenarios.getNomColonneSup().get(k);
+				boolean resultat=scenarios[i].getCriteresSup().get(critere);
+				
+			    if (resultat==true){
 			    	/*On recupere le bien essentiel correspondant au bien support du scenario considéré*/
 			    Bien biensupport=scenarios[i].getBienSupport();	
-			    System.out.println(scenarios[i].getIntituleConcret());
+			    
 			    
 			    ArrayList<Bien> biensessentiels;
 				try {
@@ -101,7 +117,7 @@ public class AnalyseDesRisques extends Module{
 			}}
 			
 		}
-		
+		}
 		this.risques=liste;
 		}
 		else{
