@@ -40,7 +40,7 @@ public class ControlJButtonAjoutColonne implements Observer,ActionListener {
 	}
 
 	public void update(Observable o, Object arg) {
-		if (this.modele.getModuleCourant().getNomColonneSup().size()==4){
+		if (this.modele.getModuleCourant().getNomColonneSup().size()==this.modele.getCriteresDeSecurite().nombreDeCriteres()){
 			this.ajouterCritere.setEnabled(false);
 		}
 		else{

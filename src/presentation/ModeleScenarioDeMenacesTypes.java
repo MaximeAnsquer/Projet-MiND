@@ -4,8 +4,6 @@ import java.util.LinkedList;
 
 import javax.swing.table.AbstractTableModel;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import abstraction.Etude;
 import abstraction.autres.Bien;
 import abstraction.autres.ScenarioGenerique;
