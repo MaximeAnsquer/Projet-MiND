@@ -78,9 +78,9 @@ public class EvenementsRedoutes extends Module {
 		
 		
 		CriteresDeSecurite critere=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
+		
+		
 		ArrayList<Critere> tableaucriteres=new ArrayList<Critere>(critere.getCriteresRetenus().values());
-		
-		
 		ArrayList<Bien> tableaubiens=new ArrayList<Bien>(this.lesBiensEssentiels.getBiensRetenus().values());
 		
 		
