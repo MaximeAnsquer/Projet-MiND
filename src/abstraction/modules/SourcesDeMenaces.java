@@ -50,12 +50,6 @@ public class SourcesDeMenaces extends Module {
 	 */
 	public SourcesDeMenaces(){
 		super("SourcesDeMenaces");
-		//TODO commente pour faire des test, a decommenter par la suite
-		
-//		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
-//		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
-//		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
-//		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;

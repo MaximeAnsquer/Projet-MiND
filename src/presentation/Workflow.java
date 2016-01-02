@@ -121,8 +121,8 @@ public class Workflow extends JPanel {
 
 		//6eme ligne
 		this.add(new JLabel());
-		this.add(new JLabel());
 		this.add(lesBoutons.get("ScenariosDeMenacesGeneriques"));		
+		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
