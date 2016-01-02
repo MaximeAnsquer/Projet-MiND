@@ -19,7 +19,6 @@ public class ScenarioType extends ScenarioGenerique {
 	private String intituleConcret;
 	private int vraisemblanceIntrinseque;
 	private int vraisemblanceReelle;
-	private boolean retenu;
 	
 	public ScenarioType(String type, String id, String intitule,
 			Hashtable<String, Boolean> criteres,
@@ -32,7 +31,6 @@ public class ScenarioType extends ScenarioGenerique {
 		this.intituleConcret=intituleConcret;
 		this.vraisemblanceIntrinseque=intrinseque;
 		this.vraisemblanceReelle=reelle;
-		this.retenu=retenu;
 	}
 	
 	public ScenarioType(String type, String id, String intitule,
@@ -45,7 +43,6 @@ public class ScenarioType extends ScenarioGenerique {
 		this.intituleConcret="";
 		this.vraisemblanceIntrinseque=0;
 		this.vraisemblanceReelle=0;
-		this.retenu=retenu;
 	}
 	
 	public Hashtable<String, SourceDeMenace> getMenaces() {
@@ -86,14 +83,6 @@ public class ScenarioType extends ScenarioGenerique {
 
 	public void setVraisemblanceReelle(int vraisemblanceReelle) {
 		this.vraisemblanceReelle = vraisemblanceReelle;
-	}
-	
-	public Boolean isRetenuScenarioType(){
-		return this.retenu;
-	}
-	
-	public void setRetenuScenarioType(Boolean retenu){
-		this.retenu=retenu;
 	}
 	
 	public String listeSourcesMenaces(){

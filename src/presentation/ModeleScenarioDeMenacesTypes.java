@@ -83,6 +83,10 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		return this.entetes.size();
 	}
 	
+	public String getColumnName(int columnIndex) {
+		return this.entetes.get(columnIndex);
+	}
+	
 	public void updateIndice(){
 		if (this.biensSupports.getNomColonnesSup()!=null){
 			int nbColonnesSup = this.biensSupports.getNomColonnesSup().size();
@@ -232,7 +236,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				scenarioType.setVraisemblanceReelle((Integer) aValue);
 			}
 			if(columnIndex==COLONNE_RETENU){
-				scenarioType.setRetenuScenarioType((Boolean) aValue);
+				scenarioType.setRetenu((Boolean) aValue);
 			}
 		}
 	}
