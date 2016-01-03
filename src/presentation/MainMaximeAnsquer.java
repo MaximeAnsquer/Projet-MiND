@@ -33,6 +33,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import abstraction.Etude;
+import abstraction.modules.AnalyseDesRisques;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
 import abstraction.modules.CriteresDeSecurite;
@@ -200,6 +201,9 @@ public class MainMaximeAnsquer extends JFrame {
 			}
 			else if(nom.equals("ScenariosDeMenacesGeneriques")){
 				this.lesJpanels.put(nom, new FenetreScenariosDeMenacesGeneriques( (ScenariosDeMenacesGeneriques) etudeEnCours.getModule(nom)) ) ;
+			}
+			else if(nom.equals("AnalyseDesRisques")){
+				this.lesJpanels.put(nom, new FenetreAnalyseDesRisques( (AnalyseDesRisques) etudeEnCours.getModule(nom)) ) ;
 			}
 
 			this.partieDuCentre.add(label, BorderLayout.NORTH);
@@ -454,7 +458,6 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 	
 	public void supprimerEtude() {
-		System.out.println("supprimerEtude");
 		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
 		File dossierEtude = new File(urlEtudes);
 		File[] listOfFiles = dossierEtude.listFiles();

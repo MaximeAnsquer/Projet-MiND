@@ -1,5 +1,4 @@
 package abstraction;
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.modules.AnalyseDesRisques;
@@ -11,6 +10,7 @@ import abstraction.modules.MappingDesBiens;
 import abstraction.modules.Metriques;
 import abstraction.modules.Module;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
+import abstraction.modules.ScenariosDeMenacesTypes;
 import abstraction.modules.SourcesDeMenaces;
 import abstraction.modules.TypologieDesBiensSupports;
 
@@ -45,6 +45,8 @@ public class Etude {
 		this.addModule(new MappingDesBiens(this));
 		this.addModule(new EvenementsRedoutes(this));
 		this.addModule(new ScenariosDeMenacesGeneriques(this));
+		this.addModule(new ScenariosDeMenacesTypes());
+		this.addModule(new AnalyseDesRisques(this));
 	}
 	
 	public Etude(){
