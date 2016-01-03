@@ -125,7 +125,9 @@ public class Evenement {
 	
 	public boolean estComplet(){
 		boolean resultat = true;
-		resultat = resultat && !this.GetNomEvenement().equals("");
+		if(this.GetNomEvenement().equals("")){
+			resultat=false;
+		}
 		return resultat;
 	}
 	
