@@ -239,6 +239,21 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		}
 	}
 	
+	// SERVICES 
+	
+	public ScenarioType getScenarioCourant(){
+		return this.moduleCourant.getScenarioTypeCourant();
+	}
+	
+	public void setScenarioCourant(int rowIndex){
+		this.moduleCourant.setScenarioTypeCourant(this.moduleCourant.getScenarioType(rowIndex));
+	}
+	
+	public void addScenarioType(ScenarioType scenario, int indiceInsertion){
+		this.moduleCourant.addScenarioType(scenario);
+		fireTableRowsInserted(indiceInsertion, indiceInsertion);
+	}
+	
 	
 
 }

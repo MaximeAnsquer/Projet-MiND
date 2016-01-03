@@ -65,6 +65,10 @@ public class ScenariosDeMenacesTypes extends Module {
 		ArrayList<ScenarioType> scenariosMenacesTypes = new ArrayList<ScenarioType>(tableau.values());
 		return scenariosMenacesTypes.get(i);
 	}
+	
+	public void addScenarioType(ScenarioType scenario){
+		this.tableau.put(scenario.getIntituleConcret(), scenario);
+	}
 
 	public static Hashtable<String, ScenarioType> getBDC() {
 		return bdcScenariosMenacesTypes;
