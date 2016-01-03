@@ -47,7 +47,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		 
 		EvenementsRedoutes nouveauev=new EvenementsRedoutes(evenements.getEtude());
 		
-		
+		nouveauev.setCree(true);
 		
 		/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
 		 * dans le nouveau
