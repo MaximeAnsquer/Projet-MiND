@@ -54,7 +54,9 @@ public class AnalyseDesRisques extends Module{
 		
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
-		if(this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true){
+		
+		
+		if(this.scenarios!=null&&this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true){
 		
 		int a=this.scenarios.getTableau().size();/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
 		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size();
