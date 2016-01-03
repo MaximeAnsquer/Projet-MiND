@@ -17,7 +17,7 @@ public class ScenariosDeMenacesTypes extends Module {
 	private ArrayList<String> nomColonneSup ;
 
 	public ScenariosDeMenacesTypes() {
-		super("ScenarioDeMenacesTypes");
+		super("ScenariosDeMenacesTypes");
 		this.tableau = new Hashtable<String, ScenarioType>();
 		this.nomColonneSup=new ArrayList<String>();
 		// this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
