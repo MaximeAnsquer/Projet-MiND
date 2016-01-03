@@ -163,7 +163,7 @@ public class AnalyseDesRisques extends Module{
 	/*Méthode qui permet de vérifier si le bouton associé au module doit être grisé ou non (cf workflow)*/
 	
 	public void checkDisponible(){
-		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.mapping.estCoherent()==true&&this.scenarios.estCoherent()==true){
+		if(this.evenements.estCoherent()==true&&this.mapping.estCoherent()==true&&this.scenarios.estCoherent()==true){
 			this.disponible=true;
 		}
 		else{
