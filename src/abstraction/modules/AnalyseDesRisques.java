@@ -54,7 +54,9 @@ public class AnalyseDesRisques extends Module{
 		
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
-		if(this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true){
+		
+		
+		if(this.scenarios!=null&&this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true){
 		
 		int a=this.scenarios.getTableau().size();/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
 		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size();
@@ -163,7 +165,7 @@ public class AnalyseDesRisques extends Module{
 	/*Méthode qui permet de vérifier si le bouton associé au module doit être grisé ou non (cf workflow)*/
 	
 	public void checkDisponible(){
-		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.mapping.estCoherent()==true&&this.scenarios.estCoherent()==true){
+		if(this.scenarios!=null&&this.evenements.estCoherent()==true&&this.mapping.estCoherent()==true&&this.scenarios.estCoherent()==true){
 			this.disponible=true;
 		}
 		else{

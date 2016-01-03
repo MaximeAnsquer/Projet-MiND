@@ -38,6 +38,8 @@ public class Workflow extends JPanel {
 		this.lesBoutons = new Hashtable<String, JButton>();		
 		
 		for(final Module m : etude.getLesModules().values()){
+			
+			System.out.println("Traitement du module " + m + "...");
 
 			JButton bouton = new JButton(m.toString());
 			if(!m.estDisponible()){
@@ -95,7 +97,7 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 		this.add(lesBoutons.get("MappingDesBiens"));
 		this.add(new JLabel());
-		this.add(moduleManquant());
+		this.add(moduleManquant()); 
 		this.add(new JLabel());
 		this.add(moduleManquant());
 
