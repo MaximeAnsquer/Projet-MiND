@@ -108,6 +108,10 @@ public class MappingDesBiens extends Module{
 	public boolean estCoherent(){
 		boolean resultat = true;
 		this.problemesDeCoherence = new ArrayList<String>();
+		if (this.mappingDesBiens.size()==0 || this.mappingDesBiens.size()!=this.biensEssentiels.nombreDeBiens()){
+			this.problemesDeCoherence.add("Il y a des problemes de coherence");
+			resultat=false;
+		}
 		for(MappingBien m : this.getMappingDesBiens()){
 			if(!m.estComplet()){
 				this.problemesDeCoherence.add("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
