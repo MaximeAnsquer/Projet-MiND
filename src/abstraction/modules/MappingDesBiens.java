@@ -1,8 +1,7 @@
 package abstraction.modules;
-import java.awt.Color;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
-import javax.swing.JLabel;
 
 import abstraction.Etude;
 import abstraction.autres.*;
@@ -17,17 +16,17 @@ import abstraction.autres.*;
 
 public class MappingDesBiens extends Module{
 	//Variables d'instance
-	private ArrayList<MappingBien> mappingDesBiens; // table qui relie chaque bien essentiel a son mapping
+	private LinkedList<MappingBien> mappingDesBiens; // table qui relie chaque bien essentiel a son mapping
 	private BiensSupports biensSupports;
 	private BiensEssentiels biensEssentiels;
 	
 	//Constructeur
 	public MappingDesBiens(Etude etude) {
 		super("MappingDesBiens");
+		this.mappingDesBiens=new LinkedList<MappingBien>();
 		this.etude=etude;
 		this.biensSupports = (BiensSupports)this.getEtude().getModule("BiensSupports");
 		this.biensEssentiels = (BiensEssentiels)this.getEtude().getModule("BiensEssentiels");
-		this.mappingDesBiens=new ArrayList<MappingBien>(this.biensSupports.nombreDeBiens());
 		for (int i=0; i<this.biensEssentiels.nombreDeBiens(); i++){
 			mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
 		}
@@ -42,11 +41,11 @@ public class MappingDesBiens extends Module{
 	}
 	
 	//Getters et Setters
-	public ArrayList<MappingBien> getMappingDesBiens(){
+	public LinkedList<MappingBien> getMappingDesBiens(){
 		return this.mappingDesBiens;
 	}
 	
-	public  void setMappingDesBiens(ArrayList<MappingBien> mapping){
+	public  void setMappingDesBiens(LinkedList<MappingBien> mapping){
 		this.mappingDesBiens=mapping;
 	}
 	
@@ -91,6 +90,17 @@ public class MappingDesBiens extends Module{
 		return biens;
 	}
 	
+	public void actualiserMapping(){
+		for (int i=0; i<this.mappingDesBiens.size(); i++){
+			for (int j=this.mappingDesBiens.get(i).getMappingBien().size(); j<this.biensSupports.nombreDeBiens();j++){
+				this.mappingDesBiens.get(i).ajouterCase();
+			}
+		}
+		for (int i=this.mappingDesBiens.size(); i<this.biensEssentiels.nombreDeBiens();i++){
+			this.mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
+		}
+	}
+	
 	public String toString(){
 		return "Mapping Des Biens";
 	}
@@ -103,10 +113,7 @@ public class MappingDesBiens extends Module{
 				this.problemesDeCoherence.add("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
 				resultat = false;
 			}
-		}
-		if(resultat){
-			this.problemesDeCoherence.add("Aucun probleme de coherence au niveau du mapping des biens.");
-		}		
+		}	
 		return resultat;
 	}
 }

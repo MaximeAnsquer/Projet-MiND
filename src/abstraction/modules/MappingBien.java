@@ -1,5 +1,5 @@
 package abstraction.modules;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import abstraction.autres.*;
 
@@ -12,15 +12,15 @@ import abstraction.autres.*;
 
 public class MappingBien {
 	//Variables d'instance
-	private ArrayList<String> mappingBien; // table qui relie un bien essentiel aux biens supports
+	private LinkedList<String> mappingBien; // table qui relie un bien essentiel aux biens supports
 	private BiensSupports biensSupports;
 	private Bien bienEssentiel;
 	
 	//Constructeur
 	public MappingBien(BiensSupports biensSupports, Bien bienEssentiel){
+		this.mappingBien = new LinkedList<String>();
 		this.biensSupports = biensSupports;
 		this.bienEssentiel = bienEssentiel;
-		this.mappingBien = new ArrayList<String>(this.biensSupports.getLesBiens().size());
 		for (int i=0; i<this.biensSupports.nombreDeBiens(); i++){
 			this.mappingBien.add("");
 		}
@@ -43,8 +43,12 @@ public class MappingBien {
 		this.bienEssentiel=bienEssentiel;
 	}
 	
-	public ArrayList<String> getMappingBien(){
+	public LinkedList<String> getMappingBien(){
 		return this.mappingBien;
+	}
+	
+	public void ajouterCase(){
+		this.mappingBien.addLast("");
 	}
 	
 	public String getValueAt(int index){
@@ -57,7 +61,7 @@ public class MappingBien {
 		}
 	}
 	
-	public void setMappingBien(ArrayList<String> mappingBien){
+	public void setMappingBien(LinkedList<String> mappingBien){
 		this.mappingBien=mappingBien;
 	}
 	

@@ -13,7 +13,6 @@ import javax.swing.table.AbstractTableModel;
 
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
-import abstraction.modules.MappingBien;
 import abstraction.modules.MappingDesBiens;
 
 public class FenetreMappingDesBiens extends JPanel{
@@ -25,6 +24,7 @@ public class FenetreMappingDesBiens extends JPanel{
 	public FenetreMappingDesBiens(MappingDesBiens mappingDesBiens){
 		this.setVisible(true);
 		this.mappingDesBiens=mappingDesBiens;
+		this.mappingDesBiens.actualiserMapping();
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		comboBox.addItem("");
@@ -46,11 +46,6 @@ public class FenetreMappingDesBiens extends JPanel{
 		
 		public ModeleDynamiqueObjet() {
 			super();
-			if (mappingDesBiens.getMappingDesBiens().size()!=biensEssentiels.nombreDeBiens()){
-				for (int i=0; i<biensEssentiels.nombreDeBiens(); i++){
-					mappingDesBiens.getMappingDesBiens().add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
-				}
-			}
 			entetes.add("Biens Essentiels");
 			for (int i=0; i<biensSupports.getLesBiens().size(); i++){
 				entetes.add(biensSupports.getBien(i).getIntitule());
@@ -92,9 +87,7 @@ public class FenetreMappingDesBiens extends JPanel{
 		    	case 0 :
 		    		break;
 				default:
-					//System.out.println(""+aValue);
 					mappingDesBiens.getMappingDesBiens().get(rowIndex).setValueAt((String)aValue, columnIndex-1);
-					//System.out.println("value : "+mapping.getMappingDesBiens().get(rowIndex).getValueAt(columnIndex-1));
 					break;
 				}
 		    }

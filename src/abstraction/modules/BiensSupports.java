@@ -1,10 +1,8 @@
 package abstraction.modules;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 
-import javax.swing.JLabel;
 
 import abstraction.Etude;
 import abstraction.autres.*;

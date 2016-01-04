@@ -165,7 +165,7 @@ public class FenetreBiensSupports extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				int ligneSelectionnee = table.getSelectedRow();
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-				modele.supprimerBienEssentiel(ligneSelectionnee);
+				modele.supprimerBienSupport(ligneSelectionnee);
 			}
 		});
 		return boutonSupprimerLigne;
@@ -187,7 +187,7 @@ public class FenetreBiensSupports extends JPanel{
 		bouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-				modele.ajouterBienEssentiel();
+				modele.ajouterBienSupport();
 			}
 		});
 		return bouton;
@@ -223,7 +223,7 @@ public class FenetreBiensSupports extends JPanel{
 			}
 		}
 
-		public void supprimerBienEssentiel(int ligneSelectionnee) {
+		public void supprimerBienSupport(int ligneSelectionnee) {
 			if (biensSupports.getLesBiens().size()!=0){
 				if (biensSupports.getLesBiens().size()==1){
 					Bien bien = biensSupports.getBien(ligneSelectionnee);
@@ -253,7 +253,7 @@ public class FenetreBiensSupports extends JPanel{
 			fireTableStructureChanged();	
 		}
 
-		public void ajouterBienEssentiel() {
+		public void ajouterBienSupport() {
 			LinkedList<String> contenuColonneSup = new LinkedList<String>();
 			for (int i=0; i<entetes.size()-4;i++){
 				contenuColonneSup.add("");
