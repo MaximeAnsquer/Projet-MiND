@@ -90,7 +90,7 @@ public class Bien{
 	}
 		
 	public String toString(){
-		return "{Bien :  intitule : "+this.getIntitule()+"}";
+		return this.getIntitule();
 	}
 		
 }
