@@ -74,16 +74,39 @@ public class MainMaximeAnsquer extends JFrame {
 	private JList listeFichiers;
 	private JButton boutonOk;
 	private JFrame fenetreChoisirEtude; 
+	private JButton boutonWorkflow;
+	private JButton boutonVerifier;
 
 	public MainMaximeAnsquer(){
 
-
 		super("Outil d'analyse de risques");
 		this.setPreferredSize(new Dimension(largeurEcran, (int) (0.95*hauteurEcran)));
+		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);	
+		this.contentPane = this.getContentPane();
+		this.partieDuCentre = new JPanel();
+		this.partieDuCentre.setLayout(new BorderLayout());
+		this.partieDeGauche = new JPanel();
+		partieDeGauche.setLayout(new GridLayout(2,1));
+		creerPartieDuBas();		
+		this.lesJpanels = new Hashtable<String, JPanel>(); //les différents tableaux affichés selon le module
+		creerBoutonWorkflow();
+		creerBoutonVerifierCoherence();
+		ajouterListenerFermetureFenetre();
+		this.setJMenuBar(new BarreMenu(this));
+		this.pack();
 
-		//Permet de reagir a la fermeture de la fenetre
+		if(this.existeAuMoinsUneEtude()){
+			this.demanderEtude();			
+		}
+		else{
+			JOptionPane.showMessageDialog(this, "Aucune etude enregistreee !");
+			this.nouvelleEtude();
+		}
+	}
+
+	private void ajouterListenerFermetureFenetre() {		
 		this.addWindowListener(new WindowAdapter() {
-
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 				if(etudeEnCours != null){
 					int decision = JOptionPane.showConfirmDialog(null, 
@@ -101,28 +124,28 @@ public class MainMaximeAnsquer extends JFrame {
 					}	    	
 				}
 			}
-		});
-		
-		//La barre de menu en haut
-		this.setJMenuBar(new BarreMenu(this));
-		
-		this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);	
-		this.contentPane = this.getContentPane();
-		this.partieDuCentre = new JPanel();
-		this.partieDuCentre.setLayout(new BorderLayout());
-		this.partieDeGauche = new JPanel();
-		creerPartieDuBas();		
-		this.lesJpanels = new Hashtable<String, JPanel>();
-		this.pack();
+		});		
+	}
 
-		if(this.existeAuMoinsUneEtude()){
-			this.demanderEtude();			
-		}
-		else{
-			JOptionPane.showMessageDialog(this, "Aucune etude enregistreee !");
-			this.nouvelleEtude();
-		}
+	private void creerBoutonVerifierCoherence() {
+		this.boutonVerifier = new JButton("Verifier la coherence");
+		boutonVerifier.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				String nom = moduleEnCours.getNom();
+				setContenu("Workflow");
+				setContenu(nom);
+			}				
+		});
+	}
+
+	private void creerBoutonWorkflow() {
+		this.boutonWorkflow = new JButton("Workflow"); 
+		boutonWorkflow.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				moduleEnCours = new Module("Workflow");
+				setContenu("Workflow");				
+			}				
+		});		
 	}
 
 	private void creerPartieDuBas() {
@@ -148,8 +171,8 @@ public class MainMaximeAnsquer extends JFrame {
 			this.choisirEtude();
 		}	
 	}
-	/**
-	 * 
+
+	/** 
 	 * @param nom le nom du module a afficher, ou bien " Workflow " si on veut afficher le workflow
 	 */
 	public void setContenu(String nom) {					
@@ -216,57 +239,43 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	private void setPartieDuBas() {
-		
+
 		//On genere les eventuels problemes de coherence
 		moduleEnCours.estCoherent();
-		
+
 		partieDuBas.removeAll();		
-		
+
 		for(String probleme : moduleEnCours.getProblemes()){
 			JLabel label = new JLabel(probleme);
 			label.setForeground(Color.red);
 			label.setFont(new Font("Arial", Font.PLAIN, 22));
 			partieDuBas.add(label);
 		}
-		
+
 		if(moduleEnCours.getProblemes().size() == 0){
 			JLabel label = new JLabel("Aucun probleme de coherence");
 			label.setFont(new Font("Arial", Font.PLAIN, 22));
 			partieDuBas.add(label);
 		}
-		
+
 		partieDuBas.validate();
 		partieDuBas.repaint();
-				
+
 	}
 
 	private void setPartieDeGauche() {
 
-		partieDeGauche = new JPanel();
-		partieDeGauche.setLayout(new GridLayout(2,1));
+		this.partieDeGauche.removeAll();
+
+		/*
+		 * Si le moduleEnCours est veritablement un module (et pas le workflow), on ajoute les boutons
+		 * " Workflow " et " Verifier la coherence " a la partie de gauche (qui sinon est vide)
+		 */
 		String nom = moduleEnCours.getNom();
 
-		if(nom.equals("Workflow")){
-		}		
-		else{			
-			JButton boutonWorkflow = new JButton("Workflow"); 
-			boutonWorkflow.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e) {
-					moduleEnCours = new Module("Workflow");
-					setContenu("Workflow");				
-				}				
-			});
-			partieDeGauche.add(boutonWorkflow);
-
-			JButton boutonVerifier = new JButton("Verifier la coherence");
-			boutonVerifier.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e) {
-					String nom = moduleEnCours.getNom();
-					setContenu("Workflow");
-					setContenu(nom);
-				}				
-			});
-			partieDeGauche.add(boutonVerifier);
+		if(!nom.equals("Workflow")){			
+			partieDeGauche.add(this.boutonWorkflow);
+			partieDeGauche.add(this.boutonVerifier);
 
 			partieDeGauche.validate();
 			partieDeGauche.repaint();
@@ -282,6 +291,7 @@ public class MainMaximeAnsquer extends JFrame {
 		if(etudeEnCours != null){
 			setContenu("Workflow");
 		}
+		//On demande le nom a attribuer a l'etude
 		String nomEtude = "";
 		while(nomEtude.equals("") ){
 			nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle etude.");	
@@ -295,25 +305,52 @@ public class MainMaximeAnsquer extends JFrame {
 				}
 			}
 		}
-		Etude nouvelleEtude = new Etude(nomEtude);
-		this.etudeEnCours = nouvelleEtude;
-		this.setTitle("Outil d'analyse de risques - Etude en cours : " + nomEtude);			
-
-		this.moduleEnCours = new Module("Workflow");
-
-		this.setContenu("Workflow");		
+		
+		Etude nouvelleEtude = new Etude();
+		
+		if(nomEtudeDejaUtilise(nomEtude)){
+			JOptionPane.showMessageDialog(this, "Ce nom d'etude est deja utilise, veuillez en choisir un autre");
+			return nouvelleEtude();
+		}
+		else{
+			nouvelleEtude.setNom(nomEtude);
+			this.etudeEnCours = nouvelleEtude;
+			this.setTitle("Outil d'analyse de risques - Etude en cours : " + nomEtude);			
+			
+			this.moduleEnCours = new Module("Workflow");
+			
+			this.setContenu("Workflow");					
+		}		
 
 		return nouvelleEtude;
 	}
-	public void enregistrerEtude(){
+
+	private boolean nomEtudeDejaUtilise(String nomEtude) {
+		boolean resultat = false;
 		
+		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
+		File dossierEtude = new File(urlEtudes);
+		File[] listOfFiles = dossierEtude.listFiles();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				String nomFichier = listOfFiles[i].getName();
+				if(nomFichier.equals(nomEtude + ".xml")){
+					resultat = true;
+				}
+			}
+		}			
+		return resultat;
+	}
+
+	public void enregistrerEtude(){
+
 		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme temps que la fenetre)
 		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
 		((ScenariosDeMenacesGeneriques) etudeEnCours.getModule("ScenariosDeMenacesGeneriques") ).deleteObservers();
-		
+
 		//Necessaire etant donne que l'on supprime les observeurs (il faut recreer les fenetres pour que leurs boutons etc refonctionnent)
 		setContenu("Workflow");
-		
+
 		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
 		try {
 			// Instanciation de la classe XStream
@@ -336,6 +373,7 @@ public class MainMaximeAnsquer extends JFrame {
 			ioe.printStackTrace();
 		}
 	}
+
 	/**
 	 * Permet a l'utilisateur de choisir parmi une liste d'etudes sauvegardees, et definit l'etude choisie comme etude courante
 	 * @return l'etude choisie
@@ -403,6 +441,7 @@ public class MainMaximeAnsquer extends JFrame {
 		this.setContenu("Workflow");	
 		return etudeOuverte;
 	}
+
 	private JFrame fenetreChoixFichier(JList jlist) {
 		fenetreChoisirEtude = new JFrame();
 		fenetreChoisirEtude.setVisible(true);
@@ -421,12 +460,15 @@ public class MainMaximeAnsquer extends JFrame {
 		fenetreChoisirEtude.pack();
 		return fenetreChoisirEtude;
 	}
+
 	public Etude getEtude(){
 		return etudeEnCours;
 	}
+
 	public void setModuleEnCours(Module m){
 		this.moduleEnCours = m;
 	}
+
 	public void modifierNomEtude() {		
 		//On supprimer le fichier de sauvegarde de l'etude en cours s'il existe		
 		boolean existaitSauvegarde = false;
@@ -456,7 +498,10 @@ public class MainMaximeAnsquer extends JFrame {
 			this.enregistrerEtude();
 		}
 	}
-	
+
+	/**
+	 * supprime l'etude en cours
+	 */
 	public void supprimerEtude() {
 		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
 		File dossierEtude = new File(urlEtudes);
