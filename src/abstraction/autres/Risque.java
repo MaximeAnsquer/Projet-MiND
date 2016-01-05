@@ -40,6 +40,10 @@ public class Risque {
 		this.intitule=intitule;
 	}
 	
+	public void setRetenu(boolean retenu){
+		this.estretenu=retenu;
+	}
+	
 	public int getNiveauGravite(){
 		return this.niveaugravite;
 		
@@ -57,6 +61,8 @@ public class Risque {
 	public ScenarioType getScenarioConcret(){
 		return this.scenarioconcret;
 	}
+	
+	
 
 	public Bien getBienSupport(){
 		return this.biensupport;

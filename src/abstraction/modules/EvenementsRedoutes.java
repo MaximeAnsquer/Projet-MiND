@@ -81,7 +81,7 @@ public class EvenementsRedoutes extends Module {
 		
 		
 		ArrayList<Critere> tableaucriteres=new ArrayList<Critere>(critere.getCriteresRetenus().values());
-		ArrayList<Bien> tableaubiens=new ArrayList<Bien>(this.lesBiensEssentiels.getBiensRetenus().values());
+		ArrayList<Bien> tableaubiens=new ArrayList<Bien>(this.lesBiensEssentiels.getBiensRetenus());
 		
 		
 		for (int i=0;i<a;i++){

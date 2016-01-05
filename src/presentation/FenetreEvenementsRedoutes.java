@@ -69,7 +69,11 @@ public class FenetreEvenementsRedoutes extends JPanel{
 					nouveauev.getEvenementsRedoutes().get(i).setNomEvenement(evenements.getEvenementsRedoutes().get(j).GetNomEvenement());
 					nouveauev.getEvenementsRedoutes().get(i).setNiveauExigence(evenements.getEvenementsRedoutes().get(j).getNiveauExigence());
 					nouveauev.getEvenementsRedoutes().get(i).setNiveauGravite(evenements.getEvenementsRedoutes().get(j).getNiveauGravite());
-					
+					if(evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
+						for(int k=0;k<evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();k++){
+						nouveauev.getEvenementsRedoutes().get(i).getContenuGroupes().addLast(evenements.getEvenementsRedoutes().get(j).getContenuGroupes().get(k));
+						}
+					}
 					
 				}
 				
