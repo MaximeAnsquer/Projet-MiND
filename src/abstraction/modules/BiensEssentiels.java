@@ -1,6 +1,5 @@
 package abstraction.modules;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.LinkedList;
 
 
@@ -19,7 +18,7 @@ public class BiensEssentiels extends Module {
 
 	// ---Variables d'instance
 
-	private Hashtable<String, Bien> lesBiens;
+	private LinkedList<Bien> lesBiens;
 	private LinkedList<String> nomColonnesSup;
 
 	// ---Constructeurs---
@@ -27,7 +26,7 @@ public class BiensEssentiels extends Module {
 	public BiensEssentiels(Etude etude) {
 		super("BiensEssentiels");
 		this.etude=etude;
-		this.lesBiens = new Hashtable<String, Bien>();
+		this.lesBiens = new LinkedList<Bien>();
 		//TODO supprimer quand tous les tests seront ok
 		//this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "", new LinkedList<String>()));
 		//this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "", new LinkedList<String>()));
@@ -45,20 +44,30 @@ public class BiensEssentiels extends Module {
 
 	// ---Getters et setters---
 
-	public Hashtable<String, Bien> getLesBiens() {
+	public LinkedList<Bien> getLesBiens() {
 		return lesBiens;
 	}
 
-	public void setLesBiens(Hashtable<String, Bien> lesBiens) {
+	public void setLesBiens(LinkedList<Bien> lesBiens) {
 		this.lesBiens = lesBiens;
 	}
-
-	public Bien getBien(String nomBien) {
-		return this.getLesBiens().get(nomBien);
-	}
 	
+	public Bien getBien (String intitule){
+		int index = 0;
+		while (index<this.nombreDeBiens() && !this.getBien(index).getIntitule().equals("intitule")){
+			index++;
+		}
+		if (index<this.nombreDeBiens()){
+			return this.getBien(index);
+		}
+		else{
+			return null;
+		}
+		
+	}
+
 	public Bien getBien(int index){
-		return (Bien) lesBiens.values().toArray()[index];
+		return this.lesBiens.get(index);
 	}
 	
 	public LinkedList<String> getNomColonnesSup(){
@@ -76,7 +85,7 @@ public class BiensEssentiels extends Module {
 	}
 	
 	public void ajouterBien(Bien bien) {
-		this.getLesBiens().put(bien.getIntitule(), bien);
+		this.getLesBiens().add(bien);
 	}
 
 	public void supprimerBien(String nomBien) {
@@ -91,11 +100,11 @@ public class BiensEssentiels extends Module {
 		this.getNomColonnesSup().removeFirst();
 	}
 
-	public Hashtable<String, Bien> getBiensRetenus() {
-		Hashtable<String, Bien> resultat = new Hashtable<String, Bien>();
-		for (Bien bien : this.getLesBiens().values()) {
+	public LinkedList<Bien> getBiensRetenus() {
+		LinkedList<Bien> resultat = new LinkedList<Bien>();
+		for (Bien bien : this.getLesBiens()) {
 			if (bien.isRetenu()) {
-				resultat.put(bien.getIntitule(), bien);
+				resultat.add(bien);
 			}
 		}
 		return resultat;
@@ -116,7 +125,7 @@ public class BiensEssentiels extends Module {
 	public boolean estCoherent(){
 		boolean resultat = true;
 		this.problemesDeCoherence = new ArrayList<String>();
-		for(Bien b : this.getLesBiens().values()){
+		for(Bien b : this.getLesBiens()){
 			if(!b.estComplet()){
 				this.problemesDeCoherence.add("bien essentiel \" " + b.getIntitule() + " \" incomplet");
 				resultat = false;
