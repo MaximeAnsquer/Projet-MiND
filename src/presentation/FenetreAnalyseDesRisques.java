@@ -16,7 +16,7 @@ import abstraction.modules.AnalyseDesRisques;
 import abstraction.modules.EvenementsRedoutes;
 
 public class FenetreAnalyseDesRisques extends JPanel{
-	private ModeleAnalyseDesRisques modele=new ModeleAnalyseDesRisques();
+	private ModeleAnalyseDesRisques modele;
 	private JTable tableau;
 	private AnalyseDesRisques analyse;
 		
@@ -71,11 +71,14 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			
 			analyse=nouvellean;
 			analyse.getEtude().addModule(nouvellean);
+			
+			this.modele=new ModeleAnalyseDesRisques(analyse);
 		 
 		 
 			this.analyse=analyse;
 			
 			this.tableau=new JTable(modele);
+			
 			tableau.setPreferredScrollableViewportSize(new Dimension(900, 400));
 	        tableau.setFillsViewportHeight(true);
 			

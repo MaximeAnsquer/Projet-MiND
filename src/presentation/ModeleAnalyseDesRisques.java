@@ -18,9 +18,10 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 	
 	
 	
-	public ModeleAnalyseDesRisques(){
-		this.etude=MainMaximeEtienne.etude;
-		this.analyse=(AnalyseDesRisques)etude.getModule("AnalyseDesRisques");
+	public ModeleAnalyseDesRisques(AnalyseDesRisques analyse){
+		this.etude=analyse.getEtude();
+		this.analyse=analyse;
+		
 		int a=this.analyse.getAnalyseDesRisques().size();
 		System.out.println(a+"");
 		
