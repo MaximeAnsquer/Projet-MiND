@@ -81,10 +81,6 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	}
 	
 
-
-
-
-	
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch(this.getColumnCount()-columnIndex-1){
 		case 4:
