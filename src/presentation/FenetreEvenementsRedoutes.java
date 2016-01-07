@@ -100,11 +100,11 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
         JScrollPane scrollPane = new JScrollPane(tableau);
 		this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setUpComBo();
+	
 		
 		add(scrollPane);
 		
-		
+		tableau.setDefaultRenderer(Object.class, new CellRendererEv());
 		
 		this.setVisible(true);
 		
@@ -179,6 +179,11 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	gravColumn.setPreferredWidth(200);
 	gravColumn.setMaxWidth(250);
 	
+	TableColumn nameColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5);
+	 DefaultTableCellRenderer renderer =
+             new DefaultTableCellRenderer();
+     renderer.setToolTipText("Appuyez sur entrée pour confirmer le nom de l'évènement une fois qu'il a été écrit");
+     nameColumn.setCellRenderer(renderer);
 	
 	}
 	
