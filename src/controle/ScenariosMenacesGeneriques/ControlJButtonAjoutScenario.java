@@ -27,20 +27,29 @@ public class ControlJButtonAjoutScenario implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Object[] typesBiens = this.modele.getTypologieBiensSupports().getIntituleTypeBiensRetenus();
-		
-		String typeBienSupport = (String) JOptionPane.showInputDialog(null,
-				"Quelle type de bien support voulez vous choisir ?", "Choix du Type de bien support",
-				JOptionPane.QUESTION_MESSAGE, null, typesBiens, typesBiens[0]);
-		
-		if (typeBienSupport!=null){
-			String Id = JOptionPane.showInputDialog("Id du scénario ?");
+		if (this.tableau.getSelectedRow() == -1) {
+			JOptionPane
+					.showMessageDialog(
+							null,
+							"Pour ajouter un scénario, vous devez sélectionner la ligne en dessous de laquelle ce scénario sera crée ",
+							"Erreur ajout de scénario", JOptionPane.ERROR_MESSAGE);
+		}
+		else{
+			Object[] typesBiens = this.modele.getTypologieBiensSupports().getIntituleTypeBiensRetenus();
 			
-			if (Id != null && !Id.equals("")) {
-				String intituleScenario = JOptionPane.showInputDialog("Intitulé du scénario ?");
+			String typeBienSupport = (String) JOptionPane.showInputDialog(null,
+					"Quelle type de bien support voulez vous choisir ?", "Choix du Type de bien support",
+					JOptionPane.QUESTION_MESSAGE, null, typesBiens, typesBiens[0]);
+			
+			if (typeBienSupport!=null){
+				String Id = JOptionPane.showInputDialog("Id du scénario ?");
 				
-				if (intituleScenario != null && !intituleScenario.equals("")){
-					this.modele.addScenarioGenerique(new ScenarioGenerique(typeBienSupport, Id, intituleScenario), this.modele.getRowCount());
+				if (Id != null && !Id.equals("")) {
+					String intituleScenario = JOptionPane.showInputDialog("Intitulé du scénario ?");
+					
+					if (intituleScenario != null && !intituleScenario.equals("")){
+						this.modele.addScenarioGenerique(new ScenarioGenerique(typeBienSupport, Id, intituleScenario), this.tableau.getSelectedRow()+1);
+					}
 				}
 			}
 		}

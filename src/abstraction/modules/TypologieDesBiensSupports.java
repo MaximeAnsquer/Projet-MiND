@@ -168,7 +168,7 @@ public class TypologieDesBiensSupports extends Module {
 		ArrayList<String> resultat = new ArrayList<String>();
 		for (TypeBien type : this.getTableau().values()) {
 			if (type.isRetenu()) {
-				resultat.add(type.getIntitule());
+				resultat.add(type.getIntitule() + " (" + type.getId() + ")");
 			}
 		}
 		return resultat.toArray();

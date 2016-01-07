@@ -116,7 +116,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		bien2.setRetenu(true);
 		this.biensSupports.ajouterBien(bien2);
 		
-		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getTableau().values()){
+		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getTableau()){
 			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
 			for (Bien b : this.biensSupports.getBiensRetenus()){
 				if (sGene.getTypeBienSupport().contains(b.getType())){

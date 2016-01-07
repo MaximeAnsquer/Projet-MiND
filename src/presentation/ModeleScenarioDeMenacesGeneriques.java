@@ -182,7 +182,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	
 	// Ajout d'un scénario
 	public void addScenarioGenerique (ScenarioGenerique scenario, int indiceInsertion){
-		this.moduleCourant.addScenarioGenerique(scenario);
+		this.moduleCourant.addScenarioGenerique(scenario,indiceInsertion);
 		fireTableRowsInserted(indiceInsertion, indiceInsertion);
 	}
 	

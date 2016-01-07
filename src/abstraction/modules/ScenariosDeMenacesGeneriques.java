@@ -22,16 +22,19 @@ import abstraction.autres.TypeBien;
 public class ScenariosDeMenacesGeneriques extends Module {
 	
 	// Represente la bdc
-	private static Hashtable<String, ScenarioGenerique> bdcScenariosMenacesGeneriques;
+	private static ArrayList<ScenarioGenerique> bdcScenariosMenacesGeneriques;
 
 	// Variable d'instance
-	private Hashtable<String, ScenarioGenerique> tableau;
+	private ArrayList<ScenarioGenerique> tab ;
+	//private Hashtable<String, ScenarioGenerique> tableau;
 	private ScenarioGenerique scenarioCourant ;
 	private ArrayList<String> nomColonneSup;
 	
 	public ScenariosDeMenacesGeneriques(Etude etude){
 		super("ScenariosDeMenacesGeneriques");
-		this.tableau = new Hashtable<String, ScenarioGenerique>();
+		
+		//this.tableau = new Hashtable<String, ScenarioGenerique>();
+		this.tab= new ArrayList<ScenarioGenerique>();
 		
 		this.etude=etude;
 		this.predecesseurs.add(this.getEtude().getModule("TypologieDesBiensSupports"));
@@ -44,13 +47,13 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		this.coherent = false;
 		this.disponible = false;
 		this.importerBDC();
-		this.tableau = ScenariosDeMenacesGeneriques.getBDC();
+		this.tab = ScenariosDeMenacesGeneriques.getBDC();
 	}
 	
 	// ---Getters et setters---
 	
 	public int getSize(){
-		return this.tableau.size();
+		return this.tab.size();
 	}
 	
 	public ScenarioGenerique getScenarioCourant(){
@@ -71,21 +74,20 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		this.nomColonneSup = nomColonneSup;
 	}
 
-	public Hashtable<String, ScenarioGenerique> getTableau() {
-		return tableau;
+	public ArrayList<ScenarioGenerique> getTableau() {
+		return tab;
 	}
 
-	public void setTableau(Hashtable<String, ScenarioGenerique> tableau) {
-		this.tableau = tableau;
+	public void setTableau(ArrayList<ScenarioGenerique> tableau) {
+		this.tab = tableau;
 	}
 	
 	public ScenarioGenerique getScenarioGenerique(int i) {
-		ArrayList<ScenarioGenerique> scenariosMenacesGeneriques = new ArrayList<ScenarioGenerique>(
-				tableau.values());
-		return scenariosMenacesGeneriques.get(i);
+		// ArrayList<ScenarioGenerique> scenariosMenacesGeneriques = new ArrayList<ScenarioGenerique>(tab.values());
+		return this.tab.get(i);
 	}
 	
-	public static Hashtable<String, ScenarioGenerique> getBDC(){
+	public static ArrayList<ScenarioGenerique> getBDC(){
 		return bdcScenariosMenacesGeneriques;
 	}
 	
@@ -99,8 +101,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		boolean b = ((TypologieDesBiensSupports) this.getEtude().getModule(
 				"Typologie des biens supports")).estNouveauTypeBien(type);
 		if (b) {
-			for (ScenarioGenerique scenario : bdcScenariosMenacesGeneriques
-					.values()) {
+			for (ScenarioGenerique scenario : bdcScenariosMenacesGeneriques) {
 				b = b
 						&& (scenario.getTypeBienSupport() != type
 								.getIntitule());
@@ -112,13 +113,13 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	// L'ajout d'une ligne dans le tableau correspond ici
 	// � un type de bien support r�f�renc�
 	
-	public void addScenarioGenerique(ScenarioGenerique scenario) {
+	public void addScenarioGenerique(ScenarioGenerique scenario, int index) {
 		if (this.nomColonneSup!=null){
 			for(String nomCritere : this.nomColonneSup){
 				scenario.getCriteresSup().put(nomCritere,false);
 			}
 		}
-		this.tableau.put(scenario.getIntitule(), scenario);
+		this.tab.add(index,scenario);
 		this.setChanged();                           // PAC
 		this.notifyObservers();                      // PAC
 	}
@@ -129,7 +130,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 				scenario.getCriteresSup().remove(nomCritere);
 			}
 		}
-		this.tableau.remove(scenario.getIntitule(), scenario);
+		this.tab.remove(scenario);
 		this.setChanged();                           // PAC
 		this.notifyObservers();                      // PAC
 	}
@@ -137,7 +138,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	// Ajout d'une colonne
 	public void addCritere (String nomCritere){
 		this.nomColonneSup.add(nomCritere);
-		for (int i=0 ; i<this.tableau.size() ; i++){
+		for (int i=0 ; i<this.tab.size() ; i++){
 			if (!this.getScenarioGenerique(i).getCriteresSup().containsKey(nomCritere)){
 				this.getScenarioGenerique(i).getCriteresSup().put(nomCritere, false);
 			}
@@ -160,7 +161,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	public Hashtable<String, ScenarioGenerique> getScenariosGeneriquesRetenus() {
 		Hashtable<String, ScenarioGenerique> resultat = new Hashtable<String, ScenarioGenerique>();
-		for (ScenarioGenerique scenario : this.getTableau().values()) {
+		for (ScenarioGenerique scenario : this.getTableau()) {
 			if (scenario.isRetenu()) {
 				resultat.put(scenario.getIntitule(), scenario);
 			}
@@ -170,17 +171,17 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	public boolean isImpacteCritere(String nomCritere){
 		ArrayList<Boolean> critere = new ArrayList<Boolean>();
-		for (ScenarioGenerique scenario : this.tableau.values()){
+		for (ScenarioGenerique scenario : this.tab){
 			if (!scenario.getCriteresSup().get(nomCritere)){
 				critere.add(scenario.getCriteresSup().get(nomCritere));
 			}
 		}
-		return !(critere.size()==this.tableau.size()) ;
+		return !(critere.size()==this.tab.size()) ;
 	}
 	
 	private void importerBDC() {
 		
-		bdcScenariosMenacesGeneriques = new Hashtable<String, ScenarioGenerique>();
+		bdcScenariosMenacesGeneriques = new ArrayList<ScenarioGenerique>();
 		
 		/*
 		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
@@ -244,7 +245,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 					 * Ajout du scenario � la bdc
 					 */
 					
-					bdcScenariosMenacesGeneriques.put(intituleScenario, scenario);				
+					bdcScenariosMenacesGeneriques.add(scenario);				
 					}				
 			}
 			
@@ -266,7 +267,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	public boolean estCoherent() {
 		boolean resultat = true;
 		this.problemesDeCoherence = new ArrayList<String>();
-		for (ScenarioGenerique scenario : this.tableau.values()) {
+		for (ScenarioGenerique scenario : this.tab) {
 			if (scenario.isIncomplete()) {
 				String s = "Scenario generique \" " + scenario.getIntitule()
 						+ " \" incomplet";
