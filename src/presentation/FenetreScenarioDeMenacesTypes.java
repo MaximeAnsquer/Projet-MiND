@@ -6,6 +6,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -59,6 +60,9 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	}
 	
 	public void creerBoutonsBas() {
+		JLabel label = new JLabel("");
+		this.add(label);
+		
 		this.ajoutLigne=new JButton("Particulariser un scénario générique");
 		
 		ControlJButtonAjoutLigne controlAjoutLigne = new ControlJButtonAjoutLigne(modeleTableau, tableau, ajoutLigne);

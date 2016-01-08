@@ -97,11 +97,7 @@ public class ScenariosDeMenacesTypes extends Module {
 		
 		for (ScenarioGenerique sGene : moduleScenarioGene.getTableau()){
 			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), SourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
-			System.out.println(sGene.getTypeBienSupport());
-			System.out.println();
 			for (Bien b : biensSupports.getBiensRetenus()){
-				System.out.println(b.getType());
-				System.out.println();
 				if (sGene.getTypeBienSupport().contains(b.getType())){
 					scenario.setBienSupport(b);
 					bdcScenariosMenacesTypes.put(sGene.getIntitule() + b.getIntitule(), scenario);

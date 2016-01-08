@@ -43,10 +43,14 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		this.biensSupports = (BiensSupports) this.moduleCourant.getEtude().getModule("BiensSupports");
 		this.scenarioDeMenacesGeneriques= (ScenariosDeMenacesGeneriques) this.moduleCourant.getEtude().getModule("ScenariosDeMenacesGeneriques");
 		
+		// On remet les indices à leurs valeurs initiales (pas de colonnes supplémentaires)
+		this.setIndices();
+		
 		// Ajout des colonnes supplémentaires provenant du module "Biens Supports"
 		if (this.biensSupports.getNomColonnesSup()!=null){
 			for (int i=0; i<this.biensSupports.getNomColonnesSup().size();i++){
 				entetes.add(this.biensSupports.getNomColonnesSup().get(i));
+				this.updateIndicesTab1();
 			}
 		}
 		entetes.add("Bien support");
@@ -62,6 +66,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				
 				entetes.add(this.scenarioDeMenacesGeneriques.getNomColonneSup().get(i));
 				this.moduleCourant.getNomColonneSup().add(this.scenarioDeMenacesGeneriques.getNomColonneSup().get(i));
+				this.updateIndicesTab2();
 			}
 		}
 		
@@ -69,8 +74,42 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		entetes.add("Vraisemblance réelle");
 		entetes.add("Retenu");
 		
-		this.updateIndice();
+		//this.updateIndice();
 		this.importerDonnees();
+	}
+	
+	public void setIndices(){
+		COLONNE_BIEN_SUPPORT = 0;
+		COLONNE_TYPE = 1;
+		COLONNE_ID = 2;
+		COLONNE_SCENARIO_GENERIQUE = 3;
+		COLONNE_SCENARIO_CONCRET = 4 ;
+		COLONNE_SOURCES_MENACES = 5;
+		COLONNE_VRAISEMBLANCE_I = 6;
+		COLONNE_VRAISEMBLANCE_R = 7;
+		COLONNE_RETENU = 8;
+	}
+	
+	// On incrémente d'un pas les indices de la première partie du tableau 
+	// (indices des colonnes situées à gauche des critères de sécurités) 
+	public void updateIndicesTab1(){
+		COLONNE_BIEN_SUPPORT += 1;
+		COLONNE_TYPE += 1;
+		COLONNE_ID += 1;
+		COLONNE_SCENARIO_GENERIQUE += 1;
+		COLONNE_SCENARIO_CONCRET += 1;
+		COLONNE_SOURCES_MENACES += 1;
+		COLONNE_VRAISEMBLANCE_I+=1;
+		COLONNE_VRAISEMBLANCE_R +=1;
+		COLONNE_RETENU += 1;
+	}
+	
+	// On incrémente d'un pas les indices de la deuxième partie du tableau 
+	// (indices des colonnes situées à droite des critères de sécurités) 
+	public void updateIndicesTab2(){
+		COLONNE_VRAISEMBLANCE_I+=1;
+		COLONNE_VRAISEMBLANCE_R+=1;
+		COLONNE_RETENU+=1;
 	}
 	
 	public ScenariosDeMenacesTypes getModuleCourant(){
@@ -118,7 +157,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		if (this.scenarioDeMenacesGeneriques.getNomColonneSup() != null
 				&& COLONNE_VRAISEMBLANCE_I != COLONNE_SOURCES_MENACES
 						+ this.scenarioDeMenacesGeneriques.getNomColonneSup()
-								.size()) {
+								.size() + 1) {
 			int nbCriteresSup=this.scenarioDeMenacesGeneriques.getNomColonneSup().size();
 			COLONNE_VRAISEMBLANCE_I+=nbCriteresSup;
 			COLONNE_VRAISEMBLANCE_R+=nbCriteresSup;
@@ -212,7 +251,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			ScenarioType scenarioType = this.moduleCourant.getScenarioType(rowIndex);
 			
 			if (columnIndex==COLONNE_BIEN_SUPPORT){
-				scenarioType.getBienSupport().setIntitule((String) aValue);
+				//scenarioType.getBienSupport().setIntitule((String) aValue);
 			}
 			if(columnIndex==COLONNE_TYPE){
 				scenarioType.setTypeBienSupport((String) aValue);
