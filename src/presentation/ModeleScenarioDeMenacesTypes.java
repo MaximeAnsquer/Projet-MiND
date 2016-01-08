@@ -1,5 +1,6 @@
 package presentation;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
 
 import javax.swing.table.AbstractTableModel;
@@ -97,9 +98,12 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	}
 	
 	public void updateIndice(){
-		// On ne met à jour les indices qu'une seule fois ?
-		// NOn 
-		if (this.biensSupports.getNomColonnesSup()!=null && COLONNE_BIEN_SUPPORT!=this.biensSupports.getNomColonnesSup().size()){
+		// COLONNE_BIEN_SUPPORT!=this.biensSupports.getNomColonnesSup().size()
+		// Cette instruction est nécessaire puisque l'on recreer à chaque fois la fenêtre 
+		
+		if (this.biensSupports.getNomColonnesSup() != null
+				&& COLONNE_BIEN_SUPPORT != this.biensSupports
+						.getNomColonnesSup().size()) {
 			int nbColonnesSup = this.biensSupports.getNomColonnesSup().size();
 			COLONNE_BIEN_SUPPORT += nbColonnesSup;
 			COLONNE_TYPE += nbColonnesSup;
@@ -111,7 +115,10 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			COLONNE_VRAISEMBLANCE_R +=nbColonnesSup;
 			COLONNE_RETENU += nbColonnesSup;
 		}
-		if (this.scenarioDeMenacesGeneriques.getNomColonneSup()!=null ){
+		if (this.scenarioDeMenacesGeneriques.getNomColonneSup() != null
+				&& COLONNE_VRAISEMBLANCE_I != COLONNE_SOURCES_MENACES
+						+ this.scenarioDeMenacesGeneriques.getNomColonneSup()
+								.size()) {
 			int nbCriteresSup=this.scenarioDeMenacesGeneriques.getNomColonneSup().size();
 			COLONNE_VRAISEMBLANCE_I+=nbCriteresSup;
 			COLONNE_VRAISEMBLANCE_R+=nbCriteresSup;
@@ -120,6 +127,9 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	}
 	
 	public void importerDonnees(){
+		// On réinitialise les données : à supprimer après 
+		this.moduleCourant.setTableau(new Hashtable<String, ScenarioType>());
+		
 		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getTableau()){
 			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
 			for (Bien b : this.biensSupports.getBiensRetenus()){
@@ -233,7 +243,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				}
 			}
 			if(columnIndex==COLONNE_VRAISEMBLANCE_I){
-				scenarioType.setVraisemblanceIntrinseque((Integer) aValue);
+				scenarioType.setVraisemblanceIntrinseque(Integer.parseInt((String) aValue));
 			}
 			if(columnIndex==COLONNE_VRAISEMBLANCE_R){
 				scenarioType.setVraisemblanceReelle((Integer) aValue);
