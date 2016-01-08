@@ -2,7 +2,6 @@ package presentation;
 
 import java.util.ArrayList;
 
-import javafx.scene.control.TableColumn;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
@@ -11,7 +10,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 
 import controle.ScenariosDeMenacesTypes.ControlJButtonAjoutLigne;
 import controle.ScenariosDeMenacesTypes.ControlJTable;
