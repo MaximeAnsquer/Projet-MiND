@@ -10,11 +10,13 @@ import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.ScenarioType;
 import abstraction.autres.SourceDeMenace;
 import abstraction.modules.BiensSupports;
+import abstraction.modules.Metriques;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.ScenariosDeMenacesTypes;
 import abstraction.modules.SourcesDeMenaces;
 
 public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
+	private Metriques metriques = new Metriques(new Etude());
 	private SourcesDeMenaces sourcesDeMenaces = new SourcesDeMenaces();
 	private BiensSupports biensSupports = new BiensSupports(new Etude());
 	private ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques = new ScenariosDeMenacesGeneriques(new Etude());
@@ -71,6 +73,10 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	
 	public SourcesDeMenaces getSourcesDeMenaces(){
 		return this.sourcesDeMenaces;
+	}
+	
+	public Metriques getMetriques(){
+		return this.metriques;
 	}
 
 	public int getRowCount() {
@@ -228,7 +234,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				}
 			}
 			if(columnIndex==COLONNE_VRAISEMBLANCE_I){
-				scenarioType.setVraisemblanceIntrinseque((Integer) aValue);
+				scenarioType.setVraisemblanceIntrinseque(Integer.parseInt((String) aValue));
 			}
 			if(columnIndex==COLONNE_VRAISEMBLANCE_R){
 				scenarioType.setVraisemblanceReelle((Integer) aValue);

@@ -41,8 +41,8 @@ public class ScenarioType extends ScenarioGenerique {
 		this.menaces=menaces;
 		this.bienSupport=bienSupport;
 		this.intituleConcret="";
-		this.vraisemblanceIntrinseque=0;
-		this.vraisemblanceReelle=0;
+		this.vraisemblanceIntrinseque=1;
+		this.vraisemblanceReelle=1;
 	}
 	
 	public Hashtable<String, SourceDeMenace> getMenaces() {

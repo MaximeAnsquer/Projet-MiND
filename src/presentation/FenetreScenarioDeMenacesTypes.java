@@ -1,7 +1,13 @@
 package presentation;
 
+import java.util.ArrayList;
+
+import javafx.scene.control.TableColumn;
+
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,6 +20,7 @@ public class FenetreScenarioDeMenacesTypes extends JFrame {
 	private ScenariosDeMenacesTypes moduleCourant;
 	private ModeleScenarioDeMenacesTypes modeleTableau;
 	private JTable tableau ;
+	private JComboBox comboBoxIntrinseque ;
 	private JButton ajoutLigne ;
 
 	public FenetreScenarioDeMenacesTypes() {
@@ -24,6 +31,7 @@ public class FenetreScenarioDeMenacesTypes extends JFrame {
 		this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
 		this.creerTableau();
+		this.creerComboBox();
 		this.creerBoutonsBas();
 		this.pack();
 	}
@@ -38,6 +46,19 @@ public class FenetreScenarioDeMenacesTypes extends JFrame {
 		
 		this.getContentPane().add(tableau.getTableHeader());
         this.getContentPane().add(new JScrollPane(tableau));
+	}
+	
+	public void creerComboBox(){
+		javax.swing.table.TableColumn colonneIntrinseque = this.tableau.getColumnModel().getColumn(this.modeleTableau.COLONNE_VRAISEMBLANCE_I);
+		int vraisemblanceMax = this.modeleTableau.getMetriques().getMetrique("Vraisemblance").nombreDeNiveaux();
+		String[] liste = new String[vraisemblanceMax];
+		
+		for (int i = 1 ; i<=vraisemblanceMax ; i++){
+			liste[i-1]=""+ i;
+		}
+		this.comboBoxIntrinseque = new JComboBox(liste);
+		colonneIntrinseque.setCellEditor(new DefaultCellEditor(comboBoxIntrinseque));
+		
 	}
 	
 	public void creerBoutonsBas() {
