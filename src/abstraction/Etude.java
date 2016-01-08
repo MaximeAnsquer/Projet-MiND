@@ -45,7 +45,7 @@ public class Etude {
 		this.addModule(new MappingDesBiens(this));
 		this.addModule(new EvenementsRedoutes(this));
 		this.addModule(new ScenariosDeMenacesGeneriques(this));
-		this.addModule(new ScenariosDeMenacesTypes());
+		this.addModule(new ScenariosDeMenacesTypes(this));
 		this.addModule(new AnalyseDesRisques(this));
 	}
 	
