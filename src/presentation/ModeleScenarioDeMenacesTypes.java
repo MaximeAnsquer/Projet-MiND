@@ -136,9 +136,8 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		return this.entetes.get(columnIndex);
 	}
 	
+	// Méthode non utilisée 
 	public void updateIndice(){
-		// COLONNE_BIEN_SUPPORT!=this.biensSupports.getNomColonnesSup().size()
-		// Cette instruction est nécessaire puisque l'on recreer à chaque fois la fenêtre 
 		
 		if (this.biensSupports.getNomColonnesSup() != null
 				&& COLONNE_BIEN_SUPPORT != this.biensSupports

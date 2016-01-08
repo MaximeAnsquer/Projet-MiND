@@ -106,6 +106,11 @@ public class ScenariosDeMenacesTypes extends Module {
 		}
 	}
 	
+	public boolean estCoherent() {
+		boolean resultat = true ;
+		return resultat;
+	}
+	
 	public String toString(){
 		return "Scénarios de menaces typés";
 	}

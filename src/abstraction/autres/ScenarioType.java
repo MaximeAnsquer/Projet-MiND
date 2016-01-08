@@ -100,6 +100,8 @@ public class ScenarioType extends ScenarioGenerique {
 				s=s+sourceMenace.getId() + ", ";
 			}
 		}
+		// On supprime le dernier charactère qui est une virgule
+		s=s.substring(0, s.length()-2);
 		return s ;
 	}
 
