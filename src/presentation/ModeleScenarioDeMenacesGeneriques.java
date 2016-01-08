@@ -68,7 +68,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		switch (columnIndex) {
 		case COLONNE_TYPEBIENSUPPORT:
 			String intituleTypeBien = this.moduleCourant.getScenarioGenerique(rowIndex).getTypeBienSupport();
-			return intituleTypeBien;
+			return intituleTypeBien ;
 		case COLONNE_ID:
 			return this.moduleCourant.getScenarioGenerique(rowIndex).getId();
 		case COLONNE_INTITULE:
