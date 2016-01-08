@@ -142,7 +142,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			// Bien du module BiensSupports ou du module ScenarioType ??
 			resultat = scenarioType.getBienSupport().getContenuColonnesSup().get(columnIndex);
 		}
-		if (columnIndex==COLONNE_BIEN_SUPPORT){
+		if (columnIndex==COLONNE_BIEN_SUPPORT && scenarioType.getBienSupport()!=null){
 			resultat=scenarioType.getBienSupport().getIntitule();
 		}
 		if(columnIndex==COLONNE_TYPE){
