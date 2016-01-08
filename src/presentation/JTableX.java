@@ -91,4 +91,6 @@ public class JTableX extends JTable{
 	          else{return super.getCellEditor(row,col);
 	      }
 	      }
+	      
+	      
 }

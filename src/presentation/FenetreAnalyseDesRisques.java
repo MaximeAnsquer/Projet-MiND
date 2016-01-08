@@ -95,6 +95,9 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-6).setPreferredWidth(700);
 			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-7).setPreferredWidth(800);
 			
+			
+			this.tableau.setDefaultRenderer(Object.class, new CellRendererEv());
+			
 			this.setVisible(true);
 		
 		

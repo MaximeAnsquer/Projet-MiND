@@ -95,6 +95,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		this.setUpComBo();
 		
+		
 		tableau.setPreferredScrollableViewportSize(new Dimension(500, 70));
         tableau.setFillsViewportHeight(true);
 		
@@ -103,8 +104,9 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 		
 		add(scrollPane);
+
 		
-		tableau.setDefaultRenderer(Object.class, new CellRendererEv());
+		this.tableau.setDefaultRenderer(Object.class, new CellRendererEv());
 		
 		this.setVisible(true);
 		

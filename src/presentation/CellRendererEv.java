@@ -27,6 +27,8 @@ public class CellRendererEv extends DefaultTableCellRenderer{
 		else if(value instanceof Integer){
 			int numero = (Integer) value;
 			Color clr;
+			
+			
 			switch(numero){
 			case 1: clr = Color.green;
 			break;

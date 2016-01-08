@@ -54,7 +54,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 				if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
 					int b=this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().size();
 				for(int i=0;i<b;i++){
-				this.entetes.add(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().get(i));
+				this.entetes.add(0,this.evenements.getEvenementsRedoutes().get(0).getNomGroupes().get(i));
 				
 				}
 				}

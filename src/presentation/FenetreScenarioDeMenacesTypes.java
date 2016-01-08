@@ -11,7 +11,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableColumnModel;
 
 import controle.ScenariosDeMenacesTypes.ControlJButtonAjoutLigne;
 import controle.ScenariosDeMenacesTypes.ControlJTable;
@@ -50,7 +49,7 @@ public class FenetreScenarioDeMenacesTypes extends JFrame {
 	}
 	
 	public void creerComboBox(){
-		TableColumn colonneIntrinseque = this.tableau.getColumnModel().getColumn(this.modeleTableau.getColumnCount()-3);
+		javax.swing.table.TableColumn colonneIntrinseque = this.tableau.getColumnModel().getColumn(this.modeleTableau.COLONNE_VRAISEMBLANCE_I);
 		int vraisemblanceMax = this.modeleTableau.getMetriques().getMetrique("Vraisemblance").nombreDeNiveaux();
 		String[] liste = new String[vraisemblanceMax];
 		
