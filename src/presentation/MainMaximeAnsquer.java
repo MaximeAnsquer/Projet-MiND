@@ -42,6 +42,7 @@ import abstraction.modules.MappingDesBiens;
 import abstraction.modules.Metriques;
 import abstraction.modules.Module;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
+import abstraction.modules.ScenariosDeMenacesTypes;
 import abstraction.modules.SourcesDeMenaces;
 import abstraction.modules.TypologieDesBiensSupports;
 
@@ -224,6 +225,9 @@ public class MainMaximeAnsquer extends JFrame {
 			}
 			else if(nom.equals("ScenariosDeMenacesGeneriques")){
 				this.lesJpanels.put(nom, new FenetreScenariosDeMenacesGeneriques( (ScenariosDeMenacesGeneriques) etudeEnCours.getModule(nom)) ) ;
+			}
+			else if(nom.equals("ScenariosDeMenacesTypes")){
+				this.lesJpanels.put(nom, new FenetreScenarioDeMenacesTypes( (ScenariosDeMenacesTypes) etudeEnCours.getModule(nom)) ) ;
 			}
 			else if(nom.equals("AnalyseDesRisques")){
 				this.lesJpanels.put(nom, new FenetreAnalyseDesRisques( (AnalyseDesRisques) etudeEnCours.getModule(nom)) ) ;

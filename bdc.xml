@@ -320,7 +320,7 @@
     <ScenariosMenacesGeneriques>
     
     	<ScenarioGenerique>
-    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<TypeBien>Matériels (MAT)</TypeBien>
     		<Id>M1</Id>
     		<Intitule>Détournement de l'usage prévu d'un matériel</Intitule>
     		<CriteresRetenus>
@@ -348,7 +348,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<TypeBien>Matériels (MAT)</TypeBien>
     		<Id>M2</Id>
     		<Intitule>Espionnage d'un matériel</Intitule>
     		<CriteresRetenus>
@@ -376,7 +376,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<TypeBien>Matériels (MAT)</TypeBien>
     		<Id>M3</Id>
     		<Intitule>Dépassement des limites de fonctionnement d'un matériel</Intitule>
     		<CriteresRetenus>
@@ -404,7 +404,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<TypeBien>Matériels (MAT)</TypeBien>
     		<Id>M4</Id>
     		<Intitule>Déterioration d'un matériel</Intitule>
     		<CriteresRetenus>
@@ -432,7 +432,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<TypeBien>Matériels (MAT)</TypeBien>
     		<Id>M5</Id>
     		<Intitule>Modification d'un matériel</Intitule>
     		<CriteresRetenus>
@@ -460,7 +460,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Matériel (MAT)</TypeBien>
+    		<TypeBien>Matériels (MAT)</TypeBien>
     		<Id>M6</Id>
     		<Intitule>Perte d'un matériel</Intitule>
     		<CriteresRetenus>
@@ -490,7 +490,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Logiciel (LOG)</TypeBien>
+    		<TypeBien>Logiciels (LOG)</TypeBien>
     		<Id>L1</Id>
     		<Intitule>Détournement de l'usage prévu d'un logiciel</Intitule>
     		<CriteresRetenus>

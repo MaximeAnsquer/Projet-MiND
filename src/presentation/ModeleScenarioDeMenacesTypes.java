@@ -118,26 +118,16 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	}
 	
 	public void importerDonnees(){
-		// On ajoute des biens supports pour tester
-		/*
-		Bien bien1 = new Bien("description bien 1", "BS 1", "Matériel", new LinkedList<String>() );
-		bien1.setRetenu(true);
-		this.biensSupports.ajouterBien(bien1);
-		
-		Bien bien2 = new Bien("description bien 2", "BS 2", "Logiciel", new LinkedList<String>() );
-		bien2.setRetenu(true);
-		this.biensSupports.ajouterBien(bien2);
-		
 		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getTableau()){
 			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
 			for (Bien b : this.biensSupports.getBiensRetenus()){
 				if (sGene.getTypeBienSupport().contains(b.getType())){
 					scenario.setBienSupport(b);
+					this.moduleCourant.getTableau().put(sGene.getIntitule() + b.getIntitule(), scenario);
 				}
 			}
-			this.moduleCourant.getTableau().put(sGene.getIntitule(), scenario);
 		}
-		*/
+		
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {

@@ -27,10 +27,10 @@ public class ScenariosDeMenacesTypes extends Module {
 		this.tableau = new Hashtable<String, ScenarioType>();
 		this.nomColonneSup=new ArrayList<String>();
 		
-		//this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
-		//this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
-		//this.predecesseurs.add(this.getEtude().getModule("Metriques"));
-		//this.predecesseurs.add(this.getEtude().getModule("SourcesDeMenaces"));
+		this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
+		this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
+		this.predecesseurs.add(this.getEtude().getModule("Metriques"));
+		this.predecesseurs.add(this.getEtude().getModule("SourcesDeMenaces"));
 		
 		// this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
 		this.scenarioTypeCourant=new ScenarioType();
@@ -95,23 +95,18 @@ public class ScenariosDeMenacesTypes extends Module {
 		SourcesDeMenaces SourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
 		
 		
-		Bien bien1 = new Bien("description bien 1", "BS 1", "Matériel", new LinkedList<String>() );
-		bien1.setRetenu(true);
-		biensSupports.ajouterBien(bien1);
-		
-		Bien bien2 = new Bien("description bien 2", "BS 2", "Logiciel", new LinkedList<String>() );
-		bien2.setRetenu(true);
-		biensSupports.ajouterBien(bien2);
-		
-		
 		for (ScenarioGenerique sGene : moduleScenarioGene.getTableau()){
 			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), SourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
+			System.out.println(sGene.getTypeBienSupport());
+			System.out.println();
 			for (Bien b : biensSupports.getBiensRetenus()){
+				System.out.println(b.getType());
+				System.out.println();
 				if (sGene.getTypeBienSupport().contains(b.getType())){
 					scenario.setBienSupport(b);
+					bdcScenariosMenacesTypes.put(sGene.getIntitule() + b.getIntitule(), scenario);
 				}
 			}
-			bdcScenariosMenacesTypes.put(sGene.getIntitule(), scenario);
 		}
 	}
 	
