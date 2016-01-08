@@ -235,6 +235,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			}
 			if(columnIndex==COLONNE_VRAISEMBLANCE_I){
 				scenarioType.setVraisemblanceIntrinseque(Integer.parseInt((String) aValue));
+				fireTableCellUpdated(rowIndex, columnIndex);
 			}
 			if(columnIndex==COLONNE_VRAISEMBLANCE_R){
 				scenarioType.setVraisemblanceReelle((Integer) aValue);
