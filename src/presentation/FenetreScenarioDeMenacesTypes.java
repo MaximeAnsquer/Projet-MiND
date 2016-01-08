@@ -32,7 +32,7 @@ public class FenetreScenarioDeMenacesTypes extends JFrame {
 		this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
 		this.creerTableau();
-		//this.creerComboBox();
+		this.creerComboBox();
 		this.creerBoutonsBas();
 		this.pack();
 	}
