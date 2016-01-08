@@ -97,7 +97,9 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	}
 	
 	public void updateIndice(){
-		if (this.biensSupports.getNomColonnesSup()!=null){
+		// On ne met à jour les indices qu'une seule fois ?
+		// NOn 
+		if (this.biensSupports.getNomColonnesSup()!=null && COLONNE_BIEN_SUPPORT!=this.biensSupports.getNomColonnesSup().size()){
 			int nbColonnesSup = this.biensSupports.getNomColonnesSup().size();
 			COLONNE_BIEN_SUPPORT += nbColonnesSup;
 			COLONNE_TYPE += nbColonnesSup;
@@ -109,7 +111,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			COLONNE_VRAISEMBLANCE_R +=nbColonnesSup;
 			COLONNE_RETENU += nbColonnesSup;
 		}
-		if (this.scenarioDeMenacesGeneriques.getNomColonneSup()!=null){
+		if (this.scenarioDeMenacesGeneriques.getNomColonneSup()!=null ){
 			int nbCriteresSup=this.scenarioDeMenacesGeneriques.getNomColonneSup().size();
 			COLONNE_VRAISEMBLANCE_I+=nbCriteresSup;
 			COLONNE_VRAISEMBLANCE_R+=nbCriteresSup;
@@ -161,7 +163,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			if (columnIndex>COLONNE_SOURCES_MENACES && columnIndex<COLONNE_VRAISEMBLANCE_I){
 				// indice du critère dans l'ArrayList
 				int indice = columnIndex-COLONNE_SOURCES_MENACES; 
-				String critere = this.moduleCourant.getNomColonneSup().get(indice);
+				String critere = this.moduleCourant.getNomColonneSup().get(indice-1); // pb ICI sur java 7!!
 				resultat=this.moduleCourant.getScenarioType(rowIndex).getCriteresSup().get(critere);
 			}
 		}
