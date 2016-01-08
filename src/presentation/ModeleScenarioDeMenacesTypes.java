@@ -16,11 +16,11 @@ import abstraction.modules.ScenariosDeMenacesTypes;
 import abstraction.modules.SourcesDeMenaces;
 
 public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
-	private Metriques metriques = new Metriques(new Etude());
-	private SourcesDeMenaces sourcesDeMenaces = new SourcesDeMenaces();
-	private BiensSupports biensSupports = new BiensSupports(new Etude());
-	private ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques = new ScenariosDeMenacesGeneriques(new Etude());
-	private ScenariosDeMenacesTypes moduleCourant = new ScenariosDeMenacesTypes() ;
+	private Metriques metriques ;
+	private SourcesDeMenaces sourcesDeMenaces ;
+	private BiensSupports biensSupports ;
+	private ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques ;
+	private ScenariosDeMenacesTypes moduleCourant ;
 	private LinkedList<String> entetes = new LinkedList<String>();
 	
 	public static int COLONNE_BIEN_SUPPORT = 0;
@@ -34,8 +34,12 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	public static int COLONNE_VRAISEMBLANCE_R=7 ;
 	public static int COLONNE_RETENU=8 ;
 	
-	public ModeleScenarioDeMenacesTypes() {
+	public ModeleScenarioDeMenacesTypes(ScenariosDeMenacesTypes moduleCourant) {
 		super();
+		this.moduleCourant=moduleCourant;
+		this.metriques= (Metriques) this.moduleCourant.getEtude().getModule("Metriques");
+		this.sourcesDeMenaces = (SourcesDeMenaces) this.moduleCourant.getEtude().getModule("SourcesDeMenaces");
+		this.biensSupports = (BiensSupports) this.moduleCourant.getEtude().getModule("BiensSupports");
 		
 		// Ajout des colonnes supplémentaires provenant du module "Biens Supports"
 		if (this.biensSupports.getNomColonnesSup()!=null){
@@ -114,6 +118,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	
 	public void importerDonnees(){
 		// On ajoute des biens supports pour tester
+		/*
 		Bien bien1 = new Bien("description bien 1", "BS 1", "Matériel", new LinkedList<String>() );
 		bien1.setRetenu(true);
 		this.biensSupports.ajouterBien(bien1);
@@ -131,6 +136,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			}
 			this.moduleCourant.getTableau().put(sGene.getIntitule(), scenario);
 		}
+		*/
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {

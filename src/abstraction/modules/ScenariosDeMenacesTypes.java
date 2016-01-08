@@ -2,7 +2,11 @@ package abstraction.modules;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedList;
 
+import abstraction.Etude;
+import abstraction.autres.Bien;
+import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.ScenarioType;
 
 public class ScenariosDeMenacesTypes extends Module {
@@ -16,19 +20,23 @@ public class ScenariosDeMenacesTypes extends Module {
 	// On liste les critères de sécurité retenus dans le module Scénarios de menaces génériques
 	private ArrayList<String> nomColonneSup ;
 
-	public ScenariosDeMenacesTypes() {
+	public ScenariosDeMenacesTypes(Etude etude) {
 		super("ScenariosDeMenacesTypes");
 		this.tableau = new Hashtable<String, ScenarioType>();
 		this.nomColonneSup=new ArrayList<String>();
-		// this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
-		// this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
-		// this.predecesseurs.add(this.getEtude().getModule("Metriques"));
+		
+		this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
+		this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
+		this.predecesseurs.add(this.getEtude().getModule("Metriques"));
+		this.predecesseurs.add(this.getEtude().getModule("SourcesDeMenaces"));
+		
 		// this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
+		this.scenarioTypeCourant=new ScenarioType();
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
 		this.importerBDC();
-		// this.tableau = ScenariosDeMenacesTypes.getBDC();
+		this.tableau = ScenariosDeMenacesTypes.getBDC();
 	}
 	
 	public int getSize(){
@@ -75,7 +83,33 @@ public class ScenariosDeMenacesTypes extends Module {
 	}
 
 	private void importerBDC() {
-		// TODO Auto-generated method stub
+		BiensSupports biensSupports = (BiensSupports) this.etude
+				.getModule("BiensSupports");
+		
+		ScenariosDeMenacesGeneriques moduleScenarioGene = (ScenariosDeMenacesGeneriques) this.etude
+				.getModule("ScenariosDeMenacesGeneriques");
+		
+		SourcesDeMenaces SourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
+		
+		
+		Bien bien1 = new Bien("description bien 1", "BS 1", "Matériel", new LinkedList<String>() );
+		bien1.setRetenu(true);
+		biensSupports.ajouterBien(bien1);
+		
+		Bien bien2 = new Bien("description bien 2", "BS 2", "Logiciel", new LinkedList<String>() );
+		bien2.setRetenu(true);
+		biensSupports.ajouterBien(bien2);
+		
+		
+		for (ScenarioGenerique sGene : moduleScenarioGene.getTableau()){
+			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), SourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
+			for (Bien b : biensSupports.getBiensRetenus()){
+				if (sGene.getTypeBienSupport().contains(b.getType())){
+					scenario.setBienSupport(b);
+				}
+			}
+			this.tableau.put(sGene.getIntitule(), scenario);
+		}
 	}
 	
 	public String toString(){
