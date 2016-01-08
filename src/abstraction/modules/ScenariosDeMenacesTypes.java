@@ -22,13 +22,15 @@ public class ScenariosDeMenacesTypes extends Module {
 
 	public ScenariosDeMenacesTypes(Etude etude) {
 		super("ScenariosDeMenacesTypes");
+		this.etude=etude;
+		
 		this.tableau = new Hashtable<String, ScenarioType>();
 		this.nomColonneSup=new ArrayList<String>();
 		
-		this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
-		this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
-		this.predecesseurs.add(this.getEtude().getModule("Metriques"));
-		this.predecesseurs.add(this.getEtude().getModule("SourcesDeMenaces"));
+		//this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
+		//this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
+		//this.predecesseurs.add(this.getEtude().getModule("Metriques"));
+		//this.predecesseurs.add(this.getEtude().getModule("SourcesDeMenaces"));
 		
 		// this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
 		this.scenarioTypeCourant=new ScenarioType();
@@ -83,8 +85,9 @@ public class ScenariosDeMenacesTypes extends Module {
 	}
 
 	private void importerBDC() {
-		BiensSupports biensSupports = (BiensSupports) this.etude
-				.getModule("BiensSupports");
+		bdcScenariosMenacesTypes= new Hashtable<String, ScenarioType>();
+		
+		BiensSupports biensSupports = (BiensSupports) this.etude.getModule("BiensSupports");
 		
 		ScenariosDeMenacesGeneriques moduleScenarioGene = (ScenariosDeMenacesGeneriques) this.etude
 				.getModule("ScenariosDeMenacesGeneriques");
@@ -108,7 +111,7 @@ public class ScenariosDeMenacesTypes extends Module {
 					scenario.setBienSupport(b);
 				}
 			}
-			this.tableau.put(sGene.getIntitule(), scenario);
+			bdcScenariosMenacesTypes.put(sGene.getIntitule(), scenario);
 		}
 	}
 	

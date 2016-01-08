@@ -40,6 +40,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		this.metriques= (Metriques) this.moduleCourant.getEtude().getModule("Metriques");
 		this.sourcesDeMenaces = (SourcesDeMenaces) this.moduleCourant.getEtude().getModule("SourcesDeMenaces");
 		this.biensSupports = (BiensSupports) this.moduleCourant.getEtude().getModule("BiensSupports");
+		this.scenarioDeMenacesGeneriques= (ScenariosDeMenacesGeneriques) this.moduleCourant.getEtude().getModule("ScenariosDeMenacesGeneriques");
 		
 		// Ajout des colonnes supplémentaires provenant du module "Biens Supports"
 		if (this.biensSupports.getNomColonnesSup()!=null){
