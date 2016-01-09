@@ -123,6 +123,11 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.evenements.setCree(true);
 		
 		
+		
+	    
+		
+		
+		
 	}
 	
 	

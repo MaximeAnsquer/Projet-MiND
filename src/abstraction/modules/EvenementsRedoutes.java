@@ -235,6 +235,7 @@ public class EvenementsRedoutes extends Module {
 				resultat=false;
 			}
 		}
+		
 		return resultat;
 	}
 	

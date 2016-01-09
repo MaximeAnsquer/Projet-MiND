@@ -59,11 +59,19 @@ public class Module extends Observable implements IModule  {
 	public boolean estDisponible(){
 		boolean resultat = true;
 		System.out.println("predecesseurs : " + this.getPredecesseurs() );
+		
+		if (this.getNom()=="AnalyseDesRisques"){
+			resultat=resultat&&this.getEtude().getModule("EvenementsRedoutes").estCree()&&this.getEtude().getModule("EvenementsRedoutes").estCoherent()&&this.getEtude().getModule("Metriques").estCree()&&this.getEtude().getModule("Metriques").estCoherent()&&this.getEtude().getModule("ScenariosDeMenacesTypes").estCree()&&this.getEtude().getModule("ScenariosDeMenacesTypes").estCoherent();
+			
+			
+		}
+		else {
 		for(Module m : this.getPredecesseurs()){
 			System.out.println("Traitement des predecesseurs de " + this + "...");
-			System.out.println(m);
+			
 			resultat = resultat && m.estCree() && m.estCoherent();
-		}
+			
+		}}
 		this.disponible = resultat;
 		return resultat;
 	}
