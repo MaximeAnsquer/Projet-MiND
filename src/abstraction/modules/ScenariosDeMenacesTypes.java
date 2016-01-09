@@ -12,10 +12,10 @@ import abstraction.autres.ScenarioType;
 public class ScenariosDeMenacesTypes extends Module {
 
 	// Represente la bdc
-	private static Hashtable<String, ScenarioType> bdcScenariosMenacesTypes;
+	private static ArrayList<ScenarioType> bdcScenariosMenacesTypes;
 
 	// Variable d'instance
-	Hashtable<String, ScenarioType> tableau;
+	ArrayList<ScenarioType> tableau;
 	private ScenarioType scenarioTypeCourant ;
 	// On liste les critères de sécurité retenus dans le module Scénarios de menaces génériques
 	private ArrayList<String> nomColonneSup ;
@@ -24,7 +24,7 @@ public class ScenariosDeMenacesTypes extends Module {
 		super("ScenariosDeMenacesTypes");
 		this.etude=etude;
 		
-		this.tableau = new Hashtable<String, ScenarioType>();
+		this.tableau = new ArrayList<ScenarioType>();
 		this.nomColonneSup=new ArrayList<String>();
 		
 		this.predecesseurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
@@ -51,8 +51,8 @@ public class ScenariosDeMenacesTypes extends Module {
 
 	public void setScenarioTypeCourant(ScenarioType scenarioTypeCourant) {
 		this.scenarioTypeCourant = scenarioTypeCourant;
-		// this.setChanged();         // PAC
-		// this.notifyObservers();    // PAC
+		this.setChanged();         // PAC
+		this.notifyObservers();    // PAC
 	}
 
 	public ArrayList<String> getNomColonneSup() {
@@ -63,29 +63,28 @@ public class ScenariosDeMenacesTypes extends Module {
 		this.nomColonneSup = nomColonneSup;
 	}
 
-	public Hashtable<String, ScenarioType> getTableau() {
+	public ArrayList<ScenarioType> getTableau() {
 		return tableau;
 	}
 
-	public void setTableau(Hashtable<String, ScenarioType> tableau) {
+	public void setTableau(ArrayList<ScenarioType> tableau) {
 		this.tableau = tableau;
 	}
 	
 	public ScenarioType getScenarioType (int i){
-		ArrayList<ScenarioType> scenariosMenacesTypes = new ArrayList<ScenarioType>(tableau.values());
-		return scenariosMenacesTypes.get(i);
+		return this.tableau.get(i);
 	}
 	
-	public void addScenarioType(ScenarioType scenario){
-		this.tableau.put(scenario.getIntituleConcret(), scenario);
+	public void addScenarioType(ScenarioType scenario,int indiceInsertion){
+		this.tableau.add(indiceInsertion,scenario);
 	}
 
-	public static Hashtable<String, ScenarioType> getBDC() {
+	public static ArrayList<ScenarioType> getBDC() {
 		return bdcScenariosMenacesTypes;
 	}
 
 	private void importerBDC() {
-		bdcScenariosMenacesTypes= new Hashtable<String, ScenarioType>();
+		bdcScenariosMenacesTypes= new ArrayList<ScenarioType>();
 		
 		BiensSupports biensSupports = (BiensSupports) this.etude.getModule("BiensSupports");
 		
@@ -100,7 +99,7 @@ public class ScenariosDeMenacesTypes extends Module {
 			for (Bien b : biensSupports.getBiensRetenus()){
 				if (sGene.getTypeBienSupport().contains(b.getType())){
 					scenario.setBienSupport(b);
-					bdcScenariosMenacesTypes.put(sGene.getIntitule() + b.getIntitule(), scenario);
+					bdcScenariosMenacesTypes.add(scenario);
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 package presentation;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 
@@ -166,17 +167,18 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	
 	public void importerDonnees(){
 		// On réinitialise les données : à supprimer après 
-		this.moduleCourant.setTableau(new Hashtable<String, ScenarioType>());
+		this.moduleCourant.setTableau(new ArrayList<ScenarioType>());
 		
 		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getTableau()){
 			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
 			for (Bien b : this.biensSupports.getBiensRetenus()){
 				if (sGene.getTypeBienSupport().contains(b.getType())){
 					scenario.setBienSupport(b);
-					this.moduleCourant.getTableau().put(sGene.getIntitule() + b.getIntitule(), scenario);
+					this.moduleCourant.getTableau().add(scenario);
 				}
 			}
 		}
+		//this.moduleCourant.setScenarioTypeCourant(this.moduleCourant.getTableau().ge);
 		
 	}
 
@@ -303,7 +305,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	}
 	
 	public void addScenarioType(ScenarioType scenario, int indiceInsertion){
-		this.moduleCourant.addScenarioType(scenario);
+		this.moduleCourant.addScenarioType(scenario, indiceInsertion);
 		fireTableRowsInserted(indiceInsertion, indiceInsertion);
 	}
 	
