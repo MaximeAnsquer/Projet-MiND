@@ -185,6 +185,12 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				}
 			}
 		}
+		else{
+			for (ScenarioType scenario : this.moduleCourant.getTableau()){
+				scenario.setMenaces(this.sourcesDeMenaces.getSourcesDeMenacesRetenues());
+				//scenario.setId(this.scenarioDeMenacesGeneriques.ge);
+			}
+		}
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
