@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import abstraction.Etude;
 
 /** 
- * Classe visant � factoriser tout ce qui est commun aux diff�rents modules.
+ * Classe visant ï¿½ factoriser tout ce qui est commun aux diffï¿½rents modules.
  * @author Maxime Ansquer 
  */
 
@@ -57,11 +57,25 @@ public class Module extends Observable implements IModule  {
 	}
 
 	public boolean estDisponible(){
+		
+		System.out.println(" \n ------------------- \n");
+		
+		System.out.println("Vérification de la disponibilité de " + this + "...");
 		boolean resultat = true;
 		System.out.println("predecesseurs : " + this.getPredecesseurs() );
 		for(Module m : this.getPredecesseurs()){
-			System.out.println("Traitement des predecesseurs de " + this + "...");
-			System.out.println(m);
+			if(m.estCree()){
+				System.out.println("Le predecesseur " + m + " est cree");
+			}
+			else{
+				System.out.println("Le predecesseur " + m + " n'est pas cree");
+			}
+			if(m.estCoherent()){
+				System.out.println("Le predecesseur " + m + " est coherent");
+			}
+			else{
+				System.out.println("Le predecesseur " + m + " n'est pas coherent");
+			}
 			resultat = resultat && m.estCree() && m.estCoherent();
 		}
 		this.disponible = resultat;
