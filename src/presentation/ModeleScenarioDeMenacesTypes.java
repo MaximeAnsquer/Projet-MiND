@@ -165,21 +165,24 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		}
 	}
 	
-	public void importerDonnees(){
-		// On réinitialise les données : à supprimer après 
+	public void importerDonnees() {
+		// On réinitialise les données : à supprimer après
 		this.moduleCourant.setTableau(new ArrayList<ScenarioType>());
 		
-		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getTableau()){
-			ScenarioType scenario = new ScenarioType(sGene.getTypeBienSupport(), sGene.getId(), sGene.getIntitule(), sGene.getCriteresSup(), this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null, true);
-			for (Bien b : this.biensSupports.getBiensRetenus()){
-				if (sGene.getTypeBienSupport().contains(b.getType())){
+		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques
+				.getScenariosGeneriquesRetenus()) {
+			ScenarioType scenario = new ScenarioType(
+					sGene.getTypeBienSupport(), sGene.getId(),
+					sGene.getIntitule(), sGene.getCriteresSup(),
+					this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
+					true);
+			for (Bien b : this.biensSupports.getBiensRetenus()) {
+				if (sGene.getTypeBienSupport().contains(b.getType())) {
 					scenario.setBienSupport(b);
 					this.moduleCourant.getTableau().add(scenario);
 				}
 			}
 		}
-		//this.moduleCourant.setScenarioTypeCourant(this.moduleCourant.getTableau().ge);
-		
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
