@@ -106,7 +106,12 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		add(scrollPane);
 
 		
-		this.tableau.setDefaultRenderer(Object.class, new CellRendererEv());
+		CellRendererEv renderer=new CellRendererEv();
+		
+		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-1).setCellRenderer( renderer);
+		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-2).setCellRenderer( renderer);
+		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-5).setCellRenderer( renderer);
+		
 		
 		this.setVisible(true);
 		
@@ -120,6 +125,9 @@ public class FenetreEvenementsRedoutes extends JPanel{
  
 		
 		this.tableau=new JTableX(modele);
+		
+		
+		
 		tableau.setRowSelectionAllowed(false);
         tableau.setColumnSelectionAllowed(false);
 		
@@ -181,11 +189,11 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	gravColumn.setPreferredWidth(200);
 	gravColumn.setMaxWidth(250);
 	
-	TableColumn nameColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5);
+	/*TableColumn nameColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5);
 	 DefaultTableCellRenderer renderer =
              new DefaultTableCellRenderer();
      renderer.setToolTipText("Appuyez sur entrée pour confirmer le nom de l'évènement une fois qu'il a été écrit");
-     nameColumn.setCellRenderer(renderer);
+     nameColumn.setCellRenderer(renderer);*/
 	
 	}
 	

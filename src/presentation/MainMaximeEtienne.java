@@ -48,19 +48,18 @@ public class MainMaximeEtienne extends JFrame {
 		System.out.println(bien1.getIntitule());
 		
 		
-		ScenarioType sc1=new ScenarioType("couco", "1", "J'ai parlé du projet à un ami", criteres,menaces, bien1,
+		/*ScenarioType sc1=new ScenarioType("couco", "1", "J'ai parlé du projet à un ami", criteres,menaces, bien1,
 				 "J'ai parlé du projet et cela a menacé la Confidentialité du projet", 1, 2,true) ;
+	
+		/*sc.getTableau().put("ligne1", sc1);*/
 		
-		ScenariosDeMenacesTypes sc=new ScenariosDeMenacesTypes();
-		sc.getTableau().put("ligne1", sc1);*/
-		
-		/*ScenariosDeMenacesTypes sc=new ScenariosDeMenacesTypes();*/
+	
 		etude.addModule(new CriteresDeSecurite());
 		BiensEssentiels be=new BiensEssentiels(etude);
 		
 		etude.addModule(be);
 		etude.addModule(new Metriques(etude));
-		etude.addModule(new SourcesDeMenaces());
+		/*etude.addModule(new SourcesDeMenaces());
 		/*etude.addModule(new ScenariosDeMenacesGeneriques());*/
 		EvenementsRedoutes ev=new EvenementsRedoutes(etude);
 		etude.addModule(ev);

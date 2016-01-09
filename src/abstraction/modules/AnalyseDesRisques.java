@@ -39,7 +39,7 @@ public class AnalyseDesRisques extends Module{
 		this.criteres=(CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite");
 		this.evenements=(EvenementsRedoutes) this.etude.getModule("EvenementsRedoutes");
 		this.mapping=(MappingDesBiens)this.etude.getModule("MappingDesBiens");
-		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("ScenarioDeMenacesTypes");
+		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("ScenariosDeMenacesTypes");
 		
 		this.predecesseurs.add(this.etude.getModule("ScenariosDeMenacesTypes"));
 		this.predecesseurs.add(this.evenements);
@@ -49,6 +49,8 @@ public class AnalyseDesRisques extends Module{
 		
 		
 		this.cree=false;
+		
+		
 		this.checkDisponible();
 		
 		

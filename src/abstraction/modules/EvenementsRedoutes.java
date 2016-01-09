@@ -56,6 +56,7 @@ public class EvenementsRedoutes extends Module {
 		
 		this.cree=false;
 		this.checkDisponible();
+		
 		this.coherent=false;
 		
 		
@@ -238,7 +239,7 @@ public class EvenementsRedoutes extends Module {
 	 * 	
 	 */
 	public void checkDisponible(){
-		if(this.etude.getModule("CriteresDeSecurite").estCoherent()==true&&this.etude.getModule("BiensEssentiels").estCoherent()==true&&this.lesMetriques.estCoherent()==true){
+		if(this.lesBiensEssentiels.estCoherent()==true&&this.lesMetriques.estCoherent()==true){
 			this.disponible=true;
 		}
 		else{

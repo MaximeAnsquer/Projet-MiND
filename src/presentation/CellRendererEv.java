@@ -5,12 +5,19 @@ import java.awt.Component;
 
 import javax.swing.JComponent;
 import javax.swing.JTable;
-
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
 public class CellRendererEv extends DefaultTableCellRenderer{
 	
+	
+	public CellRendererEv(){
+		super();
+		this.setHorizontalAlignment( SwingConstants.CENTER );
+	}
+
+	private static final long serialVersionUID = 1L;
 	
 	
 	public Component getTableCellRendererComponent(JTable table, Object value,
