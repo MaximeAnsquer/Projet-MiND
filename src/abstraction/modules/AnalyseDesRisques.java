@@ -16,8 +16,8 @@ import abstraction.autres.SourceDeMenace;
 
 public class AnalyseDesRisques extends Module{
 	
-	/*Une analyse de risques est une liste de risques, cette classe fait appel à ses antécédents comme va d'instance
-	 * et également à l'étude en cours.
+	/*Une analyse de risques est une liste de risques, cette classe fait appel ï¿½ ses antï¿½cï¿½dents comme va d'instance
+	 * et ï¿½galement ï¿½ l'ï¿½tude en cours.
 	 */
 	
 	
@@ -63,19 +63,19 @@ public class AnalyseDesRisques extends Module{
 		int a=this.scenarios.getTableau().size();/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
 		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size();
 		
-		/*là on construit chacuns des risques de l'arraylist, en allant piocher dans les modules antécédents pour
-		 * faire correspondre chaque scénario de menace(ScenariosDeMenacesTypes) avec l'évenement correspondant(EvenementsRedoutes)
-		 * Les autres arguments du constructeur Risque découlent de ce couplage. C'est assez lourd dans l'écriture,
-		 * y a moyen que je retouche ça plus tard pour plus de visibilité.
+		/*lï¿½ on construit chacuns des risques de l'arraylist, en allant piocher dans les modules antï¿½cï¿½dents pour
+		 * faire correspondre chaque scï¿½nario de menace(ScenariosDeMenacesTypes) avec l'ï¿½venement correspondant(EvenementsRedoutes)
+		 * Les autres arguments du constructeur Risque dï¿½coulent de ce couplage. C'est assez lourd dans l'ï¿½criture,
+		 * y a moyen que je retouche ï¿½a plus tard pour plus de visibilitï¿½.
 		 * 
 		 */
 		
 		/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
 		
-		ScenarioType[] scenarios=this.scenarios.getTableau().values().toArray(new ScenarioType[this.scenarios.getTableau().size()]);
+		ScenarioType[] scenarios=this.scenarios.getTableau().toArray(new ScenarioType[this.scenarios.getTableau().size()]);
 		
 		
-		/*Pour chaque scénario*/
+		/*Pour chaque scï¿½nario*/
 		for (int i=0;i<a;i++){
 			
 			/*si le scenario est retenu*/
@@ -93,7 +93,7 @@ public class AnalyseDesRisques extends Module{
 				boolean resultat=scenarios[i].getCriteresSup().get(critere);
 				
 			    if (resultat==true){
-			    	/*On recupere le bien essentiel correspondant au bien support du scenario considéré*/
+			    	/*On recupere le bien essentiel correspondant au bien support du scenario considï¿½rï¿½*/
 			    Bien biensupport=scenarios[i].getBienSupport();	
 			    
 			    
@@ -105,7 +105,7 @@ public class AnalyseDesRisques extends Module{
 					biensessentiels=null;
 					e.printStackTrace();
 				}
-			    /*On récupère le critère correspondant*/
+			    /*On rï¿½cupï¿½re le critï¿½re correspondant*/
 			    Critere[] listecriteres =this.criteres.getCriteresRetenus().values().toArray(new Critere[this.criteres.getCriteresRetenus().size()]);
 			    Critere criterecourant=listecriteres[k];
 			   
@@ -148,7 +148,7 @@ public class AnalyseDesRisques extends Module{
 			
 			this.risques=liste;
 		}
-	/*Getter utile pour la construction de la matrice qui vient après*/	
+	/*Getter utile pour la construction de la matrice qui vient aprï¿½s*/	
 	
 	}
 	
@@ -164,7 +164,7 @@ public class AnalyseDesRisques extends Module{
 	
 	
 	
-	/*Méthode qui permet de vérifier si le bouton associé au module doit être grisé ou non (cf workflow)*/
+	/*Mï¿½thode qui permet de vï¿½rifier si le bouton associï¿½ au module doit ï¿½tre grisï¿½ ou non (cf workflow)*/
 	
 	public void checkDisponible(){
 		

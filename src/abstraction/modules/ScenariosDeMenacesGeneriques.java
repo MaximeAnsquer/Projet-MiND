@@ -159,11 +159,11 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		this.notifyObservers();                      // PAC
 	}
 	
-	public Hashtable<String, ScenarioGenerique> getScenariosGeneriquesRetenus() {
-		Hashtable<String, ScenarioGenerique> resultat = new Hashtable<String, ScenarioGenerique>();
+	public ArrayList<ScenarioGenerique> getScenariosGeneriquesRetenus() {
+		ArrayList<ScenarioGenerique> resultat = new ArrayList<ScenarioGenerique>();
 		for (ScenarioGenerique scenario : this.getTableau()) {
 			if (scenario.isRetenu()) {
-				resultat.put(scenario.getIntitule(), scenario);
+				resultat.add(scenario);
 			}
 		}
 		return resultat;
