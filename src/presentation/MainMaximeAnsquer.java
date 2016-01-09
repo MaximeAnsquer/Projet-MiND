@@ -355,6 +355,7 @@ public class MainMaximeAnsquer extends JFrame {
 		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme temps que la fenetre)
 		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
 		((ScenariosDeMenacesGeneriques) etudeEnCours.getModule("ScenariosDeMenacesGeneriques") ).deleteObservers();
+		((ScenariosDeMenacesTypes) etudeEnCours.getModule("ScenariosDeMenacesTypes") ).deleteObservers();
 
 		//Necessaire etant donne que l'on supprime les observeurs (il faut recreer les fenetres pour que leurs boutons etc refonctionnent)
 		setContenu("Workflow");
