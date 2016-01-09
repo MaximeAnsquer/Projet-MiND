@@ -167,20 +167,28 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	
 	public void importerDonnees() {
 		// On réinitialise les données : à supprimer après
-		this.moduleCourant.setTableau(new ArrayList<ScenarioType>());
+		//this.moduleCourant.setTableau(new ArrayList<ScenarioType>());
 		
-		for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques
-				.getScenariosGeneriquesRetenus()) {
-			ScenarioType scenario = new ScenarioType(
-					sGene.getTypeBienSupport(), sGene.getId(),
-					sGene.getIntitule(), sGene.getCriteresSup(),
-					this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
-					true);
-			for (Bien b : this.biensSupports.getBiensRetenus()) {
-				if (sGene.getTypeBienSupport().contains(b.getType())) {
-					scenario.setBienSupport(b);
-					this.moduleCourant.getTableau().add(scenario);
+		if (this.moduleCourant.getTableau().size()==0){
+			for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques
+					.getScenariosGeneriquesRetenus()) {
+				ScenarioType scenario = new ScenarioType(
+						sGene.getTypeBienSupport(), sGene.getId(),
+						sGene.getIntitule(), sGene.getCriteresSup(),
+						this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
+						true);
+				for (Bien b : this.biensSupports.getBiensRetenus()) {
+					if (sGene.getTypeBienSupport().contains(b.getType())) {
+						scenario.setBienSupport(b);
+						this.moduleCourant.getTableau().add(scenario);
+					}
 				}
+			}
+		}
+		else{
+			for (ScenarioType scenario : this.moduleCourant.getTableau()){
+				scenario.setMenaces(this.sourcesDeMenaces.getSourcesDeMenacesRetenues());
+				//scenario.setId(this.scenarioDeMenacesGeneriques.ge);
 			}
 		}
 	}
