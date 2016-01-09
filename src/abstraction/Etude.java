@@ -7,6 +7,7 @@ import abstraction.modules.BiensSupports;
 import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.EvenementsRedoutes;
 import abstraction.modules.MappingDesBiens;
+import abstraction.modules.MatriceDesRisques;
 import abstraction.modules.Metriques;
 import abstraction.modules.Module;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
@@ -45,8 +46,9 @@ public class Etude {
 		this.addModule(new MappingDesBiens(this));
 		this.addModule(new EvenementsRedoutes(this));
 		this.addModule(new ScenariosDeMenacesGeneriques(this));
-		this.addModule(new ScenariosDeMenacesTypes());
+		this.addModule(new ScenariosDeMenacesTypes(this));
 		this.addModule(new AnalyseDesRisques(this));
+		this.addModule(new MatriceDesRisques(this));
 	}
 	
 	public Etude(){

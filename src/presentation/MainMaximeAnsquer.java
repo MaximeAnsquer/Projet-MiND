@@ -310,7 +310,7 @@ public class MainMaximeAnsquer extends JFrame {
 		
 		if(nomEtudeDejaUtilise(nomEtude)){
 			JOptionPane.showMessageDialog(this, "Ce nom d'etude est deja utilise, veuillez en choisir un autre");
-			return nouvelleEtude();
+			nouvelleEtude = nouvelleEtude();
 		}
 		else{
 			nouvelleEtude.setNom(nomEtude);
