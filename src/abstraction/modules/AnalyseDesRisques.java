@@ -41,7 +41,7 @@ public class AnalyseDesRisques extends Module{
 		this.mapping=(MappingDesBiens)this.etude.getModule("MappingDesBiens");
 		this.scenarios=(ScenariosDeMenacesTypes)this.etude.getModule("ScenariosDeMenacesTypes");
 		
-		this.predecesseurs.add(this.etude.getModule("ScenariosDeMenacesTypes"));
+		this.predecesseurs.add(this.scenarios);
 		this.predecesseurs.add(this.evenements);
 		this.predecesseurs.add(this.mapping);
 		
@@ -50,18 +50,22 @@ public class AnalyseDesRisques extends Module{
 		
 		this.cree=false;
 		
+		this.coherent=false;
 		
-		this.checkDisponible();
+		
+		//this.checkDisponible();
 		
 		
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
 		
 		
-		if(this.scenarios!=null&&this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true){
+		if(this.scenarios!=null&&this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true&&this.scenarios.getTableau().get(0).getCriteresSup()!=null){
 		
 		int a=this.scenarios.getTableau().size();/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
-		int b=((CriteresDeSecurite)this.etude.getModule("CriteresDeSecurite")).getCriteresRetenus().size();
+		
+		
+		int b=this.scenarios.getTableau().get(0).getCriteresSup().size();
 		
 		/*l� on construit chacuns des risques de l'arraylist, en allant piocher dans les modules ant�c�dents pour
 		 * faire correspondre chaque sc�nario de menace(ScenariosDeMenacesTypes) avec l'�venement correspondant(EvenementsRedoutes)

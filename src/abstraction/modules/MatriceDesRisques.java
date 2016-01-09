@@ -37,7 +37,7 @@ public class MatriceDesRisques extends Module {
 		
 		this.coherent=false;
 		this.cree=false;
-		this.checkDisponible();
+		//this.checkDisponible();
 		
 		if(this.analysedesrisques.estCoherent()==true){
 		
@@ -70,6 +70,7 @@ public class MatriceDesRisques extends Module {
 }
 			
 	else{this.matrice=new ArrayList[1][1];
+	this.matrice[0][0]=new ArrayList<String>();
 	this.matrice[0][0].add("");
 	
 		

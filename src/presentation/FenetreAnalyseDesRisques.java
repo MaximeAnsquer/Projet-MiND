@@ -79,6 +79,8 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			
 			this.tableau=new JTable(modele);
 			
+			
+			
 			tableau.setPreferredScrollableViewportSize(new Dimension(900, 400));
 	        tableau.setFillsViewportHeight(true);
 			

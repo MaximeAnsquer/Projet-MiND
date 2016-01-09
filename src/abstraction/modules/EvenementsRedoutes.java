@@ -55,9 +55,12 @@ public class EvenementsRedoutes extends Module {
 		this.lesBiensEssentiels=(BiensEssentiels)this.etude.getModule("BiensEssentiels");
 		
 		this.cree=false;
-		this.checkDisponible();
+		//this.checkDisponible();
 		
 		this.coherent=false;
+		
+	
+		
 		
 		
 		/*A ce stade-ci du constructeur, on remplit l'arraylist en constituant des combinaisons entre Biens Essentiels

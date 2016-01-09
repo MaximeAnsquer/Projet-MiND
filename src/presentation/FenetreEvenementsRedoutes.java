@@ -33,6 +33,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	 * 
 	 */
 	
+	
+	
 	private ModeleEvenementsRedoutes modele;
 	private EvenementsRedoutes evenements;
 	private JTableX tableau;
@@ -52,6 +54,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
 		 * dans le nouveau
 		 */
+		
+		
 		
 		int a=nouveauev.getEvenementsRedoutes().size();
 		int b=evenements.getEvenementsRedoutes().size();
@@ -86,6 +90,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.modele=new ModeleEvenementsRedoutes(evenements);
 		
 		this.etude=evenements.getEtude();
+		
 	
 		
 		this.criteres=(CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite");
@@ -114,6 +119,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		
 		this.setVisible(true);
+		
+		this.evenements.setCree(true);
 		
 		
 	}
