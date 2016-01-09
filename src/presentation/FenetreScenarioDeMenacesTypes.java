@@ -1,52 +1,49 @@
 package presentation;
 
-import java.util.ArrayList;
-
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 import controle.ScenariosDeMenacesTypes.ControlJButtonAjoutLigne;
 import controle.ScenariosDeMenacesTypes.ControlJTable;
 import abstraction.modules.ScenariosDeMenacesTypes;
 
-public class FenetreScenarioDeMenacesTypes extends JFrame {
+public class FenetreScenarioDeMenacesTypes extends JPanel {
 	private ScenariosDeMenacesTypes moduleCourant;
 	private ModeleScenarioDeMenacesTypes modeleTableau;
 	private JTable tableau ;
 	private JComboBox comboBoxIntrinseque ;
 	private JButton ajoutLigne ;
 
-	public FenetreScenarioDeMenacesTypes() {
-		super("Scenarios de menaces types");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(true);
+	public FenetreScenarioDeMenacesTypes(ScenariosDeMenacesTypes module) {
+		
+		this.moduleCourant=module;
 
-		this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		this.creerTableau();
 		this.creerComboBox();
 		this.creerBoutonsBas();
-		this.pack();
 	}
 	
 	public void creerTableau() {
-		this.modeleTableau= new ModeleScenarioDeMenacesTypes();
-		this.moduleCourant=this.modeleTableau.getModuleCourant();
+		this.modeleTableau= new ModeleScenarioDeMenacesTypes(this.moduleCourant);
+		// this.moduleCourant=this.modeleTableau.getModuleCourant();
 		this.tableau = new JTable(this.modeleTableau);
 		
 		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau);
 		this.tableau.addMouseListener(controlTableau);
 		
-		this.getContentPane().add(tableau.getTableHeader());
-        this.getContentPane().add(new JScrollPane(tableau));
+		this.add(tableau.getTableHeader());
+        this.add(new JScrollPane(tableau));
 	}
 	
 	public void creerComboBox(){
@@ -63,12 +60,15 @@ public class FenetreScenarioDeMenacesTypes extends JFrame {
 	}
 	
 	public void creerBoutonsBas() {
+		JLabel label = new JLabel("");
+		this.add(label);
+		
 		this.ajoutLigne=new JButton("Particulariser un scénario générique");
 		
 		ControlJButtonAjoutLigne controlAjoutLigne = new ControlJButtonAjoutLigne(modeleTableau, tableau, ajoutLigne);
 		this.moduleCourant.addObserver(controlAjoutLigne);
 		this.ajoutLigne.addActionListener(controlAjoutLigne);
 		
-		this.getContentPane().add(ajoutLigne);
+		this.add(ajoutLigne);
 	}
 }

@@ -33,6 +33,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	 * 
 	 */
 	
+	
+	
 	private ModeleEvenementsRedoutes modele;
 	private EvenementsRedoutes evenements;
 	private JTableX tableau;
@@ -52,6 +54,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
 		 * dans le nouveau
 		 */
+		
+		
 		
 		int a=nouveauev.getEvenementsRedoutes().size();
 		int b=evenements.getEvenementsRedoutes().size();
@@ -86,6 +90,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.modele=new ModeleEvenementsRedoutes(evenements);
 		
 		this.etude=evenements.getEtude();
+		
 	
 		
 		this.criteres=(CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite");
@@ -95,6 +100,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		this.setUpComBo();
 		
+		
 		tableau.setPreferredScrollableViewportSize(new Dimension(500, 70));
         tableau.setFillsViewportHeight(true);
 		
@@ -103,10 +109,18 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 		
 		add(scrollPane);
+
 		
-		tableau.setDefaultRenderer(Object.class, new CellRendererEv());
+		CellRendererEv renderer=new CellRendererEv();
+		
+		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-1).setCellRenderer( renderer);
+		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-2).setCellRenderer( renderer);
+		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-5).setCellRenderer( renderer);
+		
 		
 		this.setVisible(true);
+		
+		this.evenements.setCree(true);
 		
 		
 	}
@@ -118,6 +132,9 @@ public class FenetreEvenementsRedoutes extends JPanel{
  
 		
 		this.tableau=new JTableX(modele);
+		
+		
+		
 		tableau.setRowSelectionAllowed(false);
         tableau.setColumnSelectionAllowed(false);
 		
@@ -179,11 +196,11 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	gravColumn.setPreferredWidth(200);
 	gravColumn.setMaxWidth(250);
 	
-	TableColumn nameColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5);
+	/*TableColumn nameColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5);
 	 DefaultTableCellRenderer renderer =
              new DefaultTableCellRenderer();
      renderer.setToolTipText("Appuyez sur entrée pour confirmer le nom de l'évènement une fois qu'il a été écrit");
-     nameColumn.setCellRenderer(renderer);
+     nameColumn.setCellRenderer(renderer);*/
 	
 	}
 	

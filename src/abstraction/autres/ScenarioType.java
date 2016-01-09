@@ -45,6 +45,14 @@ public class ScenarioType extends ScenarioGenerique {
 		this.vraisemblanceReelle=1;
 	}
 	
+	public ScenarioType(){
+		super("","","",new Hashtable<String, Boolean>(),true);
+		this.menaces=new Hashtable<String, SourceDeMenace>();
+		this.intituleConcret="";
+		this.vraisemblanceIntrinseque=1;
+		this.vraisemblanceReelle=1;
+	}
+	
 	public Hashtable<String, SourceDeMenace> getMenaces() {
 		return menaces;
 	}
@@ -92,6 +100,8 @@ public class ScenarioType extends ScenarioGenerique {
 				s=s+sourceMenace.getId() + ", ";
 			}
 		}
+		// On supprime le dernier charactère qui est une virgule
+		s=s.substring(0, s.length()-2);
 		return s ;
 	}
 

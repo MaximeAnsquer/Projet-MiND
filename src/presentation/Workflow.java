@@ -99,7 +99,7 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 		this.add(lesBoutons.get("AnalyseDesRisques"));
 		this.add(new JLabel());
-		this.add(moduleManquant());
+		this.add(lesBoutons.get("MatriceDesRisques"));
 
 		//4eme ligne
 		this.add(new JLabel());
@@ -135,7 +135,7 @@ public class Workflow extends JPanel {
 		this.add(lesBoutons.get("SourcesDeMenaces"));
 		this.add(new JLabel());
 		this.add(new JLabel());
-		this.add(moduleManquant());
+		this.add(lesBoutons.get("ScenariosDeMenacesTypes"));
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());

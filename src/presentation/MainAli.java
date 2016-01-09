@@ -4,8 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import abstraction.Etude;
+import abstraction.modules.BiensSupports;
 import abstraction.modules.CriteresDeSecurite;
+import abstraction.modules.Metriques;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
+import abstraction.modules.ScenariosDeMenacesTypes;
+import abstraction.modules.SourcesDeMenaces;
 import abstraction.modules.TypologieDesBiensSupports;
 
 public class MainAli extends JFrame {
@@ -39,6 +43,18 @@ public class MainAli extends JFrame {
 		ScenariosDeMenacesGeneriques secondModule = new ScenariosDeMenacesGeneriques(etude);
 		etude.addModule(secondModule);
 		
+		BiensSupports moduleBiens = new BiensSupports(etude);
+		etude.addModule(moduleBiens);
+		
+		Metriques moduleMetriques = new Metriques(etude);
+		etude.addModule(moduleMetriques);
+		
+		SourcesDeMenaces moduleSources = new SourcesDeMenaces();
+		etude.addModule(moduleSources);
+		
+		ScenariosDeMenacesTypes dernierModule = new ScenariosDeMenacesTypes(etude);
+		etude.addModule(dernierModule);
+		
 		String module1 = "Typologie des biens supports";
 		String module2 = "Scénario de menaces génériques";
 		String module3 = "Scenario de menaces typés" ;
@@ -59,7 +75,9 @@ public class MainAli extends JFrame {
 			mainTest.pack();
 		}
 		if (reponse==choix[2]){
-			FenetreScenarioDeMenacesTypes fen3 = new FenetreScenarioDeMenacesTypes();
+			FenetreScenarioDeMenacesTypes fen3 = new FenetreScenarioDeMenacesTypes(dernierModule);
+			mainTest.add(fen3);
+			mainTest.pack();
 		}
 	}
 }

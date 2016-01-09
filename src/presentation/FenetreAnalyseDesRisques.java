@@ -79,6 +79,8 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			
 			this.tableau=new JTable(modele);
 			
+			
+			
 			tableau.setPreferredScrollableViewportSize(new Dimension(900, 400));
 	        tableau.setFillsViewportHeight(true);
 			
@@ -94,6 +96,13 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5).setPreferredWidth(600);
 			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-6).setPreferredWidth(700);
 			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-7).setPreferredWidth(800);
+			
+			
+			CellRendererEv renderer=new CellRendererEv();
+			
+			this.tableau.getColumnModel().getColumn(1).setCellRenderer( renderer);
+			this.tableau.getColumnModel().getColumn(4).setCellRenderer( renderer);
+			this.tableau.getColumnModel().getColumn(6).setCellRenderer( renderer);
 			
 			this.setVisible(true);
 		
