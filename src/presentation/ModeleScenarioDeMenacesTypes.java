@@ -297,7 +297,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				scenarioType.setVraisemblanceIntrinseque(Integer.parseInt((String) aValue));
 			}
 			if(columnIndex==COLONNE_VRAISEMBLANCE_R){
-				scenarioType.setVraisemblanceReelle((Integer) aValue);
+				scenarioType.setVraisemblanceReelle(Integer.parseInt((String) aValue));
 			}
 			if(columnIndex==COLONNE_RETENU){
 				scenarioType.setRetenu((Boolean) aValue);

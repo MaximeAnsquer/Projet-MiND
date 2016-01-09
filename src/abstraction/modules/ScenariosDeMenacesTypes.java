@@ -1,8 +1,6 @@
 package abstraction.modules;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.LinkedList;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
@@ -82,6 +80,16 @@ public class ScenariosDeMenacesTypes extends Module {
 	public static ArrayList<ScenarioType> getBDC() {
 		return bdcScenariosMenacesTypes;
 	}
+	
+	public ArrayList<ScenarioType> getScenariosTypesRetenus() {
+		ArrayList<ScenarioType> resultat = new ArrayList<ScenarioType>();
+		for (ScenarioType scenario : this.getTableau()) {
+			if (scenario.isRetenu()) {
+				resultat.add(scenario);
+			}
+		}
+		return resultat;
+	}
 
 	private void importerBDC() {
 		bdcScenariosMenacesTypes= new ArrayList<ScenarioType>();
@@ -107,10 +115,24 @@ public class ScenariosDeMenacesTypes extends Module {
 	
 	public boolean estCoherent() {
 		boolean resultat = true ;
+		this.problemesDeCoherence = new ArrayList<String>();
+		for (ScenarioType scenario : this.tableau) {
+			if (scenario.isIncomplete()) {
+				String s = "Scenario type \" " + scenario.getIntitule()
+						+ " \" incomplet";
+				this.problemesDeCoherence.add(s);
+				resultat = false;
+			}
+		}
+		if (this.getScenariosTypesRetenus().size() < 1) {
+			String s = "Aucun scenario type retenu";
+			this.problemesDeCoherence.add(s);
+			resultat = false;
+		}
 		return resultat;
 	}
 	
 	public String toString(){
-		return "Scénarios de menaces typés";
+		return "Scenarios de menaces types";
 	}
 }

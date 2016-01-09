@@ -47,15 +47,33 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	}
 	
 	public void creerComboBox(){
-		TableColumn colonneIntrinseque = this.tableau.getColumnModel().getColumn(this.modeleTableau.getColumnCount()-3);
-		int vraisemblanceMax = this.modeleTableau.getMetriques().getMetrique("Vraisemblance").nombreDeNiveaux();
-		String[] liste = new String[vraisemblanceMax];
 		
-		for (int i = 1 ; i<=vraisemblanceMax ; i++){
-			liste[i-1]=""+ i;
+		// Création du JcomboBox pour chaque case de la colonne Vraisemblance intrinsèque
+		
+		TableColumn colonneIntrinseque = this.tableau.getColumnModel().getColumn(this.modeleTableau.getColumnCount()-3);
+		int nbNiveauxIntrinseque = this.modeleTableau.getMetriques().getMetrique("Vraisemblance").nombreDeNiveaux();
+		String[] niveauxIntrinseque = new String[nbNiveauxIntrinseque];
+		for (int i = 1 ; i<=nbNiveauxIntrinseque ; i++){
+			niveauxIntrinseque[i-1]=""+ i;
 		}
-		this.comboBoxIntrinseque = new JComboBox(liste);
+		this.comboBoxIntrinseque = new JComboBox(niveauxIntrinseque);
+		// On gère la couleur des JcomboBox
+		CellRendererEv renderer = new CellRendererEv();
+		colonneIntrinseque.setCellRenderer(renderer);
 		colonneIntrinseque.setCellEditor(new DefaultCellEditor(comboBoxIntrinseque));
+		
+		// Création du JcomboBox pour chaque case de la colonne Vraisemblance réelle
+		
+		TableColumn colonneReelle = this.tableau.getColumnModel().getColumn(this.modeleTableau.getColumnCount()-2);
+		int nbNiveauxReelle = this.modeleTableau.getMetriques().getMetrique("Vraisemblance").nombreDeNiveaux();
+		String[] niveauxReelle = new String[nbNiveauxReelle];
+		for (int i = 1 ; i<=nbNiveauxReelle ; i++){
+			niveauxReelle[i-1]=""+ i;
+		}
+		this.comboBoxIntrinseque = new JComboBox(niveauxReelle);
+		// On gère la couleur des JcomboBox
+		colonneReelle.setCellRenderer(renderer);
+		colonneReelle.setCellEditor(new DefaultCellEditor(comboBoxIntrinseque));
 		
 	}
 	
