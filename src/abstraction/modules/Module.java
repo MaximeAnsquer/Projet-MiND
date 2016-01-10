@@ -64,14 +64,22 @@ public class Module extends Observable implements IModule  {
 		boolean resultat = true;
 		System.out.println("predecesseurs : " + this.getPredecesseurs() );
 		
+		
 		if(this.getNom()=="AnalyseDesRisques"){
 			resultat=this.getEtude().getModule("EvenementsRedoutes").estCoherent()&&this.getEtude().getModule("EvenementsRedoutes").estCree();
 		    resultat=resultat&&this.getEtude().getModule("MappingDesBiens").estCoherent()&&this.getEtude().getModule("MappingDesBiens").estCree();
 		    resultat=resultat&&this.getEtude().getModule("ScenariosDeMenacesTypes").estCoherent()&&this.getEtude().getModule("ScenariosDeMenacesTypes").estCree();
-		
+		    System.out.println(this.getNom());
+		}
+		else  if(this.getNom()=="MatriceDesRisques"){
+			resultat=this.getEtude().getModule("AnalyseDesRisques").estCoherent()&&this.getEtude().getModule("AnalyseDesRisques").estCree();
+			System.out.println(this.getNom());
 		}
 		
-		else{
+		
+		
+		else{ 
+			
 		for(Module m : this.getPredecesseurs()){
 			if(m.estCree()){
 				System.out.println("Le predecesseur " + m + " est cree");

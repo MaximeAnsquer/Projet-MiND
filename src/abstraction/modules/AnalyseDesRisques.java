@@ -67,6 +67,9 @@ public class AnalyseDesRisques extends Module{
 		
 		int b=this.scenarios.getTableau().get(0).getCriteresSup().size();
 		
+		System.out.println(a);
+		System.out.println(b);
+		
 		/*l� on construit chacuns des risques de l'arraylist, en allant piocher dans les modules ant�c�dents pour
 		 * faire correspondre chaque sc�nario de menace(ScenariosDeMenacesTypes) avec l'�venement correspondant(EvenementsRedoutes)
 		 * Les autres arguments du constructeur Risque d�coulent de ce couplage. C'est assez lourd dans l'�criture,
@@ -118,7 +121,8 @@ public class AnalyseDesRisques extends Module{
 			    for(int j=0;j<biensessentiels.size();j++){
 			    
 			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biensessentiels.get(j).getIntitule());
-			    
+			   System.out.println(evenement.GetNomEvenement()); 
+			   
 				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),biensupport,scenarios[i],scenarios[i].getVraisemblanceReelle()));
 				
 			}}

@@ -28,8 +28,6 @@ public class FenetreAnalyseDesRisques extends JPanel{
 		 
 		 AnalyseDesRisques nouvellean=new AnalyseDesRisques(analyse.getEtude());
 		 
-		 
-		 
 		 nouvellean.setCree(true);
 			
 			/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
@@ -38,6 +36,9 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			
 			int a=nouvellean.getAnalyseDesRisques().size();
 			int b=analyse.getAnalyseDesRisques().size();
+			
+			
+			
 			
 			for (int i=0;i<a;i++){
 				for(int j=0;j<b;j++){
@@ -69,8 +70,17 @@ public class FenetreAnalyseDesRisques extends JPanel{
 				}
 			}
 			
+			
+System.out.println(nouvellean.getAnalyseDesRisques().get(0).getNiveauGravite());
+
+analyse.getEtude().addModule(nouvellean);
 			analyse=nouvellean;
-			analyse.getEtude().addModule(nouvellean);
+			
+			System.out.println(analyse.getAnalyseDesRisques().get(0).getEvenementRedoute().GetNomEvenement());
+			System.out.println(analyse.getAnalyseDesRisques().get(1).getEvenementRedoute().GetNomEvenement());
+			System.out.println(analyse.getAnalyseDesRisques().get(2).getEvenementRedoute().GetNomEvenement());
+			System.out.println(analyse.getAnalyseDesRisques().get(3).getEvenementRedoute().GetNomEvenement());
+
 			
 			this.modele=new ModeleAnalyseDesRisques(analyse);
 		 
@@ -106,7 +116,7 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			
 			this.setVisible(true);
 		
-		
+		this.analyse.setCree(true);
 		
 		
 		

@@ -28,7 +28,7 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 		for (int i=0;i<a;i++){
 			this.data.add(this.analyse.getAnalyseDesRisques().get(i));
 		}
-	this.entetes.add("Evenement redouté)");
+	this.entetes.add("Evenement redouté");
 	this.entetes.add("Niveau gravité");
 	this.entetes.add("Bien support)");
 	this.entetes.add("Scenario concret");
@@ -67,7 +67,7 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch(columnIndex){
 		case 0:
-			analyse.getAnalyseDesRisques().get(rowIndex).getEvenementRedoute().GetNomEvenement();
+			return analyse.getAnalyseDesRisques().get(rowIndex).getEvenementRedoute().GetNomEvenement();
 		case 1:
 			return analyse.getAnalyseDesRisques().get(rowIndex).getNiveauGravite();
 		

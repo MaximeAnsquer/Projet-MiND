@@ -22,6 +22,8 @@ public class MatriceDesRisques extends Module {
 	private ArrayList<String>[][] matrice; 
 	private AnalyseDesRisques analysedesrisques;
 	
+	private int nombreniveaux;
+	
 	/*Constructeur
 	 * 
 	 */
@@ -43,13 +45,23 @@ public class MatriceDesRisques extends Module {
 		
 		int a=((Metriques)this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
 		int b=((Metriques)this.etude.getModule("Metriques")).getVraisemblance().nombreDeNiveaux();
-		this.matrice=new ArrayList[a][b];
 		
-		for (int i=1;i<a;i++){
-			for (int j=1;j<b;j++){
+		this.nombreniveaux=b;
+		
+		this.matrice=new ArrayList[a][b+1];
+		
+		
+		
+		for (int i=1;i<=a;i++){
+			for (int j=1;j<=b;j++){
 				for (int k=0;k<this.analysedesrisques.getAnalyseDesRisques().size();k++){
 					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getRetenu()==true&&this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j){
-		this.matrice[i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
+						this.matrice[a-i][j]=new ArrayList<String>();
+		this.matrice[a-i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
+		System.out.println(i);
+		System.out.println(j);
+		System.out.println(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
+		
 					}
 				}
 			}
@@ -57,16 +69,12 @@ public class MatriceDesRisques extends Module {
 		}
 			
 		
-	for (int i=1;i<a;i++){
-		this.matrice[i][0].add((i+1)+"");
-	}
-	for (int i=1;i<b;i++){
-		this.matrice[0][i].add((i+1)+"");
+	for (int i=1;i<=a;i++){
+		this.matrice[a-i][0]=new ArrayList<String>();
+		this.matrice[a-i][0].add(i+"");
 	}
 	
 	
-	this.matrice[0][0].add("Gravité");
-	this.matrice[0][0].add("Vraisemblance");
 }
 			
 	else{this.matrice=new ArrayList[1][1];
@@ -108,4 +116,8 @@ public class MatriceDesRisques extends Module {
 		}
 	}
 	
+	
+	public int nombre(){
+		return this.nombreniveaux;
+	}
 }
