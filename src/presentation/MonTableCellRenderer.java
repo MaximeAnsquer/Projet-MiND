@@ -31,20 +31,7 @@ public class MonTableCellRenderer extends DefaultTableCellRenderer {
 			default: clr = Color.magenta;
 			}
 		}
-			if(row==0){
-				
-				switch(column){
-				case 0: clr = Color.green;
-				break;
-				case 1: clr = Color.yellow;
-				break;
-				case 2: clr = Color.orange;
-				break;
-				case 3: clr = Color.red;
-				break;
-				default: clr = Color.magenta;
-				}
-			}
+			
 	cell.setBackground(clr);
 	return cell;
 
