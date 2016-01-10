@@ -59,7 +59,7 @@ public class BiensSupports extends Module{
 
 	public Bien getBien (String intitule){
 		int index = 0;
-		while (index<this.nombreDeBiens() && !this.getBien(index).getIntitule().equals("intitule")){
+		while (index<this.nombreDeBiens() && !this.getBien(index).getIntitule().equals(intitule)){
 			index++;
 		}
 		if (index<this.nombreDeBiens()){
@@ -106,7 +106,7 @@ public class BiensSupports extends Module{
 	}
 
 	public void supprimerBien(String nomBien) {
-		this.getLesBiens().remove(nomBien);
+		this.getLesBiens().remove(this.getBien(nomBien));
 	}
 
 	public LinkedList<Bien> getBiensRetenus() {
