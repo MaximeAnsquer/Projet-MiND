@@ -68,7 +68,7 @@ public class MappingDesBiens extends Module{
 	public int getIndexBienSupport(Bien bienSupport) throws Exception{
 		int index=0;
 		while (index<this.mappingDesBiens.get(0).getBiensSupports().nombreDeBiens() 
-				&& this.getMappingDesBiens().get(0).getBiensSupports().getBien(index)==bienSupport){
+				&& this.getMappingDesBiens().get(0).getBiensSupports().getBien(index)!=bienSupport){
 			index++;
 		}
 		if (index!=this.mappingDesBiens.get(0).getBiensSupports().nombreDeBiens()){
