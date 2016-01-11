@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.TableColumn;
 
 import controle.TypologieBiensSupports.ControlJButtonAide;
 import controle.TypologieBiensSupports.ControlJButtonAjoutTypeBien;
@@ -36,6 +37,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.creerTableau();
+		this.creerCouleurs();
 		this.creerZoneDescription();
 		this.creerBoutonsBas();
 	}
@@ -50,6 +52,12 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		//tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);
 		this.add(tableau.getTableHeader());
         this.add(new JScrollPane(tableau));
+	}
+	
+	public void creerCouleurs(){
+		TableColumn colonneId = this.tableau.getColumnModel().getColumn(ModeleTypologieBiensSupports.COLONNE_ID);
+		CellRendererTypesBiens rendererTypeBien = new CellRendererTypesBiens();
+		colonneId.setCellRenderer(rendererTypeBien);
 	}
 	
 	public void creerZoneDescription(){
