@@ -8,10 +8,10 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class CellRendererScenario extends DefaultTableCellRenderer {
+public class CellRendererVraisemblance extends DefaultTableCellRenderer {
 	ModeleScenarioDeMenacesTypes modele ;
 	
-	public CellRendererScenario(ModeleScenarioDeMenacesTypes modele){
+	public CellRendererVraisemblance(ModeleScenarioDeMenacesTypes modele){
 		super();
 		this.modele=modele;
 		this.setHorizontalAlignment( SwingConstants.CENTER );

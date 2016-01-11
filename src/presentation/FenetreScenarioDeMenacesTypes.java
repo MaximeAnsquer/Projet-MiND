@@ -26,8 +26,11 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	private ScenariosDeMenacesTypes moduleCourant;
 	private ModeleScenarioDeMenacesTypes modeleTableau;
 	private JTable tableau ;
+	private CellRendererVraisemblance rendererTooltip ;
+	private CellRendererEv rendererEv ;
 	private JComboBox comboBoxIntrinseque ;
-	private ArrayList<JCheckBox> checkBoxSourcesMenaces ;
+	private JComboBox comboBoxReelle ;
+	// private ArrayList<JCheckBox> checkBoxSourcesMenaces ;
 	private JButton ajoutLigne ;
 
 	public FenetreScenarioDeMenacesTypes(ScenariosDeMenacesTypes module) {
@@ -50,6 +53,12 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau);
 		this.tableau.addMouseListener(controlTableau);
 		
+		this.rendererTooltip=new CellRendererVraisemblance(modeleTableau);
+		this.rendererEv=new CellRendererEv();
+		
+		TableColumn colonneScenarioConcret = this.tableau.getColumnModel().getColumn(ModeleScenarioDeMenacesTypes.COLONNE_SCENARIO_CONCRET);
+		colonneScenarioConcret.setCellRenderer(this.rendererEv);
+		
 		this.add(tableau.getTableHeader());
         this.add(new JScrollPane(tableau));
 	}
@@ -67,9 +76,9 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		this.comboBoxIntrinseque = new JComboBox(niveauxIntrinseque);
 		
 		// On gère la couleur des JcomboBox et les infobulles (ToolTips)
-		CellRendererScenario rendererScenario = new CellRendererScenario(modeleTableau);
+		CellRendererVraisemblance rendererScenario = new CellRendererVraisemblance(modeleTableau);
 		
-		colonneIntrinseque.setCellRenderer(rendererScenario);
+		colonneIntrinseque.setCellRenderer(this.rendererTooltip);
 		colonneIntrinseque.setCellEditor(new DefaultCellEditor(comboBoxIntrinseque));
 		
 		// Création du JcomboBox pour chaque case de la colonne Vraisemblance réelle
@@ -80,10 +89,10 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		for (int i = 1 ; i<=nbNiveauxReelle ; i++){
 			niveauxReelle[i-1]=""+ i;
 		}
-		this.comboBoxIntrinseque = new JComboBox(niveauxReelle);
+		this.comboBoxReelle = new JComboBox(niveauxReelle);
 		// On gère la couleur des JcomboBox
-		colonneReelle.setCellRenderer(rendererScenario);
-		colonneReelle.setCellEditor(new DefaultCellEditor(comboBoxIntrinseque));
+		colonneReelle.setCellRenderer(this.rendererTooltip);
+		colonneReelle.setCellEditor(new DefaultCellEditor(comboBoxReelle));
 		
 	}
 	
