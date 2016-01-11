@@ -24,6 +24,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 
 	private TypologieDesBiensSupports moduleCourant;
 	private ModeleTypologieBiensSupports modeleTableau ;
+	private CellRendererTypesBiens rendererTypeBien ;
 	private JTable tableau ;
 	private JTextArea zoneDescription ;
 	private JButton supprimerLigne ;
@@ -45,6 +46,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	public void creerTableau() {
 		this.modeleTableau=new ModeleTypologieBiensSupports(this.moduleCourant);
 		this.tableau = new JTable(this.modeleTableau);
+		this.rendererTypeBien=new CellRendererTypesBiens();
 		
 		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC
 		this.tableau.addMouseListener(control);                            // PAC
@@ -55,9 +57,11 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	}
 	
 	public void creerCouleurs(){
-		TableColumn colonneId = this.tableau.getColumnModel().getColumn(ModeleTypologieBiensSupports.COLONNE_ID);
-		CellRendererTypesBiens rendererTypeBien = new CellRendererTypesBiens();
-		colonneId.setCellRenderer(rendererTypeBien);
+		for(int i =0 ; i< this.modeleTableau.getColumnCount() ; i++){
+			TableColumn colonneId = this.tableau.getColumnModel().getColumn(i);
+			colonneId.setCellRenderer(this.rendererTypeBien);
+		}
+		
 	}
 	
 	public void creerZoneDescription(){

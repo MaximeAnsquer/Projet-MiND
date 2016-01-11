@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JTable;
@@ -9,9 +10,11 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class CellRendererTypesBiens extends DefaultTableCellRenderer {
+	private ArrayList<Color> couleurs ;
 	
 	public CellRendererTypesBiens(){
 		super();
+		this.couleurs=new ArrayList<Color>();
 		this.setHorizontalAlignment( SwingConstants.CENTER );
 	}
 	
@@ -25,28 +28,45 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 			Color clr = Color.yellow;
 			component.setBackground(clr);
 		} 
-		else if (value instanceof String) {
+		else if (value instanceof String || value instanceof Boolean) {
 			Color clr;
 			switch(row){
 			case 0 : clr=new Color(198, 224, 180);
+			component.setBackground(clr);
 			break;
 			case 1 : clr=new Color(248, 203, 173);
+			component.setBackground(clr);
 			break;
 			case 2 : clr=new Color(255, 230, 153);
+			component.setBackground(clr);
 			break;
 			case 3 : clr=new Color(250, 172, 207);
+			component.setBackground(clr);
 			break;
 			case 4 : clr=new Color(189, 215, 238);
+			component.setBackground(clr);
 			break;
 			case 5 : clr=new Color(172, 185, 202);
+			component.setBackground(clr);
 			break;
 			case 6 : clr=new Color(219, 219, 219);
+			component.setBackground(clr);
 			break;
-			default: 
-				clr=new Color((255/(row+1))*(row),(255/(row+1))*(row),(255/(row+1))*(row));
-				component.setBackground(clr);
+			default:
+				if (couleurs.size()>= row - 7) {
+					Random rand = new Random();
+					float r = rand.nextFloat();
+					float g = rand.nextFloat();
+					float b = rand.nextFloat();
+					clr = new Color(r, g, b);
+					couleurs.add(clr);
+					component.setBackground(couleurs.get(couleurs.size()-1));
+				}
+				else{
+					clr=couleurs.get(row-7);
+					component.setBackground(clr);
+				}
 		}
-		component.setBackground(clr);
 		} else {
 			Color clr = new Color(255, 255, 255);
 			component.setBackground(clr);
