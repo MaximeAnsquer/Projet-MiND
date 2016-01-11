@@ -31,7 +31,6 @@ public class MappingDesBiens extends Module{
 			mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
 		}
 
-		//this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
 		this.predecesseurs.add(this.getEtude().getModule("BiensEssentiels"));
 		this.predecesseurs.add(this.getEtude().getModule("BiensSupports"));
 		

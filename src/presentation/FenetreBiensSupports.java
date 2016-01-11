@@ -40,6 +40,7 @@ public class FenetreBiensSupports extends JPanel{
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensSupports biensSupports;
+	private CellRendererBiensSupports rendererTooltip;
 	JComboBox comboBox = new JComboBox();
 
 	public FenetreBiensSupports(BiensSupports biensSupports){
@@ -47,10 +48,12 @@ public class FenetreBiensSupports extends JPanel{
 		this.biensSupports=biensSupports;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.rendererTooltip = new CellRendererBiensSupports(this.biensSupports.getTypologie());
+		table.getColumn("Type").setCellRenderer(this.rendererTooltip);
 		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
 			comboBox.addItem((String)biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i]);
 		}
-		table.getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));;
+		table.getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));
 		table.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent e) {
 				zoneDescription.setText(getBienSelectionne().getDescription());
@@ -243,7 +246,12 @@ public class FenetreBiensSupports extends JPanel{
 			String categorie = "";
 			do{
 				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
-			} while (categorie.equals("") || categorie.equals("Intitule") || categorie.equals("Description") || categorie.equals("Type") || categorie.equals("Retenu"));			
+				for (int i=0; i<this.entetes.size();i++){
+					if (this.entetes.get(i).equals(categorie)){
+						categorie = "";
+					}
+				}
+			} while (categorie.equals(""));			
 			biensSupports.getNomColonnesSup().addFirst(categorie);
 			for (int i=0; i<biensSupports.nombreDeBiens();i++){
 				biensSupports.getBien(i).ajouterColonne("");
@@ -261,12 +269,14 @@ public class FenetreBiensSupports extends JPanel{
 			String intitule = "";
 			do{
 				intitule = JOptionPane.showInputDialog("Intitule ?");
+				for (int i=0; i<biensSupports.nombreDeBiens();i++){
+					if (biensSupports.getBien(i).getIntitule().equals(intitule)){
+						intitule = "";
+					}
+				}
 			} while (intitule.equals(""));
 			Object[] possibilities = biensSupports.getTypologie().getIntituleTypeBiensRetenus();
 			String type = (String)possibilities[0];
-			/*do{
-				type = JOptionPane.showInputDialog(null, "type",JOptionPane.PLAIN_MESSAGE, null, null, possibilities,possibilities[0]);
-			} while (type.equals(""));*/
 			String description = "";
 			do{
 				description = JOptionPane.showInputDialog("Description ?");
