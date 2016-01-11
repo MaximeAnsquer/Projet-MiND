@@ -1,9 +1,14 @@
 package presentation;
 
 
+import java.util.ArrayList;
+
+import javafx.scene.control.CheckBox;
+
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +19,7 @@ import javax.swing.table.TableColumn;
 
 import controle.ScenariosDeMenacesTypes.ControlJButtonAjoutLigne;
 import controle.ScenariosDeMenacesTypes.ControlJTable;
+import abstraction.autres.SourceDeMenace;
 import abstraction.modules.ScenariosDeMenacesTypes;
 
 public class FenetreScenarioDeMenacesTypes extends JPanel {
@@ -21,6 +27,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	private ModeleScenarioDeMenacesTypes modeleTableau;
 	private JTable tableau ;
 	private JComboBox comboBoxIntrinseque ;
+	private ArrayList<JCheckBox> checkBoxSourcesMenaces ;
 	private JButton ajoutLigne ;
 
 	public FenetreScenarioDeMenacesTypes(ScenariosDeMenacesTypes module) {
@@ -31,6 +38,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 
 		this.creerTableau();
 		this.creerComboBox();
+		//this.creerCheckBox();
 		this.creerBoutonsBas();
 	}
 	
@@ -59,7 +67,9 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		this.comboBoxIntrinseque = new JComboBox(niveauxIntrinseque);
 		// On gère la couleur des JcomboBox
 		CellRendererEv renderer = new CellRendererEv();
-		colonneIntrinseque.setCellRenderer(renderer);
+		CellRendererScenario rendererScenario = new CellRendererScenario(modeleTableau);
+		
+		colonneIntrinseque.setCellRenderer(rendererScenario);
 		colonneIntrinseque.setCellEditor(new DefaultCellEditor(comboBoxIntrinseque));
 		
 		// Création du JcomboBox pour chaque case de la colonne Vraisemblance réelle
@@ -77,6 +87,17 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		
 	}
 	
+	/*
+	public void creerCheckBox(){
+		TableColumn colonneSourcesMenaces = this.tableau.getColumnModel().getColumn(this.modeleTableau.COLONNE_SOURCES_MENACES);
+		
+		this.checkBoxSourcesMenaces = new ArrayList<JCheckBox>();
+		for(SourceDeMenace source :  this.modeleTableau.getSourcesDeMenaces().getBDC().values()){
+			JCheckBox idSource = new JCheckBox(source.getId(),source.isRetenu());
+			this.checkBoxSourcesMenaces.add(idSource);
+		}
+	}
+	*/
 	public void creerBoutonsBas() {
 		JLabel label = new JLabel("");
 		this.add(label);
