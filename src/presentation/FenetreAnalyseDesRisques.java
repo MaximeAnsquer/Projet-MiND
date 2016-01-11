@@ -30,7 +30,7 @@ public class FenetreAnalyseDesRisques extends JPanel{
 		 
 		 nouvellean.setCree(true);
 			
-			/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
+			/*La boucle va servir ï¿½ mettre ï¿½ conserver les valeurs modifiï¿½es de l'ancien tableau et de les mettre
 			 * dans le nouveau
 			 */
 			
