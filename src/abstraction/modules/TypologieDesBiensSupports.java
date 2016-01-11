@@ -86,7 +86,7 @@ public class TypologieDesBiensSupports extends Module {
 	}
 	
 	public void setTypeBien (int i, TypeBien type){
-		this.tableau.replace(this.getTypeBien(i).getIntitule(), type);
+		this.tableau.put(this.getTypeBien(i).getIntitule(), type);
 		this.setChanged();               // PAC
 		this.notifyObservers();          // PAC
 	}
