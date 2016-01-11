@@ -104,5 +104,9 @@ public class ScenarioType extends ScenarioGenerique {
 		s=s.substring(0, s.length()-2);
 		return s ;
 	}
+	
+	public Boolean isIncompleteType(){
+		return super.isIncomplete() || this.intituleConcret.equals("") ;
+	}
 
 }

@@ -117,7 +117,7 @@ public class ScenariosDeMenacesTypes extends Module {
 		boolean resultat = true ;
 		this.problemesDeCoherence = new ArrayList<String>();
 		for (ScenarioType scenario : this.tableau) {
-			if (scenario.isIncomplete()) {
+			if (scenario.isIncompleteType()) {
 				String s = "Scenario type \" " + scenario.getIntitule()
 						+ " \" incomplet";
 				this.problemesDeCoherence.add(s);

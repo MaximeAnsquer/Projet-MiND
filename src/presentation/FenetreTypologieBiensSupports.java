@@ -57,7 +57,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	}
 	
 	public void creerCouleurs(){
-		for(int i =0 ; i< this.modeleTableau.getColumnCount() ; i++){
+		for(int i =0 ; i< this.modeleTableau.getColumnCount() - 1 ; i++){
 			TableColumn colonneId = this.tableau.getColumnModel().getColumn(i);
 			colonneId.setCellRenderer(this.rendererTypeBien);
 		}
