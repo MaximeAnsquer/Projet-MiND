@@ -280,6 +280,11 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			this.problemesDeCoherence.add(s);
 			resultat = false;
 		}
+		if (this.nomColonneSup==null || this.nomColonneSup.size()==0){
+			String s = "Aucun critere de securite ajoute";
+			this.problemesDeCoherence.add(s);
+			resultat = false;
+		}
 		for (String nomCritere : this.nomColonneSup) {
 			if (!this.isImpacteCritere(nomCritere)) {
 				String s = "Le critere de securite \" " + nomCritere
