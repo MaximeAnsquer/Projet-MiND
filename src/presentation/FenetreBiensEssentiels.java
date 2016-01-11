@@ -235,7 +235,12 @@ public class FenetreBiensEssentiels extends JPanel{
 			String categorie = "";
 			do{
 				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
-			} while (categorie.equals("") || categorie.equals("Intitule") || categorie.equals("Description") || categorie.equals("Type") || categorie.equals("Retenu"));
+				for (int i=0; i<this.entetes.size();i++){
+					if (this.entetes.get(i).equals(categorie)){
+						categorie = "";
+					}
+				}
+			} while (categorie.equals(""));
 			biensEssentiels.getNomColonnesSup().addFirst(categorie);
 			for (int i=0; i<biensEssentiels.nombreDeBiens();i++){
 				biensEssentiels.getBien(i).ajouterColonne("");;
@@ -254,6 +259,11 @@ public class FenetreBiensEssentiels extends JPanel{
 			String intitule = "";
 			do{
 				intitule = JOptionPane.showInputDialog("Intitule ?");
+				for (int i=0; i<biensEssentiels.nombreDeBiens();i++){
+					if (biensEssentiels.getBien(i).getIntitule().equals(intitule)){
+						intitule = "";
+					}
+				}
 			} while (intitule.equals(""));
 			String type = "";
 			String description = "";

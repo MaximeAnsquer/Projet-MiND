@@ -29,15 +29,8 @@ public class BiensSupports extends Module{
 		this.etude=etude;
 		
 		this.lesBiens = new LinkedList<Bien>();
-		//TODO supprimer quand tous les tests seront ok
-		//this.lesBiens.put("Disponibilite", new Bien("il s'agit du bien numero 1", "Disponibilite", "type 1", new LinkedList<String>()));
-		//this.lesBiens.put("Integrite", new Bien("il s'agit du bien numero 2", "Integrite", "type 2", new LinkedList<String>()));
-		//this.lesBiens.put("Confidentialite", new Bien("il s'agit du bien numero 3", "Confidentialite", "type 3", new LinkedList<String>()));
-		//
 		this.nomColonnesSup = new LinkedList<String>();
 
-		//this.successeurs.add(this.getEtude().getModule("MappingDesBiens"));
-		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
 		this.predecesseurs.add(this.getEtude().getModule("TypologieDesBiensSupports"));
 		
 		typologie = (TypologieDesBiensSupports) this.getEtude().getModule("TypologieDesBiensSupports");
