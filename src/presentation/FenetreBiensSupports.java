@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,20 +37,18 @@ public class FenetreBiensSupports extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JTextArea zoneDescription;
+	private JTextArea descriptionTypesBiens;
 	private JButton boutonModifierDescription;
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensSupports biensSupports;
-	private CellRendererBiensSupports rendererTooltip;
-	JComboBox comboBox = new JComboBox();
+	private JComboBox comboBox = new JComboBox();
 
 	public FenetreBiensSupports(BiensSupports biensSupports){
 		this.setVisible(true);
 		this.biensSupports=biensSupports;
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.rendererTooltip = new CellRendererBiensSupports(this.biensSupports.getTypologie());
-		table.getColumn("Type").setCellRenderer(this.rendererTooltip);
 		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
 			comboBox.addItem((String)biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i]);
 		}
@@ -69,7 +68,8 @@ public class FenetreBiensSupports extends JPanel{
 			}			
 		});
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(new JScrollPane(table));	
+		this.add(new JScrollPane(table));
+		this.add(descriptionTypesBiens());
 		this.add(zoneDescription());
 		this.add(partieBoutons());
 		if (biensSupports.getNomColonnesSup().size()>0){
@@ -86,6 +86,29 @@ public class FenetreBiensSupports extends JPanel{
 		}
 	}
 	
+	private Component descriptionTypesBiens() {
+		String valeurInitiale = "";
+		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
+			valeurInitiale += "\n"+biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i];
+			valeurInitiale +=" : \n"+biensSupports.getTypologie().getTypeBiensRetenus().get(i).getDescription();
+		}
+		descriptionTypesBiens = new JTextArea(valeurInitiale);
+		descriptionTypesBiens.setLineWrap(true);
+		descriptionTypesBiens.setWrapStyleWord(true);
+		
+		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
+		areaScrollPane.setVerticalScrollBarPolicy(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		areaScrollPane.setPreferredSize(new Dimension(400, 100));
+		areaScrollPane.setBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createCompoundBorder(
+								BorderFactory.createTitledBorder("Description des types de biens"),
+								BorderFactory.createEmptyBorder(5,5,5,5)),
+								areaScrollPane.getBorder()));
+		return areaScrollPane;
+	}
+
 	private JScrollPane zoneDescription() {
 		String valeurInitiale = "";		
 		zoneDescription = new JTextArea(valeurInitiale);
@@ -105,7 +128,7 @@ public class FenetreBiensSupports extends JPanel{
 		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
 		areaScrollPane.setVerticalScrollBarPolicy(
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setPreferredSize(new Dimension(400, 100));
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
