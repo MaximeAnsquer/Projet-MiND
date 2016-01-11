@@ -1140,6 +1140,290 @@
     	
     	
     	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<Id>O1</Id>
+    		<Intitule>Manipulation via un canal interpersonnel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<Id>O2</Id>
+    		<Intitule>Espionnage d'un canal interpersonnel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<Id>O3</Id>
+    		<Intitule>Saturation d'un canal interpersonnel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<Id>O4</Id>
+    		<Intitule>Dégradation d'un canal interpersonnel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<Id>O5</Id>
+    		<Intitule>Modification d'un canal interpersonnel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<Id>O6</Id>
+    		<Intitule>Disparition d'un canal interpersonnel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Supports papiers (PAP)</TypeBien>
+    		<Id>Pa1</Id>
+    		<Intitule>Détournement de l'usage prévu d'un support papier</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Supports papiers (PAP)</TypeBien>
+    		<Id>Pa2</Id>
+    		<Intitule>Espionnage d'un support papier</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Supports papiers (PAP)</TypeBien>
+    		<Id>Pa3</Id>
+    		<Intitule>Déterioration d'un support papier</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Supports papiers (PAP)</TypeBien>
+    		<Id>Pa4</Id>
+    		<Intitule>Perte d'un support papier</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	
     </ScenariosMenacesGeneriques>
     
     
