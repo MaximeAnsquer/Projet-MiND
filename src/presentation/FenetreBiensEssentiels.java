@@ -100,7 +100,7 @@ public class FenetreBiensEssentiels extends JPanel{
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Description du Bien"),
+								BorderFactory.createTitledBorder("Description du bien selectionne"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		return areaScrollPane;

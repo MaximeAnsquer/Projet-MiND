@@ -106,10 +106,17 @@ public class MappingDesBiens extends Module{
 	
 	public boolean estCoherent(){
 		boolean resultat = true;
+		boolean auMoinsUneAssociation = false;
 		this.problemesDeCoherence = new ArrayList<String>();
-		if (this.mappingDesBiens.size()==0 || this.mappingDesBiens.size()!=this.biensEssentiels.nombreDeBiens()){
-			this.problemesDeCoherence.add("Il y a des problemes de coherence");
-			resultat=false;
+		for (int i=0; i<this.mappingDesBiens.size();i++){
+			for (int j=0; j<this.mappingDesBiens.get(i).getMappingBien().size();j++){
+				if (this.mappingDesBiens.get(i).getMappingBien().get(j).equals("x")){
+					auMoinsUneAssociation = true;
+				}
+			}
+		}
+		if (!auMoinsUneAssociation){
+			this.problemesDeCoherence.add("Il n'y a aucun x dans le mapping des biens");
 		}
 		for(MappingBien m : this.getMappingDesBiens()){
 			if(!m.estComplet()){
