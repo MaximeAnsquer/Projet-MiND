@@ -38,7 +38,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.creerTableau();
-		//this.creerCouleurs();
+		this.creerCouleurs();
 		this.creerZoneDescription();
 		this.creerBoutonsBas();
 	}

@@ -26,16 +26,16 @@ import abstraction.autres.TypeBien;
 public class TypologieDesBiensSupports extends Module {
 
 	// Represente la bdc
-	private static Hashtable<String, TypeBien> bdcTypeBiensSupports;
+	private static ArrayList<TypeBien> bdcTypeBiensSupports;
 
 	// Variable d'instance
 	// La clé de la Hashtable représente l'intitulé du type de bien
-	private Hashtable<String, TypeBien> tableau;
+	private ArrayList<TypeBien> tableau;
 	private TypeBien typeBienCourant;
 
 	public TypologieDesBiensSupports() {
 		super("TypologieDesBiensSupports");
-		this.tableau = new Hashtable<String, TypeBien>();
+		this.tableau = new ArrayList<TypeBien>();
 		
 		this.addTypeBienSupport(new TypeBien(
 				"MAT",
@@ -59,7 +59,7 @@ public class TypologieDesBiensSupports extends Module {
 
 	// ---Getters et setters---
 
-	public Hashtable<String, TypeBien> getTableau() {
+	public ArrayList<TypeBien> getTableau() {
 		return this.tableau;
 	}
 	
@@ -67,7 +67,7 @@ public class TypologieDesBiensSupports extends Module {
 		return this.tableau.size();
 	}
 
-	public void setTableau(Hashtable<String, TypeBien> tab) {
+	public void setTableau(ArrayList<TypeBien> tab) {
 		this.tableau = tab;
 	}
 	
@@ -82,21 +82,24 @@ public class TypologieDesBiensSupports extends Module {
 	}
 
 	public TypeBien getTypeBien(String type) {
-		return this.tableau.get(type);
+		int i = 0 ;
+		while (i<this.tableau.size() && !this.tableau.get(i).getIntitule().equals(type)){
+			i++ ;
+		}
+		return this.tableau.get(i);
 	}
 	
 	public void setTypeBien (int i, TypeBien type){
-		this.tableau.put(this.getTypeBien(i).getIntitule(), type);
+		this.tableau.add(type);
 		this.setChanged();               // PAC
 		this.notifyObservers();          // PAC
 	}
 	
 	public TypeBien getTypeBien(int i){
-		ArrayList<TypeBien> typesBien = new ArrayList<TypeBien>(tableau.values());
-		return typesBien.get(i);
+		return this.tableau.get(i);
 	}
 
-	public static Hashtable<String, TypeBien> getBDC() {
+	public static ArrayList<TypeBien> getBDC() {
 		return bdcTypeBiensSupports;
 	}
 
@@ -107,11 +110,11 @@ public class TypologieDesBiensSupports extends Module {
 	// ALGO A AMELIORER
 	public boolean estNouveauTypeBien(TypeBien type) {
 		boolean b = true;
-		for (TypeBien t : TypologieDesBiensSupports.getBDC().values()) {
+		for (TypeBien t : TypologieDesBiensSupports.getBDC()) {
 			b = b && (t.getIntitule() != type.getIntitule());
 		}
 		if (b) {
-			for (TypeBien t : this.tableau.values()) {
+			for (TypeBien t : this.tableau) {
 				b = b && (t.getIntitule() != type.getIntitule());
 			}
 		}
@@ -123,7 +126,7 @@ public class TypologieDesBiensSupports extends Module {
 	// ATTENTION : si 2 types ont le même intitulé, un seul sera présent dans la JTable
 	public void addTypeBienSupport(TypeBien type) {
 		if (!type.isIncomplete()) {
-			this.tableau.put(type.getIntitule(), type);
+			this.tableau.add(type);
 			this.setChanged();      // PAC
 			this.notifyObservers(); // PAC
 		}
@@ -131,14 +134,14 @@ public class TypologieDesBiensSupports extends Module {
 
 	// Suppression d'une ligne du tableau
 	public void removeTypeBienSupport(TypeBien type) {
-		this.tableau.remove(type.getIntitule());
+		this.tableau.remove(type);
 		this.setChanged();      // PAC
 		this.notifyObservers(); // PAC
 	}
 	
 	// NEW !!!
 	public void setDescriptionTypeBienSupport (String description, TypeBien type){
-		this.tableau.get(type.getIntitule()).setDescription(description);
+		this.getTypeBien(type.getIntitule()).setDescription(description);
 		this.setChanged();      // PAC
 		this.notifyObservers(); // PAC
 	}
@@ -146,7 +149,7 @@ public class TypologieDesBiensSupports extends Module {
 	// On liste les Types de bien retenus
 	public ArrayList<TypeBien> getTypeBiensRetenus() {
 		ArrayList<TypeBien> resultat = new ArrayList<TypeBien>();
-		for (TypeBien type : this.getTableau().values()) {
+		for (TypeBien type : this.getTableau()) {
 			if (type.isRetenu()) {
 				resultat.add(type);
 			}
@@ -156,7 +159,7 @@ public class TypologieDesBiensSupports extends Module {
 	
 	public boolean isTypeBienRetenu(String value) {
 		ArrayList<String> resultat = new ArrayList<String>();
-		for (TypeBien type : this.getTableau().values()) {
+		for (TypeBien type : this.getTableau()) {
 			if (type.isRetenu()) {
 				resultat.add(type.getIntitule());
 			}
@@ -166,7 +169,7 @@ public class TypologieDesBiensSupports extends Module {
 	
 	public Object[] getIntituleTypeBiensRetenus() {
 		ArrayList<String> resultat = new ArrayList<String>();
-		for (TypeBien type : this.getTableau().values()) {
+		for (TypeBien type : this.getTableau()) {
 			if (type.isRetenu()) {
 				resultat.add(type.getIntitule());
 			}
@@ -182,7 +185,7 @@ public class TypologieDesBiensSupports extends Module {
 
 	public void importerBDC() {
 		
-		bdcTypeBiensSupports= new Hashtable<String, TypeBien>();
+		bdcTypeBiensSupports= new ArrayList<TypeBien>();
 		
 		/*
 		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
@@ -230,7 +233,7 @@ public class TypologieDesBiensSupports extends Module {
 					 * Ajout du type de bien à la bdc
 					 */
 
-					bdcTypeBiensSupports.put(intitule, type);
+					bdcTypeBiensSupports.add(type);
 				}				
 			}
 			
@@ -253,7 +256,7 @@ public class TypologieDesBiensSupports extends Module {
 	public boolean estCoherent() {
 		boolean resultat = true;
 		this.problemesDeCoherence = new ArrayList<String>();
-		for (TypeBien type : this.tableau.values()) {
+		for (TypeBien type : this.tableau) {
 			if (type.isIncomplete()) {
 				String s = "Type de bien support \" " + type.getIntitule()
 						+ " \" incomplet";

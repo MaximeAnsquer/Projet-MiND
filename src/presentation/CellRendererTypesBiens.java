@@ -15,6 +15,16 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 	public CellRendererTypesBiens(){
 		super();
 		this.couleurs=new ArrayList<Color>();
+		this.couleurs.add(Color.blue);
+		this.couleurs.add(Color.cyan);
+		this.couleurs.add(Color.DARK_GRAY);
+		this.couleurs.add(Color.green);
+		this.couleurs.add(Color.LIGHT_GRAY);
+		this.couleurs.add(Color.yellow);
+		this.couleurs.add(Color.red);
+		this.couleurs.add(Color.pink);
+		this.couleurs.add(Color.orange);
+		this.couleurs.add(Color.magenta);
 		this.setHorizontalAlignment( SwingConstants.CENTER );
 	}
 	
@@ -53,6 +63,8 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 			component.setBackground(clr);
 			break;
 			default:
+				component.setBackground(couleurs.get(row-7));
+				/*
 				if (couleurs.size()>= row - 7) {
 					Random rand = new Random();
 					float r = rand.nextFloat();
@@ -66,6 +78,7 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 					clr=couleurs.get(row-7);
 					component.setBackground(clr);
 				}
+				*/
 		}
 		} else {
 			Color clr = new Color(255, 255, 255);
