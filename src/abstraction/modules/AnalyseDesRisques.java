@@ -65,7 +65,7 @@ public class AnalyseDesRisques extends Module{
 		int a=this.scenarios.getTableau().size();/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
 		
 		
-		int b=this.scenarios.getTableau().get(0).getCriteresSup().size();
+		int b=this.scenarios.getNomColonneSup().size();
 		
 		
 		
