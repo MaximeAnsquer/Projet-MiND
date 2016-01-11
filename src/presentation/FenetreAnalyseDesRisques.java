@@ -71,15 +71,12 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			}
 			
 			
-System.out.println(nouvellean.getAnalyseDesRisques().get(0).getNiveauGravite());
+
 
 analyse.getEtude().addModule(nouvellean);
 			analyse=nouvellean;
 			
-			System.out.println(analyse.getAnalyseDesRisques().get(0).getEvenementRedoute().GetNomEvenement());
-			System.out.println(analyse.getAnalyseDesRisques().get(1).getEvenementRedoute().GetNomEvenement());
-			System.out.println(analyse.getAnalyseDesRisques().get(2).getEvenementRedoute().GetNomEvenement());
-			System.out.println(analyse.getAnalyseDesRisques().get(3).getEvenementRedoute().GetNomEvenement());
+			
 
 			
 			this.modele=new ModeleAnalyseDesRisques(analyse);
