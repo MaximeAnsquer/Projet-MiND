@@ -87,19 +87,20 @@ public class FenetreBiensSupports extends JPanel{
 	}
 	
 	private Component descriptionTypesBiens() {
-		String valeurInitiale = "";
-		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
+		String valeurInitiale = ""+biensSupports.getTypologie().getIntituleTypeBiensRetenus()[0];
+		valeurInitiale+=" : \n"+biensSupports.getTypologie().getTypeBiensRetenus().get(0).getDescription()+"\n";
+		for (int i=1; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
 			valeurInitiale += "\n"+biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i];
-			valeurInitiale +=" : \n"+biensSupports.getTypologie().getTypeBiensRetenus().get(i).getDescription();
+			valeurInitiale +=" : \n"+biensSupports.getTypologie().getTypeBiensRetenus().get(i).getDescription()+"\n";
 		}
 		descriptionTypesBiens = new JTextArea(valeurInitiale);
 		descriptionTypesBiens.setLineWrap(true);
 		descriptionTypesBiens.setWrapStyleWord(true);
 		
-		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
+		JScrollPane areaScrollPane = new JScrollPane(descriptionTypesBiens);
 		areaScrollPane.setVerticalScrollBarPolicy(
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 100));
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
@@ -128,11 +129,11 @@ public class FenetreBiensSupports extends JPanel{
 		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
 		areaScrollPane.setVerticalScrollBarPolicy(
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 100));
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Description du Bien"),
+								BorderFactory.createTitledBorder("Description du bien selectionne"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		return areaScrollPane;

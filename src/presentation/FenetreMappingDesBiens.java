@@ -46,7 +46,7 @@ public class FenetreMappingDesBiens extends JPanel{
 		
 		public ModeleDynamiqueObjet() {
 			super();
-			entetes.add("Biens Essentiels | Biens Supports");
+			entetes.add("Biens Essentiels   \\   Biens Supports");
 			for (int i=0; i<biensSupports.getLesBiens().size(); i++){
 				entetes.add(biensSupports.getBien(i).getIntitule());
 			}
