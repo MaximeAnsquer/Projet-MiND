@@ -942,6 +942,204 @@
     	
     	
     	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Personnes (PER)</TypeBien>
+    		<Id>Pe1</Id>
+    		<Intitule>Dissipation de l'activité d'une personne</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Personnes (PER)</TypeBien>
+    		<Id>Pe2</Id>
+    		<Intitule>Espionnage d'une personne à distance</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Personnes (PER)</TypeBien>
+    		<Id>Pe3</Id>
+    		<Intitule>Surcharge des capacités d'une personne</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Personnes (PER)</TypeBien>
+    		<Id>Pe4</Id>
+    		<Intitule>Dégradation d'une personne</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Personnes (PER)</TypeBien>
+    		<Id>Pe5</Id>
+    		<Intitule>Influence sur une personne</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Personnes (PER)</TypeBien>
+    		<Id>Pe6</Id>
+    		<Intitule>Départ d'une personne</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Personnes (PER)</TypeBien>
+    		<Id>Pe7</Id>
+    		<Intitule>Négligence d'une personne concernant des données sensibles</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	
     </ScenariosMenacesGeneriques>
     
     
