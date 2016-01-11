@@ -65,8 +65,8 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 			niveauxIntrinseque[i-1]=""+ i;
 		}
 		this.comboBoxIntrinseque = new JComboBox(niveauxIntrinseque);
-		// On gère la couleur des JcomboBox
-		CellRendererEv renderer = new CellRendererEv();
+		
+		// On gère la couleur des JcomboBox et les infobulles (ToolTips)
 		CellRendererScenario rendererScenario = new CellRendererScenario(modeleTableau);
 		
 		colonneIntrinseque.setCellRenderer(rendererScenario);
@@ -82,7 +82,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		}
 		this.comboBoxIntrinseque = new JComboBox(niveauxReelle);
 		// On gère la couleur des JcomboBox
-		colonneReelle.setCellRenderer(renderer);
+		colonneReelle.setCellRenderer(rendererScenario);
 		colonneReelle.setCellEditor(new DefaultCellEditor(comboBoxIntrinseque));
 		
 	}
