@@ -32,7 +32,7 @@ public class ControlJButtonAjoutColonne implements Observer,ActionListener {
 		
 		Object[] tabCriteresRetenus = criteresRetenus.keySet().toArray();
 		String critere = (String) JOptionPane.showInputDialog(null,
-				"Quelle critère voulez-vous rajoutez ?", "Choix du critère",
+				"Quel critère voulez-vous rajouter ?", "Choix du critère",
 				JOptionPane.QUESTION_MESSAGE, null, tabCriteresRetenus, tabCriteresRetenus[0]);
 		if (critere!=null){
 			this.modele.addCritere(critere);

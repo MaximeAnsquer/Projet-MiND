@@ -38,7 +38,7 @@ public class ControlJButtonAjoutScenario implements ActionListener {
 			Object[] typesBiens = this.modele.getTypologieBiensSupports().getIntituleTypeBiensRetenus();
 			
 			String typeBienSupport = (String) JOptionPane.showInputDialog(null,
-					"Quelle type de bien support voulez vous choisir ?", "Choix du Type de bien support",
+					"Quel type de bien support voulez vous choisir ?", "Choix du Type de bien support",
 					JOptionPane.QUESTION_MESSAGE, null, typesBiens, typesBiens[0]);
 			
 			if (typeBienSupport!=null){
