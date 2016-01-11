@@ -517,6 +517,429 @@
     	</ScenarioGenerique>
     	
     	
+    	<ScenarioGenerique>
+    		<TypeBien>Logiciels (LOG)</TypeBien>
+    		<Id>L2</Id>
+    		<Intitule>Analyse d'un logiciel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Logiciels (LOG)</TypeBien>
+    		<Id>L3</Id>
+    		<Intitule>Dépassement des limites d'un logiciel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Logiciels (LOG)</TypeBien>
+    		<Id>L4</Id>
+    		<Intitule>Suppression de tout ou partie d'un logiciel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Logiciels (LOG)</TypeBien>
+    		<Id>L5</Id>
+    		<Intitule>Modification d'un logiciel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Logiciels (LOG)</TypeBien>
+    		<Id>L6</Id>
+    		<Intitule>Disparition d'un logiciel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Logiciels (LOG)</TypeBien>
+    		<Id>L7</Id>
+    		<Intitule>Dysfonctionnement d'un logiciel</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Canaux informatiques et de téléphonie (RSX)</TypeBien>
+    		<Id>R1</Id>
+    		<Intitule>Intrusion sur un canal informatique ou de téléphonie</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Canaux informatiques et de téléphonie (RSX)</TypeBien>
+    		<Id>R2</Id>
+    		<Intitule>Attaque du milieu sur un canal informatique ou de téléphonie</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Canaux informatiques et de téléphonie (RSX)</TypeBien>
+    		<Id>R3</Id>
+    		<Intitule>Ecoute passive d'un canal informatique ou de téléphonie</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Canaux informatiques et de téléphonie (RSX)</TypeBien>
+    		<Id>R4</Id>
+    		<Intitule>Saturation d'un canal informatique ou de téléphonie</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Canaux informatiques et de téléphonie (RSX)</TypeBien>
+    		<Id>R5</Id>
+    		<Intitule>Dégradation d'un canal informatique ou de téléphonie</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Canaux informatiques et de téléphonie (RSX)</TypeBien>
+    		<Id>R6</Id>
+    		<Intitule>Modification d'un canal informatique ou de téléphonie</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Canaux informatiques et de téléphonie (RSX)</TypeBien>
+    		<Id>R7</Id>
+    		<Intitule>Disparition d'un canal informatique ou de téléphonie</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Locaux (LOC)</TypeBien>
+    		<Id>Lc1</Id>
+    		<Intitule>Dégradation ou destruction d'un local</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
+    	
+    	<ScenarioGenerique>
+    		<TypeBien>Locaux (LOC)</TypeBien>
+    		<Id>Lc2</Id>
+    		<Intitule>Perte d'alimentation en énergie au niveau d'un local</Intitule>
+    		<CriteresRetenus>
+    			<Critere>
+    				<IntituleCritere>Disponibilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Intégrité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Confidentialité</IntituleCritere>
+    				<Retenu>false</Retenu>
+    			</Critere>
+    			
+    			<Critere>
+    				<IntituleCritere>Traçabilité</IntituleCritere>
+    				<Retenu>true</Retenu>
+    			</Critere>
+    		</CriteresRetenus>		
+    	</ScenarioGenerique>
+    	
     	
     	
     </ScenariosMenacesGeneriques>
