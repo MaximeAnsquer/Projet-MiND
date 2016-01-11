@@ -5,6 +5,7 @@ import java.awt.Component;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
 
 
 
@@ -17,20 +18,27 @@ public class MonTableCellRenderer extends DefaultTableCellRenderer {
 			Component cell = super.getTableCellRendererComponent(table, value,
 					isSelected, hasFocus, row, column);
 
+			
+			TableModel modele=table.getModel();
+			int nombrelignes=modele.getRowCount();
+			
 			Color clr=Color.white;
 			if(column==0){
-			switch(row){
-			case 0: clr = Color.green;
+		
+			
+			switch(nombrelignes-row){
+			case 1: clr = Color.green;
 			break;
-			case 1: clr = Color.yellow;
+			case 2: clr = Color.yellow;
 			break;
-			case 2: clr = Color.orange;
+			case 3: clr = Color.orange;
 			break;
-			case 3: clr = Color.red;
+			case 4: clr = Color.red;
 			break;
 			default: clr = Color.magenta;
 			}
 		}
+			
 			
 	cell.setBackground(clr);
 	return cell;

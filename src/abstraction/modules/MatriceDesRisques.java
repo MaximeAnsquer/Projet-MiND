@@ -50,16 +50,21 @@ public class MatriceDesRisques extends Module {
 		
 		this.matrice=new ArrayList[a][b+1];
 		
+		for (int i=0;i<a;i++){
+			for (int j=1;j<=b;j++){
+				this.matrice[i][j]=new ArrayList<String>();
+			}
+		}
+		
 		
 		
 		for (int i=1;i<=a;i++){
 			for (int j=1;j<=b;j++){
 				for (int k=0;k<this.analysedesrisques.getAnalyseDesRisques().size();k++){
 					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getRetenu()==true&&this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j){
-						this.matrice[a-i][j]=new ArrayList<String>();
+						
 		this.matrice[a-i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
-		System.out.println(i);
-		System.out.println(j);
+		
 		System.out.println(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
 		
 					}
