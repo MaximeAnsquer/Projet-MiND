@@ -10,21 +10,24 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class CellRendererTypesBiens extends DefaultTableCellRenderer {
-	private ArrayList<Color> couleurs ;
+	private ArrayList<Color> listeCouleurs ;
+	private ArrayList<Color> couleursRetenus;
 	
 	public CellRendererTypesBiens(){
 		super();
-		this.couleurs=new ArrayList<Color>();
-		this.couleurs.add(Color.blue);
-		this.couleurs.add(Color.cyan);
-		this.couleurs.add(Color.DARK_GRAY);
-		this.couleurs.add(Color.green);
-		this.couleurs.add(Color.LIGHT_GRAY);
-		this.couleurs.add(Color.yellow);
-		this.couleurs.add(Color.red);
-		this.couleurs.add(Color.pink);
-		this.couleurs.add(Color.orange);
-		this.couleurs.add(Color.magenta);
+		this.listeCouleurs = new ArrayList<Color>();
+		this.listeCouleurs.add(Color.cyan);
+		this.listeCouleurs.add(Color.green);
+		this.listeCouleurs.add(Color.yellow);
+		this.listeCouleurs.add(Color.red);
+		this.listeCouleurs.add(Color.pink);
+		this.listeCouleurs.add(Color.orange);
+		this.listeCouleurs.add(Color.magenta);
+		this.listeCouleurs.add(new Color(198, 95, 251));
+		this.listeCouleurs.add(new Color(244, 104, 147));
+		this.listeCouleurs.add(new Color(147, 195, 201));
+
+		this.couleursRetenus = new ArrayList<Color>();
 		this.setHorizontalAlignment( SwingConstants.CENTER );
 	}
 	
@@ -43,27 +46,42 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 			switch(row){
 			case 0 : clr=new Color(198, 224, 180);
 			component.setBackground(clr);
+			this.couleursRetenus.add(clr);
 			break;
 			case 1 : clr=new Color(248, 203, 173);
 			component.setBackground(clr);
+			this.couleursRetenus.add(clr);
 			break;
 			case 2 : clr=new Color(255, 230, 153);
 			component.setBackground(clr);
+			this.couleursRetenus.add(clr);
 			break;
 			case 3 : clr=new Color(250, 172, 207);
 			component.setBackground(clr);
+			this.couleursRetenus.add(clr);
 			break;
 			case 4 : clr=new Color(189, 215, 238);
 			component.setBackground(clr);
+			this.couleursRetenus.add(clr);
 			break;
 			case 5 : clr=new Color(172, 185, 202);
 			component.setBackground(clr);
+			this.couleursRetenus.add(clr);
 			break;
 			case 6 : clr=new Color(219, 219, 219);
 			component.setBackground(clr);
+			this.couleursRetenus.add(clr);
 			break;
 			default:
-				component.setBackground(couleurs.get(row-7));
+				if (row - 7 < this.listeCouleurs.size()) {
+					component.setBackground(listeCouleurs.get(row - 7));
+					this.couleursRetenus.add(listeCouleurs.get(row - 7));
+				}
+				else{
+					clr = new Color(255, 255, 255);
+					component.setBackground(clr);
+					this.couleursRetenus.add(clr);
+				}
 				/*
 				if (couleurs.size()>= row - 7) {
 					Random rand = new Random();
@@ -83,6 +101,7 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 		} else {
 			Color clr = new Color(255, 255, 255);
 			component.setBackground(clr);
+			this.couleursRetenus.add(clr);
 		}
 		return component;
 	}
