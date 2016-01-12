@@ -88,6 +88,18 @@ public class Bien{
 		}
 		return complet;
 	}
+	
+	public boolean equals(Object o) {
+		Boolean resultat = true;
+		if (o instanceof Bien) {
+			Bien b = (Bien) o;
+			resultat = resultat
+					&& (b.getDescription() == this.getDescription()
+							&& b.getIntitule() == this.getIntitule() && b
+							.getType() == b.getType());
+		}
+		return resultat;
+	}
 		
 	public String toString(){
 		return this.getIntitule();
