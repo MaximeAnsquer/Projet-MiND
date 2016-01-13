@@ -144,14 +144,19 @@ public class ScenariosDeMenacesTypes extends Module {
 		return listeIndices ;
 	}
 	
+	// Suppression des scénarios typés
 	public void actualiserScenariosTypes() {
-		for (int i = 0; i < this.tableau.size(); i++) {
-			if (!estRetenu(this.tableau.get(i).getBienSupport())) {
-				this.biensRetenus.remove(this.tableau.get(i).getBienSupport()
+		int j = 0;
+		while (j<this.tableau.size() && this.tableau.get(j)!=null){
+			while (j<this.tableau.size() && !estRetenu(this.tableau.get(j).getBienSupport())) {
+				ScenarioType scenario = this.tableau.get(j);
+				this.biensRetenus.remove(this.tableau.get(j).getBienSupport()
 						.getIntitule());
 				// System.out.println(this.biensRetenus.size());
-				this.tableau.remove(i);
+				this.tableau.remove(scenario);
+				System.out.println("scenario " + j);
 			}
+			j++;
 		}
 	}
 
