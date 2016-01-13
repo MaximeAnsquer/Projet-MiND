@@ -97,7 +97,9 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 				switch(col){
 				case 6:
 					r.setIntitule((String)aValue);
-					break;
+				case 5:
+				    r.setRetenu((Boolean) aValue);
+				    break;
 				
 				
 	 }
@@ -106,7 +108,7 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 	 }
 	 
 	 public boolean isCellEditable(int row,int col){
-		 if(col==6){
+		 if(col==6||col==5){
 			 return true;
 		 }
 			 else{
