@@ -90,13 +90,10 @@ public class Bien{
 	}
 	
 	public boolean equals(Object o) {
-		Boolean resultat = true;
+		Boolean resultat = false;
 		if (o instanceof Bien) {
 			Bien b = (Bien) o;
-			resultat = resultat
-					&& (b.getDescription() == this.getDescription()
-							&& b.getIntitule() == this.getIntitule() && b
-							.getType() == b.getType());
+			resultat = resultat || b.getIntitule() == this.getIntitule();
 		}
 		return resultat;
 	}
