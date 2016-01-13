@@ -66,11 +66,11 @@ public class AnalyseDesRisques extends Module{
 		
 		
 		int b=((ScenariosDeMenacesGeneriques)this.etude.getModule("ScenariosDeMenacesGeneriques")).getNomColonneSup().size();
-		/*System.out.println(b);
+		System.out.println(b);
 		for(int l=0;l<b;l++){
 			System.out.println(this.scenarios.getNomColonneSup().get(l));
 		}
-		*/
+		
 		
 		
 		/*l� on construit chacuns des risques de l'arraylist, en allant piocher dans les modules ant�c�dents pour
