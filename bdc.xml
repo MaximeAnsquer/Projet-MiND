@@ -1142,7 +1142,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<TypeBien>Organisations (ORG)</TypeBien>
     		<Id>O1</Id>
     		<Intitule>Manipulation via un canal interpersonnel</Intitule>
     		<CriteresRetenus>
@@ -1170,7 +1170,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<TypeBien>Organisations (ORG)</TypeBien>
     		<Id>O2</Id>
     		<Intitule>Espionnage d'un canal interpersonnel</Intitule>
     		<CriteresRetenus>
@@ -1198,7 +1198,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<TypeBien>Organisations (ORG)</TypeBien>
     		<Id>O3</Id>
     		<Intitule>Saturation d'un canal interpersonnel</Intitule>
     		<CriteresRetenus>
@@ -1226,7 +1226,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<TypeBien>Organisations (ORG)</TypeBien>
     		<Id>O4</Id>
     		<Intitule>Dégradation d'un canal interpersonnel</Intitule>
     		<CriteresRetenus>
@@ -1254,7 +1254,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<TypeBien>Organisations (ORG)</TypeBien>
     		<Id>O5</Id>
     		<Intitule>Modification d'un canal interpersonnel</Intitule>
     		<CriteresRetenus>
@@ -1282,7 +1282,7 @@
     	
     	
     	<ScenarioGenerique>
-    		<TypeBien>Organisation (ORG)</TypeBien>
+    		<TypeBien>Organisations (ORG)</TypeBien>
     		<Id>O6</Id>
     		<Intitule>Disparition d'un canal interpersonnel</Intitule>
     		<CriteresRetenus>
