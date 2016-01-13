@@ -90,6 +90,18 @@ public class ScenariosDeMenacesTypes extends Module {
 		}
 		return resultat;
 	}
+	
+	public Boolean contientBien(Bien b){
+		Boolean resultat = false ;
+		for (ScenarioType scenario : this.tableau) {
+			if (scenario.getBienSupport().getIntitule().equals(b.getIntitule())
+					&& scenario.getBienSupport().getType().equals(b.getType())
+					&& scenario.getBienSupport().getDescription().equals(b.getDescription())) {
+				resultat=true;
+			}
+		}
+		return resultat ;
+	}
 
 	private void importerBDC() {
 		bdcScenariosMenacesTypes= new ArrayList<ScenarioType>();

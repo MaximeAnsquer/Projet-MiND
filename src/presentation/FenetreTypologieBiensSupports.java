@@ -38,7 +38,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.creerTableau();
-		this.creerCouleurs();
+		//this.creerCouleurs();
 		this.creerZoneDescription();
 		this.creerBoutonsBas();
 	}
@@ -47,6 +47,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		this.modeleTableau=new ModeleTypologieBiensSupports(this.moduleCourant);
 		this.tableau = new JTable(this.modeleTableau);
 		this.rendererTypeBien=new CellRendererTypesBiens();
+		this.tableau.setDefaultRenderer(Object.class, rendererTypeBien);
 		
 		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC
 		this.tableau.addMouseListener(control);                            // PAC

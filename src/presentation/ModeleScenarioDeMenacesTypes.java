@@ -23,6 +23,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 	private BiensSupports biensSupports ;
 	private ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques ;
 	private ScenariosDeMenacesTypes moduleCourant ;
+	private ArrayList<Bien> biensRetenus ;
 	private LinkedList<String> entetes = new LinkedList<String>();
 	
 	public static int COLONNE_BIEN_SUPPORT = 0;
@@ -43,6 +44,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		this.sourcesDeMenaces = (SourcesDeMenaces) this.moduleCourant.getEtude().getModule("SourcesDeMenaces");
 		this.biensSupports = (BiensSupports) this.moduleCourant.getEtude().getModule("BiensSupports");
 		this.scenarioDeMenacesGeneriques= (ScenariosDeMenacesGeneriques) this.moduleCourant.getEtude().getModule("ScenariosDeMenacesGeneriques");
+		this.biensRetenus = new ArrayList<Bien>();
 		
 		// On remet les indices à leurs valeurs initiales (pas de colonnes supplémentaires)
 		this.setIndices();
@@ -137,7 +139,8 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		return this.entetes.get(columnIndex);
 	}
 	
-	// Méthode non utilisée 
+	// Méthode non utilisée
+	/*
 	public void updateIndice(){
 		
 		if (this.biensSupports.getNomColonnesSup() != null
@@ -164,11 +167,11 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			COLONNE_RETENU+=nbCriteresSup;
 		}
 	}
+	//*/
 	
 	public void importerDonnees() {
-		// On réinitialise les données : à supprimer après
-		//this.moduleCourant.setTableau(new ArrayList<ScenarioType>());
 		
+		// Cas où on remplit le tableau pour la première fois
 		if (this.moduleCourant.getTableau().size()==0){
 			for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques
 					.getScenariosGeneriquesRetenus()) {
@@ -180,18 +183,49 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				for (Bien b : this.biensSupports.getBiensRetenus()) {
 					if (sGene.getTypeBienSupport().contains(b.getType())) {
 						scenario.setBienSupport(b);
+						this.biensRetenus.add(b);
 						this.moduleCourant.getTableau().add(scenario);
 					}
 				}
 			}
 		}
+		// On actualise les valeurs du tableau
+		// OK lorsqu'on rajoute des Biens supports
 		else{
+			if (this.biensRetenus.size()<this.biensSupports.getBiensRetenus().size()){
+				for (Bien b : this.biensSupports.getBiensRetenus()){
+					if (!this.moduleCourant.contientBien(b)){
+						for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getScenariosGeneriquesRetenus()) {
+							ScenarioType scenario = new ScenarioType(
+									sGene.getTypeBienSupport(), sGene.getId(),
+									sGene.getIntitule(), sGene.getCriteresSup(),
+									this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
+									true);
+							if (sGene.getTypeBienSupport().contains(b.getType())) {
+								scenario.setBienSupport(b);
+								this.biensRetenus.add(b);
+								this.moduleCourant.getTableau().add(scenario);
+							}
+						}
+					}
+				}
+			}
+			else{
+				for (Bien b : this.biensRetenus){
+					// définir une méthode equals de bien
+					/*
+					if(!this.biensSupports.getBiensRetenus().contains(o)){
+						
+					}*/
+				}
+			}
 			for (ScenarioType scenario : this.moduleCourant.getTableau()){
 				scenario.setMenaces(this.sourcesDeMenaces.getSourcesDeMenacesRetenues());
-				//scenario.setId(this.scenarioDeMenacesGeneriques.ge);
 			}
 		}
 	}
+	
+	
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		ScenarioType scenarioType = this.moduleCourant.getScenarioType(rowIndex);
