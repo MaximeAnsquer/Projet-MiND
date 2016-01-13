@@ -28,9 +28,11 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	public FenetreScenarioDeMenacesTypes(ScenariosDeMenacesTypes module) {
 		
 		this.moduleCourant=module;
-
+		this.moduleCourant.importerDonnees();
+		this.moduleCourant.actualiserDonnees();
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+		
 		this.creerTableau();
 		this.creerComboBox();
 		//this.creerCheckBox();

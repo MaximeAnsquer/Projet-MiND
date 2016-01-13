@@ -75,7 +75,6 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		entetes.add("Vraisemblance réelle");
 		entetes.add("Retenu");
 		
-		//this.updateIndice();
 		this.importerDonnees();
 	}
 	
@@ -137,44 +136,13 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		return this.entetes.get(columnIndex);
 	}
 	
-	// Méthode non utilisée
-	/*
-	public void updateIndice(){
-		
-		if (this.biensSupports.getNomColonnesSup() != null
-				&& COLONNE_BIEN_SUPPORT != this.biensSupports
-						.getNomColonnesSup().size()) {
-			int nbColonnesSup = this.biensSupports.getNomColonnesSup().size();
-			COLONNE_BIEN_SUPPORT += nbColonnesSup;
-			COLONNE_TYPE += nbColonnesSup;
-			COLONNE_ID += nbColonnesSup;
-			COLONNE_SCENARIO_GENERIQUE += nbColonnesSup;
-			COLONNE_SCENARIO_CONCRET += nbColonnesSup;
-			COLONNE_SOURCES_MENACES += nbColonnesSup;
-			COLONNE_VRAISEMBLANCE_I+=nbColonnesSup;
-			COLONNE_VRAISEMBLANCE_R +=nbColonnesSup;
-			COLONNE_RETENU += nbColonnesSup;
-		}
-		if (this.scenarioDeMenacesGeneriques.getNomColonneSup() != null
-				&& COLONNE_VRAISEMBLANCE_I != COLONNE_SOURCES_MENACES
-						+ this.scenarioDeMenacesGeneriques.getNomColonneSup()
-								.size() + 1) {
-			int nbCriteresSup=this.scenarioDeMenacesGeneriques.getNomColonneSup().size();
-			COLONNE_VRAISEMBLANCE_I+=nbCriteresSup;
-			COLONNE_VRAISEMBLANCE_R+=nbCriteresSup;
-			COLONNE_RETENU+=nbCriteresSup;
-		}
-	}
-	//*/
-	
 	public void importerDonnees() {
 		
 		// Cas où on remplit le tableau pour la première fois
 		if (this.moduleCourant.getTableau().size()==0){
 			this.moduleCourant.importerBDC();
 		}
-		// On actualise les valeurs du tableau
-		// OK lorsqu'on rajoute des Biens supports
+		// On actualise les valeurs du tableau selon les biens 
 		else{
 			if (this.moduleCourant.getBiensRetenus().size()<this.biensSupports.getBiensRetenus().size()){
 				for (Bien b : this.biensSupports.getBiensRetenus()){
@@ -188,7 +156,6 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 							if (sGene.getTypeBienSupport().contains(b.getType()) && scenario.getBienSupport()==null) {
 								scenario.setBienSupport(b);
 								this.moduleCourant.getBiensRetenus().put(b.getIntitule(),b);
-								//System.out.println(this.moduleCourant.getBiensRetenus().size());
 								this.moduleCourant.getTableau().add(scenario);
 							}
 						}
@@ -197,15 +164,10 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			}
 			// Sinon on supprime les scénarios correspondants aux biens qui ne sont plus retenus
 			else{
-				this.moduleCourant.actualiserScenariosTypes();
-			}
-			for (ScenarioType scenario : this.moduleCourant.getTableau()){
-				scenario.setMenaces(this.sourcesDeMenaces.getSourcesDeMenacesRetenues());
+				this.moduleCourant.supprimerScenariosTypes();
 			}
 		}
 	}
-	
-	
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		ScenarioType scenarioType = this.moduleCourant.getScenarioType(rowIndex);
