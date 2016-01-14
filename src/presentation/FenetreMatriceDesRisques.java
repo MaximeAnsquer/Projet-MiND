@@ -3,28 +3,39 @@ package presentation;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 
 
 import abstraction.modules.MatriceDesRisques;
+import controle.TypologieBiensSupports.ControlJTextArea;
 
 public class FenetreMatriceDesRisques extends JPanel{
 	
 	private JTable tableau;
 	private ModeleMatriceDesRisques modele;
 	private MatriceDesRisques matrice;
+	private JTextArea zoneDescription;
 	
 	public FenetreMatriceDesRisques(MatriceDesRisques matrice){
 		
 		
-		super(new GridLayout(1,0));
+this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+	
 		
 		MatriceDesRisques mat=new MatriceDesRisques(matrice.getEtude());
 		mat.setCree(true);
@@ -85,15 +96,43 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 		}
 		
 		
-		
+		this.creerZoneDescription();
 		
 		this.setVisible(true);
 	
 	
-
+	}
 	
-	
+	public void creerZoneDescription(){
+		JLabel label = new JLabel("");
+		this.zoneDescription= new JTextArea("Cliquer sur la cellule que vous souhaitez afficher");
+		this.zoneDescription.setLineWrap(true); // On passe Ã  la ligne 
+		this.zoneDescription.setWrapStyleWord(true);
 		
+		tableau.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    
+			      JTable target = (JTable)e.getSource();
+			      int row = target.getSelectedRow();
+			      int column = target.getSelectedColumn();
+			     
+			      zoneDescription.setText((String)tableau.getValueAt(row, column));
+			    
+			  }
+			});
+		
+		JScrollPane areaScrollPane = new JScrollPane(this.zoneDescription);
+		areaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createCompoundBorder(
+								BorderFactory.createTitledBorder("Détail des risques contenus dans la cellule"),
+								BorderFactory.createEmptyBorder(5,5,5,5)),
+								areaScrollPane.getBorder()));
+		
+		this.add(label);
+		this.add(areaScrollPane);
 	}
 	
 	 

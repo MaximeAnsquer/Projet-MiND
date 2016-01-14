@@ -6,16 +6,17 @@ import abstraction.Etude;
 
 public class MatriceDesRisques extends Module {
 	
-	/*Ce module syntétise l'analyse effectuée en ce sens qu'elle ordonne différents "risques" tels qu'ils ont été définis 
+	/*Ce module syntétise l'etude effectuée en ce sens qu'elle ordonne différents "risques" tels qu'ils ont été définis 
 	 * dans le module AnalyseDesRisques.
-	 * Les intitulés de ces risques sont placés dans un tableau; en colonne sont précisés les niveaux de vraisemblance,
-	 * en ligne les niveaux de gravité que ces risques induisent.
+	 * Les intitulés de ces risques sont placés dans un tableau; en colonne sont précisés les niveaux de gravité qui 
+	 * leurs sont associés,
+	 * en ligne les niveaux de vraisemblance que ces risques induisent.
 	 */
 	
 
 	
-	/*les variables d'instance qui représentent les antécédents du module Matrice des risques et dont le module a 
-	 * par conséquent besoin pour fonctionner
+	/*les variables d'instance sont l'etude en cours, le tableau contenant les risques, l'analyse des risques effectuée
+	 * avant, et le nombre de niveaux de vraisemblance définis dans le module métriques.
 	 */
 	private Etude etude;
 	
