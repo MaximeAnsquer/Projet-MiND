@@ -97,9 +97,11 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 				switch(col){
 				case 6:
 					r.setIntitule((String)aValue);
+					break;
 				case 5:
 				    r.setRetenu((Boolean) aValue);
 				    break;
+				 default :   
 				
 				
 	 }
