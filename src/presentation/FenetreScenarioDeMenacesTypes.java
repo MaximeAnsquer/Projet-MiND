@@ -34,6 +34,8 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.creerTableau();
+		// On importe les données
+				
 		this.creerComboBox();
 		//this.creerCheckBox();
 		this.creerBoutonsBas();
@@ -41,7 +43,6 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	
 	public void creerTableau() {
 		this.modeleTableau= new ModeleScenarioDeMenacesTypes(this.moduleCourant);
-		// this.moduleCourant=this.modeleTableau.getModuleCourant();
 		this.tableau = new JTable(this.modeleTableau);
 		
 		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau);

@@ -75,7 +75,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		entetes.add("Vraisemblance réelle");
 		entetes.add("Retenu");
 		
-		this.importerDonnees();
+		this.moduleCourant.importerDonnees();
 	}
 	
 	public void setIndices(){
@@ -136,6 +136,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		return this.entetes.get(columnIndex);
 	}
 	
+	//*
 	public void importerDonnees() {
 		
 		// Cas où on remplit le tableau pour la première fois
@@ -168,6 +169,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			}
 		}
 	}
+	//*/
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		ScenarioType scenarioType = this.moduleCourant.getScenarioType(rowIndex);

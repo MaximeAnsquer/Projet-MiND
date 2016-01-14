@@ -2,6 +2,7 @@ package abstraction.modules;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedList;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
@@ -19,11 +20,13 @@ public class ScenariosDeMenacesTypes extends Module {
 	// On liste les critères de sécurité retenus dans le module Scénarios de menaces génériques
 	private ArrayList<String> nomColonneSup ;
 	private Hashtable<String, Bien> biensRetenus ;
+	private Hashtable<String, Bien> biensModifies ;
 
 	public ScenariosDeMenacesTypes(Etude etude) {
 		super("ScenariosDeMenacesTypes");
 		this.etude=etude;
 		this.biensRetenus=new Hashtable<String,Bien>();
+		this.biensModifies= new Hashtable<String,Bien>();
 		
 		this.tableau = new ArrayList<ScenarioType>();
 		this.nomColonneSup=new ArrayList<String>();
@@ -39,7 +42,6 @@ public class ScenariosDeMenacesTypes extends Module {
 		this.coherent = false;
 		this.disponible = false;
 		this.importerBDC();
-		this.tableau = ScenariosDeMenacesTypes.getBDC();
 	}
 	
 	public int getSize(){
@@ -110,9 +112,7 @@ public class ScenariosDeMenacesTypes extends Module {
 	public Boolean contientBien(Bien b){
 		Boolean resultat = false ;
 		for (ScenarioType scenario : this.tableau) {
-			if (scenario.getBienSupport().getIntitule().equals(b.getIntitule())
-					&& scenario.getBienSupport().getType().equals(b.getType())
-					&& scenario.getBienSupport().getDescription().equals(b.getDescription())) {
+			if (scenario.getBienSupport().getIntitule().equals(b.getIntitule())) {
 				resultat=true;
 			}
 		}
@@ -159,19 +159,57 @@ public class ScenariosDeMenacesTypes extends Module {
 	
 	// Suppression des scenarios types dont le type de Bien dans l'onglet Bien
 	// support n'est pas celui du scénario générique
-		public void coherenceTypologie() {
-			int j = 0;
-			while (j < this.tableau.size() && this.tableau.get(j) != null) {
-				while (j < this.tableau.size() && !this.tableau.get(j).getBienSupport().getType().equals(this.tableau.get(j).getTypeBienSupport())) {
-					this.tableau.remove(this.tableau.get(j));
-				}
-				j++;
+	public void coherenceTypologie() {
+		int j = 0;
+		while (j < this.tableau.size() && this.tableau.get(j) != null) {
+			while (j < this.tableau.size()
+					&& !this.tableau
+							.get(j)
+							.getTypeBienSupport()
+							.contains(
+									this.tableau.get(j).getBienSupport()
+											.getType())) {
+				this.tableau.remove(this.tableau.get(j));
+			}
+			j++;
+		}
+	}
+	
+	public void biensNonCoherent() {
+		for (ScenarioType scenario : this.tableau) {
+			if (!scenario.getTypeBienSupport().contains(
+					scenario.getBienSupport().getType())) {
+				this.biensModifies.put(scenario.getBienSupport().getType(),scenario.getBienSupport());
 			}
 		}
+	}
 	
-	public void actualiserDonnees(){
-		// Actualisation des types de biens supports
+	public void actualiserDonnees() {
+
+		ScenariosDeMenacesGeneriques moduleScenarioGene = (ScenariosDeMenacesGeneriques) this.etude
+				.getModule("ScenariosDeMenacesGeneriques");
+		
+		SourcesDeMenaces SourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
+		
+		// Actualisation des types de biens supports que l'on modifie dans biens supports
+		this.biensNonCoherent();
 		this.coherenceTypologie();
+		for (Bien b : this.biensModifies.values()) {
+			for (ScenarioGenerique sGene : moduleScenarioGene.getTableau()) {
+				ScenarioType scenario = new ScenarioType(
+						sGene.getTypeBienSupport(), sGene.getId(),
+						sGene.getIntitule(), sGene.getCriteresSup(),
+						SourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
+						true);
+				if (sGene.getTypeBienSupport().contains(b.getType())
+						&& scenario.getBienSupport() == null) {
+					scenario.setBienSupport(b);
+					this.tableau.add(scenario);
+				}
+			}
+		}
+		// On réinitialise la liste des biens modifiés
+		this.biensModifies= new Hashtable<String, Bien>();
 		
 		// On actualise les sources de menaces retenus dans l'onglet correspondant
 		SourcesDeMenaces sourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
@@ -181,6 +219,8 @@ public class ScenariosDeMenacesTypes extends Module {
 	}
 	
 	public void importerDonnees() {
+		System.out.println("ENTREE DANS LA METHODE importDonnees");
+		
 		BiensSupports biensSupports = (BiensSupports) this.etude.getModule("BiensSupports");
 		ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques = (ScenariosDeMenacesGeneriques) this.etude
 				.getModule("ScenariosDeMenacesGeneriques");
@@ -188,10 +228,12 @@ public class ScenariosDeMenacesTypes extends Module {
 		
 		// Cas où on remplit le tableau pour la première fois
 		if (this.tableau.size() == 0) {
+			System.out.println("ENTREE DANS Le 1er cas");
 			this.importerBDC();
 		}
 		// On actualise les valeurs du tableau
 		else {
+			System.out.println("Cas intermediaire");
 			if (this.biensRetenus.size() < biensSupports
 					.getBiensRetenus().size()) {
 				for (Bien b : biensSupports.getBiensRetenus()) {
@@ -211,6 +253,8 @@ public class ScenariosDeMenacesTypes extends Module {
 								scenario.setTypeBienSupport(b.getType());
 								this.biensRetenus.put(b.getIntitule(), b);
 								this.tableau.add(scenario);
+								System.out.println("scénario ajouté");
+								System.out.println(tableau.size());
 							}
 						}
 					}
@@ -220,12 +264,13 @@ public class ScenariosDeMenacesTypes extends Module {
 			// ne sont plus retenus
 			else {
 				this.supprimerScenariosTypes();
+				System.out.println("Dernier cas !");
 			}
 		}
 	}
 
 	public void importerBDC() {
-		bdcScenariosMenacesTypes= new ArrayList<ScenarioType>();
+		bdcScenariosMenacesTypes = new ArrayList<ScenarioType>();
 		
 		BiensSupports biensSupports = (BiensSupports) this.etude.getModule("BiensSupports");
 		
@@ -245,13 +290,12 @@ public class ScenariosDeMenacesTypes extends Module {
 				if (sGene.getTypeBienSupport().contains(b.getType())
 						&& scenario.getBienSupport() == null) {
 					scenario.setBienSupport(b);
-					//scenario.setTypeBienSupport(b.getType());
 					this.biensRetenus.put(b.getIntitule(), b);
 					bdcScenariosMenacesTypes.add(scenario);
 				}
 			}
 		}
-		this.tableau = ScenariosDeMenacesTypes.getBDC();
+		this.tableau=bdcScenariosMenacesTypes;
 	}
 	
 	public boolean estCoherent() {
