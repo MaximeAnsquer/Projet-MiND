@@ -31,7 +31,7 @@ public class ControlJButtonAjoutScenario implements ActionListener {
 			JOptionPane
 					.showMessageDialog(
 							null,
-							"Pour ajouter un scénario, vous devez sélectionner la ligne en dessous de laquelle ce scénario sera crée ",
+							"Pour ajouter un scénario, vous devez sélectionner la ligne sous laquelle ce scénario sera créé ",
 							"Erreur ajout de scénario", JOptionPane.ERROR_MESSAGE);
 		}
 		else{

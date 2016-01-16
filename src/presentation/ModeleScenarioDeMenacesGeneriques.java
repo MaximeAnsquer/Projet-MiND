@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import abstraction.autres.ScenarioGenerique;
 import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.ScenariosDeMenacesGeneriques;
+import abstraction.modules.ScenariosDeMenacesTypes;
 import abstraction.modules.TypologieDesBiensSupports;
 
 public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
@@ -14,6 +15,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	private TypologieDesBiensSupports typologieDesBiensSupports ;
 	private CriteresDeSecurite criteresDeSecurite ;
 	private ScenariosDeMenacesGeneriques moduleCourant ;
+	private ScenariosDeMenacesTypes scenariosTypes ;
 	private LinkedList<String> entetes = new LinkedList<String>();
 	
 	public static final int COLONNE_TYPEBIENSUPPORT = 0;
