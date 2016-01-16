@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
+import abstraction.autres.ScenarioType;
 import presentation.ModeleScenarioDeMenacesTypes;
 
 public class ControlJButtonAjoutLigne implements Observer,ActionListener{
@@ -23,7 +24,8 @@ public class ControlJButtonAjoutLigne implements Observer,ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		this.modele.addScenarioType(this.modele.getScenarioCourant(), this.tableau.getSelectedRow());
+		ScenarioType sType = new ScenarioType(this.modele.getScenarioCourant());
+		this.modele.addScenarioType(sType, this.tableau.getSelectedRow());
 	}
 
 	public void update(Observable o, Object arg) {

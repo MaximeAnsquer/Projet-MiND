@@ -37,12 +37,18 @@ public class ScenarioType extends ScenarioGenerique {
 			Hashtable<String, Boolean> criteres,
 			Hashtable<String, SourceDeMenace> menaces, Bien bienSupport, boolean retenu) {
 		
-		super(type,id,intitule,criteres,true);
+		super(type,id,intitule,criteres,retenu);
 		this.menaces=menaces;
 		this.bienSupport=bienSupport;
 		this.intituleConcret="";
 		this.vraisemblanceIntrinseque=1;
 		this.vraisemblanceReelle=1;
+	}
+	
+	public ScenarioType(ScenarioType scenario) {
+		this(scenario.getTypeBienSupport(), scenario.getId(), scenario
+				.getIntitule(), scenario.getCriteresSup(), scenario
+				.getMenaces(), scenario.getBienSupport(), true);
 	}
 	
 	public ScenarioType(){
