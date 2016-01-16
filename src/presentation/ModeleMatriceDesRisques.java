@@ -67,7 +67,7 @@ public class ModeleMatriceDesRisques extends AbstractTableModel{
 		if(data[rowIndex][columnIndex].size()!=0){
 			
 		for (int i=0;i<data[rowIndex][columnIndex].size();i++){
-		 risques= risques+data[rowIndex][columnIndex].get(i)+",";
+		 risques= risques+"["+data[rowIndex][columnIndex].get(i)+"]";
 		
 	}}
 		}
