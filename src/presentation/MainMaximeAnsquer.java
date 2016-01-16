@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -197,7 +198,7 @@ public class MainMaximeAnsquer extends JFrame {
 			contentPane.add(partieDeGauche, BorderLayout.WEST);
 			this.label = new JLabel(moduleEnCours.toString(), SwingConstants.CENTER);
 			this.label.setFont(new Font("Arial", Font.PLAIN, 25));
-			partieDuCentre.add(partieDuBas, BorderLayout.SOUTH);
+			partieDuCentre.add(new JScrollPane(partieDuBas), BorderLayout.SOUTH);
 			setPartieDuBas();
 
 			if(nom.equals("CriteresDeSecurite")){
@@ -238,7 +239,7 @@ public class MainMaximeAnsquer extends JFrame {
 			}
 
 			this.partieDuCentre.add(label, BorderLayout.NORTH);
-			this.partieDuCentre.add(lesJpanels.get(nom), BorderLayout.CENTER);
+			this.partieDuCentre.add(new JScrollPane(lesJpanels.get(nom)), BorderLayout.CENTER);
 		}				
 
 		this.validate();
@@ -253,15 +254,27 @@ public class MainMaximeAnsquer extends JFrame {
 
 		partieDuBas.removeAll();		
 
+		int problemesAffiches = 0;
 		for(String probleme : moduleEnCours.getProblemes()){
-			JLabel label = new JLabel(probleme);
+			if(problemesAffiches < 5){
+				JLabel label = new JLabel(probleme);
+				label.setForeground(Color.red);
+				label.setFont(new Font("Arial", Font.PLAIN, 22));
+				partieDuBas.add(label);
+				problemesAffiches++;
+			}
+		}
+		
+		int nbProblemesNonAffiches = moduleEnCours.getProblemes().size() - problemesAffiches;
+		if(nbProblemesNonAffiches > 0){
+			JLabel label = new JLabel("(" + nbProblemesNonAffiches + " autres problèmes de cohérence)");
 			label.setForeground(Color.red);
 			label.setFont(new Font("Arial", Font.PLAIN, 22));
 			partieDuBas.add(label);
 		}
 
 		if(moduleEnCours.getProblemes().size() == 0){
-			JLabel label = new JLabel("Aucun probleme de coherence");
+			JLabel label = new JLabel("Aucun problème de cohérence");
 			label.setFont(new Font("Arial", Font.PLAIN, 22));
 			partieDuBas.add(label);
 		}

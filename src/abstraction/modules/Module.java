@@ -58,22 +58,16 @@ public class Module extends Observable implements IModule  {
 
 	public boolean estDisponible(){
 		
-		System.out.println(" \n ------------------- \n");
 		
-		System.out.println("Vérification de la disponibilité de " + this + "...");
-		boolean resultat = true;
-		System.out.println("predecesseurs : " + this.getPredecesseurs() );
-		
+		boolean resultat = true;		
 		
 		if(this.getNom().equals("AnalyseDesRisques")){
 			resultat=this.getEtude().getModule("EvenementsRedoutes").estCoherent()&&this.getEtude().getModule("EvenementsRedoutes").estCree();
 		    resultat=resultat&&this.getEtude().getModule("MappingDesBiens").estCoherent()&&this.getEtude().getModule("MappingDesBiens").estCree();
 		    resultat=resultat&&this.getEtude().getModule("ScenariosDeMenacesTypes").estCoherent()&&this.getEtude().getModule("ScenariosDeMenacesTypes").estCree();
-		    System.out.println(resultat);
 		}
 		else  if(this.getNom().equals("MatriceDesRisques")){
 			resultat=this.getEtude().getModule("AnalyseDesRisques").estCoherent()&&this.getEtude().getModule("AnalyseDesRisques").estCree();
-			System.out.println(this.getNom());
 		}
 		
 		
@@ -81,18 +75,6 @@ public class Module extends Observable implements IModule  {
 		else{ 
 			
 		for(Module m : this.getPredecesseurs()){
-			if(m.estCree()){
-				System.out.println("Le predecesseur " + m + " est cree");
-			}
-			else{
-				System.out.println("Le predecesseur " + m + " n'est pas cree");
-			}
-			if(m.estCoherent()){
-				System.out.println("Le predecesseur " + m + " est coherent");
-			}
-			else{
-				System.out.println("Le predecesseur " + m + " n'est pas coherent");
-			}
 			resultat = resultat && m.estCree() && m.estCoherent();
 		}}
 		this.disponible = resultat;
