@@ -233,9 +233,9 @@ public class ScenariosDeMenacesTypes extends Module {
 		}
 		// On actualise les valeurs du tableau
 		else {
-			System.out.println("Cas intermediaire");
 			if (this.biensRetenus.size() < biensSupports
 					.getBiensRetenus().size()) {
+				System.out.println("Cas intermediaire");
 				for (Bien b : biensSupports.getBiensRetenus()) {
 					if (!this.contientBien(b)) {
 						for (ScenarioGenerique sGene : scenarioDeMenacesGeneriques

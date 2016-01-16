@@ -44,6 +44,7 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 		
 		ControlJtable controlTableau = new ControlJtable(modeleTableau, tableau);
 		this.tableau.addMouseListener(controlTableau);
+		this.tableau.addKeyListener(controlTableau);
 		
 		this.add(tableau.getTableHeader());
         this.add(new JScrollPane(tableau));

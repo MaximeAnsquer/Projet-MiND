@@ -31,6 +31,7 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		this.moduleCourant=moduleCourant;
 		this.typologieDesBiensSupports= (TypologieDesBiensSupports) this.moduleCourant.getEtude().getModule("TypologieDesBiensSupports");
 		this.criteresDeSecurite=(CriteresDeSecurite) this.moduleCourant.getEtude().getModule("CriteresDeSecurite");
+		this.scenariosTypes= (ScenariosDeMenacesTypes) this.moduleCourant.getEtude().getModule("ScenariosDeMenacesTypes");
 		
 		entetes.add("Type de bien support");
 		entetes.add("Id");
@@ -40,6 +41,10 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		for (int i=0; i<moduleCourant.getNomColonneSup().size();i++){
 			entetes.add(moduleCourant.getNomColonneSup().get(i).charAt(0)+"");
 		}
+	}
+	
+	public ScenariosDeMenacesTypes getScenarioTypes(){
+		return this.scenariosTypes;
 	}
 	
 	public ScenariosDeMenacesGeneriques getModuleCourant(){
