@@ -44,7 +44,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		this.biensSupports = (BiensSupports) this.moduleCourant.getEtude().getModule("BiensSupports");
 		this.scenarioDeMenacesGeneriques= (ScenariosDeMenacesGeneriques) this.moduleCourant.getEtude().getModule("ScenariosDeMenacesGeneriques");
 		
-		// On remet les indices à leurs valeurs initiales (pas de colonnes supplémentaires)
+		// On reinitialise les indices à leurs valeurs initiales (pas de colonnes supplémentaires)
 		this.setIndices();
 		
 		// Ajout des colonnes supplémentaires provenant du module "Biens Supports"
@@ -177,7 +177,6 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		if (this.biensSupports.getNomColonnesSup() != null
 				&& columnIndex < this.biensSupports.getNomColonnesSup().size()) {
 			
-			// Bien du module BiensSupports ou du module ScenarioType ??
 			resultat = scenarioType.getBienSupport().getContenuColonnesSup().get(columnIndex);
 		}
 		if (columnIndex==COLONNE_BIEN_SUPPORT && scenarioType.getBienSupport()!=null){
@@ -202,7 +201,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			if (columnIndex>COLONNE_SOURCES_MENACES && columnIndex<COLONNE_VRAISEMBLANCE_I){
 				// indice du critère dans l'ArrayList
 				int indice = columnIndex-COLONNE_SOURCES_MENACES-1; 
-				String critere = this.moduleCourant.getNomColonneSup().get(indice); // pb ICI sur java 7!!
+				String critere = this.moduleCourant.getNomColonneSup().get(indice);
 				resultat=this.moduleCourant.getScenarioType(rowIndex).getCriteresSup().get(critere);
 			}
 		}
