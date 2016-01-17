@@ -80,7 +80,7 @@ public class Metriques extends Module {
 		this.importerBDC();  //on remplit la BDC
 		this.lesMetriques = new Hashtable<String, Metrique>();  
 		CriteresDeSecurite cds = (CriteresDeSecurite) this.getEtude().getModule("CriteresDeSecurite");
-		for(Critere critere : cds.getCriteresRetenus().values()){   //pour chaque critere retenu a l'onglet "CritereDeSecurite"
+		for(Critere critere : cds.getCriteresRetenus()){   //pour chaque critere retenu a l'onglet "CritereDeSecurite"
 			if(bdcMetriques.containsKey(critere.getIntitule())){   //s'il existe une metrique associee dans la BDC Metriques
 				this.lesMetriques.put(critere.getIntitule(), bdcMetriques.get(critere.getIntitule()));   //on ajoute cette metrique dans l'onglet Metriques
 			}
@@ -238,7 +238,7 @@ public class Metriques extends Module {
 	
 	public ArrayList<Metrique> getMetriquesDesCriteresRetenus(){
 		ArrayList<Metrique> resultat = new ArrayList<Metrique>();
-		for(Critere c : ((CriteresDeSecurite) this.getEtude().getModule("CriteresDeSecurite")).getLesCriteres().values() ){
+		for(Critere c : ((CriteresDeSecurite) this.getEtude().getModule("CriteresDeSecurite")).getLesCriteres() ){
 			if(c.isRetenu()){
 				if(this.getLesMetriques().get(c.getIntitule()) != null){
 					resultat.add(this.getLesMetriques().get(c.getIntitule()));

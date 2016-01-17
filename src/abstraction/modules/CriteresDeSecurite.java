@@ -32,14 +32,14 @@ public class CriteresDeSecurite extends Module{
 	/**
 	 * Hashtable reference par l'intitule des criteres
 	 */
-	private static Hashtable<String,Critere> bdcCriteresDeSecurite;
+	private static ArrayList<Critere> bdcCriteresDeSecurite;
 
 	//---Variables d'instance---
 
 	/**
 	 * Hashtable reference par l'intitule des criteres
 	 */
-	private Hashtable<String,Critere> lesCriteres;
+	private ArrayList<Critere> lesCriteres;
 
 	private Critere gravite;	
 	private Critere vraisemblance;
@@ -51,15 +51,7 @@ public class CriteresDeSecurite extends Module{
 	 * de la BDC dans le module.
 	 */
 	public CriteresDeSecurite() {
-		super("CriteresDeSecurite");		
-		/**
-		 * TODO : comment�e pour faire des tests, a decommenter apres
-		 * 
-		 * this.successeurs.add(this.getEtude().getModule("ScenariosDeMenaceTypes"));
-		 * this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
-		 * this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
-		 * this.successeurs.add(this.getEtude().getModule("MatricDesRisques"));
-		 */
+		super("CriteresDeSecurite");
 
 		this.cree = false;
 		this.coherent = false;
@@ -74,11 +66,11 @@ public class CriteresDeSecurite extends Module{
 
 	//---Getters et setters---
 
-	public Hashtable<String,Critere> getLesCriteres() {
+	public ArrayList<Critere> getLesCriteres() {
 		return lesCriteres;
 	}
 
-	public void setLesCriteres(Hashtable<String,Critere> lesCriteres) {
+	public void setLesCriteres(ArrayList<Critere> lesCriteres) {
 		this.lesCriteres = lesCriteres;
 	}
 
@@ -90,7 +82,13 @@ public class CriteresDeSecurite extends Module{
 			return this.getVraisemblance();
 		}
 		else{
-			return this.lesCriteres.get(intituleCritere);			
+			Critere resultat = null;
+			for(Critere critere : this.getLesCriteres()){
+				if(critere.getIntitule().equals(intituleCritere)){
+					resultat = critere;
+				}
+			}
+			return resultat;
 		}
 	}
 
@@ -102,14 +100,14 @@ public class CriteresDeSecurite extends Module{
 		return this.gravite;
 	}
 
-	public static Hashtable<String,Critere> getBDC(){
+	public static ArrayList<Critere> getBDC(){
 		return bdcCriteresDeSecurite;
 	}
 
 	//---Services---	
 
 	private void importerBDC() {
-		bdcCriteresDeSecurite = new Hashtable<String,Critere>();
+		bdcCriteresDeSecurite = new ArrayList<Critere>();
 
 		/*
 		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
@@ -157,7 +155,7 @@ public class CriteresDeSecurite extends Module{
 					 * Ajout du critere a la bdc
 					 */
 
-					bdcCriteresDeSecurite.put(intitule, c);				}				
+					bdcCriteresDeSecurite.add(c);				}				
 			}			
 		}
 		catch (final ParserConfigurationException e) {
@@ -173,23 +171,27 @@ public class CriteresDeSecurite extends Module{
 
 
 	public void ajouterCritere(Critere critere){
-		this.getLesCriteres().put(critere.getIntitule(), critere);
+		this.getLesCriteres().add(critere);
 		( (Metriques) this.getEtude().getModule("Metriques")).ajouterMetrique(critere);
 	}
 
-	public void supprimerCritere(String nomCritere){
-		this.getLesCriteres().remove(nomCritere);
+	public void supprimerCritere(String intituleCritere){
+		for(Critere critere : this.getLesCriteres()){
+			if(critere.getIntitule().equals(intituleCritere)){
+				this.getLesCriteres().remove(critere);
+			}
+		}
 	}	
 
 	/**
 	 * @author Maxime Ansquer
 	 * @return Renvoie une Hashtable des criteres retenus par l'utilisateur
 	 */
-	public Hashtable<String,Critere> getCriteresRetenus(){
-		Hashtable<String,Critere> resultat = new Hashtable<String,Critere>();
-		for(Critere c : this.getLesCriteres().values()){
+	public ArrayList<Critere> getCriteresRetenus(){
+		ArrayList<Critere> resultat = new ArrayList<Critere>();
+		for(Critere c : this.getLesCriteres()){
 			if(c.isRetenu()){
-				resultat.put(c.getIntitule(), c);
+				resultat.add(c);
 			}
 		}
 		return resultat;
@@ -205,7 +207,7 @@ public class CriteresDeSecurite extends Module{
 	 * @return
 	 */
 	public Critere getCritere(int index){
-		return (Critere) lesCriteres.values().toArray()[index];
+		return this.getLesCriteres().get(index);
 	}
 
 	public String toString(){
@@ -215,7 +217,7 @@ public class CriteresDeSecurite extends Module{
 	public boolean estCoherent(){
 		boolean resultat = true;
 		this.problemesDeCoherence = new ArrayList<String>();
-		for(Critere c : getLesCriteres().values()){
+		for(Critere c : getLesCriteres()){
 			if(!c.estComplet()){
 				String probleme = "Critere \" " + c.getIntitule() + " \" incomplet";
 				this.problemesDeCoherence.add(probleme);
