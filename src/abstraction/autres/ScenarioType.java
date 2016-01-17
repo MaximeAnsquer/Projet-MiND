@@ -1,5 +1,6 @@
 package abstraction.autres;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import abstraction.modules.BiensSupports;
@@ -14,7 +15,7 @@ import abstraction.modules.BiensSupports;
  */
 
 public class ScenarioType extends ScenarioGenerique {
-	private Hashtable<String, SourceDeMenace> menaces;
+	private ArrayList<SourceDeMenace> menaces;
 	private Bien bienSupport; // Il s'agit d'un bien support ici
 	private String intituleConcret;
 	private int vraisemblanceIntrinseque;
@@ -22,7 +23,7 @@ public class ScenarioType extends ScenarioGenerique {
 	
 	public ScenarioType(String type, String id, String intitule,
 			Hashtable<String, Boolean> criteres,
-			Hashtable<String, SourceDeMenace> menaces, Bien bienSupport,
+			ArrayList<SourceDeMenace> menaces, Bien bienSupport,
 			String intituleConcret, int intrinseque, int reelle, boolean retenu) {
 		
 		super(type,id,intitule,criteres,true);
@@ -35,7 +36,7 @@ public class ScenarioType extends ScenarioGenerique {
 	
 	public ScenarioType(String type, String id, String intitule,
 			Hashtable<String, Boolean> criteres,
-			Hashtable<String, SourceDeMenace> menaces, Bien bienSupport, boolean retenu) {
+			ArrayList<SourceDeMenace> menaces, Bien bienSupport, boolean retenu) {
 		
 		super(type,id,intitule,criteres,retenu);
 		this.menaces=menaces;
@@ -53,17 +54,17 @@ public class ScenarioType extends ScenarioGenerique {
 	
 	public ScenarioType(){
 		super("","","",new Hashtable<String, Boolean>(),true);
-		this.menaces=new Hashtable<String, SourceDeMenace>();
+		this.menaces=new ArrayList<SourceDeMenace>();
 		this.intituleConcret="";
 		this.vraisemblanceIntrinseque=1;
 		this.vraisemblanceReelle=1;
 	}
 	
-	public Hashtable<String, SourceDeMenace> getMenaces() {
+	public ArrayList<SourceDeMenace> getMenaces() {
 		return menaces;
 	}
 
-	public void setMenaces(Hashtable<String, SourceDeMenace> menaces) {
+	public void setMenaces(ArrayList<SourceDeMenace> menaces) {
 		this.menaces = menaces;
 	}
 
@@ -102,7 +103,7 @@ public class ScenarioType extends ScenarioGenerique {
 	public String listeSourcesMenaces(){
 		String s="";
 		if(this.menaces!=null){
-			for (SourceDeMenace sourceMenace : this.menaces.values()){
+			for (SourceDeMenace sourceMenace : this.menaces){
 				s=s+sourceMenace.getId() + ", ";
 			}
 		}

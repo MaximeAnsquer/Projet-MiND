@@ -255,10 +255,12 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				scenarioType.setIntituleConcret((String) aValue);
 			}
 			if (columnIndex==COLONNE_SOURCES_MENACES){
+				/*
 				SourceDeMenace source = this.sourcesDeMenaces.getSourceDeMenace((String) aValue);
 				if (source!=null){
 					scenarioType.getMenaces().put((String) aValue, source);
 				}
+				*/
 			}
 			if(this.scenarioDeMenacesGeneriques.getNomColonneSup()!=null){
 				
