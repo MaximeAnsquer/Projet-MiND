@@ -6,7 +6,7 @@ import abstraction.Etude;
 
 public class MatriceDesRisques extends Module {
 	
-	/*Ce module syntétise l'etude effectuée en ce sens qu'elle ordonne différents "risques" tels qu'ils ont été définis 
+	/*Ce module synthétise l'etude effectuée en ce sens qu'elle ordonne différents "risques" tels qu'ils ont été définis 
 	 * dans le module AnalyseDesRisques.
 	 * Les intitulés de ces risques sont placés dans un tableau; en colonne sont précisés les niveaux de gravité qui 
 	 * leurs sont associés,
@@ -16,7 +16,8 @@ public class MatriceDesRisques extends Module {
 
 	
 	/*les variables d'instance sont l'etude en cours, le tableau contenant les risques, l'analyse des risques effectuée
-	 * avant, et le nombre de niveaux de vraisemblance définis dans le module métriques.
+	 * avant, et le nombre de niveaux de vraisemblance définis dans le module métriques, qui serviront à définir les entêtes 
+	 * du tableau.
 	 */
 	private Etude etude;
 	
@@ -66,7 +67,7 @@ public class MatriceDesRisques extends Module {
 						
 		this.matrice[a-i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
 		
-		System.out.println(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
+		//System.out.println(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
 		
 					}
 				}
@@ -91,7 +92,7 @@ public class MatriceDesRisques extends Module {
 	}
 		}
 	
-	/*getters
+	/*Méthodes
 	 * 
 	 */
 
@@ -113,14 +114,14 @@ public class MatriceDesRisques extends Module {
 		}
 	}
 	
-	public void checkDisponible(){
+	/*public void checkDisponible(){
 		if(this.analysedesrisques.estCoherent()==true){
 			this.disponible=true;
 		}
 		else{
 			this.disponible=false;
 		}
-	}
+	}*/
 	
 	
 	public int nombre(){

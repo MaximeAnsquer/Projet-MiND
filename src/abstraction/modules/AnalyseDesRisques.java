@@ -58,18 +58,20 @@ public class AnalyseDesRisques extends Module{
 		
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
-		
+		//Si les antécédents du module sont cohérents
 		
 		if(this.scenarios!=null&&this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true&&this.scenarios.getTableau().get(0).getCriteresSup()!=null){
 		
-		int a=this.scenarios.getTableau().size();/*TODO a modifier pour ne prendre en compte que les scenarii retenus*/
+		//On construit un tableau en utilisant ces antécédents	
+			
+		int a=this.scenarios.getTableau().size();
 		
 		
 		int b=((ScenariosDeMenacesGeneriques)this.etude.getModule("ScenariosDeMenacesGeneriques")).getNomColonneSup().size();
-		System.out.println(b);
-		for(int l=0;l<b;l++){
-			System.out.println(this.scenarios.getNomColonneSup().get(l));
-		}
+		//System.out.println(b);
+		//for(int l=0;l<b;l++){
+		//	System.out.println(this.scenarios.getNomColonneSup().get(l));
+		//}
 		
 		
 		
@@ -129,7 +131,7 @@ public class AnalyseDesRisques extends Module{
 			    for(int j=0;j<biensessentiels.size();j++){
 			    
 			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biensessentiels.get(j).getIntitule());
-			   System.out.println(evenement.GetNomEvenement()); 
+			   //System.out.println(evenement.GetNomEvenement()); 
 			   
 				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),biensupport,scenarios[i],scenarios[i].getVraisemblanceReelle()));
 				
@@ -141,6 +143,8 @@ public class AnalyseDesRisques extends Module{
 		this.risques=liste;
 		}
 		else{
+			
+			//Sinon on construit un tableau constitué d'une ligne vide, pour que le programme ne plante pas.
 			
 			LinkedList<String> vide=new LinkedList<String>();
 			vide.add("");
@@ -182,7 +186,7 @@ public class AnalyseDesRisques extends Module{
 	
 	/*Mï¿½thode qui permet de vï¿½rifier si le bouton associï¿½ au module doit ï¿½tre grisï¿½ ou non (cf workflow)*/
 	
-	public void checkDisponible(){
+	/*public void checkDisponible(){
 		
 		if(this.scenarios!=null&&this.evenements.estCoherent()==true&&this.mapping.estCoherent()==true&&this.scenarios.estCoherent()==true){
 			this.disponible=true;
@@ -190,7 +194,7 @@ public class AnalyseDesRisques extends Module{
 		else{
 			this.disponible=false;
 		}
-	}
+	}*/
 	
 	
 	public boolean estCoherent(){
