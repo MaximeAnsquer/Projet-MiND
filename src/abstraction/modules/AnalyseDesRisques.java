@@ -58,11 +58,11 @@ public class AnalyseDesRisques extends Module{
 		
 		ArrayList<Risque> liste=new ArrayList<Risque>();
 		
-		//Si les antécédents du module sont cohérents
+		//Si les antï¿½cï¿½dents du module sont cohï¿½rents
 		
 		if(this.scenarios!=null&&this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true&&this.scenarios.getTableau().get(0).getCriteresSup()!=null){
 		
-		//On construit un tableau en utilisant ces antécédents	
+		//On construit un tableau en utilisant ces antï¿½cï¿½dents	
 			
 		int a=this.scenarios.getTableau().size();
 		
@@ -144,7 +144,7 @@ public class AnalyseDesRisques extends Module{
 		}
 		else{
 			
-			//Sinon on construit un tableau constitué d'une ligne vide, pour que le programme ne plante pas.
+			//Sinon on construit un tableau constituï¿½ d'une ligne vide, pour que le programme ne plante pas.
 			
 			LinkedList<String> vide=new LinkedList<String>();
 			vide.add("");
@@ -158,11 +158,11 @@ public class AnalyseDesRisques extends Module{
 			SourceDeMenace src=new SourceDeMenace("","","");
 			src.setRetenu(true);
 			
-			Hashtable<String,SourceDeMenace> hash2=new Hashtable<String,SourceDeMenace>();
-			hash2.put("",src);
+			ArrayList<SourceDeMenace> sources=new ArrayList<SourceDeMenace>();
+			sources.add(src);
 			
 			
-			ScenarioType sc=new ScenarioType("","", "",hash1,hash2, biensupport,"", 1, 1, true) ;
+			ScenarioType sc=new ScenarioType("","", "",hash1,sources, biensupport,"", 1, 1, true) ;
 				
 			liste.add(new Risque("",ev,1,biensupport,sc,1));
 			
