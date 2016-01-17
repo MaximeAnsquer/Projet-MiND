@@ -32,7 +32,7 @@ public class SourcesDeMenaces extends Module {
 	 * Une hashtable d'objets " SourceDeMenace " indexes par leurs id.
 	 * Attention les id doivent etre distincts !
 	 */
-	private static Hashtable<String, SourceDeMenace> bdcSourcesDeMenaces = new Hashtable<String, SourceDeMenace>();
+	private static ArrayList<SourceDeMenace> bdcSourcesDeMenaces = new ArrayList<SourceDeMenace>();
 	
 	//---Variables d'instance---
 	
@@ -40,7 +40,7 @@ public class SourcesDeMenaces extends Module {
 	 * Une hashtable d'objets " SourceDeMenace " indexes par leurs id.
 	 * Attention les id doivent etre distincts !
 	 */
-	private Hashtable<String, SourceDeMenace>  lesSourcesDeMenaces;
+	private ArrayList<SourceDeMenace> lesSourcesDeMenaces;
 	
 	//---Constructeurs---
 	
@@ -60,53 +60,61 @@ public class SourcesDeMenaces extends Module {
 	
 	//---Getters et setters	
 
-	public Hashtable<String, SourceDeMenace> getLesSourcesDeMenaces() {
+	public ArrayList<SourceDeMenace> getLesSourcesDeMenaces() {
 		return lesSourcesDeMenaces;
 	}
 
-	public void setLesSources(Hashtable<String, SourceDeMenace> lesSourcesDeMenaces) {
+	public void setLesSources(ArrayList<SourceDeMenace> lesSourcesDeMenaces) {
 		this.lesSourcesDeMenaces = lesSourcesDeMenaces;
 	}
 	
 	//---Services---
 	
 	public SourceDeMenace getSourceDeMenace(SourceDeMenace sourceDeMenace){
-		return this.getLesSourcesDeMenaces().get(sourceDeMenace.getId());
+		SourceDeMenace resultat = null;
+		for(SourceDeMenace source : this.getLesSourcesDeMenaces()){
+			if(source.getId().equals(sourceDeMenace.getId())){
+				resultat = source;
+			}
+		}		
+		return resultat;
 	}
 	
 	public SourceDeMenace getSourceDeMenace(String idSourceDeMenace){
-		return this.getLesSourcesDeMenaces().get(idSourceDeMenace);
+		SourceDeMenace resultat = null;
+		for(SourceDeMenace source : this.getLesSourcesDeMenaces()){
+			if(source.getId().equals(idSourceDeMenace)){
+				resultat = source;
+			}
+		}		
+		return resultat;
 	}
 	
 	public void ajouterSourceDeMenace(SourceDeMenace sourceDeMenace){
-		this.getLesSourcesDeMenaces().put(sourceDeMenace.getId(), sourceDeMenace);
+		this.getLesSourcesDeMenaces().add(sourceDeMenace);
 	}
 	
 	public void supprimerSourceDeMenace(SourceDeMenace sourceDeMenace){
-		this.getLesSourcesDeMenaces().remove(sourceDeMenace.getId());
+		this.getLesSourcesDeMenaces().remove(sourceDeMenace);
 	}
 	
-	/**
-	 * @return Renvoie la liste des sources de menaces retenues sous la forme d'une
-	 * hashtable de SourceDeMenace indexee par leurs id.
-	 */
-	public Hashtable<String, SourceDeMenace> getSourcesDeMenacesRetenues(){
-		Hashtable<String, SourceDeMenace> resultat = new Hashtable<String, SourceDeMenace>();
-		for(SourceDeMenace sourceDeMenace : this.getLesSourcesDeMenaces().values()){
+	public ArrayList<SourceDeMenace> getSourcesDeMenacesRetenues(){
+		ArrayList<SourceDeMenace> resultat = new ArrayList<SourceDeMenace>();
+		for(SourceDeMenace sourceDeMenace : this.getLesSourcesDeMenaces()){
 			if(sourceDeMenace.isRetenu()){
-				resultat.put(sourceDeMenace.getId(), sourceDeMenace);
+				resultat.add(sourceDeMenace);
 			}
 		}
 		return resultat;
 	}
 	
-	public static Hashtable<String, SourceDeMenace> getInstance(){
+	public static ArrayList<SourceDeMenace> getInstance(){
 		return bdcSourcesDeMenaces;
 	}
 	
 	private void importerBDC() {
 		
-		bdcSourcesDeMenaces = new Hashtable<String, SourceDeMenace>();
+		bdcSourcesDeMenaces = new ArrayList<SourceDeMenace>();
 
 		/*
 		 * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
@@ -154,7 +162,7 @@ public class SourcesDeMenaces extends Module {
 					 * Ajout de la source a la bdc
 					 */
 					
-					bdcSourcesDeMenaces.put(id, s);				}				
+					bdcSourcesDeMenaces.add(s);				}				
 			}			
 		}
 		catch (final ParserConfigurationException e) {
@@ -168,7 +176,7 @@ public class SourcesDeMenaces extends Module {
 		}			
 	}
 	
-	public Hashtable<String, SourceDeMenace> getBDC(){
+	public ArrayList<SourceDeMenace> getBDC(){
 		return bdcSourcesDeMenaces;
 	}
 	
@@ -177,7 +185,7 @@ public class SourcesDeMenaces extends Module {
 	}
 	
 	public SourceDeMenace getSource(int index){
-		return (SourceDeMenace) getLesSourcesDeMenaces().values().toArray()[index];
+		return this.getLesSourcesDeMenaces().get(index);
 	}
 	
 	public String toString(){
@@ -187,9 +195,9 @@ public class SourcesDeMenaces extends Module {
 	public boolean estCoherent(){
 		boolean resultat = true;
 		this.problemesDeCoherence = new ArrayList<String>();
-		for(SourceDeMenace s : this.getLesSourcesDeMenaces().values()){
+		for(SourceDeMenace s : this.getLesSourcesDeMenaces()){
 			if(!s.estComplet()){
-				String probleme = "La source de menace \" " + s.getId() + " \" est incomplete";
+				String probleme = "La source de menace \" " + s.getId() + " \" est incomplète.";
 				problemesDeCoherence.add(probleme);
 				resultat = false;
 			}

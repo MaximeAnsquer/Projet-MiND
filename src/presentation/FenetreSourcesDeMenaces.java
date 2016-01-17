@@ -68,14 +68,10 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		table.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent e) {}
 
-			public void mousePressed(MouseEvent e) {
-				//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
-				//				boutonModifierIntitule.setEnabled(false);				
+			public void mousePressed(MouseEvent e) {			
 				boutonSupprimer.setEnabled(true);
 			}
 			public void mouseReleased(MouseEvent e) {
-				//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());
-				//				boutonModifierIntitule.setEnabled(false);
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
@@ -85,15 +81,13 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
-			public void keyReleased(KeyEvent e) {
-				//				zoneIntitule.setText(getSourceSelectionnee().getIntitule());		
+			public void keyReleased(KeyEvent e) {		
 				boutonSupprimer.setEnabled(true);
 			}			
 		});
 
 		this.setLayout(new BorderLayout());
 
-		//		this.add(zoneIntitule());
 		this.add(partieDuHaut(), BorderLayout.NORTH);
 		this.add(new JScrollPane(table), BorderLayout.CENTER);			
 	}
@@ -107,7 +101,6 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		zoneIntitule.addKeyListener(new KeyListener(){
 			public void keyTyped(KeyEvent e) {
 				if(table.getSelectedRow()>-1){
-					//					boutonModifierIntitule.setEnabled(true);
 				}				
 			}
 			public void keyPressed(KeyEvent e) {}
@@ -142,27 +135,9 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
-		//		jpanel.add(boutonModifierIntitule());
 		return jpanel;
 	}
 
-	private JButton boutonModifierIntitule() {
-		this.boutonModifierIntitule = new JButton("Modifier l'intitule");
-		boutonModifierIntitule.setEnabled(false);
-
-		boutonModifierIntitule.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				String nouvelIntitule = zoneIntitule.getText();
-				getSourceSelectionnee().setIntitule(nouvelIntitule);
-				table.validate();
-				table.repaint();
-				boutonModifierIntitule.setEnabled(false);
-			}
-
-		});
-		return this.boutonModifierIntitule;
-	}
 
 	private JButton boutonSupprimer() {
 		boutonSupprimer = new JButton("Supprimer une source de menace");
@@ -185,7 +160,6 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		bouton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 				modele.ajouterSource();
 			}
@@ -282,7 +256,6 @@ public class FenetreSourcesDeMenaces extends JPanel {
 					break;
 				}
 			}
-			//			zoneIntitule.setText(getSourceSelectionnee().getIntitule());
 		}
 	}
 
