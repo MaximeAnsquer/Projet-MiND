@@ -121,7 +121,7 @@ public class AnalyseDesRisques extends Module{
 			   // Critere[] listecriteres =this.criteres.getCriteresRetenus().values().toArray(new Critere[this.criteres.getCriteresRetenus().size()]);
 			   // Critere criterecourant=listecriteres[k];
 				
-				Critere criterecourant=this.criteres.getCriteresRetenus().get(critere);
+				
 				//System.out.println(critere);
 			    
 			    
@@ -130,7 +130,7 @@ public class AnalyseDesRisques extends Module{
 			    if(biensessentiels!=null){
 			    for(int j=0;j<biensessentiels.size();j++){
 			    
-			   Evenement evenement=this.evenements.getEvenementCorrespondant(criterecourant.getIntitule(),biensessentiels.get(j).getIntitule());
+			   Evenement evenement=this.evenements.getEvenementCorrespondant(critere,biensessentiels.get(j).getIntitule());
 			   //System.out.println(evenement.GetNomEvenement()); 
 			   
 				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),biensupport,scenarios[i],scenarios[i].getVraisemblanceReelle()));

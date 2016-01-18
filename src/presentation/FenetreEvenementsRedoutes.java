@@ -154,7 +154,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		for(int i=0;i<u;i++){
 			
-			ArrayList<Critere> tableaucriteres=new ArrayList<Critere>(this.criteres.getCriteresRetenus().values());
+			ArrayList<Critere> tableaucriteres=new ArrayList<Critere>(this.criteres.getCriteresRetenus());
 			String nomcritere=tableaucriteres.get(i).getIntitule();	
 			
 			
