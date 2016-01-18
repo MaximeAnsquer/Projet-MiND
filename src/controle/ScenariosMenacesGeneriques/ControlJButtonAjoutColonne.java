@@ -2,6 +2,7 @@ package controle.ScenariosMenacesGeneriques;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
@@ -22,15 +23,16 @@ public class ControlJButtonAjoutColonne implements Observer,ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Hashtable<String, Critere> criteresRetenus = this.modele.getCriteresDeSecurite().getCriteresRetenus();
+		//ArrayList<Critere> criteresRetenus = this.modele.getCriteresDeSecurite().getCriteresRetenus();
+		ArrayList<String> intitulesCriteresRetenus = this.modele.getCriteresDeSecurite().getIntitulesCriteresRetenus();
 		
 		if (this.modele.getModuleCourant().getNomColonneSup()!=null){
 			for (String nomCritere : this.modele.getModuleCourant().getNomColonneSup()){
-				criteresRetenus.remove(nomCritere);
+				intitulesCriteresRetenus.remove(nomCritere);
 			}
 		}
 		
-		Object[] tabCriteresRetenus = criteresRetenus.keySet().toArray();
+		Object[] tabCriteresRetenus = intitulesCriteresRetenus.toArray();
 		String critere = (String) JOptionPane.showInputDialog(null,
 				"Quel critère voulez-vous rajouter ?", "Choix du critère",
 				JOptionPane.QUESTION_MESSAGE, null, tabCriteresRetenus, tabCriteresRetenus[0]);
