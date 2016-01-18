@@ -196,6 +196,17 @@ public class CriteresDeSecurite extends Module{
 		}
 		return resultat;
 	}
+	
+	public ArrayList<String> getIntitulesCriteresRetenus(){
+		ArrayList<String> resultat = new ArrayList<String>();
+		for(Critere c : this.getLesCriteres()){
+			if(c.isRetenu()){
+				resultat.add(c.getIntitule());
+			}
+		}
+		return resultat;
+	}
+	
 
 	public int nombreDeCriteres(){
 		return lesCriteres.size();
