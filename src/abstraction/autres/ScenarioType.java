@@ -16,6 +16,7 @@ import abstraction.modules.BiensSupports;
 
 public class ScenarioType extends ScenarioGenerique {
 	private ArrayList<SourceDeMenace> menaces;
+	private Hashtable<String,Boolean> criteresTypes;
 	private Bien bienSupport; // Il s'agit d'un bien support ici
 	private String intituleConcret;
 	private int vraisemblanceIntrinseque;
@@ -28,6 +29,7 @@ public class ScenarioType extends ScenarioGenerique {
 		
 		super(type,id,intitule,criteres,true);
 		this.menaces=menaces;
+		this.criteresTypes=criteres;
 		this.bienSupport=bienSupport;
 		this.intituleConcret=intituleConcret;
 		this.vraisemblanceIntrinseque=intrinseque;
@@ -40,6 +42,7 @@ public class ScenarioType extends ScenarioGenerique {
 		
 		super(type,id,intitule,criteres,retenu);
 		this.menaces=menaces;
+		this.criteresTypes=criteres;
 		this.bienSupport=bienSupport;
 		this.intituleConcret="";
 		this.vraisemblanceIntrinseque=1;
@@ -48,13 +51,14 @@ public class ScenarioType extends ScenarioGenerique {
 	
 	public ScenarioType(ScenarioType scenario) {
 		this(scenario.getTypeBienSupport(), scenario.getId(), scenario
-				.getIntitule(), scenario.getCriteresSup(), scenario
+				.getIntitule(), scenario.getCriteresTypes(), scenario
 				.getMenaces(), scenario.getBienSupport(), true);
 	}
 	
 	public ScenarioType(){
 		super("","","",new Hashtable<String, Boolean>(),true);
 		this.menaces=new ArrayList<SourceDeMenace>();
+		this.criteresTypes=new Hashtable<String, Boolean>();
 		this.intituleConcret="";
 		this.vraisemblanceIntrinseque=1;
 		this.vraisemblanceReelle=1;
@@ -66,6 +70,14 @@ public class ScenarioType extends ScenarioGenerique {
 
 	public void setMenaces(ArrayList<SourceDeMenace> menaces) {
 		this.menaces = menaces;
+	}
+	
+	public Hashtable<String, Boolean> getCriteresTypes() {
+		return this.criteresTypes;
+	}
+
+	public void setCriteresTypes(Hashtable<String, Boolean> criteresSup) {
+		this.criteresTypes = criteresSup;
 	}
 
 	public Bien getBienSupport() {

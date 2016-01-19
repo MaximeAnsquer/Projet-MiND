@@ -30,6 +30,14 @@ public class ScenarioGenerique {
 		this.retenu = retenu;
 	}
 	
+	// Contructeur pour la classe mère
+	public ScenarioGenerique(String type, String id, String intitule, boolean retenu) {
+		this.typeBienSupport = type;
+		this.Id = id;
+		this.intituleGenerique = intitule;
+		this.retenu = retenu;
+	}
+	
 	// Constructeur : Nouveau Type de bien support défini précédemment
 	public ScenarioGenerique(String type, String id, String intitule) {
 		this(type, id, intitule, new Hashtable<String,Boolean>(),
@@ -69,7 +77,7 @@ public class ScenarioGenerique {
 	}
 
 	public Hashtable<String,Boolean> getCriteresSup() {
-		return CriteresSup;
+		return this.CriteresSup;
 	}
 
 	public void setCriteresSup(Hashtable<String,Boolean> nomCriteresSup) {

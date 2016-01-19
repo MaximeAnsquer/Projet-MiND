@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import abstraction.Etude;
 import abstraction.autres.Bien;
+import abstraction.autres.Critere;
 import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.ScenarioType;
 
@@ -108,6 +109,14 @@ public class ScenariosDeMenacesTypes extends Module {
 		return resultat;
 	}
 	
+	public Hashtable<String,Boolean> getCriteres(ScenarioGenerique sGene){
+		Hashtable<String,Boolean> criteres = new Hashtable<String, Boolean>();
+		for (String intitule : sGene.getCriteresSup().keySet()){
+			criteres.put(intitule, sGene.getCriteresSup().get(intitule));
+		}
+		return criteres ;
+	}
+	
 	// Vérifie si le Bien b est présent dans le tableau
 	public Boolean contientBien(Bien b){
 		Boolean resultat = false ;
@@ -198,7 +207,7 @@ public class ScenariosDeMenacesTypes extends Module {
 			for (ScenarioGenerique sGene : moduleScenarioGene.getTableau()) {
 				ScenarioType scenario = new ScenarioType(
 						sGene.getTypeBienSupport(), sGene.getId(),
-						sGene.getIntitule(), sGene.getCriteresSup(),
+						sGene.getIntitule(), this.getCriteres(sGene),
 						SourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
 						true);
 				if (sGene.getTypeBienSupport().contains(b.getType())
@@ -243,7 +252,7 @@ public class ScenariosDeMenacesTypes extends Module {
 							ScenarioType scenario = new ScenarioType(
 									sGene.getTypeBienSupport(), sGene.getId(),
 									sGene.getIntitule(),
-									sGene.getCriteresSup(),
+									this.getCriteres(sGene),
 									sourcesDeMenaces.getSourcesDeMenacesRetenues(),
 									null, true);
 							if (sGene.getTypeBienSupport()
@@ -284,7 +293,7 @@ public class ScenariosDeMenacesTypes extends Module {
 			for (ScenarioGenerique sGene : moduleScenarioGene.getTableau()) {
 				ScenarioType scenario = new ScenarioType(
 						sGene.getTypeBienSupport(), sGene.getId(),
-						sGene.getIntitule(), sGene.getCriteresSup(),
+						sGene.getIntitule(), this.getCriteres(sGene),
 						SourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
 						true);
 				if (sGene.getTypeBienSupport().contains(b.getType())
