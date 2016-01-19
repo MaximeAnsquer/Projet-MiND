@@ -313,7 +313,7 @@ public class MainMaximeAnsquer extends JFrame {
 		}
 		//On demande le nom a attribuer a l'etude
 		String nomEtude = "";
-		while(nomEtude.equals("") ){
+		while(nomEtude != null && nomEtude.equals("") ){
 			nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle etude.");	
 			if(nomEtude == null){
 				if(this.existeAuMoinsUneEtude()){

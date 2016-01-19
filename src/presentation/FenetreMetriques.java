@@ -381,7 +381,7 @@ public class FenetreMetriques extends JPanel {
 	//---Renderer---
 
 	class Renderer extends DefaultTableCellRenderer {
-		
+
 		public Renderer(){
 			super();
 			this.setHorizontalAlignment( SwingConstants.CENTER );
@@ -411,7 +411,9 @@ public class FenetreMetriques extends JPanel {
 				break;
 				case 4: clr = Color.red;
 				break;
-				default: clr = Color.magenta;
+				case 5: clr = Color.magenta;
+				break;
+				default: clr = new Color(150, 0, 150);
 				}
 				component.setBackground(clr);
 			}
