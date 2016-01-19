@@ -166,8 +166,26 @@ public class EvenementsRedoutes extends Module {
 				String probleme = "Un ou plusieurs evenements sont incomplets";
 				this.problemesDeCoherence.add(probleme);
 				
-				resultat=false;
+				
+				
+				resultat=false;	
+				
 			}
+			
+			for(int k=0;k<this.getEvenementsRedoutes().size();k++){
+				
+				if(k!=i){
+					
+					if(this.getEvenementsRedoutes().get(i).GetNomEvenement().equals(this.getEvenementsRedoutes().get(k).GetNomEvenement())){
+						resultat=false;
+						
+						String probleme = "Un ou plusieurs evenements ont le même nom";
+						this.problemesDeCoherence.add(probleme);
+						
+					}
+				}
+			}
+			
 		}
 		
 		return resultat;
