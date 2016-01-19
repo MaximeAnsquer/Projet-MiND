@@ -176,11 +176,13 @@ public class CriteresDeSecurite extends Module{
 	}
 
 	public void supprimerCritere(String intituleCritere){
+		Critere critereASupprimer = null;
 		for(Critere critere : this.getLesCriteres()){
 			if(critere.getIntitule().equals(intituleCritere)){
-				this.getLesCriteres().remove(critere);
+				critereASupprimer = critere;
 			}
 		}
+		this.getLesCriteres().remove(critereASupprimer);
 	}	
 
 	/**
