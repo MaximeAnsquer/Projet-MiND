@@ -28,6 +28,7 @@ public class ControlJtable implements MouseListener, KeyListener {
 			this.modele.setScenarioCourant(this.tableau.getSelectedRow());
 			this.idCourant=(String) this.tableau.getValueAt(this.tableau.getSelectedRow(), 1);
 			this.intituleCourant = (String) this.tableau.getValueAt(this.tableau.getSelectedRow(), 2);
+			System.out.println(intituleCourant);
 		}
 	}
 
@@ -57,20 +58,7 @@ public class ControlJtable implements MouseListener, KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		
-	}
-	
-	
-	public void keyReleased(KeyEvent e) {
-		if (this.tableau.getSelectedRow() != -1 && this.tableau.getSelectedColumn()==1 && this.modele.getScenarioTypes()!=null){
-			for (ScenarioType sType : this.modele.getScenarioTypes().getTableau()){
-				if (sType.getId().equals(idCourant)){
-					System.out.println("ENTREE dans le KeyPressed");
-					String newId = (String) this.tableau.getValueAt(this.tableau.getSelectedRow(), 1);
-					sType.setId(newId);
-				}
-			}
-		}
+		/*
 		if (this.tableau.getSelectedRow() != -1 && this.tableau.getSelectedColumn()==2 && this.modele.getScenarioTypes()!=null){
 			for (ScenarioType sType : this.modele.getScenarioTypes().getTableau()){
 				if (sType.getIntitule().equals(intituleCourant)){
@@ -80,6 +68,32 @@ public class ControlJtable implements MouseListener, KeyListener {
 				}
 			}
 		}
+		*/
 	}
-
+	
+	
+	public void keyReleased(KeyEvent e) {
+		if (this.tableau.getSelectedRow() != -1 && this.modele.getScenarioTypes()!=null){
+			if (this.tableau.getSelectedColumn()==1){
+				for (ScenarioType sType : this.modele.getScenarioTypes().getTableau()){
+					if (sType.getId().equals(idCourant)){
+						System.out.println("ENTREE dans le KeyReleased");
+						String newId = (String) this.modele.getValueAt(this.tableau.getSelectedRow(), 1);
+						sType.setId(newId);
+					}
+				}
+			}
+			else{
+				if (this.tableau.getSelectedColumn()==2){
+					for (ScenarioType sType : this.modele.getScenarioTypes().getTableau()){
+						if (sType.getIntitule().equals(intituleCourant)){
+							System.out.println("ENTREE dans le KeyPressed");
+							String newIntitule = (String) this.tableau.getValueAt(this.tableau.getSelectedRow(), 2);
+							sType.setIntitule(newIntitule);
+						}
+					}
+				}
+			}
+		}	
+	}
 }
