@@ -207,6 +207,21 @@ public class AnalyseDesRisques extends Module{
 				
 				resultat=false;
 			}
+			
+for(int k=0;k<this.getAnalyseDesRisques().size();k++){
+				
+				if(k!=i){
+					
+					if(this.getAnalyseDesRisques().get(i).getIntitule().equals(this.getAnalyseDesRisques().get(k).getIntitule())){
+						resultat=false;
+						
+						String probleme = "Un ou plusieurs risques ont le même nom";
+						this.problemesDeCoherence.add(probleme);
+						
+					}
+				}
+			}
+			
 		}
 		return resultat;
 	}
