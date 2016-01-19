@@ -34,7 +34,6 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.creerTableau();
-		// On importe les données
 				
 		this.creerComboBox();
 		//this.creerCheckBox();

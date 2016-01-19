@@ -139,7 +139,7 @@ public class ScenariosDeMenacesTypes extends Module {
 	}
 	
 	// Vérifie si le Bien b est retenu dans le module BiensEssentiels
-	public Boolean estRetenu (Bien b){
+	public Boolean estRetenuBien (Bien b){
 		Boolean res = false ;
 		BiensSupports biensSupports = (BiensSupports) this.etude.getModule("BiensSupports");
 		for (Bien bien : biensSupports.getBiensRetenus()){
@@ -150,6 +150,18 @@ public class ScenariosDeMenacesTypes extends Module {
 		return res;
 	}
 	
+	// Vérifie si l'Id du scénario typé provient d'un scénario générique retenu dans le module Scenarios de menaces génériques
+	public Boolean estRetenuScenarioGene (ScenarioType scenario){
+		Boolean res = false ;
+		ScenariosDeMenacesGeneriques moduleScenarioGene = (ScenariosDeMenacesGeneriques) this.etude
+				.getModule("ScenariosDeMenacesGeneriques");
+		for (ScenarioGenerique sGene : moduleScenarioGene.getScenariosGeneriquesRetenus()){
+			if (sGene.getId().equals(scenario.getId())){
+				res=true;
+			}
+		}
+		return res;
+	}
 	
 	// Retourne le premier et le dernier indice du tableau où les scenarios
 	// types ont pour bien b
@@ -164,12 +176,21 @@ public class ScenariosDeMenacesTypes extends Module {
 	}
 	
 	// Suppression des scenarios types dont le Bien Support n'est plus retenu
+	// Suppression des scenarios types dont les scénarios génériques ont été supprimé
 	public void supprimerScenariosTypes() {
 		int j = 0;
 		while (j < this.tableau.size() && this.tableau.get(j) != null) {
-			while (j < this.tableau.size() && !estRetenu(this.tableau.get(j).getBienSupport())) {
+			while (j < this.tableau.size() && !estRetenuBien(this.tableau.get(j).getBienSupport())) {
 				ScenarioType scenario = this.tableau.get(j);
 				this.biensRetenus.remove(this.tableau.get(j).getBienSupport().getIntitule());
+				this.tableau.remove(scenario);
+			}
+			j++;
+		}
+		j=0;
+		while (j < this.tableau.size() && this.tableau.get(j) != null) {
+			while (j < this.tableau.size() && !estRetenuScenarioGene(this.tableau.get(j))) {
+				ScenarioType scenario = this.tableau.get(j);
 				this.tableau.remove(scenario);
 			}
 			j++;
@@ -280,7 +301,7 @@ public class ScenariosDeMenacesTypes extends Module {
 				}
 			}
 			// Sinon on supprime les scénarios correspondants aux biens qui 
-			// ne sont plus retenus
+			// ne sont plus retenus ou aux scénarios non retenus
 			else {
 				this.supprimerScenariosTypes();
 				System.out.println("Dernier cas !");

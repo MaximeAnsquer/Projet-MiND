@@ -80,7 +80,6 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	}
 	
 	public ScenarioGenerique getScenarioGenerique(int i) {
-		// ArrayList<ScenarioGenerique> scenariosMenacesGeneriques = new ArrayList<ScenarioGenerique>(tab.values());
 		return this.tableau.get(i);
 	}
 	
