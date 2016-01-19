@@ -44,10 +44,17 @@ public class ControlJButtonAjoutScenario implements ActionListener {
 			if (typeBienSupport!=null){
 				String Id = JOptionPane.showInputDialog("Id du scénario ?");
 				
-				if (Id != null && !Id.equals("")) {
+				if (Id!=null){
+					while (Id.equals("")) {
+						Id = JOptionPane.showInputDialog("Id du scénario ?");
+					}
+					
 					String intituleScenario = JOptionPane.showInputDialog("Intitulé du scénario ?");
 					
-					if (intituleScenario != null && !intituleScenario.equals("")){
+					if (intituleScenario!=null){
+						while (intituleScenario.equals("")){
+							intituleScenario = JOptionPane.showInputDialog("Intitulé du scénario ?");
+						}
 						this.modele.addScenarioGenerique(new ScenarioGenerique(typeBienSupport, Id, intituleScenario), this.tableau.getSelectedRow()+1);
 					}
 				}
