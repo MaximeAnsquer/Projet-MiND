@@ -1,5 +1,6 @@
 package abstraction.autres;
 
+import java.awt.Color;
 import java.util.Observable;
 
 /**
@@ -19,23 +20,32 @@ public class TypeBien {
 	private String Description;
 	private String intitule;
 	private boolean retenu; 
-	private String couleur; 
+	private Color couleur; 
 	// Ex couleur : "red", "yellow", etc...
 	
 	// IHM : quand retenu=true (cad quand on clique sur la case du tableau correspondante)
 	//on a un X qui s'affiche dans cette case. Dans l'autre cas, le X disparait (case vide)
 	
 	// Constructeur
+	public TypeBien(String id, String description, String intitule, boolean retenu, Color clr){
+		this.Id=id;
+		this.Description = description;
+		this.intitule = intitule;
+		this.retenu = retenu;
+		this.couleur = clr;
+	}
+	
 	public TypeBien(String id, String description, String intitule, boolean retenu){
 		this.Id=id;
 		this.Description = description;
 		this.intitule = intitule;
 		this.retenu = retenu;
+		this.couleur = new Color(255, 255, 255);
 	}
 	
 	// Constructeur : Ligne vide
 	public TypeBien(){
-		this("","","",false);
+		this("","","",false,new Color(255, 255, 255));
 	}
 	
 	public String getId(){
@@ -70,6 +80,14 @@ public class TypeBien {
 		this.retenu = retenu;
 	}
 	
+	public Color getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(Color couleur) {
+		this.couleur = couleur;
+	}
+
 	// On vérifie si le type a bien toutes les informations renseignées
 	// Tous les champs doivent être renseignés
 	public boolean isIncomplete() {

@@ -151,7 +151,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 						for (ScenarioGenerique sGene : this.scenarioDeMenacesGeneriques.getScenariosGeneriquesRetenus()) {
 							ScenarioType scenario = new ScenarioType(
 									sGene.getTypeBienSupport(), sGene.getId(),
-									sGene.getIntitule(), sGene.getCriteresSup(),
+									sGene.getIntitule(), this.moduleCourant.getCriteres(sGene),
 									this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
 									true);
 							if (sGene.getTypeBienSupport().contains(b.getType()) && scenario.getBienSupport()==null) {
@@ -202,7 +202,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				// indice du critère dans l'ArrayList
 				int indice = columnIndex-COLONNE_SOURCES_MENACES-1; 
 				String critere = this.moduleCourant.getNomColonneSup().get(indice);
-				resultat=this.moduleCourant.getScenarioType(rowIndex).getCriteresSup().get(critere);
+				resultat=this.moduleCourant.getScenarioType(rowIndex).getCriteresTypes().get(critere);
 			}
 		}
 		if(columnIndex==COLONNE_VRAISEMBLANCE_I){
@@ -249,7 +249,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				scenarioType.setId((String) aValue);
 			}
 			if(columnIndex==COLONNE_SCENARIO_GENERIQUE){
-				scenarioType.setIntitule((String) aValue);
+				// scenarioType.setIntitule((String) aValue);
 			}
 			if (columnIndex==COLONNE_SCENARIO_CONCRET){
 				scenarioType.setIntituleConcret((String) aValue);
@@ -269,7 +269,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 					// indice du critère dans l'ArrayList
 					int indice = columnIndex-COLONNE_SOURCES_MENACES-1; 
 					String critere = this.moduleCourant.getNomColonneSup().get(indice);
-					this.moduleCourant.getScenarioType(rowIndex).getCriteresSup().put(critere, (Boolean) aValue);
+					this.moduleCourant.getScenarioType(rowIndex).getCriteresTypes().put(critere, (Boolean) aValue);
 				}
 			}
 			if(columnIndex==COLONNE_VRAISEMBLANCE_I){

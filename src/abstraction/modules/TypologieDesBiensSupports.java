@@ -1,9 +1,11 @@
 package abstraction.modules;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,6 +39,7 @@ public class TypologieDesBiensSupports extends Module {
 		super("TypologieDesBiensSupports");
 		this.tableau = new ArrayList<TypeBien>();
 		
+		/*
 		this.addTypeBienSupport(new TypeBien(
 				"MAT",
 				"Ce type de biens supports est constitué de l’ensemble des éléments physiques d'un système informatique (hardware) et des supports de données électroniques) participant au stockage et au traitement de tout ou partie des biens essentiels.",
@@ -46,8 +49,9 @@ public class TypologieDesBiensSupports extends Module {
 				"LOG",
 				"Ce type de biens supports est constitué de l'ensemble des programmes participant au traitement de tout ou partie des biens essentiels (software).",
 				"Logiciels", true));
+		*/
 		
-		this.typeBienCourant=this.getTypeBien(0);
+		this.typeBienCourant=new TypeBien();
 		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
 		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
 		this.cree = false;
@@ -226,8 +230,12 @@ public class TypologieDesBiensSupports extends Module {
 					String id = typeBien.getElementsByTagName("Id").item(0).getTextContent();
 					String intitule = typeBien.getElementsByTagName("Intitule").item(0).getTextContent();
 					String description = typeBien.getElementsByTagName("Description").item(0).getTextContent();
+					String couleur = typeBien.getElementsByTagName("Couleur").item(0).getTextContent();
+					String [] nbsCouleurs = couleur.split(",");
+					
+					Color clr = new Color(Integer.parseInt(nbsCouleurs[0]), Integer.parseInt(nbsCouleurs[1]), Integer.parseInt(nbsCouleurs[2]));
 
-					TypeBien type = new TypeBien(id, description, intitule, true);
+					TypeBien type = new TypeBien(id, description, intitule, true, clr);
 
 					/*
 					 * Ajout du type de bien à la bdc
