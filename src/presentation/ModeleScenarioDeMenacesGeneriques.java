@@ -39,7 +39,9 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 		entetes.add("Retenu");
 		
 		for (int i=0; i<moduleCourant.getNomColonneSup().size();i++){
-			entetes.add(moduleCourant.getNomColonneSup().get(i).charAt(0)+"");
+			if (this.criteresDeSecurite.getIntitulesCriteresRetenus().contains(moduleCourant.getNomColonneSup().get(i))){
+				entetes.add(moduleCourant.getNomColonneSup().get(i).charAt(0)+"");
+			}
 		}
 	}
 	
