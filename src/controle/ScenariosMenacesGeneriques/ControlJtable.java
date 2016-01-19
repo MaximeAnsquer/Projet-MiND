@@ -28,7 +28,6 @@ public class ControlJtable implements MouseListener, KeyListener {
 			this.modele.setScenarioCourant(this.tableau.getSelectedRow());
 			this.idCourant=(String) this.tableau.getValueAt(this.tableau.getSelectedRow(), 1);
 			this.intituleCourant = (String) this.tableau.getValueAt(this.tableau.getSelectedRow(), 2);
-			System.out.println(intituleCourant);
 		}
 	}
 
@@ -77,7 +76,6 @@ public class ControlJtable implements MouseListener, KeyListener {
 			if (this.tableau.getSelectedColumn()==1){
 				for (ScenarioType sType : this.modele.getScenarioTypes().getTableau()){
 					if (sType.getId().equals(idCourant)){
-						System.out.println("ENTREE dans le KeyReleased");
 						String newId = (String) this.modele.getValueAt(this.tableau.getSelectedRow(), 1);
 						sType.setId(newId);
 					}
@@ -87,7 +85,6 @@ public class ControlJtable implements MouseListener, KeyListener {
 				if (this.tableau.getSelectedColumn()==2){
 					for (ScenarioType sType : this.modele.getScenarioTypes().getTableau()){
 						if (sType.getIntitule().equals(intituleCourant)){
-							System.out.println("ENTREE dans le KeyPressed");
 							String newIntitule = (String) this.tableau.getValueAt(this.tableau.getSelectedRow(), 2);
 							sType.setIntitule(newIntitule);
 						}

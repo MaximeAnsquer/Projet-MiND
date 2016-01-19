@@ -26,14 +26,11 @@ public class ScenariosDeMenacesGeneriques extends Module {
 
 	// Variable d'instance
 	private ArrayList<ScenarioGenerique> tableau ;
-	//private Hashtable<String, ScenarioGenerique> tableau;
 	private ScenarioGenerique scenarioCourant ;
 	private ArrayList<String> nomColonneSup;
 	
 	public ScenariosDeMenacesGeneriques(Etude etude){
 		super("ScenariosDeMenacesGeneriques");
-		
-		//this.tableau = new Hashtable<String, ScenarioGenerique>();
 		this.tableau= new ArrayList<ScenarioGenerique>();
 		
 		this.etude=etude;

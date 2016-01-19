@@ -117,6 +117,16 @@ public class ScenariosDeMenacesTypes extends Module {
 		return criteres ;
 	}
 	
+	public boolean isImpacteCritere(String nomCritere){
+		ArrayList<Boolean> critere = new ArrayList<Boolean>();
+		for (ScenarioType scenario : this.tableau){
+			if (!scenario.getCriteresTypes().get(nomCritere)){
+				critere.add(scenario.getCriteresTypes().get(nomCritere));
+			}
+		}
+		return !(critere.size()==this.tableau.size()) ;
+	}
+	
 	// Vérifie si le Bien b est présent dans le tableau
 	public Boolean contientBien(Bien b){
 		Boolean resultat = false ;
@@ -322,6 +332,14 @@ public class ScenariosDeMenacesTypes extends Module {
 			String s = "Aucun scenario type retenu";
 			this.problemesDeCoherence.add(s);
 			resultat = false;
+		}
+		for (String nomCritere : this.nomColonneSup){
+			if (!this.isImpacteCritere(nomCritere)) {
+				String s = "Le critere de securite \" " + nomCritere
+						+ " \" n'est retenu dans aucun scenario type";
+				this.problemesDeCoherence.add(s);
+				resultat = false;
+			}
 		}
 		return resultat;
 	}
