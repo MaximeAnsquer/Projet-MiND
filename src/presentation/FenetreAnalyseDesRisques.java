@@ -42,22 +42,22 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			
 			for (int i=0;i<a;i++){
 				for(int j=0;j<b;j++){
-					Evenement evnouveau=nouvellean.getAnalyseDesRisques().get(i).getEvenementRedoute();
-					Evenement evancien=analyse.getAnalyseDesRisques().get(j).getEvenementRedoute();
+					String evnouveau=nouvellean.getAnalyseDesRisques().get(i).getEvenementRedoute().GetNomEvenement();
+					String evancien=analyse.getAnalyseDesRisques().get(j).getEvenementRedoute().GetNomEvenement();
 					
-					/*int nouveaugrav=nouvellean.getAnalyseDesRisques().get(i).getNiveauGravite();
-					int anciengrav=analyse.getAnalyseDesRisques().get(j).getNiveauGravite();
+					//System.out.println(nouvellean.getAnalyseDesRisques().get(i).getIntitule());
+					//System.out.println(analyse.getAnalyseDesRisques().get(j).getIntitule());
 					int nouveauvrai=nouvellean.getAnalyseDesRisques().get(i).getNiveauVraisemblance();
-					int ancienvrai=analyse.getAnalyseDesRisques().get(j).getNiveauVraisemblance();*/
+					int ancienvrai=analyse.getAnalyseDesRisques().get(j).getNiveauVraisemblance();
 					
-					Bien biennouveau=nouvellean.getAnalyseDesRisques().get(i).getBienSupport();
-					Bien bienancien=analyse.getAnalyseDesRisques().get(j).getBienSupport();
+					String biennouveau=nouvellean.getAnalyseDesRisques().get(i).getBienSupport().getIntitule();
+					String bienancien=analyse.getAnalyseDesRisques().get(j).getBienSupport().getIntitule();
 					
-					ScenarioType scnouveau=	nouvellean.getAnalyseDesRisques().get(i).getScenarioConcret();
-					ScenarioType scancien= analyse.getAnalyseDesRisques().get(j).getScenarioConcret();
+					String scnouveau=	nouvellean.getAnalyseDesRisques().get(i).getScenarioConcret().getIntitule();
+					String scancien= analyse.getAnalyseDesRisques().get(j).getScenarioConcret().getIntitule();
 				
 					
-					if(evnouveau==evancien&&biennouveau==bienancien&&scnouveau==scancien){
+					if(evnouveau.equals(evancien)&&biennouveau.equals(bienancien)&&scnouveau.equals(scancien)){
 						
 						nouvellean.getAnalyseDesRisques().get(i).setIntitule(analyse.getAnalyseDesRisques().get(j).getIntitule());;
 						nouvellean.getAnalyseDesRisques().get(i).setRetenu(analyse.getAnalyseDesRisques().get(j).getRetenu());
