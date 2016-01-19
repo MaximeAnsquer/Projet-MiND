@@ -46,7 +46,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	public void creerTableau() {
 		this.modeleTableau=new ModeleTypologieBiensSupports(this.moduleCourant);
 		this.tableau = new JTable(this.modeleTableau);
-		this.rendererTypeBien=new CellRendererTypesBiens();
+		this.rendererTypeBien=new CellRendererTypesBiens(this.moduleCourant);
 		this.tableau.setDefaultRenderer(Object.class, rendererTypeBien);
 		
 		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC

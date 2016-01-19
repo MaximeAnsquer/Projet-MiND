@@ -9,12 +9,17 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import abstraction.autres.TypeBien;
+import abstraction.modules.TypologieDesBiensSupports;
+
 public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 	private ArrayList<Color> listeCouleurs ;
 	private ArrayList<Color> couleursRetenus;
+	private TypologieDesBiensSupports module ;
 	
-	public CellRendererTypesBiens(){
+	public CellRendererTypesBiens(TypologieDesBiensSupports module){
 		super();
+		this.module=module;
 		this.listeCouleurs = new ArrayList<Color>();
 		this.listeCouleurs.add(Color.cyan);
 		this.listeCouleurs.add(Color.green);
@@ -42,36 +47,36 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 			component.setBackground(clr);
 		} 
 		else if (value instanceof String || value instanceof Boolean) {
-			Color clr;
-			switch(row){
-			case 0 : clr=new Color(198, 224, 180);
-			component.setBackground(clr);
-			this.couleursRetenus.add(clr);
-			break;
-			case 1 : clr=new Color(248, 203, 173);
-			component.setBackground(clr);
-			this.couleursRetenus.add(clr);
-			break;
-			case 2 : clr=new Color(255, 230, 153);
-			component.setBackground(clr);
-			this.couleursRetenus.add(clr);
-			break;
-			case 3 : clr=new Color(250, 172, 207);
-			component.setBackground(clr);
-			this.couleursRetenus.add(clr);
-			break;
-			case 4 : clr=new Color(189, 215, 238);
-			component.setBackground(clr);
-			this.couleursRetenus.add(clr);
-			break;
-			case 5 : clr=new Color(172, 185, 202);
-			component.setBackground(clr);
-			this.couleursRetenus.add(clr);
-			break;
-			case 6 : clr=new Color(219, 219, 219);
-			component.setBackground(clr);
-			this.couleursRetenus.add(clr);
-			break;
+			Color clr = this.module.getTypeBien(row).getCouleur();
+			switch (row) {
+			case 0:
+				component.setBackground(clr);
+				this.couleursRetenus.add(clr);
+				break;
+			case 1:
+				component.setBackground(clr);
+				this.couleursRetenus.add(clr);
+				break;
+			case 2:
+				component.setBackground(clr);
+				this.couleursRetenus.add(clr);
+				break;
+			case 3:
+				component.setBackground(clr);
+				this.couleursRetenus.add(clr);
+				break;
+			case 4:
+				component.setBackground(clr);
+				this.couleursRetenus.add(clr);
+				break;
+			case 5:
+				component.setBackground(clr);
+				this.couleursRetenus.add(clr);
+				break;
+			case 6:
+				component.setBackground(clr);
+				this.couleursRetenus.add(clr);
+				break;
 			default:
 				if (row - 7 < this.listeCouleurs.size()) {
 					component.setBackground(listeCouleurs.get(row - 7));
