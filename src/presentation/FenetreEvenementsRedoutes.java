@@ -68,7 +68,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 				String nouveaucrit=nouveauev.getEvenementsRedoutes().get(i).GetCritere();
 				String anciencrit=evenements.getEvenementsRedoutes().get(j).GetCritere();
 				
-				if(anciencrit==nouveaucrit&&biennouveau==bienancien){
+				if(anciencrit.equals(nouveaucrit)&&biennouveau.equals(bienancien)){
 					
 					nouveauev.getEvenementsRedoutes().get(i).setNomEvenement(evenements.getEvenementsRedoutes().get(j).GetNomEvenement());
 					nouveauev.getEvenementsRedoutes().get(i).setNiveauExigence(evenements.getEvenementsRedoutes().get(j).getNiveauExigence());
