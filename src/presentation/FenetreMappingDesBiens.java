@@ -1,16 +1,20 @@
 package presentation;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
@@ -36,7 +40,10 @@ public class FenetreMappingDesBiens extends JPanel{
 		}
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(new JScrollPane(table));
+		
+		table.setDefaultRenderer(Object.class, new Renderer());
 		table.setFont(new Font("Arial", Font.PLAIN, 15)); table.setRowHeight(50);
+		table.setRowHeight(50);
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
@@ -93,6 +100,25 @@ public class FenetreMappingDesBiens extends JPanel{
 					break;
 				}
 		    }
+		}
+	}
+	
+	class Renderer extends DefaultTableCellRenderer {
+
+		public Renderer(){
+			super();
+			this.setHorizontalAlignment( SwingConstants.CENTER );
+		}
+
+		private static final long serialVersionUID = 1L;
+
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+			if(component instanceof JComponent){
+				((JComponent)component).setToolTipText(value.toString());
+			}
+			return component;
 		}
 	}
 }

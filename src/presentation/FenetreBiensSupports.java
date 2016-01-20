@@ -16,13 +16,17 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import abstraction.autres.Bien;
 import abstraction.modules.BiensSupports;
@@ -85,7 +89,11 @@ public class FenetreBiensSupports extends JPanel{
 		else{
 			boutonSupprimerLigne.setEnabled(true);
 		}
+		
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnCount()-1).setMaxWidth(50);
+		table.setDefaultRenderer(Object.class, new Renderer());
 		table.setFont(new Font("Arial", Font.PLAIN, 15)); table.setRowHeight(50);
+		table.setRowHeight(50);
 	}
 	
 	private Component descriptionTypesBiens() {
@@ -251,6 +259,7 @@ public class FenetreBiensSupports extends JPanel{
 					boutonSupprimerColonne.setEnabled(false);
 				}
 				fireTableStructureChanged();
+				table.getColumnModel().getColumn(table.getColumnModel().getColumnCount()-1).setMaxWidth(50);
 			}
 		}
 
@@ -286,7 +295,8 @@ public class FenetreBiensSupports extends JPanel{
 			}
 			entetes.addFirst(categorie);
 			boutonSupprimerColonne.setEnabled(true);
-			fireTableStructureChanged();	
+			fireTableStructureChanged();
+			table.getColumnModel().getColumn(table.getColumnModel().getColumnCount()-1).setMaxWidth(50);
 		}
 
 		public void ajouterBienSupport() {
@@ -391,6 +401,25 @@ public class FenetreBiensSupports extends JPanel{
 		            	
 		        }
 		    }
+		}
+	}
+	
+	class Renderer extends DefaultTableCellRenderer {
+
+		public Renderer(){
+			super();
+			this.setHorizontalAlignment( SwingConstants.CENTER );
+		}
+
+		private static final long serialVersionUID = 1L;
+
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+			if(component instanceof JComponent){
+				((JComponent)component).setToolTipText(value.toString());
+			}
+			return component;
 		}
 	}
 }
