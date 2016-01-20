@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Font;
 import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
@@ -34,7 +35,8 @@ public class FenetreMappingDesBiens extends JPanel{
 			table.getColumn(""+table.getColumnName(i)).setCellEditor(new DefaultCellEditor(comboBox));;
 		}
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(new JScrollPane(table));	
+		this.add(new JScrollPane(table));
+		table.setFont(new Font("Arial", Font.PLAIN, 15)); table.setRowHeight(50);
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {

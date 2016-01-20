@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -75,6 +76,7 @@ public class FenetreBiensEssentiels extends JPanel{
 		else{
 			boutonSupprimerLigne.setEnabled(true);
 		}
+		table.setFont(new Font("Arial", Font.PLAIN, 15)); table.setRowHeight(50);
 	}
 	
 	private JScrollPane zoneDescription() {
@@ -82,6 +84,7 @@ public class FenetreBiensEssentiels extends JPanel{
 		zoneDescription = new JTextArea(valeurInitiale);
 		zoneDescription.setLineWrap(true);
 		zoneDescription.setWrapStyleWord(true);
+		zoneDescription.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		zoneDescription.addKeyListener(new KeyListener(){
 			public void keyTyped(KeyEvent e) {
