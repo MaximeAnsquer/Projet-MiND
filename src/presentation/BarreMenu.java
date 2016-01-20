@@ -25,14 +25,14 @@ public class BarreMenu extends JMenuBar {
 		super();
 		this.fenetre = fenetrePrincipale;
 		JMenu fichier = new JMenu("Fichier");
-		JMenuItem nouvelleEtude = new JMenuItem("Nouvelle etude");
+		JMenuItem nouvelleEtude = new JMenuItem("Nouvelle étude");
 		nouvelleEtude.setMnemonic('n');
 		
 		nouvelleEtude.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				if(fenetre.etudeEnCours != null){
 					int decision = JOptionPane.showConfirmDialog(null, 
-							"Enregistrer l'etude en cours avant de creer une nouvelle etude ?", "Enregistrer l'etude en cours ?", 
+							"Enregistrer l'étude en cours avant de créer une nouvelle etude ?", "Enregistrer l'étude en cours ?", 
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE);
 					switch(decision){
@@ -50,7 +50,7 @@ public class BarreMenu extends JMenuBar {
 		fichier.add(nouvelleEtude);		
 		
 		
-		JMenuItem ouvrir = new JMenuItem("Ouvrir une etude existante");
+		JMenuItem ouvrir = new JMenuItem("Ouvrir une étude existante");
 		ouvrir.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				fenetre.choisirEtude();
@@ -58,7 +58,7 @@ public class BarreMenu extends JMenuBar {
 		});		
 		fichier.add(ouvrir);
 		
-		JMenuItem enregistrer = new JMenuItem("Enregistrer l'etude");
+		JMenuItem enregistrer = new JMenuItem("Enregistrer l'étude");
 		enregistrer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				fenetre.enregistrerEtude();
@@ -70,7 +70,7 @@ public class BarreMenu extends JMenuBar {
 		
 		JMenu options = new JMenu("Options");
 		
-		JMenuItem modifierNom = new JMenuItem("Modifier le nom de l'etude");
+		JMenuItem modifierNom = new JMenuItem("Modifier le nom de l'étude");
 		modifierNom.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				fenetre.modifierNomEtude();		
@@ -78,7 +78,7 @@ public class BarreMenu extends JMenuBar {
 		});
 		options.add(modifierNom);
 		
-		JMenuItem supprimerEtude = new JMenuItem("Supprimer l'etude en cours");
+		JMenuItem supprimerEtude = new JMenuItem("Supprimer l'étude en cours");
 		supprimerEtude.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("bouton");

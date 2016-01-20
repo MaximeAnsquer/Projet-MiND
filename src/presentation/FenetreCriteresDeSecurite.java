@@ -162,7 +162,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 	}
 
 	private JButton boutonSupprimer() {
-		boutonSupprimer = new JButton("Supprimer un critere");
+		boutonSupprimer = new JButton("Supprimer un critère");
 		boutonSupprimer.setEnabled(false);
 		boutonSupprimer.addActionListener(new ActionListener(){
 
@@ -179,7 +179,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 	}
 
 	private JButton boutonAjouter() {
-		JButton bouton = new JButton("Ajouter un critere");
+		JButton bouton = new JButton("Ajouter un critère");
 		bouton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
@@ -241,22 +241,25 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		}
 
 		public void ajouterCritere() {
-			String Id = JOptionPane.showInputDialog("Veuillez entrer l'id du critere.");
-			String Intitule = JOptionPane.showInputDialog("Veuillez entrer l'intitule du critere.");
-			if(cds.getCritere(Intitule) != null){
-				JOptionPane.showMessageDialog(null, "Le critere existe deja.", "Erreur", JOptionPane.ERROR_MESSAGE);
+			String id = JOptionPane.showInputDialog("Veuillez saisir un id.");
+			if(id != null){
+				String intitule = JOptionPane.showInputDialog("Veuillez saisir un intitulé.");
+				if(cds.getCritere(intitule) != null){
+					JOptionPane.showMessageDialog(null, "Le critère existe déjà.", "Erreur", JOptionPane.ERROR_MESSAGE);
+				}
+				else if(intitule != null){
+					String description = JOptionPane.showInputDialog("Veuillez entrer la description du critère.");
+					if(description != null){
+						Critere critere = new Critere(id, intitule, description);
+						cds.ajouterCritere(critere);
+						fireTableRowsInserted(cds.nombreDeCriteres() -1, cds.nombreDeCriteres() -1);						
+					}
+				}				
 			}
-			else{
-				String Description = JOptionPane.showInputDialog("Veuillez entrer la description du critere.");
-				Critere critere = new Critere(Id, Intitule, Description);
-				cds.ajouterCritere(critere);
-				fireTableRowsInserted(cds.nombreDeCriteres() -1, cds.nombreDeCriteres() -1);
-			}			
 		}
 
 		public void supprimerCritere(int rowIndex) {
 			Critere c = cds.getCritere(rowIndex);
-			System.out.println("Suppression du critere : " + c + "a l'index : " + rowIndex);
 			cds.supprimerCritere(c.getIntitule());
 
 			fireTableRowsDeleted(rowIndex, rowIndex);

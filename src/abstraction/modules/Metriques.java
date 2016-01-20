@@ -255,7 +255,7 @@ public class Metriques extends Module {
 	}
 	
 	public String toString(){
-		return "Metriques";
+		return "Métriques";
 	}	
 	
 	public boolean estCoherent(){
@@ -264,18 +264,18 @@ public class Metriques extends Module {
 		this.problemesDeCoherence = new ArrayList<String>();
 		for(Metrique m : this.getMetriquesDesCriteresRetenus()){
 			if(!m.estComplet()){
-				String probleme = "La metrique \" " + m.getIntitule() + " \" est incomplete.";
+				String probleme = "La métrique \" " + m.getIntitule() + " \" est incomplète.";
 				this.problemesDeCoherence.add(probleme);
 				resultat = false;
 			}			
 		}
 		if(this.getMetrique("Gravite") == null){
-			String probleme = "Il faut une metrique \" Gravite \".";
+			String probleme = "Il faut une métrique \" Gravité \".";
 			this.problemesDeCoherence.add(probleme);
 			resultat = false;
 		}
 		if(this.getMetrique("Vraisemblance") == null){
-			String probleme = "Il faut une metrique \" Vraisemblance \".";
+			String probleme = "Il faut une métrique \" Vraisemblance \".";
 			this.problemesDeCoherence.add(probleme);
 			resultat = false;
 		}		

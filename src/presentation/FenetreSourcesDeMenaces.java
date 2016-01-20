@@ -169,7 +169,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 	}
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
-		private final String[] entetes = {"Id", "Intitule", "Exemple", "Retenu"};
+		private final String[] entetes = {"Id", "Intitulé", "Exemple", "Retenu"};
 
 		public ModeleDynamiqueObjet() {
 			super();		}
@@ -202,18 +202,21 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		}
 
 		public void ajouterSource() {
-			String id = JOptionPane.showInputDialog("Id ?");
+			String id = JOptionPane.showInputDialog("Veuillez saisir un id.");
 			if(sdm.getSourceDeMenace(id) != null){
-				JOptionPane.showMessageDialog(null, "Cet id est deja utilise.", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Cet id est déjà utilisé.", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
-			else{
-				String intitule = JOptionPane.showInputDialog("Intitule ?");
-				String exemple = JOptionPane.showInputDialog("Exemple ?");
-				SourceDeMenace source = new SourceDeMenace(id, intitule, exemple);
-				source.setRetenu(true);
-				sdm.ajouterSourceDeMenace(source);
-
-				fireTableRowsInserted(sdm.nombreDeSources() -1, sdm.nombreDeSources() -1);
+			else if(id != null){
+				String intitule = JOptionPane.showInputDialog("Veuillez saisir un intitulé.");
+				if(intitule != null){
+					String exemple = JOptionPane.showInputDialog("Veuillez saisir un exemple.");
+					if(exemple != null){
+						SourceDeMenace source = new SourceDeMenace(id, intitule, exemple);
+						source.setRetenu(true);
+						sdm.ajouterSourceDeMenace(source);						
+						fireTableRowsInserted(sdm.nombreDeSources() -1, sdm.nombreDeSources() -1);
+					}
+				}
 			}			
 		}
 
@@ -262,7 +265,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 	//---Renderer---
 
 	class Renderer extends DefaultTableCellRenderer {
-		
+
 		public Renderer(){
 			super();
 			this.setHorizontalAlignment( SwingConstants.CENTER );

@@ -102,7 +102,7 @@ public class MainMaximeAnsquer extends JFrame {
 			this.demanderEtude();			
 		}
 		else{
-			JOptionPane.showMessageDialog(this, "Aucune etude enregistreee !");
+			JOptionPane.showMessageDialog(this, "Aucune étude enregistrée !");
 			this.nouvelleEtude();
 		}
 	}
@@ -112,7 +112,7 @@ public class MainMaximeAnsquer extends JFrame {
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 				if(etudeEnCours != null){
 					int decision = JOptionPane.showConfirmDialog(null, 
-							"Enregistrer l'etude en cours avant de fermer le programme ?", "Fermeture du programme", 
+							"Enregistrer l'étude en cours avant de fermer le programme ?", "Fermeture du programme", 
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE);
 					switch(decision){
@@ -130,18 +130,17 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	private void creerBoutonVerifierCoherence() {
-		this.boutonVerifier = new JButton("Verifier la coherence");
+		this.boutonVerifier = new JButton("Vérifier la cohérence");
 		boutonVerifier.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				String nom = moduleEnCours.getNom();
-				setContenu("Workflow");
 				setContenu(nom);
 			}				
 		});
 	}
 
 	private void creerBoutonWorkflow() {
-		this.boutonWorkflow = new JButton("Workflow"); 
+		this.boutonWorkflow = new JButton("Menu principal"); 
 		boutonWorkflow.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				moduleEnCours = new Module("Workflow");
@@ -163,7 +162,7 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	private void demanderEtude() {
-		Object[] choix = {"Creer une nouvelle etude", "Ouvrir une etude existante"};
+		Object[] choix = {"Créer une nouvelle étude", "Ouvrir une étude existante"};
 		Object reponse =  JOptionPane.showOptionDialog(this,  "Que souhaitez-vous faire ?", null, JOptionPane.DEFAULT_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);	
 		if (reponse.equals(0)){
@@ -306,7 +305,7 @@ public class MainMaximeAnsquer extends JFrame {
 	 * Cree une nouvelle etude et la definie comme etude courante
 	 * @return la nouvelle etude cree
 	 */
-	public Etude nouvelleEtude(){	
+	public void nouvelleEtude(){	
 		//permet d'eviter un bug graphique
 		if(etudeEnCours != null){
 			setContenu("Workflow");
@@ -314,35 +313,35 @@ public class MainMaximeAnsquer extends JFrame {
 		//On demande le nom a attribuer a l'etude
 		String nomEtude = "";
 		while(nomEtude != null && nomEtude.equals("") ){
-			nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle etude.");	
+			nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle étude.");	
 			if(nomEtude == null){
 				if(this.existeAuMoinsUneEtude()){
 					this.demanderEtude();			
 				}
 				else{
-					JOptionPane.showMessageDialog(this, "Aucune etude enregistreee !");
+					JOptionPane.showMessageDialog(this, "Aucune étude enregistrée !");
 					this.nouvelleEtude();
 				}
 			}
 		}
-		
-		Etude nouvelleEtude = new Etude();
-		
-		if(nomEtudeDejaUtilise(nomEtude)){
-			JOptionPane.showMessageDialog(this, "Ce nom d'etude est deja utilise, veuillez en choisir un autre");
-			nouvelleEtude = nouvelleEtude();
+		if(nomEtude != null){
+			Etude nouvelleEtude = new Etude();
+			
+			if(nomEtudeDejaUtilise(nomEtude)){
+				JOptionPane.showMessageDialog(this, "Ce nom est déjà utilisé pour une autre étude, veuillez en choisir un autre.");
+				nouvelleEtude();
+			}
+			else{
+				nouvelleEtude.setNom(nomEtude);
+				this.etudeEnCours = nouvelleEtude;
+				this.setTitle("Outil d'analyse de risques - Etude en cours : " + nomEtude);			
+				
+				this.moduleEnCours = new Module("Workflow");
+				
+				this.setContenu("Workflow");					
+			}					
 		}
-		else{
-			nouvelleEtude.setNom(nomEtude);
-			this.etudeEnCours = nouvelleEtude;
-			this.setTitle("Outil d'analyse de risques - Etude en cours : " + nomEtude);			
-			
-			this.moduleEnCours = new Module("Workflow");
-			
-			this.setContenu("Workflow");					
-		}		
-
-		return nouvelleEtude;
+		
 	}
 
 	private boolean nomEtudeDejaUtilise(String nomEtude) {
@@ -383,7 +382,7 @@ public class MainMaximeAnsquer extends JFrame {
 			try {
 				// Sérialisation de l'objet 
 				xstream.toXML(etudeEnCours, fos);
-				JOptionPane.showMessageDialog(null, "Etude enregistree avec succes");
+				JOptionPane.showMessageDialog(null, "Etude enregistrée avec succès");
 			} finally {
 				// On s'assure de fermer le flux quoi qu'il arrive
 				fos.close();
@@ -400,6 +399,16 @@ public class MainMaximeAnsquer extends JFrame {
 	 * @return l'etude choisie
 	 */
 	public void choisirEtude(){
+		if(this.etudeEnCours != null){
+			int decision = JOptionPane.showConfirmDialog(null, 
+					"Enregistrer l'étude en cours avant d'en ouvrir une autre ?", null, 
+					JOptionPane.YES_NO_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
+			if(decision == JOptionPane.YES_OPTION ){
+				enregistrerEtude();
+			}  
+		}
+		
 		if(this.existeAuMoinsUneEtude()){
 			ArrayList<Object> data = new ArrayList<Object>();
 			String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
@@ -467,7 +476,7 @@ public class MainMaximeAnsquer extends JFrame {
 		fenetreChoisirEtude = new JFrame();
 		fenetreChoisirEtude.setVisible(true);
 		fenetreChoisirEtude.getContentPane().add(jlist, BorderLayout.CENTER);
-		boutonOk = new JButton("Ouvrir l'etude");
+		boutonOk = new JButton("Ouvrir l'étude");
 		boutonOk.setEnabled(false);
 		boutonOk.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {

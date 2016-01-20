@@ -224,7 +224,7 @@ public class CriteresDeSecurite extends Module{
 	}
 
 	public String toString(){
-		return "Criteres de securite";
+		return "Critères de sécurité";
 	}
 
 	public boolean estCoherent(){

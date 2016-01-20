@@ -331,18 +331,22 @@ public class FenetreMetriques extends JPanel {
 
 		public void ajouterNiveau() {
 			int numero = getMetriqueCourante().nombreDeNiveaux() + 1;
-			String intitule = JOptionPane.showInputDialog("Intitule ?");
-			String description = JOptionPane.showInputDialog("Description ?");
-			try{ 
-				NiveauDeMetrique niveau = new NiveauDeMetrique(numero, intitule, description);
+			String intitule = JOptionPane.showInputDialog("Veuillez saisir un intitulé.");
+			if(intitule != null){
+				String description = JOptionPane.showInputDialog("Veuillez saisir une description. ?");
+				if(description != null){
+					try{ 
+						NiveauDeMetrique niveau = new NiveauDeMetrique(numero, intitule, description);
 
-				getMetriqueCourante().ajouterNiveau(niveau);
-			}
-			catch(NumberFormatException e){
-				JOptionPane.showMessageDialog(null, "La premiere valeur doit etre un entier.");
-			}
+						getMetriqueCourante().ajouterNiveau(niveau);
+					}
+					catch(NumberFormatException e){
+						JOptionPane.showMessageDialog(null, "La première valeur doit être un entier.");
+					}
 
-			fireTableRowsInserted(getMetriqueCourante().nombreDeNiveaux() -1, getMetriqueCourante().nombreDeNiveaux() -1);
+					fireTableRowsInserted(getMetriqueCourante().nombreDeNiveaux() -1, getMetriqueCourante().nombreDeNiveaux() -1);							
+				}
+			}
 		}
 
 		public void supprimerNiveau(int rowIndex) {
@@ -361,7 +365,7 @@ public class FenetreMetriques extends JPanel {
 						niveau.setNumero(Integer.parseInt((String) aValue));
 					}
 					catch(NumberFormatException e){
-						JOptionPane.showMessageDialog(null, "Veuillez saisir un entier superieur a 0.");
+						JOptionPane.showMessageDialog(null, "Veuillez saisir un entier supérieur a 0.");
 					}
 					break;
 				case 1:
@@ -393,7 +397,9 @@ public class FenetreMetriques extends JPanel {
 			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
 			if(component instanceof JComponent){
-				((JComponent)component).setToolTipText(value.toString());
+				if(value != null){
+					((JComponent)component).setToolTipText(value.toString());					
+				}
 			}	
 			if (value.equals("") || value == null) {
 				Color clr = Color.yellow;
