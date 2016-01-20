@@ -90,14 +90,25 @@ public class MappingDesBiens extends Module{
 	}
 	
 	public void actualiserMapping(){
-		for (int i=0; i<this.mappingDesBiens.size(); i++){
+		LinkedList<MappingBien> nouveauMapping = new LinkedList<MappingBien>();
+		for (int i=0; i<this.biensEssentiels.nombreDeBiens();i++){
+			nouveauMapping.add(new MappingBien(this.biensSupports,this.biensEssentiels.getBien(i)));
+			if (!this.mappingDesBiens.isEmpty() && i<this.mappingDesBiens.size()){
+				for (int j=0; j<this.biensSupports.nombreDeBiens() && j<this.mappingDesBiens.get(i).getMappingBien().size(); j++){
+					nouveauMapping.get(i).getMappingBien().set(j, this.mappingDesBiens.get(i).getMappingBien().get(j));
+				}
+			}
+		}
+		this.mappingDesBiens = nouveauMapping;
+		
+		/*for (int i=0; i<this.mappingDesBiens.size(); i++){
 			for (int j=this.mappingDesBiens.get(i).getMappingBien().size(); j<this.biensSupports.nombreDeBiens();j++){
 				this.mappingDesBiens.get(i).ajouterCase();
 			}
 		}
 		for (int i=this.mappingDesBiens.size(); i<this.biensEssentiels.nombreDeBiens();i++){
 			this.mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
-		}
+		}*/
 	}
 	
 	public String toString(){
@@ -119,7 +130,7 @@ public class MappingDesBiens extends Module{
 			this.problemesDeCoherence.add("Il n'y a aucun x dans le mapping des biens");
 		}
 		for(MappingBien m : this.getMappingDesBiens()){
-			if(!m.estComplet()){
+			if(!m.estComplet() && this.biensEssentiels.getBien(m.getBienEssentiel().getIntitule())!=null){
 				this.problemesDeCoherence.add("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
 				resultat = false;
 			}
