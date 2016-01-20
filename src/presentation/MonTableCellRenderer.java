@@ -35,7 +35,9 @@ public class MonTableCellRenderer extends DefaultTableCellRenderer {
 			break;
 			case 4: clr = Color.red;
 			break;
-			default: clr = Color.magenta;
+			case 5: clr = Color.magenta;
+			break;
+			default: clr = new Color(150, 0, 150);
 			}
 		}
 			
