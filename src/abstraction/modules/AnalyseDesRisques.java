@@ -94,17 +94,27 @@ public class AnalyseDesRisques extends Module{
 			
 			if(scenarios[i].isRetenuScenario()){
 				
+				System.out.println(scenarios[i].getIntitule());
+				System.out.println(this.criteres.getCriteresRetenus().size());
+				
 			
 			/*Pour chaque critere*/
 			for(int k=0;k<b;k++){
 				
 				/*si le critere est retenu*/
+				
+				
 			
 				
 				String critere = this.scenarios.getNomColonneSup().get(k);
+				
 				boolean resultat=scenarios[i].getCriteresSup().get(critere);
 				
-			    if (resultat==true){
+				boolean resultatbis=this.criteres.getIntitulesCriteresRetenus().contains(critere);
+				
+				
+				
+			    if (resultatbis==true&&resultat==true){
 			    	/*On recupere le bien essentiel correspondant au bien support du scenario consid�r�*/
 			    Bien biensupport=scenarios[i].getBienSupport();	
 			    
@@ -131,7 +141,8 @@ public class AnalyseDesRisques extends Module{
 			    for(int j=0;j<biensessentiels.size();j++){
 			    
 			   Evenement evenement=this.evenements.getEvenementCorrespondant(critere,biensessentiels.get(j).getIntitule());
-			   //System.out.println(evenement.GetNomEvenement()); 
+			   
+			   
 			   
 				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),biensupport,scenarios[i],scenarios[i].getVraisemblanceReelle()));
 				
