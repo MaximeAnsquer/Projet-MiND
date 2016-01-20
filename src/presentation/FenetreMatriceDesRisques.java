@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -113,6 +114,10 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 	public void creerZoneDescription(){
 		JLabel label = new JLabel("");
 		this.zoneDescription= new JTextArea("Cliquer sur la cellule que vous souhaitez afficher");
+		
+		Font font=new Font("Verdana",Font.BOLD,12);
+		this.zoneDescription.setFont(font);
+		
 		this.zoneDescription.setLineWrap(true); // On passe à la ligne 
 		this.zoneDescription.setWrapStyleWord(true);
 		

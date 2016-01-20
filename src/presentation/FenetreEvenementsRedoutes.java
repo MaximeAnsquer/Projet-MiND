@@ -149,7 +149,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 	/*On construit la JCombobox associée à l'exigence de chaque critère du tableau*/
 		
-		int u=this.criteres.nombreDeCriteres();
+		int u=this.criteres.getCriteresRetenus().size();
 		
 		
 		for(int i=0;i<u;i++){
