@@ -61,7 +61,7 @@ public class Module extends Observable implements IModule  {
 		
 		boolean resultat = true;		
 		
-		if(this.getNom().equals("AnalyseDesRisques")){
+		/*if(this.getNom().equals("AnalyseDesRisques")){
 			
 			resultat=this.getEtude().getModule("EvenementsRedoutes").estCoherent()&&this.getEtude().getModule("EvenementsRedoutes").estCree();
 		    resultat=resultat&&this.getEtude().getModule("MappingDesBiens").estCoherent()&&this.getEtude().getModule("MappingDesBiens").estCree();
@@ -74,11 +74,11 @@ public class Module extends Observable implements IModule  {
 		
 		
 		
-		else{ 
+		else{ */
 			
 		for(Module m : this.getPredecesseurs()){
 			resultat = resultat && m.estCree() && m.estCoherent();
-		}}
+		}
 		this.disponible = resultat;
 		return resultat;
 	}
