@@ -43,7 +43,7 @@ public class Workflow extends JPanel {
 			System.out.println("\n Création du bouton " + m.toString() + "... \n");
 			
 			JButton bouton = new JButton(m.toString());
-			System.out.println(m.getNom());
+			
 			if(!m.estDisponible()){
 				System.out.println(m + " n'est pas disponible.");
 				bouton.setEnabled(false);
