@@ -40,6 +40,7 @@ public class Workflow extends JPanel {
 		for(final Module m : etude.getLesModules().values()){
 			
 			JButton bouton = new JButton(m.toString());
+			System.out.println(m.getNom());
 			if(!m.estDisponible()){
 				bouton.setEnabled(false);
 			}

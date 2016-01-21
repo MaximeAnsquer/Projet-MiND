@@ -159,6 +159,50 @@ public class EvenementsRedoutes extends Module {
 	
 	
 	public boolean estCoherent(){
+		
+		
+EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
+		
+		nouveauev.setCree(true);
+		
+		/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
+		 * dans le nouveau
+		 */
+		
+		
+		
+		int a=nouveauev.getEvenementsRedoutes().size();
+		int b=this.getEvenementsRedoutes().size();
+		
+		for (int i=0;i<a;i++){
+			for(int j=0;j<b;j++){
+				String biennouveau=nouveauev.getEvenementsRedoutes().get(i).GetNomBien();
+				String bienancien=this.getEvenementsRedoutes().get(j).GetNomBien();
+				
+				String nouveaucrit=nouveauev.getEvenementsRedoutes().get(i).GetCritere();
+				String anciencrit=this.getEvenementsRedoutes().get(j).GetCritere();
+				
+				if(anciencrit.equals(nouveaucrit)&&biennouveau.equals(bienancien)){
+					
+					nouveauev.getEvenementsRedoutes().get(i).setNomEvenement(this.getEvenementsRedoutes().get(j).GetNomEvenement());
+					nouveauev.getEvenementsRedoutes().get(i).setNiveauExigence(this.getEvenementsRedoutes().get(j).getNiveauExigence());
+					nouveauev.getEvenementsRedoutes().get(i).setNiveauGravite(this.getEvenementsRedoutes().get(j).getNiveauGravite());
+					if(this.getEvenementsRedoutes().get(0).getNomGroupes()!=null){
+						for(int k=0;k<this.getEvenementsRedoutes().get(0).getNomGroupes().size();k++){
+						nouveauev.getEvenementsRedoutes().get(i).getContenuGroupes().addLast(this.getEvenementsRedoutes().get(j).getContenuGroupes().get(k));
+						}
+					}
+					
+				}
+				
+			}
+		}
+		
+		
+		this.getEtude().addModule(nouveauev);
+		
+		
+		
 		boolean resultat=true;
 		this.problemesDeCoherence=new ArrayList<String>();
 		for (int i=0;i<this.getEvenementsRedoutes().size();i++){

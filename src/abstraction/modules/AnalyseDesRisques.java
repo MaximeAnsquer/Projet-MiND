@@ -108,15 +108,18 @@ public class AnalyseDesRisques extends Module{
 				
 				String critere = this.scenarios.getNomColonneSup().get(k);
 				
+				
+				
 				boolean resultat=scenarios[i].getCriteresSup().get(critere);
 				
 				boolean resultatbis=this.criteres.getIntitulesCriteresRetenus().contains(critere);
 				
 				
-				
 			    if (resultatbis==true&&resultat==true){
 			    	/*On recupere le bien essentiel correspondant au bien support du scenario considï¿½rï¿½*/
 			    Bien biensupport=scenarios[i].getBienSupport();	
+			    
+			    
 			    
 			    
 			    ArrayList<Bien> biensessentiels;
@@ -142,11 +145,11 @@ public class AnalyseDesRisques extends Module{
 			    
 			   Evenement evenement=this.evenements.getEvenementCorrespondant(critere,biensessentiels.get(j).getIntitule());
 			   
-			   
+			   if(evenement!=null){
 			   
 				liste.add(new Risque("",evenement,evenement.getNiveauGravite(),biensupport,scenarios[i],scenarios[i].getVraisemblanceReelle()));
 				
-			}}
+			}}}
 			}}
 			
 		}
@@ -209,6 +212,62 @@ public class AnalyseDesRisques extends Module{
 	
 	
 	public boolean estCoherent(){
+		
+		
+		AnalyseDesRisques nouvellean=new AnalyseDesRisques(this.getEtude());
+		 
+		 nouvellean.setCree(true);
+			
+			/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
+			 * dans le nouveau
+			 */
+			
+			int a=nouvellean.getAnalyseDesRisques().size();
+			int b=this.getAnalyseDesRisques().size();
+			
+			
+			
+			
+			for (int i=0;i<a;i++){
+				for(int j=0;j<b;j++){
+					String evnouveau=nouvellean.getAnalyseDesRisques().get(i).getEvenementRedoute().GetNomEvenement();
+					String evancien=this.getAnalyseDesRisques().get(j).getEvenementRedoute().GetNomEvenement();
+					
+					//System.out.println(nouvellean.getAnalyseDesRisques().get(i).getIntitule());
+					//System.out.println(analyse.getAnalyseDesRisques().get(j).getIntitule());
+					int nouveauvrai=nouvellean.getAnalyseDesRisques().get(i).getNiveauVraisemblance();
+					int ancienvrai=this.getAnalyseDesRisques().get(j).getNiveauVraisemblance();
+					
+					String biennouveau=nouvellean.getAnalyseDesRisques().get(i).getBienSupport().getIntitule();
+					String bienancien=this.getAnalyseDesRisques().get(j).getBienSupport().getIntitule();
+					
+					String scnouveau=	nouvellean.getAnalyseDesRisques().get(i).getScenarioConcret().getIntitule();
+					String scancien= this.getAnalyseDesRisques().get(j).getScenarioConcret().getIntitule();
+				
+					
+					if(evnouveau.equals(evancien)&&biennouveau.equals(bienancien)&&scnouveau.equals(scancien)){
+						
+						nouvellean.getAnalyseDesRisques().get(i).setIntitule(this.getAnalyseDesRisques().get(j).getIntitule());;
+						nouvellean.getAnalyseDesRisques().get(i).setRetenu(this.getAnalyseDesRisques().get(j).getRetenu());
+						
+						
+						
+						
+					}
+					
+				}
+			}
+			
+			
+
+
+this.getEtude().addModule(nouvellean);
+			
+			
+			
+
+		
+		
 		boolean resultat=true;
 		this.problemesDeCoherence=new ArrayList<String>();
 		for (int i=0;i<this.getAnalyseDesRisques().size();i++){
