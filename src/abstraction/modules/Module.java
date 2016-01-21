@@ -62,11 +62,11 @@ public class Module extends Observable implements IModule  {
 		boolean resultat = true;		
 		
 		if(this.getNom().equals("AnalyseDesRisques")){
-			System.out.println(this.getNom());
+			
 			resultat=this.getEtude().getModule("EvenementsRedoutes").estCoherent()&&this.getEtude().getModule("EvenementsRedoutes").estCree();
 		    resultat=resultat&&this.getEtude().getModule("MappingDesBiens").estCoherent()&&this.getEtude().getModule("MappingDesBiens").estCree();
 		    resultat=resultat&&this.getEtude().getModule("ScenariosDeMenacesTypes").estCoherent()&&this.getEtude().getModule("ScenariosDeMenacesTypes").estCree();
-		    System.out.println(resultat);
+		    
 		}
 		else  if(this.getNom().equals("MatriceDesRisques")){
 			resultat=this.getEtude().getModule("AnalyseDesRisques").estCoherent()&&this.getEtude().getModule("AnalyseDesRisques").estCree();
