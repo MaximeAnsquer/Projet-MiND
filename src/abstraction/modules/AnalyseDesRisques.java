@@ -94,8 +94,7 @@ public class AnalyseDesRisques extends Module{
 			
 			if(scenarios[i].isRetenuScenario()){
 				
-				System.out.println(scenarios[i].getIntitule());
-				System.out.println(this.criteres.getCriteresRetenus().size());
+				
 				
 			
 			/*Pour chaque critere*/
