@@ -116,19 +116,9 @@ public class MappingDesBiens extends Module{
 	}
 	
 	public boolean estCoherent(){
+		this.actualiserMapping();
 		boolean resultat = true;
-		boolean auMoinsUneAssociation = false;
 		this.problemesDeCoherence = new ArrayList<String>();
-		for (int i=0; i<this.mappingDesBiens.size();i++){
-			for (int j=0; j<this.mappingDesBiens.get(i).getMappingBien().size();j++){
-				if (this.mappingDesBiens.get(i).getMappingBien().get(j).equals("x")){
-					auMoinsUneAssociation = true;
-				}
-			}
-		}
-		if (!auMoinsUneAssociation){
-			this.problemesDeCoherence.add("Il n'y a aucun x dans le mapping des biens");
-		}
 		for(MappingBien m : this.getMappingDesBiens()){
 			if(!m.estComplet() && this.biensEssentiels.getBien(m.getBienEssentiel().getIntitule())!=null){
 				this.problemesDeCoherence.add("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
