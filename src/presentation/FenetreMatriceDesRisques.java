@@ -69,29 +69,34 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 		tableau.getColumnModel().getColumn(1).setHeaderRenderer(headerRenderer1);
 		
 
-		DefaultTableCellRenderer headerRenderer2= new DefaultTableCellRenderer();
+		if(tableau.getModel().getColumnCount()>=3){DefaultTableCellRenderer headerRenderer2= new DefaultTableCellRenderer();
 		Color clr2=Color.yellow;
 		headerRenderer2.setBackground(clr2);
 		
 		tableau.getColumnModel().getColumn(2).setHeaderRenderer(headerRenderer2);
+		}
 		
-		DefaultTableCellRenderer headerRenderer3= new DefaultTableCellRenderer();
+		if(tableau.getModel().getColumnCount()>=4){ DefaultTableCellRenderer headerRenderer3= new DefaultTableCellRenderer();
 		Color clr3=Color.orange;
 		headerRenderer3.setBackground(clr3);
 		
 		tableau.getColumnModel().getColumn(3).setHeaderRenderer(headerRenderer3);
+		}
 		
-		DefaultTableCellRenderer headerRenderer4= new DefaultTableCellRenderer();
+		if(tableau.getModel().getColumnCount()>=5){DefaultTableCellRenderer headerRenderer4= new DefaultTableCellRenderer();
 		Color clr4=Color.red;
 		headerRenderer4.setBackground(clr4);
 		
 		tableau.getColumnModel().getColumn(4).setHeaderRenderer(headerRenderer4);
+		}
 		
-		DefaultTableCellRenderer headerRenderer5= new DefaultTableCellRenderer();
+		
+		if(tableau.getModel().getColumnCount()>=6){DefaultTableCellRenderer headerRenderer5= new DefaultTableCellRenderer();
 		Color clr5=Color.magenta;
 		headerRenderer5.setBackground(clr5);
 		
 		tableau.getColumnModel().getColumn(5).setHeaderRenderer(headerRenderer5);
+		}
 		
 		if (tableau.getModel().getColumnCount()>6){
 			for (int i=6;i<tableau.getModel().getColumnCount();i++){
