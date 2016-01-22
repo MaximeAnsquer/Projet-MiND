@@ -141,23 +141,14 @@ public class FenetreMetriques extends JPanel {
 	}
 
 	private Metrique getMetriqueCourante() {
-		Metrique m;
-		if(comboBox == null){
-			if(metriques.getMetriquesDesCriteresRetenus().size() != 0){
-				m = metriques.getMetriquesDesCriteresRetenus().get(0);
-			}
-			else{
-				m = new Metrique();
-			}
+		Metrique m;		
+		if(comboBox.getSelectedItem() == null){
+			//Metrique fictive et inutile, cree juste pour eviter un bug
+			m = new Metrique();
 		}
 		else{
-			if(comboBox.getSelectedItem() == null){
-				m = new Metrique();
-			}
-			else{
-				m = metriques.getMetrique(  ((Metrique) comboBox.getSelectedItem()).getCritere().getIntitule()   );
-			}			
-		}
+			m = (Metrique) comboBox.getSelectedItem();
+		}		
 		return m;
 	}
 
@@ -168,24 +159,6 @@ public class FenetreMetriques extends JPanel {
 		jp.add(boutonSupprimer());
 		//		jp.add(boutonModifier());
 		return jp;
-	}
-
-	private JButton boutonModifier() {
-		this.boutonModifierDescription = new JButton("Modifier la description");
-		boutonModifierDescription.setEnabled(false);
-
-		boutonModifierDescription.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				//				String nouvelleDescription = zoneDescription.getText();
-				//				getNiveauSelectionne().setDescription(nouvelleDescription);
-				table.validate();
-				table.repaint();
-				boutonModifierDescription.setEnabled(false);
-			}
-
-		});
-		return boutonModifierDescription;
 	}
 
 	private JButton boutonSupprimer() {
@@ -222,8 +195,6 @@ public class FenetreMetriques extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				setTableau();	
-				//				boutonModifierDescription.setEnabled(false);
-				//				zoneDescription.setText(null);
 				boutonSupprimer.setEnabled(false);
 			}
 
