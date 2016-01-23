@@ -105,6 +105,11 @@ public class MatriceDesRisques extends Module {
 	public String toString(){
 		return "Matrice des risques";
 	}
+	
+	
+	public void setMatrice(ArrayList<String>[][] matrice){
+		this.matrice=matrice;
+	}
 
 	public boolean  estCoherent(){
 		
@@ -112,7 +117,7 @@ public class MatriceDesRisques extends Module {
 		mat.setCree(true);
 		
 		
-		this.getEtude().addModule(mat);
+		this.setMatrice(mat.getMatrice());
 		
 		
 		

@@ -133,6 +133,10 @@ public class EvenementsRedoutes extends Module {
 		
 	}
 	
+	public void setEvenementsRedoutes(ArrayList<Evenement> evenementsredoutes){
+		this.evenementsredoutes=evenementsredoutes;
+	}
+	
 	public void setBiens(BiensEssentiels lesBiensEssentiels){
 		this.lesBiensEssentiels=lesBiensEssentiels;
 	}
@@ -199,7 +203,7 @@ EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
 		}
 		
 		
-		this.getEtude().addModule(nouveauev);
+		this.setEvenementsRedoutes(nouveauev.getEvenementsRedoutes());
 		
 		boolean resultat=true;
 		this.problemesDeCoherence=new ArrayList<String>();

@@ -194,7 +194,9 @@ public class AnalyseDesRisques extends Module{
 	}
 	
 	
-	
+	public void setAnalyseDesRisques(ArrayList<Risque> risques){
+		this.risques=risques;
+	}
 	
 	
 	/*M�thode qui permet de v�rifier si le bouton associ� au module doit �tre gris� ou non (cf workflow)*/
@@ -260,7 +262,7 @@ public class AnalyseDesRisques extends Module{
 			
 
 
-this.getEtude().addModule(nouvellean);
+this.setAnalyseDesRisques(nouvellean.getAnalyseDesRisques());
 		
 		
 		boolean resultat=true;
