@@ -12,10 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import abstraction.Etude;
 import abstraction.modules.Module;
@@ -27,7 +29,7 @@ import abstraction.modules.Module;
  */
 public class Workflow extends JPanel {
 
-	
+
 	private Etude etude;
 	private Hashtable<String, JButton> lesBoutons;
 	private MainMaximeAnsquer fenetre;
@@ -37,13 +39,13 @@ public class Workflow extends JPanel {
 		this.etude = etude;
 		this.fenetre = fenetrePrincipale;
 		this.lesBoutons = new Hashtable<String, JButton>();		
-		
+
 		for(final Module m : etude.getLesModules().values()){
-			
+
 			System.out.println("\n Création du bouton " + m.toString() + "... \n");
-			
-			JButton bouton = new JButton(m.toString());
-			
+
+			JButton bouton = new JButton(mettreSurDeuxLignes(m.toString()));
+
 			if(!m.estDisponible()){
 				System.out.println(m + " n'est pas disponible.");
 				bouton.setEnabled(false);
@@ -52,11 +54,11 @@ public class Workflow extends JPanel {
 				System.out.println(m + " est disponible.");
 				if(m.estCree()){
 					if(!m.estCoherent()){
-						
+
 						bouton.setBackground(Color.RED);
 					}
 					else{
-						
+
 						bouton.setBackground(Color.GREEN);
 					}
 				}				
@@ -156,6 +158,33 @@ public class Workflow extends JPanel {
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
+	}
+
+	private String mettreSurDeuxLignes(String string) {
+		String resultat = string;
+		if(string.equals("Typologies des biens supports")){			
+			resultat = "<html><div align=\"center\">Typologies des biens <br /> supports  </div> </html>";		
+
+		}
+		else if(string.equals("Scenarios de menaces generiques")){
+			Module module = etude.getModule("ScenariosDeMenacesGeneriques");
+			if(!module.estCree() && !module.estDisponible()){
+				resultat = "<html><div style=\"color:#999999;\" align=\"center\"> Scénarios de menaces <br /> génériques </div> </html>";				
+			}
+			else{
+				resultat = "<html><div align=\"center\"> Scénarios de menaces <br /> génériques </div> </html>";		
+			}
+		}
+		else if(string.equals("Scenarios de menaces types")){
+			Module module = etude.getModule("ScenariosDeMenacesTypes");
+			if(!module.estCree() && !module.estDisponible()){
+				resultat = "<html><div style=\"color:#999999;\" align=\"center\"> Scénarios de menaces <br /> typés </div> </html>";				
+			}
+			else{
+				resultat = "<html><div align=\"center\"> Scénarios de menaces <br /> typés </div> </html>";		
+			}
+		}
+		return resultat;
 	}
 
 	private JButton moduleManquant() {
