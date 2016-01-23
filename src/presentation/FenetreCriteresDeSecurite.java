@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
 import abstraction.autres.Critere;
+import abstraction.autres.Metrique;
 import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.Metriques;
 
@@ -207,7 +208,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 
-		private final String[] entetes = {"Id", "Intitule", "Description", "Retenu"};
+		private final String[] entetes = {"Id", "Intitulé", "Description", "Retenu"};
 
 		public ModeleDynamiqueObjet() {
 			super();
@@ -289,8 +290,10 @@ public class FenetreCriteresDeSecurite extends JPanel {
 				case 1:
 					String ancienIntitule = critere.getIntitule();
 					critere.setIntitule((String)aValue);
+					((Metriques) cds.getEtude().getModule("Metriques")).getMetrique(ancienIntitule).setCritere(critere);
+					Metrique metriqueARemettreDansLaListe = ((Metriques) cds.getEtude().getModule("Metriques")).getMetrique(ancienIntitule);
 					((Metriques) cds.getEtude().getModule("Metriques")).supprimerMetrique(ancienIntitule);
-					((Metriques) cds.getEtude().getModule("Metriques")).ajouterMetrique(critere);
+					((Metriques) cds.getEtude().getModule("Metriques")).ajouterMetrique(metriqueARemettreDansLaListe);
 					break;
 				case 2:
 					critere.setDescription((String)aValue);
