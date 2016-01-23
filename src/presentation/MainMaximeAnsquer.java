@@ -20,14 +20,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -78,6 +80,8 @@ public class MainMaximeAnsquer extends JFrame {
 	private JFrame fenetreChoisirEtude; 
 	private JButton boutonWorkflow;
 	private JButton boutonVerifier;
+	private JList jlistProblemes;
+	private DefaultListModel listModel;
 
 	public MainMaximeAnsquer(){
 
@@ -151,7 +155,15 @@ public class MainMaximeAnsquer extends JFrame {
 
 	private void creerPartieDuBas() {
 		partieDuBas = new JPanel();
-		partieDuBas.setLayout(new BoxLayout(partieDuBas, BoxLayout.Y_AXIS));		
+		
+		listModel = new DefaultListModel();	
+		
+		jlistProblemes = new JList(listModel);		
+		jlistProblemes.setVisibleRowCount(6);
+		Font font = new Font("Arial", Font.PLAIN, 18);
+		jlistProblemes.setFont(font);
+		jlistProblemes.setForeground(Color.red);
+		partieDuBas.add(new JScrollPane(jlistProblemes));
 	}
 
 	private boolean existeAuMoinsUneEtude() {
@@ -187,7 +199,6 @@ public class MainMaximeAnsquer extends JFrame {
 			this.partieDuCentre.removeAll();
 			this.workflow = new Workflow(etudeEnCours, this);
 			this.partieDuCentre.add(workflow, BorderLayout.CENTER);
-			partieDuBas.removeAll();
 		}
 		else{
 			this.moduleEnCours = etudeEnCours.getModule(nom);
@@ -246,39 +257,70 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	private void setPartieDuBas() {
-
+		
 		//On genere les eventuels problemes de coherence
 		moduleEnCours.estCoherent();
-
-		partieDuBas.removeAll();		
-
-		int problemesAffiches = 0;
-		for(String probleme : moduleEnCours.getProblemes()){
-			if(problemesAffiches < 5){
-				JLabel label = new JLabel(probleme);
-				label.setForeground(Color.red);
-				label.setFont(new Font("Arial", Font.PLAIN, 22));
-				partieDuBas.add(label);
-				problemesAffiches++;
+		
+		//On vide la jlist
+		listModel.removeAllElements();
+		
+		//S'il n'y a pas de problème de cohérence :
+		if(moduleEnCours.getProblemes().size() == 0){
+			jlistProblemes.setVisibleRowCount(1);		
+			jlistProblemes.setForeground(Color.black);
+			listModel.addElement("Aucun problème de cohérence.");
+		}
+		//s'il y a des problèmes de cohérence :
+		else{
+			for(String probleme : moduleEnCours.getProblemes()){
+				listModel.addElement(probleme);
 			}
+			int nbLignesAffichees;
+			if(listModel.size() > 5){
+				nbLignesAffichees = 6;
+			}
+			else{
+				nbLignesAffichees = listModel.size();
+			}
+			jlistProblemes.setVisibleRowCount(nbLignesAffichees);
+			jlistProblemes.setForeground(Color.red);
 		}
 		
-		int nbProblemesNonAffiches = moduleEnCours.getProblemes().size() - problemesAffiches;
-		if(nbProblemesNonAffiches > 0){
-			JLabel label = new JLabel("(" + nbProblemesNonAffiches + " autres problèmes de cohérence)");
-			label.setForeground(Color.red);
-			label.setFont(new Font("Arial", Font.PLAIN, 22));
-			partieDuBas.add(label);
-		}
-
-		if(moduleEnCours.getProblemes().size() == 0){
-			JLabel label = new JLabel("Aucun problème de cohérence");
-			label.setFont(new Font("Arial", Font.PLAIN, 22));
-			partieDuBas.add(label);
-		}
-
 		partieDuBas.validate();
 		partieDuBas.repaint();
+
+		//On genere les eventuels problemes de coherence
+//		moduleEnCours.estCoherent();
+//
+//		partieDuBas.removeAll();		
+//
+//		int problemesAffiches = 0;
+//		for(String probleme : moduleEnCours.getProblemes()){
+//			if(problemesAffiches < 5){
+//				JLabel label = new JLabel(probleme);
+//				label.setForeground(Color.red);
+//				label.setFont(new Font("Arial", Font.PLAIN, 22));
+//				partieDuBas.add(label);
+//				problemesAffiches++;
+//			}
+//		}
+//		
+//		int nbProblemesNonAffiches = moduleEnCours.getProblemes().size() - problemesAffiches;
+//		if(nbProblemesNonAffiches > 0){
+//			JLabel label = new JLabel("(" + nbProblemesNonAffiches + " autres problèmes de cohérence)");
+//			label.setForeground(Color.red);
+//			label.setFont(new Font("Arial", Font.PLAIN, 22));
+//			partieDuBas.add(label);
+//		}
+//
+//		if(moduleEnCours.getProblemes().size() == 0){
+//			JLabel label = new JLabel("Aucun problème de cohérence");
+//			label.setFont(new Font("Arial", Font.PLAIN, 22));
+//			partieDuBas.add(label);
+//		}
+//
+//		partieDuBas.validate();
+//		partieDuBas.repaint();
 
 	}
 
@@ -541,7 +583,7 @@ public class MainMaximeAnsquer extends JFrame {
 				String nomFichier = listOfFiles[i].getName();
 				if(nomFichier.equals(etudeEnCours.getNom()+".xml")){
 					listOfFiles[i].delete();
-					JOptionPane.showMessageDialog(this, "Etude supprimee avec succes");
+					JOptionPane.showMessageDialog(this, "Etude supprimée avec succès.");
 					if(this.existeAuMoinsUneEtude()){
 						this.demanderEtude();			
 					}

@@ -303,7 +303,6 @@ public class FenetreCriteresDeSecurite extends JPanel {
 					break;
 				}
 			}
-			//			zoneDescription.setText(getCritereSelectionne().getDescription());
 		}
 	}
 

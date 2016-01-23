@@ -232,7 +232,7 @@ public class CriteresDeSecurite extends Module{
 		this.problemesDeCoherence = new ArrayList<String>();
 		for(Critere c : getLesCriteres()){
 			if(!c.estComplet()){
-				String probleme = "Critere \" " + c.getIntitule() + " \" incomplet";
+				String probleme = "Le critère \" " + c.getIntitule() + " \" est incomplet";
 				this.problemesDeCoherence.add(probleme);
 				resultat = false;
 			}
