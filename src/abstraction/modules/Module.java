@@ -77,6 +77,7 @@ public class Module extends Observable implements IModule  {
 		else{ */
 			
 		for(Module m : this.getPredecesseurs()){
+			
 			resultat = resultat && m.estCree() && m.estCoherent();
 		}
 		this.disponible = resultat;

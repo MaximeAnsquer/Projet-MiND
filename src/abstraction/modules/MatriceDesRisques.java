@@ -3,6 +3,7 @@ package abstraction.modules;
 import java.util.ArrayList;
 
 import abstraction.Etude;
+import presentation.ModeleMatriceDesRisques;
 
 public class MatriceDesRisques extends Module {
 	
@@ -106,6 +107,15 @@ public class MatriceDesRisques extends Module {
 	}
 
 	public boolean  estCoherent(){
+		
+		MatriceDesRisques mat=new MatriceDesRisques(this.getEtude());
+		mat.setCree(true);
+		
+		
+		this.getEtude().addModule(mat);
+		
+		
+		
 		if (this.matrice.length!=1){
 			return true;
 		}

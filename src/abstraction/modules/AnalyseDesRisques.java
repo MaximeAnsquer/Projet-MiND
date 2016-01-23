@@ -213,7 +213,7 @@ public class AnalyseDesRisques extends Module{
 	public boolean estCoherent(){
 		
 		
-		AnalyseDesRisques nouvellean=new AnalyseDesRisques(this.getEtude());
+ AnalyseDesRisques nouvellean=new AnalyseDesRisques(this.getEtude());
 		 
 		 nouvellean.setCree(true);
 			
@@ -261,10 +261,6 @@ public class AnalyseDesRisques extends Module{
 
 
 this.getEtude().addModule(nouvellean);
-			
-			
-			
-
 		
 		
 		boolean resultat=true;

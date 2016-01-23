@@ -48,7 +48,7 @@ public class EvenementsRedoutes extends Module {
 		this.predecesseurs.add(this.etude.getModule("BiensEssentiels"));
 		this.predecesseurs.add(this.etude.getModule("Metriques"));
 		
-		this.successeurs.add(this.etude.getModule("AnalyseDesRisques"));
+//		this.successeurs.add(this.etude.getModule("AnalyseDesRisques"));
 		
 		this.lesMetriques=(Metriques)this. etude.getModule("Metriques");
 		this.lesBiensEssentiels=(BiensEssentiels)this.etude.getModule("BiensEssentiels");
@@ -200,8 +200,6 @@ EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
 		
 		
 		this.getEtude().addModule(nouveauev);
-		
-		
 		
 		boolean resultat=true;
 		this.problemesDeCoherence=new ArrayList<String>();

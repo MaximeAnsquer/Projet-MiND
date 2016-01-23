@@ -38,12 +38,10 @@ this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 	
 		
-		MatriceDesRisques mat=new MatriceDesRisques(matrice.getEtude());
-		mat.setCree(true);
 		
-		this.modele=new ModeleMatriceDesRisques(mat);
-		matrice.getEtude().addModule(mat);
-		matrice=mat;
+		
+		
+		
 		
 this.modele=new ModeleMatriceDesRisques(matrice);		
 		

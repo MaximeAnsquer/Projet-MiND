@@ -26,55 +26,8 @@ public class FenetreAnalyseDesRisques extends JPanel{
 		
 		 super(new GridLayout(1,0));
 		 
-		 AnalyseDesRisques nouvellean=new AnalyseDesRisques(analyse.getEtude());
-		 
-		 nouvellean.setCree(true);
+		
 			
-			/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
-			 * dans le nouveau
-			 */
-			
-			int a=nouvellean.getAnalyseDesRisques().size();
-			int b=analyse.getAnalyseDesRisques().size();
-			
-			
-			
-			
-			for (int i=0;i<a;i++){
-				for(int j=0;j<b;j++){
-					String evnouveau=nouvellean.getAnalyseDesRisques().get(i).getEvenementRedoute().GetNomEvenement();
-					String evancien=analyse.getAnalyseDesRisques().get(j).getEvenementRedoute().GetNomEvenement();
-					
-					//System.out.println(nouvellean.getAnalyseDesRisques().get(i).getIntitule());
-					//System.out.println(analyse.getAnalyseDesRisques().get(j).getIntitule());
-					int nouveauvrai=nouvellean.getAnalyseDesRisques().get(i).getNiveauVraisemblance();
-					int ancienvrai=analyse.getAnalyseDesRisques().get(j).getNiveauVraisemblance();
-					
-					String biennouveau=nouvellean.getAnalyseDesRisques().get(i).getBienSupport().getIntitule();
-					String bienancien=analyse.getAnalyseDesRisques().get(j).getBienSupport().getIntitule();
-					
-					String scnouveau=	nouvellean.getAnalyseDesRisques().get(i).getScenarioConcret().getIntitule();
-					String scancien= analyse.getAnalyseDesRisques().get(j).getScenarioConcret().getIntitule();
-				
-					
-					if(evnouveau.equals(evancien)&&biennouveau.equals(bienancien)&&scnouveau.equals(scancien)){
-						
-						nouvellean.getAnalyseDesRisques().get(i).setIntitule(analyse.getAnalyseDesRisques().get(j).getIntitule());;
-						nouvellean.getAnalyseDesRisques().get(i).setRetenu(analyse.getAnalyseDesRisques().get(j).getRetenu());
-						
-						
-						
-						
-					}
-					
-				}
-			}
-			
-			
-
-
-analyse.getEtude().addModule(nouvellean);
-			analyse=nouvellean;
 			
 			
 

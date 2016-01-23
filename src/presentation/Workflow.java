@@ -52,9 +52,11 @@ public class Workflow extends JPanel {
 				System.out.println(m + " est disponible.");
 				if(m.estCree()){
 					if(!m.estCoherent()){
+						
 						bouton.setBackground(Color.RED);
 					}
 					else{
+						
 						bouton.setBackground(Color.GREEN);
 					}
 				}				
