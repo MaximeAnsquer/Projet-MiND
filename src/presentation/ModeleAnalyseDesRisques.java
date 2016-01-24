@@ -28,8 +28,8 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 		for (int i=0;i<a;i++){
 			this.data.add(this.analyse.getAnalyseDesRisques().get(i));
 		}
-	this.entetes.add("Evenement redouté");
-	this.entetes.add("Niveau gravité");
+	this.entetes.add("Evenement redoutÃ©");
+	this.entetes.add("Niveau gravitÃ©");
 	this.entetes.add("Bien support");
 	this.entetes.add("Scenario concret");
 	this.entetes.add("Niveau vraisemblance");

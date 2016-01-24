@@ -25,7 +25,7 @@ public class ModeleMatriceDesRisques extends AbstractTableModel{
     	
     	this.entetes=new ArrayList<String>();
 
-		this.entetes.add("Gravité-Vraisemblance");
+		this.entetes.add("GravitÃ©-Vraisemblance");
 		int a=this.matrice.nombre();
 		
 		for (int i=1;i<=a;i++){

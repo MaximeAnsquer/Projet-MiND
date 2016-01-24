@@ -228,7 +228,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 			    	 
 			    	 NiveauDeMetrique niveaucourant=metriques.getMetrique(intitulecritere).getNiveau((Integer)tableau.getValueAt(row, column+1)-1);
 			    	 
-			      zoneDescription.setText("Description du niveau d'exigence associ� au crit�re s�lectionn�: "+niveaucourant.getDescription()+System.getProperty("line.separator")+"Description du niveau de gravit�: "+niveaugravite.getDescription());}
+			      zoneDescription.setText("Description du niveau d'exigence associé au critère sélectionné: "+niveaucourant.getDescription()+System.getProperty("line.separator")+"Description du niveau de gravité: "+niveaugravite.getDescription());}
 			    
 			  }
 			});

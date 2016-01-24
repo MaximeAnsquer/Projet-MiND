@@ -19,12 +19,12 @@ import abstraction.modules.EvenementsRedoutes;
 
 public class ModeleEvenementsRedoutes extends AbstractTableModel{
 	
-	/* les varialbes d'instance sont l'étude considérée, les evenements redoutes qui permettent d'établir le tableau*/
+	/* les varialbes d'instance sont l'ï¿½tude considï¿½rï¿½e, les evenements redoutes qui permettent d'ï¿½tablir le tableau*/
 	private Etude etude;
 	private EvenementsRedoutes evenements;
 	
-	/*mais également les éléments du tableau lui même, c'est à dire une liste d'Objects qui seront en fait des evenements
-	 * et les entêtes du tableau Evenements Redoutés
+	/*mais ï¿½galement les ï¿½lï¿½ments du tableau lui mï¿½me, c'est ï¿½ dire une liste d'Objects qui seront en fait des evenements
+	 * et les entï¿½tes du tableau Evenements Redoutï¿½s
 	 */
 	ArrayList<Object> data;
 	ArrayList<String> entetes=new ArrayList<String>();
@@ -44,11 +44,11 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 					
 				}
 				
-				this.entetes.add("Nom evênement");
+				this.entetes.add("Nom evÃ¨nement");
 				this.entetes.add("Bien essentiel");
-				this.entetes.add("Critère");
+				this.entetes.add("CritÃ¨re");
 				this.entetes.add("Exigence");
-				this.entetes.add("Gravité");
+				this.entetes.add("GravitÃ©");
 			
 				
 				if(this.evenements.getEvenementsRedoutes().get(0).getNomGroupes()!=null){

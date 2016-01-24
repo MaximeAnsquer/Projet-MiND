@@ -115,7 +115,7 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 	
 	public void creerZoneDescription(){
 		JLabel label = new JLabel("");
-		this.zoneDescription= new JTextArea("Cliquer sur la cellule que vous souhaitez afficher");
+		this.zoneDescription= new JTextArea("Cliquez sur la cellule que vous souhaitez afficher");
 		
 		Font font=new Font("Verdana",Font.BOLD,12);
 		this.zoneDescription.setFont(font);
@@ -141,7 +141,7 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Détail des risques contenus dans la cellule"),
+								BorderFactory.createTitledBorder("DÃ©tail des risques contenus dans la cellule"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		
