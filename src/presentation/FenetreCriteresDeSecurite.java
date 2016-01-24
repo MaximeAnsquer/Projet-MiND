@@ -54,7 +54,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 		//On redimensionne les colonnes 
 		TableColumnModel columnModel = table.getColumnModel();		
-		columnModel.getColumn(0).setMaxWidth(30);
+		columnModel.getColumn(0).setMaxWidth(60);
 		columnModel.getColumn(1).setMaxWidth(200);
 		columnModel.getColumn(1).setMinWidth(200);
 		columnModel.getColumn(3).setMaxWidth(50);
@@ -99,43 +99,6 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 	}
 
-	private JScrollPane zoneDescription() {
-
-		zoneDescription = new JTextArea();
-		zoneDescription.setLineWrap(true);
-		zoneDescription.setWrapStyleWord(true);
-		zoneDescription.setFont(new Font("Arial", Font.PLAIN, 18));
-
-		zoneDescription.addKeyListener(new KeyListener(){
-
-			public void keyTyped(KeyEvent e) {
-				if(table.getSelectedRow()>-1){
-					//					boutonModifierDescription.setEnabled(true);
-				}
-
-			}
-
-			public void keyPressed(KeyEvent e) {
-			}
-
-			public void keyReleased(KeyEvent e) {
-			}
-
-		});
-
-		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
-		areaScrollPane.setVerticalScrollBarPolicy(
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 150));
-		areaScrollPane.setBorder(
-				BorderFactory.createCompoundBorder(
-						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Description du critere"),
-								BorderFactory.createEmptyBorder(5,5,5,5)),
-								areaScrollPane.getBorder()));
-		return areaScrollPane;
-	}
-
 	private JPanel partieDuHaut() {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
@@ -165,8 +128,6 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		boutonModifierDescription.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				//				String nouvelleDescription = zoneDescription.getText();
-				//				getCritereSelectionne().setDescription(nouvelleDescription);
 				table.validate();
 				table.repaint();
 				boutonModifierDescription.setEnabled(false);

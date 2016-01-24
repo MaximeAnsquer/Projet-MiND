@@ -52,7 +52,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 		//On redimensionne les colonnes 
 		TableColumnModel columnModel = table.getColumnModel();		
-		columnModel.getColumn(0).setMaxWidth(40);
+		columnModel.getColumn(0).setMaxWidth(100);
 		columnModel.getColumn(3).setMaxWidth(50);
 
 		//On change le mode de selection
