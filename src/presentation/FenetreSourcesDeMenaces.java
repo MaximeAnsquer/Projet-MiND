@@ -52,7 +52,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 		//On redimensionne les colonnes 
 		TableColumnModel columnModel = table.getColumnModel();		
-		columnModel.getColumn(0).setMaxWidth(40);
+		columnModel.getColumn(0).setMaxWidth(100);
 		columnModel.getColumn(3).setMaxWidth(50);
 
 		//On change le mode de selection
@@ -135,9 +135,22 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
+		jpanel.add(boutonAide());
 		return jpanel;
 	}
+	
+	private JButton boutonAide() {
+		JButton bouton = new JButton("Aide");
+		bouton.addActionListener(new ActionListener(){
 
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Double-cliquez sur une cellule pour la modifier.", "Aide", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+			
+		});
+		return bouton;
+	}
 
 	private JButton boutonSupprimer() {
 		boutonSupprimer = new JButton("Supprimer une source de menace");

@@ -25,7 +25,7 @@ public class ControlJButtonAjoutLigne implements Observer,ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		ScenarioType sType = new ScenarioType(this.modele.getScenarioCourant());
-		this.modele.addScenarioType(sType, this.tableau.getSelectedRow());
+		this.modele.addScenarioType(sType, this.tableau.getSelectedRow()+1);
 	}
 
 	public void update(Observable o, Object arg) {

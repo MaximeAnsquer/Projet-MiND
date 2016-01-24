@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -13,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableColumn;
 
+import presentation.FenetreBiensSupports.Renderer;
 import controle.TypologieBiensSupports.ControlJButtonAide;
 import controle.TypologieBiensSupports.ControlJButtonAjoutTypeBien;
 import controle.TypologieBiensSupports.ControlJButtonSuppressionTypeBien;
@@ -51,6 +53,10 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		
 		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC
 		this.tableau.addMouseListener(control);                            // PAC
+		
+		tableau.getColumnModel().getColumn(tableau.getColumnModel().getColumnCount()-1).setMaxWidth(50);
+		tableau.setFont(new Font("Arial", Font.PLAIN, 15)); tableau.setRowHeight(50);
+		tableau.setRowHeight(50);
 		
 		//tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);
 		this.add(tableau.getTableHeader());
