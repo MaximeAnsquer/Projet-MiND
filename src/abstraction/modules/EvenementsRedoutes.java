@@ -237,7 +237,16 @@ EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
 		return resultat;
 	}
 	
-	
+	public boolean estRempli(){
+		int a=this.getEvenementsRedoutes().size();
+		boolean resultat=false;
+		for (int i=0;i<a;i++){
+			if(this.getEvenementsRedoutes().get(i).estComplet()==true){
+				resultat=true;
+			}
+		}
+		return resultat;
+	}
 	
 	
 }

@@ -60,7 +60,7 @@ public class AnalyseDesRisques extends Module{
 		
 		//Si les ant�c�dents du module sont coh�rents
 		
-		if(this.scenarios!=null&&this.scenarios.estCoherent()==true&&this.evenements.estCoherent()==true&& this.mapping.estCoherent()==true&&this.scenarios.getTableau().get(0).getCriteresSup()!=null){
+		if(this.scenarios.estCoherent()==true&&this.evenements.estRempli()==true&& this.mapping.estCoherent()==true){
 		
 		//On construit un tableau en utilisant ces ant�c�dents	
 			

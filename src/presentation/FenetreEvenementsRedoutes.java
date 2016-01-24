@@ -3,19 +3,25 @@ package presentation;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
@@ -24,6 +30,7 @@ import javax.swing.table.TableColumn;
 import abstraction.Etude;
 import abstraction.autres.Critere;
 import abstraction.autres.Evenement;
+import abstraction.autres.NiveauDeMetrique;
 import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.EvenementsRedoutes;
 import abstraction.modules.Metriques;
@@ -36,11 +43,13 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 	
 	private ModeleEvenementsRedoutes modele;
+	private Metriques metriques;
 	private EvenementsRedoutes evenements;
 	private JTableX tableau;
 	private Etude etude;
 	private CriteresDeSecurite criteres;
 	private ArrayList<TableCellEditor> editors=new ArrayList<TableCellEditor>();
+	private JTextArea zoneDescription;
 
 	
 	FenetreEvenementsRedoutes(EvenementsRedoutes evenements){
@@ -52,7 +61,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		this.etude=evenements.getEtude();
 		
-	
+		this.metriques=(Metriques)this.etude.getModule("Metriques");
 		
 		this.criteres=(CriteresDeSecurite) this.etude.getModule("CriteresDeSecurite");
 		
@@ -77,6 +86,11 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-1).setCellRenderer( renderer);
 		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-2).setCellRenderer( renderer);
 		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-5).setCellRenderer( renderer);
+		this.tableau.setRowHeight(50);
+		
+		
+		
+		this.creerZoneDescription();
 		
 		
 		this.setVisible(true);
@@ -184,7 +198,54 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 	
 	 
-	    
+	public void creerZoneDescription(){
+		JLabel label = new JLabel("");
+		this.zoneDescription= new JTextArea("Cliquer sur la cellule que vous souhaitez afficher");
+		
+		Font font=new Font("Verdana",Font.BOLD,12);
+		
+		this.zoneDescription.setFont(font);
+		
+		this.zoneDescription.setLineWrap(true); // On passe Ã  la ligne 
+		this.zoneDescription.setWrapStyleWord(true);
+		
+		tableau.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    
+			      JTableX target = (JTableX)e.getSource();
+			      System.out.println("bonjour");
+			      int row = target.getSelectedRow();
+			      int column = target.getSelectedColumn();
+			      if(column==target.getColumnCount()-3){
+			    	  
+			    	 
+			    	 String intitulecritere= (String)tableau.getValueAt(row, target.getColumnCount()-3);
+			    	
+			     
+			    	
+			    	 NiveauDeMetrique niveaugravite=metriques.getMetrique("Gravite").getNiveau((Integer)tableau.getValueAt(row, column+2)-1);
+			    	 
+			    	 NiveauDeMetrique niveaucourant=metriques.getMetrique(intitulecritere).getNiveau((Integer)tableau.getValueAt(row, column+1)-1);
+			    	 
+			      zoneDescription.setText("Description du niveau d'exigence associé au critère sélectionné: "+niveaucourant.getDescription()+System.getProperty("line.separator")+"Description du niveau de gravité: "+niveaugravite.getDescription());}
+			    
+			  }
+			});
+		
+		JScrollPane areaScrollPane = new JScrollPane(this.zoneDescription);
+		areaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setBorder(
+				BorderFactory.createCompoundBorder(
+						BorderFactory.createCompoundBorder(
+								BorderFactory.createTitledBorder("Sélectionnez un critère pour afficher la description de l'exigence et de la gravité associés au critère de l'évenement"),
+								BorderFactory.createEmptyBorder(5,5,5,5)),
+								areaScrollPane.getBorder()));
+		
+		this.add(label);
+		this.add(areaScrollPane);
+	}
+	
 	        
 	   
 	

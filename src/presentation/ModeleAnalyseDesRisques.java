@@ -30,7 +30,7 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 		}
 	this.entetes.add("Evenement redouté");
 	this.entetes.add("Niveau gravité");
-	this.entetes.add("Bien support)");
+	this.entetes.add("Bien support");
 	this.entetes.add("Scenario concret");
 	this.entetes.add("Niveau vraisemblance");
 	this.entetes.add("est retenu");

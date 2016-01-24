@@ -63,7 +63,7 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 		Color clr1=Color.green;
 		headerRenderer1.setBackground(clr1);
 		
-		/*tableau.getColumnModel().getColumn(1).setHeaderRenderer(headerRenderer1);
+		tableau.getColumnModel().getColumn(1).setHeaderRenderer(headerRenderer1);
 		
 
 		if(tableau.getModel().getColumnCount()>=3){DefaultTableCellRenderer headerRenderer2= new DefaultTableCellRenderer();
@@ -103,7 +103,7 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 				
 				tableau.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer6);
 			}
-		}*/
+		}
 		
 		
 		this.creerZoneDescription();
