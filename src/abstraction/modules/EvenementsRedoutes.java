@@ -25,14 +25,14 @@ import abstraction.autres.Metrique;
 
 public class EvenementsRedoutes extends Module {
 	
-	/*Je mets dans cette classe pour variable d'instance tout d'abord une arraylist d'évenements, et une autre qui correspond
-	 * aux évenements éventuellement stockés dans une bdc(xml)
+	/*Je mets dans cette classe pour variable d'instance tout d'abord une arraylist d'ï¿½venements, et une autre qui correspond
+	 * aux ï¿½venements ï¿½ventuellement stockï¿½s dans une bdc(xml)
 	 */
 	private ArrayList<Evenement> evenementsredoutes;
 	
 	
 	
-	/*Puis les antécédents du module ainsi que l'étude car on en a besoin pour créer le présent module
+	/*Puis les antï¿½cï¿½dents du module ainsi que l'ï¿½tude car on en a besoin pour crï¿½er le prï¿½sent module
 	 */
 	private Etude etude;
 	private BiensEssentiels lesBiensEssentiels;
@@ -63,13 +63,13 @@ public class EvenementsRedoutes extends Module {
 		
 		
 		/*A ce stade-ci du constructeur, on remplit l'arraylist en constituant des combinaisons entre Biens Essentiels
-		 * et Critères définis dans les antécédents du  module.
+		 * et Critï¿½res dï¿½finis dans les antï¿½cï¿½dents du  module.
 		 */
-		/*On crée une arraylist qui contiendra les lignes du tableau*/
+		/*On crï¿½e une arraylist qui contiendra les lignes du tableau*/
 		
 	    ArrayList<Evenement> liste=new ArrayList<Evenement>();
 	    
-	    /*Si on génére le module à partir des modules précédents*/
+	    /*Si on gï¿½nï¿½re le module ï¿½ partir des modules prï¿½cï¿½dents*/
 	    
 	   
 	
@@ -155,10 +155,10 @@ public class EvenementsRedoutes extends Module {
 	}
 	
 	public String toString(){
-		return "Evenements redoutés";
+		return "Evenements redoutÃ©s";
 	}
 	
-	/*Méthode qui permet de lire le fichier xml pour importer les évenements qu'il contient*/
+	/*Mï¿½thode qui permet de lire le fichier xml pour importer les ï¿½venements qu'il contient*/
 	
 	
 	
@@ -169,7 +169,7 @@ EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
 		
 		nouveauev.setCree(true);
 		
-		/*La boucle va servir à mettre à conserver les valeurs modifiées de l'ancien tableau et de les mettre
+		/*La boucle va servir ï¿½ mettre ï¿½ conserver les valeurs modifiï¿½es de l'ancien tableau et de les mettre
 		 * dans le nouveau
 		 */
 		
@@ -225,7 +225,7 @@ EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
 					if(this.getEvenementsRedoutes().get(i).GetNomEvenement().equals(this.getEvenementsRedoutes().get(k).GetNomEvenement())){
 						resultat=false;
 						
-						String probleme = "Un ou plusieurs evenements ont le même nom";
+						String probleme = "Un ou plusieurs evenements ont le mï¿½me nom";
 						this.problemesDeCoherence.add(probleme);
 						
 					}
