@@ -21,8 +21,7 @@ public class ModeleMatriceDesRisques extends AbstractTableModel{
 		this.matrice=mat;
     	this.data=this.matrice.getMatrice();
     	
-    	System.out.println(this.data.length);
-    	System.out.println();
+    
     	
     	this.entetes=new ArrayList<String>();
 

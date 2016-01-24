@@ -51,6 +51,9 @@ public class MatriceDesRisques extends Module {
 		
 		this.nombreniveaux=b;
 		
+		System.out.println("le niveau de grac est"+a);
+		System.out.println("le niveua de vrai est"+b);
+		
 		this.matrice=new ArrayList[a][b+1];
 		
 		for (int i=0;i<a;i++){
@@ -64,11 +67,13 @@ public class MatriceDesRisques extends Module {
 		for (int i=1;i<=a;i++){
 			for (int j=1;j<=b;j++){
 				for (int k=0;k<this.analysedesrisques.getAnalyseDesRisques().size();k++){
+					
+					System.out.println(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
 					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getRetenu()==true&&this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j){
 						
 		this.matrice[a-i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
 		
-		//System.out.println(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
+		System.out.println("rntré");
 		
 					}
 				}
@@ -110,6 +115,10 @@ public class MatriceDesRisques extends Module {
 	public void setMatrice(ArrayList<String>[][] matrice){
 		this.matrice=matrice;
 	}
+	
+	public void setNiveaux(int niveaux){
+		this.nombreniveaux=niveaux;
+	}
 
 	public boolean  estCoherent(){
 		
@@ -118,6 +127,7 @@ public class MatriceDesRisques extends Module {
 		
 		
 		this.setMatrice(mat.getMatrice());
+		this.setNiveaux(mat.nombre());
 		
 		
 		

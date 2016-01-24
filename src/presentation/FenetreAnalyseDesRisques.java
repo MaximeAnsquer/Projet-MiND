@@ -25,9 +25,6 @@ public class FenetreAnalyseDesRisques extends JPanel{
 		
 		
 		 super(new GridLayout(1,0));
-		 
-		
-			
 			
 			
 
