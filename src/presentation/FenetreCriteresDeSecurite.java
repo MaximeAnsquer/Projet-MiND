@@ -140,8 +140,22 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
+		jpanel.add(boutonAide());
 		//		jpanel.add(boutonModifierDescription());
 		return jpanel;
+	}
+
+	private JButton boutonAide() {
+		JButton bouton = new JButton("Aide");
+		bouton.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Double-cliquez sur une cellule pour la modifier.", "Aide", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+			
+		});
+		return bouton;
 	}
 
 	private JButton boutonModifierDescription() {

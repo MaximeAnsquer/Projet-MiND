@@ -29,20 +29,7 @@ public class BarreMenu extends JMenuBar {
 		nouvelleEtude.setMnemonic('n');
 		
 		nouvelleEtude.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				if(fenetre.etudeEnCours != null){
-					int decision = JOptionPane.showConfirmDialog(null, 
-							"Enregistrer l'étude en cours avant de créer une nouvelle etude ?", "Enregistrer l'étude en cours ?", 
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE);
-					switch(decision){
-					case JOptionPane.YES_OPTION:
-						fenetre.enregistrerEtude();		
-						break;
-					case JOptionPane.NO_OPTION:
-						break;
-					}	
-				}
+			public void actionPerformed(ActionEvent e) {				
 				fenetre.nouvelleEtude();				
 			}			
 		});
@@ -66,6 +53,21 @@ public class BarreMenu extends JMenuBar {
 		});		
 		fichier.add(enregistrer);
 		
+		JMenuItem quitter = new JMenuItem("Quitter");
+		quitter.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				int confirmation = JOptionPane.showConfirmDialog(fenetre, "Enregistrer l'étude en cours avant de quitter ?");
+				if(confirmation == JOptionPane.YES_OPTION){
+					fenetre.enregistrerEtude();
+					System.exit(0);
+				}
+				else if(confirmation == JOptionPane.NO_OPTION){
+					System.exit(0);
+				}
+			}			
+		});		
+		fichier.add(quitter);
+		
 		this.add(fichier);
 		
 		JMenu options = new JMenu("Options");
@@ -81,7 +83,6 @@ public class BarreMenu extends JMenuBar {
 		JMenuItem supprimerEtude = new JMenuItem("Supprimer l'étude en cours");
 		supprimerEtude.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("bouton");
 				fenetre.supprimerEtude();		
 			}			
 		});

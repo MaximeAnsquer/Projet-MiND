@@ -157,8 +157,24 @@ public class FenetreMetriques extends JPanel {
 		jp.add(comboBox());
 		jp.add(boutonAjouter());
 		jp.add(boutonSupprimer());
+		jp.add(boutonAide());
 		//		jp.add(boutonModifier());
 		return jp;
+	}
+	
+	private JButton boutonAide() {
+		JButton bouton = new JButton("Aide");
+		bouton.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				String aide = "- Double-cliquez sur une cellule pour la modifier." +
+						"\n- Utilisez le menu déroulant en haut à gauche pour sélectionner un autre critère de sécurité.";
+				JOptionPane.showMessageDialog(null, aide, "Aide", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+			
+		});
+		return bouton;
 	}
 
 	private JButton boutonSupprimer() {
