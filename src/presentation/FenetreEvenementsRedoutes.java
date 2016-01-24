@@ -36,7 +36,7 @@ import abstraction.modules.EvenementsRedoutes;
 import abstraction.modules.Metriques;
 
 public class FenetreEvenementsRedoutes extends JPanel{
-	/*Cette classe fait appel aux variables d'instance suivantes pour afficher le tableau des Evenements Redoutés
+	/*Cette classe fait appel aux variables d'instance suivantes pour afficher le tableau des Evenements Redoutï¿½s
 	 * 
 	 */
 	
@@ -54,7 +54,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	
 	FenetreEvenementsRedoutes(EvenementsRedoutes evenements){
 		 super(new GridLayout(1,0));
-		 /* On recrée un module pour être sur que les données sont à jour*/
+		 /* On recrï¿½e un module pour ï¿½tre sur que les donnï¿½es sont ï¿½ jour*/
 		 
 		
 		this.modele=new ModeleEvenementsRedoutes(evenements);
@@ -106,7 +106,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	}
 	
 	
-	/*Methode qui permet de construire le tableau ainsi que les Jcombobox associées à la Gravité et à l'Exigence*/
+	/*Methode qui permet de construire le tableau ainsi que les Jcombobox associï¿½es ï¿½ la Gravitï¿½ et ï¿½ l'Exigence*/
 	
 	public void setUpComBo() {
  
@@ -122,7 +122,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		tableau.setRowEditorModel(rm);
 	
-	/*On construit la JCombobox associée à l'exigence de chaque critère du tableau*/
+	/*On construit la JCombobox associï¿½e ï¿½ l'exigence de chaque critï¿½re du tableau*/
 		
 		int u=this.criteres.getCriteresRetenus().size();
 		
@@ -155,7 +155,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(150);
 		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(200);
        
-		/*Puis on construit la JCombobox associée à la Gravité*/
+		/*Puis on construit la JCombobox associï¿½e ï¿½ la Gravitï¿½*/
 		
        int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
 		
@@ -179,7 +179,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	/*TableColumn nameColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5);
 	 DefaultTableCellRenderer renderer =
              new DefaultTableCellRenderer();
-     renderer.setToolTipText("Appuyez sur entrée pour confirmer le nom de l'évènement une fois qu'il a été écrit");
+     renderer.setToolTipText("Appuyez sur entrï¿½e pour confirmer le nom de l'ï¿½vï¿½nement une fois qu'il a ï¿½tï¿½ ï¿½crit");
      nameColumn.setCellRenderer(renderer);*/
 	
 	}
@@ -218,6 +218,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 			      int column = target.getSelectedColumn();
 			      if(column==target.getColumnCount()-3){
 			    	  
+			    	  
 			    	 
 			    	 String intitulecritere= (String)tableau.getValueAt(row, target.getColumnCount()-3);
 			    	
@@ -227,7 +228,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 			    	 
 			    	 NiveauDeMetrique niveaucourant=metriques.getMetrique(intitulecritere).getNiveau((Integer)tableau.getValueAt(row, column+1)-1);
 			    	 
-			      zoneDescription.setText("Description du niveau d'exigence associé au critère sélectionné: "+niveaucourant.getDescription()+System.getProperty("line.separator")+"Description du niveau de gravité: "+niveaugravite.getDescription());}
+			      zoneDescription.setText("Description du niveau d'exigence associï¿½ au critï¿½re sï¿½lectionnï¿½: "+niveaucourant.getDescription()+System.getProperty("line.separator")+"Description du niveau de gravitï¿½: "+niveaugravite.getDescription());}
 			    
 			  }
 			});
@@ -238,7 +239,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Sélectionnez un critère pour afficher la description de l'exigence et de la gravité associés au critère de l'évenement"),
+								BorderFactory.createTitledBorder("Sï¿½lectionnez un critï¿½re pour afficher la description de l'exigence et de la gravitï¿½ associï¿½s au critï¿½re de l'ï¿½venement"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		
