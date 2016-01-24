@@ -82,6 +82,7 @@ public class MainMaximeAnsquer extends JFrame {
 	private JButton boutonVerifier;
 	private JList jlistProblemes;
 	private DefaultListModel listModel;
+	private boolean keyCtrl;
 
 	public MainMaximeAnsquer(){
 
@@ -99,8 +100,9 @@ public class MainMaximeAnsquer extends JFrame {
 		creerBoutonWorkflow();
 		creerBoutonVerifierCoherence();
 		ajouterListenerFermetureFenetre();
-		this.setJMenuBar(new BarreMenu(this));
-		this.pack();
+		setJMenuBar(new BarreMenu(this));
+//		creerKeyListener();
+		pack();
 
 		if(this.existeAuMoinsUneEtude()){
 			this.demanderEtude();			
@@ -109,6 +111,43 @@ public class MainMaximeAnsquer extends JFrame {
 			JOptionPane.showMessageDialog(this, "Aucune étude enregistrée !");
 			this.nouvelleEtude();
 		}
+	}
+
+	//Permet d'utiliser les raccourcis clavier
+	private void creerKeyListener() {
+		keyCtrl = false;
+		this.addKeyListener(new KeyListener(){
+
+			public void keyTyped(KeyEvent e) {
+				System.out.println("keyTyped");				
+			}
+
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_CONTROL){
+					keyCtrl = true;
+				}
+				else if(keyCtrl){
+					keyCtrl = false;
+					switch(e.getKeyCode()){					
+					case KeyEvent.VK_S:						
+						enregistrerEtude();
+						break;
+					case KeyEvent.VK_N:
+						nouvelleEtude();
+						break;
+					case KeyEvent.VK_O:
+						if(existeAuMoinsUneEtude()){
+							choisirEtude();							
+						}						
+					}
+				}
+			}
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_CONTROL){
+					keyCtrl = false;
+				}			
+			}			
+		});		
 	}
 
 	private void ajouterListenerFermetureFenetre() {		

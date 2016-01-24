@@ -320,7 +320,7 @@ public class FenetreMetriques extends JPanel {
 			int numero = getMetriqueCourante().nombreDeNiveaux() + 1;
 			String intitule = JOptionPane.showInputDialog("Veuillez saisir un intitulé.");
 			if(intitule != null){
-				String description = JOptionPane.showInputDialog("Veuillez saisir une description. ?");
+				String description = JOptionPane.showInputDialog("Veuillez saisir une description.");
 				if(description != null){
 					try{ 
 						NiveauDeMetrique niveau = new NiveauDeMetrique(numero, intitule, description);
