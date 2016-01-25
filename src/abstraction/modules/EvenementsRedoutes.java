@@ -225,7 +225,7 @@ EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
 					if(this.getEvenementsRedoutes().get(i).GetNomEvenement().equals(this.getEvenementsRedoutes().get(k).GetNomEvenement())){
 						resultat=false;
 						
-						String probleme = "Un ou plusieurs evenements ont le même nom";
+						String probleme = "Un ou plusieurs événements ont le même nom";
 						this.problemesDeCoherence.add(probleme);
 						
 					}

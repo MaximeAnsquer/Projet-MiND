@@ -89,7 +89,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.tableau.getColumnModel().getColumn(tableau.getColumnCount()-5).setCellRenderer( renderer);
 		this.tableau.setRowHeight(50);
 		
-		
+		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		this.creerZoneDescription();
 		
