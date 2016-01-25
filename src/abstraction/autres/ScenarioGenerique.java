@@ -3,8 +3,6 @@ package abstraction.autres;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import com.sun.glass.ui.CommonDialogs.Type;
-
 /**
  * Classe representant les scénarios génériques représentés en mémoire par : un
  * type de bien, un numéro Id, un intitule, un ensemble de sources menaces et de
