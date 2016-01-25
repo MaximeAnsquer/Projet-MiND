@@ -18,8 +18,9 @@ public class ControlJButtonAide implements ActionListener {
 		JOptionPane
 				.showMessageDialog(
 						null,
-						"Pour modifier la description, vous pouvez écrire directement dans la zone prévue à cet effet, en haut des boutons"
-						+ "\nDouble-cliquez sur une cellule pour modifier le champ de texte ",
+						"1) Pour modifier la description, vous pouvez écrire directement dans la zone prévue à cet effet, en haut des boutons"
+								+ "\n2) Double-cliquez sur une cellule pour modifier le champ de texte "
+								+ "\n3) Une case vide a une couleur jaune",
 						"Aide", JOptionPane.INFORMATION_MESSAGE);
 	}
 
