@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
@@ -60,6 +61,10 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			this.tableau.getColumnModel().getColumn(1).setCellRenderer( renderer);
 			this.tableau.getColumnModel().getColumn(4).setCellRenderer( renderer);
 			this.tableau.getColumnModel().getColumn(6).setCellRenderer( renderer);
+			
+			tableau.setRowHeight(50);
+			
+			tableau.setFont(new Font("Arial", Font.PLAIN, 15));
 			
 			this.setVisible(true);
 		

@@ -108,6 +108,11 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 		
 		this.creerZoneDescription();
 		
+		tableau.setRowHeight(50);
+		
+		
+		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
+		
 		this.setVisible(true);
 	
 	
