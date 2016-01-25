@@ -44,7 +44,7 @@ public class ModeleEvenementsRedoutes extends AbstractTableModel{
 					
 				}
 				
-				this.entetes.add("Nom evènement");
+				this.entetes.add("Nom evénement");
 				this.entetes.add("Bien essentiel");
 				this.entetes.add("Critère");
 				this.entetes.add("Exigence");
