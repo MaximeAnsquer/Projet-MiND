@@ -13,6 +13,7 @@ import abstraction.autres.Evenement;
 import abstraction.autres.Risque;
 import abstraction.autres.ScenarioType;
 import abstraction.autres.SourceDeMenace;
+import abstraction.autres.TypeBien;
 
 public class AnalyseDesRisques extends Module{
 	
@@ -175,7 +176,7 @@ public class AnalyseDesRisques extends Module{
 			sources.add(src);
 			
 			
-			ScenarioType sc=new ScenarioType("","", "",hash1,sources, biensupport,"", 1, 1, true) ;
+			ScenarioType sc=new ScenarioType(new TypeBien(),"", "",hash1,sources, biensupport,"", 1, 1, true) ;
 				
 			liste.add(new Risque("",ev,1,biensupport,sc,1));
 			

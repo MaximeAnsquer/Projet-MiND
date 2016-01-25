@@ -206,7 +206,7 @@ public class ScenariosDeMenacesTypes extends Module {
 					&& !this.tableau
 							.get(j)
 							.getTypeBienSupport()
-							.contains(
+							.getIntitule().contains(
 									this.tableau.get(j).getBienSupport()
 											.getType())) {
 				this.tableau.remove(this.tableau.get(j));
@@ -217,7 +217,7 @@ public class ScenariosDeMenacesTypes extends Module {
 	
 	public void biensNonCoherent() {
 		for (ScenarioType scenario : this.tableau) {
-			if (!scenario.getTypeBienSupport().contains(
+			if (!scenario.getTypeBienSupport().getIntitule().contains(
 					scenario.getBienSupport().getType())) {
 				this.biensModifies.put(scenario.getBienSupport().getType(),scenario.getBienSupport());
 			}
@@ -241,7 +241,7 @@ public class ScenariosDeMenacesTypes extends Module {
 						sGene.getIntitule(), this.getCriteres(sGene),
 						SourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
 						true);
-				if (sGene.getTypeBienSupport().contains(b.getType())
+				if (sGene.getTypeBienSupport().getIntitule().contains(b.getType())
 						&& scenario.getBienSupport() == null) {
 					scenario.setBienSupport(b);
 					this.tableau.add(scenario);
@@ -286,11 +286,11 @@ public class ScenariosDeMenacesTypes extends Module {
 									this.getCriteres(sGene),
 									sourcesDeMenaces.getSourcesDeMenacesRetenues(),
 									null, true);
-							if (sGene.getTypeBienSupport()
+							if (sGene.getTypeBienSupport().getIntitule()
 									.contains(b.getType())
 									&& scenario.getBienSupport() == null) {
 								scenario.setBienSupport(b);
-								scenario.setTypeBienSupport(b.getType());
+								//scenario.setTypeBienSupport(b.getType());
 								this.biensRetenus.put(b.getIntitule(), b);
 								this.tableau.add(scenario);
 								System.out.println("scénario ajouté");
@@ -327,7 +327,7 @@ public class ScenariosDeMenacesTypes extends Module {
 						sGene.getIntitule(), this.getCriteres(sGene),
 						SourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
 						true);
-				if (sGene.getTypeBienSupport().contains(b.getType())
+				if (sGene.getTypeBienSupport().getIntitule().contains(b.getType())
 						&& scenario.getBienSupport() == null) {
 					scenario.setBienSupport(b);
 					this.biensRetenus.put(b.getIntitule(), b);

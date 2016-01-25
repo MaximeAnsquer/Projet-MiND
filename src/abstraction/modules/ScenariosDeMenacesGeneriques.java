@@ -89,8 +89,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	// ---Services---
 	
-	// L'id�e n'est pas encore finalis�e : 
-	
+	/*
 	// Un TypeBien est nouveau dans le cas o� il n'est pas contenu dans la bdc de cette classe
 	// et qu'il n'est pas dans la bdc de la classe TypeBien
 	public boolean estNouveauTypeBien(TypeBien type) {
@@ -105,6 +104,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		}
 		return b;
 	}
+	*/
 	
 	// L'ajout d'une ligne dans le tableau correspond ici
 	// � un type de bien support r�f�renc�
@@ -234,8 +234,8 @@ public class ScenariosDeMenacesGeneriques extends Module {
 							CriteresSup.put(intituleCritere,retenu);
 						}
 					}					
-					
-					ScenarioGenerique scenario = new ScenarioGenerique(intituleTypeBien, id, intituleScenario, CriteresSup, true);
+					TypologieDesBiensSupports typologie = (TypologieDesBiensSupports) this.etude.getModule("TypologieDesBiensSupports");
+					ScenarioGenerique scenario = new ScenarioGenerique(typologie.getTypeBien(intituleTypeBien), id, intituleScenario, CriteresSup, true);
 					
 					/*
 					 * Ajout du scenario � la bdc

@@ -71,14 +71,15 @@ public class TypologieDesBiensSupports extends Module {
 		this.setChanged();        // PAC
 		this.notifyObservers();   // PAC
 	}
-
+	//*
 	public TypeBien getTypeBien(String type) {
 		int i = 0 ;
-		while (i<this.tableau.size() && !this.tableau.get(i).getIntitule().equals(type)){
+		while (i<this.tableau.size() && !type.contains(this.tableau.get(i).getIntitule())){
 			i++ ;
 		}
 		return this.tableau.get(i);
 	}
+	//*/
 	
 	public void setTypeBien (int i, TypeBien type){
 		this.tableau.add(type);
@@ -130,12 +131,14 @@ public class TypologieDesBiensSupports extends Module {
 		this.notifyObservers(); // PAC
 	}
 	
+	/*
 	// NEW !!!
 	public void setDescriptionTypeBienSupport (String description, TypeBien type){
 		this.getTypeBien(type.getIntitule()).setDescription(description);
 		this.setChanged();      // PAC
 		this.notifyObservers(); // PAC
 	}
+	*/
 	
 	// On liste les Types de bien retenus
 	public ArrayList<TypeBien> getTypeBiensRetenus() {
@@ -168,11 +171,13 @@ public class TypologieDesBiensSupports extends Module {
 		return resultat.toArray();
 	}
 	
+	/*
 	// On retient un Type de Bien)
 	// Cela correspond à une croix cochée dans la colonne des types de biens retenus
 	public void retenirTypeBien(String intitule) {
 		this.getTypeBien(intitule).setRetenu(true);
 	}
+	*/
 
 	public void importerBDC() {
 		

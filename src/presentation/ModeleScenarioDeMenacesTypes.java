@@ -154,7 +154,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 									sGene.getIntitule(), this.moduleCourant.getCriteres(sGene),
 									this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
 									true);
-							if (sGene.getTypeBienSupport().contains(b.getType()) && scenario.getBienSupport()==null) {
+							if (sGene.getTypeBienSupport().getIntitule().contains(b.getType()) && scenario.getBienSupport()==null) {
 								scenario.setBienSupport(b);
 								this.moduleCourant.getBiensRetenus().put(b.getIntitule(),b);
 								this.moduleCourant.getTableau().add(scenario);
@@ -183,7 +183,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			resultat=scenarioType.getBienSupport().getIntitule();
 		}
 		if(columnIndex==COLONNE_TYPE){
-			resultat=scenarioType.getTypeBienSupport();
+			resultat=scenarioType.getTypeBienSupport().getIntitule();
 		}
 		if(columnIndex==COLONNE_ID){
 			resultat=scenarioType.getId();
@@ -243,7 +243,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 				//scenarioType.getBienSupport().setIntitule((String) aValue);
 			}
 			if(columnIndex==COLONNE_TYPE){
-				scenarioType.setTypeBienSupport((String) aValue);
+				// scenarioType.setTypeBienSupport((String) aValue);
 			}
 			if(columnIndex==COLONNE_ID){
 				scenarioType.setId((String) aValue);
