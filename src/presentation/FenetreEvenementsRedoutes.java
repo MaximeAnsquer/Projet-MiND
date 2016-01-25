@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -78,7 +79,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	
 		
-		add(scrollPane);
+		this.add(scrollPane,BorderLayout.WEST);
 
 		
 		CellRendererEv renderer=new CellRendererEv();
@@ -151,10 +152,12 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	    
 		
 		}
-	
+		
+		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-2).setPreferredWidth(200);
 		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(150);
-		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(200);
-       
+		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(150);
+		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5).setPreferredWidth(200);
+		
 		/*Puis on construit la JCombobox associ�e � la Gravit�*/
 		
        int a=((Metriques) this.etude.getModule("Metriques")).getMetrique("Gravite").nombreDeNiveaux();
@@ -200,7 +203,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	 
 	public void creerZoneDescription(){
 		JLabel label = new JLabel("");
-		this.zoneDescription= new JTextArea("Cliquer sur la cellule que vous souhaitez afficher");
+		this.zoneDescription= new JTextArea("Cliquer sur un critère dont vous souhaitez afficher la description de l'exigence et la gravité associés aux niveaux sélectionnés");
 		
 		Font font=new Font("Verdana",Font.BOLD,12);
 		
@@ -239,12 +242,12 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Sélectionnez un critère pour afficher la description de l'exigence et de la gravité associés au critère de l'évenement"),
+								BorderFactory.createTitledBorder("Sélectionnez un critère pour afficher la description de l'exigence et de la gravité associés au critère"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		
-		this.add(label);
-		this.add(areaScrollPane);
+		//this.add(label);
+		this.add(areaScrollPane,BorderLayout.CENTER);
 	}
 	
 	        
