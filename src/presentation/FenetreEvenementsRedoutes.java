@@ -239,7 +239,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("S�lectionnez un crit�re pour afficher la description de l'exigence et de la gravit� associ�s au crit�re de l'�venement"),
+								BorderFactory.createTitledBorder("Sélectionnez un critère pour afficher la description de l'exigence et de la gravité associés au critère de l'évenement"),
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		
