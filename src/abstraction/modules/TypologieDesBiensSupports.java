@@ -38,19 +38,6 @@ public class TypologieDesBiensSupports extends Module {
 	public TypologieDesBiensSupports() {
 		super("TypologieDesBiensSupports");
 		this.tableau = new ArrayList<TypeBien>();
-		
-		/*
-		this.addTypeBienSupport(new TypeBien(
-				"MAT",
-				"Ce type de biens supports est constitué de l’ensemble des éléments physiques d'un système informatique (hardware) et des supports de données électroniques) participant au stockage et au traitement de tout ou partie des biens essentiels.",
-				"Matériels", true));
-		
-		this.addTypeBienSupport(new TypeBien(
-				"LOG",
-				"Ce type de biens supports est constitué de l'ensemble des programmes participant au traitement de tout ou partie des biens essentiels (software).",
-				"Logiciels", true));
-		*/
-		
 		this.typeBienCourant=new TypeBien();
 		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
 		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
@@ -262,15 +249,17 @@ public class TypologieDesBiensSupports extends Module {
 	}
 	
 	public boolean estCoherent() {
+		int compteur = 1 ;
 		boolean resultat = true;
 		this.problemesDeCoherence = new ArrayList<String>();
 		for (TypeBien type : this.tableau) {
 			if (type.isIncomplete()) {
-				String s = "Type de bien support \" " + type.getIntitule()
-						+ " \" incomplet";
+				String s = "Le type de bien support situé à la ligne " + compteur
+						+ " est incomplet";
 				this.problemesDeCoherence.add(s);
 				resultat = false;
 			}
+			compteur++ ;
 		}
 
 		if (this.getTypeBiensRetenus().size() < 1) {
