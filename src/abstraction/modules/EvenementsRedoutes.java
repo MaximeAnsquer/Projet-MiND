@@ -155,7 +155,7 @@ public class EvenementsRedoutes extends Module {
 	}
 	
 	public String toString(){
-		return "Evenements redoutés";
+		return "Evénements redoutés";
 	}
 	
 	/*M�thode qui permet de lire le fichier xml pour importer les �venements qu'il contient*/

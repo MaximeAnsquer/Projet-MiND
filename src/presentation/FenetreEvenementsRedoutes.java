@@ -153,10 +153,10 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		}
 		
-		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-2).setPreferredWidth(200);
+		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-2).setPreferredWidth(100);
 		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(150);
 		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(150);
-		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5).setPreferredWidth(200);
+		this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5).setPreferredWidth(250);
 		
 		/*Puis on construit la JCombobox associ�e � la Gravit�*/
 		
@@ -176,7 +176,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	gravColumn.setCellEditor(new DefaultCellEditor(comboBoxgrav));
 	
 	
-	gravColumn.setPreferredWidth(200);
+	gravColumn.setPreferredWidth(100);
 	gravColumn.setMaxWidth(250);
 	
 	/*TableColumn nameColumn =this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5);

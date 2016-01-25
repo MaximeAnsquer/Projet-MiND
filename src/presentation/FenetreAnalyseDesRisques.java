@@ -47,11 +47,11 @@ public class FenetreAnalyseDesRisques extends JPanel{
 			add(scrollPane);
 			
 			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-3).setPreferredWidth(400);
-			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(400);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-4).setPreferredWidth(600);
 			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-2).setPreferredWidth(250);
-			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-1).setPreferredWidth(300);
-			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5).setPreferredWidth(600);
-			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-6).setPreferredWidth(700);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-1).setPreferredWidth(400);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-5).setPreferredWidth(400);
+			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-6).setPreferredWidth(300);
 			this.tableau.getColumnModel().getColumn(modele.getColumnCount()-7).setPreferredWidth(800);
 			
 			
