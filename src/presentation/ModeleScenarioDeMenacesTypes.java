@@ -183,7 +183,9 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 			resultat=scenarioType.getBienSupport().getIntitule();
 		}
 		if(columnIndex==COLONNE_TYPE){
-			resultat=scenarioType.getTypeBienSupport().getIntitule();
+			String intituleTypeBien = scenarioType.getTypeBienSupport().getIntitule();
+			String idTypeBien = scenarioType.getTypeBienSupport().getId();
+			resultat=intituleTypeBien + " (" + idTypeBien + ")";
 		}
 		if(columnIndex==COLONNE_ID){
 			resultat=scenarioType.getId();
