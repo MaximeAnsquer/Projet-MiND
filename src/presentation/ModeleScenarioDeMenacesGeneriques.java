@@ -76,8 +76,9 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
 		case COLONNE_TYPEBIENSUPPORT:
-			String intituleTypeBien = this.moduleCourant.getScenarioGenerique(rowIndex).getTypeBienSupport();
-			return intituleTypeBien ;
+			String intituleTypeBien = this.moduleCourant.getScenarioGenerique(rowIndex).getTypeBienSupport().getIntitule();
+			String idTypeBien = this.moduleCourant.getScenarioGenerique(rowIndex).getTypeBienSupport().getId();
+			return intituleTypeBien + " (" + idTypeBien + ")" ;
 		case COLONNE_ID:
 			return this.moduleCourant.getScenarioGenerique(rowIndex).getId();
 		case COLONNE_INTITULE:
@@ -130,11 +131,13 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 			switch (columnIndex) {
 
 			case COLONNE_TYPEBIENSUPPORT:
+				/*
 				if (this.typologieDesBiensSupports
 						.isTypeBienRetenu((String) aValue)) {
 					scenario.setTypeBienSupport((String) aValue);
 				}
 				break;
+				*/
 			case COLONNE_ID:
 				scenario.setId((String) aValue);
 				break;

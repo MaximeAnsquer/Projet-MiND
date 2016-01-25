@@ -3,6 +3,8 @@ package abstraction.autres;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import com.sun.glass.ui.CommonDialogs.Type;
+
 /**
  * Classe representant les scénarios génériques représentés en mémoire par : un
  * type de bien, un numéro Id, un intitule, un ensemble de sources menaces et de
@@ -14,14 +16,14 @@ import java.util.Hashtable;
  */
 
 public class ScenarioGenerique {
-	private String typeBienSupport;
+	private TypeBien typeBienSupport;
 	private String Id;
 	private String intituleGenerique;
 	private Hashtable<String,Boolean> CriteresSup; // représente les critères que l'utilisateur peut rajouter
 	private boolean retenu;
 
 	// Constructeur
-	public ScenarioGenerique(String type, String id, String intitule,
+	public ScenarioGenerique(TypeBien type, String id, String intitule,
 			Hashtable<String,Boolean> criteres, boolean retenu) {
 		this.typeBienSupport = type;
 		this.Id = id;
@@ -31,7 +33,7 @@ public class ScenarioGenerique {
 	}
 	
 	// Contructeur pour la classe mère
-	public ScenarioGenerique(String type, String id, String intitule, boolean retenu) {
+	public ScenarioGenerique(TypeBien type, String id, String intitule, boolean retenu) {
 		this.typeBienSupport = type;
 		this.Id = id;
 		this.intituleGenerique = intitule;
@@ -39,14 +41,14 @@ public class ScenarioGenerique {
 	}
 	
 	// Constructeur : Nouveau Type de bien support défini précédemment
-	public ScenarioGenerique(String type, String id, String intitule) {
+	public ScenarioGenerique(TypeBien type, String id, String intitule) {
 		this(type, id, intitule, new Hashtable<String,Boolean>(),
 				true);
 	}
 
 	// Constructeur : Scénario non retenu
 	public ScenarioGenerique() {
-		this("", "", "",
+		this(new TypeBien(), "", "",
 				new Hashtable<String,Boolean>(), false);
 	}
 	
@@ -68,11 +70,11 @@ public class ScenarioGenerique {
 		this.intituleGenerique = intitule;
 	}
 	
-	public String getTypeBienSupport() {
+	public TypeBien getTypeBienSupport() {
 		return typeBienSupport;
 	}
 
-	public void setTypeBienSupport(String typeBienSupport) {
+	public void setTypeBienSupport(TypeBien typeBienSupport) {
 		this.typeBienSupport = typeBienSupport;
 	}
 

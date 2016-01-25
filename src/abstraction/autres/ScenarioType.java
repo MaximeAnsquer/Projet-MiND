@@ -22,7 +22,7 @@ public class ScenarioType extends ScenarioGenerique {
 	private int vraisemblanceIntrinseque;
 	private int vraisemblanceReelle;
 	
-	public ScenarioType(String type, String id, String intitule,
+	public ScenarioType(TypeBien type, String id, String intitule,
 			Hashtable<String, Boolean> criteres,
 			ArrayList<SourceDeMenace> menaces, Bien bienSupport,
 			String intituleConcret, int intrinseque, int reelle, boolean retenu) {
@@ -36,7 +36,7 @@ public class ScenarioType extends ScenarioGenerique {
 		this.vraisemblanceReelle=reelle;
 	}
 	
-	public ScenarioType(String type, String id, String intitule,
+	public ScenarioType(TypeBien type, String id, String intitule,
 			Hashtable<String, Boolean> criteres,
 			ArrayList<SourceDeMenace> menaces, Bien bienSupport, boolean retenu) {
 		
@@ -56,7 +56,7 @@ public class ScenarioType extends ScenarioGenerique {
 	}
 	
 	public ScenarioType(){
-		super("","","",new Hashtable<String, Boolean>(),true);
+		super(new TypeBien(),"","",new Hashtable<String, Boolean>(),true);
 		this.menaces=new ArrayList<SourceDeMenace>();
 		this.criteresTypes=new Hashtable<String, Boolean>();
 		this.intituleConcret="";

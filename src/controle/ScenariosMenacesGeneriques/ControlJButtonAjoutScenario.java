@@ -58,7 +58,7 @@ public class ControlJButtonAjoutScenario implements ActionListener {
 									.showInputDialog("Intitulé du scénario ?");
 						}
 						this.modele.addScenarioGenerique(new ScenarioGenerique(
-								typeBienSupport, Id, intituleScenario),
+								this.modele.getTypologieBiensSupports().getTypeBien(typeBienSupport), Id, intituleScenario),
 								this.tableau.getSelectedRow() + 1);
 					}
 				}
