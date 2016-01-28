@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import abstraction.Etude;
 
 /** 
- * Classe visant � factoriser tout ce qui est commun aux diff�rents modules.
+ * Classe visant à factoriser tout ce qui est commun aux différents modules.
  * @author Maxime Ansquer 
  */
 
