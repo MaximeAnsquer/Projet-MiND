@@ -60,14 +60,6 @@ public class Metriques extends Module {
 		
 		this.etude = etude;
 		
-		/**
-		 * TODO : Commente pour faire des tests, a decommenter par la suite
-		 */
-		this.predecesseurs.add(this.getEtude().getModule("CriteresDeSecurite"));
-//		this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesTypes"));
-//		this.successeurs.add(this.getEtude().getModule("AnalyseDesRisques"));
-//		this.successeurs.add(this.getEtude().getModule("MatriceDesRisques"));
-		
 		this.cree = false;
 		this.coherent = false;
 		this.disponible = false;
@@ -279,6 +271,12 @@ public class Metriques extends Module {
 			this.problemesDeCoherence.add(probleme);
 			resultat = false;
 		}		
+		return resultat;
+	}
+	
+	public ArrayList<Module> getPredecesseurs(){
+		ArrayList<Module> resultat = new ArrayList<Module>();
+		resultat.add(this.getEtude().getModule("CriteresDeSecurite"));
 		return resultat;
 	}
 	
