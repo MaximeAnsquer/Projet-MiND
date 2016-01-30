@@ -414,6 +414,9 @@ public class FenetreMetriques extends JPanel {
 				Color clr = new Color(255, 255, 255);
 				component.setBackground(clr);
 			}
+			if(isSelected && column != 0){
+				component.setBackground(new Color(184, 207, 229));
+				}
 			return component;
 		}
 	}

@@ -82,7 +82,6 @@ public class MainMaximeAnsquer extends JFrame {
 	private JButton boutonVerifier;
 	private JList jlistProblemes;
 	private DefaultListModel listModel;
-	private boolean keyCtrl;
 
 	public MainMaximeAnsquer(){
 
@@ -113,51 +112,10 @@ public class MainMaximeAnsquer extends JFrame {
 		}
 	}
 
-	//Permet d'utiliser les raccourcis clavier
-	private void creerKeyListener() {
-		keyCtrl = false;
-		this.addKeyListener(new KeyListener(){
-
-			public void keyTyped(KeyEvent e) {
-				System.out.println("keyTyped");				
-			}
-
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_CONTROL){
-					keyCtrl = true;
-				}
-				else if(keyCtrl){
-					keyCtrl = false;
-					switch(e.getKeyCode()){					
-					case KeyEvent.VK_S:						
-						enregistrerEtude();
-						break;
-					case KeyEvent.VK_N:
-						nouvelleEtude();
-						break;
-					case KeyEvent.VK_O:
-						if(existeAuMoinsUneEtude()){
-							choisirEtude();							
-						}						
-					}
-				}
-			}
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_CONTROL){
-					keyCtrl = false;
-				}			
-			}			
-		});		
-	}
-
 	private void ajouterListenerFermetureFenetre() {		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 				if(etudeEnCours != null){
-//					int decision = JOptionPane.showConfirmDialog(null, 
-//							"Enregistrer l'étude en cours avant de fermer le programme ?", "Fermeture du programme", 
-//							JOptionPane.YES_NO_OPTION,
-//							JOptionPane.QUESTION_MESSAGE);
 					int confirmation = JOptionPane.showConfirmDialog(null, "Enregistrer l'étude en cours avant de quitter ?");
 					switch(confirmation){
 					case JOptionPane.YES_OPTION:
@@ -467,6 +425,8 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	public void enregistrerEtude(){
+		
+		long t0 = System.currentTimeMillis();
 
 		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme temps que la fenetre)
 		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
@@ -487,6 +447,8 @@ public class MainMaximeAnsquer extends JFrame {
 			try {
 				// Sérialisation de l'objet 
 				xstream.toXML(etudeEnCours, fos);
+				long t1 = System.currentTimeMillis();
+				System.out.println("Temps mis pour enregistrer l'étude : " + (t1-t0)/1000.0 + "s");
 				JOptionPane.showMessageDialog(null, "Etude enregistrée avec succès");
 			} finally {
 				// On s'assure de fermer le flux quoi qu'il arrive
@@ -559,6 +521,7 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	public Etude ouvrirEtude(String urlEtude){
+		long tempsAvantOuverture = System.currentTimeMillis();
 		System.out.println("Ouverture de l'étude : " + urlEtude);
 		Etude etudeOuverte = new Etude();
 		try {
@@ -568,6 +531,8 @@ public class MainMaximeAnsquer extends JFrame {
 			FileInputStream fis = new FileInputStream(new File(urlEtude));			
 			// Désérialisation du fichier vers un nouvel objet article
 			etudeOuverte = (Etude) xstream.fromXML(fis);
+			long tempsApresOuverture = System.currentTimeMillis();
+			System.out.println("Temps mis pour ouvrir l'étude : " + (tempsApresOuverture - tempsAvantOuverture)/1000.0 + "s"  );
 		} catch (FileNotFoundException e) {	
 			e.printStackTrace();
 		} catch (IOException ioe) {
