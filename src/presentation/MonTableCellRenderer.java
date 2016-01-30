@@ -41,7 +41,6 @@ public class MonTableCellRenderer extends DefaultTableCellRenderer {
 			}
 		}
 			
-			
 	cell.setBackground(clr);
 	return cell;
 

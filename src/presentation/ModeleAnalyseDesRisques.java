@@ -33,8 +33,8 @@ public class ModeleAnalyseDesRisques extends AbstractTableModel{
 	this.entetes.add("Bien support");
 	this.entetes.add("Scenario concret");
 	this.entetes.add("Niveau vraisemblance");
-	this.entetes.add("est retenu");
-	this.entetes.add("Nom risque");
+	this.entetes.add("Retenu");
+	this.entetes.add("Intitulé du risque");
 		
 	
 	}

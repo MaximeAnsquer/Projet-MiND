@@ -1,14 +1,19 @@
 package presentation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -54,7 +59,9 @@ this.modele=new ModeleMatriceDesRisques(matrice);
         JScrollPane scrollPane = new JScrollPane(tableau);
 		this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		add(scrollPane);
+		//this.add(partieDuHaut(), BorderLayout.NORTH);
+		
+		add(scrollPane,BorderLayout.NORTH);
 		
 		tableau.setDefaultRenderer(Object.class, new MonTableCellRenderer());
 		
@@ -106,12 +113,15 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 		}
 		
 		
+		
 		this.creerZoneDescription();
 		
 		tableau.setRowHeight(50);
 		
 		
 		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
+		
+		
 		
 		this.setVisible(true);
 	
@@ -142,7 +152,7 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 		
 		JScrollPane areaScrollPane = new JScrollPane(this.zoneDescription);
 		areaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 150));
+		areaScrollPane.setPreferredSize(new Dimension(200, 100));
 		areaScrollPane.setBorder(
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createCompoundBorder(
@@ -150,9 +160,42 @@ this.modele=new ModeleMatriceDesRisques(matrice);
 								BorderFactory.createEmptyBorder(5,5,5,5)),
 								areaScrollPane.getBorder()));
 		
-		this.add(label);
-		this.add(areaScrollPane);
+		this.add(label,BorderLayout.SOUTH);
+		this.add(areaScrollPane,BorderLayout.SOUTH);
 	}
 	
+	private JButton boutonModifierCellule() {
+		 final JButton bouton = new JButton("Modifier la couleur de la cellule");
+		bouton.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				((FenetreMatriceDesRisques)bouton.getParent().getParent()).ChoixCouleur();
+				
+			}
+			});
+		
+		return bouton;
+	}
+	private JColorChooser ChoixCouleur(){
+		JColorChooser choix=new JColorChooser();
+		Color couleur=choix.showDialog(this, "Choix couleur cellule", tableau.getSelectionBackground());
+		if(couleur!=null){
+			
+			tableau.setSelectionBackground(couleur);
+			
+		}
+		return choix;
+		}
+	
+	
+	
+	private JPanel partieDuHaut() {
+		JPanel jpanel = new JPanel();
+		jpanel.setPreferredSize(new Dimension(50,150));
+		jpanel.add(boutonModifierCellule());
+		
+		//		jpanel.add(boutonModifierDescription());
+		return jpanel;
+	}
 	 
 }

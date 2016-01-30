@@ -7,17 +7,17 @@ import presentation.ModeleMatriceDesRisques;
 
 public class MatriceDesRisques extends Module {
 	
-	/*Ce module synthétise l'etude effectuée en ce sens qu'elle ordonne différents "risques" tels qu'ils ont été définis 
+	/*Ce module synthï¿½tise l'etude effectuï¿½e en ce sens qu'elle ordonne diffï¿½rents "risques" tels qu'ils ont ï¿½tï¿½ dï¿½finis 
 	 * dans le module AnalyseDesRisques.
-	 * Les intitulés de ces risques sont placés dans un tableau; en colonne sont précisés les niveaux de gravité qui 
-	 * leurs sont associés,
+	 * Les intitulï¿½s de ces risques sont placï¿½s dans un tableau; en colonne sont prï¿½cisï¿½s les niveaux de gravitï¿½ qui 
+	 * leurs sont associï¿½s,
 	 * en ligne les niveaux de vraisemblance que ces risques induisent.
 	 */
 	
 
 	
-	/*les variables d'instance sont l'etude en cours, le tableau contenant les risques, l'analyse des risques effectuée
-	 * avant, et le nombre de niveaux de vraisemblance définis dans le module métriques, qui serviront à définir les entêtes 
+	/*les variables d'instance sont l'etude en cours, le tableau contenant les risques, l'analyse des risques effectuï¿½e
+	 * avant, et le nombre de niveaux de vraisemblance dï¿½finis dans le module mï¿½triques, qui serviront ï¿½ dï¿½finir les entï¿½tes 
 	 * du tableau.
 	 */
 	private Etude etude;
@@ -68,7 +68,7 @@ public class MatriceDesRisques extends Module {
 				for (int k=0;k<this.analysedesrisques.getAnalyseDesRisques().size();k++){
 					
 					
-					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getRetenu()==true&&this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j){
+					if(this.analysedesrisques.getAnalyseDesRisques().get(k).getRetenu()==true&&this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauGravite()==i && this.analysedesrisques.getAnalyseDesRisques().get(k).getNiveauVraisemblance()==j&&this.matrice[a-i][j].contains(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule())!=true){
 						
 		this.matrice[a-i][j].add(this.analysedesrisques.getAnalyseDesRisques().get(k).getIntitule());
 		
@@ -97,7 +97,7 @@ public class MatriceDesRisques extends Module {
 	}
 		}
 	
-	/*Méthodes
+	/*Mï¿½thodes
 	 * 
 	 */
 

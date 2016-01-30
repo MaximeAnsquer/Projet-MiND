@@ -276,7 +276,7 @@ this.setAnalyseDesRisques(nouvellean.getAnalyseDesRisques());
 				resultat=false;
 			}
 			
-for(int k=0;k<this.getAnalyseDesRisques().size();k++){
+/*for(int k=0;k<this.getAnalyseDesRisques().size();k++){
 				
 				if(k!=i){
 					
@@ -288,7 +288,7 @@ for(int k=0;k<this.getAnalyseDesRisques().size();k++){
 						
 					}
 				}
-			}
+			}*/
 			
 		}
 		return resultat;
