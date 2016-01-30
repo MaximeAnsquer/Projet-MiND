@@ -5,15 +5,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -26,7 +23,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumnModel;
 
 import abstraction.autres.Bien;
 import abstraction.modules.BiensSupports;
@@ -41,9 +37,7 @@ public class FenetreBiensSupports extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
-	private JTextArea zoneDescription;
 	private JTextArea descriptionTypesBiens;
-	private JButton boutonModifierDescription;
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensSupports biensSupports;
@@ -58,24 +52,9 @@ public class FenetreBiensSupports extends JPanel{
 			comboBox.addItem((String)biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i]);
 		}
 		table.getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));
-		table.addMouseListener(new MouseListener(){
-			public void mouseClicked(MouseEvent e) {
-				zoneDescription.setText(getBienSelectionne().getDescription());
-				boutonModifierDescription.setEnabled(false);
-			}
-			public void mousePressed(MouseEvent e) {
-			}
-			public void mouseReleased(MouseEvent e) {
-			}
-			public void mouseEntered(MouseEvent e) {
-			}
-			public void mouseExited(MouseEvent e) {
-			}			
-		});
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(new JScrollPane(table));
 		this.add(descriptionTypesBiens());
-		this.add(zoneDescription());
 		this.add(partieBoutons());
 		if (biensSupports.getNomColonnesSup().size()>0){
 			boutonSupprimerColonne.setEnabled(true);
@@ -120,36 +99,6 @@ public class FenetreBiensSupports extends JPanel{
 								areaScrollPane.getBorder()));
 		return areaScrollPane;
 	}
-
-	private JScrollPane zoneDescription() {
-		String valeurInitiale = "";		
-		zoneDescription = new JTextArea(valeurInitiale);
-		zoneDescription.setLineWrap(true);
-		zoneDescription.setWrapStyleWord(true);
-		zoneDescription.setFont(new Font("Arial", Font.PLAIN, 15));
-		
-		zoneDescription.addKeyListener(new KeyListener(){
-			public void keyTyped(KeyEvent e) {
-				boutonModifierDescription.setEnabled(true);
-			}
-			public void keyPressed(KeyEvent e) {
-			}
-			public void keyReleased(KeyEvent e) {
-			}
-		});
-		
-		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
-		areaScrollPane.setVerticalScrollBarPolicy(
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 150));
-		areaScrollPane.setBorder(
-				BorderFactory.createCompoundBorder(
-						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Description du bien selectionne"),
-								BorderFactory.createEmptyBorder(5,5,5,5)),
-								areaScrollPane.getBorder()));
-		return areaScrollPane;
-	}
 	
 	private JPanel partieBoutons() {
 		JPanel jpanel = new JPanel();
@@ -157,33 +106,7 @@ public class FenetreBiensSupports extends JPanel{
 		jpanel.add(boutonSupprimerLigne());
 		jpanel.add(boutonAjouterColonne());
 		jpanel.add(boutonSupprimerColonne());
-		jpanel.add(boutonModifierDescription());
 		return jpanel;
-	}
-	
-	private JButton boutonModifierDescription() {
-		this.boutonModifierDescription = new JButton("Modifier la description");
-		boutonModifierDescription.setEnabled(false);
-		
-		boutonModifierDescription.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				String nouvelleDescription = zoneDescription.getText();
-				getBienSelectionne().setDescription(nouvelleDescription);
-				boutonModifierDescription.setEnabled(false);
-			}
-		});
-		return boutonModifierDescription;
-	}
-	
-	private Bien getBienSelectionne(){
-		Bien b;
-		try{
-			b = biensSupports.getBien(table.getSelectedRow());
-		}
-		catch(ArrayIndexOutOfBoundsException e){
-			b = biensSupports.getBien(0);
-		}
-		return b;
 	}
 
 	private JButton boutonSupprimerColonne() {
@@ -313,12 +236,15 @@ public class FenetreBiensSupports extends JPanel{
 					}
 				}
 			} while (intitule.equals(""));
-			Object[] possibilities = biensSupports.getTypologie().getIntituleTypeBiensRetenus();
-			String type = (String)possibilities[0];
 			String description = "";
 			do{
 				description = JOptionPane.showInputDialog("Description ?");
 			} while (description.equals(""));
+			Object[] possibilities = biensSupports.getTypologie().getIntituleTypeBiensRetenus();
+			String type = "";
+			do{
+				type = (String)JOptionPane.showInputDialog(null, "Quel type de bien support ?","Type de bien", JOptionPane.QUESTION_MESSAGE,new ImageIcon(),possibilities,possibilities[0]);
+			} while (type.equals(""));
 			Bien bien = new Bien(description, intitule, type, contenuColonneSup);
 			biensSupports.ajouterBien(bien);
 			boutonSupprimerLigne.setEnabled(true);
