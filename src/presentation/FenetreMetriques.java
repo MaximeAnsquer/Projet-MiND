@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,11 +14,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -41,14 +43,16 @@ import abstraction.modules.Metriques;
 public class FenetreMetriques extends JPanel {
 
 	private JComboBox comboBox;
-	private JPanel metriqueEnCours;
 	private Metrique metriqueCourante;
 	private Metriques metriques;
 	private JPanel jpanel = new JPanel(new BorderLayout());
 	private JTable table;
-	private JTextArea zoneDescription;
-	private JButton boutonModifierDescription;
 	private JButton boutonSupprimer;
+	private JFrame petiteFenetre;
+	private JTextArea textAreaPetiteFenetre;
+	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier." +
+			"\n- Utilisez le menu déroulant en haut à gauche pour sélectionner un autre critère de sécurité." +
+			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier.";
 
 	public FenetreMetriques(Metriques metriques){
 		this.metriques = metriques;
@@ -56,8 +60,6 @@ public class FenetreMetriques extends JPanel {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());		
 
-
-		//		this.add(zoneDescription());		
 		this.add(partieDuBas(), BorderLayout.NORTH);			
 		this.add(jpanel, BorderLayout.CENTER);
 
@@ -70,6 +72,8 @@ public class FenetreMetriques extends JPanel {
 		metriqueCourante = getMetriqueCourante();
 		ModeleDynamiqueObjet modele = new ModeleDynamiqueObjet(metriqueCourante);
 		table = new JTable(modele);
+
+		this.creerPetiteFenetre();
 
 		//On n'autorise la selection que d'une seule ligne a la fois
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -85,13 +89,16 @@ public class FenetreMetriques extends JPanel {
 			}
 
 			public void mousePressed(MouseEvent e) {
-				//				zoneDescription.setText(getNiveauSelectionne().getDescription());
-				//				boutonModifierDescription.setEnabled(false);
 				boutonSupprimer.setEnabled(true);
+				if(SwingUtilities.isRightMouseButton(e)){
+					selectionnerLaLigne(e);
+					setPetiteFenetre();
+				}
 			}
 			public void mouseReleased(MouseEvent e) {
-				//				zoneDescription.setText(getNiveauSelectionne().getDescription());
-				//				boutonModifierDescription.setEnabled(false);
+				if(SwingUtilities.isRightMouseButton(e)){
+					petiteFenetre.setVisible(false);
+				}
 			}
 			public void mouseEntered(MouseEvent e) {
 			}
@@ -129,15 +136,50 @@ public class FenetreMetriques extends JPanel {
 		jpanel.validate();
 	}	
 
-	private NiveauDeMetrique getNiveauSelectionne() {
-		NiveauDeMetrique n;
-		try{
-			n = ( (ModeleDynamiqueObjet)table.getModel() ).metrique.getNiveau(table.getSelectedRow());
-		}
-		catch(ArrayIndexOutOfBoundsException e){
-			n = ( (ModeleDynamiqueObjet)table.getModel() ).metrique.getNiveau(table.getSelectedRow());
-		}
-		return n;
+	protected void selectionnerLaLigne(MouseEvent e) {
+		// get the coordinates of the mouse click
+		Point p = e.getPoint();
+
+		// get the row and column indexes that contains that coordinate
+		int rowNumber = table.rowAtPoint(p);
+		int colNumber = table.columnAtPoint(p);
+
+		table.changeSelection(rowNumber, colNumber, false, true);
+
+	}
+
+	private void creerPetiteFenetre() {
+		this.petiteFenetre = new JFrame("Détails de la cellule");
+		this.creerTextAreaPetiteFenetre();
+		petiteFenetre.add(textAreaPetiteFenetre);	
+		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
+		petiteFenetre.setMinimumSize(new Dimension(300,0));		
+	}
+
+	private void creerTextAreaPetiteFenetre() {
+		this.textAreaPetiteFenetre = new JTextArea("Laul");		
+		textAreaPetiteFenetre.setEditable(false);
+		textAreaPetiteFenetre.setFont(new Font("Arial", Font.PLAIN, 17));
+		textAreaPetiteFenetre.setLineWrap(true);
+		textAreaPetiteFenetre.setWrapStyleWord(true);		
+	}
+
+	protected void setPetiteFenetre() {
+		int row = this.table.getSelectedRow();
+		int col = this.table.getSelectedColumn();
+		if(row != -1 && col != -1){
+			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+			String contenuCellule = modele.getValueAt(row, col).toString();
+			this.textAreaPetiteFenetre.setText(contenuCellule);
+			petiteFenetre.pack();
+			petiteFenetre.pack();
+			Point positionSouris = MouseInfo.getPointerInfo().getLocation();
+			int xSouris = (int) positionSouris.getX();
+			int ySouris = (int) positionSouris.getY();
+			Point positionDeLaFenetre = new Point(xSouris - 1, ySouris + 1);
+			petiteFenetre.setLocation(positionDeLaFenetre);
+			petiteFenetre.setVisible(true);	
+		}			
 	}
 
 	private Metrique getMetriqueCourante() {
@@ -158,21 +200,19 @@ public class FenetreMetriques extends JPanel {
 		jp.add(boutonAjouter());
 		jp.add(boutonSupprimer());
 		jp.add(boutonAide());
-		//		jp.add(boutonModifier());
 		return jp;
 	}
-	
+
 	private JButton boutonAide() {
 		JButton bouton = new JButton("Aide");
 		bouton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				String aide = "- Double-cliquez sur une cellule pour la modifier." +
-						"\n- Utilisez le menu déroulant en haut à gauche pour sélectionner un autre critère de sécurité.";
+				String aide = stringAide;
 				JOptionPane.showMessageDialog(null, aide, "Aide", JOptionPane.INFORMATION_MESSAGE);
-				
+
 			}
-			
+
 		});
 		return bouton;
 	}
@@ -216,50 +256,6 @@ public class FenetreMetriques extends JPanel {
 
 		});
 		return comboBox;
-	}
-
-	private JPanel tableau(JTable table, String intitule) {
-
-		JPanel j = new JPanel();
-		j.setLayout(new BoxLayout(j, BoxLayout.Y_AXIS));
-		j.add(new JLabel(intitule));
-		j.add(new JScrollPane(table));
-		return j;
-	}
-
-	private JScrollPane zoneDescription() {
-
-		zoneDescription = new JTextArea();
-		zoneDescription.setLineWrap(true);
-		zoneDescription.setWrapStyleWord(true);
-
-		zoneDescription.addKeyListener(new KeyListener(){
-
-			public void keyTyped(KeyEvent e) {
-				if(table.getSelectedRow()>-1){
-					//					boutonModifierDescription.setEnabled(true);
-				}
-			}
-
-			public void keyPressed(KeyEvent e) {
-			}
-
-			public void keyReleased(KeyEvent e) {
-			}
-
-		});
-
-		JScrollPane areaScrollPane = new JScrollPane(zoneDescription);
-		areaScrollPane.setVerticalScrollBarPolicy(
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 150));
-		areaScrollPane.setBorder(
-				BorderFactory.createCompoundBorder(
-						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Description du niveau"),
-								BorderFactory.createEmptyBorder(5,5,5,5)),
-								areaScrollPane.getBorder()));
-		return areaScrollPane;
 	}
 	//---Modele---
 
@@ -416,7 +412,7 @@ public class FenetreMetriques extends JPanel {
 			}
 			if(isSelected && column != 0){
 				component.setBackground(new Color(184, 207, 229));
-				}
+			}
 			return component;
 		}
 	}

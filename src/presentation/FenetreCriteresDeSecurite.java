@@ -47,15 +47,19 @@ public class FenetreCriteresDeSecurite extends JPanel {
 	private CriteresDeSecurite cds;
 	private JFrame petiteFenetre;
 	private JTextArea textAreaPetiteFenetre;
+	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier. \n- Faites un clic-droit sur une cellule pour afficher son contenu en entier.";
 
 	public FenetreCriteresDeSecurite(CriteresDeSecurite cds){
-
+		//On set le module
 		this.cds = cds;
-
+		
+		//On rend le fenêtre visible
 		this.setVisible(true);
-
+		
+		//On crée la fenêtre qui détaille les cellules lors d'un clic droit
 		this.creerPetiteFenetre();
 
+		//On crée le tableau des sources de menaces
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -109,15 +113,10 @@ public class FenetreCriteresDeSecurite extends JPanel {
 	}
 
 	protected void selectionnerLaLigne(MouseEvent e) {
-		// get the coordinates of the mouse click
 		Point p = e.getPoint();
-
-		// get the row and column indexes that contains that coordinate
 		int rowNumber = table.rowAtPoint(p);
 		int colNumber = table.columnAtPoint(p);
-
-		table.changeSelection(rowNumber, colNumber, false, true);
-		
+		table.changeSelection(rowNumber, colNumber, false, true);		
 	}
 
 	protected void setPetiteFenetre() {
@@ -127,12 +126,13 @@ public class FenetreCriteresDeSecurite extends JPanel {
 			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
 			String contenuCellule = modele.getValueAt(row, col).toString();
 			this.textAreaPetiteFenetre.setText(contenuCellule);
-			petiteFenetre.pack();
 			Point positionSouris = MouseInfo.getPointerInfo().getLocation();
 			int xSouris = (int) positionSouris.getX();
 			int ySouris = (int) positionSouris.getY();
 			Point positionDeLaFenetre = new Point(xSouris - 1, ySouris + 1);
 			petiteFenetre.setLocation(positionDeLaFenetre);
+			petiteFenetre.pack();
+			petiteFenetre.pack();
 			petiteFenetre.setVisible(true);	
 		}			
 	}
@@ -141,7 +141,6 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		this.petiteFenetre = new JFrame("Détails de la cellule");
 		this.creerTextAreaPetiteFenetre();
 		petiteFenetre.add(textAreaPetiteFenetre);	
-		//		petiteFenetre.setPreferredSize(new Dimension(400,100));
 		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
 		petiteFenetre.setMinimumSize(new Dimension(300,0));
 	}
@@ -167,28 +166,12 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		bouton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Double-cliquez sur une cellule pour la modifier.", "Aide", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, stringAide, "Aide", JOptionPane.INFORMATION_MESSAGE);
 
 			}
 
 		});
 		return bouton;
-	}
-
-	private JButton boutonModifierDescription() {
-		this.boutonModifierDescription = new JButton("Modifier la description");
-		boutonModifierDescription.setEnabled(false);
-
-		boutonModifierDescription.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				table.validate();
-				table.repaint();
-				boutonModifierDescription.setEnabled(false);
-			}
-
-		});
-		return boutonModifierDescription;
 	}
 
 	private JButton boutonSupprimer() {

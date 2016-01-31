@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,10 +25,12 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
+import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
 import presentation.FenetreMetriques.Renderer;
 
 import abstraction.autres.SourceDeMenace;
@@ -43,11 +48,22 @@ public class FenetreSourcesDeMenaces extends JPanel {
 	private JButton boutonModifierIntitule;
 	private JButton boutonSupprimer;
 	private SourcesDeMenaces sdm;
+	private JFrame petiteFenetre;
+	private JTextArea textAreaPetiteFenetre;
+	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier. \n- Faites un clic-droit sur une cellule pour afficher son contenu en entier.";
+
 
 	public FenetreSourcesDeMenaces(SourcesDeMenaces sdm){
+		//On set le module
 		this.sdm = sdm;
+		
+		//On rend le fenêtre visible
 		this.setVisible(true);
+		
+		//On crée la fenêtre qui détaille les cellules lors d'un clic droit
+		this.creerPetiteFenetre();
 
+		//On crée la tableau des sources de menaces
 		table = new JTable(new ModeleDynamiqueObjet());
 
 		//On redimensionne les colonnes 
@@ -70,8 +86,15 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 			public void mousePressed(MouseEvent e) {			
 				boutonSupprimer.setEnabled(true);
+				if(SwingUtilities.isRightMouseButton(e)){
+					selectionnerLaLigne(e);
+					setPetiteFenetre();
+				}
 			}
 			public void mouseReleased(MouseEvent e) {
+				if(SwingUtilities.isRightMouseButton(e)){
+					petiteFenetre.setVisible(false);
+				}
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
@@ -92,32 +115,45 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		this.add(new JScrollPane(table), BorderLayout.CENTER);			
 	}
 
-	private JScrollPane zoneIntitule() {
+	protected void selectionnerLaLigne(MouseEvent e) {
+		Point p = e.getPoint();
+		int rowNumber = table.rowAtPoint(p);
+		int colNumber = table.columnAtPoint(p);
+		table.changeSelection(rowNumber, colNumber, false, true);		
+	}
+	
+	protected void setPetiteFenetre() {
+		int row = this.table.getSelectedRow();
+		int col = this.table.getSelectedColumn();
+		if(row != -1 && col != -1){
+			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+			String contenuCellule = modele.getValueAt(row, col).toString();
+			this.textAreaPetiteFenetre.setText(contenuCellule);
+			Point positionSouris = MouseInfo.getPointerInfo().getLocation();
+			int xSouris = (int) positionSouris.getX();
+			int ySouris = (int) positionSouris.getY();
+			Point positionDeLaFenetre = new Point(xSouris - 1, ySouris + 1);
+			petiteFenetre.setLocation(positionDeLaFenetre);
+			petiteFenetre.pack();
+			petiteFenetre.pack();
+			petiteFenetre.setVisible(true);	
+		}			
+	}
 
-		zoneIntitule = new JTextArea();
-		zoneIntitule.setLineWrap(true);
-		zoneIntitule.setWrapStyleWord(true);
+	private void creerPetiteFenetre() {
+		this.petiteFenetre = new JFrame("Détails de la cellule");
+		this.creerTextAreaPetiteFenetre();
+		petiteFenetre.add(textAreaPetiteFenetre);	
+		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
+		petiteFenetre.setMinimumSize(new Dimension(300,0));
+	}
 
-		zoneIntitule.addKeyListener(new KeyListener(){
-			public void keyTyped(KeyEvent e) {
-				if(table.getSelectedRow()>-1){
-				}				
-			}
-			public void keyPressed(KeyEvent e) {}
-			public void keyReleased(KeyEvent e) {}
-		});
-
-		JScrollPane areaScrollPane = new JScrollPane(zoneIntitule);
-		areaScrollPane.setVerticalScrollBarPolicy(
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 150));
-		areaScrollPane.setBorder(
-				BorderFactory.createCompoundBorder(
-						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Intitule de la source de menace"),
-								BorderFactory.createEmptyBorder(5,5,5,5)),
-								areaScrollPane.getBorder()));
-		return areaScrollPane;
+	private void creerTextAreaPetiteFenetre() {
+		this.textAreaPetiteFenetre = new JTextArea("Laul");		
+		textAreaPetiteFenetre.setEditable(false);
+		textAreaPetiteFenetre.setFont(new Font("Arial", Font.PLAIN, 17));
+		textAreaPetiteFenetre.setLineWrap(true);
+		textAreaPetiteFenetre.setWrapStyleWord(true);
 	}
 
 	protected SourceDeMenace getSourceSelectionnee() {
@@ -144,7 +180,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		bouton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Double-cliquez sur une cellule pour la modifier.", "Aide", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, stringAide, "Aide", JOptionPane.INFORMATION_MESSAGE);
 				
 			}
 			
