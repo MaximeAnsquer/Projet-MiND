@@ -6,11 +6,13 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import abstraction.autres.TypeBien;
+import abstraction.modules.ScenariosDeMenacesGeneriques;
 import abstraction.modules.TypologieDesBiensSupports;
 
 public class ModeleTypologieBiensSupports extends AbstractTableModel{
 	
-	private TypologieDesBiensSupports moduleCourant ; 
+	private TypologieDesBiensSupports moduleCourant ;
+	private ScenariosDeMenacesGeneriques scenariosGeneriques ;
 	private final String[] entetes = {"Id", "Intitulé", "Description", "Retenu"} ;
 	
 	public static final int COLONNE_ID = 0;
@@ -21,6 +23,11 @@ public class ModeleTypologieBiensSupports extends AbstractTableModel{
 	public ModeleTypologieBiensSupports(TypologieDesBiensSupports module) {
 		super();
 		this.moduleCourant=module;
+		this.scenariosGeneriques = (ScenariosDeMenacesGeneriques) this.moduleCourant.getEtude().getModule("ScenariosDeMenacesGeneriques");
+	}
+	
+	public ScenariosDeMenacesGeneriques getScenariosGeneriques(){
+		return this.scenariosGeneriques;
 	}
 	
 	public TypologieDesBiensSupports getModuleCourant(){

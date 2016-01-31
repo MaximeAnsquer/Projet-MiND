@@ -33,11 +33,13 @@ public class TypologieDesBiensSupports extends Module {
 	// Variable d'instance
 	// La clé de la Hashtable représente l'intitulé du type de bien
 	private ArrayList<TypeBien> tableau;
+	private ArrayList<TypeBien> typesSupprimes ;
 	private TypeBien typeBienCourant;
 
 	public TypologieDesBiensSupports() {
 		super("TypologieDesBiensSupports");
 		this.tableau = new ArrayList<TypeBien>();
+		this.typesSupprimes=new ArrayList<TypeBien>();
 		this.typeBienCourant=new TypeBien();
 		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
 		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
