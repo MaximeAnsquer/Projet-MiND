@@ -41,7 +41,7 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 		
 		Component component = super.getTableCellRendererComponent(table, value,
 				isSelected, hasFocus, row, column);
-
+		
 		if (value.equals("") || value == null) {
 			Color clr = Color.yellow;
 			component.setBackground(clr);
@@ -107,6 +107,9 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 			Color clr = new Color(255, 255, 255);
 			component.setBackground(clr);
 			this.couleursRetenus.add(clr);
+		}
+		if (isSelected) {
+			component.setBackground(new Color(184, 207, 229));
 		}
 		return component;
 	}
