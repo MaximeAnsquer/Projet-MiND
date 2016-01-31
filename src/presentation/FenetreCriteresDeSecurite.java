@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -11,9 +13,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -42,12 +45,16 @@ public class FenetreCriteresDeSecurite extends JPanel {
 	private JButton boutonModifierDescription;
 	private JButton boutonSupprimer;
 	private CriteresDeSecurite cds;
+	private JFrame petiteFenetre;
+	private JTextArea textAreaPetiteFenetre;
 
 	public FenetreCriteresDeSecurite(CriteresDeSecurite cds){
 
 		this.cds = cds;
 
 		this.setVisible(true);
+
+		this.creerPetiteFenetre();
 
 		table = new JTable(new ModeleDynamiqueObjet());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -67,13 +74,16 @@ public class FenetreCriteresDeSecurite extends JPanel {
 			public void mouseClicked(MouseEvent e) {}
 
 			public void mousePressed(MouseEvent e) {
-				//				zoneDescription.setText(getCritereSelectionne().getDescription());
-				//				boutonModifierDescription.setEnabled(false);
 				boutonSupprimer.setEnabled(true);
+				if(SwingUtilities.isRightMouseButton(e)){
+					selectionnerLaLigne(e);
+					setPetiteFenetre();
+				}
 			}
 			public void mouseReleased(MouseEvent e) {
-				//				zoneDescription.setText(getCritereSelectionne().getDescription());
-				//				boutonModifierDescription.setEnabled(false);
+				if(SwingUtilities.isRightMouseButton(e)){
+					petiteFenetre.setVisible(false);
+				}
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
@@ -83,7 +93,6 @@ public class FenetreCriteresDeSecurite extends JPanel {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				//				zoneDescription.setText(getCritereSelectionne().getDescription());
 				boutonSupprimer.setEnabled(true);
 			}			
 		});
@@ -99,12 +108,57 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 	}
 
+	protected void selectionnerLaLigne(MouseEvent e) {
+		// get the coordinates of the mouse click
+		Point p = e.getPoint();
+
+		// get the row and column indexes that contains that coordinate
+		int rowNumber = table.rowAtPoint(p);
+		int colNumber = table.columnAtPoint(p);
+
+		table.changeSelection(rowNumber, colNumber, true, false);
+		
+	}
+
+	protected void setPetiteFenetre() {
+		int row = this.table.getSelectedRow();
+		int col = this.table.getSelectedColumn();
+		if(row != -1 && col != -1){
+			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+			String contenuCellule = modele.getValueAt(row, col).toString();
+			this.textAreaPetiteFenetre.setText(contenuCellule);
+			petiteFenetre.pack();
+			Point positionSouris = MouseInfo.getPointerInfo().getLocation();
+			int xSouris = (int) positionSouris.getX();
+			int ySouris = (int) positionSouris.getY();
+			Point positionDeLaFenetre = new Point(xSouris - 1, ySouris + 1);
+			petiteFenetre.setLocation(positionDeLaFenetre);
+			petiteFenetre.setVisible(true);	
+		}			
+	}
+
+	private void creerPetiteFenetre() {
+		this.petiteFenetre = new JFrame("Détails de la cellule");
+		this.creerTextAreaPetiteFenetre();
+		petiteFenetre.add(textAreaPetiteFenetre);	
+		//		petiteFenetre.setPreferredSize(new Dimension(400,100));
+		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
+		petiteFenetre.setMinimumSize(new Dimension(300,0));
+	}
+
+	private void creerTextAreaPetiteFenetre() {
+		this.textAreaPetiteFenetre = new JTextArea("Laul");		
+		textAreaPetiteFenetre.setEditable(false);
+		textAreaPetiteFenetre.setFont(new Font("Arial", Font.PLAIN, 17));
+		textAreaPetiteFenetre.setLineWrap(true);
+		textAreaPetiteFenetre.setWrapStyleWord(true);
+	}
+
 	private JPanel partieDuHaut() {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
 		jpanel.add(boutonAide());
-		//		jpanel.add(boutonModifierDescription());
 		return jpanel;
 	}
 
@@ -114,9 +168,9 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Double-cliquez sur une cellule pour la modifier.", "Aide", JOptionPane.INFORMATION_MESSAGE);
-				
+
 			}
-			
+
 		});
 		return bouton;
 	}
