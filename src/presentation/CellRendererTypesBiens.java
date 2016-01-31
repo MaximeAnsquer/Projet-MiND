@@ -21,10 +21,12 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 		super();
 		this.module=module;
 		this.listeCouleurs = new ArrayList<Color>();
+		this.listeCouleurs.add(new Color(159 , 232 , 85)); // Vert anis
+		this.listeCouleurs.add(new Color(225, 206, 154)); // Vanille
+		this.listeCouleurs.add(new Color(247 , 255 , 60)); // Jaune clair
+		this.listeCouleurs.add(new Color(219, 101, 23));
+		// this.listeCouleurs.add(Color.red);
 		this.listeCouleurs.add(Color.cyan);
-		this.listeCouleurs.add(Color.green);
-		this.listeCouleurs.add(Color.yellow);
-		this.listeCouleurs.add(Color.red);
 		this.listeCouleurs.add(Color.pink);
 		this.listeCouleurs.add(Color.orange);
 		this.listeCouleurs.add(Color.magenta);
