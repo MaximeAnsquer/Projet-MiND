@@ -116,7 +116,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		int rowNumber = table.rowAtPoint(p);
 		int colNumber = table.columnAtPoint(p);
 
-		table.changeSelection(rowNumber, colNumber, true, false);
+		table.changeSelection(rowNumber, colNumber, false, true);
 		
 	}
 
