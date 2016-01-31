@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
 
 import presentation.FenetreBiensSupports.Renderer;
@@ -48,6 +49,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	public void creerTableau() {
 		this.modeleTableau=new ModeleTypologieBiensSupports(this.moduleCourant);
 		this.tableau = new JTable(this.modeleTableau);
+		
 		this.rendererTypeBien=new CellRendererTypesBiens(this.moduleCourant);
 		this.tableau.setDefaultRenderer(Object.class, rendererTypeBien);
 		
@@ -55,7 +57,8 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		this.tableau.addMouseListener(control);                            // PAC
 		
 		tableau.getColumnModel().getColumn(tableau.getColumnModel().getColumnCount()-1).setMaxWidth(50);
-		tableau.setFont(new Font("Arial", Font.PLAIN, 15)); tableau.setRowHeight(50);
+		this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
 		tableau.setRowHeight(50);
 		
 		//tableau.getColumnModel().getColumn(2).setPreferredWidth(1000);

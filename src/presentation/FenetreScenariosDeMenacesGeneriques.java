@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -8,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 import controle.ScenariosMenacesGeneriques.ControlJButtonAide;
 import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutColonne;
@@ -41,6 +43,10 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 	public void creerTableau() {
 		this.modeleTableau= new ModeleScenarioDeMenacesGeneriques(this.moduleCourant);
 		this.tableau = new JTable(this.modeleTableau);
+		
+		this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
+		tableau.setRowHeight(50);
 		
 		ControlJtable controlTableau = new ControlJtable(modeleTableau, tableau);
 		this.tableau.addMouseListener(controlTableau);
