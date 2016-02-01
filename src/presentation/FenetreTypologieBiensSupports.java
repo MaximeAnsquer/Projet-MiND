@@ -55,6 +55,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		
 		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC
 		this.tableau.addMouseListener(control);                            // PAC
+		this.tableau.addKeyListener(control);                              // PAC
 		
 		tableau.getColumnModel().getColumn(tableau.getColumnModel().getColumnCount()-1).setMaxWidth(50);
 		this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
