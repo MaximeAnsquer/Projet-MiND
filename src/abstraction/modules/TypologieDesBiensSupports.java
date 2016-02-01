@@ -39,7 +39,7 @@ public class TypologieDesBiensSupports extends Module {
 	public TypologieDesBiensSupports() {
 		super("TypologieDesBiensSupports");
 		this.tableau = new ArrayList<TypeBien>();
-		this.typesSupprimes=new ArrayList<TypeBien>();
+		this.setTypesSupprimes(new ArrayList<TypeBien>());
 		this.typeBienCourant=new TypeBien();
 		//this.successeurs.add(this.getEtude().getModule("Biens Supports"));
 		//this.successeurs.add(this.getEtude().getModule("ScenariosDeMenacesGeneriques"));
@@ -275,5 +275,26 @@ public class TypologieDesBiensSupports extends Module {
 			resultat = false;
 		}
 		return resultat;
+	}
+
+	public ArrayList<TypeBien> getTypesSupprimes() {
+		return typesSupprimes;
+	}
+
+	public void setTypesSupprimes(ArrayList<TypeBien> typesSupprimes) {
+		this.typesSupprimes = typesSupprimes;
+	}
+	
+	public String getIdTypesSupprimes(){
+		// On va rendre une chaine de caractère du type : "MAT,LOG, ..." avec
+		// MAT et LOG si ces types ont été supprimés par l'utilisateur
+		String s = "";
+		for (int i=0 ; i<this.typesSupprimes.size() ; i++){
+			s+=this.typesSupprimes.get(i).getId() + ",";
+		}
+		if (s.length()>1){
+			s=s.substring(0, s.length()-1);
+		}
+		return s ;
 	}
 }

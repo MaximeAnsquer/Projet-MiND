@@ -43,6 +43,9 @@ public class ModeleScenarioDeMenacesGeneriques extends AbstractTableModel {
 				entetes.add(moduleCourant.getNomColonneSup().get(i).charAt(0)+"");
 			}
 		}
+		this.moduleCourant.actualiserScenarios();
+		
+		// on supprime les Scénarios dont les types de Bien n'existent plus
 	}
 	
 	public ScenariosDeMenacesTypes getScenarioTypes(){

@@ -28,6 +28,8 @@ public class ControlJButtonSuppressionTypeBien implements Observer,
 		int[] selection = tableau.getSelectedRows();
 		
 		for(int i = selection.length - 1; i >= 0; i--){
+			modele.getModuleCourant().getTypesSupprimes().add(modele.getModuleCourant().getTypeBien(selection[i]));
+			// System.out.println(modele.getModuleCourant().getTypesSupprimes().size());
 			modele.removeTypeBien(selection[i]);
 		} 
 	}

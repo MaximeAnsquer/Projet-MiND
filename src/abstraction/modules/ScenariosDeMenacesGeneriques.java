@@ -175,6 +175,22 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		return !(critere.size()==this.tableau.size()) ;
 	}
 	
+	public void actualiserScenarios(){
+		TypologieDesBiensSupports typesBiens = (TypologieDesBiensSupports) this.etude.getModule("TypologieDesBiensSupports");
+		String idsTypesSupprimes = typesBiens.getIdTypesSupprimes();
+		System.out.println(idsTypesSupprimes);
+		if (typesBiens.getTypesSupprimes().size()!=0){
+			int j = 0;
+			while (j < this.tableau.size() && this.tableau.get(j) != null) {
+				while (j < this.tableau.size()
+						&& idsTypesSupprimes.contains(tableau.get(j).getTypeBienSupport().getId())){
+					this.tableau.remove(this.tableau.get(j));
+				}
+				j++;
+			}
+		}
+	}
+	
 	private void importerBDC() {
 		
 		bdcScenariosMenacesGeneriques = new ArrayList<ScenarioGenerique>();
