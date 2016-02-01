@@ -100,7 +100,7 @@ public class MainMaximeAnsquer extends JFrame {
 		creerBoutonVerifierCoherence();
 		ajouterListenerFermetureFenetre();
 		setJMenuBar(new BarreMenu(this));
-//		creerKeyListener();
+		//		creerKeyListener();
 		pack();
 
 		if(this.existeAuMoinsUneEtude()){
@@ -425,7 +425,7 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	public void enregistrerEtude(){
-		
+
 		long t0 = System.currentTimeMillis();
 
 		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme temps que la fenetre)
@@ -621,23 +621,22 @@ public class MainMaximeAnsquer extends JFrame {
 			if(nouveauNom != null){
 				this.etudeEnCours.setNom(nouveauNom);
 				this.setTitle("Outil d'analyse de risques - Etude en cours : " + nouveauNom);
-			}
-		}	
 
-		//On enregistre l'etude (si elle etait deja enregistree)
-		if(existaitSauvegarde){
-			this.enregistrerEtude();
-		}
-
-		//On supprime l'ancienne etude (si elle etait enregistree)
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if (listOfFiles[i].isFile()) {
-				String nomFichier = listOfFiles[i].getName();
-				if(nomFichier.equals(nomEtudeASupprimer + ".xml")){
-					listOfFiles[i].delete();
+				//On enregistre l'etude (si elle etait deja enregistree)
+				if(existaitSauvegarde){
+					this.enregistrerEtude();
+				}
+				//On supprime l'ancienne etude (si elle etait enregistree)
+				for (int i = 0; i < listOfFiles.length; i++) {
+					if (listOfFiles[i].isFile()) {
+						String nomFichier = listOfFiles[i].getName();
+						if(nomFichier.equals(nomEtudeASupprimer + ".xml")){
+							listOfFiles[i].delete();
+						}
+					}
 				}
 			}
-		}
+		}	
 	}
 
 	/**

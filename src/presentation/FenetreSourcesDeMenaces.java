@@ -13,8 +13,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -26,12 +24,10 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
-
-import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
-import presentation.FenetreMetriques.Renderer;
 
 import abstraction.autres.SourceDeMenace;
 import abstraction.modules.SourcesDeMenaces;
@@ -50,7 +46,9 @@ public class FenetreSourcesDeMenaces extends JPanel {
 	private SourcesDeMenaces sdm;
 	private JFrame petiteFenetre;
 	private JTextArea textAreaPetiteFenetre;
-	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier. \n- Faites un clic-droit sur une cellule pour afficher son contenu en entier.";
+	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier." +
+			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier." +
+			"\n  (La fenêtre qui apparaît alors se ferme par un clic-gauche dans une zone quelconque du tableau.)";
 
 
 	public FenetreSourcesDeMenaces(SourcesDeMenaces sdm){
@@ -86,16 +84,13 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 			public void mousePressed(MouseEvent e) {			
 				boutonSupprimer.setEnabled(true);
+				petiteFenetre.setVisible(false);
 				if(SwingUtilities.isRightMouseButton(e)){
 					selectionnerLaLigne(e);
 					setPetiteFenetre();
 				}
 			}
-			public void mouseReleased(MouseEvent e) {
-				if(SwingUtilities.isRightMouseButton(e)){
-					petiteFenetre.setVisible(false);
-				}
-			}
+			public void mouseReleased(MouseEvent e) {}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
 		});
@@ -146,6 +141,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		petiteFenetre.add(textAreaPetiteFenetre);	
 		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
 		petiteFenetre.setMinimumSize(new Dimension(300,0));
+		petiteFenetre.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 	}
 
 	private void creerTextAreaPetiteFenetre() {

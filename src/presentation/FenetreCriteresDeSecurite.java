@@ -24,6 +24,7 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -47,15 +48,17 @@ public class FenetreCriteresDeSecurite extends JPanel {
 	private CriteresDeSecurite cds;
 	private JFrame petiteFenetre;
 	private JTextArea textAreaPetiteFenetre;
-	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier. \n- Faites un clic-droit sur une cellule pour afficher son contenu en entier.";
+	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier. " +
+			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier." +
+			"\n  (La fenêtre qui apparaît alors se ferme par un clic-gauche dans une zone quelconque du tableau.)";
 
 	public FenetreCriteresDeSecurite(CriteresDeSecurite cds){
 		//On set le module
 		this.cds = cds;
-		
+
 		//On rend le fenêtre visible
 		this.setVisible(true);
-		
+
 		//On crée la fenêtre qui détaille les cellules lors d'un clic droit
 		this.creerPetiteFenetre();
 
@@ -79,15 +82,16 @@ public class FenetreCriteresDeSecurite extends JPanel {
 
 			public void mousePressed(MouseEvent e) {
 				boutonSupprimer.setEnabled(true);
+				petiteFenetre.setVisible(false);
 				if(SwingUtilities.isRightMouseButton(e)){
 					selectionnerLaLigne(e);
 					setPetiteFenetre();
 				}
 			}
 			public void mouseReleased(MouseEvent e) {
-				if(SwingUtilities.isRightMouseButton(e)){
-					petiteFenetre.setVisible(false);
-				}
+				//				if(SwingUtilities.isRightMouseButton(e)){
+				//					petiteFenetre.setVisible(false);
+				//				}
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
@@ -143,6 +147,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		petiteFenetre.add(textAreaPetiteFenetre);	
 		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
 		petiteFenetre.setMinimumSize(new Dimension(300,0));
+		petiteFenetre.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 	}
 
 	private void creerTextAreaPetiteFenetre() {
