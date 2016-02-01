@@ -17,7 +17,8 @@ public class ControlJButtonAide implements ActionListener {
 		JOptionPane
 				.showMessageDialog(
 						null,
-						"Pour supprimer un critère ou un scénario, sélectionner une ligne du tableau ",
+						"Pour supprimer un critère ou un scénario, sélectionner une ligne du tableau "
+							+ "\nPour ajouter une nouvelle ligne, sélectionner la ligne du tableau en dessous de laquelle le scénario sera crée",
 						"Aide", JOptionPane.INFORMATION_MESSAGE);
 	}
 

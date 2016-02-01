@@ -178,7 +178,7 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	public void actualiserScenarios(){
 		TypologieDesBiensSupports typesBiens = (TypologieDesBiensSupports) this.etude.getModule("TypologieDesBiensSupports");
 		String idsTypesSupprimes = typesBiens.getIdTypesSupprimes();
-		System.out.println(idsTypesSupprimes);
+		// System.out.println(idsTypesSupprimes);
 		if (typesBiens.getTypesSupprimes().size()!=0){
 			int j = 0;
 			while (j < this.tableau.size() && this.tableau.get(j) != null) {
@@ -283,6 +283,12 @@ public class ScenariosDeMenacesGeneriques extends Module {
 			if (scenario.isIncomplete()) {
 				String s = "Scenario generique \" " + scenario.getIntitule()
 						+ " \" incomplet";
+				this.problemesDeCoherence.add(s);
+				resultat = false;
+			}
+			if (!scenario.getCriteresSup().values().contains(true)){
+				String s = "Le scenario generique \" " + scenario.getIntitule()
+						+ " \" n'a pas de critère retenu";
 				this.problemesDeCoherence.add(s);
 				resultat = false;
 			}
