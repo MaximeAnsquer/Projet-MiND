@@ -27,6 +27,7 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -52,7 +53,8 @@ public class FenetreMetriques extends JPanel {
 	private JTextArea textAreaPetiteFenetre;
 	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier." +
 			"\n- Utilisez le menu déroulant en haut à gauche pour sélectionner un autre critère de sécurité." +
-			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier.";
+			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier." +
+			"\n  (La fenêtre qui apparaît alors se ferme par un clic-gauche dans une zone quelconque du tableau.)";
 
 	public FenetreMetriques(Metriques metriques){
 		this.metriques = metriques;
@@ -90,20 +92,15 @@ public class FenetreMetriques extends JPanel {
 
 			public void mousePressed(MouseEvent e) {
 				boutonSupprimer.setEnabled(true);
+				petiteFenetre.setVisible(false);
 				if(SwingUtilities.isRightMouseButton(e)){
 					selectionnerLaLigne(e);
 					setPetiteFenetre();
 				}
 			}
-			public void mouseReleased(MouseEvent e) {
-				if(SwingUtilities.isRightMouseButton(e)){
-					petiteFenetre.setVisible(false);
-				}
-			}
-			public void mouseEntered(MouseEvent e) {
-			}
-			public void mouseExited(MouseEvent e) {
-			}			
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}			
 		});
 
 		table.addKeyListener(new KeyListener(){
@@ -111,7 +108,6 @@ public class FenetreMetriques extends JPanel {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				//				zoneDescription.setText(getNiveauSelectionne().getDescription());
 				boutonSupprimer.setEnabled(true);
 			}
 
@@ -153,7 +149,8 @@ public class FenetreMetriques extends JPanel {
 		this.creerTextAreaPetiteFenetre();
 		petiteFenetre.add(textAreaPetiteFenetre);	
 		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
-		petiteFenetre.setMinimumSize(new Dimension(300,0));		
+		petiteFenetre.setMinimumSize(new Dimension(300,0));
+		petiteFenetre.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 	}
 
 	private void creerTextAreaPetiteFenetre() {
