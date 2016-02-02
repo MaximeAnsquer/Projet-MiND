@@ -513,6 +513,7 @@ public class MainMaximeAnsquer extends JFrame {
 					boutonOk.setEnabled(true);				
 				}
 			});
+			this.setVisible(false);
 			JFrame fenetreChoixFichier = fenetreChoixFichier(listeFichiers);			
 		}
 		else{
@@ -534,7 +535,7 @@ public class MainMaximeAnsquer extends JFrame {
 			long tempsApresOuverture = System.currentTimeMillis();
 			System.out.println("Temps mis pour ouvrir l'étude : " + (tempsApresOuverture - tempsAvantOuverture)/1000.0 + "s"  );
 		} catch (FileNotFoundException e) {	
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Ce fichier ne contient pas d'étude valide.\nUne nouvelle étude \" " + extraireNom(urlEtude) + " \" a été créée à la place.", "Fichier invalide", JOptionPane.ERROR_MESSAGE, null );
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
@@ -571,16 +572,19 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	private JFrame fenetreChoixFichier(JList jlist) {
-		fenetreChoisirEtude = new JFrame();
+		fenetreChoisirEtude = new JFrame("Veuillez choisir une étude.");
 		fenetreChoisirEtude.setVisible(true);
-		fenetreChoisirEtude.getContentPane().add(jlist, BorderLayout.CENTER);
+		fenetreChoisirEtude.setMinimumSize(new Dimension(400,0));
+		fenetreChoisirEtude.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		fenetreChoisirEtude.getContentPane().add(new JScrollPane(jlist), BorderLayout.CENTER);
 		boutonOk = new JButton("Ouvrir l'étude");
 		boutonOk.setEnabled(false);
 		boutonOk.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" + File.separator + listeFichiers.getSelectedValue() + ".xml";
 				ouvrirEtude(urlEtude);
-				fenetreChoisirEtude.dispose();				
+				fenetreChoisirEtude.dispose();	
+				setVisible(true);
 			}
 		});
 		fenetreChoisirEtude.setLocationRelativeTo(null);
