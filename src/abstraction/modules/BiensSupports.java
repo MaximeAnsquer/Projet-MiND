@@ -4,6 +4,10 @@ import java.util.LinkedList;
 
 
 
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 import abstraction.Etude;
 import abstraction.autres.*;
 
@@ -118,6 +122,20 @@ public class BiensSupports extends Module{
 
 	public void retenirBien(Bien bien) {
 		this.retenirBien(bien.getIntitule());
+	}
+
+	public void actualiserBiens() {
+		Object[] types = this.typologie.getIntituleTypeBiensRetenus();
+		for (Bien bien : this.lesBiens){
+			if (!this.typologie.isTypeBienRetenu(bien.getType())){
+				String type = null;
+				do{
+					type = (String)JOptionPane.showInputDialog(null, "Quel nouveau type de bien support voulez vous mettre à la place de "+bien.getType()+" pour le bien "+bien.getIntitule()+"?","Type de bien", JOptionPane.QUESTION_MESSAGE,new ImageIcon(),types,types[0]);
+				} while (type==null);
+				bien.setType(type);
+				bien.setRetenu(false);
+			}	
+		}
 	}
 	
 	public String toString(){

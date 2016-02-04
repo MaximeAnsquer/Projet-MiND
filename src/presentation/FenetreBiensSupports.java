@@ -101,6 +101,9 @@ public class FenetreBiensSupports extends JPanel{
 		table.setDefaultRenderer(Object.class, new Renderer());
 		table.setFont(new Font("Arial", Font.PLAIN, 15)); table.setRowHeight(50);
 		table.setRowHeight(50);
+		
+		this.biensSupports.actualiserBiens();
+			
 	}
 	
 	protected void selectionnerLaLigne(MouseEvent e) {

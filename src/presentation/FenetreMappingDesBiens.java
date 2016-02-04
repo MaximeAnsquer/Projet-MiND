@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
@@ -30,7 +29,6 @@ import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import presentation.FenetreBiensEssentiels.ModeleDynamiqueObjet;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
 import abstraction.modules.MappingDesBiens;
