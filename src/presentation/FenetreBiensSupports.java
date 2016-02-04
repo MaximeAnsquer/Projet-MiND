@@ -3,17 +3,21 @@ package presentation;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,6 +25,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -37,11 +43,15 @@ public class FenetreBiensSupports extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
-	private JTextArea descriptionTypesBiens;
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensSupports biensSupports;
 	private JComboBox comboBox = new JComboBox();
+	private JFrame petiteFenetre;
+	private JTextArea textAreaPetiteFenetre;
+	public static String stringAide = "- Double-cliquez sur une cellule pour la modifier. " +
+			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier." +
+			"\n  (La fenêtre qui apparaît alors se ferme par un clic-gauche dans une zone quelconque du tableau.)";
 
 	public FenetreBiensSupports(BiensSupports biensSupports){
 		this.setVisible(true);
@@ -51,10 +61,11 @@ public class FenetreBiensSupports extends JPanel{
 		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
 			comboBox.addItem((String)biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i]);
 		}
+		stringAide += this.descriptionTypesBiens();
 		table.getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.creerPetiteFenetre();
 		this.add(new JScrollPane(table));
-		this.add(descriptionTypesBiens());
 		this.add(partieBoutons());
 		if (biensSupports.getNomColonnesSup().size()>0){
 			boutonSupprimerColonne.setEnabled(true);
@@ -69,35 +80,92 @@ public class FenetreBiensSupports extends JPanel{
 			boutonSupprimerLigne.setEnabled(true);
 		}
 		
+		table.addMouseListener(new MouseListener(){
+
+			public void mouseClicked(MouseEvent e) {}
+
+			public void mousePressed(MouseEvent e) {
+				petiteFenetre.setVisible(false);
+				if(SwingUtilities.isRightMouseButton(e)){
+					selectionnerLaLigne(e);
+					setPetiteFenetre();
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+			}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}			
+		});
+		
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnCount()-1).setMaxWidth(50);
 		table.setDefaultRenderer(Object.class, new Renderer());
 		table.setFont(new Font("Arial", Font.PLAIN, 15)); table.setRowHeight(50);
 		table.setRowHeight(50);
 	}
 	
-	private Component descriptionTypesBiens() {
-		String valeurInitiale = ""+biensSupports.getTypologie().getIntituleTypeBiensRetenus()[0];
-		valeurInitiale+=" : \n"+biensSupports.getTypologie().getTypeBiensRetenus().get(0).getDescription()+"\n";
-		for (int i=1; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
-			valeurInitiale += "\n"+biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i];
-			valeurInitiale +=" : \n"+biensSupports.getTypologie().getTypeBiensRetenus().get(i).getDescription()+"\n";
+	protected void selectionnerLaLigne(MouseEvent e) {
+		Point p = e.getPoint();
+		int rowNumber = table.rowAtPoint(p);
+		int colNumber = table.columnAtPoint(p);
+		table.changeSelection(rowNumber, colNumber, false, true);		
+	}
+	
+	protected void setPetiteFenetre() {
+		int row = this.table.getSelectedRow();
+		int col = this.table.getSelectedColumn();
+		if(row != -1 && col != -1){
+			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+			String contenuCellule = modele.getValueAt(row, col).toString();
+			this.textAreaPetiteFenetre.setText(contenuCellule);
+			Point positionSouris = MouseInfo.getPointerInfo().getLocation();
+			int xSouris = (int) positionSouris.getX();
+			int ySouris = (int) positionSouris.getY();
+			Point positionDeLaFenetre = new Point(xSouris - 1, ySouris + 1);
+			petiteFenetre.setLocation(positionDeLaFenetre);
+			petiteFenetre.pack();
+			petiteFenetre.pack();
+			petiteFenetre.setVisible(true);	
+		}			
+	}
+
+	private void creerPetiteFenetre() {
+		this.petiteFenetre = new JFrame("Détails de la cellule");
+		this.creerTextAreaPetiteFenetre();
+		petiteFenetre.add(textAreaPetiteFenetre);	
+		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
+		petiteFenetre.setMinimumSize(new Dimension(300,0));
+		petiteFenetre.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+	}
+
+	private void creerTextAreaPetiteFenetre() {
+		this.textAreaPetiteFenetre = new JTextArea("Laul");		
+		textAreaPetiteFenetre.setEditable(false);
+		textAreaPetiteFenetre.setFont(new Font("Arial", Font.PLAIN, 17));
+		textAreaPetiteFenetre.setLineWrap(true);
+		textAreaPetiteFenetre.setWrapStyleWord(true);
+	}
+	
+	private String descriptionTypesBiens() {
+		String valeurInitiale = "\n\n\n";
+		String stringDeBase = "";
+		String stringRaccourcie = "";
+		int index = 0;
+		int nombreLignes = 0;
+		boolean raccourcie = false;
+		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
+			valeurInitiale += biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i];
+			stringDeBase = biensSupports.getTypologie().getTypeBiensRetenus().get(i).getDescription();
+			while (!raccourcie && index<stringDeBase.length()){
+				stringRaccourcie += stringDeBase.charAt(index);
+				if (index == 120*(1+nombreLignes)){
+					stringRaccourcie += "\n";
+					nombreLignes++;
+				}
+				index++;
+			}
+			valeurInitiale +=" : \n"+stringRaccourcie+"\n\n";
 		}
-		descriptionTypesBiens = new JTextArea(valeurInitiale);
-		descriptionTypesBiens.setLineWrap(true);
-		descriptionTypesBiens.setWrapStyleWord(true);
-		descriptionTypesBiens.setFont(new Font("Arial", Font.PLAIN, 15));
-		
-		JScrollPane areaScrollPane = new JScrollPane(descriptionTypesBiens);
-		areaScrollPane.setVerticalScrollBarPolicy(
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		areaScrollPane.setPreferredSize(new Dimension(400, 150));
-		areaScrollPane.setBorder(
-				BorderFactory.createCompoundBorder(
-						BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Description des types de biens"),
-								BorderFactory.createEmptyBorder(5,5,5,5)),
-								areaScrollPane.getBorder()));
-		return areaScrollPane;
+		return valeurInitiale;
 	}
 	
 	private JPanel partieBoutons() {
@@ -106,9 +174,23 @@ public class FenetreBiensSupports extends JPanel{
 		jpanel.add(boutonSupprimerLigne());
 		jpanel.add(boutonAjouterColonne());
 		jpanel.add(boutonSupprimerColonne());
+		jpanel.add(boutonAide());
 		return jpanel;
 	}
 
+	private JButton boutonAide() {
+		JButton bouton = new JButton("Aide");
+		bouton.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, stringAide, "Aide", JOptionPane.INFORMATION_MESSAGE);
+
+			}
+
+		});
+		return bouton;
+	}
+	
 	private JButton boutonSupprimerColonne() {
 		this.boutonSupprimerColonne = new JButton("Supprimer la premiere categorie");
 		boutonSupprimerColonne.addActionListener(new ActionListener(){
