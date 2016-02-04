@@ -121,7 +121,7 @@ public class BiensSupports extends Module{
 	}
 	
 	public String toString(){
-		return "Biens Supports";
+		return "Biens supports";
 	}
 	
 	public boolean estCoherent(){

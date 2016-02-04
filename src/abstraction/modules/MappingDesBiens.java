@@ -112,7 +112,7 @@ public class MappingDesBiens extends Module{
 	}
 	
 	public String toString(){
-		return "Mapping Des Biens";
+		return "Mapping des biens";
 	}
 	
 	public boolean estCoherent(){

@@ -110,7 +110,7 @@ public class BiensEssentiels extends Module {
 	}
 	
 	public String toString(){
-		return "Biens Essentiels";
+		return "Biens essentiels";
 	}
 	
 	public boolean estCoherent(){
