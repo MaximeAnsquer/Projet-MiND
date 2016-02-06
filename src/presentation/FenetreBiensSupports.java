@@ -223,11 +223,18 @@ public class FenetreBiensSupports extends JPanel{
 	
 	private JButton boutonAide() {
 		JButton bouton = new JButton("Aide");
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setText(stringAide);
+		textArea.setEditable(false);
+		textArea.setFont(new Font("Arial", Font.PLAIN, 17));
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		final JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setPreferredSize(new Dimension(1000, 500 ));
 		bouton.addActionListener(new ActionListener(){
-
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, stringAide, "Aide", JOptionPane.INFORMATION_MESSAGE);
-
+				JOptionPane.showMessageDialog(null, scrollPane, "Aide", JOptionPane.INFORMATION_MESSAGE);
 			}
 
 		});
