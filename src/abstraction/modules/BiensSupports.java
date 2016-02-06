@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 
 
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -92,6 +93,14 @@ public class BiensSupports extends Module{
 	
 	public void enleverPremiereColonne(){
 		this.getNomColonnesSup().removeFirst();
+	}
+	
+	public void modifierColonne(String nomColonne, String nouvelleColonne){
+		for (int i=0; i<this.getNomColonnesSup().size(); i++){
+			if (this.getNomColonnesSup().get(i).equals(nomColonne)){
+				this.getNomColonnesSup().set(i, nouvelleColonne);
+			}
+		}
 	}
 
 	public int nombreDeBiens(){

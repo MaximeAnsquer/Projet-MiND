@@ -87,6 +87,14 @@ public class BiensEssentiels extends Module {
 		this.getNomColonnesSup().addFirst(nomColonne);
 	}
 	
+	public void modifierColonne(String nomColonne, String nouvelleColonne){
+		for (int i=0; i<this.getNomColonnesSup().size(); i++){
+			if (this.getNomColonnesSup().get(i).equals(nomColonne)){
+				this.getNomColonnesSup().set(i, nouvelleColonne);
+			}
+		}
+	}
+	
 	public void enleverPremiereColonne(){
 		this.getNomColonnesSup().removeFirst();
 	}

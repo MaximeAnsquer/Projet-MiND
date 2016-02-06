@@ -30,6 +30,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import presentation.FenetreBiensEssentiels.ModeleDynamiqueObjet;
 import abstraction.autres.Bien;
 import abstraction.modules.BiensSupports;
 
@@ -43,12 +44,14 @@ public class FenetreBiensSupports extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
+	private JButton boutonModifierColonne;
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensSupports biensSupports;
 	private JComboBox comboBox = new JComboBox();
 	private JFrame petiteFenetre;
 	private JTextArea textAreaPetiteFenetre;
+	
 	public static String stringAide = "- Double-cliquez sur une cellule pour la modifier. " +
 			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier." +
 			"\n  (La fenêtre qui apparaît alors se ferme par un clic-gauche dans une zone quelconque du tableau.)";
@@ -69,9 +72,11 @@ public class FenetreBiensSupports extends JPanel{
 		this.add(partieBoutons());
 		if (biensSupports.getNomColonnesSup().size()>0){
 			boutonSupprimerColonne.setEnabled(true);
+			boutonModifierColonne.setEnabled(true);
 		}
 		else{
 			boutonSupprimerColonne.setEnabled(false);
+			boutonModifierColonne.setEnabled(false);
 		}
 		if (biensSupports.nombreDeBiens()==0){
 			boutonSupprimerLigne.setEnabled(false);
@@ -177,10 +182,45 @@ public class FenetreBiensSupports extends JPanel{
 		jpanel.add(boutonSupprimerLigne());
 		jpanel.add(boutonAjouterColonne());
 		jpanel.add(boutonSupprimerColonne());
+		jpanel.add(boutonModificationColonne());
 		jpanel.add(boutonAide());
 		return jpanel;
 	}
 
+	private JButton boutonModificationColonne(){
+		boutonModifierColonne = new JButton("Modifier categorie");
+		boutonModifierColonne.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				LinkedList<String> listeCategorie = biensSupports.getNomColonnesSup();
+				String categorie = null;
+				categorie = (String)JOptionPane.showInputDialog(null,"Choississez une categorie","Categorie",JOptionPane.QUESTION_MESSAGE, null, listeCategorie.toArray(), listeCategorie.get(0));
+				if (categorie != null){
+					String nouvelleCategorie = "";
+					nouvelleCategorie = JOptionPane.showInputDialog(null, "Nouveau nom de la categorie "+categorie+" ?");
+					for (int i=0; i<listeCategorie.size();i++){
+						if (listeCategorie.get(i).equals(nouvelleCategorie)){
+							nouvelleCategorie = "";
+						}
+					}
+					if (nouvelleCategorie.equals("Intitule") || nouvelleCategorie.equals("Description") || nouvelleCategorie.equals("Retenu") || nouvelleCategorie.equals("Type")){
+						nouvelleCategorie = "";
+					}
+					if (!nouvelleCategorie.equals("")){
+						biensSupports.modifierColonne(categorie, nouvelleCategorie);
+						ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+						for (int i=0; i<modele.entetes.size(); i++){
+							if (modele.entetes.get(i).equals(categorie)){
+								modele.entetes.set(i, nouvelleCategorie);
+							}
+						}
+						modele.fireTableStructureChanged();
+					}
+				}
+			}
+		});
+		return boutonModifierColonne;
+	}
+	
 	private JButton boutonAide() {
 		JButton bouton = new JButton("Aide");
 		bouton.addActionListener(new ActionListener(){
@@ -265,6 +305,7 @@ public class FenetreBiensSupports extends JPanel{
 				biensSupports.getNomColonnesSup().removeFirst();
 				if (biensSupports.getNomColonnesSup().size()==1){
 					boutonSupprimerColonne.setEnabled(false);
+					boutonModifierColonne.setEnabled(false);
 				}
 				fireTableStructureChanged();
 				table.getColumnModel().getColumn(table.getColumnModel().getColumnCount()-1).setMaxWidth(50);
@@ -303,6 +344,7 @@ public class FenetreBiensSupports extends JPanel{
 			}
 			entetes.addFirst(categorie);
 			boutonSupprimerColonne.setEnabled(true);
+			boutonModifierColonne.setEnabled(true);
 			fireTableStructureChanged();
 			table.getColumnModel().getColumn(table.getColumnModel().getColumnCount()-1).setMaxWidth(50);
 		}

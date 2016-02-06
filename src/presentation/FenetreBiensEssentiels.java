@@ -27,7 +27,6 @@ import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
 import abstraction.autres.Bien;
 import abstraction.modules.BiensEssentiels;
 
@@ -41,6 +40,7 @@ public class FenetreBiensEssentiels extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
+	private JButton boutonModifierColonne;
 	private JButton boutonSupprimerColonne;
 	private JButton boutonSupprimerLigne;
 	private BiensEssentiels biensEssentiels;
@@ -61,9 +61,11 @@ public class FenetreBiensEssentiels extends JPanel{
 		this.add(partieBoutons());
 		if (biensEssentiels.getNomColonnesSup().size()>0){
 			boutonSupprimerColonne.setEnabled(true);
+			boutonModifierColonne.setEnabled(true);
 		}
 		else{
 			boutonSupprimerColonne.setEnabled(false);
+			boutonModifierColonne.setEnabled(false);
 		}
 		if (biensEssentiels.nombreDeBiens()==0){
 			boutonSupprimerLigne.setEnabled(false);
@@ -143,8 +145,43 @@ public class FenetreBiensEssentiels extends JPanel{
 		jpanel.add(boutonSupprimerLigne());
 		jpanel.add(boutonAjouterColonne());
 		jpanel.add(boutonSupprimerColonne());
+		jpanel.add(boutonModificationColonne());
 		jpanel.add(boutonAide());
 		return jpanel;
+	}
+	
+	private JButton boutonModificationColonne(){
+		boutonModifierColonne = new JButton("Modifier categorie");
+		boutonModifierColonne.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				LinkedList<String> listeCategorie = biensEssentiels.getNomColonnesSup();
+				String categorie = null;
+				categorie = (String)JOptionPane.showInputDialog(null,"Choississez une categorie","Categorie",JOptionPane.QUESTION_MESSAGE, null, listeCategorie.toArray(), listeCategorie.get(0));
+				if (categorie != null){
+					String nouvelleCategorie = "";
+					nouvelleCategorie = JOptionPane.showInputDialog(null, "Nouveau nom de la categorie "+categorie+" ?");
+					for (int i=0; i<listeCategorie.size();i++){
+						if (listeCategorie.get(i).equals(nouvelleCategorie)){
+							nouvelleCategorie = "";
+						}
+					}
+					if (nouvelleCategorie.equals("Intitule") || nouvelleCategorie.equals("Description") || nouvelleCategorie.equals("Retenu")){
+						nouvelleCategorie = "";
+					}
+					if (!nouvelleCategorie.equals("")){
+						biensEssentiels.modifierColonne(categorie, nouvelleCategorie);
+						ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+						for (int i=0; i<modele.entetes.size(); i++){
+							if (modele.entetes.get(i).equals(categorie)){
+								modele.entetes.set(i, nouvelleCategorie);
+							}
+						}
+						modele.fireTableStructureChanged();
+					}
+				}
+			}
+		});
+		return boutonModifierColonne;
 	}
 	
 	private JButton boutonAide() {
@@ -229,6 +266,7 @@ public class FenetreBiensEssentiels extends JPanel{
 				biensEssentiels.getNomColonnesSup().removeFirst();
 				if (biensEssentiels.getNomColonnesSup().size()==1){
 					boutonSupprimerColonne.setEnabled(false);
+					boutonModifierColonne.setEnabled(false);
 				}
 				fireTableStructureChanged();
 				table.getColumnModel().getColumn(table.getColumnModel().getColumnCount()-1).setMaxWidth(50);
@@ -267,6 +305,7 @@ public class FenetreBiensEssentiels extends JPanel{
 			}
 			entetes.addFirst(categorie);
 			boutonSupprimerColonne.setEnabled(true);
+			boutonModifierColonne.setEnabled(true);
 			fireTableStructureChanged();
 			table.getColumnModel().getColumn(table.getColumnModel().getColumnCount()-1).setMaxWidth(50);			
 		}
