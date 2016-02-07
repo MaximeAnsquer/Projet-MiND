@@ -274,7 +274,6 @@ public class ScenariosDeMenacesTypes extends Module {
 		BiensSupports biensSupports = (BiensSupports) this.etude.getModule("BiensSupports");
 		ScenariosDeMenacesGeneriques scenarioDeMenacesGeneriques = (ScenariosDeMenacesGeneriques) this.etude
 				.getModule("ScenariosDeMenacesGeneriques");
-		SourcesDeMenaces sourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
 		
 		// Cas où on remplit le tableau pour la première fois
 		if (this.tableau.size() == 0) {
@@ -326,9 +325,6 @@ public class ScenariosDeMenacesTypes extends Module {
 		
 		ScenariosDeMenacesGeneriques moduleScenarioGene = (ScenariosDeMenacesGeneriques) this.etude
 				.getModule("ScenariosDeMenacesGeneriques");
-		
-		SourcesDeMenaces SourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
-		
 		
 		for (Bien b : biensSupports.getBiensRetenus()) {
 			for (ScenarioGenerique sGene : moduleScenarioGene.getTableau()) {
