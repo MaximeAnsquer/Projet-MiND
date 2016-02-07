@@ -28,7 +28,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
+import presentation.FenetreBiensSupports.ModeleDynamiqueObjet;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
 import abstraction.modules.MappingDesBiens;
@@ -61,10 +63,12 @@ public class FenetreMappingDesBiens extends JPanel {
 		comboBox.addItem("");
 		comboBox.addItem("x");
 		comboBox.addItem("o");
-		for (int i = 1; i < table.getColumnCount(); i++) {
-			table.getColumn("" + table.getColumnName(i)).setCellEditor(
-					new DefaultCellEditor(comboBox));
-			;
+		
+		//TODO régler le problème de cellEditor (l'appliquer que pour les bonnes cases (combo column+row))
+		TableColumnModel columnModel = table.getColumnModel();
+		ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+		for (int i = modele.biensEssentiels.getNomColonnesSup().size()+1; i < table.getColumnCount(); i++) {
+			columnModel.getColumn(i).setCellEditor(new DefaultCellEditor(comboBox));
 		}
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(new JScrollPane(table));
@@ -153,42 +157,80 @@ public class FenetreMappingDesBiens extends JPanel {
 	class ModeleDynamiqueObjet extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		private final LinkedList<String> entetes = new LinkedList<String>();
-		private BiensEssentiels biensEssentiels = mappingDesBiens
-				.getBiensEssentiels();
-		private BiensSupports biensSupports = mappingDesBiens
-				.getBiensSupports();
+		private BiensEssentiels biensEssentiels = mappingDesBiens.getBiensEssentiels();
+		private BiensSupports biensSupports = mappingDesBiens.getBiensSupports();
 
 		public ModeleDynamiqueObjet() {
 			super();
-			entetes.add("Biens Essentiels   \\   Biens Supports");
+			/*entetes.add("Biens Essentiels   \\   Biens Supports");
 			for (int i = 0; i < biensSupports.getLesBiens().size(); i++) {
 				entetes.add(biensSupports.getBien(i).getIntitule());
-			}
+			}*/
 		}
 
 		public int getRowCount() {
-			return biensEssentiels.nombreDeBiens();
+			return biensEssentiels.nombreDeBiens() + biensSupports.getNomColonnesSup().size() + 1;
 		}
 
 		public int getColumnCount() {
-			return biensSupports.nombreDeBiens() + 1;
+			return biensSupports.nombreDeBiens() + biensEssentiels.getNomColonnesSup().size() + 1;
 		}
 
 		public String getColumnName(int columnIndex) {
-			return entetes.get(columnIndex);
+			return "";
+			//return entetes.get(columnIndex);
 		}
 
 		public boolean isCellEditable(int row, int col) {
-			return true;
+			if (row > biensSupports.getNomColonnesSup().size() && col > biensEssentiels.getNomColonnesSup().size()){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 
 		public Object getValueAt(int rowIndex, int columnIndex) {
-			switch (columnIndex) {
-			case 0:
-				return biensEssentiels.getBien(rowIndex).getIntitule();
-			default:
-				return mappingDesBiens.getMappingDesBiens().get(rowIndex)
-						.getValueAt(columnIndex - 1);
+			if (rowIndex < biensSupports.getNomColonnesSup().size() +1){
+				if (rowIndex == biensSupports.getNomColonnesSup().size()){
+					if (columnIndex < biensEssentiels.getNomColonnesSup().size() + 1){
+						if (columnIndex == biensEssentiels.getNomColonnesSup().size()){
+							return "Biens Essentiels   \\   Biens Supports";
+						}
+						else {
+							return biensEssentiels.getNomColonnesSup().get(columnIndex);
+						}
+					}
+					else{
+						return biensSupports.getBien(columnIndex-biensEssentiels.getNomColonnesSup().size() - 1).getIntitule();
+					}
+				}
+				else{
+					if (columnIndex < biensEssentiels.getNomColonnesSup().size() + 1){
+						if (columnIndex == biensEssentiels.getNomColonnesSup().size()){
+							return biensSupports.getNomColonnesSup().get(rowIndex);
+						}
+						else {
+							return "";
+						}
+					}
+					else{
+						return biensSupports.getBien(columnIndex-biensEssentiels.getNomColonnesSup().size() - 1).getContenuColonnesSup().get(rowIndex);
+					}
+				}
+			}
+			else{
+				if (columnIndex < biensEssentiels.getNomColonnesSup().size() + 1){
+					if (columnIndex == biensEssentiels.getNomColonnesSup().size()){
+						return biensEssentiels.getBien(rowIndex-biensSupports.getNomColonnesSup().size() - 1).getIntitule();
+					}
+					else{
+						return biensEssentiels.getBien(rowIndex-biensSupports.getNomColonnesSup().size() - 1).getContenuColonnesSup().get(columnIndex);
+					}
+				}
+				else{
+					return mappingDesBiens.getMappingDesBiens().get(rowIndex-biensSupports.getNomColonnesSup().size()-1).getValueAt(columnIndex - biensEssentiels.getNomColonnesSup().size()-1);
+				}
 			}
 		}
 
@@ -197,15 +239,8 @@ public class FenetreMappingDesBiens extends JPanel {
 		}
 
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-			if (aValue != null) {
-				switch (columnIndex) {
-				case 0:
-					break;
-				default:
-					mappingDesBiens.getMappingDesBiens().get(rowIndex)
-							.setValueAt((String) aValue, columnIndex - 1);
-					break;
-				}
+			if (aValue != null && rowIndex >= biensSupports.getNomColonnesSup().size() + 1 && columnIndex >= biensEssentiels.getNomColonnesSup().size() + 1) {
+				mappingDesBiens.getMappingDesBiens().get(rowIndex - biensSupports.getNomColonnesSup().size() - 1).setValueAt((String) aValue, columnIndex - biensEssentiels.getNomColonnesSup().size() - 1);
 			}
 		}
 	}
@@ -219,11 +254,8 @@ public class FenetreMappingDesBiens extends JPanel {
 
 		private static final long serialVersionUID = 1L;
 
-		public Component getTableCellRendererComponent(JTable table,
-				Object value, boolean isSelected, boolean hasFocus, int row,
-				int column) {
-			Component component = super.getTableCellRendererComponent(table,
-					value, isSelected, hasFocus, row, column);
+		public Component getTableCellRendererComponent(JTable table,Object value, boolean isSelected, boolean hasFocus, int row,int column) {
+			Component component = super.getTableCellRendererComponent(table,value, isSelected, hasFocus, row, column);
 
 			if (component instanceof JComponent) {
 				((JComponent) component).setToolTipText(value.toString());

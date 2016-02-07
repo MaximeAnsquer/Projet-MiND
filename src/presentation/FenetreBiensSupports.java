@@ -188,7 +188,7 @@ public class FenetreBiensSupports extends JPanel{
 	}
 
 	private JButton boutonModificationColonne(){
-		boutonModifierColonne = new JButton("Modifier categorie");
+		boutonModifierColonne = new JButton("Modifier le nom d'une categorie");
 		boutonModifierColonne.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				LinkedList<String> listeCategorie = biensSupports.getNomColonnesSup();
