@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -67,7 +68,7 @@ public class FenetreMappingDesBiens extends JPanel {
 		//TODO régler le problème de cellEditor (l'appliquer que pour les bonnes cases (combo column+row))
 		TableColumnModel columnModel = table.getColumnModel();
 		ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-		for (int i = modele.biensEssentiels.getNomColonnesSup().size()+1; i < table.getColumnCount(); i++) {
+		for (int i = 0; i < table.getColumnCount(); i++) {
 			columnModel.getColumn(i).setCellEditor(new DefaultCellEditor(comboBox));
 		}
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -256,10 +257,44 @@ public class FenetreMappingDesBiens extends JPanel {
 
 		public Component getTableCellRendererComponent(JTable table,Object value, boolean isSelected, boolean hasFocus, int row,int column) {
 			Component component = super.getTableCellRendererComponent(table,value, isSelected, hasFocus, row, column);
-
+			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+			
 			if (component instanceof JComponent) {
 				((JComponent) component).setToolTipText(value.toString());
 			}
+			
+			if (row < modele.biensSupports.getNomColonnesSup().size() +1){
+				if (row == modele.biensSupports.getNomColonnesSup().size()){
+					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+						component.setBackground(new Color(200, 200, 200));
+					}
+					else{
+						component.setBackground(new Color(222, 222, 222));
+					}
+				}
+				else{
+					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+						if (column == modele.biensEssentiels.getNomColonnesSup().size()){
+							component.setBackground(new Color(200, 200, 200));
+						}
+						else {
+							component.setBackground(new Color(255, 255, 255));
+						}
+					}
+					else{
+						component.setBackground(new Color(222, 222, 222));
+					}
+				}
+			}
+			else{
+				if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+					component.setBackground(new Color(222, 222, 222));
+				}
+				else{
+					component.setBackground(new Color(255, 255, 255));
+				}
+			}
+
 			return component;
 		}
 	}
