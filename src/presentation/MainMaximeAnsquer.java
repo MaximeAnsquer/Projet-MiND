@@ -534,10 +534,8 @@ public class MainMaximeAnsquer extends JFrame {
 			etudeOuverte = (Etude) xstream.fromXML(fis);
 			long tempsApresOuverture = System.currentTimeMillis();
 			System.out.println("Temps mis pour ouvrir l'étude : " + (tempsApresOuverture - tempsAvantOuverture)/1000.0 + "s"  );
-		} catch (FileNotFoundException e) {	
+		} catch (Exception e) {	
 			JOptionPane.showMessageDialog(this, "Ce fichier ne contient pas d'étude valide.\nUne nouvelle étude \" " + extraireNom(urlEtude) + " \" a été créée à la place.", "Fichier invalide", JOptionPane.ERROR_MESSAGE, null );
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
 		}
 		this.etudeEnCours = etudeOuverte;
 		this.moduleEnCours = new Module("Workflow");
