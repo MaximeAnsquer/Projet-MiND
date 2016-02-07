@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -77,6 +78,7 @@ public class MainMaximeAnsquer extends JFrame {
 	private int hauteurEcran = Toolkit.getDefaultToolkit().getScreenSize().height;
 	private JList listeFichiers;
 	private JButton boutonOk;
+	private JButton boutonAnnuler;
 	private JFrame fenetreChoisirEtude; 
 	private JButton boutonWorkflow;
 	private JButton boutonVerifier;
@@ -575,6 +577,7 @@ public class MainMaximeAnsquer extends JFrame {
 		fenetreChoisirEtude.setMinimumSize(new Dimension(400,0));
 		fenetreChoisirEtude.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		fenetreChoisirEtude.getContentPane().add(new JScrollPane(jlist), BorderLayout.CENTER);
+		
 		boutonOk = new JButton("Ouvrir l'étude");
 		boutonOk.setEnabled(false);
 		boutonOk.addActionListener(new ActionListener(){
@@ -585,8 +588,22 @@ public class MainMaximeAnsquer extends JFrame {
 				setVisible(true);
 			}
 		});
+		
+		boutonAnnuler = new JButton("Annuler");
+		boutonAnnuler.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				fenetreChoisirEtude.dispose();
+				MainMaximeAnsquer.this.setVisible(true);
+				demanderEtude();
+			}			
+		});
+		
+		JPanel lesBoutons = new JPanel();
+		lesBoutons.setLayout(new BorderLayout());
+		lesBoutons.add(boutonOk, BorderLayout.CENTER);
+		lesBoutons.add(boutonAnnuler, BorderLayout.EAST);
+		fenetreChoisirEtude.getContentPane().add(lesBoutons, BorderLayout.SOUTH);
 		fenetreChoisirEtude.setLocationRelativeTo(null);
-		fenetreChoisirEtude.getContentPane().add(boutonOk, BorderLayout.SOUTH);
 		fenetreChoisirEtude.pack();
 		return fenetreChoisirEtude;
 	}
