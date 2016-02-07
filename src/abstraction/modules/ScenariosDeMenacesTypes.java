@@ -9,6 +9,7 @@ import abstraction.autres.Bien;
 import abstraction.autres.Critere;
 import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.ScenarioType;
+import abstraction.autres.SourceDeMenace;
 
 public class ScenariosDeMenacesTypes extends Module {
 
@@ -115,6 +116,15 @@ public class ScenariosDeMenacesTypes extends Module {
 			criteres.put(intitule, sGene.getCriteresSup().get(intitule));
 		}
 		return criteres ;
+	}
+	
+	public ArrayList<SourceDeMenace> getSourcesMenaces(){
+		SourcesDeMenaces sourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
+		ArrayList<SourceDeMenace> menaces = new ArrayList<SourceDeMenace>();
+		for (SourceDeMenace source : sourcesDeMenaces.getSourcesDeMenacesRetenues() ){
+			menaces.add(source);
+		}
+		return menaces;
 	}
 	
 	public boolean isImpacteCritere(String nomCritere){
@@ -254,7 +264,7 @@ public class ScenariosDeMenacesTypes extends Module {
 		// On actualise les sources de menaces retenus dans l'onglet correspondant
 		SourcesDeMenaces sourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
 		for (ScenarioType scenario : this.tableau){
-			scenario.setMenaces(sourcesDeMenaces.getSourcesDeMenacesRetenues());
+			//scenario.setMenaces(sourcesDeMenaces.getSourcesDeMenacesRetenues());
 		}
 	}
 	
@@ -284,7 +294,7 @@ public class ScenariosDeMenacesTypes extends Module {
 									sGene.getTypeBienSupport(), sGene.getId(),
 									sGene.getIntitule(),
 									this.getCriteres(sGene),
-									sourcesDeMenaces.getSourcesDeMenacesRetenues(),
+									this.getSourcesMenaces(),
 									null, true);
 							if (sGene.getTypeBienSupport().getIntitule()
 									.contains(b.getType())
@@ -325,7 +335,7 @@ public class ScenariosDeMenacesTypes extends Module {
 				ScenarioType scenario = new ScenarioType(
 						sGene.getTypeBienSupport(), sGene.getId(),
 						sGene.getIntitule(), this.getCriteres(sGene),
-						SourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
+						this.getSourcesMenaces(), null,
 						true);
 				if (sGene.getTypeBienSupport().getIntitule().contains(b.getType())
 						&& scenario.getBienSupport() == null) {

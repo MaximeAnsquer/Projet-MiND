@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -37,8 +38,26 @@ public class ControlJTable implements MouseListener,Observer {
 			int colNumber = this.tableau.columnAtPoint(p);
 			this.tableau.changeSelection(rowNumber, colNumber, false, true);
 			
+			// On affiche la fenêtre si la colonne est celle des sources de menaces
 			if (colNumber==ModeleScenarioDeMenacesTypes.COLONNE_SOURCES_MENACES){
 				this.listeSourcesMenaces.setVisible(true);
+				
+				// On actualise la fenêtre pour qu'elle corresponde à ce qui est dans la case
+				int row = this.tableau.getSelectedRow();
+				int col = this.tableau.getSelectedColumn();
+				if(row != -1 && col != -1){
+					String idsSourcesMenaces = (String) this.modele.getValueAt(row, col);
+					for (int i = 0 ; i<this.listeSourcesMenaces.getContentPane().getComponentCount() ; i++){
+						JCheckBox checkbox = ((JCheckBox) this.listeSourcesMenaces.getContentPane().getComponent(i));
+						String idSDM = checkbox.getText();
+						if (idsSourcesMenaces.contains(idSDM)){
+							checkbox.setSelected(true);
+						}
+						else{
+							checkbox.setSelected(false);
+						}
+					}
+				}
 			}
 		}
 	}

@@ -152,7 +152,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 							ScenarioType scenario = new ScenarioType(
 									sGene.getTypeBienSupport(), sGene.getId(),
 									sGene.getIntitule(), this.moduleCourant.getCriteres(sGene),
-									this.sourcesDeMenaces.getSourcesDeMenacesRetenues(), null,
+									this.moduleCourant.getSourcesMenaces(), null,
 									true);
 							if (sGene.getTypeBienSupport().getIntitule().contains(b.getType()) && scenario.getBienSupport()==null) {
 								scenario.setBienSupport(b);

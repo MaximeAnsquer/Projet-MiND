@@ -20,6 +20,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.TableColumn;
 
 import controle.ScenariosDeMenacesTypes.ControlJButtonAjoutLigne;
+import controle.ScenariosDeMenacesTypes.ControlJCheckBox;
 import controle.ScenariosDeMenacesTypes.ControlJTable;
 import abstraction.autres.SourceDeMenace;
 import abstraction.modules.ScenariosDeMenacesTypes;
@@ -131,13 +132,17 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		this.checkBoxSourcesMenaces = new ArrayList<JCheckBox>();
 		for(SourceDeMenace source :  this.modeleTableau.getSourcesDeMenaces().getLesSourcesDeMenaces()){
 			JCheckBox idSource = new JCheckBox(source.getId(),source.isRetenu());
+			
+			// PAC
+			ControlJCheckBox controlCheckbox = new ControlJCheckBox(modeleTableau, tableau);
+			idSource.addActionListener(controlCheckbox);
+			
 			this.checkBoxSourcesMenaces.add(idSource);
 		}
 		
 		for (JCheckBox idSource : this.checkBoxSourcesMenaces){
 			conteneur.add(idSource);
 		}
-		
 		this.listeSourcesMenaces.pack();
 	}
 	//*/
