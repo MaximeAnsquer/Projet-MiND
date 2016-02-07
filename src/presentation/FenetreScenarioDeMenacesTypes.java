@@ -1,24 +1,31 @@
 package presentation;
 
 
+import java.awt.Container;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
 import javax.swing.table.TableColumn;
 
 import controle.ScenariosDeMenacesTypes.ControlJButtonAjoutLigne;
 import controle.ScenariosDeMenacesTypes.ControlJTable;
+import abstraction.autres.SourceDeMenace;
 import abstraction.modules.ScenariosDeMenacesTypes;
 
 public class FenetreScenarioDeMenacesTypes extends JPanel {
+	
 	private ScenariosDeMenacesTypes moduleCourant;
 	private ModeleScenarioDeMenacesTypes modeleTableau;
 	private JTable tableau ;
@@ -28,6 +35,9 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	private JComboBox comboBoxIntrinseque ;
 	private JComboBox comboBoxReelle ;
 	private JButton ajoutLigne ;
+	
+	private ArrayList<JCheckBox> checkBoxSourcesMenaces ;
+	private JFrame listeSourcesMenaces ;
 
 	public FenetreScenarioDeMenacesTypes(ScenariosDeMenacesTypes module) {
 		
@@ -37,11 +47,17 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		this.creerPetiteFenetre();
 		this.creerTableau();
 				
 		this.creerComboBox();
-		//this.creerCheckBox();
+		this.creerCheckBox();
 		this.creerBoutonsBas();
+	}
+	
+	public void creerPetiteFenetre(){
+		this.listeSourcesMenaces= new JFrame("Liste sources de menaces");
+		this.listeSourcesMenaces.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 	}
 	
 	public void creerTableau() {
@@ -52,7 +68,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
 		tableau.setRowHeight(50);
 		
-		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau);
+		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau, listeSourcesMenaces);
 		this.tableau.addMouseListener(controlTableau);
 		
 		this.rendererVraisemblance=new CellRendererVraisemblance(modeleTableau);
@@ -105,17 +121,26 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		
 	}
 	
-	/*
+	///*
 	public void creerCheckBox(){
 		TableColumn colonneSourcesMenaces = this.tableau.getColumnModel().getColumn(this.modeleTableau.COLONNE_SOURCES_MENACES);
 		
+		Container conteneur = this.listeSourcesMenaces.getContentPane();
+		conteneur.setLayout(new BoxLayout(conteneur, BoxLayout.Y_AXIS));
+		
 		this.checkBoxSourcesMenaces = new ArrayList<JCheckBox>();
-		for(SourceDeMenace source :  this.modeleTableau.getSourcesDeMenaces().getBDC().values()){
+		for(SourceDeMenace source :  this.modeleTableau.getSourcesDeMenaces().getLesSourcesDeMenaces()){
 			JCheckBox idSource = new JCheckBox(source.getId(),source.isRetenu());
 			this.checkBoxSourcesMenaces.add(idSource);
 		}
+		
+		for (JCheckBox idSource : this.checkBoxSourcesMenaces){
+			conteneur.add(idSource);
+		}
+		
+		this.listeSourcesMenaces.pack();
 	}
-	*/
+	//*/
 	public void creerBoutonsBas() {
 		JLabel label = new JLabel("");
 		this.add(label);
