@@ -61,6 +61,15 @@ public class SourceDeMenace {
 
 	public boolean estComplet() {
 		return !this.getId().equals("") && !this.getIntitule().equals("") && !this.getExemple().equals("");   
-	}	
+	}
+	
+	public boolean equals(Object o) {
+		Boolean resultat = false;
+		if (o instanceof SourceDeMenace){
+			SourceDeMenace source = (SourceDeMenace) o ;
+			resultat= resultat || source.getId() == this.getId();
+		}
+		return resultat;
+	}
 	
 }
