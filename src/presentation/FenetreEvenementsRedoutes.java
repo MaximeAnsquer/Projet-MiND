@@ -6,10 +6,13 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
@@ -24,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
@@ -35,6 +40,7 @@ import abstraction.autres.NiveauDeMetrique;
 import abstraction.modules.CriteresDeSecurite;
 import abstraction.modules.EvenementsRedoutes;
 import abstraction.modules.Metriques;
+import presentation.FenetreCriteresDeSecurite.ModeleDynamiqueObjet;
 
 public class FenetreEvenementsRedoutes extends JPanel{
 	/*Cette classe fait appel aux variables d'instance suivantes pour afficher le tableau des Evenements Redout�s
@@ -51,6 +57,8 @@ public class FenetreEvenementsRedoutes extends JPanel{
 	private CriteresDeSecurite criteres;
 	private ArrayList<TableCellEditor> editors=new ArrayList<TableCellEditor>();
 	private JTextArea zoneDescription;
+	private JFrame petiteFenetre;
+	private JTextArea textAreaPetiteFenetre; 
 
 	
 	FenetreEvenementsRedoutes(EvenementsRedoutes evenements){
@@ -71,7 +79,32 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		this.setUpComBo();
 		
+		this.tableau.addMouseListener(new MouseListener(){
 		
+		public void mousePressed(MouseEvent e) {
+			
+			
+			petiteFenetre.setVisible(false);
+			if(SwingUtilities.isRightMouseButton(e)){
+				selectionnerLaLigne(e);
+				setPetiteFenetre();
+			}
+		}
+		public void mouseReleased(MouseEvent e) {
+			
+		}
+		public void mouseClicked(MouseEvent arg0) {
+			
+			
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			
+			
+		}
+		public void mouseExited(MouseEvent arg0) {
+			
+			
+		}});
 		tableau.setPreferredScrollableViewportSize(new Dimension(500, 70));
         tableau.setFillsViewportHeight(true);
 		
@@ -114,7 +147,7 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		
 		this.tableau=new JTableX(modele);
 		
-		
+		this.creerPetiteFenetre();
 		
 		tableau.setRowSelectionAllowed(false);
         tableau.setColumnSelectionAllowed(false);
@@ -250,11 +283,53 @@ public class FenetreEvenementsRedoutes extends JPanel{
 		this.add(areaScrollPane,BorderLayout.CENTER);
 	}
 	
-	        
-	   
-	
-	
-	    
+	protected void selectionnerLaLigne(MouseEvent e) {
+		// get the coordinates of the mouse click
+		Point p = e.getPoint();
+
+		// get the row and column indexes that contains that coordinate
+		int rowNumber = tableau.rowAtPoint(p);
+		int colNumber = tableau.columnAtPoint(p);
+
+		tableau.changeSelection(rowNumber, colNumber, false, true);
+
+	}
+
+	private void creerPetiteFenetre() {
+		this.petiteFenetre = new JFrame("Détails de la cellule");
+		this.creerTextAreaPetiteFenetre();
+		petiteFenetre.add(textAreaPetiteFenetre);	
+		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
+		petiteFenetre.setMinimumSize(new Dimension(300,0));		
+	}
+
+	private void creerTextAreaPetiteFenetre() {
+		this.textAreaPetiteFenetre = new JTextArea("Laul");		
+		textAreaPetiteFenetre.setEditable(false);
+		textAreaPetiteFenetre.setFont(new Font("Arial", Font.PLAIN, 17));
+		textAreaPetiteFenetre.setLineWrap(true);
+		textAreaPetiteFenetre.setWrapStyleWord(true);		
+	}
+
+	protected void setPetiteFenetre() {
+		int row = this.tableau.getSelectedRow();
+		int col = this.tableau.getSelectedColumn();
+		if(row != -1 && col != -1){
+			ModeleEvenementsRedoutes modele = (ModeleEvenementsRedoutes) tableau.getModel();
+			String contenuCellule = modele.getValueAt(row, col).toString();
+			System.out.println(contenuCellule);
+			this.textAreaPetiteFenetre.setText(contenuCellule);
+			petiteFenetre.pack();
+			petiteFenetre.pack();
+			Point positionSouris = MouseInfo.getPointerInfo().getLocation();
+			int xSouris = (int) positionSouris.getX();
+			int ySouris = (int) positionSouris.getY();
+			Point positionDeLaFenetre = new Point(xSouris - 1, ySouris + 1);
+			petiteFenetre.setLocation(positionDeLaFenetre);
+			petiteFenetre.setVisible(true);	
+		}			
+	}
+
 	
 }
 
