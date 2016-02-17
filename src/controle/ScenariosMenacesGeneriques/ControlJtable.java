@@ -1,11 +1,15 @@
 package controle.ScenariosMenacesGeneriques;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import abstraction.autres.ScenarioType;
 import presentation.ModeleScenarioDeMenacesGeneriques;
@@ -15,12 +19,14 @@ public class ControlJtable implements MouseListener, KeyListener {
 	private JTable tableau ;
 	private String idCourant ;
 	private String intituleCourant ;
+	private JFrame fenetreDescription ;
 	
-	public ControlJtable(ModeleScenarioDeMenacesGeneriques modele , JTable tableau) {
+	public ControlJtable(ModeleScenarioDeMenacesGeneriques modele , JTable tableau, JFrame fen) {
 		this.modele=modele;
 		this.tableau=tableau;
 		this.idCourant="";
 		this.intituleCourant="";
+		this.fenetreDescription=fen;
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -32,8 +38,24 @@ public class ControlJtable implements MouseListener, KeyListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (SwingUtilities.isRightMouseButton(e)) {
+			// On sélectionne la case correspondante
+			Point p = e.getPoint();
+			int rowNumber = this.tableau.rowAtPoint(p);
+			int colNumber = this.tableau.columnAtPoint(p);
+			this.tableau.changeSelection(rowNumber, colNumber, false, true);
+			
+			this.fenetreDescription.setVisible(true);
+			
+			// On actualise la fenêtre pour qu'elle corresponde à ce qui est dans la case
+			int row = this.tableau.getSelectedRow();
+			int col = this.tableau.getSelectedColumn();
+			if(row != -1 && col != -1){
+				String description = (String) this.modele.getValueAt(row, col);
+				((JTextArea) this.fenetreDescription.getContentPane().getComponent(0)).setText(description);
+				this.fenetreDescription.pack();
+			}
+		}
 	}
 
 	public void mouseReleased(MouseEvent e) {

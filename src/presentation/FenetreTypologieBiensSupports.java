@@ -7,12 +7,14 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
 import javax.swing.table.TableColumn;
 
 import presentation.FenetreBiensSupports.Renderer;
@@ -33,6 +35,8 @@ public class FenetreTypologieBiensSupports extends JPanel {
 	private JButton supprimerLigne ;
 	private JButton ajouterLigne ;
 	private JButton aide ;
+	private JFrame petiteFenetre;
+	private JTextArea textAreaPetiteFenetre;
 
 	public FenetreTypologieBiensSupports(TypologieDesBiensSupports module) {
 		
@@ -40,10 +44,28 @@ public class FenetreTypologieBiensSupports extends JPanel {
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		this.creerPetiteFenetre();
 		this.creerTableau();
 		//this.creerCouleurs();
 		this.creerZoneDescription();
 		this.creerBoutonsBas();
+	}
+	
+	public void creerPetiteFenetre(){
+		this.petiteFenetre = new JFrame("Détail de la cellule");
+		this.creerTextAreaPetiteFenetre();
+		this.petiteFenetre.add(textAreaPetiteFenetre);
+		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
+		petiteFenetre.setMinimumSize(new Dimension(300,0));
+		this.petiteFenetre.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+	}
+	
+	public void creerTextAreaPetiteFenetre() {
+		this.textAreaPetiteFenetre = new JTextArea("");		
+		textAreaPetiteFenetre.setEditable(false);
+		textAreaPetiteFenetre.setFont(new Font("Arial", Font.PLAIN, 17));
+		textAreaPetiteFenetre.setLineWrap(true);
+		textAreaPetiteFenetre.setWrapStyleWord(true);
 	}
 
 	public void creerTableau() {
@@ -53,7 +75,7 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		this.rendererTypeBien=new CellRendererTypesBiens(this.moduleCourant);
 		this.tableau.setDefaultRenderer(Object.class, rendererTypeBien);
 		
-		ControlJTable control = new ControlJTable(modeleTableau, tableau); // PAC
+		ControlJTable control = new ControlJTable(modeleTableau, tableau, petiteFenetre); // PAC
 		this.tableau.addMouseListener(control);                            // PAC
 		this.tableau.addKeyListener(control);                              // PAC
 		

@@ -2,6 +2,7 @@ package presentation;
 
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.table.TableColumn;
@@ -39,6 +41,9 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	
 	private ArrayList<JCheckBox> checkBoxSourcesMenaces ;
 	private JFrame listeSourcesMenaces ;
+	
+	private JFrame petiteFenetre;;
+	private JTextArea textAreaPetiteFenetre;
 
 	public FenetreScenarioDeMenacesTypes(ScenariosDeMenacesTypes module) {
 		
@@ -49,6 +54,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.creerPetiteFenetre();
+		this.creerFenetreSourcesMenaces();
 		this.creerTableau();
 				
 		this.creerComboBox();
@@ -57,6 +63,23 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	}
 	
 	public void creerPetiteFenetre(){
+		this.petiteFenetre = new JFrame("Détail de la cellule");
+		this.creerTextAreaPetiteFenetre();
+		this.petiteFenetre.add(textAreaPetiteFenetre);
+		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
+		petiteFenetre.setMinimumSize(new Dimension(300,0));
+		this.petiteFenetre.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+	}
+	
+	public void creerTextAreaPetiteFenetre() {
+		this.textAreaPetiteFenetre = new JTextArea("");		
+		textAreaPetiteFenetre.setEditable(false);
+		textAreaPetiteFenetre.setFont(new Font("Arial", Font.PLAIN, 17));
+		textAreaPetiteFenetre.setLineWrap(true);
+		textAreaPetiteFenetre.setWrapStyleWord(true);
+	}
+	
+	public void creerFenetreSourcesMenaces(){
 		this.listeSourcesMenaces= new JFrame("Liste sources de menaces");
 		this.listeSourcesMenaces.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 	}
@@ -69,7 +92,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
 		tableau.setRowHeight(50);
 		
-		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau, listeSourcesMenaces);
+		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau, listeSourcesMenaces, petiteFenetre);
 		this.tableau.addMouseListener(controlTableau);
 		
 		this.rendererVraisemblance=new CellRendererVraisemblance(modeleTableau);

@@ -9,6 +9,7 @@ import java.util.Observer;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import presentation.ModeleScenarioDeMenacesTypes;
@@ -17,11 +18,13 @@ public class ControlJTable implements MouseListener,Observer {
 	private ModeleScenarioDeMenacesTypes modele ;
 	private JTable tableau ;
 	private JFrame listeSourcesMenaces;
+	private JFrame fenetreDescription ;
 	
-	public ControlJTable(ModeleScenarioDeMenacesTypes modele, JTable tableau, JFrame fen) {
+	public ControlJTable(ModeleScenarioDeMenacesTypes modele, JTable tableau, JFrame fenetreSourcesMenaces, JFrame petiteFenetre) {
 		this.modele=modele;
 		this.tableau=tableau;
-		this.listeSourcesMenaces=fen;
+		this.listeSourcesMenaces=fenetreSourcesMenaces;
+		this.fenetreDescription=petiteFenetre;
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -57,6 +60,27 @@ public class ControlJTable implements MouseListener,Observer {
 							checkbox.setSelected(false);
 						}
 					}
+				}
+			}
+		}
+		else{
+			if(SwingUtilities.isRightMouseButton(e)){
+				
+				// On sélectionne la case correspondante
+				Point p = e.getPoint();
+				int rowNumber = this.tableau.rowAtPoint(p);
+				int colNumber = this.tableau.columnAtPoint(p);
+				this.tableau.changeSelection(rowNumber, colNumber, false, true);
+				
+				this.fenetreDescription.setVisible(true);
+				
+				// On actualise la fenêtre pour qu'elle corresponde à ce qui est dans la case
+				int row = this.tableau.getSelectedRow();
+				int col = this.tableau.getSelectedColumn();
+				if(row != -1 && col != -1){
+					String description = (String) this.modele.getValueAt(row, col);
+					((JTextArea) this.fenetreDescription.getContentPane().getComponent(0)).setText(description);
+					this.fenetreDescription.pack();
 				}
 			}
 		}

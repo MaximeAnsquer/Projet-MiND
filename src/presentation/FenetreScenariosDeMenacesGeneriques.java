@@ -1,15 +1,19 @@
 package presentation;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
 
 import controle.ScenariosMenacesGeneriques.ControlJButtonAide;
 import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutColonne;
@@ -29,6 +33,8 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 	private JButton ajouterCritere;
 	private JButton supprimerCritere;
 	private JButton aide ;
+	private JFrame petiteFenetre;
+	private JTextArea textAreaPetiteFenetre;
 	
 	public FenetreScenariosDeMenacesGeneriques(ScenariosDeMenacesGeneriques module) {
 		
@@ -36,8 +42,26 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		this.creerPetiteFenetre();
 		this.creerTableau();
 		this.creerBoutonsBas();
+	}
+	
+	public void creerPetiteFenetre(){
+		this.petiteFenetre = new JFrame("Détail de la cellule");
+		this.creerTextAreaPetiteFenetre();
+		this.petiteFenetre.add(textAreaPetiteFenetre);
+		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
+		petiteFenetre.setMinimumSize(new Dimension(300,0));
+		this.petiteFenetre.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+	}
+	
+	public void creerTextAreaPetiteFenetre() {
+		this.textAreaPetiteFenetre = new JTextArea("");		
+		textAreaPetiteFenetre.setEditable(false);
+		textAreaPetiteFenetre.setFont(new Font("Arial", Font.PLAIN, 17));
+		textAreaPetiteFenetre.setLineWrap(true);
+		textAreaPetiteFenetre.setWrapStyleWord(true);
 	}
 	
 	public void creerTableau() {
@@ -48,7 +72,7 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
 		tableau.setRowHeight(50);
 		
-		ControlJtable controlTableau = new ControlJtable(modeleTableau, tableau);
+		ControlJtable controlTableau = new ControlJtable(modeleTableau, tableau, petiteFenetre);
 		this.tableau.addMouseListener(controlTableau);
 		this.tableau.addKeyListener(controlTableau);
 		
