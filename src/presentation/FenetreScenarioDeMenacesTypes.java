@@ -69,6 +69,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		petiteFenetre.setMaximumSize(new Dimension(1000,1000));
 		petiteFenetre.setMinimumSize(new Dimension(300,0));
 		this.petiteFenetre.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		this.petiteFenetre.pack();
 	}
 	
 	public void creerTextAreaPetiteFenetre() {

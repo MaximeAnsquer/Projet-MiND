@@ -1,5 +1,6 @@
 package controle.ScenariosMenacesGeneriques;
 
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -53,6 +54,13 @@ public class ControlJtable implements MouseListener, KeyListener {
 			if(row != -1 && col != -1){
 				String description = (String) this.modele.getValueAt(row, col);
 				((JTextArea) this.fenetreDescription.getContentPane().getComponent(0)).setText(description);
+				
+				Point positionSouris = MouseInfo.getPointerInfo().getLocation();
+				int xSouris = (int) positionSouris.getX();
+				int ySouris = (int) positionSouris.getY();
+				Point positionDeLaFenetre = new Point(xSouris - 1, ySouris + 1);
+				this.fenetreDescription.setLocation(positionDeLaFenetre);
+				
 				this.fenetreDescription.pack();
 			}
 		}
