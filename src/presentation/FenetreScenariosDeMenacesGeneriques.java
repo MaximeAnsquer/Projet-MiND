@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
+import javax.swing.table.TableColumn;
 
 import controle.ScenariosMenacesGeneriques.ControlJButtonAide;
 import controle.ScenariosMenacesGeneriques.ControlJButtonAjoutColonne;
@@ -28,6 +29,7 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 	private ScenariosDeMenacesGeneriques moduleCourant;
 	private ModeleScenarioDeMenacesGeneriques modeleTableau;
 	private JTable tableau ;
+	private CellRendererToolTip rendererToolTip ;
 	private JButton supprimerLigne ;
 	private JButton ajouterLigne ;
 	private JButton ajouterCritere;
@@ -75,6 +77,11 @@ public class FenetreScenariosDeMenacesGeneriques extends JPanel {
 		ControlJtable controlTableau = new ControlJtable(modeleTableau, tableau, petiteFenetre);
 		this.tableau.addMouseListener(controlTableau);
 		this.tableau.addKeyListener(controlTableau);
+		
+		this.rendererToolTip= new CellRendererToolTip(modeleTableau);
+		
+		TableColumn colonneIntitule = this.tableau.getColumnModel().getColumn(ModeleScenarioDeMenacesGeneriques.COLONNE_INTITULE);
+		colonneIntitule.setCellRenderer(rendererToolTip);
 		
 		this.add(tableau.getTableHeader());
         this.add(new JScrollPane(tableau));

@@ -72,13 +72,13 @@ public class FenetreTypologieBiensSupports extends JPanel {
 		this.modeleTableau=new ModeleTypologieBiensSupports(this.moduleCourant);
 		this.tableau = new JTable(this.modeleTableau);
 		
-		this.rendererTypeBien=new CellRendererTypesBiens(this.moduleCourant);
+		this.rendererTypeBien=new CellRendererTypesBiens(this.moduleCourant,modeleTableau);
 		this.tableau.setDefaultRenderer(Object.class, rendererTypeBien);
 		
 		ControlJTable control = new ControlJTable(modeleTableau, tableau, petiteFenetre); // PAC
 		this.tableau.addMouseListener(control);                            // PAC
 		this.tableau.addKeyListener(control);                              // PAC
-		
+	
 		tableau.getColumnModel().getColumn(tableau.getColumnModel().getColumnCount()-1).setMaxWidth(50);
 		this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableau.setFont(new Font("Arial", Font.PLAIN, 15));

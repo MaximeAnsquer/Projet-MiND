@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -16,10 +17,12 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 	private ArrayList<Color> listeCouleurs ;
 	private ArrayList<Color> couleursRetenus;
 	private TypologieDesBiensSupports module ;
+	private ModeleTypologieBiensSupports modele ;
 	
-	public CellRendererTypesBiens(TypologieDesBiensSupports module){
+	public CellRendererTypesBiens(TypologieDesBiensSupports module, ModeleTypologieBiensSupports modele){
 		super();
 		this.module=module;
+		this.modele=modele;
 		this.listeCouleurs = new ArrayList<Color>();
 		this.listeCouleurs.add(new Color(159 , 232 , 85)); // Vert anis
 		this.listeCouleurs.add(new Color(225, 206, 154)); // Vanille
@@ -44,6 +47,10 @@ public class CellRendererTypesBiens extends DefaultTableCellRenderer {
 		Component component = super.getTableCellRendererComponent(table, value,
 				isSelected, hasFocus, row, column);
 		
+		if (component instanceof JComponent) {
+			String contenuCase = (String) this.modele.getValueAt(row, column);
+			((JComponent) component).setToolTipText(contenuCase);
+		}
 		if (value.equals("") || value == null) {
 			Color clr = Color.yellow;
 			component.setBackground(clr);

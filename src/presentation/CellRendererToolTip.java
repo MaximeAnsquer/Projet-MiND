@@ -9,11 +9,25 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class CellRendererToolTip extends DefaultTableCellRenderer {
-	ModeleScenarioDeMenacesTypes modele ;
+	ModeleScenarioDeMenacesTypes modeleType ;
+	ModeleScenarioDeMenacesGeneriques modeleGene ;
+	ModeleTypologieBiensSupports modeleTypologie;
 
 	public CellRendererToolTip(ModeleScenarioDeMenacesTypes modele) {
 		super();
-		this.modele=modele;
+		this.modeleType=modele;
+		this.setHorizontalAlignment(SwingConstants.CENTER);
+	}
+	
+	public CellRendererToolTip(ModeleTypologieBiensSupports modele) {
+		super();
+		this.modeleTypologie=modele;
+		this.setHorizontalAlignment(SwingConstants.CENTER);
+	}
+	
+	public CellRendererToolTip(ModeleScenarioDeMenacesGeneriques modele) {
+		super();
+		this.modeleGene=modele;
 		this.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
@@ -26,8 +40,14 @@ public class CellRendererToolTip extends DefaultTableCellRenderer {
 				isSelected, hasFocus, row, column);
 		
 		if (component instanceof JComponent) {
-			String contenuCase = (String) this.modele.getValueAt(row, column);
-			((JComponent) component).setToolTipText(contenuCase);
+			if (modeleType!=null){
+				String contenuCase = (String) this.modeleType.getValueAt(row, column);
+				((JComponent) component).setToolTipText(contenuCase);
+			}
+			if (modeleGene!=null){
+				String contenuCase = (String) this.modeleGene.getValueAt(row, column);
+				((JComponent) component).setToolTipText(contenuCase);
+			}	
 		}
 		
 		if (value.equals("") || value == null) {
