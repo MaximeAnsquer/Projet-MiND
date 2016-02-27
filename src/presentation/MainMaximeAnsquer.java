@@ -378,8 +378,9 @@ public class MainMaximeAnsquer extends JFrame {
 		if(decision != -1 ){
 			//On demande le nom a attribuer a l'etude
 			String nomEtude = "";
-			while(nomEtude != null && nomEtude.equals("") ){
-				nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle étude.");	
+			while( (nomEtude != null && nomEtude.equals("")) || !nomEstValide(nomEtude) ){
+				nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle étude." +
+						"\n(Un nom d'étude ne peut pas contenir les caractères suivants : \\ / * ? \" < > | )");	
 				if(nomEtude == null){
 					if(this.existeAuMoinsUneEtude()){
 						this.demanderEtude();			
@@ -408,6 +409,19 @@ public class MainMaximeAnsquer extends JFrame {
 				}					
 			}
 		}
+	}
+
+	private boolean nomEstValide(String nomEtude) {
+		boolean valide = true;
+		if(nomEtude != null){
+			String[] caracteresInterdits = {"\\","/",":","*","?","\"","<",">","|"};
+			for(String c: caracteresInterdits){
+				if(nomEtude.contains(c)){
+					valide = false;
+				}
+			}		
+		}
+		return valide;
 	}
 
 	private boolean nomEtudeDejaUtilise(String nomEtude) {
@@ -636,9 +650,11 @@ public class MainMaximeAnsquer extends JFrame {
 
 		//On change le nom de l'etude		
 		String nouveauNom = "";
-		while(nouveauNom != null && nouveauNom.equals("")){
-			nouveauNom = JOptionPane.showInputDialog("Veuillez saisir le nouveau nom de l'etude");
-			if(nouveauNom != null){
+		while( (nouveauNom != null && nouveauNom.equals("")) || !nomEstValide(nouveauNom)){
+			nouveauNom = JOptionPane.showInputDialog("Veuillez saisir le nouveau nom de l'étude." +
+					"\n(Un nom d'étude ne peut pas contenir les caractères suivants : \\ / * ? \" < > | )");
+			if(nouveauNom != null && nomEstValide(nouveauNom)){
+				nouveauNom.replace('"', '\"');
 				this.etudeEnCours.setNom(nouveauNom);
 				this.setTitle("Outil d'analyse de risques - Etude en cours : " + nouveauNom);
 
