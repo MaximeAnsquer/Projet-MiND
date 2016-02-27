@@ -267,11 +267,11 @@ this.setAnalyseDesRisques(nouvellean.getAnalyseDesRisques());
 		
 		
 		boolean resultat=true;
-		this.problemesDeCoherence=new ArrayList<String>();
+		this.erreurs=new ArrayList<String>();
 		for (int i=0;i<this.getAnalyseDesRisques().size();i++){
 			if(this.getAnalyseDesRisques().get(i).estComplet()!=true){
 				String probleme = "Un risque est incomplet";
-				this.problemesDeCoherence.add(probleme);
+				this.erreurs.add(probleme);
 				
 				resultat=false;
 			}

@@ -123,15 +123,15 @@ public class BiensEssentiels extends Module {
 	
 	public boolean estCoherent(){
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<String>();
+		this.erreurs = new ArrayList<String>();
 		for(Bien b : this.getLesBiens()){
 			if(!b.estComplet()){
-				this.problemesDeCoherence.add("bien essentiel \" " + b.getIntitule() + " \" incomplet");
+				this.erreurs.add("bien essentiel \" " + b.getIntitule() + " \" incomplet");
 				resultat = false;
 			}
 		}
 		if(this.getBiensRetenus().size() <= 0){
-			this.problemesDeCoherence.add("Aucun bien essentiel retenu");
+			this.erreurs.add("Aucun bien essentiel retenu");
 			resultat = false;
 		}
 		return resultat;

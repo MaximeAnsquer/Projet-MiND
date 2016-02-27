@@ -253,22 +253,22 @@ public class Metriques extends Module {
 	public boolean estCoherent(){
 		boolean resultat = true;
 		
-		this.problemesDeCoherence = new ArrayList<String>();
+		this.erreurs = new ArrayList<String>();
 		for(Metrique m : this.getMetriquesDesCriteresRetenus()){
 			if(!m.estComplet()){
 				String probleme = "La métrique \" " + m.getIntitule() + " \" est incomplète.";
-				this.problemesDeCoherence.add(probleme);
+				this.erreurs.add(probleme);
 				resultat = false;
 			}			
 		}
 		if(this.getMetrique("Gravite") == null){
 			String probleme = "Il faut une métrique \" Gravité \".";
-			this.problemesDeCoherence.add(probleme);
+			this.erreurs.add(probleme);
 			resultat = false;
 		}
 		if(this.getMetrique("Vraisemblance") == null){
 			String probleme = "Il faut une métrique \" Vraisemblance \".";
-			this.problemesDeCoherence.add(probleme);
+			this.erreurs.add(probleme);
 			resultat = false;
 		}		
 		return resultat;

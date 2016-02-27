@@ -129,22 +129,22 @@
                 <Niveau>
                     <Numero>1</Numero>
                     <Intitule>Négligeable</Intitule>
-                    <Description>Gravite négligeable</Description>
+                    <Description>Gravité négligeable</Description>
                 </Niveau>
                 <Niveau>
                     <Numero>2</Numero>
                     <Intitule>Limitée</Intitule>
-                    <Description>Gravite limitée</Description>
+                    <Description>Gravité limitée</Description>
                 </Niveau>
                 <Niveau>
                     <Numero>3</Numero>
                     <Intitule>Importante</Intitule>
-                    <Description>Gravite importante</Description>
+                    <Description>Gravité importante</Description>
                 </Niveau>
                 <Niveau>
                     <Numero>4</Numero>
                     <Intitule>Critique</Intitule>
-                    <Description>Gravite critique</Description>
+                    <Description>Gravité critique</Description>
                 </Niveau>
             </Niveaux>
         </Metrique>

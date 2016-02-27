@@ -258,12 +258,12 @@ public class TypologieDesBiensSupports extends Module {
 	public boolean estCoherent() {
 		int compteur = 1 ;
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<String>();
+		this.erreurs = new ArrayList<String>();
 		for (TypeBien type : this.tableau) {
 			if (type.isIncomplete()) {
 				String s = "Le type de bien support situé à la ligne " + compteur
 						+ " est incomplet";
-				this.problemesDeCoherence.add(s);
+				this.erreurs.add(s);
 				resultat = false;
 			}
 			compteur++ ;
@@ -271,7 +271,7 @@ public class TypologieDesBiensSupports extends Module {
 
 		if (this.getTypeBiensRetenus().size() < 1) {
 			String s = "Aucun type de bien support retenu";
-			this.problemesDeCoherence.add(s);
+			this.erreurs.add(s);
 			resultat = false;
 		}
 		return resultat;

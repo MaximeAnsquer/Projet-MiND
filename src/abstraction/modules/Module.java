@@ -1,4 +1,5 @@
 package abstraction.modules;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -22,16 +23,18 @@ public class Module extends Observable implements IModule  {
 	protected boolean coherent;
 	protected boolean disponible;
 	protected Etude etude;
-	protected ArrayList<String> problemesDeCoherence;
+	protected ArrayList<String> erreurs;
+	protected ArrayList<String> avertissements;
 
 	//---Constructeurs---
 
 	public Module(String nom) {
+		this.successeurs = new ArrayList<Module>();
 		this.predecesseurs=new ArrayList<Module>();
-		this.successeurs=new ArrayList<Module>();
 		this.nom=nom;
 		this.cree = false;
-		this.problemesDeCoherence = new ArrayList<String>();
+		this.erreurs = new ArrayList<String>();
+		this.avertissements = new ArrayList<String>();
 	}
 
 	//---Getters et setters---
@@ -104,8 +107,16 @@ public class Module extends Observable implements IModule  {
 		this.etude = etude;
 	}
 
-	public ArrayList<String> getProblemes() {
-		return this.problemesDeCoherence;
+	public ArrayList<String> getErreurs() {
+		return this.erreurs;
+	}
+
+	public ArrayList<String> getAvertissements() {
+		return this.avertissements;
+	}
+
+	public boolean pasDavertissement() {
+		return this.avertissements.size() == 0;
 	}	
 
 	

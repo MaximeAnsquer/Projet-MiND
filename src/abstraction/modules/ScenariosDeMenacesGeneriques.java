@@ -278,36 +278,36 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	
 	public boolean estCoherent() {
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<String>();
+		this.erreurs = new ArrayList<String>();
 		for (ScenarioGenerique scenario : this.tableau) {
 			if (scenario.isIncomplete()) {
 				String s = "Scenario generique \" " + scenario.getIntitule()
 						+ " \" incomplet";
-				this.problemesDeCoherence.add(s);
+				this.erreurs.add(s);
 				resultat = false;
 			}
 			if (!scenario.getCriteresSup().values().contains(true)){
 				String s = "Le scenario generique \" " + scenario.getIntitule()
 						+ " \" n'a pas de critère retenu";
-				this.problemesDeCoherence.add(s);
+				this.erreurs.add(s);
 				resultat = false;
 			}
 		}
 		if (this.getScenariosGeneriquesRetenus().size() < 1) {
 			String s = "Aucun scenario generique retenu";
-			this.problemesDeCoherence.add(s);
+			this.erreurs.add(s);
 			resultat = false;
 		}
 		if (this.nomColonneSup==null || this.nomColonneSup.size()==0){
 			String s = "Aucun critere de securite ajoute";
-			this.problemesDeCoherence.add(s);
+			this.erreurs.add(s);
 			resultat = false;
 		}
 		for (String nomCritere : this.nomColonneSup) {
 			if (!this.isImpacteCritere(nomCritere)) {
 				String s = "Le critere de securite \" " + nomCritere
 						+ " \" n'est retenu dans aucun scenario";
-				this.problemesDeCoherence.add(s);
+				this.erreurs.add(s);
 				resultat = false;
 			}
 		}

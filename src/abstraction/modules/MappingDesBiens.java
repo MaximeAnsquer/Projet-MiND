@@ -118,10 +118,10 @@ public class MappingDesBiens extends Module{
 	public boolean estCoherent(){
 		this.actualiserMapping();
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<String>();
+		this.erreurs = new ArrayList<String>();
 		for(MappingBien m : this.getMappingDesBiens()){
 			if(!m.estComplet() && this.biensEssentiels.getBien(m.getBienEssentiel().getIntitule())!=null){
-				this.problemesDeCoherence.add("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
+				this.erreurs.add("le bien essentiel \" " + m.getBienEssentiel() + " \" ne correspond a aucun bien support");
 				resultat = false;
 			}
 		}	

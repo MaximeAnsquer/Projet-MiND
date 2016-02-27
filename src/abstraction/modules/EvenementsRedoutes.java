@@ -206,11 +206,11 @@ EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
 		this.setEvenementsRedoutes(nouveauev.getEvenementsRedoutes());
 		
 		boolean resultat=true;
-		this.problemesDeCoherence=new ArrayList<String>();
+		this.erreurs=new ArrayList<String>();
 		for (int i=0;i<this.getEvenementsRedoutes().size();i++){
 			if(this.getEvenementsRedoutes().get(i).estComplet()!=true){
 				String probleme = "Un ou plusieurs evenements sont incomplets";
-				this.problemesDeCoherence.add(probleme);
+				this.erreurs.add(probleme);
 				
 				
 				
@@ -226,7 +226,7 @@ EvenementsRedoutes nouveauev=new EvenementsRedoutes(this.getEtude());
 						resultat=false;
 						
 						String probleme = "Un ou plusieurs événements ont le même nom";
-						this.problemesDeCoherence.add(probleme);
+						this.erreurs.add(probleme);
 						
 					}
 				}

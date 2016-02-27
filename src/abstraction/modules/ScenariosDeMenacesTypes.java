@@ -355,25 +355,25 @@ public class ScenariosDeMenacesTypes extends Module {
 	
 	public boolean estCoherent() {
 		boolean resultat = true ;
-		this.problemesDeCoherence = new ArrayList<String>();
+		this.erreurs = new ArrayList<String>();
 		for (ScenarioType scenario : this.tableau) {
 			if (scenario.isIncompleteType()) {
 				String s = "Scenario type \" " + scenario.getIntitule()
 						+ " \" incomplet";
-				this.problemesDeCoherence.add(s);
+				this.erreurs.add(s);
 				resultat = false;
 			}
 		}
 		if (this.getScenariosTypesRetenus().size() < 1) {
 			String s = "Aucun scenario type retenu";
-			this.problemesDeCoherence.add(s);
+			this.erreurs.add(s);
 			resultat = false;
 		}
 		for (String nomCritere : this.nomColonneSup){
 			if (!this.isImpacteCritere(nomCritere)) {
 				String s = "Le critere de securite \" " + nomCritere
 						+ " \" n'est retenu dans aucun scenario type";
-				this.problemesDeCoherence.add(s);
+				this.erreurs.add(s);
 				resultat = false;
 			}
 		}

@@ -198,7 +198,7 @@ public class CriteresDeSecurite extends Module{
 		}
 		return resultat;
 	}
-	
+
 	public ArrayList<String> getIntitulesCriteresRetenus(){
 		ArrayList<String> resultat = new ArrayList<String>();
 		for(Critere c : this.getLesCriteres()){
@@ -208,7 +208,7 @@ public class CriteresDeSecurite extends Module{
 		}
 		return resultat;
 	}
-	
+
 
 	public int nombreDeCriteres(){
 		return lesCriteres.size();
@@ -228,19 +228,22 @@ public class CriteresDeSecurite extends Module{
 	}
 
 	public boolean estCoherent(){
+		
+		//Traitement des avertissements
+		this.avertissements.clear();
+		if(this.getCriteresRetenus().size() <= 0){
+			this.avertissements.add("Aucun critère retenu.");
+		}
+
+		//Traitement des erreurs		
 		boolean resultat = true;
-		this.problemesDeCoherence = new ArrayList<String>();
+		this.erreurs.clear();
 		for(Critere c : getLesCriteres()){
 			if(!c.estComplet()){
 				String probleme = "Le critère \" " + c.getIntitule() + " \" est incomplet";
-				this.problemesDeCoherence.add(probleme);
+				this.erreurs.add(probleme);
 				resultat = false;
 			}
-		}
-		if(this.getCriteresRetenus().size() <= 0){
-			String probleme = "Aucun critere retenu";
-			this.problemesDeCoherence.add(probleme);
-			resultat = false;
 		}
 		return resultat;
 	}

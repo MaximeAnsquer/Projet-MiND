@@ -35,31 +35,33 @@ public class Workflow extends JPanel {
 	private MainMaximeAnsquer fenetre;
 
 	public Workflow(Etude etude, MainMaximeAnsquer fenetrePrincipale) {
-//		System.out.println("\n --- RECHARGEMENT DU WORKFLOW --- \n");
+		//		System.out.println("\n --- RECHARGEMENT DU WORKFLOW --- \n");
 		this.etude = etude;
 		this.fenetre = fenetrePrincipale;
 		this.lesBoutons = new Hashtable<String, JButton>();		
 
 		for(final Module m : etude.getLesModules().values()){
 
-//			System.out.println("\n Création du bouton " + m.toString() + "... \n");
+			//			System.out.println("\n Création du bouton " + m.toString() + "... \n");
 
 			JButton bouton = new JButton(mettreSurDeuxLignes(m.toString()));
 
 			if(!m.estDisponible()){
-//				System.out.println(m + " n'est pas disponible.");
+				//				System.out.println(m + " n'est pas disponible.");
 				bouton.setEnabled(false);
 			}
 			else{
-//				System.out.println(m + " est disponible.");
+				//				System.out.println(m + " est disponible.");
 				if(m.estCree()){
 					if(!m.estCoherent()){
 
 						bouton.setBackground(Color.RED);
 					}
 					else{
-
-						bouton.setBackground(Color.GREEN);
+						if(m.pasDavertissement())						
+							bouton.setBackground(Color.GREEN);							
+						else
+							bouton.setBackground(Color.ORANGE);		
 					}
 				}				
 			}
@@ -195,7 +197,7 @@ public class Workflow extends JPanel {
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(new ImageIcon("images/workflow.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
+		g.drawImage(new ImageIcon("images/workflow.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 
 

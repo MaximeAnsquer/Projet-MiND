@@ -82,8 +82,10 @@ public class MainMaximeAnsquer extends JFrame {
 	private JFrame fenetreChoisirEtude; 
 	private JButton boutonWorkflow;
 	private JButton boutonVerifier;
-	private JList jlistProblemes;
-	private DefaultListModel listModel;
+	private JList jListAvertissements;
+	private DefaultListModel listModelAvertissements;
+	private JList jListErreurs;
+	private DefaultListModel listModelErreurs;
 
 	public MainMaximeAnsquer(){
 
@@ -156,15 +158,25 @@ public class MainMaximeAnsquer extends JFrame {
 
 	private void creerPartieDuBas() {
 		partieDuBas = new JPanel();
-
-		listModel = new DefaultListModel();	
-
-		jlistProblemes = new JList(listModel);		
-		jlistProblemes.setVisibleRowCount(6);
+		partieDuBas.setLayout(new BoxLayout(partieDuBas, BoxLayout.X_AXIS));
 		Font font = new Font("Arial", Font.PLAIN, 18);
-		jlistProblemes.setFont(font);
-		jlistProblemes.setForeground(Color.red);
-		partieDuBas.add(new JScrollPane(jlistProblemes));
+
+		//JList des avertissements
+		listModelAvertissements = new DefaultListModel();	
+		jListAvertissements = new JList(listModelAvertissements);		
+		jListAvertissements.setVisibleRowCount(6);
+		jListAvertissements.setFont(font);
+		jListAvertissements.setForeground(new Color(255,65,0));
+
+		//JList des erreurs
+		listModelErreurs = new DefaultListModel();	
+		jListErreurs = new JList(listModelErreurs);		
+		jListErreurs.setVisibleRowCount(6);
+		jListErreurs.setFont(font);
+		jListErreurs.setForeground(Color.red);
+
+		partieDuBas.add(new JScrollPane(jListAvertissements));
+		partieDuBas.add(new JScrollPane(jListErreurs));
 	}
 
 	private boolean existeAuMoinsUneEtude() {
@@ -262,70 +274,59 @@ public class MainMaximeAnsquer extends JFrame {
 
 	private void setPartieDuBas() {
 
-		//On genere les eventuels problemes de coherence
+		//On genere les eventuels avertissements et erreurs
 		moduleEnCours.estCoherent();
 
-		//On vide la jlist
-		listModel.removeAllElements();
+		//On vide les JList
+		listModelAvertissements.removeAllElements();
+		listModelErreurs.removeAllElements();
 
-		//S'il n'y a pas de problème de cohérence :
-		if(moduleEnCours.getProblemes().size() == 0){
-			jlistProblemes.setVisibleRowCount(1);		
-			jlistProblemes.setForeground(Color.black);
-			listModel.addElement("Aucun problème de cohérence.");
+		//S'il n'y a pas d'avertissement :
+		if(moduleEnCours.getAvertissements().size() == 0){
+			jListAvertissements.setVisibleRowCount(1);		
+			jListAvertissements.setForeground(new Color(34,139,34));
+			listModelAvertissements.addElement("Aucun avertissement.");
 		}
-		//s'il y a des problèmes de cohérence :
+		//s'il y a des avertissements :
 		else{
-			for(String probleme : moduleEnCours.getProblemes()){
-				listModel.addElement(probleme);
+			for(String avertissement : moduleEnCours.getAvertissements()){
+				listModelAvertissements.addElement("Avertissement : " + avertissement);
 			}
 			int nbLignesAffichees;
-			if(listModel.size() > 5){
+			if(listModelAvertissements.size() > 5){
 				nbLignesAffichees = 6;
 			}
 			else{
-				nbLignesAffichees = listModel.size();
+				nbLignesAffichees = listModelErreurs.size();
 			}
-			jlistProblemes.setVisibleRowCount(nbLignesAffichees);
-			jlistProblemes.setForeground(Color.red);
+			jListAvertissements.setVisibleRowCount(nbLignesAffichees);
+			jListAvertissements.setForeground(new Color(255,65,0)); 
+		}
+
+		//S'il n'y a pas de problème de cohérence :
+		if(moduleEnCours.getErreurs().size() == 0){
+			jListErreurs.setVisibleRowCount(1);		
+			jListErreurs.setForeground(new Color(34,139,34));
+			listModelErreurs.addElement("Aucune erreur.");
+		}
+		//s'il y a des problèmes de cohérence :
+		else{
+			for(String probleme : moduleEnCours.getErreurs()){
+				listModelErreurs.addElement("Erreur : " + probleme);
+			}
+			int nbLignesAffichees;
+			if(listModelErreurs.size() > 5){
+				nbLignesAffichees = 6;
+			}
+			else{
+				nbLignesAffichees = listModelErreurs.size();
+			}
+			jListErreurs.setVisibleRowCount(nbLignesAffichees);
+			jListErreurs.setForeground(Color.red);
 		}
 
 		partieDuBas.validate();
 		partieDuBas.repaint();
-
-		//On genere les eventuels problemes de coherence
-		//		moduleEnCours.estCoherent();
-		//
-		//		partieDuBas.removeAll();		
-		//
-		//		int problemesAffiches = 0;
-		//		for(String probleme : moduleEnCours.getProblemes()){
-		//			if(problemesAffiches < 5){
-		//				JLabel label = new JLabel(probleme);
-		//				label.setForeground(Color.red);
-		//				label.setFont(new Font("Arial", Font.PLAIN, 22));
-		//				partieDuBas.add(label);
-		//				problemesAffiches++;
-		//			}
-		//		}
-		//		
-		//		int nbProblemesNonAffiches = moduleEnCours.getProblemes().size() - problemesAffiches;
-		//		if(nbProblemesNonAffiches > 0){
-		//			JLabel label = new JLabel("(" + nbProblemesNonAffiches + " autres problèmes de cohérence)");
-		//			label.setForeground(Color.red);
-		//			label.setFont(new Font("Arial", Font.PLAIN, 22));
-		//			partieDuBas.add(label);
-		//		}
-		//
-		//		if(moduleEnCours.getProblemes().size() == 0){
-		//			JLabel label = new JLabel("Aucun problème de cohérence");
-		//			label.setFont(new Font("Arial", Font.PLAIN, 22));
-		//			partieDuBas.add(label);
-		//		}
-		//
-		//		partieDuBas.validate();
-		//		partieDuBas.repaint();
-
 	}
 
 	private void setPartieDeGauche() {
@@ -451,7 +452,7 @@ public class MainMaximeAnsquer extends JFrame {
 				xstream.toXML(etudeEnCours, fos);
 				long t1 = System.currentTimeMillis();
 				System.out.println("Temps mis pour enregistrer l'étude : " + (t1-t0)/1000.0 + "s");
-				JOptionPane.showMessageDialog(null, "Etude enregistrée avec succès");
+				JOptionPane.showMessageDialog(null, "Étude enregistrée avec succès");
 			} finally {
 				// On s'assure de fermer le flux quoi qu'il arrive
 				fos.close();
@@ -577,7 +578,7 @@ public class MainMaximeAnsquer extends JFrame {
 		fenetreChoisirEtude.setMinimumSize(new Dimension(400,0));
 		fenetreChoisirEtude.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		fenetreChoisirEtude.getContentPane().add(new JScrollPane(jlist), BorderLayout.CENTER);
-		
+
 		boutonOk = new JButton("Ouvrir l'étude");
 		boutonOk.setEnabled(false);
 		boutonOk.addActionListener(new ActionListener(){
@@ -588,7 +589,7 @@ public class MainMaximeAnsquer extends JFrame {
 				setVisible(true);
 			}
 		});
-		
+
 		boutonAnnuler = new JButton("Annuler");
 		boutonAnnuler.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -597,7 +598,7 @@ public class MainMaximeAnsquer extends JFrame {
 				demanderEtude();
 			}			
 		});
-		
+
 		JPanel lesBoutons = new JPanel();
 		lesBoutons.setLayout(new BorderLayout());
 		lesBoutons.add(boutonOk, BorderLayout.CENTER);
