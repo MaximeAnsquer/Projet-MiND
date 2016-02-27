@@ -680,7 +680,7 @@ public class MainMaximeAnsquer extends JFrame {
 	 */
 	public void supprimerEtude() {
 
-		int confirmation = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer l'étude en cours ?");
+		int confirmation = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer l'étude en cours ?", "Suppression de l'étude", JOptionPane.YES_NO_OPTION);
 		if(confirmation == JOptionPane.YES_OPTION){
 			String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
 			File dossierEtude = new File(urlEtudes);
