@@ -264,7 +264,7 @@ public class FenetreBiensEssentiels extends JPanel{
 					biensEssentiels.getBien(i).enleverPremiereColonne();
 				}
 				biensEssentiels.getNomColonnesSup().removeFirst();
-				if (biensEssentiels.getNomColonnesSup().size()==1){
+				if (biensEssentiels.getNomColonnesSup().size()==0){
 					boutonSupprimerColonne.setEnabled(false);
 					boutonModifierColonne.setEnabled(false);
 				}

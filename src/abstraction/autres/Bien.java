@@ -22,6 +22,7 @@ public class Bien{
 		this.intitule = intitule;
 		this.type=type;
 		this.contenuColonnesSup=contenuColonnesSup;
+		this.retenu=true;
 	}
 		
 	//Getters et setters

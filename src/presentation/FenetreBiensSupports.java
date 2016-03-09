@@ -310,7 +310,7 @@ public class FenetreBiensSupports extends JPanel{
 					biensSupports.getBien(i).enleverPremiereColonne();
 				}
 				biensSupports.getNomColonnesSup().removeFirst();
-				if (biensSupports.getNomColonnesSup().size()==1){
+				if (biensSupports.getNomColonnesSup().size()==0){
 					boutonSupprimerColonne.setEnabled(false);
 					boutonModifierColonne.setEnabled(false);
 				}
