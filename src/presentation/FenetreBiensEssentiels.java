@@ -291,14 +291,20 @@ public class FenetreBiensEssentiels extends JPanel{
 
 		public void ajouterCategorie() {
 			String categorie = "";
-			do{
-				categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
+			categorie = JOptionPane.showInputDialog("Intitule de la categorie ?");
+			for (int i=0; i<this.entetes.size();i++){
+				if (this.entetes.get(i).equals(categorie)){
+					categorie = "";
+				}
+			}
+			while (categorie.equals("")) {
+				categorie = JOptionPane.showInputDialog("Erreur au niveau de l'intitulé, veuillez en entrer un qui n'est pas vide et qui n'existe pas déjà.");
 				for (int i=0; i<this.entetes.size();i++){
 					if (this.entetes.get(i).equals(categorie)){
 						categorie = "";
 					}
 				}
-			} while (categorie.equals(""));
+			} 
 			biensEssentiels.getNomColonnesSup().addFirst(categorie);
 			for (int i=0; i<biensEssentiels.nombreDeBiens();i++){
 				biensEssentiels.getBien(i).ajouterColonne("");;
@@ -315,20 +321,30 @@ public class FenetreBiensEssentiels extends JPanel{
 			for (int i=0; i<entetes.size()-3;i++){
 				contenuColonneSup.add("");
 			}
+			
 			String intitule = "";
-			do{
-				intitule = JOptionPane.showInputDialog("Intitule ?");
+			intitule = JOptionPane.showInputDialog("Intitule ?");
+			for (int i=0; i<biensEssentiels.nombreDeBiens();i++){
+				if (biensEssentiels.getBien(i).getIntitule().equals(intitule)){
+					intitule = "";
+				}
+			}
+			while (intitule.equals("")){
+				intitule = JOptionPane.showInputDialog("Erreur au niveau de l'intitulé, veuillez en entrer un qui n'est pas vide et qui n'existe pas déjà.");
 				for (int i=0; i<biensEssentiels.nombreDeBiens();i++){
 					if (biensEssentiels.getBien(i).getIntitule().equals(intitule)){
 						intitule = "";
 					}
 				}
-			} while (intitule.equals(""));
+			}
 			String type = "";
+			
 			String description = "";
-			do{
-				description = JOptionPane.showInputDialog("Description ?");
-			} while (description.equals(""));
+			description = JOptionPane.showInputDialog("Description ?");
+			while (description.equals("")){
+				description = JOptionPane.showInputDialog("Erreur au niveau de la description, veuillez en entrer une qui n'est pas vide et qui n'existe pas déjà.");
+			}
+			
 			Bien bien = new Bien(description, intitule, type, contenuColonneSup);
 			biensEssentiels.ajouterBien(bien);
 			boutonSupprimerLigne.setEnabled(true);
