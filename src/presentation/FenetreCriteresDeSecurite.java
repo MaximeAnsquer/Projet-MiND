@@ -71,10 +71,10 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		columnModel.getColumn(0).setMaxWidth(60);
 		columnModel.getColumn(1).setMaxWidth(200);
 		columnModel.getColumn(1).setMinWidth(200);
-		columnModel.getColumn(3).setMaxWidth(50);
+		columnModel.getColumn(3).setMaxWidth(50);		
 
 		//On definit le Renderer (pour les tooltips)
-		table.setDefaultRenderer(Object.class, new Renderer());
+		table.setDefaultRenderer(Object.class, new Renderer());		
 
 		table.addMouseListener(new MouseListener(){
 

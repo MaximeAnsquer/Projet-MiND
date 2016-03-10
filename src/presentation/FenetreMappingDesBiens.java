@@ -29,9 +29,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-import presentation.FenetreBiensSupports.ModeleDynamiqueObjet;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
 import abstraction.modules.MappingDesBiens;
@@ -39,6 +39,7 @@ import abstraction.modules.MappingDesBiens;
 public class FenetreMappingDesBiens extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
+	private JScrollPane scrollPane;
 	private MappingDesBiens mappingDesBiens;
 	JComboBox comboBox = new JComboBox();
 	private JFrame petiteFenetre;
@@ -59,7 +60,7 @@ public class FenetreMappingDesBiens extends JPanel {
 		this.mappingDesBiens = mappingDesBiens;
 		this.mappingDesBiens.actualiserMapping();
 		table = new JTable(new ModeleDynamiqueObjet());
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			
 		this.creerPetiteFenetre();
 		comboBox.addItem("");
 		comboBox.addItem("x");
@@ -72,7 +73,9 @@ public class FenetreMappingDesBiens extends JPanel {
 			columnModel.getColumn(i).setCellEditor(new DefaultCellEditor(comboBox));
 		}
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(new JScrollPane(table));
+		scrollPane = new JScrollPane(table);
+		this.add(scrollPane);
+		this.fixerPremiereColonneEtPouvoirScrollerLesAutres();	
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAide());
 		this.add(jpanel);
@@ -94,12 +97,36 @@ public class FenetreMappingDesBiens extends JPanel {
 			public void mouseExited(MouseEvent e) {}			
 		});
 		
-		table.setDefaultRenderer(Object.class, new Renderer());
+		table.setDefaultRenderer(Object.class, new Renderer1());
 		table.setFont(new Font("Arial", Font.PLAIN, 15));
 		table.setRowHeight(50);
 		table.setRowHeight(50);
 	}
 	
+	private void fixerPremiereColonneEtPouvoirScrollerLesAutres() {
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		resizeColumnWidth(table);
+		FixedColumnTable fct = new FixedColumnTable(1, scrollPane);		
+		JTable fixedTable = fct.getFixedTable();
+		fixedTable.setDefaultRenderer(Object.class, new Renderer2());
+		fixedTable.setFont(new Font("Arial", Font.PLAIN, 15));
+		fixedTable.setRowHeight(50);
+		fixedTable.setRowHeight(50);
+	}
+
+	public void resizeColumnWidth(JTable table) {
+	    final TableColumnModel columnModel = table.getColumnModel();
+	    for (int column = 0; column < table.getColumnCount(); column++) {
+	        int width = 50; // Min width
+	        for (int row = 0; row < table.getRowCount(); row++) {
+	            TableCellRenderer renderer = table.getCellRenderer(row, column);
+	            Component comp = table.prepareRenderer(renderer, row, column);
+	            width = Math.max(2*comp.getMinimumSize().width + 1 , width);
+	        }
+	        columnModel.getColumn(column).setPreferredWidth(width);
+	    }
+	}
+
 	protected void selectionnerLaLigne(MouseEvent e) {
 		Point p = e.getPoint();
 		int rowNumber = table.rowAtPoint(p);
@@ -245,9 +272,30 @@ public class FenetreMappingDesBiens extends JPanel {
 		}
 	}
 
-	class Renderer extends DefaultTableCellRenderer {
+	class Renderer1 extends DefaultTableCellRenderer {
 
-		public Renderer() {
+		public Renderer1() {
+			super();
+			this.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+
+		private static final long serialVersionUID = 1L;
+
+		public Component getTableCellRendererComponent(JTable table,Object value, boolean isSelected, boolean hasFocus, int row,int column) {
+			Component component = super.getTableCellRendererComponent(table,value, isSelected, hasFocus, row, column);
+			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
+			
+			if (component instanceof JComponent) {
+				((JComponent) component).setToolTipText(value.toString());
+			}
+
+			return component;
+		}
+	}
+	
+	class Renderer2 extends DefaultTableCellRenderer {
+
+		public Renderer2() {
 			super();
 			this.setHorizontalAlignment(SwingConstants.CENTER);
 		}
@@ -262,39 +310,41 @@ public class FenetreMappingDesBiens extends JPanel {
 				((JComponent) component).setToolTipText(value.toString());
 			}
 			
-			if (row < modele.biensSupports.getNomColonnesSup().size() +1){
-				if (row == modele.biensSupports.getNomColonnesSup().size()){
-					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
-						component.setBackground(new Color(200, 200, 200));
-					}
-					else{
-						component.setBackground(new Color(222, 222, 222));
-					}
-				}
-				else{
-					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
-						if (column == modele.biensEssentiels.getNomColonnesSup().size()){
-							component.setBackground(new Color(200, 200, 200));
-						}
-						else {
-							component.setBackground(new Color(255, 255, 255));
-						}
-					}
-					else{
-						component.setBackground(new Color(222, 222, 222));
-					}
-				}
-			}
-			else{
-				if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
-					component.setBackground(new Color(222, 222, 222));
-				}
-				else{
-					component.setBackground(new Color(255, 255, 255));
-				}
-			}
+//			if (row < modele.biensSupports.getNomColonnesSup().size() +1){
+//				if (row == modele.biensSupports.getNomColonnesSup().size()){
+//					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+//						component.setBackground(new Color(200, 200, 200));
+//					}
+//					else{
+//						component.setBackground(new Color(222, 222, 222));
+//					}
+//				}
+//				else{
+//					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+//						if (column == modele.biensEssentiels.getNomColonnesSup().size()){
+//							component.setBackground(new Color(200, 200, 200));
+//						}
+//						else {
+//							component.setBackground(new Color(255, 255, 255));
+//						}
+//					}
+//					else{
+//						component.setBackground(new Color(222, 222, 222));
+//					}
+//				}
+//			}
+//			else{
+//				if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+//					component.setBackground(new Color(222, 222, 222));
+//				}
+//				else{
+//					component.setBackground(new Color(255, 255, 255));
+//				}
+//			}
 
 			return component;
 		}
 	}
+	
+	
 }
