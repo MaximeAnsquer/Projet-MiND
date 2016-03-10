@@ -35,6 +35,7 @@ import javax.swing.table.TableColumnModel;
 import abstraction.modules.BiensEssentiels;
 import abstraction.modules.BiensSupports;
 import abstraction.modules.MappingDesBiens;
+import abstraction.modules.Module;
 
 public class FenetreMappingDesBiens extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -65,7 +66,7 @@ public class FenetreMappingDesBiens extends JPanel {
 		comboBox.addItem("");
 		comboBox.addItem("x");
 		comboBox.addItem("o");
-		
+
 		//TODO régler le problème de cellEditor (l'appliquer que pour les bonnes cases (combo column+row))
 		TableColumnModel columnModel = table.getColumnModel();
 		ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
@@ -96,17 +97,19 @@ public class FenetreMappingDesBiens extends JPanel {
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}			
 		});
-		
+
 		table.setDefaultRenderer(Object.class, new Renderer1());
 		table.setFont(new Font("Arial", Font.PLAIN, 15));
 		table.setRowHeight(50);
 		table.setRowHeight(50);
 	}
-	
+
 	private void fixerPremiereColonneEtPouvoirScrollerLesAutres() {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		resizeColumnWidth(table);
-		FixedColumnTable fct = new FixedColumnTable(1, scrollPane);		
+		BiensEssentiels biensEssentiels = (BiensEssentiels) mappingDesBiens.getEtude().getModule("BiensEssentiels");
+		int nbCategoriesBiensEssentiels = biensEssentiels.getNomColonnesSup().size();
+		FixedColumnTable fct = new FixedColumnTable(nbCategoriesBiensEssentiels + 1, scrollPane);		
 		JTable fixedTable = fct.getFixedTable();
 		fixedTable.setDefaultRenderer(Object.class, new Renderer2());
 		fixedTable.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -115,16 +118,16 @@ public class FenetreMappingDesBiens extends JPanel {
 	}
 
 	public void resizeColumnWidth(JTable table) {
-	    final TableColumnModel columnModel = table.getColumnModel();
-	    for (int column = 0; column < table.getColumnCount(); column++) {
-	        int width = 50; // Min width
-	        for (int row = 0; row < table.getRowCount(); row++) {
-	            TableCellRenderer renderer = table.getCellRenderer(row, column);
-	            Component comp = table.prepareRenderer(renderer, row, column);
-	            width = Math.max(2*comp.getMinimumSize().width + 1 , width);
-	        }
-	        columnModel.getColumn(column).setPreferredWidth(width);
-	    }
+		final TableColumnModel columnModel = table.getColumnModel();
+		for (int column = 0; column < table.getColumnCount(); column++) {
+			int width = 50; // Min width
+			for (int row = 0; row < table.getRowCount(); row++) {
+				TableCellRenderer renderer = table.getCellRenderer(row, column);
+				Component comp = table.prepareRenderer(renderer, row, column);
+				width = (int) Math.max(1.5*comp.getMinimumSize().width + 1 , width);
+			}
+			columnModel.getColumn(column).setPreferredWidth(width);
+		}
 	}
 
 	protected void selectionnerLaLigne(MouseEvent e) {
@@ -133,7 +136,7 @@ public class FenetreMappingDesBiens extends JPanel {
 		int colNumber = table.columnAtPoint(p);
 		table.changeSelection(rowNumber, colNumber, false, true);		
 	}
-	
+
 	protected void setPetiteFenetre() {
 		int row = this.table.getSelectedRow();
 		int col = this.table.getSelectedColumn();
@@ -168,7 +171,7 @@ public class FenetreMappingDesBiens extends JPanel {
 		textAreaPetiteFenetre.setLineWrap(true);
 		textAreaPetiteFenetre.setWrapStyleWord(true);
 	}
-	
+
 	private JButton boutonAide() {
 		JButton bouton = new JButton("Aide");
 		bouton.addActionListener(new ActionListener(){
@@ -284,15 +287,22 @@ public class FenetreMappingDesBiens extends JPanel {
 		public Component getTableCellRendererComponent(JTable table,Object value, boolean isSelected, boolean hasFocus, int row,int column) {
 			Component component = super.getTableCellRendererComponent(table,value, isSelected, hasFocus, row, column);
 			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-			
+
 			if (component instanceof JComponent) {
 				((JComponent) component).setToolTipText(value.toString());
+			}
+
+			if (row < modele.biensSupports.getNomColonnesSup().size() + 1){
+					component.setBackground(new Color(222, 222, 222));
+			}
+			else{
+				component.setBackground(Color.white);
 			}
 
 			return component;
 		}
 	}
-	
+
 	class Renderer2 extends DefaultTableCellRenderer {
 
 		public Renderer2() {
@@ -305,46 +315,46 @@ public class FenetreMappingDesBiens extends JPanel {
 		public Component getTableCellRendererComponent(JTable table,Object value, boolean isSelected, boolean hasFocus, int row,int column) {
 			Component component = super.getTableCellRendererComponent(table,value, isSelected, hasFocus, row, column);
 			ModeleDynamiqueObjet modele = (ModeleDynamiqueObjet) table.getModel();
-			
+
 			if (component instanceof JComponent) {
 				((JComponent) component).setToolTipText(value.toString());
 			}
-			
-//			if (row < modele.biensSupports.getNomColonnesSup().size() +1){
-//				if (row == modele.biensSupports.getNomColonnesSup().size()){
-//					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
-//						component.setBackground(new Color(200, 200, 200));
-//					}
-//					else{
-//						component.setBackground(new Color(222, 222, 222));
-//					}
-//				}
-//				else{
-//					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
-//						if (column == modele.biensEssentiels.getNomColonnesSup().size()){
-//							component.setBackground(new Color(200, 200, 200));
-//						}
-//						else {
-//							component.setBackground(new Color(255, 255, 255));
-//						}
-//					}
-//					else{
-//						component.setBackground(new Color(222, 222, 222));
-//					}
-//				}
-//			}
-//			else{
-//				if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
-//					component.setBackground(new Color(222, 222, 222));
-//				}
-//				else{
-//					component.setBackground(new Color(255, 255, 255));
-//				}
-//			}
+
+			if (row < modele.biensSupports.getNomColonnesSup().size() +1){
+				if (row == modele.biensSupports.getNomColonnesSup().size()){
+					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+						component.setBackground(new Color(200, 200, 200));
+					}
+					else{
+						component.setBackground(new Color(222, 222, 222));
+					}
+				}
+				else{
+					if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+						if (column == modele.biensEssentiels.getNomColonnesSup().size()){
+							component.setBackground(new Color(200, 200, 200));
+						}
+						else {
+							component.setBackground(new Color(255, 255, 255));
+						}
+					}
+					else{
+						component.setBackground(new Color(222, 222, 222));
+					}
+				}
+			}
+			else{
+				if (column < modele.biensEssentiels.getNomColonnesSup().size() + 1){
+					component.setBackground(new Color(222, 222, 222));
+				}
+				else{
+					component.setBackground(new Color(255, 255, 255));
+				}
+			}
 
 			return component;
 		}
 	}
-	
-	
+
+
 }
