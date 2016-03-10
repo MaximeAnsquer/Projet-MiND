@@ -163,23 +163,18 @@ public class FenetreMappingDesBiens extends JPanel {
 
 		public ModeleDynamiqueObjet() {
 			super();
-			/*entetes.add("Biens Essentiels   \\   Biens Supports");
-			for (int i = 0; i < biensSupports.getLesBiens().size(); i++) {
-				entetes.add(biensSupports.getBien(i).getIntitule());
-			}*/
 		}
 
 		public int getRowCount() {
-			return biensEssentiels.nombreDeBiens() + biensSupports.getNomColonnesSup().size() + 1;
+			return biensEssentiels.getBiensRetenus().size() + biensSupports.getNomColonnesSup().size() + 1;
 		}
 
 		public int getColumnCount() {
-			return biensSupports.nombreDeBiens() + biensEssentiels.getNomColonnesSup().size() + 1;
+			return biensSupports.getBiensRetenus().size() + biensEssentiels.getNomColonnesSup().size() + 1;
 		}
 
 		public String getColumnName(int columnIndex) {
 			return "";
-			//return entetes.get(columnIndex);
 		}
 
 		public boolean isCellEditable(int row, int col) {
@@ -203,7 +198,8 @@ public class FenetreMappingDesBiens extends JPanel {
 						}
 					}
 					else{
-						return biensSupports.getBien(columnIndex-biensEssentiels.getNomColonnesSup().size() - 1).getIntitule();
+						return biensSupports.getBiensRetenus().get(columnIndex-biensEssentiels.getNomColonnesSup().size() - 1).getIntitule();
+						//return biensSupports.getBien(columnIndex-biensEssentiels.getNomColonnesSup().size() - 1).getIntitule();
 					}
 				}
 				else{
@@ -216,17 +212,20 @@ public class FenetreMappingDesBiens extends JPanel {
 						}
 					}
 					else{
-						return biensSupports.getBien(columnIndex-biensEssentiels.getNomColonnesSup().size() - 1).getContenuColonnesSup().get(rowIndex);
+						return biensSupports.getBiensRetenus().get(columnIndex-biensEssentiels.getNomColonnesSup().size() - 1).getContenuColonnesSup().get(rowIndex);
+						//return biensSupports.getBien(columnIndex-biensEssentiels.getNomColonnesSup().size() - 1).getContenuColonnesSup().get(rowIndex);
 					}
 				}
 			}
 			else{
 				if (columnIndex < biensEssentiels.getNomColonnesSup().size() + 1){
 					if (columnIndex == biensEssentiels.getNomColonnesSup().size()){
-						return biensEssentiels.getBien(rowIndex-biensSupports.getNomColonnesSup().size() - 1).getIntitule();
+						return biensEssentiels.getBiensRetenus().get(rowIndex-biensSupports.getNomColonnesSup().size() - 1).getIntitule();
+						//return biensEssentiels.getBien(rowIndex-biensSupports.getNomColonnesSup().size() - 1).getIntitule();
 					}
 					else{
-						return biensEssentiels.getBien(rowIndex-biensSupports.getNomColonnesSup().size() - 1).getContenuColonnesSup().get(columnIndex);
+						return biensEssentiels.getBiensRetenus().get(rowIndex-biensSupports.getNomColonnesSup().size() - 1).getContenuColonnesSup().get(columnIndex);
+						//return biensEssentiels.getBien(rowIndex-biensSupports.getNomColonnesSup().size() - 1).getContenuColonnesSup().get(columnIndex);
 					}
 				}
 				else{

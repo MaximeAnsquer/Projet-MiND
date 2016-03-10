@@ -28,7 +28,9 @@ public class MappingDesBiens extends Module{
 		this.biensSupports = (BiensSupports)this.getEtude().getModule("BiensSupports");
 		this.biensEssentiels = (BiensEssentiels)this.getEtude().getModule("BiensEssentiels");
 		for (int i=0; i<this.biensEssentiels.nombreDeBiens(); i++){
-			mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
+			if (biensEssentiels.getBien(i).isRetenu()){
+				mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
+			}
 		}
 
 		this.predecesseurs.add(this.getEtude().getModule("BiensEssentiels"));
@@ -90,25 +92,29 @@ public class MappingDesBiens extends Module{
 	}
 	
 	public void actualiserMapping(){
-		LinkedList<MappingBien> nouveauMapping = new LinkedList<MappingBien>();
+		/*LinkedList<MappingBien> nouveauMapping = new LinkedList<MappingBien>();
 		for (int i=0; i<this.biensEssentiels.nombreDeBiens();i++){
-			nouveauMapping.add(new MappingBien(this.biensSupports,this.biensEssentiels.getBien(i)));
-			if (!this.mappingDesBiens.isEmpty() && i<this.mappingDesBiens.size()){
-				for (int j=0; j<this.biensSupports.nombreDeBiens() && j<this.mappingDesBiens.get(i).getMappingBien().size(); j++){
-					nouveauMapping.get(i).getMappingBien().set(j, this.mappingDesBiens.get(i).getMappingBien().get(j));
+			if (this.biensEssentiels.getBien(i).isRetenu()){
+				nouveauMapping.add(new MappingBien(this.biensSupports,this.biensEssentiels.getBien(i)));
+				if (!this.mappingDesBiens.isEmpty() && i<this.mappingDesBiens.size()){
+					for (int j=0; j<this.biensSupports.nombreDeBiens() && j<this.mappingDesBiens.get(i).getMappingBien().size(); j++){
+						nouveauMapping.get(i).getMappingBien().set(j, this.mappingDesBiens.get(i).getMappingBien().get(j));
+					}
 				}
-			}
+			}	
 		}
-		this.mappingDesBiens = nouveauMapping;
+		this.mappingDesBiens = nouveauMapping;*/
 		
-		/*for (int i=0; i<this.mappingDesBiens.size(); i++){
-			for (int j=this.mappingDesBiens.get(i).getMappingBien().size(); j<this.biensSupports.nombreDeBiens();j++){
-				this.mappingDesBiens.get(i).ajouterCase();
+		if (this.mappingDesBiens.size()!=this.biensEssentiels.getBiensRetenus().size()){
+			LinkedList<MappingBien> nouveauMapping = new LinkedList<MappingBien>();
+			for (int i=0; i<this.biensEssentiels.nombreDeBiens();i++){
+				if (this.biensEssentiels.getBien(i).isRetenu()){
+					nouveauMapping.add(new MappingBien(this.biensSupports,this.biensEssentiels.getBien(i)));
+				}	
 			}
+			this.mappingDesBiens = nouveauMapping;
 		}
-		for (int i=this.mappingDesBiens.size(); i<this.biensEssentiels.nombreDeBiens();i++){
-			this.mappingDesBiens.add(new MappingBien(biensSupports,biensEssentiels.getBien(i)));
-		}*/
+
 	}
 	
 	public String toString(){

@@ -22,7 +22,9 @@ public class MappingBien {
 		this.biensSupports = biensSupports;
 		this.bienEssentiel = bienEssentiel;
 		for (int i=0; i<this.biensSupports.nombreDeBiens(); i++){
-			this.mappingBien.add("");
+			if (this.biensSupports.getBien(i).isRetenu()){
+				this.mappingBien.add("");
+			}
 		}
 	}
 	
@@ -78,6 +80,6 @@ public class MappingBien {
 	}
 	
 	public String toString(){
-		return "{Mapping Bien : intitul� = "+this.getBienEssentiel().getIntitule()+"}";
+		return "{Mapping Bien : intitulé = "+this.getBienEssentiel().getIntitule()+"}";
 	}
 }
