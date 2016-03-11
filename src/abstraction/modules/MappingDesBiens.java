@@ -105,7 +105,7 @@ public class MappingDesBiens extends Module{
 		}
 		this.mappingDesBiens = nouveauMapping;*/
 		
-		if (this.mappingDesBiens.size()!=this.biensEssentiels.getBiensRetenus().size()){
+		if (this.mappingDesBiens.size()!=this.biensEssentiels.getBiensRetenus().size() || this.mappingDesBiens.get(0).getMappingBien().size()!=this.biensSupports.getBiensRetenus().size()){
 			LinkedList<MappingBien> nouveauMapping = new LinkedList<MappingBien>();
 			for (int i=0; i<this.biensEssentiels.nombreDeBiens();i++){
 				if (this.biensEssentiels.getBien(i).isRetenu()){
