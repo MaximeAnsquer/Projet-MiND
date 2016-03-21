@@ -120,7 +120,9 @@ public class ScenarioType extends ScenarioGenerique {
 			}
 		}
 		// On supprime le dernier charactère qui est une virgule
-		s=s.substring(0, s.length()-2);
+		if (s.length()>1){
+			s=s.substring(0, s.length()-2);
+		}
 		return s ;
 	}
 	
