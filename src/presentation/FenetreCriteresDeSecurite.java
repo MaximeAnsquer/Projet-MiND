@@ -111,7 +111,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		this.setLayout(new BorderLayout());
 
 		//		this.add(zoneDescription());
-		this.add(partieDuHaut(), BorderLayout.NORTH);
+		this.add(partieDuBas(), BorderLayout.SOUTH);
 		this.add(new JScrollPane(table), BorderLayout.CENTER);	
 
 	}
@@ -158,7 +158,7 @@ public class FenetreCriteresDeSecurite extends JPanel {
 		textAreaPetiteFenetre.setWrapStyleWord(true);
 	}
 
-	private JPanel partieDuHaut() {
+	private JPanel partieDuBas() {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());

@@ -62,7 +62,7 @@ public class FenetreMetriques extends JPanel {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());		
 
-		this.add(partieDuBas(), BorderLayout.NORTH);			
+		this.add(partieDuHaut(), BorderLayout.SOUTH);			
 		this.add(jpanel, BorderLayout.CENTER);
 
 		setTableau();
@@ -191,7 +191,7 @@ public class FenetreMetriques extends JPanel {
 		return m;
 	}
 
-	private JPanel partieDuBas() {
+	private JPanel partieDuHaut() {
 		JPanel jp = new JPanel();
 		jp.add(comboBox());
 		jp.add(boutonAjouter());
