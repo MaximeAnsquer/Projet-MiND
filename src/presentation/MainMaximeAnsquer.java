@@ -180,8 +180,11 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	private boolean existeAuMoinsUneEtude() {
-		String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
-		File dossierEtude = new File(urlEtudes);
+		String urlDossierEtudes = System.getProperty("user.dir") + File.separator + "etudes";
+		File dossierEtude = new File(urlDossierEtudes);
+		if (!dossierEtude.exists())	{
+			dossierEtude.mkdir();
+		}
 		File[] listOfFiles = dossierEtude.listFiles();
 		return listOfFiles.length > 0;
 	}
