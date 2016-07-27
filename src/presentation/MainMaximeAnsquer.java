@@ -92,6 +92,7 @@ public class MainMaximeAnsquer extends JFrame {
 		super("Outil d'analyse de risques");
 		this.setPreferredSize(new Dimension(largeurEcran, (int) (0.95*hauteurEcran)));
 		this.setVisible(true);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);	
 		this.contentPane = this.getContentPane();
 		this.partieDuCentre = new JPanel();
@@ -104,7 +105,6 @@ public class MainMaximeAnsquer extends JFrame {
 		creerBoutonVerifierCoherence();
 		ajouterListenerFermetureFenetre();
 		setJMenuBar(new BarreMenu(this));
-		//		creerKeyListener();
 		pack();
 
 		if(this.existeAuMoinsUneEtude()){
