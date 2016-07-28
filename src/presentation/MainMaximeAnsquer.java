@@ -100,7 +100,8 @@ public class MainMaximeAnsquer extends JFrame {
 		this.partieDeGauche = new JPanel();
 		partieDeGauche.setLayout(new GridLayout(2,1));
 		creerPartieDuBas();		
-		this.lesJpanels = new Hashtable<String, JPanel>(); //les différents tableaux affichés selon le module
+		this.lesJpanels = new Hashtable<String, JPanel>(); //les différents tableaux affichés
+		// selon le module
 		creerBoutonWorkflow();
 		creerBoutonVerifierCoherence();
 		ajouterListenerFermetureFenetre();
@@ -111,8 +112,7 @@ public class MainMaximeAnsquer extends JFrame {
 			this.demanderEtude();			
 		}
 		else{
-			JOptionPane.showMessageDialog(this, "Aucune étude enregistrée !");
-			this.nouvelleEtude();
+			creerNouvelleEtudeOuQuitter();
 		}
 	}
 
@@ -120,7 +120,8 @@ public class MainMaximeAnsquer extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 				if(etudeEnCours != null){
-					int confirmation = JOptionPane.showConfirmDialog(null, "Enregistrer l'étude en cours avant de quitter ?");
+					int confirmation = JOptionPane.showConfirmDialog(null, "Enregistrer l'étude" +
+							" en cours avant de quitter ?");
 					switch(confirmation){
 					case JOptionPane.YES_OPTION:
 						enregistrerEtude();		 
@@ -191,7 +192,8 @@ public class MainMaximeAnsquer extends JFrame {
 
 	private void demanderEtude() {
 		Object[] choix = {"Créer une nouvelle étude", "Ouvrir une étude existante"};
-		Object reponse =  JOptionPane.showOptionDialog(this,  "Que souhaitez-vous faire ?", null, JOptionPane.DEFAULT_OPTION,
+		Object reponse =  JOptionPane.showOptionDialog(this,  "Que souhaitez-vous faire ?", null,
+				JOptionPane.DEFAULT_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);	
 		if (reponse.equals(0)){
 			this.nouvelleEtude();
@@ -230,40 +232,52 @@ public class MainMaximeAnsquer extends JFrame {
 			setPartieDuBas();
 
 			if(nom.equals("CriteresDeSecurite")){
-				this.lesJpanels.put(nom, new FenetreCriteresDeSecurite((CriteresDeSecurite) etudeEnCours.getModule(nom)));
+				this.lesJpanels.put(nom, new FenetreCriteresDeSecurite(
+						(CriteresDeSecurite) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("Metriques")){
-				this.lesJpanels.put(nom, new FenetreMetriques((Metriques) etudeEnCours.getModule(nom)));
+				this.lesJpanels.put(nom, new FenetreMetriques(
+						(Metriques) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("SourcesDeMenaces")){
-				this.lesJpanels.put(nom, new FenetreSourcesDeMenaces((SourcesDeMenaces) etudeEnCours.getModule(nom)));
+				this.lesJpanels.put(nom, new FenetreSourcesDeMenaces(
+						(SourcesDeMenaces) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("BiensSupports")){
-				this.lesJpanels.put(nom, new FenetreBiensSupports((BiensSupports) etudeEnCours.getModule(nom)));
+				this.lesJpanels.put(nom, new FenetreBiensSupports(
+						(BiensSupports) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("BiensEssentiels")){
-				this.lesJpanels.put(nom, new FenetreBiensEssentiels((BiensEssentiels) etudeEnCours.getModule(nom)));
+				this.lesJpanels.put(nom, new FenetreBiensEssentiels(
+						(BiensEssentiels) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("MappingDesBiens")){
-				this.lesJpanels.put(nom, new FenetreMappingDesBiens((MappingDesBiens) etudeEnCours.getModule(nom)));
+				this.lesJpanels.put(nom, new FenetreMappingDesBiens(
+						(MappingDesBiens) etudeEnCours.getModule(nom)));
 			}
 			else if(nom.equals("EvenementsRedoutes")){
-				this.lesJpanels.put(nom, new FenetreEvenementsRedoutes( (EvenementsRedoutes) etudeEnCours.getModule(nom)) );
+				this.lesJpanels.put(nom, new FenetreEvenementsRedoutes(
+						(EvenementsRedoutes) etudeEnCours.getModule(nom)) );
 			}
 			else if(nom.equals("TypologieDesBiensSupports")){
-				this.lesJpanels.put(nom, new FenetreTypologieBiensSupports( (TypologieDesBiensSupports) etudeEnCours.getModule(nom)) ) ;
+				this.lesJpanels.put(nom, new FenetreTypologieBiensSupports(
+						(TypologieDesBiensSupports) etudeEnCours.getModule(nom)) ) ;
 			}
 			else if(nom.equals("ScenariosDeMenacesGeneriques")){
-				this.lesJpanels.put(nom, new FenetreScenariosDeMenacesGeneriques( (ScenariosDeMenacesGeneriques) etudeEnCours.getModule(nom)) ) ;
+				this.lesJpanels.put(nom, new FenetreScenariosDeMenacesGeneriques(
+						(ScenariosDeMenacesGeneriques) etudeEnCours.getModule(nom)) ) ;
 			}
 			else if(nom.equals("ScenariosDeMenacesTypes")){
-				this.lesJpanels.put(nom, new FenetreScenarioDeMenacesTypes( (ScenariosDeMenacesTypes) etudeEnCours.getModule(nom)) ) ;
+				this.lesJpanels.put(nom, new FenetreScenarioDeMenacesTypes(
+						(ScenariosDeMenacesTypes) etudeEnCours.getModule(nom)) ) ;
 			}
 			else if(nom.equals("AnalyseDesRisques")){
-				this.lesJpanels.put(nom, new FenetreAnalyseDesRisques( (AnalyseDesRisques) etudeEnCours.getModule(nom)) ) ;
+				this.lesJpanels.put(nom, new FenetreAnalyseDesRisques(
+						(AnalyseDesRisques) etudeEnCours.getModule(nom)) ) ;
 			}
 			else if(nom.equals("MatriceDesRisques")){
-				this.lesJpanels.put(nom, new FenetreMatriceDesRisques(  (MatriceDesRisques) etudeEnCours.getModule(nom)) ) ;
+				this.lesJpanels.put(nom, new FenetreMatriceDesRisques(
+						(MatriceDesRisques) etudeEnCours.getModule(nom)) ) ;
 			}
 
 			this.partieDuCentre.add(label, BorderLayout.NORTH);
@@ -337,8 +351,9 @@ public class MainMaximeAnsquer extends JFrame {
 		this.partieDeGauche.removeAll();
 
 		/*
-		 * Si le moduleEnCours est veritablement un module (et pas le workflow), on ajoute les boutons
-		 * " Workflow " et " Verifier la coherence " a la partie de gauche (qui sinon est vide)
+		 * Si le moduleEnCours est veritablement un module (et pas le workflow), on ajoute les
+		 * boutons " Workflow " et " Verifier la coherence " a la partie de gauche (qui sinon
+		 * est vide)
 		 */
 		String nom = moduleEnCours.getNom();
 
@@ -364,7 +379,8 @@ public class MainMaximeAnsquer extends JFrame {
 		int decision = -2;
 		if(etudeEnCours != null){
 			decision = JOptionPane.showConfirmDialog(null, 
-					"Enregistrer l'étude en cours avant de créer une nouvelle etude ?", "Enregistrer l'étude en cours ?", 
+					"Enregistrer l'étude en cours avant de créer une nouvelle etude ?",
+					"Enregistrer l'étude en cours ?",
 					JOptionPane.YES_NO_OPTION,
 					JOptionPane.QUESTION_MESSAGE);
 			switch(decision){
@@ -382,15 +398,16 @@ public class MainMaximeAnsquer extends JFrame {
 			//On demande le nom a attribuer a l'etude
 			String nomEtude = "";
 			while( (nomEtude != null && nomEtude.equals("")) || !nomEstValide(nomEtude) ){
-				nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la nouvelle étude." +
-						"\n(Un nom d'étude ne peut pas contenir les caractères suivants : \\ / * ? \" < > | )");	
+				nomEtude = JOptionPane.showInputDialog("Veuillez saisir un nom pour la" +
+						" nouvelle étude." +
+						"\n(Un nom d'étude ne peut pas contenir les caractères suivants :" +
+						" \\ / * ? \" < > | )");
 				if(nomEtude == null){
 					if(this.existeAuMoinsUneEtude()){
 						this.demanderEtude();			
 					}
 					else{
-						JOptionPane.showMessageDialog(this, "Aucune étude enregistrée !");
-						this.nouvelleEtude();
+						creerNouvelleEtudeOuQuitter();
 					}
 				}
 			}
@@ -398,7 +415,8 @@ public class MainMaximeAnsquer extends JFrame {
 				Etude nouvelleEtude = new Etude();
 
 				if(nomEtudeDejaUtilise(nomEtude)){
-					JOptionPane.showMessageDialog(this, "Ce nom est déjà utilisé pour une autre étude, veuillez en choisir un autre.");
+					JOptionPane.showMessageDialog(this, "Ce nom est déjà utilisé pour une autre" +
+							" étude, veuillez en choisir un autre.");
 					nouvelleEtude();
 				}
 				else{
@@ -448,20 +466,27 @@ public class MainMaximeAnsquer extends JFrame {
 
 		long t0 = System.currentTimeMillis();
 
-		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme temps que la fenetre)
-		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
-		((ScenariosDeMenacesGeneriques) etudeEnCours.getModule("ScenariosDeMenacesGeneriques") ).deleteObservers();
-		((ScenariosDeMenacesTypes) etudeEnCours.getModule("ScenariosDeMenacesTypes") ).deleteObservers();
+		//On supprime les observeurs (posent problemes pour la serialisation, sont recrees en meme
+		// temps que la fenetre)
+		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") )
+				.deleteObservers();
+		((ScenariosDeMenacesGeneriques) etudeEnCours.getModule("ScenariosDeMenacesGeneriques") )
+				.deleteObservers();
+		((ScenariosDeMenacesTypes) etudeEnCours.getModule("ScenariosDeMenacesTypes") )
+				.deleteObservers();
 
-		//Necessaire etant donne que l'on supprime les observeurs (il faut recreer les fenetres pour que leurs boutons etc refonctionnent)
+		//Necessaire etant donne que l'on supprime les observeurs (il faut recreer les fenetres
+		// pour que leurs boutons etc refonctionnent)
 		setContenu("Workflow");
 
-		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") ).deleteObservers();
+		((TypologieDesBiensSupports) etudeEnCours.getModule("TypologieDesBiensSupports") )
+				.deleteObservers();
 		try {
 			// Instanciation de la classe XStream
 			XStream xstream = new XStream(new DomDriver("UTF-8"));		    
 			// Instanciation d'un fichier
-			File fichier = new File(System.getProperty("user.dir") + File.separator + "etudes" + File.separator + etudeEnCours.getNom()+".xml");
+			File fichier = new File(System.getProperty("user.dir") + File.separator + "etudes" +
+					File.separator + etudeEnCours.getNom()+".xml");
 			// Instanciation d'un flux de sortie fichier
 			FileOutputStream fos = new FileOutputStream(fichier);
 			try {
@@ -482,7 +507,8 @@ public class MainMaximeAnsquer extends JFrame {
 	}
 
 	/**
-	 * Permet a l'utilisateur de choisir parmi une liste d'etudes sauvegardees, et definit l'etude choisie comme etude courante
+	 * Permet a l'utilisateur de choisir parmi une liste d'etudes sauvegardees, et definit
+	 * l'etude choisie comme etude courante
 	 * @return l'etude choisie
 	 */
 	public void choisirEtude(){
@@ -513,14 +539,16 @@ public class MainMaximeAnsquer extends JFrame {
 			}
 			listeFichiers = new JList(data.toArray());
 			listeFichiers.setFont(new Font("Arial", Font.PLAIN, 20));
-			((DefaultListCellRenderer) listeFichiers.getCellRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+			((DefaultListCellRenderer) listeFichiers.getCellRenderer()).setHorizontalAlignment(
+					SwingConstants.CENTER);
 
 			listeFichiers.addKeyListener(new KeyListener(){
 				public void keyTyped(KeyEvent e) {}			
 				public void keyPressed(KeyEvent e) {
 					int keyCode = e.getKeyCode();
 					if(keyCode == KeyEvent.VK_ENTER){
-						String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" + File.separator + listeFichiers.getSelectedValue() + ".xml";
+						String urlEtude = System.getProperty("user.dir") + File.separator + "etudes"
+								+ File.separator + listeFichiers.getSelectedValue() + ".xml";
 						ouvrirEtude(urlEtude);
 						fenetreChoisirEtude.dispose();
 					}
@@ -553,9 +581,12 @@ public class MainMaximeAnsquer extends JFrame {
 			// Désérialisation du fichier vers un nouvel objet article
 			etudeOuverte = (Etude) xstream.fromXML(fis);
 			long tempsApresOuverture = System.currentTimeMillis();
-			System.out.println("Temps mis pour ouvrir l'étude : " + (tempsApresOuverture - tempsAvantOuverture)/1000.0 + "s"  );
+			System.out.println("Temps mis pour ouvrir l'étude : " + (tempsApresOuverture -
+					tempsAvantOuverture)/1000.0 + "s"  );
 		} catch (Exception e) {	
-			JOptionPane.showMessageDialog(this, "Ce fichier ne contient pas d'étude valide.\nUne nouvelle étude \" " + extraireNom(urlEtude) + " \" a été créée à la place.", "Fichier invalide", JOptionPane.ERROR_MESSAGE, null );
+			JOptionPane.showMessageDialog(this, "Ce fichier ne contient pas d'étude valide." +
+					"\nUne nouvelle étude \" " + extraireNom(urlEtude) + " \" a été créée à la" +
+					" place.", "Fichier invalide", JOptionPane.ERROR_MESSAGE, null );
 		}
 		this.etudeEnCours = etudeOuverte;
 		this.moduleEnCours = new Module("Workflow");
@@ -600,7 +631,8 @@ public class MainMaximeAnsquer extends JFrame {
 		boutonOk.setEnabled(false);
 		boutonOk.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" + File.separator + listeFichiers.getSelectedValue() + ".xml";
+				String urlEtude = System.getProperty("user.dir") + File.separator + "etudes" +
+						File.separator + listeFichiers.getSelectedValue() + ".xml";
 				ouvrirEtude(urlEtude);
 				fenetreChoisirEtude.dispose();	
 				setVisible(true);
@@ -655,7 +687,8 @@ public class MainMaximeAnsquer extends JFrame {
 		String nouveauNom = "";
 		while( (nouveauNom != null && nouveauNom.equals("")) || !nomEstValide(nouveauNom)){
 			nouveauNom = JOptionPane.showInputDialog("Veuillez saisir le nouveau nom de l'étude." +
-					"\n(Un nom d'étude ne peut pas contenir les caractères suivants : \\ / * ? \" < > | )");
+					"\n(Un nom d'étude ne peut pas contenir les caractères suivants :" +
+					" \\ / * ? \" < > | )");
 			if(nouveauNom != null && nomEstValide(nouveauNom)){
 				nouveauNom.replace('"', '\"');
 				this.etudeEnCours.setNom(nouveauNom);
@@ -683,7 +716,8 @@ public class MainMaximeAnsquer extends JFrame {
 	 */
 	public void supprimerEtude() {
 
-		int confirmation = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer l'étude en cours ?", "Suppression de l'étude", JOptionPane.YES_NO_OPTION);
+		int confirmation = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer" +
+				" l'étude en cours ?", "Suppression de l'étude", JOptionPane.YES_NO_OPTION);
 		if(confirmation == JOptionPane.YES_OPTION){
 			String urlEtudes = System.getProperty("user.dir") + File.separator + "etudes";
 			File dossierEtude = new File(urlEtudes);
@@ -703,7 +737,7 @@ public class MainMaximeAnsquer extends JFrame {
 							this.demanderEtude();			
 						}
 						else{
-							this.nouvelleEtude();
+							creerNouvelleEtudeOuQuitter();
 						}
 					}
 				}
@@ -716,9 +750,24 @@ public class MainMaximeAnsquer extends JFrame {
 					this.demanderEtude();			
 				}
 				else{
-					this.nouvelleEtude();
+					creerNouvelleEtudeOuQuitter();
 				}		
 			}		
+		}
+	}
+
+	public void creerNouvelleEtudeOuQuitter() {
+		Object[] options = {"Créer une nouvelle étude", "Quitter"};
+		int ouvrirEtudeOuQuitter = JOptionPane.showOptionDialog(this,
+				"Aucune étude enregistrée ! ",
+				"Créer une nouvelle étude ou quitter", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.WARNING_MESSAGE, null, options,
+				options[1]);
+		if(ouvrirEtudeOuQuitter == 0) {
+			this.nouvelleEtude();
+		}
+		else {
+			System.exit(0);
 		}
 	}
 
