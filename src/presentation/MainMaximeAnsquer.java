@@ -757,7 +757,8 @@ public class MainMaximeAnsquer extends JFrame {
 		Object[] options = {"Créer une nouvelle étude", "Quitter"};
 		int ouvrirEtudeOuQuitter = JOptionPane.showOptionDialog(this,
 				"Aucune étude enregistrée ! ",
-				"Créer une nouvelle étude ou quitter", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
+				"Créer une nouvelle étude ou quitter", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.WARNING_MESSAGE, null, options,
 				options[1]);
 		if(ouvrirEtudeOuQuitter == 0) {
 			this.nouvelleEtude();
