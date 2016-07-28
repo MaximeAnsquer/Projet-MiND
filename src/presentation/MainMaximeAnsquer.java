@@ -111,8 +111,15 @@ public class MainMaximeAnsquer extends JFrame {
 			this.demanderEtude();			
 		}
 		else{
-			JOptionPane.showMessageDialog(this, "Aucune étude enregistrée !");
-			this.nouvelleEtude();
+			Object[] options = {"Créer une nouvelle étude", "Quitter"};
+			int ouvrirEtudeOuQuitter = JOptionPane.showOptionDialog(this, "Aucune étude enregistrée ! ",
+					"Title", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+			if(ouvrirEtudeOuQuitter == 0) {
+				this.nouvelleEtude();
+			}
+			else {
+				System.exit(0);
+			}
 		}
 	}
 
@@ -386,8 +393,15 @@ public class MainMaximeAnsquer extends JFrame {
 						this.demanderEtude();			
 					}
 					else{
-						JOptionPane.showMessageDialog(this, "Aucune étude enregistrée !");
-						this.nouvelleEtude();
+						Object[] options = {"Créer une nouvelle étude", "Quitter"};
+						int ouvrirEtudeOuQuitter = JOptionPane.showOptionDialog(this, "Aucune étude enregistrée ! ",
+								"Title", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+						if(ouvrirEtudeOuQuitter==0) {
+							this.nouvelleEtude();
+						}
+						else {
+							System.exit(0);
+						}
 					}
 				}
 			}
