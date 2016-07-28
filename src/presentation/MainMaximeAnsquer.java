@@ -112,17 +112,7 @@ public class MainMaximeAnsquer extends JFrame {
 			this.demanderEtude();			
 		}
 		else{
-			Object[] options = {"Créer une nouvelle étude", "Quitter"};
-			int ouvrirEtudeOuQuitter = JOptionPane.showOptionDialog(this,
-					"Aucune étude enregistrée ! ",
-					"Title", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
-					options[1]);
-			if(ouvrirEtudeOuQuitter == 0) {
-				this.nouvelleEtude();
-			}
-			else {
-				System.exit(0);
-			}
+			creerNouvelleEtudeOuQuitter();
 		}
 	}
 
@@ -414,17 +404,7 @@ public class MainMaximeAnsquer extends JFrame {
 						this.demanderEtude();			
 					}
 					else{
-						Object[] options = {"Créer une nouvelle étude", "Quitter"};
-						int ouvrirEtudeOuQuitter = JOptionPane.showOptionDialog(this, "Aucune" +
-										" étude enregistrée ! ",
-								"Title", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-								null, options, options[1]);
-						if(ouvrirEtudeOuQuitter==0) {
-							this.nouvelleEtude();
-						}
-						else {
-							System.exit(0);
-						}
+						creerNouvelleEtudeOuQuitter();
 					}
 				}
 			}
@@ -754,7 +734,7 @@ public class MainMaximeAnsquer extends JFrame {
 							this.demanderEtude();			
 						}
 						else{
-							this.nouvelleEtude();
+							creerNouvelleEtudeOuQuitter();
 						}
 					}
 				}
@@ -767,9 +747,23 @@ public class MainMaximeAnsquer extends JFrame {
 					this.demanderEtude();			
 				}
 				else{
-					this.nouvelleEtude();
+					creerNouvelleEtudeOuQuitter();
 				}		
 			}		
+		}
+	}
+
+	public void creerNouvelleEtudeOuQuitter() {
+		Object[] options = {"Créer une nouvelle étude", "Quitter"};
+		int ouvrirEtudeOuQuitter = JOptionPane.showOptionDialog(this,
+				"Aucune étude enregistrée ! ",
+				"Créer une nouvelle étude ou quitter", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
+				options[1]);
+		if(ouvrirEtudeOuQuitter == 0) {
+			this.nouvelleEtude();
+		}
+		else {
+			System.exit(0);
 		}
 	}
 
