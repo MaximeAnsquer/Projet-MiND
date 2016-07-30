@@ -62,8 +62,8 @@ public class FenetreMappingDesBiens extends JPanel {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.creerPetiteFenetre();
 		comboBox.addItem("");
-		comboBox.addItem("x");
-		comboBox.addItem("o");
+		comboBox.addItem("X");
+		comboBox.addItem("O");
 		
 		//TODO régler le problème de cellEditor (l'appliquer que pour les bonnes cases (combo column+row))
 		TableColumnModel columnModel = table.getColumnModel();

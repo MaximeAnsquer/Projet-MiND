@@ -58,7 +58,7 @@ public class MappingBien {
 	}
 	
 	public void setValueAt(String value, int index){
-		if (value.equals("") || value.equals("x") || value.equals("o")){
+		if (value.equals("") || value.equals("X") || value.equals("O")){
 			mappingBien.set(index, value);
 		}
 	}
