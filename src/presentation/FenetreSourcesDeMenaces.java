@@ -106,7 +106,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 
 		this.setLayout(new BorderLayout());
 
-		this.add(partieDuHaut(), BorderLayout.NORTH);
+		this.add(partieDuBas(), BorderLayout.SOUTH);
 		this.add(new JScrollPane(table), BorderLayout.CENTER);			
 	}
 
@@ -163,7 +163,7 @@ public class FenetreSourcesDeMenaces extends JPanel {
 		return c;
 	}
 
-	private JPanel partieDuHaut() {
+	private JPanel partieDuBas() {
 		JPanel jpanel = new JPanel();
 		jpanel.add(boutonAjouter());
 		jpanel.add(boutonSupprimer());
