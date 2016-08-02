@@ -52,7 +52,7 @@ public class FenetreMetriques extends JPanel {
 	private JFrame petiteFenetre;
 	private JTextArea textAreaPetiteFenetre;
 	public static final String stringAide = "- Double-cliquez sur une cellule pour la modifier." +
-			"\n- Utilisez le menu déroulant en haut à gauche pour sélectionner un autre critère de sécurité." +
+			"\n- Utilisez le menu déroulant en bas de la fenêtre pour sélectionner un autre critère de sécurité." +
 			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier." +
 			"\n  (La fenêtre qui apparaît alors se ferme par un clic-gauche dans une zone quelconque du tableau.)";
 
@@ -62,7 +62,7 @@ public class FenetreMetriques extends JPanel {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());		
 
-		this.add(partieDuHaut(), BorderLayout.SOUTH);			
+		this.add(partieDuBas(), BorderLayout.SOUTH);
 		this.add(jpanel, BorderLayout.CENTER);
 
 		setTableau();
@@ -191,8 +191,9 @@ public class FenetreMetriques extends JPanel {
 		return m;
 	}
 
-	private JPanel partieDuHaut() {
+	private JPanel partieDuBas() {
 		JPanel jp = new JPanel();
+		jp.add(new JLabel("Critère de sécurité : "));
 		jp.add(comboBox());
 		jp.add(boutonAjouter());
 		jp.add(boutonSupprimer());
