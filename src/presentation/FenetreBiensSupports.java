@@ -52,9 +52,10 @@ public class FenetreBiensSupports extends JPanel{
 	private JFrame petiteFenetre;
 	private JTextArea textAreaPetiteFenetre;
 	
-	public static String stringAide = "- Double-cliquez sur une cellule pour la modifier. " +
+	public static String introductionStringAide = "- Double-cliquez sur une cellule pour la modifier. " +
 			"\n- Faites un clic-droit sur une cellule pour afficher son contenu en entier." +
 			"\n  (La fenêtre qui apparaît alors se ferme par un clic-gauche dans une zone quelconque du tableau.)";
+	private String stringAide;
 
 	public FenetreBiensSupports(BiensSupports biensSupports){
 		this.setVisible(true);
@@ -64,7 +65,7 @@ public class FenetreBiensSupports extends JPanel{
 		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
 			comboBox.addItem((String)biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i]);
 		}
-		stringAide += this.descriptionTypesBiens();
+		this.stringAide = introductionStringAide + this.descriptionTypesBiens();
 		table.getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.creerPetiteFenetre();
@@ -154,26 +155,50 @@ public class FenetreBiensSupports extends JPanel{
 	}
 	
 	private String descriptionTypesBiens() {
-		String valeurInitiale = "\n\n\n";
+		String valeurIntermediaire = "";
 		String stringDeBase = "";
 		String stringRaccourcie = "";
+		String valeurFinale="\n\n";
 		int index = 0;
+		int indexIntermediaire = 0;
 		int nombreLignes = 0;
-		boolean raccourcie = false;
+		
 		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
-			valeurInitiale += biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i];
+			stringRaccourcie = "";
+			index = 0;
+			indexIntermediaire = 0;
+			nombreLignes = 0;
+			valeurIntermediaire = "\n"+biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i];
 			stringDeBase = biensSupports.getTypologie().getTypeBiensRetenus().get(i).getDescription();
-			while (!raccourcie && index<stringDeBase.length()){
-				stringRaccourcie += stringDeBase.charAt(index);
-				if (index == 120*(1+nombreLignes)){
-					stringRaccourcie += "\n";
-					nombreLignes++;
+			
+			while (index<stringDeBase.length()){
+				if (stringDeBase.charAt(index)==' '){
+					indexIntermediaire = index + 1;
+					while (indexIntermediaire<stringDeBase.length() && stringDeBase.charAt(indexIntermediaire)!=' '){
+						indexIntermediaire++;
+					}
+					if (indexIntermediaire>=120*(1+nombreLignes)){
+						stringRaccourcie += stringDeBase.charAt(index);
+						stringRaccourcie += "\n";
+						nombreLignes++;
+					}
+					else{
+						stringRaccourcie += stringDeBase.charAt(index);
+					}
+					index++;
 				}
-				index++;
+				else{
+					stringRaccourcie += stringDeBase.charAt(index);
+					if (index == 120*(1+nombreLignes)){
+						stringRaccourcie += "\n";
+						nombreLignes++;
+					}
+					index++;
+				}
 			}
-			valeurInitiale +=" : \n"+stringRaccourcie+"\n\n";
+			valeurFinale +=valeurIntermediaire+" : \n"+stringRaccourcie+"\n";
 		}
-		return valeurInitiale;
+		return valeurFinale;
 	}
 	
 	private JPanel partieBoutons() {
@@ -225,7 +250,7 @@ public class FenetreBiensSupports extends JPanel{
 		JButton bouton = new JButton("Aide");
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setText(stringAide);
+		textArea.setText(this.stringAide);
 		textArea.setEditable(false);
 		textArea.setFont(new Font("Arial", Font.PLAIN, 17));
 		textArea.setLineWrap(true);
