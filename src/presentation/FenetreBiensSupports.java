@@ -160,21 +160,41 @@ public class FenetreBiensSupports extends JPanel{
 		String stringRaccourcie = "";
 		String valeurFinale="\n\n";
 		int index = 0;
+		int indexIntermediaire = 0;
 		int nombreLignes = 0;
-		boolean raccourcie = false;
+		
 		for (int i=0; i<biensSupports.getTypologie().getIntituleTypeBiensRetenus().length;i++){
 			stringRaccourcie = "";
 			index = 0;
+			indexIntermediaire = 0;
 			nombreLignes = 0;
 			valeurIntermediaire = "\n"+biensSupports.getTypologie().getIntituleTypeBiensRetenus()[i];
 			stringDeBase = biensSupports.getTypologie().getTypeBiensRetenus().get(i).getDescription();
-			while (!raccourcie && index<stringDeBase.length()){
-				stringRaccourcie += stringDeBase.charAt(index);
-				if (index == 120*(1+nombreLignes)){
-					stringRaccourcie += "\n";
-					nombreLignes++;
+			
+			while (index<stringDeBase.length()){
+				if (stringDeBase.charAt(index)==' '){
+					indexIntermediaire = index + 1;
+					while (indexIntermediaire<stringDeBase.length() && stringDeBase.charAt(indexIntermediaire)!=' '){
+						indexIntermediaire++;
+					}
+					if (indexIntermediaire>=120*(1+nombreLignes)){
+						stringRaccourcie += stringDeBase.charAt(index);
+						stringRaccourcie += "\n";
+						nombreLignes++;
+					}
+					else{
+						stringRaccourcie += stringDeBase.charAt(index);
+					}
+					index++;
 				}
-				index++;
+				else{
+					stringRaccourcie += stringDeBase.charAt(index);
+					if (index == 120*(1+nombreLignes)){
+						stringRaccourcie += "\n";
+						nombreLignes++;
+					}
+					index++;
+				}
 			}
 			valeurFinale +=valeurIntermediaire+" : \n"+stringRaccourcie+"\n";
 		}
