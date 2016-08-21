@@ -49,7 +49,7 @@ public class BarreMenu extends JMenuBar {
 		enregistrer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK));		
 		enregistrer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				fenetre.enregistrerEtude();
+				fenetre.enregistrerEtude(true);
 			}			
 		});		
 		fichier.add(enregistrer);
@@ -59,7 +59,7 @@ public class BarreMenu extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				int confirmation = JOptionPane.showConfirmDialog(fenetre, "Enregistrer l'étude en cours avant de quitter ?");
 				if(confirmation == JOptionPane.YES_OPTION){
-					fenetre.enregistrerEtude();
+					fenetre.enregistrerEtude(true);
 					System.exit(0);
 				}
 				else if(confirmation == JOptionPane.NO_OPTION){
