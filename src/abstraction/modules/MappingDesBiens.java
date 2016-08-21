@@ -92,26 +92,35 @@ public class MappingDesBiens extends Module{
 	}
 	
 	public void actualiserMapping(){
-		/*LinkedList<MappingBien> nouveauMapping = new LinkedList<MappingBien>();
-		for (int i=0; i<this.biensEssentiels.nombreDeBiens();i++){
-			if (this.biensEssentiels.getBien(i).isRetenu()){
-				nouveauMapping.add(new MappingBien(this.biensSupports,this.biensEssentiels.getBien(i)));
-				if (!this.mappingDesBiens.isEmpty() && i<this.mappingDesBiens.size()){
-					for (int j=0; j<this.biensSupports.nombreDeBiens() && j<this.mappingDesBiens.get(i).getMappingBien().size(); j++){
-						nouveauMapping.get(i).getMappingBien().set(j, this.mappingDesBiens.get(i).getMappingBien().get(j));
-					}
-				}
-			}	
-		}
-		this.mappingDesBiens = nouveauMapping;*/
-		
-		if (this.mappingDesBiens.size()!=this.biensEssentiels.getBiensRetenus().size() || this.mappingDesBiens.get(0).getMappingBien().size()!=this.biensSupports.getBiensRetenus().size()){
+		if (this.mappingDesBiens.size()!=this.biensEssentiels.getBiensRetenus().size() 
+			|| this.mappingDesBiens.get(0).getMappingBien().size()!=this.biensSupports.getBiensRetenus().size()){
 			LinkedList<MappingBien> nouveauMapping = new LinkedList<MappingBien>();
+			
 			for (int i=0; i<this.biensEssentiels.nombreDeBiens();i++){
 				if (this.biensEssentiels.getBien(i).isRetenu()){
 					nouveauMapping.add(new MappingBien(this.biensSupports,this.biensEssentiels.getBien(i)));
 				}	
 			}
+			
+			String bienEssentiel = "";
+			String bienSupport = "";
+			String value = "";
+			for (int i=0; i<nouveauMapping.size();i++){
+				for (int j=0; j<nouveauMapping.get(0).getMappingBien().size();j++){
+					bienEssentiel = nouveauMapping.get(i).getBienEssentiel().getIntitule();
+					bienSupport = nouveauMapping.get(i).getBiensSupports().getBien(j).getIntitule();
+					for (int k=0; k<this.getMappingDesBiens().size();k++){
+						if (this.getMappingDesBiens().get(k).getBienEssentiel().equals(bienEssentiel)){
+							value = this.getMappingDesBiens().get(k).getCase(bienEssentiel, bienSupport);
+						}
+						if (!value.equals("")){
+							nouveauMapping.get(i).getMappingBien().set(j, value);	
+						}
+					}
+					value = "";
+				}
+			}
+			
 			this.mappingDesBiens = nouveauMapping;
 		}
 

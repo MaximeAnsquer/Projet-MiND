@@ -49,6 +49,18 @@ public class MappingBien {
 		return this.mappingBien;
 	}
 	
+	public String getCase(String bienEssentiel, String bienSupport){
+		String caseMapping = "";
+		if (bienEssentiel.equals(this.getBienEssentiel().getIntitule())){
+			for (int i=0; i<this.getBiensSupports().nombreDeBiens(); i++){
+				if (this.getBiensSupports().getBien(i).getIntitule().equals(bienSupport)){
+					caseMapping = this.getMappingBien().get(i);
+				}
+			}
+		}
+		return caseMapping;
+	}
+	
 	public void ajouterCase(){
 		this.mappingBien.addLast("");
 	}
@@ -60,6 +72,14 @@ public class MappingBien {
 	public void setValueAt(String value, int index){
 		if (value.equals("") || value.equals("X") || value.equals("O")){
 			mappingBien.set(index, value);
+		}
+	}
+	
+	public void setValueAt(String bienSupport, String value){
+		for (int i=0; i<this.getBiensSupports().nombreDeBiens(); i++){
+			if (this.getBiensSupports().getBien(i).getIntitule().equals(bienSupport)){
+				this.setValueAt(value, i);
+			}
 		}
 	}
 	
