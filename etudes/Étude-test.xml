@@ -367,11 +367,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
@@ -391,12 +391,12 @@
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -415,11 +415,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -439,11 +439,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -463,12 +463,12 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>true</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>false</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>true</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -487,12 +487,12 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -511,11 +511,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -535,12 +535,12 @@
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -559,11 +559,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -583,11 +583,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -607,11 +607,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
@@ -631,11 +631,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -655,11 +655,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -679,11 +679,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
@@ -703,11 +703,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
@@ -727,12 +727,12 @@
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -751,11 +751,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -775,11 +775,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -799,11 +799,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -823,11 +823,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -847,11 +847,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -871,11 +871,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -895,11 +895,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -919,12 +919,12 @@
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -943,12 +943,12 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>true</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>false</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>true</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -967,11 +967,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -991,11 +991,11 @@
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>true</boolean>
                       </entry>
                       <entry>
@@ -1015,12 +1015,12 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -1039,12 +1039,12 @@
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -1063,12 +1063,12 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>true</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>false</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>true</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -1087,12 +1087,12 @@
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -1111,11 +1111,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -1135,11 +1135,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -1159,11 +1159,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -1183,11 +1183,11 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
+                        <string>Confidentialité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Confidentialité</string>
+                        <string>Intégrité</string>
                         <boolean>false</boolean>
                       </entry>
                       <entry>
@@ -1207,12 +1207,12 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>true</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>false</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>true</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -1231,12 +1231,12 @@
                         <boolean>false</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -1255,12 +1255,12 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>true</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>false</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>true</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -1279,12 +1279,12 @@
                         <boolean>true</boolean>
                       </entry>
                       <entry>
-                        <string>Intégrité</string>
-                        <boolean>false</boolean>
-                      </entry>
-                      <entry>
                         <string>Confidentialité</string>
                         <boolean>true</boolean>
+                      </entry>
+                      <entry>
+                        <string>Intégrité</string>
+                        <boolean>false</boolean>
                       </entry>
                       <entry>
                         <string>Traçabilité</string>
@@ -1449,38 +1449,6 @@
                     </abstraction.autres.Metrique>
                   </entry>
                   <entry>
-                    <string>Intégrité</string>
-                    <abstraction.autres.Metrique>
-                      <critere reference="../../../../../../../../../../entry[2]/abstraction.modules.CriteresDeSecurite/lesCriteres/abstraction.autres.Critere[2]"/>
-                      <lesNiveaux>
-                        <abstraction.autres.NiveauDeMetrique>
-                          <numero>1</numero>
-                          <intitule>Non contrôlée</intitule>
-                          <description>Aucune mesure particulière ne doit être mise en œuvre.</description>
-                          <couleur>vert</couleur>
-                        </abstraction.autres.NiveauDeMetrique>
-                        <abstraction.autres.NiveauDeMetrique>
-                          <numero>2</numero>
-                          <intitule>Identifiée</intitule>
-                          <description>Le processus essentiel peut être altéré si cette altération est identifiée.</description>
-                          <couleur>jaune-orange</couleur>
-                        </abstraction.autres.NiveauDeMetrique>
-                        <abstraction.autres.NiveauDeMetrique>
-                          <numero>3</numero>
-                          <intitule>Corrigée</intitule>
-                          <description>Le processus essentiel peut être altéré si cette altération est identifiée et l’intégrité du processus essentiel peut être retrouvée.</description>
-                          <couleur>orange</couleur>
-                        </abstraction.autres.NiveauDeMetrique>
-                        <abstraction.autres.NiveauDeMetrique>
-                          <numero>4</numero>
-                          <intitule>Non altérée</intitule>
-                          <description>Le processus essentiel ne doit pas être altéré.</description>
-                          <couleur>rouge</couleur>
-                        </abstraction.autres.NiveauDeMetrique>
-                      </lesNiveaux>
-                    </abstraction.autres.Metrique>
-                  </entry>
-                  <entry>
                     <string>Confidentialité</string>
                     <abstraction.autres.Metrique>
                       <critere reference="../../../../../../../../../../entry[2]/abstraction.modules.CriteresDeSecurite/lesCriteres/abstraction.autres.Critere[3]"/>
@@ -1507,6 +1475,38 @@
                           <numero>4</numero>
                           <intitule>Confidentiel</intitule>
                           <description>Ne doit être connu que par des personnes nommément désignées et autorisées à cet effet.</description>
+                          <couleur>rouge</couleur>
+                        </abstraction.autres.NiveauDeMetrique>
+                      </lesNiveaux>
+                    </abstraction.autres.Metrique>
+                  </entry>
+                  <entry>
+                    <string>Intégrité</string>
+                    <abstraction.autres.Metrique>
+                      <critere reference="../../../../../../../../../../entry[2]/abstraction.modules.CriteresDeSecurite/lesCriteres/abstraction.autres.Critere[2]"/>
+                      <lesNiveaux>
+                        <abstraction.autres.NiveauDeMetrique>
+                          <numero>1</numero>
+                          <intitule>Non contrôlée</intitule>
+                          <description>Aucune mesure particulière ne doit être mise en œuvre.</description>
+                          <couleur>vert</couleur>
+                        </abstraction.autres.NiveauDeMetrique>
+                        <abstraction.autres.NiveauDeMetrique>
+                          <numero>2</numero>
+                          <intitule>Identifiée</intitule>
+                          <description>Le processus essentiel peut être altéré si cette altération est identifiée.</description>
+                          <couleur>jaune-orange</couleur>
+                        </abstraction.autres.NiveauDeMetrique>
+                        <abstraction.autres.NiveauDeMetrique>
+                          <numero>3</numero>
+                          <intitule>Corrigée</intitule>
+                          <description>Le processus essentiel peut être altéré si cette altération est identifiée et l’intégrité du processus essentiel peut être retrouvée.</description>
+                          <couleur>orange</couleur>
+                        </abstraction.autres.NiveauDeMetrique>
+                        <abstraction.autres.NiveauDeMetrique>
+                          <numero>4</numero>
+                          <intitule>Non altérée</intitule>
+                          <description>Le processus essentiel ne doit pas être altéré.</description>
                           <couleur>rouge</couleur>
                         </abstraction.autres.NiveauDeMetrique>
                       </lesNiveaux>
@@ -1559,11 +1559,11 @@
                     <abstraction.autres.Metrique reference="../../../bdcMetriques/entry[3]/abstraction.autres.Metrique"/>
                   </entry>
                   <entry>
-                    <string>Intégrité</string>
+                    <string>Confidentialité</string>
                     <abstraction.autres.Metrique reference="../../../bdcMetriques/entry[4]/abstraction.autres.Metrique"/>
                   </entry>
                   <entry>
-                    <string>Confidentialité</string>
+                    <string>Intégrité</string>
                     <abstraction.autres.Metrique reference="../../../bdcMetriques/entry[5]/abstraction.autres.Metrique"/>
                   </entry>
                   <entry>
@@ -1594,11 +1594,11 @@
                     <boolean>true</boolean>
                   </entry>
                   <entry>
-                    <string>Confidentialité</string>
+                    <string>Intégrité</string>
                     <boolean>true</boolean>
                   </entry>
                   <entry>
-                    <string>Intégrité</string>
+                    <string>Confidentialité</string>
                     <boolean>true</boolean>
                   </entry>
                   <entry>
@@ -1628,11 +1628,11 @@
                     <boolean>true</boolean>
                   </entry>
                   <entry>
-                    <string>Confidentialité</string>
+                    <string>Intégrité</string>
                     <boolean>false</boolean>
                   </entry>
                   <entry>
-                    <string>Intégrité</string>
+                    <string>Confidentialité</string>
                     <boolean>false</boolean>
                   </entry>
                   <entry>
@@ -1662,11 +1662,11 @@
                     <boolean>true</boolean>
                   </entry>
                   <entry>
-                    <string>Confidentialité</string>
+                    <string>Intégrité</string>
                     <boolean>false</boolean>
                   </entry>
                   <entry>
-                    <string>Intégrité</string>
+                    <string>Confidentialité</string>
                     <boolean>false</boolean>
                   </entry>
                   <entry>
@@ -1696,11 +1696,11 @@
                     <boolean>true</boolean>
                   </entry>
                   <entry>
-                    <string>Confidentialité</string>
+                    <string>Intégrité</string>
                     <boolean>false</boolean>
                   </entry>
                   <entry>
-                    <string>Intégrité</string>
+                    <string>Confidentialité</string>
                     <boolean>false</boolean>
                   </entry>
                   <entry>
@@ -1730,11 +1730,11 @@
                     <boolean>true</boolean>
                   </entry>
                   <entry>
-                    <string>Confidentialité</string>
+                    <string>Intégrité</string>
                     <boolean>false</boolean>
                   </entry>
                   <entry>
-                    <string>Intégrité</string>
+                    <string>Confidentialité</string>
                     <boolean>false</boolean>
                   </entry>
                   <entry>
@@ -2005,10 +2005,6 @@
       <abstraction.modules.BiensSupports reference="../../entry[4]/abstraction.modules.AnalyseDesRisques/predecesseurs/abstraction.modules.ScenariosDeMenacesTypes/predecesseurs/abstraction.modules.BiensSupports"/>
     </entry>
     <entry>
-      <string>Metriques</string>
-      <abstraction.modules.Metriques reference="../../entry[4]/abstraction.modules.AnalyseDesRisques/predecesseurs/abstraction.modules.ScenariosDeMenacesTypes/predecesseurs/abstraction.modules.Metriques"/>
-    </entry>
-    <entry>
       <string>MatriceDesRisques</string>
       <abstraction.modules.MatriceDesRisques>
         <changed>false</changed>
@@ -2065,6 +2061,10 @@
         <analysedesrisques reference="../../../entry[4]/abstraction.modules.AnalyseDesRisques"/>
         <nombreniveaux>4</nombreniveaux>
       </abstraction.modules.MatriceDesRisques>
+    </entry>
+    <entry>
+      <string>Metriques</string>
+      <abstraction.modules.Metriques reference="../../entry[4]/abstraction.modules.AnalyseDesRisques/predecesseurs/abstraction.modules.ScenariosDeMenacesTypes/predecesseurs/abstraction.modules.Metriques"/>
     </entry>
     <entry>
       <string>MappingDesBiens</string>
