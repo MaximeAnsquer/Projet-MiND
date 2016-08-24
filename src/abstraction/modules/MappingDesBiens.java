@@ -84,7 +84,7 @@ public class MappingDesBiens extends Module{
 		ArrayList<Bien> biens = new ArrayList<Bien>();
 		int indexBien = this.getIndexBienSupport(bienSupport);
 		for (int i=0; i<this.mappingDesBiens.size(); i++){
-			if (this.getMappingDesBiens().get(i).getMappingBien().get(indexBien).equals("x")){
+			if (this.getMappingDesBiens().get(i).getMappingBien().get(indexBien).equals("X")){
 				biens.add(this.getMappingDesBiens().get(i).getBienEssentiel());
 			}
 		}
@@ -110,7 +110,7 @@ public class MappingDesBiens extends Module{
 					bienEssentiel = nouveauMapping.get(i).getBienEssentiel().getIntitule();
 					bienSupport = nouveauMapping.get(i).getBiensSupports().getBien(j).getIntitule();
 					for (int k=0; k<this.getMappingDesBiens().size();k++){
-						if (this.getMappingDesBiens().get(k).getBienEssentiel().equals(bienEssentiel)){
+						if (this.getMappingDesBiens().get(k).getBienEssentiel().getIntitule().equals(bienEssentiel)){
 							value = this.getMappingDesBiens().get(k).getCase(bienEssentiel, bienSupport);
 						}
 						if (!value.equals("")){
