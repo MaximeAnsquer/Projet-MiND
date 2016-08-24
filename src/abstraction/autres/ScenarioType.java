@@ -135,6 +135,7 @@ public class ScenarioType extends ScenarioGenerique {
 		}
 		if(this.menacesSuppl!=null){
 			for (SourceDeMenace sourceMenace : this.menacesSuppl){
+				if (!this.menaces.contains(sourceMenace))
 				s=s+sourceMenace.getId() + ", ";
 			}
 		}
