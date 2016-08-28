@@ -30,7 +30,7 @@ public class MappingBien {
 	
 	//Getters et Setters
 	public BiensSupports getBiensSupports(){
-		return this.biensSupports;
+		return biensSupports;
 	}
 	
 	public void setBiensSupports(BiensSupports biensSupports){
@@ -52,7 +52,7 @@ public class MappingBien {
 	public String getCase(String bienEssentiel, String bienSupport){
 		String caseMapping = "";
 		if (bienEssentiel.equals(this.getBienEssentiel().getIntitule())){
-			for (int i=0; i<this.getBiensSupports().nombreDeBiens(); i++){
+			for (int i=0; i<this.getMappingBien().size() && i<this.getBiensSupports().nombreDeBiens(); i++){
 				if (this.getBiensSupports().getBien(i).getIntitule().equals(bienSupport)){
 					caseMapping = this.getMappingBien().get(i);
 				}
