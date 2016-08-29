@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 
+
 import abstraction.Etude;
 import abstraction.autres.*;
 
@@ -112,18 +113,15 @@ public class MappingDesBiens extends Module{
 					for (int k=0; k<this.getMappingDesBiens().size();k++){
 						if (this.getMappingDesBiens().get(k).getBienEssentiel().getIntitule().equals(bienEssentiel)){
 							value = this.getMappingDesBiens().get(k).getCase(bienEssentiel, bienSupport);
-						}
-						if (!value.equals("")){
-							nouveauMapping.get(i).getMappingBien().set(j, value);	
+							nouveauMapping.get(i).getMappingBien().set(j, value);
+							value = "";
 						}
 					}
-					value = "";
+					
 				}
 			}
-			
 			this.mappingDesBiens = nouveauMapping;
 		}
-
 	}
 	
 	public String toString(){

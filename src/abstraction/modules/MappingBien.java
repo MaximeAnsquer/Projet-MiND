@@ -13,17 +13,20 @@ import abstraction.autres.*;
 public class MappingBien {
 	//Variables d'instance
 	private LinkedList<String> mappingBien; // table qui relie un bien essentiel aux biens supports
+	private LinkedList<String> bienAssocies; // table qui relie les biens supports aux case du mapping
 	private BiensSupports biensSupports;
 	private Bien bienEssentiel;
 	
 	//Constructeur
 	public MappingBien(BiensSupports biensSupports, Bien bienEssentiel){
 		this.mappingBien = new LinkedList<String>();
+		this.bienAssocies = new LinkedList<String>();
 		this.biensSupports = biensSupports;
 		this.bienEssentiel = bienEssentiel;
 		for (int i=0; i<this.biensSupports.nombreDeBiens(); i++){
 			if (this.biensSupports.getBien(i).isRetenu()){
 				this.mappingBien.add("");
+				this.bienAssocies.add(this.biensSupports.getBien(i).getIntitule());
 			}
 		}
 	}
@@ -52,17 +55,13 @@ public class MappingBien {
 	public String getCase(String bienEssentiel, String bienSupport){
 		String caseMapping = "";
 		if (bienEssentiel.equals(this.getBienEssentiel().getIntitule())){
-			for (int i=0; i<this.getMappingBien().size() && i<this.getBiensSupports().nombreDeBiens(); i++){
-				if (this.getBiensSupports().getBien(i).getIntitule().equals(bienSupport)){
+			for (int i=0; i<this.getMappingBien().size(); i++){
+				if (this.getBienAssocies().get(i).equals(bienSupport)){
 					caseMapping = this.getMappingBien().get(i);
 				}
 			}
 		}
 		return caseMapping;
-	}
-	
-	public void ajouterCase(){
-		this.mappingBien.addLast("");
 	}
 	
 	public String getValueAt(int index){
@@ -76,8 +75,8 @@ public class MappingBien {
 	}
 	
 	public void setValueAt(String bienSupport, String value){
-		for (int i=0; i<this.getBiensSupports().nombreDeBiens(); i++){
-			if (this.getBiensSupports().getBien(i).getIntitule().equals(bienSupport)){
+		for (int i=0; i<this.getMappingBien().size(); i++){
+			if (this.getBienAssocies().get(i).equals(bienSupport)){
 				this.setValueAt(value, i);
 			}
 		}
@@ -101,5 +100,13 @@ public class MappingBien {
 	
 	public String toString(){
 		return "{Mapping Bien : intitulé = "+this.getBienEssentiel().getIntitule()+"}";
+	}
+
+	public LinkedList<String> getBienAssocies() {
+		return bienAssocies;
+	}
+
+	public void setBienAssocies(LinkedList<String> bienAssocies) {
+		this.bienAssocies = bienAssocies;
 	}
 }
