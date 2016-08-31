@@ -94,4 +94,15 @@ public class TypeBien {
 		return (this.Id.equals("") || this.Description.equals("") ||
 				this.intitule.equals(""));
 	}
+	
+	public boolean equals(Object o) {
+		boolean b = false ;
+		if (o instanceof TypeBien) {
+			TypeBien type = (TypeBien) o;
+			b= (type.getDescription().equals(this.getDescription())
+					&& type.getId().equals(this.getId()) && type.getIntitule()
+					.equals(this.getIntitule()));
+		}
+		return b;
+	}
 }

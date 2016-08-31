@@ -297,4 +297,19 @@ public class TypologieDesBiensSupports extends Module {
 		}
 		return s ;
 	}
+	
+	public String getIdTypesNonRetenus(){
+		// On va rendre une chaine de caractère du type : "MAT,LOG, ..." avec
+		// MAT et LOG si ces types ont été non retenus par l'utilisateur
+		String s = "";
+		for (int i=0 ; i<this.tableau.size() ; i++){
+			if (!this.tableau.get(i).isRetenu()){
+				s+=this.tableau.get(i).getId() + ",";
+			}
+		}
+		if (s.length()>1){
+			s=s.substring(0, s.length()-1);
+		}
+		return s ;
+	}
 }

@@ -29,9 +29,13 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	private ScenarioGenerique scenarioCourant ;
 	private ArrayList<String> nomColonneSup;
 	
+	private ArrayList<ScenarioGenerique> scenariosSupprimes ;
+	
 	public ScenariosDeMenacesGeneriques(Etude etude){
 		super("ScenariosDeMenacesGeneriques");
 		this.tableau= new ArrayList<ScenarioGenerique>();
+		
+		this.scenariosSupprimes=new ArrayList<ScenarioGenerique>();
 		
 		this.etude=etude;
 		this.predecesseurs.add(this.getEtude().getModule("TypologieDesBiensSupports"));
@@ -71,6 +75,14 @@ public class ScenariosDeMenacesGeneriques extends Module {
 		this.nomColonneSup = nomColonneSup;
 	}
 
+	public ArrayList<ScenarioGenerique> getScenariosSupprimes() {
+		return scenariosSupprimes;
+	}
+
+	public void setScenariosSupprimes(ArrayList<ScenarioGenerique> scenariosSupprimes) {
+		this.scenariosSupprimes = scenariosSupprimes;
+	}
+	
 	public ArrayList<ScenarioGenerique> getTableau() {
 		return tableau;
 	}
@@ -178,6 +190,8 @@ public class ScenariosDeMenacesGeneriques extends Module {
 	public void actualiserScenarios(){
 		TypologieDesBiensSupports typesBiens = (TypologieDesBiensSupports) this.etude.getModule("TypologieDesBiensSupports");
 		String idsTypesSupprimes = typesBiens.getIdTypesSupprimes();
+		String idsTypesNonRetenus = typesBiens.getIdTypesNonRetenus();
+		
 		// System.out.println(idsTypesSupprimes);
 		if (typesBiens.getTypesSupprimes().size()!=0){
 			int j = 0;
@@ -187,6 +201,36 @@ public class ScenariosDeMenacesGeneriques extends Module {
 					this.tableau.remove(this.tableau.get(j));
 				}
 				j++;
+			}
+		}
+		
+		// Suppression des scénarios génériques dont les types de bien supports n'existent plus
+		// On les stocke quelque part
+		if (typesBiens.getTypeBiensRetenus().size()<typesBiens.getTableau().size()){
+			int j = 0;
+			while (j < this.tableau.size() && this.tableau.get(j) != null) {
+				while (j < this.tableau.size()
+						&& idsTypesNonRetenus.contains(tableau.get(j).getTypeBienSupport().getId())){
+					this.scenariosSupprimes.add(this.tableau.get(j));
+					this.tableau.remove(this.tableau.get(j));
+				}
+				j++;
+			}
+		}
+		else{
+			if (this.scenariosSupprimes.size()>=1){
+				ArrayList<ScenarioGenerique> newTab = new ArrayList<ScenarioGenerique>();
+				
+				// On ajoute d'abord les scénarios qui sont passés du statut de "non retenu" à "retenu"
+				for (ScenarioGenerique sg : this.scenariosSupprimes){
+					newTab.add(sg);
+				}
+				
+				for (ScenarioGenerique sg : this.tableau){
+					newTab.add(sg);
+				}
+				
+				this.tableau=newTab;
 			}
 		}
 	}
@@ -254,11 +298,11 @@ public class ScenariosDeMenacesGeneriques extends Module {
 					ScenarioGenerique scenario = new ScenarioGenerique(typologie.getTypeBien(intituleTypeBien), id, intituleScenario, CriteresSup, true);
 					
 					/*
-					 * Ajout du scenario � la bdc
+					 * Ajout du scenario à la bdc dans le cas où le type de bien est retenu dans la fenêtre "Typologie des biens supports"
 					 */
 					
-					bdcScenariosMenacesGeneriques.add(scenario);				
-					}				
+					bdcScenariosMenacesGeneriques.add(scenario);
+				}
 			}
 			
 		} catch (final ParserConfigurationException e) {
