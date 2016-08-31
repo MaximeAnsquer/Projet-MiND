@@ -22,6 +22,9 @@ public class ScenarioType extends ScenarioGenerique {
 	private int vraisemblanceIntrinseque;
 	private int vraisemblanceReelle;
 	
+	// Cette liste de sources de menaces correspond aux sources de menaces supplémentaires (checkbox)
+	private ArrayList<SourceDeMenace> menacesSuppl;
+	
 	public ScenarioType(TypeBien type, String id, String intitule,
 			Hashtable<String, Boolean> criteres,
 			ArrayList<SourceDeMenace> menaces, Bien bienSupport,
@@ -34,6 +37,7 @@ public class ScenarioType extends ScenarioGenerique {
 		this.intituleConcret=intituleConcret;
 		this.vraisemblanceIntrinseque=intrinseque;
 		this.vraisemblanceReelle=reelle;
+		this.menacesSuppl=new ArrayList<SourceDeMenace>();
 	}
 	
 	public ScenarioType(TypeBien type, String id, String intitule,
@@ -47,6 +51,7 @@ public class ScenarioType extends ScenarioGenerique {
 		this.intituleConcret="";
 		this.vraisemblanceIntrinseque=1;
 		this.vraisemblanceReelle=1;
+		this.menacesSuppl=new ArrayList<SourceDeMenace>();
 	}
 	
 	public ScenarioType(ScenarioType scenario) {
@@ -62,6 +67,7 @@ public class ScenarioType extends ScenarioGenerique {
 		this.intituleConcret="";
 		this.vraisemblanceIntrinseque=1;
 		this.vraisemblanceReelle=1;
+		this.menacesSuppl=new ArrayList<SourceDeMenace>();
 	}
 	
 	public ArrayList<SourceDeMenace> getMenaces() {
@@ -70,6 +76,14 @@ public class ScenarioType extends ScenarioGenerique {
 
 	public void setMenaces(ArrayList<SourceDeMenace> menaces) {
 		this.menaces = menaces;
+	}
+	
+	public ArrayList<SourceDeMenace> getMenacesSuppl() {
+		return menacesSuppl;
+	}
+
+	public void setMenacesSuppl(ArrayList<SourceDeMenace> menacesSuppl) {
+		this.menacesSuppl = menacesSuppl;
 	}
 	
 	public Hashtable<String, Boolean> getCriteresTypes() {
@@ -116,6 +130,12 @@ public class ScenarioType extends ScenarioGenerique {
 		String s="";
 		if(this.menaces!=null){
 			for (SourceDeMenace sourceMenace : this.menaces){
+				s=s+sourceMenace.getId() + ", ";
+			}
+		}
+		if(this.menacesSuppl!=null){
+			for (SourceDeMenace sourceMenace : this.menacesSuppl){
+				if (!this.menaces.contains(sourceMenace))
 				s=s+sourceMenace.getId() + ", ";
 			}
 		}

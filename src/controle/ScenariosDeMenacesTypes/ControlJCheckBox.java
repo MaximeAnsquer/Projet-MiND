@@ -2,6 +2,7 @@ package controle.ScenariosDeMenacesTypes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
@@ -24,6 +25,9 @@ public class ControlJCheckBox implements ActionListener {
 		
 		SourceDeMenace sourceAssocie = this.modele.getSourcesDeMenaces().getSourceDeMenace(id);
 		this.modele.getModuleCourant().getScenarioType(row).getMenaces().add(sourceAssocie);
+		
+		// on place la source de menace dans la liste des sdms supplémentaires
+		this.modele.getModuleCourant().getScenarioType(row).getMenacesSuppl().add(sourceAssocie);
 	}
 
 }

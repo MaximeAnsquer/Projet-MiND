@@ -235,12 +235,29 @@ public class ScenariosDeMenacesTypes extends Module {
 	}
 	
 	public void actualisationSourcesMenaces(ScenarioType sType){
+		
 		SourcesDeMenaces sourcesDeMenaces = (SourcesDeMenaces) this.etude.getModule("SourcesDeMenaces");
-		for (SourceDeMenace source : sourcesDeMenaces.getSourcesDeMenacesRetenues()){
-			if (!sType.getMenaces().contains(source)){
-				sType.getMenaces().add(source);
+		
+		// on réinitialise les sources de menaces
+		sType.setMenaces(sourcesDeMenaces.getSourcesDeMenacesRetenues());
+		
+		// Ne pas oubliez les sources de menaces de la checkbox !
+		// if (this.listeSourcesDeMenaces.size()>=1){
+		if (sourcesDeMenaces.getSourcesDeMenacesRetenues().size()< sType.getMenaces().size()){
+			System.out.println("SUCCESS");
+			for (SourceDeMenace source : sType.getMenacesSuppl()) {
+				if (!sType.getMenaces().contains(source)) {
+					sType.getMenaces().add(source);
+				}
 			}
 		}
+		/*
+		 * for (SourceDeMenace source :
+		 * sourcesDeMenaces.getSourcesDeMenacesRetenues()){ if
+		 * (!sType.getMenaces().contains(source)){
+		 * sType.getMenaces().add(source); } }
+		 */
+		
 	}
 	
 	public void actualiserDonnees() {
@@ -273,7 +290,6 @@ public class ScenariosDeMenacesTypes extends Module {
 		// On actualise les sources de menaces retenus dans l'onglet correspondant
 		for (ScenarioType scenario : this.tableau){
 			this.actualisationSourcesMenaces(scenario);
-			//scenario.setMenaces(sourcesDeMenaces.getSourcesDeMenacesRetenues());
 		}
 	}
 	
