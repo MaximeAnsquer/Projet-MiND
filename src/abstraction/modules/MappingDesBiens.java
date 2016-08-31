@@ -84,7 +84,7 @@ public class MappingDesBiens extends Module{
 		ArrayList<Bien> biens = new ArrayList<Bien>();
 		int indexBien = this.getIndexBienSupport(bienSupport);
 		for (int i=0; i<this.mappingDesBiens.size(); i++){
-			if (this.getMappingDesBiens().get(i).getMappingBien().get(indexBien).equals("x")){
+			if (this.getMappingDesBiens().get(i).getMappingBien().get(indexBien).equals("X")){
 				biens.add(this.getMappingDesBiens().get(i).getBienEssentiel());
 			}
 		}
