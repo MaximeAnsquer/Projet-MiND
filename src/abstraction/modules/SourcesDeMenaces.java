@@ -95,6 +95,7 @@ public class SourcesDeMenaces extends Module {
 	}
 
 	public void supprimerSourceDeMenace(SourceDeMenace sourceDeMenace){
+		sourceDeMenace.setRetenu(false);
 		this.getLesSourcesDeMenaces().remove(sourceDeMenace);
 	}
 
