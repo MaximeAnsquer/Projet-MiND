@@ -48,8 +48,9 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	public FenetreScenarioDeMenacesTypes(ScenariosDeMenacesTypes module) {
 		
 		this.moduleCourant=module;
-		//this.moduleCourant.importerDonnees();
-		//this.moduleCourant.actualiserDonnees();
+		this.moduleCourant.importerDonnees();
+		this.moduleCourant.actualiserDonnees();
+		this.moduleCourant.actualiserScenarios();
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
