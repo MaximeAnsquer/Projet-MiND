@@ -279,6 +279,17 @@ public class ScenariosDeMenacesTypes extends Module {
 		}
 	}
 	
+	// On extrait de l'ID du scénario son numéro (ou position)
+	public static int extractInt (String id){
+		String s = "";
+		for (int j=0 ; j<id.length() ; j++){
+			if(Character.isDigit(id.charAt(j))){
+				s+=id.charAt(j);
+			}
+		}
+		return Integer.parseInt(s);
+	}
+	
 	// On actualise par rapport aux changements du module
 	// "Scénarios de menaces génériques"
 	// CAS : AJOUT de scénarios
@@ -292,7 +303,7 @@ public class ScenariosDeMenacesTypes extends Module {
 			ArrayList<ScenarioGenerique> listeSGene = scenariosGeneriques.getScenariosGeneriques(typeScenario);
 			
 			if (listeIndices.size() < listeSGene.size()){
-				System.out.println("succeed");
+				// System.out.println("succeed");
 				
 				///*
 				for (int i=listeIndices.size() ; i<listeSGene.size() ; i++){
@@ -309,8 +320,8 @@ public class ScenariosDeMenacesTypes extends Module {
 					// "j+1" correspond au numéro d'indice de l'ID. EX : M1 -> indice 0
 					int j = 0 ;
 					String id = sGene.getId();
-					System.out.println(id.charAt(id.length()-1));
-					while(j<listeIndices.size() && (j+1)!=(int) id.charAt(id.length()-1)){
+					// System.out.println(id.charAt(id.length()-1));
+					while(j<listeIndices.size() && (j+1)!=extractInt(id)){
 						j++ ;
 					}
 					if (j==listeIndices.size()){
@@ -360,7 +371,7 @@ public class ScenariosDeMenacesTypes extends Module {
 								this.biensRetenus.put(b.getIntitule(), b);
 								this.tableau.add(scenario);
 								System.out.println("scénario ajouté");
-								System.out.println(tableau.size());
+								//System.out.println(tableau.size());
 							}
 						}
 					}
