@@ -30,7 +30,6 @@ import javax.swing.WindowConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import presentation.FenetreBiensEssentiels.ModeleDynamiqueObjet;
 import abstraction.autres.Bien;
 import abstraction.modules.BiensSupports;
 

@@ -40,7 +40,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	private JButton ajoutLigne ;
 	
 	private ArrayList<JCheckBox> checkBoxSourcesMenaces ;
-	private JFrame listeSourcesMenaces ;
+	private JFrame fenetreSourcesMenaces ;
 	
 	private JFrame petiteFenetre;;
 	private JTextArea textAreaPetiteFenetre;
@@ -82,8 +82,8 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	}
 	
 	public void creerFenetreSourcesMenaces(){
-		this.listeSourcesMenaces= new JFrame("Liste sources de menaces");
-		this.listeSourcesMenaces.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		this.fenetreSourcesMenaces= new JFrame("Liste sources de menaces");
+		this.fenetreSourcesMenaces.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 	}
 	
 	public void creerTableau() {
@@ -94,7 +94,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		tableau.setFont(new Font("Arial", Font.PLAIN, 15));
 		tableau.setRowHeight(50);
 		
-		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau, listeSourcesMenaces, petiteFenetre);
+		ControlJTable controlTableau = new ControlJTable(modeleTableau, tableau, fenetreSourcesMenaces, petiteFenetre);
 		this.tableau.addMouseListener(controlTableau);
 		
 		this.rendererVraisemblance=new CellRendererVraisemblance(modeleTableau);
@@ -151,7 +151,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 	public void creerCheckBox(){
 		TableColumn colonneSourcesMenaces = this.tableau.getColumnModel().getColumn(this.modeleTableau.COLONNE_SOURCES_MENACES);
 		
-		Container conteneur = this.listeSourcesMenaces.getContentPane();
+		Container conteneur = this.fenetreSourcesMenaces.getContentPane();
 		conteneur.setLayout(new BoxLayout(conteneur, BoxLayout.Y_AXIS));
 		
 		this.checkBoxSourcesMenaces = new ArrayList<JCheckBox>();
@@ -168,7 +168,7 @@ public class FenetreScenarioDeMenacesTypes extends JPanel {
 		for (JCheckBox idSource : this.checkBoxSourcesMenaces){
 			conteneur.add(idSource);
 		}
-		this.listeSourcesMenaces.pack();
+		this.fenetreSourcesMenaces.pack();
 	}
 	//*/
 	public void creerBoutonsBas() {

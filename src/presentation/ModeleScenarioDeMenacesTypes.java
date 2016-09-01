@@ -75,6 +75,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		entetes.add("Vraisemblance réelle");
 		entetes.add("Retenu");
 		
+
 		//this.moduleCourant.importerDonnees();
 	}
 	
