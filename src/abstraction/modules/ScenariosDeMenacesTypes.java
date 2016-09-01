@@ -10,6 +10,7 @@ import abstraction.autres.Critere;
 import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.ScenarioType;
 import abstraction.autres.SourceDeMenace;
+import abstraction.autres.TypeBien;
 
 public class ScenariosDeMenacesTypes extends Module {
 
@@ -173,10 +174,11 @@ public class ScenariosDeMenacesTypes extends Module {
 		return res;
 	}
 	
-	// Retourne le premier et le dernier indice du tableau où les scenarios
+	// Retourne les indices du tableau où les scenarios
 	// types ont pour bien b
 	public ArrayList<Integer> getIndicesBien (Bien b){
 		ArrayList<Integer> listeIndices = new ArrayList<Integer>();
+		System.out.println(this.tableau.size());
 		for (int i = 0 ; i<this.tableau.size() ; i++){
 			if (this.tableau.get(i).getBienSupport().equals(b)){
 				listeIndices.add(i);
@@ -274,6 +276,52 @@ public class ScenariosDeMenacesTypes extends Module {
 		for (ScenarioType scenario : this.tableau){
 			this.actualisationSourcesMenaces(scenario);
 			//scenario.setMenaces(sourcesDeMenaces.getSourcesDeMenacesRetenues());
+		}
+	}
+	
+	// On actualise par rapport aux changements du module
+	// "Scénarios de menaces génériques"
+	// CAS : AJOUT de scénarios
+	public void actualiserScenarios() {
+		BiensSupports biensSupports = (BiensSupports) this.etude.getModule("BiensSupports");
+		ScenariosDeMenacesGeneriques scenariosGeneriques = (ScenariosDeMenacesGeneriques) this.etude.getModule("ScenariosDeMenacesGeneriques");
+		for (Bien b : biensSupports.getBiensRetenus()){
+			ArrayList<Integer> listeIndices = this.getIndicesBien(b);
+			
+			TypeBien typeScenario = this.tableau.get(listeIndices.get(0)).getTypeBienSupport();
+			ArrayList<ScenarioGenerique> listeSGene = scenariosGeneriques.getScenariosGeneriques(typeScenario);
+			
+			if (listeIndices.size() < listeSGene.size()){
+				System.out.println("succeed");
+				
+				///*
+				for (int i=listeIndices.size() ; i<listeSGene.size() ; i++){
+					ScenarioGenerique sGene = listeSGene.get(i);
+					
+					ScenarioType scenario = new ScenarioType(
+							sGene.getTypeBienSupport(), sGene.getId(),
+							sGene.getIntitule(),
+							this.getCriteres(sGene),
+							this.getSourcesMenaces(),
+							b, true);
+					
+					// On place le scénario au bon endroit
+					// "j+1" correspond au numéro d'indice de l'ID. EX : M1 -> indice 0
+					int j = 0 ;
+					String id = sGene.getId();
+					System.out.println(id.charAt(id.length()-1));
+					while(j<listeIndices.size() && (j+1)!=(int) id.charAt(id.length()-1)){
+						j++ ;
+					}
+					if (j==listeIndices.size()){
+						this.tableau.add(listeIndices.get(j-1)+1, scenario);
+					}
+					else{
+						this.tableau.add(listeIndices.get(j), scenario);
+					}
+				}
+				//*/
+			}
 		}
 	}
 	

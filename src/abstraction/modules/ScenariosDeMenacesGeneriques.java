@@ -15,6 +15,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import abstraction.Etude;
 import abstraction.autres.ScenarioGenerique;
 import abstraction.autres.TypeBien;
@@ -189,6 +191,22 @@ public class ScenariosDeMenacesGeneriques extends Module {
 				j++;
 			}
 		}
+	}
+	
+	// Rend une liste composée de tous les scénarios génériques de type de bien "type"
+	public ArrayList<ScenarioGenerique> getScenariosGeneriques(TypeBien type){
+		ArrayList<ScenarioGenerique> l = new ArrayList<ScenarioGenerique>();
+		int j=0 ; 
+		while(j<this.tableau.size() && !this.tableau.get(j).getTypeBienSupport().equals(type)){
+			j++;
+		}
+		if (j!=this.tableau.size()){
+			while(j<this.tableau.size() && this.tableau.get(j).getTypeBienSupport().equals(type)){
+				l.add(this.tableau.get(j));
+				j++;
+			}
+		}
+		return l ;
 	}
 	
 	private void importerBDC() {
