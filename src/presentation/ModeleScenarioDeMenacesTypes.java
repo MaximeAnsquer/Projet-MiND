@@ -76,7 +76,7 @@ public class ModeleScenarioDeMenacesTypes extends AbstractTableModel {
 		entetes.add("Retenu");
 		
 
-		//this.moduleCourant.importerDonnees();
+		this.moduleCourant.importerDonnees();
 	}
 	
 	public void setIndices(){
