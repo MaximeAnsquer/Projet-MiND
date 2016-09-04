@@ -8,3 +8,4 @@ src/META-INF/
 etudes/
 PULL_REQUEST_TEMPLATE.md
 *.xml
+.classpath
